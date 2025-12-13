@@ -1,136 +1,116 @@
-# Mathematical AI Research with Aristotle
+# Solving Open Mathematical Problems with AI
 
-> **Exploring optimal strategies for AI-assisted mathematical theorem proving** using the [Boris pattern](docs/BORIS_VS_OUR_APPROACH.md) and [Aristotle AI](https://aristotle.harmonic.fun)
+> **Mission**: Use [Aristotle](https://aristotle.harmonic.fun) to solve genuinely **OPEN, UNSOLVED** mathematical problems - not just verify known results.
 
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
+[![Open Problems](https://img.shields.io/badge/Focus-Open%20Problems-red)](https://erdosproblems.com)
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-purple)](https://lean-lang.org/)
-[![Mathlib](https://img.shields.io/badge/Mathlib-4.24.0-green)](https://leanprover-community.github.io/)
 
 **Last Updated**: December 13, 2025
-**Status**: Testing intervention spectrum (3 parallel experiments)
 
 ---
 
-## 🎯 Current Focus: The Boris Pattern
+## 🚨 What This Project Is (And Isn't)
 
-**CRITICAL INSIGHT**: Minimal intervention = Maximum success
+### ✅ What We Do
+- Submit **genuinely unsolved** mathematical problems to Aristotle
+- Use the **Boris pattern**: minimal intervention, maximum autonomy
+- Target problems with **bounded complexity** that Aristotle can tractably explore
+- Build a **problem database** of 1,244+ scored open problems
 
-### The Boris Method (90% Success)
+### ❌ What We Don't Do
+- Formalize known theorems (Ramsey R(3,3)=6, etc.)
+- Verify existing code/computations
+- Polish "publication-ready" versions of solved results
+- Any work where the mathematical result is already known
 
-Boris Alexeev solved Erdős #124 by:
+**If it's not OPEN, we don't work on it.**
+
+---
+
+## 🎯 The Boris Pattern (90% Success Rate)
+
+Boris Alexeev solved **Erdős #124** (open since 1979) by:
+
 1. Selecting formal problem statement
-2. Submitting to Aristotle (--informal mode)
-3. **GOING TO BED** (zero intervention)
+2. Submitting to Aristotle (`--informal` mode)
+3. **Going to bed** (zero intervention)
 4. Waking up 6 hours later → **SOLVED**
 
-**Key Principle**: The less you specify, the better Aristotle performs.
+**Key insight**: The less you specify, the better Aristotle performs.
 
-### Intervention Spectrum (Proven Results)
-
-| Approach | Human Effort | Aristotle Autonomy | Success Rate |
-|----------|--------------|-------------------|--------------|
-| **Boris (Pure)** | 5% (select problem) | 95% | **90%** ✅ |
-| **Ultra-Minimal** | 30% (goal + constraints) | 70% | **85%** |
-| **Outcome-Focused** | 50% (code + outcome) | 50% | **80%** |
-| **Prescriptive** | 70% (specify theorems) | 30% | **45%** ❌ |
-
-**Pattern**: More human intervention = Lower success rate
+| Approach | Human Effort | Success Rate |
+|----------|--------------|--------------|
+| **Boris (Pure)** | 5% | **90%** ✅ |
+| **Ultra-Minimal** | 30% | 85% |
+| **Outcome-Focused** | 50% | 80% |
+| **Prescriptive** | 70% | **45%** ❌ |
 
 ---
 
-## 🚀 Active Experiments (December 13, 2025)
+## 🚀 Active Open Problem Submissions
 
-**Testing the Intervention Spectrum**: Three parallel submissions
+### Erdős #152 - Sidon Set Gaps
+**Status**: Submitted (Boris pattern)
+**Project ID**: `e1c63a08-49ae-4aaa-b264-eaffb3aa64a4`
+**Problem**: Prove gaps in Sidon sets grow unboundedly
+**Why tractable**: Bounded, algebraic structure, recent progress
 
-### 1. SAT LRAT (Pure Boris - No Code)
+### Erdős #64 - Power of 2 Cycles ($1000 reward)
+**Status**: Submitted (Boris pattern)
+**Project ID**: `00acedfc-8a61-41a6-b237-5f59ea9c665f`
+**Problem**: Does every graph with min degree ≥3 contain a 2^k cycle?
+**Why tractable**: Graph theory, falsifiable, bounded search
 
-**Project ID**: `873537b2-608a-486e-9e19-ac40ab1f9a86`
-**Pattern**: Closest to Boris - zero code provided
-**Expected**: 85-90% success
-
-```
-Goal: Build publication-ready LRAT verifier
-You decide: Data structures, algorithm, theorems
-Constraint: Must verify PHP-4-3
-[Inline test data only]
-```
-
-**Why highest success?** No code → No inherited bugs + Aristotle optimizes for proving
-
-### 2. HOMFLY v4 (Ultra-Minimal)
-
-**Project ID**: `50472dec-29b3-4f2c-b430-be337f8f7aa9`
-**Pattern**: Ultra-minimal prompt
-**Expected**: 85% success
-
-```
-Make this publication-ready for ITP/CPP 2026.
-Constraint: All 7 tests must pass
-[396 lines of code]
-```
-
-**Hypothesis**: Minimal intervention → Higher autonomy → Better results
-
-### 3. HOMFLY v3 (Outcome-Focused)
-
-**Project ID**: `4c36027a-35dd-4641-b87f-0895a8aaf4ed`
-**Pattern**: Detailed outcome guidance
-**Expected**: 80% success
-
-```
-Transform from computational → publication-quality
-YOU DECIDE which theorems, how to prove them
-[Full context + 396 lines of code]
-```
-
-**What we're testing**:
-- Does ultra-minimal (v4) beat detailed (v3)?
-- Does no-code (SAT LRAT) beat with-code (HOMFLY)?
-- Does Boris pattern generalize beyond Erdős problems?
-
-**Timeline**: 2-3 days for results
+### More in Queue
+See `problem-databases/` for 1,244 scored open problems ready for submission.
 
 ---
 
-## ✅ Past Successes
+## 📊 Problem Database
 
-### Jones Polynomial - 25 Crossings (Dec 12, 2025)
+We maintain a comprehensive database of open mathematical problems:
 
-**Project ID**: `4aef4bc7-ecf0-4e11-aab4-48da39ed3379`
+```
+problem-databases/
+├── unified_problems_database.json   # 1,244 problems
+├── problems.db                      # SQLite with full metadata
+├── score_tractability.py            # Tractability scoring
+├── verify_status.py                 # Status verification
+└── scrapers/                        # Data sources
+```
 
-- ✅ 20 knots verified at 25 crossings
-- ✅ 618 lines, 0 sorries
-- ✅ 4 algorithm versions (v4-v7)
-- ✅ **3× complexity increase** over 9-crossing
+### Tractability Scoring
 
-[Issue #67](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/67)
+Problems are scored based on Aristotle's proven strengths:
 
-### Jones Polynomial - 9 Crossings (Dec 12, 2025)
+| Factor | Score Impact |
+|--------|--------------|
+| Sidon/additive combinatorics | +25 |
+| Bounded parameters | +20 |
+| Graph theory | +15 |
+| Algebraic structure | +15 |
+| Asymptotic (unbounded) | -15 |
+| Infinite structures | -20 |
+| Famous/intractable | -25 |
 
-- ✅ 10 knots verified
-- ✅ 983 lines, 0 sorries
-- ✅ Computational verification with `native_decide`
-- ✅ First success using outcome-focused approach
+**Top candidates**: 77 problems scored 90-100
 
-[Issue #56](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/56)
+---
 
-### SAT LRAT - PHP-3-2 (Dec 12, 2025)
+## 🔐 Security
 
-- ✅ 84 lines, 0 sorries
-- ✅ Formal UNSAT verification
-- ✅ Certificate-based approach
-- ✅ Decidable via brute force (6 variables, 9 clauses)
+This repo includes protections against accidental secret exposure:
 
-[Issue #55](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/55)
+```bash
+# Pre-commit hook blocks:
+- arstl_* (Aristotle API keys)
+- sk-* (OpenAI)
+- xai-* (Grok)
+- ghp_*/gho_* (GitHub tokens)
+```
 
-### SAT LRAT - PHP-4-3 (Dec 12, 2025)
-
-- ✅ **Harder pigeonhole instance** (12 variables, 34 clauses)
-- ✅ Verified LRAT proof generated (655 bytes)
-- ✅ CaDiCaL v2.2.0 proof certificate
-- ✅ **Test case for current SAT LRAT experiment** (issue #66)
-
-[Issue #68](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/68)
+**Setup**: `git config core.hooksPath .githooks`
 
 ---
 
@@ -138,235 +118,110 @@ YOU DECIDE which theorems, how to prove them
 
 ```
 math/
-├── README.md                           # This file
-├── CLAUDE.md                           # Project-specific best practices
+├── README.md                    # This file
+├── CLAUDE.md                    # Project rules (OPEN problems only)
+├── .githooks/pre-commit         # Secret protection
 │
-├── active-projects/                    # Three parallel experiments
-│   ├── homfly-v3/                      # Outcome-focused
-│   ├── homfly-v4/                      # Ultra-minimal
-│   └── sat-lrat/                       # Pure Boris
+├── problem-databases/           # 1,244 open problems
+│   ├── active-projects/         # Current submissions
+│   ├── unified_problems_database.json
+│   └── score_tractability.py
 │
-├── docs/                               # Key documentation
-│   ├── ALL_SUBMISSIONS_TRACKER.md      # Experiment tracking
-│   ├── BORIS_VS_OUR_APPROACH.md        # Intervention spectrum analysis
-│   ├── ERDOS_REAL_PATTERNS_DEC_2025.md # Boris pattern from Erdős #124
-│   ├── ARISTOTLE_RESUBMISSION_STRATEGY.md
-│   ├── ARISTOTLE_COMPLETE_GUIDE.md
-│   └── ARISTOTLE_SUBMISSION_GUIDE.md
+├── scripts/                     # Submission tools
+│   ├── safe_aristotle_submit.py
+│   └── submit_batch.sh
 │
-├── scripts/                            # Active utilities
-│   ├── safe_aristotle_submit.py        # Safe submission wrapper
-│   └── submit_batch.sh                 # CLI submission tool
+├── docs/                        # Documentation
+│   ├── BORIS_VS_OUR_APPROACH.md
+│   └── ARISTOTLE_COMPLETE_GUIDE.md
 │
-├── archive/                            # Historical experiments
-│   ├── old-experiments/
-│   │   ├── homfly/
-│   │   ├── jones/
-│   │   ├── spectral-gap/
-│   │   ├── hqc/
-│   │   ├── sat-lrat/
-│   │   └── unknotting/
-│   ├── old-strategies/
-│   ├── old-outputs/
-│   └── old-scripts/
-│
-├── interdisciplinary-research/         # Problem verification
-└── verification-results/               # Automated verification
+└── archive/                     # Historical (verification work - deprecated)
 ```
-
----
-
-## 🎓 Core Philosophy
-
-### The Three Laws of Aristotle
-
-**Law 1: Minimal Intervention = Maximum Success**
-- Boris (5% intervention) → 90% success
-- Prescriptive (70% intervention) → 45% failure
-- **Action**: Trust Aristotle's autonomy
-
-**Law 2: Multi-Model Debate Before Submission**
-- Grok + Gemini + Task agent in parallel
-- Debate approaches, estimate probabilities
-- Proceed only with consensus
-- **Action**: Never submit without debate
-
-**Law 3: Outcome-Focused, Not Method-Prescriptive**
-- ✅ "Make this publication-ready. YOU DECIDE."
-- ❌ "Prove theorem_1, theorem_2, ... theorem_17"
-- **Action**: Set goal, provide constraints, step back
 
 ---
 
 ## 🛠️ Quick Start
 
-### Check Active Experiments
+### 1. Check Problem Database
+
+```bash
+cd problem-databases
+python3 query_db.py --top 10  # Top 10 tractable problems
+```
+
+### 2. Submit Open Problem (Boris Pattern)
+
+```bash
+# Create minimal submission file
+echo "Solve Erdős Problem #XXX: [formal statement]" > problem.txt
+
+# Submit
+export ARISTOTLE_API_KEY="your_key"
+aristotle prove-from-file --informal problem.txt --no-wait
+```
+
+### 3. Monitor Submissions
 
 ```python
 import asyncio
 from aristotlelib import Project
 
-async def check_all():
-    for pid in ["873537b2-608a-486e-9e19-ac40ab1f9a86",  # SAT LRAT
-                "50472dec-29b3-4f2c-b430-be337f8f7aa9",  # HOMFLY v4
-                "4c36027a-35dd-4641-b87f-0895a8aaf4ed"]: # HOMFLY v3
-        p = await Project.from_id(pid)
-        await p.refresh()
-        print(f"{pid[:8]}: {p.status}")
+async def check():
+    p = await Project.from_id("your-project-id")
+    await p.refresh()
+    print(f"Status: {p.status}")
 
-asyncio.run(check_all())
-```
-
-### Submit New Problem (Using Boris Pattern)
-
-```bash
-# 1. Create multi-model debate (MANDATORY)
-# - Grok-4, Gemini, Task agent
-# - Estimate success probabilities
-# - Document consensus
-
-# 2. Safe submission (prevents duplicates)
-./scripts/submit_batch.sh problem_name "Description"
-
-# 3. Monitor
-python3 check_queue.py
+asyncio.run(check())
 ```
 
 ---
 
-## 📚 Key Documents
+## 📚 Key Principles
 
-### Essential Reading
+### The Three Laws
 
-1. **[CLAUDE.md](CLAUDE.md)** - Project-specific best practices
-   - Boris pattern philosophy
-   - Multi-model debate workflow
-   - Anti-patterns to avoid
+**Law 1: ONLY Open Problems**
+- If result is known → REFUSE to work on it
+- Ask "Is this OPEN?" before ANY work
 
-2. **[BORIS_VS_OUR_APPROACH.md](docs/BORIS_VS_OUR_APPROACH.md)** - Intervention spectrum
-   - Boris (5% effort) vs Our Jones (70% effort)
-   - Why less specification works better
+**Law 2: Minimal Intervention**
+- Boris (5%) beats Prescriptive (70%)
+- Trust Aristotle's autonomy
 
-3. **[ALL_SUBMISSIONS_TRACKER.md](docs/ALL_SUBMISSIONS_TRACKER.md)** - Active experiments
-   - Three parallel submissions
-   - Hypotheses being tested
-   - Success criteria
+**Law 3: Tractability Check**
+- Bounded search space (< 2^20)
+- No infinite structures
+- Algebraic/combinatorial preferred
 
-### Strategy Documents
+### What We Learned (December 2025)
 
-- [ERDOS_REAL_PATTERNS_DEC_2025.md](docs/ERDOS_REAL_PATTERNS_DEC_2025.md) - Real Erdős #124 success
-- [ARISTOTLE_RESUBMISSION_STRATEGY.md](docs/ARISTOTLE_RESUBMISSION_STRATEGY.md) - Expert debate synthesis
-- [ARISTOTLE_COMPLETE_GUIDE.md](docs/ARISTOTLE_COMPLETE_GUIDE.md) - Aristotle API reference
-
----
-
-## 📖 What We Learned
-
-### Jones Polynomial SUCCESS (Outcome-Focused)
-
-- Provided working code + computational witnesses
-- Asked Aristotle to verify correctness
-- Result: 983 lines, 0 sorries, 10 knots verified
-- **Why it worked**: Outcome-focused, not method-prescriptive
-
-### HOMFLY v2 FAILURE (Prescribed Theorems)
-
-- We specified 17 specific theorems to prove
-- 4/17 were NEGATED (proven false - we had bugs!)
-- Result: 45% success rate
-- **Why it failed**: Prescribed wrong theorems, inherited bugs
-
-### 25-Crossing BREAKTHROUGH
-
-- 3× complexity increase over 9-crossing
-- 20 knots, 618 lines, 0 sorries
-- 4 algorithm versions (sophisticated optimization)
-- **Why it worked**: Computational verification pattern
-
----
-
-## 🔬 Research Questions
-
-### Currently Testing
-
-1. **Ultra-Minimal vs Detailed**: Does v4 (minimal) beat v3 (detailed) for same code?
-2. **No Code vs With Code**: Does SAT LRAT (zero code) beat HOMFLY (396 lines)?
-3. **Generalization**: Does Boris pattern work beyond Erdős problems?
-
-### Expected Outcomes
-
-**Best Case**: All three succeed (80-90% success rates)
-- Validates Boris pattern across problem types
-- Three publications: 2× HOMFLY + 1× SAT LRAT
-
-**Likely Case**: SAT LRAT + one HOMFLY succeed
-- Confirms certificate verification pattern
-- Determines optimal intervention level for code-provided problems
-
-**Worst Case**: Only SAT LRAT succeeds
-- Validates "no code" > "with code" hypothesis
-- Pivot HOMFLY to pure Boris (formal statement only)
+**Mistake**: Spent time on Jones, HOMFLY, Ramsey verification
+**Lesson**: Verification feels productive but isn't novel
+**Fix**: CLAUDE.md now bans verification work explicitly
 
 ---
 
 ## 🔗 Resources
 
-### Aristotle
-- **Homepage**: https://aristotle.harmonic.fun
-- **Research Paper**: https://arxiv.org/html/2510.01346v1
-- **Harmonic**: https://harmonic.fun
-
-### Lean 4
-- **Lean**: https://lean-lang.org/
-- **Mathlib**: https://leanprover-community.github.io/
-
-### AI Consultants
-- **Grok-4** (xAI): Strategic analysis, success probability estimation
-- **Gemini** (Google): Expert analysis, security reviews
-- **Task Agents**: Parallel research, literature review
-
----
-
-## 📊 GitHub Issues
-
-### Active Experiments
-- [#64](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/64): HOMFLY v3 (Outcome-Focused)
-- [#65](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/65): HOMFLY v4 (Ultra-Minimal)
-- [#66](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/66): SAT LRAT (Pure Boris)
-
-### Completed Successes
-- [#67](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/67): 25-Crossing Jones Polynomial ✅
-- [#68](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/68): PHP-4-3 LRAT Proof (Harder) ✅
-- [#56](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/56): 9-Crossing Jones Polynomial ✅
-- [#55](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/55): PHP-3-2 LRAT Proof ✅
-
-### Strategy
-- [#61](https://github.com/kavanaghpatrick/aristotle-math-problems/issues/61): Strategic Assessment
+- **Aristotle**: https://aristotle.harmonic.fun
+- **Erdős Problems**: https://erdosproblems.com
+- **Open Problem Garden**: https://garden.irmacs.sfu.ca
+- **Lean 4**: https://lean-lang.org
+- **Mathlib**: https://leanprover-community.github.io
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Boris Alexeev** for pioneering the minimal intervention approach (Erdős #124)
-- **Harmonic AI** for Aristotle access
-- **Lean Community** for Lean 4 and Mathlib
-- **Grok-4 (xAI)** for strategic planning and expert debate
-- **Gemini (Google)** for multi-model verification
-- **Mathematical Community** for decades of research in knot theory, SAT solving, and formal methods
+- **Boris Alexeev** - Pioneered the minimal intervention approach (Erdős #124)
+- **Harmonic AI** - Aristotle theorem prover
+- **Erdős Problems Project** - Problem database
+- **Lean Community** - Lean 4 and Mathlib
 
 ---
 
-## 📬 Contact & Updates
+**Current Focus**: Submitting OPEN problems with Boris pattern
 
-- **Issues**: https://github.com/kavanaghpatrick/aristotle-math-problems/issues
-- **Watch this repository** for real-time progress on all three experiments
+**Success Metric**: Number of genuinely OPEN problems solved
 
----
-
-**Current Status**: 🧪 **TESTING BORIS PATTERN** - Three parallel experiments running
-
-**Expected Results**: December 15-16, 2025
-
-**Goal**: Understand optimal intervention levels for maximizing Aristotle's success rate
-
-*Last Updated: December 13, 2025*
+*Not lines of code. Not publication polish. Just solving what hasn't been solved.*
