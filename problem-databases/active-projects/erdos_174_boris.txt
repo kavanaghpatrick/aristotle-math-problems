@@ -1,0 +1,30 @@
+# Erdős Problem #174 - Ramsey Set Characterization
+
+Solve this open problem.
+
+## Problem Statement
+
+A finite set A ⊂ ℝⁿ is called Ramsey if, for any k ≥ 1, there exists some d = d(A,k) such that in any k-coloring of ℝᵈ there exists a monochromatic congruent copy of A.
+
+### Known Results
+- Every Ramsey set must be "spherical" (all points lie on a sphere)
+- Rectangles, non-degenerate simplices, trapezoids, and regular polygons are Ramsey
+
+### The Question
+Characterize exactly which finite sets are Ramsey.
+
+Graham conjectured: All spherical sets are Ramsey.
+Leader-Russell-Walters proposed: Ramsey sets are exactly the "subtransitive" sets.
+
+## What You Need To Prove
+
+Either:
+1. Prove Graham's conjecture (all spherical sets are Ramsey), OR
+2. Prove the Leader-Russell-Walters characterization, OR
+3. Find a counterexample to either conjecture
+
+## Context
+
+This is Erdős Problem #174, an open problem in Ramsey theory/combinatorial geometry.
+
+Verified OPEN: December 13, 2025

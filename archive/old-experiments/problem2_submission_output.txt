@@ -1,0 +1,6 @@
+INFO - Validating input...
+INFO - Input Validated.
+INFO - Creating project...
+INFO - Created project 66bc8e1d-5782-4137-b77b-ce7a85533f7b
+INFO - No imports to add
+INFO - Not waiting for completion. Returning project id. You can manually check on it any time with Project.from_id('{project.project_id}')

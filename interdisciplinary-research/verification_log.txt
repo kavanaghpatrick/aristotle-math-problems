@@ -1,0 +1,192 @@
+[2025-12-11 11:12:35] [INFO] 🚀 Starting automated verification pipeline
+[2025-12-11 11:12:35] [INFO] 📖 PHASE 1: Parsing all problem files...
+[2025-12-11 11:12:35] [INFO] Parsing expander-graph-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: The Bilu-Linial Conjecture for Signed Graphs
+[2025-12-11 11:12:35] [INFO]   Extracted: Two-Sided Vertex Expansion Beyond 60%
+[2025-12-11 11:12:35] [INFO]   Extracted: Spectral Gap Bounds for Odd-Diameter Graphs
+[2025-12-11 11:12:35] [INFO]   Extracted: Lossless Bipartite Expanders in Unbalanced Settings
+[2025-12-11 11:12:35] [INFO]   Extracted: Characterization of Integral Cayley Graphs
+[2025-12-11 11:12:35] [INFO] Found 5 problems in expander-graph-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing cryptography-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: Optimal Modulus for SIS-to-SVP Reduction
+[2025-12-11 11:12:35] [INFO]   Extracted: Classical Reduction from SVP to Learning With Errors (LWE)
+[2025-12-11 11:12:35] [INFO]   Extracted: SVP to SIS Reduction with Optimal Parameters
+[2025-12-11 11:12:35] [INFO]   Extracted: Bounded Distance Decoding Hardness for Large p-Norms
+[2025-12-11 11:12:35] [INFO]   Extracted: MinRank Problem Exact Complexity and Quantum Resistance
+[2025-12-11 11:12:35] [INFO]   Extracted: Syndrome Decoding in Quasi-Cyclic Codes - Complexity Gaps
+[2025-12-11 11:12:35] [INFO]   Extracted: QROM Security Proofs - Generic Lifting Theorems
+[2025-12-11 11:12:35] [INFO] Found 7 problems in cryptography-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing algorithm-optimality-problems.md
+[2025-12-11 11:12:35] [INFO] Found 0 problems in algorithm-optimality-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing topological-quantum-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: F-Matrix Existence and Uniqueness for Fusion Rules
+[2025-12-11 11:12:35] [INFO]   Extracted: Weak Integrality Implies Finite Braid Group Representation
+[2025-12-11 11:12:35] [INFO]   Extracted: Universal Lower Bound on Topological Entanglement Entropy
+[2025-12-11 11:12:35] [INFO]   Extracted: Finite-Rank Modular Tensor Category Classification (Rank ≤ 4)
+[2025-12-11 11:12:35] [INFO]   Extracted: Jones Polynomial Approximation Certifiable Cases
+[2025-12-11 11:12:35] [INFO] Found 5 problems in topological-quantum-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing sat-csp-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: Random 3-SAT Satisfiability Threshold (Exact Value)
+[2025-12-11 11:12:35] [INFO]   Extracted: Resolution Complexity for Specific SAT Formulas
+[2025-12-11 11:12:35] [INFO]   Extracted: Boolean Promise CSP Dichotomy
+[2025-12-11 11:12:35] [INFO]   Extracted: Algorithmic Gap for Low-Degree Polynomial Algorithms on k-SAT
+[2025-12-11 11:12:35] [INFO]   Extracted: Polynomial Calculus Resolution (PCR) Space Lower Bounds
+[2025-12-11 11:12:35] [INFO] Found 5 problems in sat-csp-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing information-theory-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: Gilbert-Varshamov Bound Asymptotic Exactness
+[2025-12-11 11:12:35] [INFO]   Extracted: Existence of Type I [56,28,12] Self-Dual Code
+[2025-12-11 11:12:35] [INFO]   Extracted: Quantum MDS Conjecture
+[2025-12-11 11:12:35] [INFO]   Extracted: Shannon Capacity of the Seven-Cycle C₇
+[2025-12-11 11:12:35] [INFO]   Extracted: Li-Li Conjecture (Network Coding for Multiple Unicast)
+[2025-12-11 11:12:35] [INFO]   Extracted: Ingleton Inequality Maximum Violation
+[2025-12-11 11:12:35] [INFO]   Extracted: Polar Codes Finite Blocklength Scaling Conjecture
+[2025-12-11 11:12:35] [INFO] Found 7 problems in information-theory-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing statistical-physics-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: Site Percolation Threshold on Square Lattice
+[2025-12-11 11:12:35] [INFO]   Extracted: Non-uniqueness of Ising Phase Transitions on Tree-like Graphs
+[2025-12-11 11:12:35] [INFO]   Extracted: Antiferromagnetic Potts Model - Tight Bounds on Partition Function
+[2025-12-11 11:12:35] [INFO]   Extracted: Chromatic Polynomial Zeros for Series-Parallel Graphs
+[2025-12-11 11:12:35] [INFO]   Extracted: Kac-Ward Determinant Extension to Non-Planar Graphs
+[2025-12-11 11:12:35] [INFO]   Extracted: Lévy Spin Glass Model - Enriched Free Energy
+[2025-12-11 11:12:35] [INFO]   Extracted: Matrix Discrepancy - Kómlos Conjecture Lower Bound
+[2025-12-11 11:12:35] [INFO] Found 7 problems in statistical-physics-problems.md
+[2025-12-11 11:12:35] [INFO] Parsing coding-theory-problems.md
+[2025-12-11 11:12:35] [INFO]   Extracted: MDS Self-Dual Code Existence Over Odd Characteristic Fields
+[2025-12-11 11:12:35] [INFO]   Extracted: Existence of Additive MDS Codes Satisfying the MDS Conjecture Over $\mathbb{F}_{2^m}$
+[2025-12-11 11:12:35] [INFO]   Extracted: Achievability of Drinfeld-Vladut Bound for Finite Length AG Codes
+[2025-12-11 11:12:35] [INFO]   Extracted: Non-Existence of MDS Cyclic Codes at Boundary Parameters
+[2025-12-11 11:12:35] [INFO]   Extracted: Linear Programming Bound Improvement Conjecture for Binary Codes (Small Cases)
+[2025-12-11 11:12:35] [INFO] Found 5 problems in coding-theory-problems.md
+[2025-12-11 11:12:35] [INFO] ✅ PHASE 1 COMPLETE: Parsed 41 total problems
+[2025-12-11 11:12:35] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:35] [INFO] 📝 PHASE 2: Creating GitHub issues for 41 problems...
+[2025-12-11 11:12:38] [ERROR] ❌ Failed to create issue for Characterization of Integral Cayley Graphs: could not add label: 'expander-graphs' not found
+
+[2025-12-11 11:12:38] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:38] [ERROR] ❌ Failed to create issue for Lossless Bipartite Expanders in Unbalanced Settings: could not add label: 'expander-graphs' not found
+
+[2025-12-11 11:12:38] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:38] [ERROR] ❌ Failed to create issue for Two-Sided Vertex Expansion Beyond 60%: could not add label: 'expander-graphs' not found
+
+[2025-12-11 11:12:38] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:38] [ERROR] ❌ Failed to create issue for The Bilu-Linial Conjecture for Signed Graphs: could not add label: 'expander-graphs' not found
+
+[2025-12-11 11:12:38] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for Spectral Gap Bounds for Odd-Diameter Graphs: could not add label: 'expander-graphs' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for Optimal Modulus for SIS-to-SVP Reduction: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for Classical Reduction from SVP to Learning With Errors (LWE): could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for SVP to SIS Reduction with Optimal Parameters: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for Bounded Distance Decoding Hardness for Large p-Norms: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for MinRank Problem Exact Complexity and Quantum Resistance: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for Syndrome Decoding in Quasi-Cyclic Codes - Complexity Gaps: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:39] [ERROR] ❌ Failed to create issue for QROM Security Proofs - Generic Lifting Theorems: could not add label: 'cryptography' not found
+
+[2025-12-11 11:12:39] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for F-Matrix Existence and Uniqueness for Fusion Rules: could not add label: 'quantum-topology' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for Weak Integrality Implies Finite Braid Group Representation: could not add label: 'quantum-topology' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for Finite-Rank Modular Tensor Category Classification (Rank ≤ 4): could not add label: 'quantum-topology' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for Jones Polynomial Approximation Certifiable Cases: could not add label: 'quantum-topology' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for Random 3-SAT Satisfiability Threshold (Exact Value): could not add label: 'sat-csp' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:40] [ERROR] ❌ Failed to create issue for Universal Lower Bound on Topological Entanglement Entropy: could not add label: 'quantum-topology' not found
+
+[2025-12-11 11:12:40] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:41] [ERROR] ❌ Failed to create issue for Resolution Complexity for Specific SAT Formulas: could not add label: 'sat-csp' not found
+
+[2025-12-11 11:12:41] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:41] [ERROR] ❌ Failed to create issue for Boolean Promise CSP Dichotomy: could not add label: 'sat-csp' not found
+
+[2025-12-11 11:12:41] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:41] [ERROR] ❌ Failed to create issue for Algorithmic Gap for Low-Degree Polynomial Algorithms on k-SAT: could not add label: 'sat-csp' not found
+
+[2025-12-11 11:12:41] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:41] [ERROR] ❌ Failed to create issue for Polynomial Calculus Resolution (PCR) Space Lower Bounds: could not add label: 'sat-csp' not found
+
+[2025-12-11 11:12:41] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:41] [ERROR] ❌ Failed to create issue for Gilbert-Varshamov Bound Asymptotic Exactness: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:41] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Existence of Type I [56,28,12] Self-Dual Code: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Quantum MDS Conjecture: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Shannon Capacity of the Seven-Cycle C₇: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Li-Li Conjecture (Network Coding for Multiple Unicast): could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Ingleton Inequality Maximum Violation: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Site Percolation Threshold on Square Lattice: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Antiferromagnetic Potts Model - Tight Bounds on Partition Function: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Chromatic Polynomial Zeros for Series-Parallel Graphs: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:42] [ERROR] ❌ Failed to create issue for Non-uniqueness of Ising Phase Transitions on Tree-like Graphs: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:42] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:43] [ERROR] ❌ Failed to create issue for Polar Codes Finite Blocklength Scaling Conjecture: could not add label: 'information-theory' not found
+
+[2025-12-11 11:12:43] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:44] [ERROR] ❌ Failed to create issue for Kac-Ward Determinant Extension to Non-Planar Graphs: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:44] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:44] [ERROR] ❌ Failed to create issue for Lévy Spin Glass Model - Enriched Free Energy: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:44] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:44] [ERROR] ❌ Failed to create issue for Matrix Discrepancy - Kómlos Conjecture Lower Bound: could not add label: 'statistical-physics' not found
+
+[2025-12-11 11:12:44] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:44] [ERROR] ❌ Failed to create issue for Existence of Additive MDS Codes Satisfying the MDS Conjecture Over $\mathbb{F}_{2^m}$: could not add label: 'coding-theory' not found
+
+[2025-12-11 11:12:44] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:44] [ERROR] ❌ Failed to create issue for MDS Self-Dual Code Existence Over Odd Characteristic Fields: could not add label: 'coding-theory' not found
+
+[2025-12-11 11:12:44] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:45] [ERROR] ❌ Failed to create issue for Achievability of Drinfeld-Vladut Bound for Finite Length AG Codes: could not add label: 'coding-theory' not found
+
+[2025-12-11 11:12:45] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:45] [ERROR] ❌ Failed to create issue for Non-Existence of MDS Cyclic Codes at Boundary Parameters: could not add label: 'coding-theory' not found
+
+[2025-12-11 11:12:45] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:45] [ERROR] ❌ Failed to create issue for Linear Programming Bound Improvement Conjecture for Binary Codes (Small Cases): could not add label: 'coding-theory' not found
+
+[2025-12-11 11:12:45] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:45] [INFO] 💾 Checkpoint saved: 41 problems
+[2025-12-11 11:12:45] [INFO] ✅ PHASE 2 COMPLETE: Created 0 issues
+[2025-12-11 11:12:45] [INFO] 🔍 PHASE 3: Verifying 41 problems...
+[2025-12-11 11:12:45] [INFO] ℹ️  All problems already verified, skipping phase 3
+[2025-12-11 11:12:45] [INFO] 📊 PHASE 4: Generating final report...
+[2025-12-11 11:12:45] [INFO] 📊 Generating verification report...
+[2025-12-11 11:12:45] [ERROR] 💥 FATAL ERROR: division by zero

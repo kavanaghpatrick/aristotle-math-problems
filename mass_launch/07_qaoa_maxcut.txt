@@ -1,0 +1,204 @@
+## Problem Title: QAOA Depth-2 Optimality for MaxCut on 3-Regular Graphs (12 vertices)
+
+---
+
+## Executive Summary
+
+Prove that QAOA (Quantum Approximate Optimization Algorithm) with depth p=2 achieves optimal approximation ratio for MaxCut on 3-regular graphs with 12 vertices. This has implications for near-term quantum algorithm performance.
+
+---
+
+## Background
+
+### QAOA (Quantum Approximate Optimization Algorithm)
+
+**Introduced:** Farhi et al. (2014)
+
+**Goal:** Approximate solution to combinatorial optimization (MaxCut, Max-SAT, etc.)
+
+**Parameters:**
+- Depth p (number of alternating unitaries)
+- Angles γ = (γ₁, ..., γₚ) and β = (β₁, ..., βₚ)
+
+**Circuit:**
+```
+|ψ(γ,β)⟩ = U_B(βₚ) U_C(γₚ) ... U_B(β₁) U_C(γ₁) |+⟩^⊗n
+```
+where U_C is problem Hamiltonian and U_B is mixer.
+
+### MaxCut Problem
+
+**Input:** Graph G = (V, E)
+**Goal:** Partition V into S, T to maximize |{(u,v) ∈ E : u ∈ S, v ∈ T}|
+
+**Approximation Ratio:** QAOA_value / OPT
+
+**Known:** For depth p=1, approximation ratio ≈ 0.6924 on 3-regular graphs.
+
+---
+
+## Concrete Parameters
+
+**Graph:** 3-regular (each vertex has degree 3)
+**Vertices:** n = 12
+**Depth:** p = 2
+**Target:** Prove QAOA with depth 2 is OPTIMAL for this class
+
+---
+
+## Goal 1: QAOA Approximation Ratio Lower Bound
+
+### Task
+Prove that QAOA with depth p=2 achieves approximation ratio ≥ α for MaxCut on 3-regular 12-vertex graphs.
+
+### Approach: Explicit Optimization
+
+**Strategy:**
+1. Fix specific 3-regular graph on 12 vertices (e.g., Petersen-like)
+2. Compute optimal angles (γ₁, γ₂, β₁, β₂) for QAOA
+3. Evaluate expected value ⟨ψ(γ,β)|H_C|ψ(γ,β)⟩
+4. Compare to OPT (maximum cut value)
+5. Compute ratio α = QAOA_value / OPT
+
+**For 12 vertices:** Computational optimization feasible.
+
+### Formalization
+
+```lean
+-- Graph representation
+structure Graph (n : ℕ) where
+  edges : Finset (Fin n × Fin n)
+  symmetric : ∀ {u v}, (u, v) ∈ edges → (v, u) ∈ edges
+
+-- 3-regular property
+def is_3_regular {n : ℕ} (G : Graph n) : Prop :=
+  ∀ v : Fin n, (G.edges.filter (fun e => e.1 = v ∨ e.2 = v)).card = 3
+
+-- MaxCut value
+def maxcut_value {n : ℕ} (G : Graph n) (S : Finset (Fin n)) : ℕ :=
+  (G.edges.filter (fun e => (e.1 ∈ S ∧ e.2 ∉ S) ∨ (e.1 ∉ S ∧ e.2 ∈ S))).card
+
+-- Optimal cut
+def optimal_cut {n : ℕ} (G : Graph n) : ℕ :=
+  (Finset.univ.powerset.map (maxcut_value G)).max.getD 0
+
+-- QAOA state (simplified)
+noncomputable def qaoa_state (n p : ℕ) (γ β : Fin p → ℝ) : QuantumState n :=
+  ... -- Apply QAOA circuit
+
+-- QAOA expected value
+noncomputable def qaoa_expected {n : ℕ} (G : Graph n) (p : ℕ) (γ β : Fin p → ℝ) : ℝ :=
+  ⟨qaoa_state n p γ β | maxcut_hamiltonian G | qaoa_state n p γ β⟩
+
+-- Lower bound theorem
+theorem qaoa_depth2_ratio_lower_bound (G : Graph 12) :
+  is_3_regular G →
+  ∃ (γ β : Fin 2 → ℝ),
+    qaoa_expected G 2 γ β / optimal_cut G ≥ 0.75
+```
+
+---
+
+## Goal 2: Classical Algorithm Upper Bound
+
+### Task
+Prove that no classical randomized algorithm can achieve better approximation ratio than QAOA depth-2 in polynomial time (assuming hardness).
+
+### Approach: Hardness Reduction
+
+**Known:** MaxCut is NP-hard, best polynomial-time classical is Goemans-Williamson (0.878).
+
+**For 3-regular graphs:** Specialized algorithms may do better.
+
+**Prove:** Classical ratio ≤ 0.75 for 3-regular 12-vertex graphs (matching QAOA).
+
+**Note:** This is the "optimality" claim - QAOA depth-2 matches best classical.
+
+---
+
+## Goal 3: Explicit Angle Optimization
+
+### Task
+Find optimal angles (γ₁, γ₂, β₁, β₂) for QAOA depth-2 on specific 12-vertex 3-regular graph.
+
+### Approach: Gradient Descent + Verification
+
+**Strategy:**
+1. Use gradient descent to optimize angles
+2. Verify local optimality (gradient = 0)
+3. Compute QAOA value at optimal angles
+4. Use `native_decide` or numerical verification
+
+**Specific Graph:** Petersen graph (10 vertices) or 12-vertex expansion.
+
+### Formalization
+
+```lean
+-- Optimal angles for specific graph
+def optimal_angles_petersen12 : (Fin 2 → ℝ) × (Fin 2 → ℝ) :=
+  ... -- Numerically optimized angles
+
+-- Verification
+theorem qaoa_petersen12_optimized :
+  let (γ, β) := optimal_angles_petersen12
+  qaoa_expected petersen_12 2 γ β ≥ 0.75 * optimal_cut petersen_12
+```
+
+---
+
+## Goal 4: Depth Hierarchy (Stretch)
+
+### Task
+Prove that depth p=2 is strictly better than depth p=1 for this instance.
+
+**Approach:**
+- Compute QAOA value for p=1 (known to be ≈ 0.69)
+- Compute QAOA value for p=2 (Goal 3, expect ≈ 0.75)
+- Show: QAOA(p=2) > QAOA(p=1)
+
+**This demonstrates depth hierarchy in QAOA.**
+
+---
+
+## Success Criteria
+
+✅ **Concrete graph**: Specific 12-vertex 3-regular graph
+✅ **Depth p=2**: Not just asymptotic or general p
+✅ **Approximation ratio**: Explicit value (e.g., ≥ 0.75)
+✅ **Optimal angles**: Numerically computed and verified
+✅ **Optimality claim**: Matches or exceeds best classical for this instance
+
+### Red Flags
+❌ Only asymptotic analysis
+❌ Generic graphs (not 3-regular, not n=12)
+❌ No angle optimization (abstract QAOA)
+❌ No comparison to classical algorithms
+
+---
+
+## Expected Output
+
+**Target**: 200-350 lines
+
+### Structure
+1. **Definitions** (60-80 lines): Graphs, QAOA, quantum states, MaxCut
+2. **Approximation Ratio** (60-90 lines): Angle optimization, ratio ≥ α
+3. **Classical Upper Bound** (40-60 lines): Hardness argument
+4. **Explicit Verification** (40-60 lines): Petersen graph, numerical check
+5. **Depth Hierarchy** (20-30 lines): Compare p=1 vs p=2
+
+---
+
+## Novelty Assessment
+
+**Why 6-7/10:**
+- First formal verification of QAOA optimality for specific instance
+- Explicit angle optimization for concrete graph
+- Demonstrates quantum advantage for near-term algorithm
+
+**Challenges:**
+- Quantum state manipulation in Lean 4 is difficult
+- Numerical optimization verification
+- "Optimality" depends on classical hardness assumptions
+
+**Success Probability**: 25% (quantum formalization is very challenging)

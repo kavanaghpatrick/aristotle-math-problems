@@ -1,0 +1,404 @@
+# HOMFLY-PT Polynomial: From Computational Verification to Publication-Ready Formalization
+
+## Mission
+
+Transform our **first-in-proof-assistants HOMFLY-PT computational verification** (396 lines, 6/6 knots verified) into **publication-ready formal mathematics** suitable for ITP/CPP 2026 main track.
+
+**Current Achievement**: Computational witnesses via `native_decide`
+**Target**: Formal proofs of mathematical properties
+
+---
+
+## Background: What We Already Have
+
+**File**: `homfly_pt_SUCCESS.lean` (396 lines, 0 sorries)
+
+**Working Components**:
+1. ✅ **SparsePoly2**: 2-variable sparse Laurent polynomials (v, z)
+2. ✅ **Hecke Algebra**: Permutation basis, n! elements, generators
+3. ✅ **Braid → Hecke Pipeline**: Converts braid words to Hecke elements
+4. ✅ **Ocneanu Trace**: Computes trace with loop value (v - v⁻¹)/z
+5. ✅ **HOMFLY-PT Computation**: Full pipeline from braid to polynomial
+6. ✅ **6 Verified Knots**: Trefoil, Figure-eight, Cinquefoil, Three-twist, 6₁, 7₁
+
+**Existing Theorems** (computational witnesses):
+```lean
+theorem homfly_trefoil_neq_poly_mu :
+  homfly_polynomial_computable_correct [1, 1, 1] ≠ SparsePoly2.normalize poly_mu := by native_decide
+```
+
+**Critical Assessment** (from Codex review):
+- ✅ Computation works correctly
+- ❌ No formal proofs of mathematical properties
+- ❌ No proof of skein relations
+- ❌ No proof of Reidemeister invariance
+- ❌ Conflicting normalization functions (bug!)
+
+---
+
+## Task for Aristotle
+
+**Extend the existing file** with formal proofs that establish mathematical correctness, resolving critical issues and adding the four required components for publication.
+
+**Do NOT rewrite from scratch.** Build on the working 396 lines.
+
+---
+
+## Part 1: RESOLVE NORMALIZATION CONFLICT (Critical Bug Fix)
+
+**Problem Identified**: Two conflicting normalization functions exist:
+- `homfly_normalize` (line ~356)
+- `homfly_normalize_correct` (line ~365)
+
+**Required**:
+
+```lean
+-- Unified normalization (single source of truth)
+def homfly_normalize_unified (p : SparsePoly2) (writhe : Int) : SparsePoly2 :=
+  let writhe_factor := [(-writhe, 0, 1)]  -- v^{-writhe}
+  SparsePoly2.mul_norm p writhe_factor
+
+-- Prove both old versions match unified version
+theorem normalization_v1_correct (p : SparsePoly2) (w : Int) :
+  homfly_normalize p w = homfly_normalize_unified p w := by
+  sorry  -- Fill this proof
+
+theorem normalization_v2_correct (p : SparsePoly2) (w : Int) :
+  homfly_normalize_correct p w = homfly_normalize_unified p w := by
+  sorry  -- Fill this proof
+
+-- Prove unified version matches mathematical definition
+theorem writhe_normalization_correct (b : BraidWord) :
+  let bracket := compute_kauffman_bracket b
+  let writhe := compute_writhe b
+  homfly_normalize_unified bracket writhe = mathematical_homfly_pt_definition b := by
+  sorry  -- Prove v^{-writhe} factor is mathematically correct
+```
+
+**Success Criterion**: All 6 existing theorems updated to use `homfly_normalize_unified` and still verify.
+
+---
+
+## Part 2: PROVE ALGORITHM CORRECTNESS
+
+**Goal**: Prove that our computational pipeline computes the correct mathematical object.
+
+### 2A. Polynomial Operations Preserve Semantics
+
+```lean
+-- Semantic evaluation function (Mathlib-inspired)
+def eval_poly2 (p : SparsePoly2) (v z : ℂ) : ℂ :=
+  p.foldl (fun acc (ev, ez, c) => acc + c * v^ev * z^ez) 0
+
+-- Addition is correct
+theorem sparsepoly2_add_correct (p q : SparsePoly2) (v z : ℂ) :
+  eval_poly2 (SparsePoly2.add p q) v z = eval_poly2 p v z + eval_poly2 q v z := by
+  sorry  -- Prove by induction on lists
+
+-- Multiplication is correct
+theorem sparsepoly2_mul_correct (p q : SparsePoly2) (v z : ℂ) :
+  eval_poly2 (SparsePoly2.mul p q) v z = eval_poly2 p v z * eval_poly2 q v z := by
+  sorry  -- Prove by distributivity
+
+-- Normalization preserves value
+theorem sparsepoly2_normalize_correct (p : SparsePoly2) (v z : ℂ) :
+  eval_poly2 (SparsePoly2.normalize p) v z = eval_poly2 p v z := by
+  sorry  -- Prove combining like terms doesn't change value
+```
+
+### 2B. Hecke Algebra Properties
+
+```lean
+-- Hecke multiplication is associative
+theorem hecke_mul_associative (n : Nat) (h1 h2 h3 : Hecke_elt) :
+  Hecke_elt.mul n (Hecke_elt.mul n h1 h2) h3 =
+  Hecke_elt.mul n h1 (Hecke_elt.mul n h2 h3) := by
+  sorry  -- Prove algebraic property
+
+-- Hecke generators satisfy quadratic relation
+theorem hecke_generator_quadratic (n i : Nat) :
+  let Ti := hecke_generator n i
+  let q := poly_q  -- q = v²
+  let q_inv := [(-2, 0, 1)]  -- q⁻¹ = v⁻²
+  Hecke_elt.mul n Ti Ti =
+    SparsePoly2.add
+      (SparsePoly2.mul_norm (SparsePoly2.add q (SparsePoly2.mul_norm q_inv [(-1,0,-1)])) Ti)
+      hecke_identity n := by
+  sorry  -- Prove (T_i - q)(T_i + q⁻¹) = 0
+
+-- Braid relations hold
+theorem hecke_braid_relation_adjacent (n i : Nat) (h : i + 1 < n) :
+  let Ti := hecke_generator n i
+  let Ti1 := hecke_generator n (i+1)
+  Hecke_elt.mul n (Hecke_elt.mul n Ti Ti1) Ti =
+  Hecke_elt.mul n (Hecke_elt.mul n Ti1 Ti) Ti1 := by
+  sorry  -- Prove σ_i σ_{i+1} σ_i = σ_{i+1} σ_i σ_{i+1}
+
+theorem hecke_braid_relation_distant (n i j : Nat) (h : i + 1 < j) :
+  let Ti := hecke_generator n i
+  let Tj := hecke_generator n j
+  Hecke_elt.mul n Ti Tj = Hecke_elt.mul n Tj Ti := by
+  sorry  -- Prove σ_i σ_j = σ_j σ_i for |i-j| ≥ 2
+```
+
+### 2C. Ocneanu Trace Correctness
+
+```lean
+-- Trace computes correct loop formula
+theorem ocneanu_trace_loop_value (n : Nat) (h : Hecke_elt) :
+  let trace := Hecke_elt.ocneanu_trace n h
+  let identity_coefficient := get_coefficient_of_identity_permutation h
+  trace = SparsePoly2.mul_norm identity_coefficient poly_mu := by
+  sorry  -- Prove trace projects to identity and multiplies by (v - v⁻¹)/z
+
+-- Prove fuel parameter is sufficient
+theorem ocneanu_trace_fuel_sufficient (n : Nat) (h : Hecke_elt) :
+  Hecke_elt.ocneanu_trace_fuel 100 n h =
+  Hecke_elt.ocneanu_trace_fuel 1000 n h := by
+  sorry  -- Prove fuel=100 is enough for n ≤ 10
+```
+
+---
+
+## Part 3: PROVE SKEIN RELATIONS
+
+**Mathematical Definition**:
+```
+v⁻¹·P(L₊) - v·P(L₋) = z·P(L₀)
+P(unknot) = 1
+```
+
+**Required Theorems**:
+
+```lean
+-- Base case: unknot
+theorem homfly_unknot_base :
+  homfly_polynomial_computable [] = [(0, 0, 1)] := by
+  native_decide  -- Already works!
+
+-- Skein relation at a single crossing
+theorem homfly_skein_single_crossing (b : BraidWord) (i : Nat) (pos : i < b.length) :
+  let b_plus := b  -- Assume crossing i is positive
+  let b_minus := flip_crossing b i  -- Same crossing, negative
+  let b_zero := remove_crossing b i  -- Crossing smoothed
+  let v_inv := [(-1, 0, 1)]  -- v⁻¹
+  let v := [(1, 0, 1)]       -- v
+  let z := [(0, 1, 1)]       -- z
+  SparsePoly2.add
+    (SparsePoly2.mul_norm v_inv (homfly_polynomial_computable b_plus))
+    (SparsePoly2.mul_norm v (SparsePoly2.mul_norm [(-1,0,-1)] (homfly_polynomial_computable b_minus)))
+  = SparsePoly2.mul_norm z (homfly_polynomial_computable b_zero) := by
+  sorry  -- Prove by Hecke algebra relations
+
+-- General skein relation (induction on braid complexity)
+theorem homfly_skein_general (b : BraidWord) :
+  satisfies_skein_relation (homfly_polynomial_computable b) := by
+  induction b with
+  | nil => exact homfly_unknot_base
+  | cons gen rest ih =>
+    sorry  -- Inductive case: show adding generator preserves skein
+```
+
+**Validation**: Verify against 6 existing knots
+
+```lean
+-- Validate skein holds for test cases
+example : satisfies_skein_relation (homfly_polynomial_computable [1,1,1]) := by native_decide
+example : satisfies_skein_relation (homfly_polynomial_computable [1,-2,1,-2]) := by native_decide
+-- ... (4 more)
+```
+
+---
+
+## Part 4: PROVE REIDEMEISTER INVARIANCE
+
+**Three Reidemeister Moves**:
+- R1: Twist (add/remove twist loop)
+- R2: Poke (add/remove crossing pair that cancels)
+- R3: Slide (triangle move)
+
+**Required Theorems**:
+
+### R1: Twist Invariance
+
+```lean
+-- Adding a twist introduces a v factor that cancels in normalization
+theorem homfly_reidemeister_I (b : BraidWord) (i : Nat) :
+  homfly_polynomial_computable b =
+  homfly_polynomial_computable (add_twist b i) := by
+  sorry  -- Show twist = identity in Hecke after writhe normalization
+
+-- Validate on trefoil with twist
+example :
+  homfly_polynomial_computable [1,1,1] =
+  homfly_polynomial_computable (add_twist [1,1,1] 0) := by native_decide
+```
+
+### R2: Crossing Pair Cancellation
+
+```lean
+-- R2 for braid: [σ_i, σ_i⁻¹] = identity
+theorem homfly_reidemeister_II (b : BraidWord) (i : Nat) :
+  homfly_polynomial_computable b =
+  homfly_polynomial_computable (b ++ [i, -i]) := by
+  sorry  -- Prove via Hecke: T_i * T_i⁻¹ = 1
+
+-- We already validated this!
+theorem homfly_reidemeister_II_validated :
+  homfly_polynomial_computable [] =
+  homfly_polynomial_computable [1, -1] := by
+  native_decide  -- Existing proof from validation section
+```
+
+### R3: Triangle Move
+
+```lean
+-- R3: Braid relation σ_i σ_{i+1} σ_i = σ_{i+1} σ_i σ_{i+1}
+theorem homfly_reidemeister_III (b : BraidWord) (i : Nat) (h : i + 2 ≤ braid_index b) :
+  let triangle_left := b ++ [i, i+1, i]
+  let triangle_right := b ++ [i+1, i, i+1]
+  homfly_polynomial_computable triangle_left =
+  homfly_polynomial_computable triangle_right := by
+  sorry  -- Use hecke_braid_relation_adjacent theorem
+
+-- Validate on example
+example :
+  homfly_polynomial_computable [1, 2, 1] =
+  homfly_polynomial_computable [2, 1, 2] := by native_decide
+```
+
+---
+
+## Success Criteria
+
+### Minimum Viable (can still publish at workshop):
+- ✅ Part 1: Normalization unified and proven correct
+- ✅ Part 2A: Polynomial semantics proven
+- ✅ Part 2C: Ocneanu trace correctness
+- ✅ Part 4.2: R2 proven (already validated)
+- ⚠️ Parts 2B, 3, 4.1, 4.3: Partial proofs or specific cases
+
+**Outcome**: Workshop/artifact track paper
+
+### Target (main track publication):
+- ✅ All 4 parts fully proven
+- ✅ General skein relations (Part 3)
+- ✅ All 3 Reidemeister moves (Part 4)
+- ✅ Complete algorithm correctness (Part 2)
+
+**Outcome**: ITP/CPP 2026 main track
+
+---
+
+## Implementation Strategy
+
+**File Structure**:
+```lean
+-- Keep existing 396 lines as-is
+import homfly_pt_SUCCESS
+
+-- Add new section
+namespace FormalProofs
+
+-- Part 1: Normalization
+section Normalization
+  def homfly_normalize_unified ...
+  theorem normalization_v1_correct ...
+  theorem normalization_v2_correct ...
+  theorem writhe_normalization_correct ...
+end Normalization
+
+-- Part 2: Algorithm Correctness
+section AlgorithmCorrectness
+  -- 2A: Polynomial semantics
+  def eval_poly2 ...
+  theorem sparsepoly2_add_correct ...
+  theorem sparsepoly2_mul_correct ...
+
+  -- 2B: Hecke algebra
+  theorem hecke_mul_associative ...
+  theorem hecke_braid_relation_adjacent ...
+
+  -- 2C: Ocneanu trace
+  theorem ocneanu_trace_loop_value ...
+end AlgorithmCorrectness
+
+-- Part 3: Skein Relations
+section SkeinRelations
+  theorem homfly_unknot_base ...
+  theorem homfly_skein_single_crossing ...
+  theorem homfly_skein_general ...
+end SkeinRelations
+
+-- Part 4: Reidemeister Invariance
+section ReidemeisterInvariance
+  theorem homfly_reidemeister_I ...
+  theorem homfly_reidemeister_II ...
+  theorem homfly_reidemeister_III ...
+end ReidemeisterInvariance
+
+end FormalProofs
+```
+
+**Proof Strategy**:
+1. Start with easiest (normalization, polynomial semantics)
+2. Use existing native_decide validations as test cases
+3. Build complex proofs from simpler lemmas
+4. Use induction on braid word length where needed
+5. Leverage Hecke algebra properties throughout
+
+---
+
+## Expected Output
+
+**Lean 4 file** (~600-800 lines total):
+- Original 396 lines (unchanged computational core)
+- 200-400 new lines (formal proofs)
+- 0 sorries (all filled by Aristotle)
+
+**Theorems proven**: ~25-30 total
+- 3 normalization theorems
+- 8-10 algorithm correctness lemmas
+- 3-5 skein relation theorems
+- 3 Reidemeister theorems
+- 5-10 intermediate Hecke algebra lemmas
+
+---
+
+## Risk Assessment & Fallback
+
+**Risks**:
+- General skein induction too complex (30% failure probability)
+- Hecke braid relations require deep algebraic insight (20% risk)
+- Undetected bugs in existing code block proofs (20% risk)
+
+**Fallback Plan**:
+1. If general skein fails → Prove for 6 specific test knots only
+2. If R3 fails → Prove R1 + R2 only (still publishable)
+3. If algorithm correctness stalls → Focus on polynomial semantics only
+
+**Iterative Approach**:
+- Submit Part 1 first (normalization) - if it works, continue
+- Submit Parts 1+2 next (algorithm correctness)
+- Submit full submission last (all 4 parts)
+
+---
+
+## Validation Against Existing Work
+
+After all proofs complete, verify:
+
+```lean
+-- All 6 original computational witnesses still hold
+example : homfly_polynomial_computable [1,1,1] ≠ [(0,0,1)] := by native_decide  -- Trefoil
+example : homfly_polynomial_computable [1,-2,1,-2] ≠ [(0,0,1)] := by native_decide  -- Figure-8
+-- ... (4 more)
+
+-- New formal proofs connect to computations
+example : homfly_skein_general [1,1,1] := by apply SkeinRelations.homfly_skein_general
+example : homfly_reidemeister_II [] 1 := by apply ReidemeisterInvariance.homfly_reidemeister_II
+```
+
+---
+
+**Please create the extended Lean 4 file with all sorries filled, building incrementally on the existing `homfly_pt_SUCCESS.lean` work.**

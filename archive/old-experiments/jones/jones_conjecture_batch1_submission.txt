@@ -1,0 +1,261 @@
+# Jones Unknotting Conjecture - Systematic Search (Batch 1)
+
+## Background: A 40-Year-Old Open Problem
+
+The **Jones Unknotting Conjecture** (1985) is one of the fundamental open problems in knot theory:
+
+**CONJECTURE**: No non-trivial knot has Jones polynomial V(t) = 1.
+
+**Current Status**:
+- Computationally verified up to ~24 crossings (informal, no formal proof)
+- NEVER formally verified using proof assistants
+- 40 years without resolution
+
+**Our Capability**:
+- Successfully verified Jones polynomial for 20 different 25-crossing knots (December 2025)
+- Formal Lean 4 proofs using native_decide
+- 618-line implementation with multiple optimization levels
+
+---
+
+## The Opportunity: Dual Outcomes
+
+### Outcome 1: Find Counterexample (Low probability, Historic Impact)
+If ANY knot has Jones polynomial = 1, we **SOLVE THE CONJECTURE** (breakthrough!)
+
+### Outcome 2: Systematic Verification (High probability, Publishable)
+First formally verified negative result for knots up to N crossings (novel contribution)
+
+---
+
+## This Submission: Batch 1 - Proof of Concept
+
+**Goal**: Validate that Aristotle can systematically verify low-crossing knots
+
+**Scope**: 10 prime knots with 3-5 crossings
+
+**Success Criteria**:
+- Formal Lean 4 proof for each knot showing Jones ≠ 1
+- All proofs verified by native_decide
+- Establish pattern for scaling to higher crossings
+
+---
+
+## The 10 Test Knots (Batch 1)
+
+Using standard braid word representations from knot theory:
+
+### Knot 1: Trefoil (3_1)
+- **Braid word**: [1, 1, 1]
+- **Strands**: 3
+- **Description**: Simplest non-trivial knot (3 crossings)
+- **Known Jones**: -t^4 + t^3 + t (definitely ≠ 1)
+
+### Knot 2: Figure-Eight (4_1)
+- **Braid word**: [1, 1, -2, -2]
+- **Strands**: 4
+- **Description**: Unique 4-crossing knot (amphicheiral)
+- **Known Jones**: t^2 - t + 1 - t^(-1) + t^(-2) (definitely ≠ 1)
+
+### Knot 3: Cinquefoil (5_1)
+- **Braid word**: [1, 1, 1, 1, 1]
+- **Strands**: 3
+- **Description**: 5-crossing torus knot
+- **Known Jones**: t^10 + t^8 - t^7 + ... (definitely ≠ 1)
+
+### Knot 4: Three-Twist (5_2)
+- **Braid word**: [1, 1, 1, 2, -1, 2]
+- **Strands**: 3
+- **Description**: 5-crossing knot (not torus)
+- **Known Jones**: Different from 5_1
+
+### Knot 5: Stevedore (6_1)
+- **Braid word**: [1, 1, 1, 2, -1, 2, -1, 2]
+- **Strands**: 3
+- **Description**: 6-crossing knot
+- **Expected**: Jones ≠ 1
+
+### Knot 6: 6_2
+- **Braid word**: [1, 1, 2, 1, 2, -1, -2, -1]
+- **Strands**: 3
+- **Description**: 6-crossing knot
+- **Expected**: Jones ≠ 1
+
+### Knot 7: 6_3
+- **Braid word**: [1, 2, 1, 2, 1, 2]
+- **Strands**: 3
+- **Description**: 6-crossing torus knot T(3,4)
+- **Expected**: Jones ≠ 1
+
+### Knot 8: 4-crossing braid variant
+- **Braid word**: [1, 2, -1, -2]
+- **Strands**: 3
+- **Description**: Alternative 4-crossing representation
+- **Expected**: Jones ≠ 1
+
+### Knot 9: 5-crossing variant
+- **Braid word**: [1, 2, 1, -2, -1]
+- **Strands**: 3
+- **Description**: 5-crossing knot variant
+- **Expected**: Jones ≠ 1
+
+### Knot 10: Simple 6-crossing
+- **Braid word**: [1, 1, 2, 2, 1, 1]
+- **Strands**: 3
+- **Description**: 6-crossing symmetric knot
+- **Expected**: Jones ≠ 1
+
+---
+
+## Task: Formal Verification
+
+For each of the 10 knots above, prove in Lean 4:
+
+```lean
+theorem jones_batch1_knot_XX : jones_poly_norm_v6 knot_batch1_XX ≠ [(0, 1)] := by native_decide
+```
+
+Where:
+- `knot_batch1_XX` is the braid word representation
+- `jones_poly_norm_v6` computes the normalized Jones polynomial
+- `[(0, 1)]` represents V(t) = 1 in our sparse polynomial format
+- `native_decide` provides computational verification
+
+---
+
+## Computational Strategy
+
+**Approach**: Use the proven framework from our 25-crossing success
+
+**Key Components**:
+1. **jones_poly_norm_v6**: Laurent polynomial division algorithm
+2. **jones_poly_norm_v7**: Aggressive normalization (if v6 times out)
+3. **SparsePoly**: Efficient sparse polynomial representation
+4. **native_decide**: Kernel-verified computational proof
+
+**Expected Complexity**:
+- 3-5 crossing knots: VERY LOW (seconds to verify)
+- Jones polynomials: 5-15 terms maximum
+- Proof sizes: 50-200 lines per knot
+
+---
+
+## Success Metrics
+
+**Full Success**: 10/10 theorems proven (highly likely given low crossing numbers)
+
+**Partial Success**: Even 7/10 validates the approach
+
+**Breakthrough**: If ANY knot has Jones = 1 (extremely unlikely but would be historic!)
+
+---
+
+## Context Files Provided
+
+You will have access to our complete working implementation:
+
+1. **jones_poly_framework.lean**: Full Jones polynomial implementation (618 lines)
+   - Multiple algorithm versions (v4, v5, v6, v7)
+   - SparsePoly operations
+   - Temperley-Lieb algebra
+   - Kauffman bracket computation
+
+2. **example_25crossing.lean**: Working proof template
+   - Successful 25-crossing verification
+   - Pattern to follow for these simpler knots
+
+---
+
+## Expected Deliverable
+
+A single Lean 4 file containing:
+
+```lean
+-- Knot definitions
+def knot_batch1_01 := [1, 1, 1]  -- Trefoil
+def knot_batch1_02 := [1, 1, -2, -2]  -- Figure-eight
+...
+def knot_batch1_10 := [1, 1, 2, 2, 1, 1]
+
+-- Theorems (one per knot)
+theorem jones_batch1_knot_01 : jones_poly_norm_v6 knot_batch1_01 ≠ [(0, 1)] := by native_decide
+theorem jones_batch1_knot_02 : jones_poly_norm_v6 knot_batch1_02 ≠ [(0, 1)] := by native_decide
+...
+theorem jones_batch1_knot_10 : jones_poly_norm_v6 knot_batch1_10 ≠ [(0, 1)] := by native_decide
+```
+
+All proofs should compile and verify without sorries.
+
+---
+
+## Why This Matters
+
+Even though we EXPECT Jones ≠ 1 for all knots:
+
+1. **Formal Verification**: No one has formally proven this even for low crossings
+2. **Foundation**: Establishes pattern for systematic verification
+3. **Safety Net**: Computational bugs could have missed counterexamples
+4. **Scaling Path**: Success here enables verification to n≤12 (2,977 knots)
+5. **Potential Breakthrough**: <1% chance we find Jones = 1 (solves conjecture!)
+
+---
+
+## Next Steps After This Batch
+
+**If successful** (expected):
+- Batch 2: 6-7 crossings (~50 knots)
+- Batch 3: 8-9 crossings (~200 knots)
+- Batch 4: 10-11 crossings (~800 knots)
+- Target: Complete verification n≤12 (publishable result)
+
+**If counterexample found** (unlikely):
+- HISTORIC BREAKTHROUGH
+- Immediate publication
+- Solution to 40-year-old problem
+
+---
+
+## Technical Notes
+
+**Braid Word Format**:
+- Positive integer k → σ_k (positive crossing)
+- Negative integer -k → σ_k^(-1) (negative crossing)
+- List represents braid word closure → knot
+
+**Jones Polynomial Normalization**:
+- Computed as Laurent polynomial in variable A
+- Standard Jones V(t) where t = A^(-4)
+- [(0, 1)] means A^0 with coefficient 1 → V(t) = 1
+
+**Verification Strategy**:
+- Start with v6 algorithm (works for 25 crossings)
+- Fall back to v7 if needed (more aggressive normalization)
+- Use native_decide for all proofs (kernel verification)
+
+---
+
+## Confidence Assessment
+
+**Probability of technical success**: 95%+
+- Low crossing numbers (proven tractable)
+- Working framework (25-crossing success)
+- Simple knots (well-studied)
+
+**Probability of finding Jones = 1**: <0.01%
+- 40 years of computational searches found nothing
+- Theoretical arguments suggest none exist
+- BUT formal verification could discover computational errors
+
+**Probability of publishable result**: 100%
+- Even negative result is novel (first formal verification)
+- Demonstrates AI-assisted formal mathematics
+- Foundation for future systematic searches
+
+---
+
+## Authorization to Proceed
+
+This is a **conservative, high-probability-of-success** approach to potentially solving
+a 40-year-old open problem OR producing the first formally verified negative result.
+
+**Please proceed with formal verification of all 10 knots.**

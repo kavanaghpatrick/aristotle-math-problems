@@ -1,0 +1,56 @@
+# Ramsey Number R(5,5) Exact Value
+
+## Goal
+
+Determine the exact value of the diagonal Ramsey number R(5,5).
+
+## Problem Statement
+
+The Ramsey number R(s,t) is the minimum n such that any 2-coloring of the edges of the complete graph Kₙ contains either:
+- A red clique of size s, or
+- A blue clique of size t
+
+For the diagonal case R(5,5) = R(5):
+- Any 2-coloring of K_n must contain a monochromatic K₅
+
+## Known Bounds (2024)
+
+43 ≤ R(5,5) ≤ 46
+
+This means R(5) ∈ {43, 44, 45, 46}
+
+## Your Task
+
+Determine which value is correct by proving:
+
+1. For the true value n = R(5):
+   - Every 2-coloring of Kₙ contains a monochromatic K₅
+
+2. For n-1:
+   - There exists a 2-coloring of K_{n-1} with no monochromatic K₅
+
+## You Decide
+
+- Which of {43, 44, 45, 46} to focus on
+- Case analysis strategy
+- SAT encoding approach
+- Certificate construction method
+- Proof organization
+
+## Verification
+
+For R(5) = n:
+- Upper bound proof: Show every 2-coloring of Kₙ has mono-K₅
+- Lower bound witness: Explicit 2-coloring of K_{n-1} avoiding mono-K₅
+
+## Context
+
+- R(3,3) = 6 (trivial)
+- R(4,4) = 18 (known since 1955)
+- R(5,5) bounds narrowed from [43,49] to [43,46] in 2023-2024
+- First progress on diagonal Ramsey in nearly 100 years
+- Recent work by Angeltveit, McKay, and others using SAT solvers
+
+## Historical Significance
+
+Determining R(5,5) would be the first new diagonal Ramsey number computed since R(4,4) = 18 was established in 1955.

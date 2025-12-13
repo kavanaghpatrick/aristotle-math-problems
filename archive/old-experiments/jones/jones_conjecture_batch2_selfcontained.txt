@@ -1,0 +1,121 @@
+# Jones Unknotting Conjecture - Batch 2 (6-7 Crossing Knots)
+
+## Problem Statement
+
+Prove that 5 specific knots (6-crossing and 7-crossing) have Jones polynomial V(t) ≠ 1, contributing to verification of the Jones Unknotting Conjecture.
+
+**Jones Unknotting Conjecture** (1985, UNSOLVED): No non-trivial knot has Jones polynomial V(t) = 1.
+
+## Background
+
+**Previous Aristotle successes:**
+- ✅ Verified 3-5 crossings: Trefoil, Figure-Eight, Cinquefoil, Three-Twist (project 2e358cc4)
+- ✅ Verified 9 crossings: 10 knots (project 771e9804)
+
+**This batch:** Fill the gap by verifying 6-7 crossing knots.
+
+## Computational Approach
+
+**Jones polynomial via Kauffman bracket:**
+1. Represent knot as planar diagram (PD code: list of crossings)
+2. Compute Kauffman bracket using skein relations
+3. Normalize to get Jones polynomial V(t)
+4. Prove V(t) ≠ 1 using `native_decide`
+
+**Skein relations:**
+- Crossing resolution: `⟨L₊⟩ = A⟨L₀⟩ + A⁻¹⟨L₁⟩`
+- Loop removal: `⟨unknot⟩ = 1`, `⟨L ∪ unknot⟩ = (-A² - A⁻²)⟨L⟩`
+- Jones polynomial: `V(t) = (-A)⁻³ʷ ⟨L⟩` where `w` is writhe and `A = t⁻¹/⁴`
+
+**Implementation pattern** (from previous successes):
+- Sparse Laurent polynomial representation: `List (Int × Int)` for `(exponent, coefficient)`
+- Fuel-based recursion for termination
+- Decidable equality for `native_decide` proofs
+
+## The 5 Test Knots
+
+All knots represented using **Planar Diagram (PD) codes** from KnotInfo database.
+
+### Knot 1: 6₁ (Stevedore knot)
+**PD Code**: `[[1,5,2,4], [3,9,4,8], [5,1,6,10], [7,3,8,2], [9,7,10,6]]`
+**Crossings**: 6
+**Description**: First prime 6-crossing knot
+**Expected**: Jones ≠ 1
+
+### Knot 2: 6₂
+**PD Code**: `[[1,5,2,4], [3,7,4,6], [5,11,6,10], [7,1,8,12], [9,3,10,2], [11,9,12,8]]`
+**Crossings**: 6
+**Description**: Second prime 6-crossing knot
+**Expected**: Jones ≠ 1
+
+### Knot 3: 6₃ (Granny knot variant)
+**PD Code**: `[[1,7,2,6], [3,9,4,8], [5,11,6,10], [7,1,8,12], [9,3,10,2], [11,5,12,4]]`
+**Crossings**: 6
+**Description**: T(3,4) torus knot
+**Expected**: Jones ≠ 1
+
+### Knot 4: 7₁ (Septoil)
+**PD Code**: `[[1,10,2,11], [3,14,4,15], [5,4,6,5], [7,16,8,17], [9,8,10,9], [11,18,12,19], [13,12,14,13], [15,2,16,3], [17,6,18,7], [19,20,20,1]]`
+**Crossings**: 7
+**Description**: T(2,7) torus knot
+**Expected**: Jones ≠ 1
+
+### Knot 5: 7₂
+**PD Code**: `[[1,5,2,4], [3,11,4,10], [5,15,6,14], [7,1,8,16], [9,17,10,16], [11,7,12,6], [13,19,14,18], [15,9,16,8], [17,13,18,12], [19,3,20,2]]`
+**Crossings**: 7
+**Description**: Second prime 7-crossing knot
+**Expected**: Jones ≠ 1
+
+## Task for Aristotle
+
+Create a self-contained Lean 4 file that:
+
+1. **Defines planar diagram representation** (crossing structure)
+2. **Implements Kauffman bracket computation** (skein relations, fuel-based)
+3. **Implements Jones polynomial** (normalization with writhe)
+4. **Defines the 5 knots** using the PD codes above
+5. **Proves 5 theorems** showing Jones ≠ 1 for each knot
+
+**Expected theorem format:**
+```lean
+theorem jones_6_1_nontrivial : jones_polynomial knot_6_1 ≠ [(0, 1)] := by native_decide
+theorem jones_6_2_nontrivial : jones_polynomial knot_6_2 ≠ [(0, 1)] := by native_decide
+theorem jones_6_3_nontrivial : jones_polynomial knot_6_3 ≠ [(0, 1)] := by native_decide
+theorem jones_7_1_nontrivial : jones_polynomial knot_7_1 ≠ [(0, 1)] := by native_decide
+theorem jones_7_2_nontrivial : jones_polynomial knot_7_2 ≠ [(0, 1)] := by native_decide
+```
+
+Where `[(0, 1)]` represents the constant polynomial 1 (unknot).
+
+## Success Criteria
+
+- ✅ File compiles without errors
+- ✅ Proves 5 theorems with 0 sorries
+- ✅ Uses `native_decide` for computational verification
+- ✅ Total file < 1000 lines
+- ✅ Execution time < 15 minutes
+
+**Minimum success**: 3/5 knots proven
+**Target success**: 5/5 knots proven
+**Impact**: Systematic coverage 3-7 crossings → foundation for complete n≤12 verification
+
+## Why This Matters
+
+**Dual outcomes:**
+1. **Find Jones = 1** (unlikely): SOLVES 40-YEAR-OLD CONJECTURE
+2. **Verify Jones ≠ 1** (expected): First formal verification at this scale
+
+**Strategic value:**
+- Fills gap in systematic verification (3-5 ✓, 6-7 ?, 9 ✓)
+- Each additional crossing adds confidence to conjecture
+- Formal verification catches potential computational errors
+- Publication potential: Journal of Knot Theory, ITP/CPP 2026
+
+**Probability assessment:**
+- Technical success (5/5 proofs): 85-90% (proven feasible at 3-5 and 9 crossings)
+- Finding counterexample: <0.01% (40 years of computation found none)
+- Publishable result: 100% (novel formal verification either way)
+
+---
+
+**Please create a Lean 4 file that formally verifies Jones polynomial non-triviality for these 5 knots.**

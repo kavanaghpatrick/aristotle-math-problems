@@ -1,0 +1,13 @@
+{
+  "problem_name": "SAT Resolution Proof Verification (PHP-3-2)",
+  "project_id": "66bc8e1d-5782-4137-b77b-ce7a85533f7b",
+  "submission_file": "problem2_sat_simple_complete.txt",
+  "submission_date": "2025-12-12",
+  "description": "Pigeonhole Principle: 3 pigeons, 2 holes (UNSAT)",
+  "formula_size": "6 variables, 9 clauses",
+  "search_space": "2^6 = 64 assignments",
+  "expected_method": "native_decide (brute force SAT checking)",
+  "expected_success_rate": "90%",
+  "verification_status": "Mathematically verified UNSAT via exhaustive search",
+  "key_fix": "Corrected from PHP-2-3 (SAT) to PHP-3-2 (UNSAT)"
+}

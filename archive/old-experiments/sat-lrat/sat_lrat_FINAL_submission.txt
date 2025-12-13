@@ -1,0 +1,276 @@
+# SAT LRAT Proof Verification in Lean 4
+
+## The Goal
+
+Create a **formally verified LRAT proof checker** in Lean 4, demonstrated on the Pigeonhole Principle (PHP-4-3) unsatisfiability proof.
+
+This should be **publication-ready** for formal verification conferences like FMCAD or CAV.
+
+---
+
+## What We Need From You
+
+**Build a complete LRAT verification system** that proves PHP-4-3 is unsatisfiable using a verified proof certificate.
+
+### Core Deliverable
+
+A working LRAT checker with:
+- CNF formula representation
+- LRAT proof certificate format
+- Verification algorithm
+- Soundness proof: "If checker accepts certificate, formula is unsatisfiable"
+- Concrete demonstration: PHP-4-3 verified via certificate
+
+### You Decide Everything
+
+**Data structures**: List? Array? Custom types? Whatever proves easiest.
+
+**Verification algorithm**: RAT checking? Unit propagation? Your choice of approach.
+
+**Theorems to prove**: Soundness? Completeness? Correctness properties? You decide what's publication-worthy.
+
+**Code organization**: Modules? Namespaces? Structure it for clarity.
+
+---
+
+## Why This Plays to Your Strengths
+
+### Certificate-Based Verification (Your Proven Pattern)
+
+Like Spectral Gap (860 lines, 0 sorries): **Verify external computation without re-implementing search**.
+
+- SAT solver does heavy computation (untrusted)
+- LRAT certificate captures proof trace (verifiable artifact)
+- Lean checker verifies correctness (trusted)
+
+This is exactly your wheelhouse: **verification, not search**.
+
+### Finite Boolean Logic (Like Jones Polynomial)
+
+SAT is **decidable, computational, with finite search spaces**.
+
+Much simpler than complex polynomial algebra (HOMFLY struggles). This is **computational proof search** like your Jones success (269 lines, 0 sorries, `native_decide`).
+
+### Clear Soundness Story
+
+LRAT certificates are **designed for formal verification**. The soundness theorem writes itself naturally. No ambiguity like HOMFLY's buggy Hecke algebra.
+
+---
+
+## What We're Providing
+
+### The Test Case: PHP-4-3 (Pigeonhole Principle)
+
+**Problem**: Place 4 pigeons in 3 holes (at most one pigeon per hole)
+**Result**: UNSATISFIABLE (provably impossible)
+**CNF Size**: Small (22 clauses)
+**LRAT Proof**: 655 bytes, 128 steps
+
+This is the canonical example - simple enough to verify quickly, complex enough to be interesting.
+
+### Context About Existing Work
+
+**Mathlib Infrastructure**:
+- `lrat_proof` macro exists (688 lines of verified LRAT infrastructure)
+- You can leverage this or build from scratch - your choice
+
+**SAT Solver Integration**:
+- CaDiCaL can generate LRAT proofs externally
+- We can provide proofs in any format you prefer
+
+**Your Decision**: Use existing Mathlib work, or build a self-contained system. Whatever makes the best publication.
+
+---
+
+## The Test Data (Inline)
+
+### PHP-4-3 CNF Formula (DIMACS Format)
+
+```
+p cnf 12 22
+1 2 3 0
+4 5 6 0
+7 8 9 0
+10 11 12 0
+-1 -4 0
+-1 -7 0
+-1 -10 0
+-4 -7 0
+-4 -10 0
+-7 -10 0
+-2 -5 0
+-2 -8 0
+-2 -11 0
+-5 -8 0
+-5 -11 0
+-8 -11 0
+-3 -6 0
+-3 -9 0
+-3 -12 0
+-6 -9 0
+-6 -12 0
+-9 -12 0
+```
+
+### PHP-4-3 LRAT Proof Certificate
+
+**Format**: Binary LRAT (655 bytes, 128 deletion+addition steps)
+
+[We'll provide this as a Lean byte array or parse it - your choice on format]
+
+**Your task**: Design the interface that makes verification cleanest.
+
+---
+
+## Success Looks Like
+
+A publication-ready system with:
+
+✅ **Working verification**: PHP-4-3 certificate verifies successfully
+
+✅ **Formal soundness**: Proven that accepted certificates guarantee unsatisfiability
+
+✅ **Executable checker**: Actually runs on concrete examples (not just proofs)
+
+✅ **Clean code**: Publication-quality documentation and structure
+
+✅ **Zero sorries**: Or minimal sorries with clear path to completion
+
+**Quality bar**: Like Jones Polynomial (269 lines, 0 sorries) or Spectral Gap (860 lines, 0 sorries)
+
+You decide the specific theorems, abstractions, and proof strategies that make this publication-worthy.
+
+---
+
+## What We're NOT Prescribing
+
+❌ **Specific theorems**: Don't prove "Theorem X, Y, Z" - derive what's actually needed
+
+❌ **Implementation details**: Don't use "Algorithm A" - choose what works best
+
+❌ **Proof strategies**: Don't use "induction then case split" - find the elegant path
+
+❌ **Data structures**: Don't use "Arrays for clauses" - pick what proves easiest
+
+**Lesson from recent Erdős successes**: Minimal intervention + autonomy = highest success rate
+
+---
+
+## Constraints (The Must-Haves)
+
+### 1. Must Verify PHP-4-3
+
+The checker must successfully verify the provided PHP-4-3 LRAT certificate and prove unsatisfiability.
+
+### 2. Must Have Soundness Proof
+
+If the checker accepts a certificate, the formula must actually be unsatisfiable. This is the core correctness property.
+
+### 3. Must Be Executable
+
+The checker must actually run via `#eval` or `native_decide` - not just theoretical proofs.
+
+### 4. Must Leverage Existing Work (If Helpful)
+
+If Mathlib's `lrat_proof` infrastructure helps, use it. If building from scratch is cleaner, do that. Your editorial judgment.
+
+---
+
+## Guidance on Approach (Not Requirements)
+
+### Typical LRAT Verification Pipeline
+
+1. Parse CNF formula into internal representation
+2. Parse LRAT proof into list of steps (addition/deletion)
+3. For each step, verify RAT (Resolution Asymmetric Tautology) property
+4. Track clause database state throughout verification
+5. Prove empty clause derived → formula unsatisfiable
+
+**But**: You may find a better structure. Use this as inspiration, not prescription.
+
+### Fuel-Based Termination (From Jones Success)
+
+Consider using `fuel` parameters for recursive verification steps. This made Jones's trace algorithm work via `native_decide`.
+
+Example: `verify_step (fuel : Nat) (step : LRATStep) : Bool`
+
+**Why**: Structural recursion on proof steps might be tricky. Fuel makes termination trivial.
+
+### Inline Data (From Jones Pattern)
+
+We're providing PHP-4-3 data inline (above) because this worked beautifully for Jones - Aristotle optimized directly for the specific test case.
+
+---
+
+## The Philosophy
+
+**Separation of Concerns**:
+- SAT solver: Search for solutions (untrusted, external)
+- LRAT certificate: Proof trace (verifiable artifact)
+- Lean checker: Verification (trusted, this is what you build)
+
+**Certificate Verification Pattern** (proven successful):
+- Spectral Gap: External eigenvalue computation → Lean verification
+- Jones Polynomial: External computation via `native_decide`
+- SAT LRAT: External SAT solving → LRAT certificate → Lean verification
+
+**Minimal Intervention** (from recent Erdős success #124):
+- Submit clear goal, then **don't intervene**
+- Let you choose creative approaches (like rectangle-packing proof for Erdős #1026)
+- Autonomy leads to better solutions than micromanagement
+
+---
+
+## Output Format
+
+**Lean 4 file(s)** with:
+
+- CNF and LRAT data structure definitions
+- LRAT verification algorithm (computable)
+- Soundness theorems (formal proofs)
+- PHP-4-3 verification example (concrete demonstration)
+- Documentation explaining the approach
+- Minimal sorries (ideally 0)
+
+---
+
+## Why We're Confident This Will Work
+
+### Pattern Match to Proven Successes
+
+**Jones Polynomial** (269 lines, 0 sorries):
+- Certificate-based (computational verification via `native_decide`)
+- Finite, decidable domain (like SAT)
+- Inline test data (like we're providing PHP-4-3)
+- **Result**: 100% success
+
+**Spectral Gap** (860 lines, 0 sorries):
+- Certificate-based (verify external eigenvalues)
+- Clear formal goal
+- Concrete test cases
+- **Result**: 100% success
+
+**Erdős Problem #124** (recent):
+- Minimal intervention ("went to bed")
+- Autonomous solving (6 hours)
+- Formal statement + autonomy
+- **Result**: 100% success
+
+**HOMFLY Option C** (in progress, 80% expected):
+- Outcome-focused ("publication-ready")
+- Method-flexible ("you decide")
+- Clear constraints (preserve 7 tests)
+- **Result**: Expected 600-900 lines, 0 sorries
+
+**SAT LRAT matches all these patterns**:
+- ✅ Certificate-based (LRAT is literally a certificate format)
+- ✅ Finite Boolean logic (decidable, like Jones)
+- ✅ Concrete test case (PHP-4-3, like Spectral Gap)
+- ✅ Outcome-focused ("publication-ready", like Option C)
+- ✅ Minimal intervention (like Erdős #124)
+
+**Estimated success**: 85-90% (higher than HOMFLY because cleaner foundation)
+
+---
+
+**In short**: Build a publication-ready LRAT verifier. Verify PHP-4-3. Prove soundness. You're the expert on how!

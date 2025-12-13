@@ -1,0 +1,69 @@
+# Erdős Discrepancy Problem for C = 3
+
+## Goal
+
+Determine the maximum length of a ±1 sequence with discrepancy less than 3.
+
+## Problem Statement
+
+Given a sequence x₁, x₂, x₃, ... where each xᵢ ∈ {-1, +1}, the discrepancy of the sequence is:
+
+sup_{d,k≥1} |∑_{j=1}^{k} x_{j·d}|
+
+This measures the maximum imbalance along any arithmetic progression with common difference d.
+
+## The Erdős Discrepancy Conjecture
+
+Erdős conjectured (1932) that for any ±1 sequence, the discrepancy is unbounded.
+
+This was proved by Tao in 2015 using entropy methods.
+
+## The Computational Question
+
+For fixed C, what is the maximum length N such that a ±1 sequence of length N exists with discrepancy < C?
+
+## Known Results
+
+- C = 2: Maximum N = 1,160 (Konev-Lisitsa 2014, using SAT solver)
+- C = 3: Maximum N is UNKNOWN (open problem)
+
+## Your Task
+
+Either:
+1. Find a ±1 sequence of length N > 130,000 with discrepancy < 3
+2. Prove an upper bound on the maximum length for C = 3
+3. Determine the exact maximum N for discrepancy < 3
+
+## Constraints
+
+- Sequence elements xᵢ ∈ {-1, +1}
+- For all d ≥ 1 and k ≥ 1: |∑_{j=1}^{k} x_{j·d}| < 3
+- This means |∑_{j=1}^{k} x_{j·d}| ≤ 2 for all arithmetic progressions
+
+## You Decide
+
+- SAT encoding strategy
+- Sequence construction method
+- Symmetry breaking techniques
+- Proof approach for upper bound
+
+## Verification
+
+A valid sequence of length N must satisfy:
+- For every d from 1 to N
+- For every k from 1 to ⌊N/d⌋
+- The partial sum |x_d + x_{2d} + ... + x_{kd}| ≤ 2
+
+## Context
+
+- C = 2 case was a major SAT solver achievement (2014)
+- Problem is equivalent to a large SAT instance
+- Konev-Lisitsa's UNSAT proof for N = 1,161, C = 2 was 13GB
+- Structure suggests patterns exist for larger C values
+
+## Why This Problem
+
+- Pure SAT problem - Aristotle's proven strength
+- Finite verification - check all arithmetic progressions
+- Clear success criteria
+- Extends landmark 2014 result

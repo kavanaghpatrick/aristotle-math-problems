@@ -1,0 +1,51 @@
+# Environment variables and secrets - NEVER COMMIT THESE
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*_secrets.*
+*_credentials.*
+**/secrets/
+**/credentials/
+
+# API key files (backup protection)
+*api_key*
+*apikey*
+*secret*key*
+
+# Aristotle outputs
+*.lean
+aristotle-*/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+/tmp/
+*.bak
+.aristotle_submit.lock
+
+# Large data files
+knotinfo_data/
+problem-databases/erdosproblems/
+problem-databases/formal-conjectures/

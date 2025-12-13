@@ -1,0 +1,173 @@
+# Quasi-Cyclic Syndrome Decoding Complexity for HQC
+
+## Context
+The NIST HQC post-quantum cryptosystem (selected March 2025) relies on the hardness of the Quasi-Cyclic Syndrome Decoding (QCSD) problem. While QCSD is known to be NP-complete in general (proven 2023), the exact complexity for the specific quasi-cyclic structure used in HQC remains an open problem.
+
+## HQC Parameters
+- n = 17669 (code length)
+- k = 13893 (code dimension)
+- m = n - k = 3776 (parity-check rows)
+- t = 66 (maximum error weight)
+- Code rate: k/n ≈ 0.786
+
+The parity-check matrix H has quasi-cyclic structure with circulant blocks.
+
+## Definitions
+
+**Circulant Matrix**: An n×n matrix where each row is a cyclic right-shift of the previous row. Fully determined by its first row.
+
+**Quasi-Cyclic Code**: A linear code with parity-check matrix H composed of circulant blocks.
+
+**QCSD Problem**: Given:
+- H: m×n quasi-cyclic parity-check matrix over GF(2)
+- s: syndrome vector (m bits)
+
+Find: Error vector e (n bits) with Hamming weight ≤ t such that He^T = s^T (mod 2).
+
+**Information Set Decoding (ISD)**: Algorithm class that:
+1. Selects k columns of H as "information set"
+2. Solves linear system for those positions
+3. Checks if resulting error has weight ≤ t
+4. Repeats until success
+
+Success probability per iteration ≈ C(n-k, t) / C(n, t) where C(n,k) is binomial coefficient.
+
+## Problem Statement
+
+Prove concrete lower bounds on the computational complexity of solving QCSD for HQC parameters, accounting for the quasi-cyclic structure.
+
+### Goal 1: ISD Lower Bound with Quasi-Cyclic Structure
+
+**Task**: Prove that any ISD algorithm solving HQC QCSD requires at least:
+- Expected iterations: C(n, t) / C(n-k, t) ≥ 2^100
+- Total operations: (Expected iterations) × (cost per iteration)
+
+**Key challenge**: Does quasi-cyclic structure allow ISD to reduce search space? Prove it does NOT significantly help.
+
+**Approach**:
+1. Formalize ISD algorithm model
+2. Calculate success probability per iteration for random codes
+3. Prove quasi-cyclic structure doesn't increase success probability beyond negligible factors
+4. Derive concrete complexity bound
+
+**Expected output**: Theorem proving ISD complexity ≥ 2^λ for λ ≥ 100.
+
+### Goal 2: Statistical Attack Lower Bound
+
+**Background**: Attackers might exploit statistical properties of circulant matrices to gain information about error positions.
+
+**Task**: Prove that statistical attacks exploiting circulant structure require at least 2^λ operations (for λ ≥ 80).
+
+**Approach**:
+1. Model statistical distinguisher: algorithm that uses correlations in circulant structure
+2. Use concentration inequalities (Chernoff bounds, etc.) to show statistical signals are weak
+3. Prove: Any algorithm must examine ≥ 2^λ positions to gain useful information
+4. Account for HQC parameters
+
+**Expected output**: Theorem proving statistical attack complexity ≥ 2^λ for λ ≥ 80.
+
+### Goal 3: Algebraic Attack Lower Bound (Stretch Goal)
+
+**Background**: Circulant matrices have algebraic structure (polynomial representation over GF(2)[x]).
+
+**Task**: Prove algebraic attacks have complexity ≥ 2^λ.
+
+**Approach**:
+1. Formalize polynomial representation of circulant matrices
+2. Analyze Gröbner basis algorithms for the resulting polynomial system
+3. Prove degree bounds imply exponential complexity
+
+**Expected output**: Theorem proving algebraic attack complexity ≥ 2^λ for λ ≥ 80.
+
+### Goal 4: Union Bound
+
+Combine Goals 1-3 to prove: ALL known attack families require ≥ 2^λ operations.
+
+## Technical Requirements
+
+### Formalization in Lean 4:
+
+1. **Circulant matrices**:
+   ```lean
+   def CirculantMatrix (n : ℕ) := Fin n → ZMod 2
+   -- Matrix fully determined by first row
+   ```
+
+2. **Quasi-cyclic structure**:
+   ```lean
+   structure QCCode (m n : ℕ) where
+     blocks : Matrix -- arrangement of circulant blocks
+     firstRows : Array (Fin n → ZMod 2) -- first rows of circulants
+   ```
+
+3. **QCSD problem instance**:
+   ```lean
+   structure QCSD_Instance where
+     H : QCCode m n
+     s : Fin m → ZMod 2
+     t : ℕ
+   ```
+
+4. **Complexity measures**:
+   ```lean
+   noncomputable def ISD_Complexity (inst : QCSD_Instance) : ℝ :=
+     (Nat.choose n t : ℝ) / (Nat.choose (n - k) t : ℝ)
+   ```
+
+### Key Theorems to Prove:
+
+```lean
+-- Main ISD theorem
+theorem hqc_isd_lower_bound :
+  ISD_Complexity hqc_instance ≥ 2^100 := by ...
+
+-- Statistical attack theorem
+theorem hqc_statistical_lower_bound :
+  Statistical_Complexity hqc_instance ≥ 2^80 := by ...
+
+-- Union bound
+theorem hqc_overall_security :
+  min (ISD_Complexity hqc_instance) (Statistical_Complexity hqc_instance) ≥ 2^80 := by ...
+```
+
+## Success Criteria
+
+**Minimum Success** (Still Valuable):
+- Formalize quasi-cyclic structure
+- Prove ISD lower bound accounting for structure
+- ~150-200 lines of Lean
+
+**Target Success**:
+- Goals 1-2 complete (ISD + statistical)
+- Concrete bounds λ ≥ 100 for ISD, λ ≥ 80 for statistical
+- ~250-350 lines of Lean
+
+**Stretch Success**:
+- Goals 1-3 complete (ISD + statistical + algebraic)
+- Union bound showing overall security λ ≥ 80
+- ~350-450 lines of Lean
+
+## Novelty
+
+This would be the **first formal verification** of:
+1. Complexity lower bounds that explicitly account for quasi-cyclic structure
+2. Multiple attack family analysis in a formal system
+3. Concrete security parameters for NIST HQC standard
+
+Advances beyond current state-of-art:
+- Current: NP-completeness (worst-case, asymptotic)
+- This work: Concrete bounds for specific parameters, accounting for structure
+
+## References
+
+1. Decoding Quasi-Cyclic codes is NP-complete (2023): https://eprint.iacr.org/2023/1064.pdf
+2. On Independence Assumptions in QC Codes (Jan 2025): https://arxiv.org/html/2501.02626
+3. HQC Specifications (Aug 2025): https://pqc-hqc.org/doc/hqc_specifications_2025_08_22.pdf
+4. NIST HQC Presentation (2024): https://csrc.nist.gov/csrc/media/Presentations/2024/hqc/images-media/gaborit-hqc-pqc2024.pdf
+
+## Notes
+
+- Use `native_decide` for large binomial coefficient calculations
+- Mathlib has concentration inequalities (Chernoff, Hoeffding)
+- Matrix.circulant might need to be defined or imported
+- Focus on concrete bounds for HQC parameters rather than asymptotic complexity

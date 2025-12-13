@@ -1,0 +1,151 @@
+## Problem Statement: Jones Polynomial Computational Complexity for Specific Knots
+
+Prove tight computational complexity bounds for computing the Jones polynomial V_K(t) via skein relations for specific low-crossing knots.
+
+---
+
+## Background
+
+The Jones polynomial V_K(t) is a knot invariant satisfying the **skein relation**:
+
+  t^(-1) * V_L+ - t * V_L- = (t^(1/2) - t^(-1/2)) * V_L0
+
+where L+, L-, and L0 are three link diagrams differing at exactly one crossing:
+- L+: positive crossing
+- L-: negative crossing
+- L0: smoothed crossing (no crossing)
+
+The base cases are:
+- V_unknot(t) = 1
+- V_unlink_n(t) = (-t^(1/2) - t^(-1/2))^(n-1)
+
+---
+
+## Target Knots (Concrete Instances)
+
+We focus on **alternating knots with crossing number c ≤ 5**:
+
+1. **Trefoil knot (3_1)**:
+   - Crossing number: c = 3
+   - Known result: V_{3_1}(t) = t + t^3 - t^4
+
+2. **Figure-eight knot (4_1)**:
+   - Crossing number: c = 4
+   - Known result: V_{4_1}(t) = -t^(-2) + 1 - t^2 + t^4 - t^6
+
+3. **Cinquefoil knot (5_1)**:
+   - Crossing number: c = 5
+   - Known result: V_{5_1}(t) = t^2 + t^6 - t^8 + t^10 - t^12
+
+4. **Three-twist knot (5_2)**:
+   - Crossing number: c = 5
+   - Known result: V_{5_2}(t) = t^(-2) - t^(-1) + 1 - t + 2*t^2 - t^3 + t^4 - t^5 + t^6
+
+---
+
+## Goal 1: Upper Bound (Algorithmic)
+
+**Prove**: Computing V_K(t) for a knot K with crossing number c via the skein relation requires **at most O(c^3) skein relation applications**.
+
+**Approach**:
+1. Each crossing can be resolved in 3 ways (L+, L-, L0)
+2. Skein tree has at most 3^c leaves (worst case)
+3. With memoization, revisited diagrams cost O(1)
+4. Total diagrams with c crossings: at most O(2^c) planar graphs
+5. Prove that with optimal traversal strategy, complexity is O(c^3)
+
+**Concrete targets**:
+- Trefoil (c=3): at most 27 skein applications
+- Figure-eight (c=4): at most 64 skein applications
+- Cinquefoil (c=5): at most 125 skein applications
+
+---
+
+## Goal 2: Lower Bound (Hardness)
+
+**Prove**: Computing V_K(t) for any non-trivial knot K with crossing number c requires **at least Ω(c) skein relation applications**.
+
+**Approach**:
+1. Show that each crossing must be resolved at least once
+2. Prove no shortcut exists that avoids analyzing crossing structure
+3. Use alternating knot properties to show irreducibility
+
+**Concrete targets**:
+- Any knot with c crossings: at least c skein applications needed
+- Alternating knots: at least c/2 independent crossing resolutions
+
+---
+
+## Goal 3: Specific Verification (Computational)
+
+**Prove**: For the four target knots, verify via direct skein relation computation that:
+
+1. V_{3_1}(t) = t + t^3 - t^4 (trefoil)
+2. V_{4_1}(t) = -t^(-2) + 1 - t^2 + t^4 - t^6 (figure-eight)
+3. V_{5_1}(t) = t^2 + t^6 - t^8 + t^10 - t^12 (cinquefoil)
+4. V_{5_2}(t) = t^(-2) - t^(-1) + 1 - t + 2*t^2 - t^3 + t^4 - t^5 + t^6 (three-twist)
+
+**Method**: Use `native_decide` or computational tactics to verify polynomial equality.
+
+---
+
+## Goal 4: Evaluation at Roots of Unity
+
+**Prove**: For t = e^(2πi/5) (5th root of unity), computing V_K(t) for the target knots can be done in polynomial time.
+
+**Approach**:
+1. At roots of unity, Laurent polynomials become finite cyclotomic polynomials
+2. Show that t^5 = 1 reduces polynomial degree significantly
+3. Prove evaluation complexity is O(c^2) for alternating knots at t = e^(2πi/k)
+
+---
+
+## Formalization Requirements
+
+1. **Knot Representation**: Use planar diagram encoding (crossings as signed vertices)
+2. **Skein Relation**: Define recursive function applying skein relation
+3. **Complexity Model**: Count skein relation applications as unit cost
+4. **Laurent Polynomials**: Use Mathlib's polynomial library extended to negative exponents
+5. **Verification**: Use `native_decide` for concrete polynomial equality
+
+---
+
+## Success Criteria
+
+✅ **Concrete instances**: Specific knots, not abstract types
+✅ **Quantitative bounds**: O(c^3) upper, Ω(c) lower
+✅ **Verifiable claims**: Known Jones polynomials verified computationally
+✅ **Target length**: 150-300 lines of Lean proof
+✅ **Non-trivial content**: Real bounds, not just framework
+
+---
+
+## Expected Output
+
+A Lean 4 file containing:
+1. Definitions of planar diagrams and skein relations
+2. Formalization of the four target knots (3_1, 4_1, 5_1, 5_2)
+3. Theorems proving upper bound O(c^3) and lower bound Ω(c)
+4. Computational verification of known Jones polynomials
+5. Analysis of complexity at roots of unity
+
+Target: **150-300 lines** of substantive proof (not just type definitions).
+
+---
+
+## Notes
+
+- This problem is **genuinely tractable** because:
+  - Crossing numbers are small (c ≤ 5)
+  - Jones polynomials are known (verification problem)
+  - Skein relation is constructive and well-defined
+
+- This avoids the **#P-hardness trap** because:
+  - We're analyzing specific instances, not general algorithm
+  - Upper/lower bounds are asymptotic, not exact characterization
+  - Focus is on provable complexity, not deciding polynomial-time
+
+- **Comparison to HQC v2** (which succeeded):
+  - HQC: Concrete parameters (n=17669, t=66), proved ≥ 2^100
+  - Jones: Concrete knots (c ≤ 5), prove O(c^3) and Ω(c)
+  - Both: Quantitative bounds on specific instances

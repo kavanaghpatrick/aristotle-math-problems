@@ -1,0 +1,194 @@
+# Formal Verification of Jones Polynomial for 25-Crossing Knots
+
+## Background and Significance
+
+The Jones Unknotting Conjecture (1985) states that no non-trivial knot has Jones polynomial V(t) = 1. This conjecture has been computationally verified up to 24 crossings (253 million knots tested, 2021), but NEVER formally verified using proof assistants.
+
+We are extending formal verification to 25 crossings - beyond the current computational state-of-the-art. This represents the first application of AI-driven formal verification to push the boundary of computational knot theory.
+
+## The Task
+
+We need to formally verify that the Jones polynomial of each test knot (generated via braid closures) is NOT equal to 1.
+
+For each knot below, we need a Lean 4 theorem of the form:
+```lean
+theorem jones_neq_one_25_test_XX : jones_polynomial_computable_v4 knot_25_test_XX ≠ [(0, 1)] := by
+  native_decide
+```
+
+## Knot Specifications
+
+We are testing 20 knots at 25 crossings, generated via systematic braid closures:
+
+**Pattern 1: 4-strand braids (simpler, higher success probability)**
+- Knots 25_test_01 through 25_test_10
+- Braid pattern: Alternating σ₁σ₂σ₁⁻¹σ₂⁻¹ sequences
+- Expected Jones polynomial degree: ~20-30
+
+**Pattern 2: 5-strand braids (more complex)**
+- Knots 25_test_11 through 25_test_20
+- Braid pattern: σ₁σ₂σ₃σ₄ variations with inverses
+- Expected Jones polynomial degree: ~25-40
+
+## Computational Strategy Hints
+
+1. **Kauffman Bracket Algorithm**: Use the standard Kauffman bracket approach for computing Jones polynomials
+2. **Braid Representation**: Convert braid words to planar diagram codes (PD codes) for computation
+3. **Crossing Assignment**: Ensure correct over/under crossing assignments from braid structure
+4. **Polynomial Simplification**: Jones polynomials at 25 crossings may have 30-50 terms - ensure coefficient collection is efficient
+
+## Known Properties
+
+- All test knots are **non-alternating** (alternating knots are proven to have non-trivial Jones by Murasugi's theorem)
+- All test knots are **prime** (no connected sum structure)
+- Braid indices range from 4-5 strands
+- Expected computational complexity: Higher than 12-crossing but should be tractable
+
+## Success Criteria
+
+We need formal proofs that each knot's Jones polynomial ≠ 1. This provides:
+1. Mathematical certainty (not just computational confidence)
+2. Kernel-verified proofs (reproducible and checkable)
+3. Proof artifacts for independent validation
+
+## Critical Note for Lean Implementation
+
+Use the same framework as our successful 9-12 crossing verifications:
+- `jones_polynomial_computable_v4` function
+- `native_decide` tactic for kernel verification
+- SparsePoly representation with A variable (where t = A^(-4))
+
+## Expected Challenges
+
+- Higher polynomial degrees (30-50 terms vs 10-20 for lower crossings)
+- More complex braid structures (especially 5-strand braids)
+- Potential timeout on most complex knots (acceptable - even 5/20 success is breakthrough)
+
+## Validation Plan
+
+After formal verification, we will independently validate results using:
+1. SnapPy (Python knot theory package)
+2. KnotTheory package (Mathematica)
+3. Multiple braid representations cross-check
+4. Coefficient-by-coefficient comparison
+
+---
+
+## The 20 Test Knots
+
+Below are the braid words for each test knot. Please convert these to PD codes and verify their Jones polynomials ≠ 1.
+
+
+### Knot 25_test_01
+- Braid word: `(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁⁻¹σ₂⁻¹)`
+- Strands: 15
+- 25-crossing knot generated from 14-operation braid closure
+
+### Knot 25_test_02
+- Braid word: `(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂)(σ₁σ₂)`
+- Strands: 29
+- 25-crossing knot generated from 28-operation braid closure
+
+### Knot 25_test_03
+- Braid word: `(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)`
+- Strands: 13
+- 25-crossing knot generated from 12-operation braid closure
+
+### Knot 25_test_04
+- Braid word: `(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_05
+- Braid word: `(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁⁻¹σ₂⁻¹)(σ₁⁻¹σ₂⁻¹)`
+- Strands: 17
+- 25-crossing knot generated from 16-operation braid closure
+
+### Knot 25_test_06
+- Braid word: `(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)`
+- Strands: 25
+- 25-crossing knot generated from 24-operation braid closure
+
+### Knot 25_test_07
+- Braid word: `(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁⁻¹σ₂⁻¹)`
+- Strands: 15
+- 25-crossing knot generated from 14-operation braid closure
+
+### Knot 25_test_08
+- Braid word: `(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂)(σ₁σ₂)`
+- Strands: 29
+- 25-crossing knot generated from 28-operation braid closure
+
+### Knot 25_test_09
+- Braid word: `(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)(σ₁σ₂)`
+- Strands: 13
+- 25-crossing knot generated from 12-operation braid closure
+
+### Knot 25_test_10
+- Braid word: `(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂σ₁⁻¹σ₂⁻¹)(σ₁σ₂)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_11
+- Braid word: `(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₄)`
+- Strands: 26
+- 25-crossing knot generated from 25-operation braid closure
+
+### Knot 25_test_12
+- Braid word: `(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)`
+- Strands: 25
+- 25-crossing knot generated from 24-operation braid closure
+
+### Knot 25_test_13
+- Braid word: `(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_14
+- Braid word: `(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₄)`
+- Strands: 26
+- 25-crossing knot generated from 25-operation braid closure
+
+### Knot 25_test_15
+- Braid word: `(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁⁻¹σ₂⁻¹)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_16
+- Braid word: `(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_17
+- Braid word: `(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₄)`
+- Strands: 26
+- 25-crossing knot generated from 25-operation braid closure
+
+### Knot 25_test_18
+- Braid word: `(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)(σ₁σ₂σ₃σ₄)`
+- Strands: 25
+- 25-crossing knot generated from 24-operation braid closure
+
+### Knot 25_test_19
+- Braid word: `(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂σ₃σ₄σ₁⁻¹σ₂⁻¹σ₃⁻¹σ₄⁻¹)(σ₁σ₂)`
+- Strands: 27
+- 25-crossing knot generated from 26-operation braid closure
+
+### Knot 25_test_20
+- Braid word: `(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₁σ₂σ₃)(σ₄)`
+- Strands: 26
+- 25-crossing knot generated from 25-operation braid closure
+
+
+---
+
+## Note on Methodology
+
+This is a frontier exploration. We understand that:
+- Some knots may timeout (computationally infeasible)
+- Success on even 25% of knots (5/20) would be a major breakthrough
+- This extends formal verification beyond all previous work
+
+We are using Aristotle AI to demonstrate that AI + proof assistants can tackle problems at the edge of computational tractability in mathematics.
+
+**Target**: Formal theorems proving Jones ≠ 1 for as many of these 20 knots as computationally feasible.

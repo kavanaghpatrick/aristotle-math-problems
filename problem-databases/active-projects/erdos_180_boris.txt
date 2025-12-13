@@ -1,0 +1,27 @@
+# Erdős Problem #180 - Extremal Numbers for Graph Families
+
+Solve this open problem.
+
+## Problem Statement
+
+If F is a finite set of finite graphs, then ex(n; F) is the maximum number of edges a graph on n vertices can have without containing any subgraph from F.
+
+Note: It is trivial that ex(n; F) ≤ ex(n; G) for every G ∈ F.
+
+### The Conjecture
+
+Is it true that for every finite family F of finite graphs, there exists some G ∈ F such that:
+
+ex(n; G) ≪_F ex(n; F)?
+
+In other words: Is the extremal number of the family always dominated (up to constants depending on F) by the extremal number of some single graph in the family?
+
+## What You Need To Prove
+
+Either:
+1. Prove the conjecture holds for all finite families F, OR
+2. Find a counterexample family F where no single G dominates
+
+## Context
+
+This is Erdős Problem #180, an open problem in extremal graph theory.

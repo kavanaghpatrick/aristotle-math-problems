@@ -1,0 +1,3 @@
+b41cb1bf-8755-48ee-86c6-ac989a7d6d32
+# Problem: Erdős Discrepancy C=3
+# Submitted: 2025-12-13T14:19:06.150644

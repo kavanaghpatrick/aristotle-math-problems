@@ -1,0 +1,198 @@
+## Problem Title: Quantum Communication Complexity - Set Disjointness Gap (n=8)
+
+---
+
+## Executive Summary
+
+Prove a concrete gap of at least 2 qubits between classical and quantum communication complexity for the Set Disjointness problem with n=8 elements. This demonstrates quantum advantage in communication and has implications for distributed quantum computing.
+
+---
+
+## Background
+
+### Set Disjointness (DISJ_n)
+
+**Input**: Alice has set A ⊆ [n], Bob has set B ⊆ [n]
+**Output**: Determine if A ∩ B = ∅ (sets are disjoint)
+
+### Known Results
+
+**Classical**: Ω(n) communication bits required (Razborov 1990)
+**Quantum**: O(√n log n) qubits sufficient (Buhrman-Cleve-Wigderson 1998)
+**For n=8**: Classical ≈ 8 bits, Quantum ≈ 3 qubits
+
+---
+
+## Concrete Parameters
+
+**n = 8** (universe size: [0,1,2,3,4,5,6,7])
+**Classical Lower Bound Target**: ≥ 5 bits
+**Quantum Upper Bound Target**: ≤ 3 qubits
+**Gap**: ≥ 2 (difference between classical and quantum)
+
+---
+
+## Goal 1: Classical Lower Bound via Fooling Sets
+
+### Task
+Prove that any classical deterministic protocol for DISJ_8 requires at least 5 bits of communication.
+
+### Approach: Fooling Set Method
+
+**Construct fooling set F:**
+- F = {(A_i, B_i) : i ∈ [2^k]} where k ≥ 5
+- A_i ∩ B_i = ∅ for all i (all pairs are disjoint)
+- A_i ∩ B_j ≠ ∅ for all i ≠ j (cross-pairs intersect)
+
+**Prove:** |F| = 2^k implies communication ≥ k bits.
+
+### Concrete Fooling Set for n=8
+
+```
+A_0 = {0,1,2,3}, B_0 = {4,5,6,7}  (disjoint)
+A_1 = {0,1,4,5}, B_1 = {2,3,6,7}  (disjoint)
+A_2 = {0,2,4,6}, B_2 = {1,3,5,7}  (disjoint)
+A_3 = {0,3,4,7}, B_3 = {1,2,5,6}  (disjoint)
+A_4 = {0,1,6,7}, B_4 = {2,3,4,5}  (disjoint)
+... (need 32 pairs for k=5)
+```
+
+**Verify:** A_i ∩ B_j ≠ ∅ for all i ≠ j.
+
+### Formalization
+
+```lean
+-- Set representation
+def Subset (n : ℕ) := Finset (Fin n)
+
+-- Disjointness
+def is_disjoint {n : ℕ} (A B : Subset n) : Prop :=
+  A ∩ B = ∅
+
+-- Fooling set
+def fooling_set (n : ℕ) (F : List (Subset n × Subset n)) : Prop :=
+  (∀ (p : Subset n × Subset n), p ∈ F → is_disjoint p.1 p.2) ∧
+  (∀ i j, i ≠ j → i < F.length → j < F.length →
+    ¬is_disjoint (F[i].1) (F[j].2))
+
+-- Lower bound theorem
+theorem disj_8_classical_lower_bound :
+  ∃ (F : List (Subset 8 × Subset 8)),
+    fooling_set 8 F ∧ F.length ≥ 32 →
+    classical_communication_complexity DISJ_8 ≥ 5
+```
+
+---
+
+## Goal 2: Quantum Upper Bound via Protocol Construction
+
+### Task
+Construct explicit quantum protocol for DISJ_8 using at most 3 qubits of communication.
+
+### Approach: Quantum Fingerprinting
+
+**Protocol:**
+1. Alice encodes A as quantum state |ψ_A⟩ using 3 qubits
+2. Alice sends |ψ_A⟩ to Bob (3 qubits communication)
+3. Bob performs measurement to test if A ∩ B = ∅
+4. Output: "disjoint" or "intersecting"
+
+**Encoding:** |ψ_A⟩ = (1/√|A|) ∑_{x∈A} |x⟩ for A ⊆ [8]
+
+**Bob's Test:**
+- Prepare |ψ_B⟩ = (1/√|B|) ∑_{x∈B} |x⟩
+- Measure inner product |⟨ψ_A|ψ_B⟩|²
+- If |⟨ψ_A|ψ_B⟩|² = 0 → disjoint
+- If |⟨ψ_A|ψ_B⟩|² > 0 → intersecting
+
+**Prove:** Success probability ≥ 2/3 for all inputs.
+
+### Formalization
+
+```lean
+-- Quantum state (3 qubits can encode 8 basis states)
+def QuantumState (n : ℕ) := Fin n → ℂ
+
+-- Encoding function
+def encode_set {n : ℕ} (A : Subset n) : QuantumState n :=
+  fun x => if x ∈ A then 1 / Real.sqrt (A.card : ℝ) else 0
+
+-- Inner product
+def inner_product {n : ℕ} (ψ φ : QuantumState n) : ℂ :=
+  ∑ i : Fin n, conj (ψ i) * (φ i)
+
+-- Protocol correctness
+theorem disj_8_quantum_protocol :
+  ∀ (A B : Subset 8),
+    let ψ_A := encode_set A
+    let ψ_B := encode_set B
+    (is_disjoint A B ↔ Complex.abs (inner_product ψ_A ψ_B) = 0)
+```
+
+---
+
+## Goal 3: Gap Verification
+
+### Task
+Prove that the gap between classical (≥5 bits) and quantum (≤3 qubits) is at least 2.
+
+**Theorem:**
+```lean
+theorem disj_8_communication_gap :
+  classical_communication_complexity DISJ_8 ≥ 5 ∧
+  quantum_communication_complexity DISJ_8 ≤ 3 →
+  classical_communication_complexity DISJ_8 -
+  quantum_communication_complexity DISJ_8 ≥ 2
+```
+
+---
+
+## Goal 4: Explicit Fooling Set Construction (Computational)
+
+### Task
+Use `native_decide` to verify that a specific fooling set of size 32 exists for n=8.
+
+**Approach:**
+- Enumerate all 2^8 = 256 possible subsets of [8]
+- Search for 32 pairs (A_i, B_i) satisfying fooling set properties
+- Verify combinatorially that cross-pairs always intersect
+
+---
+
+## Success Criteria
+
+✅ **Concrete fooling set**: 32 pairs explicitly constructed for n=8
+✅ **Quantum protocol**: 3-qubit encoding with success probability ≥ 2/3
+✅ **Gap proof**: Classical ≥ 5, Quantum ≤ 3, Gap ≥ 2
+✅ **Computational verification**: Use `native_decide` for finite checks
+✅ **No asymptotic only**: All bounds concrete for n=8
+
+### Red Flags
+❌ Only asymptotic Ω(n) vs O(√n) (without n=8 specifics)
+❌ Abstract protocol descriptions (no 3-qubit circuit)
+❌ Generic fooling sets (no explicit 32 pairs)
+
+---
+
+## Expected Output
+
+**Target**: 180-300 lines
+
+### Structure
+1. **Definitions** (40-60 lines): Sets, fooling sets, quantum states
+2. **Classical Lower Bound** (60-80 lines): Fooling set construction, proof
+3. **Quantum Upper Bound** (50-80 lines): Protocol, inner product, correctness
+4. **Gap Verification** (30-50 lines): Arithmetic proof of gap ≥ 2
+5. **Computational Checks** (20-30 lines): `native_decide` verification
+
+---
+
+## Novelty Assessment
+
+**Why 7-8/10:**
+- First formal proof of concrete communication gap for specific n
+- Explicit fooling set for n=8 (32 pairs)
+- Quantum fingerprinting protocol formalized
+- Computational verification component
+
+**Success Probability**: 35% (Grok assessment)

@@ -1,0 +1,202 @@
+## Problem Title: Quantum Query Complexity - Collision Problem Lower Bound (n=16)
+
+---
+
+## Executive Summary
+
+Prove a concrete lower bound of Ω(n^(1/3)) = Ω(2.52) queries for the quantum collision problem with input size n=16. This problem has significant implications for quantum algorithm optimality and is directly related to Shor's algorithm and quantum cryptanalysis.
+
+**Key Innovation**: Use adversary method + polynomial method combination to prove the lower bound for a specific, verifiable instance.
+
+---
+
+## Background
+
+### Collision Problem Definition
+
+**Input**: A function f: [n] → [n] with promise that either:
+- f is 1-to-1 (injective), OR
+- f has at least one collision (f(x) = f(y) for x ≠ y)
+
+**Goal**: Determine which case holds with bounded error probability ≤ 1/3.
+
+### Known Results
+
+**Classical**: Θ(√n) queries required (birthday paradox)
+**Quantum**: O(n^(1/3)) queries sufficient (Brassard-Høyer-Tapp 1997)
+**Lower Bound**: Ω(n^(1/5)) proven via polynomial method (Aaronson-Shi 2004)
+**Open Question**: Close the gap between Ω(n^(1/5)) and O(n^(1/3))
+
+---
+
+## Concrete Parameters
+
+**n = 16** (domain and range size)
+**Target Lower Bound**: ≥ ⌈16^(1/3)⌉ = 3 queries
+**Success Probability**: Algorithm must succeed with probability ≥ 2/3
+
+---
+
+## Goal 1: Adversary Method Lower Bound
+
+### Task
+Prove that any quantum query algorithm for the collision problem with n=16 requires at least T queries where T ≥ 3.
+
+### Approach: Adversary Matrix
+
+**Define adversary matrix Γ:**
+- Rows: Injective functions f: [16] → [16]
+- Columns: Functions with collision g: [16] → [16]
+- Entry Γ[f,g]: Number of positions where f and g differ
+
+**Prove:**
+1. Adversary norm ‖Γ‖ ≥ C·T^2 for some constant C
+2. For n=16, this gives T ≥ 3
+
+### Formalization Requirements
+
+```lean
+-- Function representation
+def QueryFunction (n : ℕ) := Fin n → Fin n
+
+-- Collision property
+def has_collision (n : ℕ) (f : QueryFunction n) : Prop :=
+  ∃ x y : Fin n, x ≠ y ∧ f x = f y
+
+-- Injective property
+def is_injective (n : ℕ) (f : QueryFunction n) : Prop :=
+  ∀ x y : Fin n, f x = f y → x = y
+
+-- Adversary matrix
+def adversary_matrix (n : ℕ) : Type :=
+  (QueryFunction n → QueryFunction n → ℝ)
+
+-- Lower bound theorem
+theorem quantum_collision_lower_bound_n16 :
+  ∀ (alg : QuantumQueryAlgorithm 16),
+    solves_collision_problem alg →
+    query_complexity alg ≥ 3
+```
+
+---
+
+## Goal 2: Polynomial Method Verification
+
+### Task
+Use polynomial method to verify the adversary bound for n=16 by showing that any degree-2 polynomial cannot distinguish injective vs collision functions with error < 1/3.
+
+### Approach
+
+**Represent algorithm output as polynomial:**
+- p(f(0), f(1), ..., f(15)) ∈ [-1, 1]
+- p = +1 for injective functions
+- p = -1 for collision functions
+- Degree ≤ 2T where T is query complexity
+
+**Prove:** For T < 3, no such polynomial exists with error < 1/3.
+
+### Formalization
+
+```lean
+-- Polynomial representation
+def query_polynomial (n : ℕ) (d : ℕ) : Type :=
+  MvPolynomial (Fin n) ℝ
+
+-- Distinguishing property
+def distinguishes_collision (n : ℕ) (p : query_polynomial n d) : Prop :=
+  (∀ f : QueryFunction n, is_injective n f → p.eval f ≥ 1/3) ∧
+  (∀ f : QueryFunction n, has_collision n f → p.eval f ≤ -1/3)
+
+-- Theorem
+theorem polynomial_method_lower_bound_n16 :
+  ∀ (d : ℕ), d < 6 →  -- degree < 2·3
+    ¬∃ (p : query_polynomial 16 d), distinguishes_collision 16 p
+```
+
+---
+
+## Goal 3: Explicit Construction Verification
+
+### Task
+Verify that the Brassard-Høyer-Tapp (BHT) algorithm achieves O(n^(1/3)) queries for n=16 by explicitly constructing the quantum circuit and computing success probability.
+
+### BHT Algorithm for n=16
+
+**Parameters:**
+- r = ⌈16^(1/3)⌉ = 3 (number of queries in quantum superposition)
+- Random sample S of size r from [16]
+
+**Steps:**
+1. Create superposition |ψ⟩ = (1/√3)∑_{x∈S} |x⟩|f(x)⟩
+2. Apply Grover search to find collision in S
+3. If found, output "collision"; else output "injective"
+
+**Prove:** Success probability ≥ 2/3 for this specific construction.
+
+---
+
+## Goal 4: Tight Characterization (Stretch)
+
+### Task
+Prove that 3 queries is EXACTLY the quantum query complexity for n=16 by:
+1. Lower bound ≥ 3 (from Goals 1-2)
+2. Upper bound ≤ 3 (from Goal 3)
+
+This would establish C(16) = 3 for collision problem.
+
+---
+
+## Success Criteria
+
+✅ **Concrete lower bound**: T ≥ 3 for n=16 (not just asymptotic)
+✅ **Adversary matrix**: Explicit construction with norm calculation
+✅ **Polynomial method**: Degree bound for specific n=16 polynomials
+✅ **Verification**: BHT algorithm achieves 3 queries with Pr[success] ≥ 2/3
+✅ **No abstract algorithms**: All analysis on concrete n=16 instance
+
+### Red Flags (failure indicators)
+❌ Only asymptotic bounds (Ω(n^(1/3)) without concrete value)
+❌ Abstract quantum circuits (no explicit construction)
+❌ Generic arguments (could apply to any n)
+
+---
+
+## Expected Output
+
+**Target**: 200-350 lines of Lean 4 proof
+
+### Structure
+1. **Definitions** (50-80 lines): Functions, adversary matrix, polynomial method
+2. **Adversary Lower Bound** (60-100 lines): Matrix norm calculation, T ≥ 3
+3. **Polynomial Method** (50-80 lines): Degree bound, non-existence proof
+4. **BHT Construction** (40-60 lines): Explicit circuit, success probability
+5. **Overall Result** (20-30 lines): Combine all bounds
+
+---
+
+## Novelty Assessment
+
+**Why This Could Be 7-8/10:**
+- First formal verification of collision lower bound for specific n
+- Combines adversary + polynomial methods (dual approach)
+- Explicit BHT circuit construction for n=16
+- Tight characterization if stretch goal achieved
+
+**Existing Work:**
+- Asymptotic results (Ω(n^(1/5)) and O(n^(1/3)))
+- Generic algorithm descriptions
+
+**Our Contribution:**
+- Concrete n=16 verification
+- Formal proof in Lean 4
+- Tight characterization (if successful)
+
+---
+
+## References
+
+- Brassard-Høyer-Tapp (1997): Quantum amplitude amplification
+- Aaronson-Shi (2004): Polynomial method lower bounds
+- Adversary method: Ambainis (2002)
+
+**Success Probability**: 40% (Grok assessment)

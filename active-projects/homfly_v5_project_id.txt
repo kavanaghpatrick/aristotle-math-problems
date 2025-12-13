@@ -1,0 +1,6 @@
+Project ID: 807cfd57-9ae1-4c41-acd8-bb69d8a4a422
+Submission: HOMFLY v5 (Publication-Ready with Refactor Permission)
+Strategy: Boris Pattern + License to Refactor
+Description: Prove Hecke algebra axioms for HOMFLY-PT
+Expected: 85% success (per Gemini estimate)
+Date: December 13, 2025

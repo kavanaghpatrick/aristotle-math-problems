@@ -1,0 +1,196 @@
+Prove Reidemeister Invariance for the Jones Polynomial
+
+CONTEXT:
+You previously created a Lean 4 formalization of the Jones polynomial for knots 3₁, 4₁, 5₁, 5₂ (project UUID: 2e358cc4-caf3-4e75-846d-60da35fb9b1e). That proof computed the Kauffman bracket using planar diagram (PD) codes and the Jones polynomial via normalization V(t) = (-A³)⁻ʷ⁽ᴸ⁾ · <L>, where w(L) is writhe and <L> is the Kauffman bracket.
+
+GOAL:
+Prove that the Jones polynomial is invariant under Reidemeister moves - the three local diagram transformations that preserve knot equivalence. This is a FUNDAMENTAL property that establishes the Jones polynomial as a true knot invariant (independent of diagram choice).
+
+THEORETICAL BACKGROUND:
+
+The Reidemeister moves are:
+- R1: Add or remove a kink (twist)
+- R2: Add or remove two antiparallel strands (untwist pair)
+- R3: Slide a strand over/under a crossing (triangle move)
+
+Kauffman Bracket Behavior:
+- R1: NOT invariant (changes by factor A^±3)
+- R2: Invariant (two crossings cancel)
+- R3: Invariant (local rearrangement preserves value)
+
+Jones Polynomial V(t) = (-A³)⁻ʷ⁽ᴸ⁾ · <L>:
+- R1: Invariant (writhe changes by ±1, bracket by A^±3, normalization compensates)
+- R2: Invariant (writhe unchanged, bracket unchanged)
+- R3: Invariant (writhe unchanged, bracket unchanged)
+
+SPECIFIC TASKS:
+
+1. **Define Reidemeister Moves**:
+
+Formalize the three Reidemeister moves as transformations on knot diagrams:
+
+```lean
+-- R1: Adding/removing a kink
+-- Before: straight strand with 0 crossings
+-- After: strand with 1 self-crossing (kink)
+-- Effect on writhe: w(L') = w(L) ± 1
+-- Effect on bracket: <L'> = -A³ · <L> or <L'> = -A⁻³ · <L>
+
+-- R2: Untwisting antiparallel strands
+-- Before: two strands with 2 antiparallel crossings
+-- After: two straight parallel strands (0 crossings)
+-- Effect on writhe: w(L') = w(L) (one +1, one -1 crossing)
+-- Effect on bracket: <L'> = <L> (crossings cancel via skein relation)
+
+-- R3: Sliding strand over crossing
+-- Before: three strands in triangle configuration
+-- After: same three strands, different over/under pattern
+-- Effect on writhe: w(L') = w(L) (same number/signs of crossings)
+-- Effect on bracket: <L'> = <L> (complex but provable via skein relations)
+```
+
+You should define these as predicates on LinkDiagram pairs, similar to how you defined individual knot diagrams in the previous work.
+
+2. **Prove Kauffman Bracket R2 Invariance**:
+
+Theorem: For knot diagrams L and L' related by R2 move, <L> = <L'>
+
+Proof strategy:
+- Apply skein relation to both crossings in R2 configuration
+- One crossing contributes: <L_A> = A·<L_0> + A⁻¹·<L_∞>
+- Second crossing (opposite sign) contributes: <L_B> = A⁻¹·<L_0> + A·<L_∞>
+- Show that terms cancel to yield <L'> (straight strands)
+
+3. **Prove Kauffman Bracket R3 Invariance**:
+
+Theorem: For knot diagrams L and L' related by R3 move, <L> = <L'>
+
+Proof strategy:
+- This is the most complex case
+- Apply skein relation to all 3 crossings in both configurations
+- Expand to 8 smoothing states for each configuration
+- Show corresponding states match between L and L'
+- May require lemmas about specific crossing patterns
+
+4. **Prove Jones Polynomial R1 Invariance**:
+
+Theorem: For knot diagrams L and L' related by R1 move, V_L(t) = V_L'(t)
+
+Proof strategy:
+- Show that writhe changes: w(L') = w(L) + ε (where ε = ±1)
+- Show that bracket changes: <L'> = (-A³)^ε · <L>
+- Apply Jones normalization: V(t) = (-A³)⁻ʷ · <L>
+  - V_L'(t) = (-A³)⁻⁽ʷ⁺ᵉ⁾ · ((-A³)^ε · <L>)
+  - V_L'(t) = (-A³)⁻ʷ · (-A³)⁻ᵉ · (-A³)^ε · <L>
+  - V_L'(t) = (-A³)⁻ʷ · <L>
+  - V_L'(t) = V_L(t) ✓
+
+5. **Prove Complete Reidemeister Invariance**:
+
+Main theorem: For knot diagrams L and L' related by any sequence of Reidemeister moves (R1, R2, R3), the Jones polynomial is equal: V_L(t) = V_L'(t)
+
+Proof strategy:
+- Use induction on the number of moves
+- Base case: 0 moves (L = L') → trivial
+- Inductive case: If L →^(n moves) L'' and L'' →^(1 move) L', then V_L(t) = V_L''(t) by IH, and V_L''(t) = V_L'(t) by single-move theorems
+- This establishes Jones polynomial as a true knot invariant
+
+6. **Test Cases (Optional but Recommended)**:
+
+Verify theorems on concrete examples:
+
+Example 1 - R1 on unknot:
+- Unknot: 0 crossings, Jones = 1
+- Unknot with kink: 1 crossing (right-handed), Jones = 1
+- Verify equality
+
+Example 2 - R2 on trefoil:
+- Take trefoil diagram
+- Add/remove R2 pair to create equivalent diagram
+- Verify Jones polynomials match
+
+Example 3 - R3 on figure-eight:
+- Take figure-eight diagram
+- Apply R3 move to rearrange crossings
+- Verify Jones polynomials match
+
+IMPORTANT CONSTRAINTS:
+
+1. **Build on Existing Work**: Import and extend the definitions from your previous Jones polynomial formalization (project 2e358cc4). Use the existing:
+   - LinkDiagram structure
+   - kauffman_bracket_computable_v4 function
+   - jones_polynomial_computable_v4 function
+   - writhe computation
+   - Do NOT redefine these from scratch
+
+2. **Formalization Approach**:
+   - Define Reidemeister moves as relations/predicates on LinkDiagram
+   - Prove separate lemmas for each move type
+   - Combine into general invariance theorem
+   - Use native_decide for computational verification of examples
+
+3. **Proof Strategy Sequence**:
+   - Start with R2 invariance for Kauffman bracket (easiest)
+   - Then prove R3 invariance for Kauffman bracket (complex but purely diagrammatic)
+   - Finally prove R1 invariance for Jones polynomial (requires writhe normalization)
+   - Combine all three into general theorem
+
+4. **Diagram Representation**:
+   - May need to extend LinkDiagram to support local modifications
+   - Define helper functions for identifying R-move configurations
+   - Create functions to perform each move on a diagram
+
+5. **Complexity Management**:
+   - R2 proof: Expected 2-3 hours (moderate, uses skein relation directly)
+   - R3 proof: Expected 5-6 hours (complex, many cases, most challenging)
+   - R1 proof: Expected 1-2 hours (straightforward algebra once bracket/writhe proven)
+   - Framework setup: Expected 2-3 hours (define moves, diagram operations)
+   - Total estimate: ~13 hours
+
+6. **Alternative Scoping** (if full proof too complex):
+   - **Minimal scope**: Prove R2 + R3 invariance for Kauffman bracket only
+   - **Moderate scope**: Add R1 invariance for Jones polynomial
+   - **Example scope**: Prove invariance on specific knot examples (unknot, trefoil)
+   - **Full scope**: General theorem for arbitrary Reidemeister sequences
+
+7. **Output Structure**: Produce a complete, self-contained Lean 4 file that:
+   - Imports Jones polynomial formalization from project 2e358cc4
+   - Defines all 3 Reidemeister moves as predicates
+   - Proves invariance theorems for each move
+   - Optionally proves general invariance theorem
+   - Includes concrete test cases
+   - Expected length: 500-800 lines (depending on scope)
+
+SUCCESS CRITERIA:
+
+Minimum (Acceptable):
+- R2 invariance for Kauffman bracket proven
+- Code compiles with no sorry statements
+
+Target (Good):
+- R2 + R3 invariance for Kauffman bracket proven
+- R1 invariance for Jones polynomial proven
+- No sorry statements
+
+Excellent (Ideal):
+- Full Reidemeister invariance proven (all 3 moves)
+- General theorem for move sequences
+- Test cases verified on concrete knots
+- No sorry, all proofs check in Lean 4.24.0
+
+THEORETICAL REFERENCES:
+
+The proof structure follows standard knot theory:
+- Kauffman, "State models and the Jones polynomial" (1987)
+- Lickorish, "An Introduction to Knot Theory" (1997), Chapter 4
+- Reidemeister, "Knotentheorie" (1932) - original Reidemeister moves
+
+Key insight: The Jones polynomial construction via Kauffman bracket was DESIGNED to be Reidemeister invariant. The normalization factor (-A³)⁻ʷ⁽ᴸ⁾ precisely compensates for R1 non-invariance of the bracket.
+
+NOTE: This is a FUNDAMENTAL result in knot theory. A successful proof would be significant because:
+1. It establishes Jones polynomial as a true knot invariant
+2. It's the first formal verification of Reidemeister invariance in Lean 4
+3. It validates the computational framework from project 2e358cc4
+4. It provides infrastructure for verifying other knot invariants
+
+The proof is challenging but tractable. The R3 case is the most complex, requiring detailed case analysis. However, the algebraic manipulations are well-suited to Aristotle's capabilities.

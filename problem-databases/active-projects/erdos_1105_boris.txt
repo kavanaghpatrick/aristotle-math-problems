@@ -1,0 +1,29 @@
+# Erdős Problem #1105 - Anti-Ramsey Numbers
+
+Solve this open problem.
+
+## Problem Statement
+
+The anti-Ramsey number AR(n,G) is the maximum number of colours in which the edges of K_n can be coloured without creating a rainbow copy of G (where all edges have different colours).
+
+### For Cycles
+Let C_k be the cycle on k vertices. Is it true that:
+
+AR(n, C_k) = ((k-2)/2 + 1/(k-1))·n + O(1)?
+
+### For Paths
+Let P_k be the path on k vertices and ℓ = floor((k-1)/2).
+
+If n ≥ k ≥ 5, is AR(n, P_k) equal to:
+
+max(C(k-2,2) + 1, C(ℓ-1,2) + (ℓ-1)(n-ℓ+1) + ε)
+
+where ε = 1 if k is odd, ε = 2 if k is even?
+
+## What You Need To Prove
+
+Prove or disprove either conjecture about AR(n, C_k) or AR(n, P_k).
+
+## Context
+
+This is Erdős Problem #1105, an open problem in Ramsey theory.

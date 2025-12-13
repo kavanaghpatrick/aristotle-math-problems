@@ -1,0 +1,79 @@
+# HOMFLY-PT Polynomial: Make It Publication-Ready
+
+## The Situation
+
+We have the **first HOMFLY-PT polynomial implementation in any proof assistant**.
+
+**Current state**: 396 lines, works computationally for 6 test knots
+**Goal**: Add formal proofs to make this publishable at ITP/CPP 2026
+
+## What We Need From You
+
+**Transform this from computational verification → publication-quality formal mathematics.**
+
+Add whatever formal proofs you think are necessary for publication. You decide:
+- Which theorems to prove
+- How to prove them
+- What to fix if something is broken
+- What assumptions/preconditions to add
+
+## The Only Constraint
+
+**All 6 existing computational tests must still pass**:
+```lean
+theorem homfly_unknot_is_poly_mu := by native_decide
+theorem homfly_trefoil_neq_poly_mu := by native_decide
+theorem homfly_figure_eight_neq_poly_mu := by native_decide
+theorem homfly_cinquefoil_neq_poly_mu := by native_decide
+theorem homfly_three_twist_neq_poly_mu := by native_decide
+theorem homfly_6_1_neq_poly_mu := by native_decide
+theorem homfly_7_1_neq_poly_mu := by native_decide
+```
+
+## Guidance (Not Requirements)
+
+**Typical correctness properties for knot invariants**:
+- Polynomial operations are semantically correct
+- Algebraic structures (Hecke algebra) satisfy their axioms
+- Trace computations are well-defined
+- Skein relations hold (defining property of HOMFLY-PT)
+- Reidemeister invariance (topological invariance)
+
+**But YOU decide** what's actually provable and worth proving!
+
+## Known Issues (From Previous Attempt)
+
+We tried to prove 17 specific theorems and found some might be false:
+- Multiplication may need preconditions (v≠0, z≠0)
+- Hecke braid relations might not hold as implemented
+- Fuel parameter (100) might be insufficient
+- Skein relations might not hold exactly as stated
+
+**Your job**: Figure out what's actually true, fix what's broken, prove what's provable.
+
+## Output Format
+
+**Lean 4 file** with:
+- Original working code (possibly fixed)
+- Additional formal proofs (as many as make sense)
+- Minimal sorries (ideally 0)
+- Clear documentation of what you proved and why
+
+## Success = Publishable
+
+**We'll consider this successful if the result is publishable** at a formal methods conference like ITP or CPP.
+
+You make the editorial decisions about:
+- Scope of formal proofs
+- Trade-offs between completeness and feasibility
+- What to highlight in a publication
+
+## The Code
+
+```lean
+[FULL 396 LINES FROM homfly_pt_SUCCESS.lean]
+```
+
+---
+
+**In short**: Take our working computational implementation and make it publication-ready. You're the expert on what that means!

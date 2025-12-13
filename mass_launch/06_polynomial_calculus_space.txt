@@ -1,0 +1,209 @@
+## Problem Title: Polynomial Calculus Space Lower Bound for PHP_6
+
+---
+
+## Executive Summary
+
+Prove a space lower bound of Ω(n) for Polynomial Calculus (PC) refutations of PHP_6 (7 pigeons, 6 holes). Space complexity in proof systems is crucial for understanding memory requirements of automated theorem provers.
+
+---
+
+## Background
+
+### Polynomial Calculus (PC)
+
+**Proof System:** Operates on polynomial equations over field F.
+
+**Rules:**
+1. **Axiom**: p_i for each polynomial p_i in formula
+2. **Linear Combination**: α·p + β·q for polynomials p,q and scalars α,β
+3. **Multiplication**: p·q for polynomials p,q
+4. **Derivation**: Infer 0 (contradiction)
+
+**Space:** Maximum number of monomials kept in memory simultaneously.
+
+### Pigeonhole Principle in PC
+
+**Variables:** x_{i,j} ∈ {0,1} for i ∈ [m], j ∈ [n] (m pigeons, n holes)
+
+**Polynomials:**
+- Pigeon: 1 - ∏_j (1 - x_{i,j}) for each pigeon i (at least one hole)
+- Hole: x_{i,j} · x_{k,j} for i < k (at most one pigeon per hole)
+- Boolean: x_{i,j}² - x_{i,j} (variables are 0 or 1)
+
+**For PHP_6:** m=7 pigeons, n=6 holes
+
+---
+
+## Concrete Parameters
+
+**n = 6** (holes)
+**m = 7** (pigeons)
+**Field**: ℤ₂ (binary field)
+**Space Lower Bound Target**: Ω(n) = Ω(6) ≈ 6
+
+---
+
+## Goal 1: Degree-Space Tradeoff
+
+### Task
+Prove that PC refutations of PHP_6 over ℤ₂ require space Ω(n) by establishing degree-space tradeoff.
+
+### Approach: Alekhnovich-Razborov Framework
+
+**Key Theorem (Alekhnovich-Razborov 2003):** For PHP_n:
+- Space S and Degree D satisfy: S · D ≥ Ω(n²)
+
+**For PHP_6:**
+- Degree D ≤ 2n = 12 (known upper bound)
+- Therefore: S ≥ Ω(n²)/D ≥ Ω(36)/12 = Ω(3)
+
+**Refined Analysis:** Improve constant to get S ≥ 6.
+
+### Formalization
+
+```lean
+-- Polynomial over F
+structure PCPolynomial (F : Type) [Field F] (vars : ℕ) where
+  monomials : Finmap (Fin vars → ℕ) F
+
+-- PC configuration (polynomials in memory)
+def PCConfiguration (F : Type) [Field F] (vars : ℕ) :=
+  List (PCPolynomial F vars)
+
+-- Space of configuration
+def space {F : Type} [Field F] {vars : ℕ} (cfg : PCConfiguration F vars) : ℕ :=
+  (cfg.map (fun p => p.monomials.toList.length)).sum
+
+-- PC refutation
+structure PCRefutation (F : Type) [Field F] (vars : ℕ) (axioms : List (PCPolynomial F vars)) where
+  steps : List (PCConfiguration F vars)
+  derives_zero : ∃ i, (steps[i]).any (fun p => p.monomials.isEmpty)
+
+-- Space of refutation
+def refutation_space {F : Type} [Field F] {vars : ℕ}
+    (ref : PCRefutation F vars axioms) : ℕ :=
+  (ref.steps.map space).maximum.getD 0
+
+-- Main theorem
+theorem php_6_pc_space_lower_bound :
+  ∀ (ref : PCRefutation ℤ₂ 42 php_6_axioms),  -- 7*6 = 42 variables
+    refutation_space ref ≥ 6
+```
+
+---
+
+## Goal 2: Clause Space to PC Space Reduction
+
+### Task
+Use known clause space lower bounds for PHP to derive PC space bounds.
+
+### Approach: Simulation Argument
+
+**Known:** Resolution space for PHP_n is Ω(n) (Ben-Sasson & Nordström 2008).
+
+**Simulation:** PC can simulate resolution with polynomial overhead.
+
+**Key Lemma:** PC space ≥ (Resolution space) / (polynomial factor)
+
+**For PHP_6:**
+- Resolution space ≥ 6
+- Overhead factor ≤ 2 (tight simulation)
+- PC space ≥ 3
+
+**Combine with Goal 1 for tighter bound.**
+
+---
+
+## Goal 3: Explicit Small-Space Refutation Impossibility
+
+### Task
+Prove that no PC refutation of PHP_6 exists with space ≤ 5 monomials.
+
+### Approach: Semantic Argument
+
+**Key Insight:** Small-space refutations correspond to "narrow" semantic trees.
+
+**Prove by Contradiction:**
+1. Assume refutation with space ≤ 5 exists
+2. Show this implies satisfying assignment to PHP_6 (contradiction)
+3. Therefore: space > 5, so space ≥ 6
+
+### Formalization
+
+```lean
+def is_low_space {F : Type} [Field F] {vars : ℕ}
+    (ref : PCRefutation F vars axioms) (bound : ℕ) : Prop :=
+  refutation_space ref ≤ bound
+
+-- Impossibility
+theorem php_6_no_low_space_refutation :
+  ¬∃ (ref : PCRefutation ℤ₂ 42 php_6_axioms),
+    is_low_space ref 5
+```
+
+---
+
+## Goal 4: Monomial Counting (Computational)
+
+### Task
+For small candidate refutations (≤ 10 steps), computationally verify that minimum space ≥ 6.
+
+### Approach: Bounded Search
+
+**Strategy:**
+1. Enumerate PC refutations with ≤ 10 steps
+2. For each, compute space at each step
+3. Find minimum space across all refutations
+4. Verify min_space ≥ 6
+
+**Feasibility:** 10 steps is computationally tractable for verification.
+
+---
+
+## Success Criteria
+
+✅ **Concrete instance**: PHP_6 (7 pigeons, 6 holes)
+✅ **Space bound**: Prove space ≥ 6 monomials (not just asymptotic Ω(n))
+✅ **Degree-space tradeoff**: Use S · D ≥ Ω(n²) with concrete values
+✅ **Impossibility**: Prove no refutation with space ≤ 5
+✅ **PC-specific**: Not just resolution (different proof system)
+
+### Red Flags
+❌ Only asymptotic Ω(n) without concrete value
+❌ Generic PHP_n arguments
+❌ Confusing PC with resolution
+❌ No explicit PHP_6 analysis
+
+---
+
+## Expected Output
+
+**Target**: 220-350 lines
+
+### Structure
+1. **Definitions** (60-80 lines): PC polynomials, configurations, space
+2. **Degree-Space Tradeoff** (60-90 lines): Alekhnovich-Razborov, S ≥ 6
+3. **Resolution Simulation** (50-70 lines): Reduction from resolution bounds
+4. **Low-Space Impossibility** (40-60 lines): Contradiction proof
+5. **Overall Result** (20-30 lines): Combine all bounds
+
+---
+
+## Novelty Assessment
+
+**Why 6-7/10:**
+- First formal PC space lower bound for concrete instance
+- Degree-space tradeoff formalized for PHP_6
+- Combines multiple techniques (tradeoff + simulation + impossibility)
+
+**Existing Work:**
+- Asymptotic Ω(n) bounds for PC space
+- Resolution space bounds for PHP
+
+**Our Contribution:**
+- Concrete space ≥ 6 for PHP_6
+- Lean 4 formalization of PC space complexity
+- Tight bound via multiple methods
+
+**Success Probability**: 25% (PC formalization is challenging)

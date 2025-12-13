@@ -1,0 +1,156 @@
+======================================================================
+SYSTEMATIC PLANNING: THE FOCUSED FIVE
+======================================================================
+
+Planning 5 problems systematically...
+
+======================================================================
+PROBLEM 1: Fibonacci Anyon Braid Verification
+Priority: HIGHEST | Success Rate: 80-90%
+======================================================================
+
+Phase 1: Gemini Initial Design
+----------------------------------------------------------------------
+✅ Initial design saved to /Users/patrickkavanagh/math/PROBLEM1_PLAN.md
+
+DESIGN SUMMARY:
+Here is the **COMPLETE, MAXIMALLY SPECIFIC PLAN** for the Fibonacci Anyon Braid Verification.
+
+This plan focuses on formal verification of the $SU(2)_3$ anyon model's braid representations, ensuring they satisfy the fundamental TQFT constraints (Unitarity, Yang-Baxter).
+
+### 1. EXACT MATHEMATICAL SPECIFICATION
+
+We define the Fibonacci Anyon model constants and matrices exactly as follows:
+
+*   **Constants**:
+    *   $\phi = \frac{1+\sqrt{5}}{2}$ (Golden Ratio)
+    *   $\zeta = e^{i \pi/5}$ (Primitive 10th root of unity)
+*   **Fusion Matrix ($F$)**:
+    $$F = \begin{pmatrix} \phi^{-1} & \phi^{-1/2} \\ \phi^{-1/2} & -\phi^{-1} \end{pmatrix}$$
+*   **Braid Matrix ($R$)**:
+    $$R = \begin{pmatrix} \zeta^{-4} & 0 \\ 0 & \zeta^3 \end{pmatrix} = \begin{pmatrix} e^{-i 4\pi/5} & 0 \\ 0 & e^{i 3\pi/...
+
+
+⏸️  Pausing 2 seconds before next problem...
+
+======================================================================
+PROBLEM 2: Resolution/LRAT Proof Verification
+Priority: HIGH | Success Rate: 70-85%
+======================================================================
+
+Phase 1: Gemini Initial Design
+----------------------------------------------------------------------
+✅ Initial design saved to /Users/patrickkavanagh/math/PROBLEM2_PLAN.md
+
+DESIGN SUMMARY:
+To establish a robust SAT resolution proof verification pipeline for Aristotle, we need a standardized workflow that converts raw SAT solver outputs into a format Lean 4 can formally verify.
+
+Here is the complete execution plan.
+
+### 1. Proof Database & Toolchain Source
+We will not rely on pre-existing static databases (which are often huge or formatted inconsistently). Instead, we will generate fresh, verifiable LRAT proofs on demand using the industry-standard toolchain.
+
+*   **Solver:** `CaDiCaL` (State-of-the-art, produces stable DRAT proofs).
+*   **Proof Converter:** `drat-trim` (Standard tool to optimize DRAT and convert to LRAT).
+*   **Source URL:**
+    *   CaDiCaL: `https://github.com/arminbiere/cadical`
+    *   DRAT-Trim: `https://github.com/marijnheule/drat-trim`
+
+### 2. Target T...
+
+
+⏸️  Pausing 2 seconds before next problem...
+
+======================================================================
+PROBLEM 3: F-Matrix Pentagon Equation Verification
+Priority: HIGH | Success Rate: 70-80%
+======================================================================
+
+Phase 1: Gemini Initial Design
+----------------------------------------------------------------------
+✅ Initial design saved to /Users/patrickkavanagh/math/PROBLEM3_PLAN.md
+
+DESIGN SUMMARY:
+Here is the comprehensive plan for verifying F-matrices of fusion categories.
+
+### 1. Pentagon Equation Exact Formulation
+
+The Pentagon Equation asserts the consistency of the associator isomorphism $\alpha_{A,B,C}: (A \otimes B) \otimes C \xrightarrow{\cong} A \otimes (B \otimes C)$. In terms of basis vectors and F-matrices (6j-symbols), it relates five sequences of fusion moves.
+
+For simple objects $a, b, c, d, e$ and intermediate objects $k, l, m, n, p$, the equation is:
+
+$$ \sum_{n} (F^{b,c,d}_g)_{e,n} (F^{a,b,n}_p)_{e,k} (F^{a,n,d}_p)_{k,l} = (F^{a,b,c}_k)_{g,d} (F^{a,k,d}_p)_{g,l} $$
+
+*Note: Indices conventions vary. We will use the standard **left-associative to right-associative** basis mapping $(F^{abc}_d)_{ef}$ representing the map $Hom(e, a \otimes b) \otimes Hom(d, e \otimes c)...
+
+
+⏸️  Pausing 2 seconds before next problem...
+
+======================================================================
+PROBLEM 4: Spectral Gap Eigenvalue Verification
+Priority: MEDIUM-HIGH | Success Rate: 60-75%
+======================================================================
+
+Phase 1: Gemini Initial Design
+----------------------------------------------------------------------
+✅ Initial design saved to /Users/patrickkavanagh/math/PROBLEM4_PLAN.md
+
+DESIGN SUMMARY:
+Here is the complete execution plan for validating the **Spectral Gap Bounds for Odd-Diameter Graphs** (Problem 3).
+
+### Execution Plan: Graph Spectral Gap Verification
+
+**Objective:** Verify spectral gap bounds for d-regular graphs, specifically targeting the "Odd-Diameter" problem, using a hybrid Python-computation and Lean-verification approach.
+
+#### 1. Graph Generation Algorithms
+We will generate three classes of 3-regular ($d=3$) graphs to ensure diversity and cover potential counter-examples.
+
+*   **Algorithm A: Random d-Regular Graphs**
+    *   **Method:** Use `networkx.random_regular_graph(d, n)`.
+    *   **Purpose:** Establish a baseline for "typical" spectral behavior and validate the pipeline.
+*   **Algorithm B: Cayley Graphs (Structured)**
+    *   **Method:** Construct Cayley ...
+
+
+⏸️  Pausing 2 seconds before next problem...
+
+======================================================================
+PROBLEM 5: PCR Space Lower Bounds (n≤15)
+Priority: MEDIUM | Success Rate: 60-70%
+======================================================================
+
+Phase 1: Gemini Initial Design
+----------------------------------------------------------------------
+✅ Initial design saved to /Users/patrickkavanagh/math/PROBLEM5_PLAN.md
+
+DESIGN SUMMARY:
+This plan outlines the strategy for proving space lower bounds for Polynomial Calculus Resolution (PCR) on specific Pebbling instances.
+
+### **1. Problem Definition**
+**Objective:** Prove space lower bounds for PCR refutations of Pebbling formulas over $\mathbb{F}_2$.
+**Metric:** Space = Maximum number of monomials in memory simultaneously during refutation.
+**Goal:** Show Space $\ge$ Pebbling Number of the underlying graph.
+
+### **2. Selected Instances (n=10, 12, 15)**
+We focus on **Pyramid** and **Grid** graphs, which have well-defined pebbling numbers.
+
+*   **Instance 1: Pyramid-4 (n=10)**
+    *   **Graph:** Pyramid of height 4. Layers have 1, 2, 3, 4 nodes.
+    *   **Nodes:** 10 total.
+    *   **Pebbling Number:** 4.
+    *   **Structure:**
+        *   Layer 1 (Sink): $v_{1,1}$
+        ...
+
+
+======================================================================
+✅ INITIAL DESIGNS COMPLETE FOR ALL 5 PROBLEMS
+======================================================================
+
+Next steps:
+1. Review each plan
+2. Validate with Grok (cross-check designs)
+3. Refine based on feedback
+4. Create Aristotle submission files
+5. Get final consensus
+6. Submit!

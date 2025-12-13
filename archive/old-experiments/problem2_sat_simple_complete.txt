@@ -1,0 +1,158 @@
+# Simple SAT Resolution Proof Verification
+
+## Problem: Verify Resolution Proof for Pigeonhole Principle (3 pigeons, 2 holes)
+
+This is a minimal, complete instance to test LRAT proof verification in Lean 4.
+
+## Background
+
+The Pigeonhole Principle states that if you have n pigeons and n-1 holes, at least two pigeons must share a hole. The negation of this principle (claiming all pigeons can fit in separate holes) is unsatisfiable.
+
+For 3 pigeons and 2 holes, we have a very small unsatisfiable SAT instance.
+
+## CNF Formula (Complete)
+
+**Variables**:
+- x1: pigeon 1 in hole 1
+- x2: pigeon 1 in hole 2
+- x3: pigeon 2 in hole 1
+- x4: pigeon 2 in hole 2
+- x5: pigeon 3 in hole 1
+- x6: pigeon 3 in hole 2
+
+**Clauses** (9 total):
+1. `(x1 ∨ x2)` - Pigeon 1 must be in some hole
+2. `(x3 ∨ x4)` - Pigeon 2 must be in some hole
+3. `(x5 ∨ x6)` - Pigeon 3 must be in some hole
+4. `(¬x1 ∨ ¬x3)` - Pigeons 1,2 not both in hole 1
+5. `(¬x1 ∨ ¬x5)` - Pigeons 1,3 not both in hole 1
+6. `(¬x3 ∨ ¬x5)` - Pigeons 2,3 not both in hole 1
+7. `(¬x2 ∨ ¬x4)` - Pigeons 1,2 not both in hole 2
+8. `(¬x2 ∨ ¬x6)` - Pigeons 1,3 not both in hole 2
+9. `(¬x4 ∨ ¬x6)` - Pigeons 2,3 not both in hole 2
+
+**DIMACS CNF Format**:
+```
+p cnf 6 9
+1 2 0
+3 4 0
+5 6 0
+-1 -3 0
+-1 -5 0
+-3 -5 0
+-2 -4 0
+-2 -6 0
+-4 -6 0
+```
+
+## Task for Aristotle
+
+Create a Lean 4 file that:
+
+1. **Defines the CNF formula** as a Lean data structure
+2. **Implements a simple resolution checker** (or uses native_decide)
+3. **Proves the formula is unsatisfiable**
+
+## Lean 4 Implementation Template
+
+```lean
+import Mathlib
+
+-- Define literals and clauses
+inductive Lit where
+  | pos : Nat → Lit
+  | neg : Nat → Lit
+  deriving Repr, DecidableEq
+
+def Clause := List Lit
+def CNF := List Clause
+
+-- The PHP-3-2 formula (3 pigeons, 2 holes)
+def php_3_2 : CNF := [
+  [Lit.pos 1, Lit.pos 2],              -- Pigeon 1 in some hole
+  [Lit.pos 3, Lit.pos 4],              -- Pigeon 2 in some hole
+  [Lit.pos 5, Lit.pos 6],              -- Pigeon 3 in some hole
+  [Lit.neg 1, Lit.neg 3],              -- Not both in hole 1 (pigeons 1,2)
+  [Lit.neg 1, Lit.neg 5],              -- Not both in hole 1 (pigeons 1,3)
+  [Lit.neg 3, Lit.neg 5],              -- Not both in hole 1 (pigeons 2,3)
+  [Lit.neg 2, Lit.neg 4],              -- Not both in hole 2 (pigeons 1,2)
+  [Lit.neg 2, Lit.neg 6],              -- Not both in hole 2 (pigeons 1,3)
+  [Lit.neg 4, Lit.neg 6]               -- Not both in hole 2 (pigeons 2,3)
+]
+
+-- Assignment type (variable → Bool)
+def Assignment := Nat → Bool
+
+-- Evaluate literal under assignment
+def eval_lit (a : Assignment) (l : Lit) : Bool :=
+  match l with
+  | Lit.pos n => a n
+  | Lit.neg n => !(a n)
+
+-- Evaluate clause (OR of literals)
+def eval_clause (a : Assignment) (c : Clause) : Bool :=
+  c.any (eval_lit a)
+
+-- Evaluate CNF (AND of clauses)
+def eval_cnf (a : Assignment) (cnf : CNF) : Bool :=
+  cnf.all (eval_clause a)
+
+-- Check if CNF is satisfiable (exists assignment making it true)
+def is_sat (cnf : CNF) : Bool :=
+  -- For 6 variables, check all 2^6 = 64 assignments
+  let n := 6
+  (List.range (2^n)).any fun i =>
+    let a := fun v => (i >>> (v-1)) % 2 == 1
+    eval_cnf a cnf
+
+-- Main theorem: PHP-3-2 is UNSAT
+theorem php_3_2_unsat : is_sat php_3_2 = false := by
+  native_decide
+```
+
+## Success Criteria
+
+The Lean code should:
+- ✅ Compile without errors
+- ✅ Prove `php_3_2_unsat` using `native_decide`
+- ✅ Zero `sorry`s
+- ✅ Execution time <10 seconds
+
+## Why This Works
+
+- **Small search space**: Only 2^6 = 64 assignments to check
+- **Decidable**: Brute force checking is tractable
+- **Self-contained**: No external libraries needed
+- **Verifiable**: Can independently verify in any SAT solver
+- **Correct**: 3 pigeons cannot fit in 2 holes (truly unsatisfiable)
+
+## Mathematical Correctness
+
+This encodes the impossible task of assigning 3 pigeons to 2 holes such that:
+- Each pigeon is in exactly one hole
+- No two pigeons share a hole
+
+This is provably impossible by the pigeonhole principle, making the formula genuinely unsatisfiable.
+
+## Alternative: Resolution Proof (Optional)
+
+If you want to verify via resolution proof instead of brute force:
+
+**Resolution Steps** (conceptual):
+1. From clauses 1 and 4: Resolve on x1 → `(x2 ∨ ¬x3)`
+2. Continue resolution chain...
+3. Eventually derive empty clause (contradiction)
+
+You may implement either:
+- **Option A**: Brute force SAT checking (simpler, shown above)
+- **Option B**: Resolution proof verification (more sophisticated)
+
+## Recommendation
+
+Start with Option A (brute force). It's simpler, guaranteed to work, and demonstrates the decidable verification capability.
+
+If successful, we can scale to larger instances or implement proper resolution checking.
+
+---
+
+**Please generate a Lean 4 file that formally proves `php_3_2_unsat` as specified above.**

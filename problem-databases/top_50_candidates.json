@@ -1,0 +1,964 @@
+[
+  {
+    "number": "1",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "number theory",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A276661"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/1.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "9",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis",
+      "primes"
+    ],
+    "oeis": [
+      "A006286"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/9.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "10",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis",
+      "primes"
+    ],
+    "oeis": [
+      "A387053"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/10.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "14",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A143824",
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/14.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "20",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$1000",
+    "tags": [
+      "combinatorics"
+    ],
+    "oeis": [
+      "A332077"
+    ],
+    "comments": "sunflower conjecture",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/20.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "30",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$1000",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A143824",
+      "A227590",
+      "A003022"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/30.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "33",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/33.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "36",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "minimum overlap problem",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/36.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "39",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/39.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "41",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/41.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "42",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/42.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "44",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "sidon sets",
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/44.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "51",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A002202",
+      "A014197"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/51.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "61",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "graph theory"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/61.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "68",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "irrationality"
+    ],
+    "oeis": [
+      "A331373"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/68.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "89",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "geometry",
+      "distances"
+    ],
+    "oeis": [
+      "A186704",
+      "A131628"
+    ],
+    "comments": "Erd\u0151s distance problem",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/89.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "90",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "geometry",
+      "distances"
+    ],
+    "oeis": [
+      "A186705"
+    ],
+    "comments": "unit distance problem",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/90.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "92",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "geometry",
+      "distances"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/92.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "108",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "graph theory",
+      "chromatic number",
+      "cycles"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/108.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "125",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "base representations"
+    ],
+    "oeis": [
+      "A367090"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/125.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "126",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$250",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/126.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "138",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "$500",
+    "tags": [
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A005346"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/138.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "141",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics",
+      "primes",
+      "arithmetic progressions"
+    ],
+    "oeis": [
+      "A006560"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/141.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "145",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A005117"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/145.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "155",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics",
+      "sidon sets"
+    ],
+    "oeis": [
+      "A143824",
+      "A227590",
+      "A003022"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/155.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "160",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics",
+      "arithmetic progressions"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/160.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "168",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A004059",
+      "A057561",
+      "A094708",
+      "A386439"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/168.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "170",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics"
+    ],
+    "oeis": [
+      "A046693"
+    ],
+    "comments": "sparse ruler problem",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/170.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "172",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "additive combinatorics",
+      "ramsey theory"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/172.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "208",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A005117",
+      "A076259"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/208.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "243",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A000058"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/243.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "249",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "irrationality"
+    ],
+    "oeis": [
+      "A256936"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/249.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "251",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "irrationality"
+    ],
+    "oeis": [
+      "A098990"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/251.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "283",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "A380791"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/283.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "295",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/295.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "304",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/304.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "313",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "A054377"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/313.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "319",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/319.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "321",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "unit fractions"
+    ],
+    "oeis": [
+      "A384927",
+      "in progress"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/321.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "325",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "powers"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/325.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "326",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/326.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "329",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/329.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "330",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis"
+    ],
+    "oeis": [
+      "N/A"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/330.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "340",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive combinatorics",
+      "sidon sets"
+    ],
+    "oeis": [
+      "A080200",
+      "A005282"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/340.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "357",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A364132",
+      "A364153",
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/357.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "358",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "additive basis",
+      "primes"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/358.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "359",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A002048"
+    ],
+    "comments": "segmented numbers",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/359.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "361",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "possible"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/361.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "371",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory"
+    ],
+    "oeis": [
+      "A070089"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/371.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  },
+  {
+    "number": "373",
+    "source": "erdos",
+    "status": "open",
+    "formalized_in_tao_repo": true,
+    "prize": "no",
+    "tags": [
+      "number theory",
+      "factorials"
+    ],
+    "oeis": [
+      "A003135"
+    ],
+    "comments": "",
+    "last_update": "2025-08-31",
+    "lean_file": "/Users/patrickkavanagh/math/problem-databases/formal-conjectures/FormalConjectures/ErdosProblems/373.lean",
+    "has_lean4": true,
+    "tractability_score": 100
+  }
+]

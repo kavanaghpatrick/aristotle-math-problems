@@ -1,0 +1,63 @@
+CRITICAL VERIFICATION TASK - Issue #1: Goldbach Conjecture for n ≤ 10^6
+
+PROBLEM STATEMENT:
+Prove that every even integer n where 4 ≤ n ≤ 1,000,000 can be expressed as the sum of two prime numbers.
+
+YOUR TASK (ULTRA-THOROUGH):
+
+1. **VERIFY IF TRULY UNSOLVED**:
+   - Search arXiv, MathOverflow, recent papers (2023-2025)
+   - Check if this has been solved recently
+   - Verify the problem statement is accurate
+   - Check for subtleties (e.g., is "bounded case" actually interesting?)
+   - Look for "almost solved" cases or trivial variants
+
+2. **ASSESS FORMALIZABILITY**:
+   - Can this be precisely stated in Lean 4?
+   - Are all necessary definitions in Mathlib?
+   - What's missing from Mathlib that would be needed?
+   - Rate formalizability: EASY / MEDIUM / HARD / VERY HARD
+
+3. **IDENTIFY PROOF STRATEGIES**:
+   - What are ALL known approaches to this problem?
+   - Which approaches are most suitable for automated proving?
+   - What are the key lemmas/techniques required?
+   - Are there simpler special cases to try first?
+
+4. **DETECT RED FLAGS**:
+   - Is this actually trivial? (e.g., "prove n+0=n")
+   - Is it a renamed/disguised version of a solved problem?
+   - Are the bounds too weak to be interesting?
+   - Would solving this bounded case tell us anything new?
+
+5. **ESTIMATE TRUE SUCCESS PROBABILITY**:
+   Current estimate: 85%
+   - Is this realistic?
+   - What would increase/decrease the probability?
+   - What are the main obstacles?
+
+6. **RECOMMEND REFINEMENTS**:
+   - How should we reformulate the problem?
+   - What's the optimal scope (broader/narrower)?
+   - What preparatory work is needed?
+   - What's the best attack strategy for Aristotle?
+
+OUTPUT FORMAT:
+```json
+{
+  "issue_number": 1,
+  "verdict": "KEEP | REFORMULATE | REJECT",
+  "still_unsolved": true/false,
+  "confidence": "HIGH | MEDIUM | LOW",
+  "formalizability": "EASY | MEDIUM | HARD | VERY HARD",
+  "true_success_probability": "X%",
+  "red_flags": ["list", "of", "concerns"],
+  "recommended_refinements": ["specific", "improvements"],
+  "proof_strategies": ["strategy1", "strategy2"],
+  "key_obstacles": ["obstacle1", "obstacle2"],
+  "preparatory_steps": ["step1", "step2"],
+  "reasoning": "detailed explanation of your assessment"
+}
+```
+
+BE BRUTALLY HONEST. We want to MAXIMIZE actual success, not preserve our existing list.

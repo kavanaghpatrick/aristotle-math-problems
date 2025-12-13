@@ -1,0 +1,53 @@
+# Three Mutually Orthogonal Latin Squares of Order 10
+
+## Goal
+
+Determine whether three mutually orthogonal Latin squares of order 10 exist.
+
+## Problem Statement
+
+A Latin square of order n is an n×n array filled with n different symbols such that each symbol occurs exactly once in each row and exactly once in each column.
+
+Two Latin squares L₁ and L₂ of order n are orthogonal if, when superimposed, every ordered pair of symbols occurs exactly once among the n² cells.
+
+Three Latin squares L₁, L₂, L₃ are mutually orthogonal if every pair (L₁,L₂), (L₁,L₃), (L₂,L₃) is orthogonal.
+
+## The Open Question
+
+For n = 10:
+- Two MOLS(10) are known to exist
+- Whether three MOLS(10) exist has been open since the 1960s
+- This is the smallest n where the maximum number of MOLS is unknown
+
+## Your Task
+
+Either:
+1. Construct three mutually orthogonal Latin squares of order 10
+2. Prove that no such triple exists
+
+## Constraints
+
+- Order n = 10
+- Symbols: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+- Each Latin square is 10×10
+- Must verify all three pairwise orthogonalities
+
+## You Decide
+
+- Construction method (if exists)
+- Proof technique (if impossible)
+- Search strategy
+- Any auxiliary lemmas needed
+
+## Verification
+
+For a valid solution:
+- Each square has each symbol exactly once per row and column
+- For each pair of squares: all 100 ordered pairs (i,j) appear exactly once when superimposed
+
+## Context
+
+- MOLS(n) exist for all n except n ∈ {2, 6}
+- For n = 10: at least 2 MOLS exist, at most 9 can exist
+- Extensive computational searches have not found 3 MOLS(10)
+- Recent work by McKay and others on Latin square enumeration

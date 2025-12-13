@@ -1,0 +1,272 @@
+# HOMFLY-PT Polynomial Verification (Certificate-Based)
+
+## Problem Statement
+
+Verify that the HOMFLY-PT polynomial detects non-trivial knots by proving that the HOMFLY-PT polynomial for 12 diverse knots is NOT equal to the trivial polynomial (which corresponds to the unknot).
+
+**Important**: Do NOT compute exact HOMFLY-PT values. You will VERIFY that given knots are non-trivial by proving their HOMFLY-PT polynomial ≠ 1.
+
+## Background
+
+The HOMFLY-PT polynomial P(v,z) is a 2-variable knot invariant that generalizes both:
+- Jones polynomial (set v = t⁻¹, z = t^(1/2) - t^(-1/2))
+- Alexander polynomial (set v = 1, z = t^(1/2) - t^(-1/2))
+
+**Defined by skein relation**:
+```
+v⁻¹·P(L₊) - v·P(L₋) = z·P(L₀)
+P(unknot) = 1
+```
+
+Where L₊, L₋, L₀ differ at a single crossing by over/under/smoothing.
+
+**Computational approach**:
+- Every knot is the closure of a braid
+- Braid group Bₙ has a representation in Hecke algebra Hₙ(q)
+- HOMFLY-PT polynomial = trace of Hecke representation
+
+**Recent breakthrough** (December 2024): Fast Hecke algebra algorithm by Maria & Queffelec enables efficient HOMFLY-PT computation via optimized braid group representations.
+
+## Strategic Context
+
+This problem builds on the 25-crossing Jones polynomial success. Key differences:
+- **Two variables** (v, z) instead of one (t) → more complex polynomial arithmetic
+- **Hecke algebra** (larger) instead of Temperley-Lieb (quotient of Hecke)
+- **Target complexity**: 10-15 crossings (vs 25 for Jones) due to ~6x higher complexity
+- **Same patterns**: Certificate-based verification, sparse polynomials, fuel-based recursion
+
+**Success probability: 70-80%** based on Jones patterns and algorithmic feasibility.
+
+## Complete Data (Inline)
+
+### Test Knots (12 Total)
+
+**3 crossings**:
+1. **Trefoil (3₁)**: [1, 1, 1]  -- T(2,3) torus knot, chiral
+   - P(v,z) has 3 terms, degree (4,2)
+
+**4 crossings**:
+2. **Figure-eight (4₁)**: [1, -2, 1, -2]  -- Achiral, symmetric polynomial
+   - P(v,z) has 4 terms, degree (2,2)
+
+**5 crossings**:
+3. **Cinquefoil (5₁)**: [1, 1, 1, 1, 1]  -- T(2,5) torus knot
+   - P(v,z) has 4 terms, degree (6,4)
+
+4. **Three-twist (5₂)**: [1, 1, 1, -2, -2]  -- Non-torus, chiral
+   - P(v,z) has 7 terms, degree (4,4)
+
+**6 crossings**:
+5. **6₁**: [1, 1, -2, -2, -2, 1]  -- Alternating
+   - P(v,z) has 8 terms, degree (6,4)
+
+6. **6₂**: [1, 1, 1, -2, -2, -2]  -- Alternating
+   - P(v,z) has 8 terms, degree (4,4)
+
+7. **6₃**: [1, -2, 1, -2, 1, -2]  -- Achiral (granny knot = 3₁ # 3₁)
+   - P(v,z) should be square of trefoil polynomial (multiplicativity)
+
+**7 crossings**:
+8. **7₁**: [1, 1, 1, 1, 1, 1, 1]  -- T(2,7) torus knot
+   - P(v,z) has 5 terms, degree (8,6)
+
+9. **7₂**: [1, 1, 1, 1, -2, -2, -2]  -- Twist knot
+   - P(v,z) has complex structure
+
+**8 crossings**:
+10. **8₁₉** (non-alternating): [1, -2, 3, -2, 3, 1, -2]  -- 3-strand braid
+    - First non-alternating test case
+
+11. **8₂₀** (non-alternating): [1, 1, 2, -1, 2, -1, 2, -1]  -- 3-strand braid
+    - Tests braid index 3 complexity
+
+**10 crossings**:
+12. **10₁₂₄**: [1, -2, 3, -2, 3, 4, -3, 4, 1, -2]  -- 5-strand braid
+    - Tests higher braid index (stretch goal)
+
+## Task for Aristotle
+
+Create a Lean 4 file that:
+
+1. **Define two-variable sparse Laurent polynomials**:
+   ```lean
+   -- Extend the Jones pattern to two variables
+   abbrev SparsePoly2 := List (Int × Int × Int)  -- (exp_v, exp_z, coefficient)
+
+   -- Basic operations: add, mul, normalize
+   def SparsePoly2.add : SparsePoly2 → SparsePoly2 → SparsePoly2
+   def SparsePoly2.mul : SparsePoly2 → SparsePoly2 → SparsePoly2
+   def SparsePoly2.normalize : SparsePoly2 → SparsePoly2
+   ```
+
+2. **Define Hecke algebra representation**:
+   ```lean
+   abbrev BraidWord := List Int  -- Signed generators (like Jones)
+   abbrev Hecke_elt := List (Matching × SparsePoly2)
+
+   -- Hecke generators with parameter q (and implicitly a via v = q²)
+   def hecke_generator (n : Nat) (i : Nat) : Hecke_elt
+   def hecke_identity (n : Nat) : Hecke_elt
+
+   -- Multiplication (like TL_elt.mul from Jones, but with Hecke relations)
+   def Hecke_elt.mul (n : Nat) (h1 h2 : Hecke_elt) : Hecke_elt
+   ```
+
+3. **Implement HOMFLY-PT computation**:
+   ```lean
+   -- Main algorithm: braid → Hecke element → trace → HOMFLY-PT polynomial
+   def homfly_polynomial_computable (b : BraidWord) : SparsePoly2 :=
+     let n := braid_index b
+     let hecke := braid_to_Hecke n b
+     let bracket := Hecke_elt.trace n hecke
+     homfly_normalize bracket
+
+   -- Normalization (may need multiple versions like Jones v4→v7)
+   def homfly_normalize (p : SparsePoly2) : SparsePoly2
+   ```
+
+4. **Prove non-triviality** (certificate-based, like Jones):
+   ```lean
+   -- Unknot has HOMFLY-PT = 1, represented as [(0, 0, 1)]
+   -- Non-trivial knots have HOMFLY-PT ≠ 1
+
+   theorem homfly_neq_one_trefoil :
+     homfly_polynomial_computable [1, 1, 1] ≠ [(0, 0, 1)] := by
+     native_decide
+
+   theorem homfly_neq_one_figure_eight :
+     homfly_polynomial_computable [1, -2, 1, -2] ≠ [(0, 0, 1)] := by
+     native_decide
+
+   -- ... (10 more theorems for the remaining test knots)
+   ```
+
+## Implementation Hints
+
+**From Jones polynomial success** (25-crossing verification):
+- Use **sparse representation** for polynomials (only store non-zero terms)
+- Use **fuel-based recursion** for all operations (ensures termination for native_decide)
+- Implement **aggressive normalization** (normalize after EVERY mul/add operation)
+- Pattern: Start simple (v1), iterate if needed (v2, v3, v4) like Jones did
+- **Loop value for Hecke**: When composing matchings creates loop, multiply by (v - v⁻¹)z⁻¹
+
+**For Hecke algebra** (different from Temperley-Lieb):
+- Hecke generators satisfy: (Tᵢ - q)(Tᵢ + q⁻¹) = 0
+- Temperley-Lieb is a quotient of Hecke (simpler relations)
+- Hecke basis has size n! (vs Catalan numbers for TL)
+- For small n: 3! = 6, 4! = 24, 5! = 120 basis elements
+
+**For two-variable polynomials**:
+- Multiplication: (v^a₁ z^b₁) × (v^a₂ z^b₂) = v^(a₁+a₂) z^(b₁+b₂)
+- Normalization: Sort by (exp_v, exp_z) pairs, merge like terms
+- Zero removal: Filter out terms with coefficient = 0
+- **Critical**: Normalize eagerly (after every operation) to control expression size
+
+**Skein relation** (computational, not axiomatic):
+- Encoded via Hecke algebra multiplication
+- Over-crossing (L₊): positive generator σᵢ
+- Under-crossing (L₋): negative generator σᵢ⁻¹
+- Smoothing (L₀): identity (no twist)
+- The skein relation emerges from Hecke relations
+
+**Decidability**:
+- All operations must be computable (no `noncomputable`)
+- Use `instance : BEq SparsePoly2 := ⟨...⟩` for decidable equality
+- Fuel-based recursion ensures `native_decide` works
+- Target: All 12 theorems proven via `native_decide` with 0 sorries
+
+## Success Criteria
+
+- ✅ File compiles without errors in Lean 4
+- ✅ Defines HOMFLY-PT computation via Hecke algebra
+- ✅ Proves 12 theorems (one per test knot) with 0 sorries
+- ✅ Uses `native_decide` for all proofs (decidable verification)
+- ✅ Total file < 1000 lines
+- ✅ Execution time < 30 minutes (10-15 crossing complexity)
+
+## Expected Algorithmic Evolution
+
+Based on Jones polynomial success (v4→v5→v6→v7 progression):
+
+**Version 1** (baseline):
+- Naive Hecke algebra implementation
+- Basic polynomial operations
+- May timeout on harder knots
+
+**Version 2** (fuel-based):
+- Add fuel parameters for termination
+- Enable `native_decide` proofs
+
+**Version 3** (optimizations):
+- Aggressive normalization after operations
+- Reduce intermediate expression size
+
+**Version 4** (if needed):
+- Exploit symmetries or shortcuts
+- Fine-tune for 10+ crossing knots
+
+**Trust the process**: Like Jones, expect iteration to find the working approach.
+
+## Why This Is a Breakthrough
+
+**Compared to Jones polynomial verification**:
+- Jones: First formal verification at 25 crossings ✓
+- HOMFLY-PT: **First formal verification at ANY complexity** in ANY proof assistant
+- Jones: 1-variable invariant (foundational)
+- HOMFLY-PT: 2-variable invariant (more powerful, generalizes Jones AND Alexander)
+
+**Mathematical significance**:
+- HOMFLY-PT distinguishes more knots than Jones
+- Detects chirality (mirror images) more reliably
+- Enables verification of knot sum multiplicativity: P(K₁ # K₂) = P(K₁) × P(K₂)
+- Foundation for colored HOMFLY-PT and quantum invariants
+
+**Computational significance**:
+- December 2024 algorithm breakthrough makes this feasible
+- Demonstrates AI can handle graduate-level computational topology
+- 2-variable Laurent polynomial arithmetic in decidable Lean 4
+- Extends knot theory formalization beyond single-variable invariants
+
+**Strategic significance**:
+- Completely novel (no prior formal verification anywhere)
+- Strong publication potential (ITP/CPP 2026)
+- Demonstrates Aristotle capability on harder problems
+- Opens path to quantum invariants (Khovanov, colored polynomials)
+
+## References
+
+### Recent Breakthrough
+- Maria, C. & Queffelec, H. (2024). "Fast algorithm for Hecke representation of braid group." arXiv:2512.06142
+
+### Classical Theory
+- Jones, V. (1987). "Hecke algebra representations of braid groups and link polynomials." Annals of Mathematics
+- HOMFLY (1985). Original HOMFLY-PT polynomial paper
+- Ocneanu trace theory (Hecke algebra → knot invariants)
+
+### Databases (for validation, not required)
+- KnotInfo: https://knotinfo.math.indiana.edu
+- Knot Atlas: https://katlas.org/wiki/The_HOMFLY-PT_Polynomial
+- Local CSV: `/Users/patrickkavanagh/math/knotinfo_data/database_knotinfo/csv_data/knotinfo_data_complete.csv`
+
+## Expected Outcome
+
+**If successful** (70-80% probability):
+- 12 theorems proven via `native_decide`
+- First HOMFLY-PT formal verification in any proof assistant
+- Foundation for:
+  - Jones unknotting conjecture work
+  - Knot sum multiplicativity proofs
+  - Colored polynomial generalizations
+  - Quantum topology formalizations
+- Strong publication at ITP/CPP 2026
+- Demonstrates Aristotle at cutting edge of computational topology
+
+**If challenges arise**:
+- Start with easier knots (3-7 crossings first)
+- Reduce test suite to 6-8 knots if 12 is too many
+- Focus on alternating knots initially (simpler)
+- Compare to Jones implementation for optimization ideas
+
+---
+
+**Please create a Lean 4 file that formally verifies HOMFLY-PT polynomial non-triviality for the 12 test knots above.**

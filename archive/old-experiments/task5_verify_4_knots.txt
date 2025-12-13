@@ -1,0 +1,132 @@
+Extend the Jones Polynomial Formalization to Four Additional Knots (6₁, 6₂, 6₃, 7₁)
+
+CONTEXT:
+You previously created a Lean 4 formalization of the Jones polynomial for knots 3₁, 4₁, 5₁, 5₂ (project UUID: 2e358cc4-caf3-4e75-846d-60da35fb9b1e). That proof computed the Kauffman bracket using planar diagram (PD) codes and verified Jones polynomials against known values using native_decide.
+
+GOAL:
+Extend this formalization to verify the Jones polynomial for four additional knots:
+- 6₁ (Stevedore's knot)
+- 6₂ (Miller Institute knot)
+- 6₃ (Eskimo bowline)
+- 7₁ (Septafoil knot)
+
+SPECIFIC TASKS:
+
+1. **Define Knot Diagrams from PD Codes**:
+
+Use the following verified PD codes from Knot Atlas (https://katlas.org):
+
+**Knot 6₁ (Stevedore)**:
+- PD Code: X1425 X7,10,8,11 X3948 X9,3,10,2 X5,12,6,1 X11,6,12,7
+- Expected Jones polynomial V(q): q² - q + 2 - 2q⁻¹ + q⁻² - q⁻³ + q⁻⁴
+- Variable conversion (q → t⁻¹): t⁻⁴ - t⁻³ + t⁻² - 2t⁻¹ + 2 - t + t²
+- Reversible symmetry, 6 crossings
+
+**Knot 6₂ (Miller Institute)**:
+- PD Code: X1425 X5,10,6,11 X3948 X9,3,10,2 X7,12,8,1 X11,6,12,7
+- Expected Jones polynomial V(q): q - 1 + 2q⁻¹ - 2q⁻² + 2q⁻³ - 2q⁻⁴ + q⁻⁵
+- Variable conversion (q → t⁻¹): t⁻⁵ - 2t⁻⁴ + 2t⁻³ - 2t⁻² + 2t⁻¹ - 1 + t
+- Reversible symmetry, 6 crossings
+
+**Knot 6₃ (Eskimo Bowline)**:
+- PD Code: X4251 X8493 X12,9,1,10 X10,5,11,6 X6,11,7,12 X2837
+- Expected Jones polynomial V(q): −q³ + 2q² − 2q + 3 − 2q⁻¹ + 2q⁻² − q⁻³
+- Variable conversion (q → t⁻¹): −t⁻³ + 2t⁻² − 2t⁻¹ + 3 − 2t + 2t² − t³
+- Full amphicheirality (symmetric), 6 crossings, signature 0
+
+**Knot 7₁ (Septafoil)**:
+- PD Code: X1829 X3,10,4,11 X5,12,6,13 X7,14,8,1 X9,2,10,3 X11,4,12,5 X13,6,14,7
+- Expected Jones polynomial V(q): −q⁻¹⁰ + q⁻⁹ − q⁻⁸ + q⁻⁷ − q⁻⁶ + q⁻⁵ + q⁻³
+- Variable conversion (q → t⁻¹): −t¹⁰ + t⁹ − t⁸ + t⁷ − t⁶ + t⁵ + t³
+- Reversible symmetry, 7 crossings
+
+2. **Convert PD Codes to Lean 4 LinkDiagram Format**:
+
+Follow the established pattern from your previous work:
+- Each crossing "Xa,b,c,d" becomes a Crossing structure with (s1, s2, s3, s4) = (a, b, c, d)
+- Determine crossing signs:
+  - For torus knots (7₁ is (7,2)-torus): typically all same sign
+  - For alternating knots: alternating ±1
+  - Use the pattern that produced correct polynomials in your previous work
+  - CRITICAL: Verify crossing signs produce the expected writhe
+
+3. **Compute Kauffman Bracket**:
+
+Use your existing kauffman_bracket_computable_v4 function:
+- Input: LinkDiagram with PD code converted to crossings
+- Output: Laurent polynomial in variable A
+
+Expected complexity (from your previous analysis):
+- 6 crossings: 2^7 - 1 = 127 recursive steps (should satisfy ≤ 6³ = 216)
+- 7 crossings: 2^8 - 1 = 255 recursive steps (should satisfy ≤ 7³ = 343)
+
+4. **Compute Jones Polynomial**:
+
+Apply the normalization: V(t) = (-A³)⁻ʷ⁽ᴸ⁾ · <L>
+where:
+- w(L) is the writhe (sum of crossing signs)
+- <L> is the Kauffman bracket
+- Variable relation: t = A⁻⁴
+
+5. **Verify Against Expected Values**:
+
+For each knot, prove using native_decide:
+```lean
+theorem jones_6_1_correct :
+  jones_polynomial_computable_v4 knot_6_1 = p6_1_target := by native_decide
+
+theorem jones_6_2_correct :
+  jones_polynomial_computable_v4 knot_6_2 = p6_2_target := by native_decide
+
+theorem jones_6_3_correct :
+  jones_polynomial_computable_v4 knot_6_3 = p6_3_target := by native_decide
+
+theorem jones_7_1_correct :
+  jones_polynomial_computable_v4 knot_7_1 = p7_1_target := by native_decide
+```
+
+6. **Prove Complexity Bounds**:
+
+For each knot, prove:
+```lean
+theorem knot_6_1_complexity : bracket_complexity knot_6_1 ≤ 216 := by native_decide
+theorem knot_6_2_complexity : bracket_complexity knot_6_2 ≤ 216 := by native_decide
+theorem knot_6_3_complexity : bracket_complexity knot_6_3 ≤ 216 := by native_decide
+theorem knot_7_1_complexity : bracket_complexity knot_7_1 ≤ 343 := by native_decide
+```
+
+IMPORTANT CONSTRAINTS:
+
+1. **Build on Existing Work**: Import and extend the definitions from your previous Jones polynomial formalization. Do NOT redefine the Kauffman bracket or Jones polynomial from scratch.
+
+2. **Crossing Sign Determination**: This is CRITICAL. In your previous work, one knot (5₂) had incorrect crossing signs. For these new knots:
+   - Start with the standard PD code interpretation
+   - If verification fails, try different sign combinations
+   - Use the all_sign_combinations search approach from your previous work ONLY if needed
+   - Document which sign pattern works for each knot
+
+3. **Variable Convention**: Maintain t = A⁻⁴ convention. Knot Atlas uses variable q, which equals t⁻¹ in your convention.
+
+4. **Verification Strategy**:
+   - Define expected polynomial as SparsePoly (list of (exponent, coefficient) pairs)
+   - Use #eval to test equality before proving
+   - Prove with native_decide once #eval succeeds
+
+5. **Output Structure**: Produce a complete, self-contained Lean 4 file that:
+   - Imports necessary Mathlib modules
+   - Defines all 4 knot diagrams
+   - Defines all 4 target Jones polynomials
+   - Proves 4 verification theorems
+   - Proves 4 complexity bound theorems
+   - Total expected length: 300-500 lines
+
+SUCCESS CRITERIA:
+- All 4 Jones polynomials verified via native_decide
+- All 4 complexity bounds proven
+- No sorry statements
+- No opaque definitions
+- Code compiles and all proofs check in Lean 4.24.0
+
+EXPECTED TIMELINE: 2-4 hours
+
+NOTE: The knot 7₁ (septafoil) is the (7,2)-torus knot, similar to how 3₁ (trefoil) is (3,2) and 5₁ (cinquefoil) is (5,2). Use the pattern from those successful verifications as a guide.

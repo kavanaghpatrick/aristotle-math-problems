@@ -1,0 +1,38 @@
+# Erdős Problem #152 - Sidon Set Gaps
+
+Solve this open problem.
+
+## Problem Statement
+
+For any M ≥ 1, if A ⊂ ℕ is a sufficiently large finite Sidon set, then there are at least M elements a ∈ A+A such that both a+1 ∉ A+A and a-1 ∉ A+A.
+
+In other words: In the sumset A+A of any large enough Sidon set, there must be arbitrarily many "isolated" elements - sums that have no neighbors in the sumset.
+
+## What You Need To Prove
+
+Prove that for any M ≥ 1, there exists N(M) such that every Sidon set A with |A| ≥ N(M) has at least M gaps in A+A.
+
+## Definition
+
+A set A ⊂ ℕ is a Sidon set (B₂ sequence) if all pairwise sums are distinct:
+∀ a,b,c,d ∈ A: a+b = c+d implies {a,b} = {c,d}
+
+Equivalently: |A+A| = |A|(|A|+1)/2
+
+## Verification Examples
+
+Sidon sets for testing definitions:
+- {0, 1, 3} is Sidon: A+A = {0,1,2,3,4,6}, size 6 = 3×4/2 ✓
+- {0, 1, 3, 7} is Sidon: A+A = {0,1,2,3,4,6,7,8,10,14}, size 10 = 4×5/2 ✓
+- {0, 1, 3, 7, 12, 20} is Sidon: size 21 = 6×7/2 ✓
+
+Non-Sidon (for negative testing):
+- {0, 1, 2, 3} is NOT Sidon: 0+3 = 1+2 = 3
+
+## Context
+
+This is Erdős Problem #152, an open problem about Sidon sets.
+Related: Erdős #124 (solved by Aristotle) was also about Sidon sets.
+Source: erdosproblems.com/152
+
+Verified OPEN: December 13, 2025

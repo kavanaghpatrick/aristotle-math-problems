@@ -1,0 +1,146 @@
+# HOMFLY-PT Polynomial: Bug Fix Request
+
+## Mission
+
+We have a HOMFLY-PT implementation that **works computationally** (6/6 test knots correct) but has **bugs that prevent formal proofs**.
+
+**Your task**: Fix the bugs and add whatever formal proofs are possible.
+
+---
+
+## Known Bugs (From Previous Analysis)
+
+### Bug #1: Polynomial Multiplication Edge Case
+**Issue**: `eval_poly2 (SparsePoly2.mul p q) v z` may fail when `v=0` or `z=0` with negative exponents
+**Counterexample**: `p = q = [(1,0,1), (-1,0,1)]`, `v=0`, `z=1`
+
+**Suggested fix**: Add precondition or special handling for zero values
+
+---
+
+### Bug #2: Hecke Algebra Braid Relations
+**Issue**: `T_i T_{i+1} T_i ≠ T_{i+1} T_i T_{i+1}` for some values
+**Counterexample**: `n=3`, `i=0`
+
+**This is CRITICAL** - fundamental axiom violated
+
+**Suspected location**: `Hecke_elt.mul_gen` (lines 203-231)
+**Suspected cause**: Logic error in length increase/decrease determination
+
+**Your job**: Debug and fix the braid relation logic
+
+---
+
+### Bug #3: Insufficient Fuel
+**Issue**: `trace_perm 100 p ≠ trace_perm 1000 p`
+**Counterexample**: `p = [1, 2, 3, 1]`
+
+**Suspected fix**: Increase fuel from 100 to 1000+ in `Hecke_elt.ocneanu_trace`
+
+---
+
+### Bug #4: Skein Relations
+**Issue**: Skein relation `v⁻¹·P(L₊) - v·P(L₋) = z·P(L₀)` fails
+**Test**: Trefoil `[1,1,1]` returns FALSE
+
+**Suspected cause**: Depends on Bugs #1-3 being fixed first
+
+---
+
+## Your Task
+
+### Phase 1: Fix Known Bugs
+
+1. **Fix Bug #3** (easiest) - Increase fuel to 1000
+2. **Fix Bug #1** - Add preconditions or handle v=0/z=0 specially
+3. **Fix Bug #2** (hardest) - Debug `Hecke_elt.mul_gen` logic
+4. **Retest Bug #4** - After fixes, check if skein relations now hold
+
+### Phase 2: Add Formal Proofs
+
+After bugs are fixed, prove:
+- Polynomial operations are correct
+- Hecke algebra satisfies required relations
+- Skein relations hold
+- Reidemeister invariance holds
+
+### Phase 3: Validate
+
+Ensure all 6 original computational witnesses still work:
+```lean
+theorem homfly_unknot_is_poly_mu : ... := by native_decide
+theorem homfly_trefoil_neq_poly_mu : ... := by native_decide
+theorem homfly_figure_eight_neq_poly_mu : ... := by native_decide
+theorem homfly_cinquefoil_neq_poly_mu : ... := by native_decide
+theorem homfly_three_twist_neq_poly_mu : ... := by native_decide
+theorem homfly_6_1_neq_poly_mu : ... := by native_decide
+theorem homfly_7_1_neq_poly_mu : ... := by native_decide
+```
+
+---
+
+## Debugging Approach for Bug #2 (Braid Relations)
+
+**The counterexample**: `n=3`, `i=0` gives `T₀T₁T₀ ≠ T₁T₀T₁`
+
+**Hypothesis**: The logic in `Hecke_elt.mul_gen` for determining length increase vs decrease is wrong.
+
+**Current logic** (lines 214-228):
+```lean
+if idx1 < idx2 then
+  -- v1 before v2: length increases
+  if inv then ...
+  else ...
+else
+  -- v1 after v2: length decreases
+  if inv then ...
+  else ...
+```
+
+**Debug strategy**:
+1. Manually compute what `T₀T₁T₀` should be for n=3
+2. Manually compute what the code actually produces
+3. Find the discrepancy
+4. Fix the logic
+
+**Possible fixes**:
+- Off-by-one error in index calculation?
+- Wrong condition for length increase/decrease?
+- Missing case in the logic?
+
+---
+
+## Expected Output
+
+**Lean 4 file with**:
+1. ✅ Bug fixes in the implementation
+2. ✅ Formal proofs of correctness properties
+3. ✅ All 6 original tests still passing
+4. ⚠️ As few sorries as possible
+
+**If a bug is unfixable**, explain why and what the fundamental issue is.
+
+---
+
+## The Code (Original 396 Lines)
+
+```lean
+[FULL CODE FROM homfly_pt_SUCCESS.lean]
+```
+
+---
+
+## Success Criteria
+
+**Minimum viable**:
+- ✅ Bug #3 fixed (increase fuel)
+- ✅ Some formal proofs added (even if not all)
+- ✅ Original 6 tests still work
+
+**Target**:
+- ✅ All 4 bugs fixed
+- ✅ Comprehensive formal proofs
+- ✅ 0 sorries in output
+
+**Acceptable failure**:
+- If Bug #2 is unfixable, explain why and suggest redesign approach

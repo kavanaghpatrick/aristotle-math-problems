@@ -1,0 +1,3 @@
+Project ID: 4e692a53-a2ec-43e3-8383-03afeedef106
+Launched: 2025-12-12 00:15:13
+Goal: Prove polynomial_bound_holds for d<6

@@ -1,0 +1,169 @@
+# HOMFLY-PT Polynomial: Exploratory Correctness Analysis
+
+## Mission
+
+We have a **working computational implementation** of the HOMFLY-PT polynomial (first in any proof assistant!). It successfully computes correct values for 6 test knots via `native_decide`.
+
+**Your task**: Explore this implementation and prove whatever correctness properties you can discover. We don't know exactly what's provable - help us find out!
+
+## What We Have (Working Code)
+
+File: 396 lines of Lean 4, 0 sorries, 6 knots verified computationally
+
+**Core components**:
+1. Sparse 2-variable Laurent polynomials (SparsePoly2)
+2. Hecke algebra representation
+3. Braid-to-Hecke conversion
+4. Ocneanu trace algorithm
+5. Writhe normalization
+6. HOMFLY-PT computation pipeline
+
+**Computational witnesses (all work)**:
+```lean
+theorem homfly_unknot_is_poly_mu :
+  homfly_polynomial_computable_correct [] = SparsePoly2.normalize poly_mu := by
+  native_decide
+
+theorem homfly_trefoil_neq_poly_mu :
+  homfly_polynomial_computable_correct [1, 1, 1] ≠ SparsePoly2.normalize poly_mu := by
+  native_decide
+
+-- + 4 more knots verified
+```
+
+## What We're Asking
+
+**Instead of us telling you what to prove, explore the code and:**
+
+1. **Identify what properties SHOULD hold** for a correct HOMFLY-PT implementation
+2. **Attempt to prove them** - some will succeed, some may fail
+3. **When proofs fail, tell us WHY** - is there a bug? A missing assumption?
+4. **Suggest fixes** if you find bugs in the implementation
+
+## Specific Questions for You to Investigate
+
+### Question 1: Are the basic operations correct?
+
+For `SparsePoly2`:
+- Does `normalize` preserve polynomial values?
+- Does `add` correctly implement addition?
+- Does `mul` correctly implement multiplication?
+- Are there edge cases (like v=0, z=0) we should worry about?
+
+**Don't assume our implementations are correct** - check them!
+
+### Question 2: Does the Hecke algebra work?
+
+The Hecke algebra should satisfy:
+- Quadratic relation: (T_i - q)(T_i + q⁻¹) = 0
+- Braid relations: T_i T_{i+1} T_i = T_{i+1} T_i T_{i+1}
+- Distant generators commute: T_i T_j = T_j T_i when |i-j| ≥ 2
+
+**Can you verify these hold for our implementation?** If not, where does it break?
+
+### Question 3: Is the Ocneanu trace correct?
+
+Properties that should hold:
+- Trace is cyclic: tr(AB) = tr(BA)
+- Trace of identity = (v - v⁻¹)/z
+- Fuel parameter (100) is sufficient for our test cases
+
+**Check if these actually hold**, and if fuel=100 is enough.
+
+### Question 4: Do the HOMFLY-PT axioms hold?
+
+HOMFLY-PT is defined by:
+- Skein relation: v⁻¹·P(L₊) - v·P(L₋) = z·P(L₀)
+- Unknot: P(unknot) = 1 (normalized to (v-v⁻¹)/z in our case)
+- Reidemeister invariance: R1, R2, R3 moves
+
+**Can you verify the skein relation for our 6 test knots?** More generally?
+
+### Question 5: Is the normalization correct?
+
+We have two normalization functions (potentially conflicting):
+- `homfly_normalize` (line 312-314)
+- `homfly_normalize_correct` (line 316-318)
+
+**Which one is mathematically correct?** Can you prove it?
+
+## Exploratory Strategy
+
+**Phase 1**: Check basic building blocks
+- Polynomial operations (normalize, add, mul)
+- Permutation operations
+- List operations used throughout
+
+**Phase 2**: Check algebraic structure
+- Hecke algebra relations
+- Braid group properties
+- Trace properties
+
+**Phase 3**: Check HOMFLY-PT axioms
+- Skein relations
+- Reidemeister invariance
+- Unknot normalization
+
+**Phase 4**: Suggest improvements
+- Where are bugs?
+- What can be fixed?
+- What additional lemmas would help?
+
+## What We've Learned (From Previous Attempt)
+
+We tried to specify exact theorems and found:
+- ✅ Normalization preserves values
+- ✅ Addition is correct
+- ❌ Multiplication might fail when v=0 or z=0
+- ❌ Braid relations might not hold (counterexample: n=3, i=0)
+- ❌ Fuel=100 might not be sufficient
+- ❌ Skein relations might not hold as stated
+
+**But we don't know the root causes or how deep the issues go.**
+
+**Your job**: Investigate systematically and tell us what you find!
+
+## Output Format
+
+Please provide:
+
+1. **Proven theorems** - What actually holds
+2. **Counterexamples** - What's false and why
+3. **Diagnostic analysis** - Where are the bugs?
+4. **Fix suggestions** - How could we repair the implementation?
+5. **Validation** - Test fixes against our 6 computational witnesses
+
+## The Code (Embedded Below)
+
+```lean
+/-
+Original HOMFLY-PT implementation (396 lines)
+All computational witnesses work via native_decide
+-/
+
+[FULL CODE FROM homfly_pt_SUCCESS.lean HERE]
+```
+
+## Success Criteria
+
+**We'll consider this successful if you can**:
+- Prove some correctness properties (even if not all)
+- Identify specific bugs with counterexamples
+- Suggest concrete fixes
+- Help us understand what's actually working vs broken
+
+**We DON'T expect**:
+- All 17 theorems from our previous attempt to be proven
+- A perfect, bug-free implementation
+- Formal proofs of everything
+
+**We DO expect**:
+- Honest assessment of what works
+- Clear counterexamples for what doesn't
+- Guidance on how to improve
+
+## Philosophy
+
+**Exploratory proof discovery** rather than proof by specification.
+
+Let Aristotle be the expert on what's provable, rather than us telling it what to prove!

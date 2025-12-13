@@ -1,0 +1,25 @@
+# Mass Launch Project IDs
+# Date: 2025-12-11
+# Total: 7 problems
+
+#27: cd691d07-ed92-4e2e-902f-5d9d0c3d1103
+  # Issue #27 - Quantum Query Collision (n=16)
+
+#28: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #28 - Quantum Communication Disjointness (n=8)
+
+#25: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #25 - PHP Width (PHP_5 improved)
+
+#32: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #32 - Self-Dual Code [56,28,12]
+
+#23: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #23 - Sorting Network C(18)=77 (improved)
+
+#35: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #35 - PC Space (PHP_6)
+
+#41: FAILED: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+  # Issue #41 - QAOA MaxCut 3-Regular
+

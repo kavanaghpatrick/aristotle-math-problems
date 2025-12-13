@@ -1,0 +1,42 @@
+{
+  "project_id": "9ccb6f60-62bc-42b4-b931-810291d17a16",
+  "submission_date": "2025-12-12",
+  "approach": "certificate_based_hybrid",
+  "input_file": "spectral_gap_v2_certificate_based.txt",
+  "strategy": "Grok's recommended approach - provide distance sets and eigenvalues as certificates for verification",
+  "expected_theorems": [
+    "desargues_is_regular (3-regular graph)",
+    "desargues_diameter = 5",
+    "spectral_gap_bound ≥ 1"
+  ],
+  "key_features": [
+    "ZMod 10 × Fin 2 representation (cleaner than Attempt 1)",
+    "Distance certificate sets S0-S5 (avoid exhaustive search)",
+    "Exact eigenvalue list (integers, no Real computation)",
+    "Explicit witness path for diameter=5",
+    "Decidable verification (no symbolic computation)"
+  ],
+  "success_probability": "75-90% (per Grok assessment)",
+  "previous_attempts": [
+    {
+      "attempt": 1,
+      "lines": 523,
+      "theorems": 25,
+      "status": "timeout",
+      "issue": "case explosion on exact distances"
+    },
+    {
+      "attempt": 2,
+      "lines": 191,
+      "theorems": 5,
+      "status": "timeout",
+      "issue": "norm_num on Real trigonometry",
+      "key_achievement": "proved exact distance (0,0) to (5,0) = 5"
+    }
+  ],
+  "strategic_context": "Option B: One certificate-based attempt before pivoting to SAT LRAT (#61)",
+  "next_steps": {
+    "if_success": "Archive and pivot to SAT LRAT implementation",
+    "if_timeout": "Immediate pivot to SAT LRAT (no retry)"
+  }
+}

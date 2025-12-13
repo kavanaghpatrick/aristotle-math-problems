@@ -1,0 +1,152 @@
+[
+  {
+    "name": "Erd\u0151s Problem 14",
+    "source": "erdos",
+    "old_score": 91,
+    "new_score": 40,
+    "delta": -51,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "Erd\u0151s Problem 30",
+    "source": "erdos",
+    "old_score": 90,
+    "new_score": 40,
+    "delta": -50,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "Erd\u0151s Problem 39",
+    "source": "erdos",
+    "old_score": 89,
+    "new_score": 40,
+    "delta": -49,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "Erd\u0151s Problem 1",
+    "source": "erdos",
+    "old_score": 73,
+    "new_score": 40,
+    "delta": -33,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "Erd\u0151s Problem 3",
+    "source": "erdos",
+    "old_score": 75,
+    "new_score": 40,
+    "delta": -35,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "Erd\u0151s Problem 11",
+    "source": "erdos",
+    "old_score": 74,
+    "new_score": 30,
+    "delta": -44,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": false,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "34145",
+    "source": "formal-conjectures",
+    "old_score": 57,
+    "new_score": 26.000000000000004,
+    "delta": -30.999999999999996,
+    "pattern": "algebraic_structure",
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": false,
+      "has_certificate": false,
+      "is_algebraic": true,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "A002372: Goldbach conjecture: number of decompositions of 2n into ordered sums of two odd primes.",
+    "source": "oeis",
+    "old_score": 43,
+    "new_score": 47.0,
+    "delta": 4.0,
+    "pattern": "bounded_combinatorics",
+    "features": {
+      "is_bounded": true,
+      "is_combinatorial": false,
+      "has_certificate": false,
+      "is_algebraic": true,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "SquarePacking",
+    "source": "formal-conjectures",
+    "old_score": 63,
+    "new_score": 40,
+    "delta": -23,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": true,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  },
+  {
+    "name": "AgohGiuga",
+    "source": "formal-conjectures",
+    "old_score": 53,
+    "new_score": 30,
+    "delta": -23,
+    "pattern": null,
+    "features": {
+      "is_bounded": false,
+      "is_combinatorial": false,
+      "has_certificate": false,
+      "is_algebraic": false,
+      "is_huge_space": false
+    }
+  }
+]

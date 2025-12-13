@@ -1,0 +1,41 @@
+# Erdős Problem #64 - Power of 2 Cycles
+
+Solve this open problem. Reward: $1000
+
+## Problem Statement
+
+Does every finite graph with minimum degree at least 3 contain a cycle of length 2^k for some k ≥ 2?
+
+In other words: If G is a finite simple graph where every vertex has degree ≥ 3, must G contain a cycle of length 4, 8, 16, 32, or some other power of 2?
+
+## What You Need To Prove
+
+Either:
+1. Prove YES: Every finite graph with min degree ≥ 3 contains a cycle of length 2^k for some k ≥ 2, OR
+2. Prove NO: Construct a finite counterexample graph with min degree ≥ 3 that has no cycle of length 2^k for any k ≥ 2
+
+## Known Progress
+
+Liu and Montgomery (2020) proved that graphs with minimum degree exceeding some absolute constant C must contain a 2^k-cycle. The question remains: does min degree ≥ 3 suffice?
+
+## Verification Examples
+
+Graphs with min degree ≥ 3 that DO contain power-of-2 cycles:
+- Complete graph K₄: min degree 3, contains C₄ (4-cycle) ✓
+- Complete graph K₅: min degree 4, contains C₄ and C₈ ✓
+- Petersen graph: min degree 3, contains cycles of various lengths
+
+Small cycles to check:
+- 4-cycle (2²): square
+- 8-cycle (2³): octagon
+- 16-cycle (2⁴)
+
+Note: The problem asks for existence of ANY 2^k cycle, not all of them.
+
+## Context
+
+This is Erdős Problem #64, a $1000 open problem in graph theory.
+Source: erdosproblems.com/64
+Status: OPEN (verified December 13, 2025)
+
+The problem is falsifiable - a finite counterexample would disprove it.

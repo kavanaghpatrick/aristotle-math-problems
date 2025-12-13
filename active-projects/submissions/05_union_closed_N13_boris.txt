@@ -1,0 +1,76 @@
+# Frankl's Union-Closed Sets Conjecture for n = 13
+
+## Goal
+
+Verify Frankl's union-closed sets conjecture for families over a 13-element universe.
+
+## Problem Statement
+
+A family F of sets is union-closed if for any A, B ∈ F, we have A ∪ B ∈ F.
+
+Frankl's Conjecture (1979): For any finite union-closed family F of sets (with F ≠ {∅}), there exists an element that belongs to at least half of the sets in F.
+
+## Known Results
+
+- Conjecture proven for |F| ≤ 50 (various authors)
+- Gilmer (2022): Every union-closed family has an element in at least 1% of sets
+- Recent improvements: Element exists in at least 38% of sets
+- Full conjecture (50%) remains open
+
+## Your Task
+
+For all union-closed families F over universe U = {1, 2, ..., 13}:
+
+Either:
+1. Prove that every such family has an element in ≥ |F|/2 sets
+2. Find a counterexample: a union-closed family where every element appears in < |F|/2 sets
+
+## Constraints
+
+- Universe: U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
+- Family F ⊆ P(U) is union-closed
+- F ≠ {∅}
+- Must verify: ∃ x ∈ U such that |{A ∈ F : x ∈ A}| ≥ |F|/2
+
+## You Decide
+
+- Lattice-theoretic approach
+- SAT encoding of the conjecture
+- Induction on family size
+- Structural classification of union-closed families
+- Which elements to track abundance for
+
+## Verification
+
+For the conjecture to hold at n = 13:
+- For every union-closed F over {1,...,13}
+- There exists x ∈ {1,...,13}
+- Such that x appears in at least ⌈|F|/2⌉ members of F
+
+A counterexample would be:
+- A specific union-closed family F
+- Where for each x ∈ {1,...,13}: |{A ∈ F : x ∈ A}| < |F|/2
+
+## Context
+
+- The conjecture is equivalent to a statement about lattices
+- Union-closed families form a lattice under ⊆
+- Smallest potential counterexamples have been ruled out
+- Gilmer's breakthrough used entropy methods
+- Recent work by Alweiss, Lovett, Wu, Zhang improved bounds
+
+## Structural Insight
+
+Union-closed families have rich structure:
+- They form a Moore family (closed under arbitrary intersection of closure)
+- Equivalent to closure operators
+- Connected to finite lattice theory
+
+The conjecture essentially asks: In any finite lattice, does some join-irreducible element appear in at least half the elements?
+
+## Why n = 13?
+
+- Small enough for exhaustive analysis
+- Large enough to test conjecture non-trivially
+- Beyond current verified range
+- Pushes the boundary of what's computationally verified

@@ -1,0 +1,11 @@
+(node:65881) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:65954) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Loaded cached credentials.
+Attempt 1 failed: RATE_LIMIT_EXCEEDED
+Suggested retry after 60s.. Retrying after 60000ms...
+Attempt 1 failed: You have exhausted your capacity on this model. Your quota will reset after 0s.. Retrying after 160.51456ms...
+Error when talking to Gemini API Full report available at: /var/folders/tv/mjd7bwd918b7745mldgg045w0000gn/T/gemini-client-error-Turn.run-sendMessageStream-2025-12-11T10-25-29-343Z.json
+[API Error: You have exhausted your capacity on this model. Your quota will reset after 32m29s.]
+An unexpected critical error occurred:[object Object]

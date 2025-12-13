@@ -1,0 +1,26 @@
+# Erdős Problem #530 - Maximal Sidon Subsets
+
+Solve this open problem.
+
+## Problem Statement
+
+Let ℓ(N) be maximal such that in any finite set A ⊂ ℝ of size N there exists a Sidon subset S of size ℓ(N).
+
+A Sidon set is one where the only solutions to a+b=c+d are the trivial ones (where {a,b}={c,d}).
+
+Determine the order of ℓ(N).
+
+In particular, is it true that ℓ(N) ~ N^(1/2)?
+
+## What You Need To Prove
+
+Either:
+1. Prove ℓ(N) ~ N^(1/2) (the conjecture), OR
+2. Prove a different asymptotic bound, OR
+3. Establish tight bounds on ℓ(N)
+
+## Context
+
+This is Erdős Problem #530, an open problem in additive combinatorics.
+
+Related: Erdős #124 (solved) was also about Sidon sets.

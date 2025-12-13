@@ -1,0 +1,212 @@
+## Problem Title: PHP Resolution Width Lower Bound with Size Tradeoff (PHP_5)
+
+---
+
+## Executive Summary
+
+Prove that resolution proofs of PHP_5 (6 pigeons, 5 holes) require width ≥ 3 while maintaining proof size ≤ 2^10 clauses. This establishes a width-size tradeoff for a concrete instance.
+
+**Improvement over v1:** Smaller instance (PHP_5 vs PHP_10), explicit size bound, follows width-size tradeoff approach.
+
+---
+
+## Background
+
+### Pigeonhole Principle PHP_n
+
+**Clauses:**
+- Pigeon clauses: p_{i,1} ∨ p_{i,2} ∨ ... ∨ p_{i,n} for i ∈ [n+1]
+  (each pigeon goes in some hole)
+- Hole clauses: ¬p_{i,j} ∨ ¬p_{k,j} for i < k, j ∈ [n]
+  (no two pigeons in same hole)
+
+**For PHP_5:** 6 pigeons (0-5), 5 holes (0-4)
+- 6 pigeon clauses
+- C(6,2) × 5 = 75 hole clauses
+- Total: 81 initial clauses
+
+### Known Results
+
+**Width:** Lower bound Ω(n) (Ben-Sasson & Wigderson 2001)
+**Size:** Lower bound 2^Ω(n) (Haken 1985)
+**Width-Size Tradeoff:** w × s ≥ 2^Ω(n) (Atserias & Dalmau 2008)
+
+**For PHP_5:** Width ≥ 3 expected (from Ω(n) = Ω(5))
+
+---
+
+## Concrete Parameters
+
+**n = 5** (holes)
+**m = 6** (pigeons)
+**Width Lower Bound Target**: w ≥ 3
+**Size Upper Bound**: s ≤ 2^10 = 1024 clauses
+**Tradeoff**: w × s ≥ C (prove w ≥ 3 assuming s ≤ 1024)
+
+---
+
+## Goal 1: Width Lower Bound via Clause Size
+
+### Task
+Prove that any resolution proof of PHP_5 must contain a clause of width ≥ 3.
+
+### Approach: Pigeon Expansion Argument
+
+**Key Insight:** Consider any resolution proof P of PHP_5.
+
+**Prove:**
+1. For each pigeon i ∈ [6], there exists a clause C_i in P containing variables from pigeon i
+2. Due to hole constraints, C_i must have width ≥ 3 for at least one pigeon
+3. Width of P = max(width(C)) ≥ 3
+
+### Formalization
+
+```lean
+-- Literal and clause definitions
+inductive Literal (n m : ℕ) : Type
+| pos (i : Fin m) (j : Fin n) : Literal n m  -- p_{i,j}
+| neg (i : Fin m) (j : Fin n) : Literal n m  -- ¬p_{i,j}
+
+def Clause (n m : ℕ) := List (Literal n m)
+
+def clause_width {n m : ℕ} (C : Clause n m) : ℕ := C.length
+
+-- PHP_5 instance
+def php_5 : CNFFormula 5 6 := ...
+
+-- Resolution proof
+structure ResolutionProof (F : CNFFormula n m) where
+  clauses : List (Clause n m)
+  derives_empty : empty_clause ∈ clauses
+
+-- Width of proof
+def proof_width {n m : ℕ} (P : ResolutionProof (php_5)) : ℕ :=
+  (P.clauses.map clause_width).maximum.getD 0
+
+-- Main theorem
+theorem php_5_width_lower_bound :
+  ∀ (P : ResolutionProof php_5),
+    proof_width P ≥ 3
+```
+
+---
+
+## Goal 2: Size-Width Tradeoff
+
+### Task
+Prove that if proof size s ≤ 1024, then width w ≥ 3 for PHP_5.
+
+### Approach: Counting Argument
+
+**Key Steps:**
+1. Prove w × s ≥ C for some constant C (width-size tradeoff)
+2. For PHP_5, show C ≥ 3 × 1024 = 3072
+3. Therefore: w ≥ C/s ≥ 3072/1024 = 3
+
+### Formalization
+
+```lean
+def proof_size {n m : ℕ} (P : ResolutionProof php_5) : ℕ :=
+  P.clauses.length
+
+-- Width-size tradeoff constant
+def tradeoff_constant (n : ℕ) : ℕ := 3 * 2^10  -- For PHP_5
+
+-- Tradeoff theorem
+theorem php_5_width_size_tradeoff (P : ResolutionProof php_5) :
+  proof_width P * proof_size P ≥ tradeoff_constant 5
+
+-- Main result
+theorem php_5_bounded_size_implies_width (P : ResolutionProof php_5) :
+  proof_size P ≤ 1024 →
+  proof_width P ≥ 3
+```
+
+---
+
+## Goal 3: Explicit Narrow Proof Impossibility
+
+### Task
+Prove that no resolution proof of width ≤ 2 exists for PHP_5 (complementary to Goal 1).
+
+### Approach: Restriction Argument
+
+**Key Insight:** Width-2 proofs correspond to restricted formulas.
+
+**Prove:**
+1. Any width-2 resolution step preserves "pigeon restrictions"
+2. PHP_5 has no width-2 derivation of empty clause
+3. Proof by contradiction: assume width ≤ 2 → construct satisfying assignment
+
+### Formalization
+
+```lean
+def is_narrow_clause {n m : ℕ} (C : Clause n m) : Prop :=
+  clause_width C ≤ 2
+
+def narrow_proof {n m : ℕ} (P : ResolutionProof php_5) : Prop :=
+  ∀ C ∈ P.clauses, is_narrow_clause C
+
+-- Impossibility theorem
+theorem php_5_no_narrow_proof :
+  ¬∃ (P : ResolutionProof php_5), narrow_proof P
+```
+
+---
+
+## Goal 4: Computational Verification (Stretch)
+
+### Task
+Use bounded search to verify computationally that all proofs of size ≤ 128 have width ≥ 3.
+
+**Approach:**
+- Enumerate all possible resolution proofs of PHP_5 with size ≤ 128
+- Compute width of each proof
+- Verify min_width ≥ 3
+
+**Note:** This is computationally intensive but feasible for small bounds.
+
+---
+
+## Success Criteria
+
+✅ **Concrete instance**: PHP_5 (6 pigeons, 5 holes) not generic PHP_n
+✅ **Width bound**: Prove w ≥ 3 (not just asymptotic Ω(n))
+✅ **Size constraint**: Explicitly use s ≤ 1024 in proof
+✅ **Tradeoff**: Show w × s ≥ 3072 for PHP_5
+✅ **Dual approach**: Both direct (Goal 1) and tradeoff (Goal 2)
+
+### Red Flags
+❌ Only asymptotic Ω(n) bounds
+❌ Generic PHP_n arguments
+❌ Timeout on width computation
+❌ No size bound used
+
+---
+
+## Expected Output
+
+**Target**: 200-350 lines
+
+### Structure
+1. **Definitions** (60-80 lines): Literals, clauses, PHP_5, resolution
+2. **Width Lower Bound** (70-100 lines): Pigeon expansion, w ≥ 3
+3. **Width-Size Tradeoff** (50-80 lines): Constant C, arithmetic
+4. **Narrow Proof Impossibility** (40-60 lines): Width ≤ 2 contradiction
+5. **Overall Result** (20-30 lines): Combine all bounds
+
+---
+
+## Novelty Assessment
+
+**Why 6-7/10:**
+- Concrete width bound for specific instance (not just asymptotic)
+- Width-size tradeoff formalized for PHP_5
+- Dual proof approach (direct + tradeoff)
+
+**Improvement over v1:**
+- Smaller instance (PHP_5 vs PHP_10) → more likely to complete
+- Explicit size bound (avoids infinite search)
+- Clear width-size tradeoff statement
+
+**Success Probability**: 30-35% (improved from v1's timeout)

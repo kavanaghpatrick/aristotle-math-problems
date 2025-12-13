@@ -1,0 +1,51 @@
+rank,erdos_number,tractability,prize,tags,has_lean4,oeis
+1,1,100,$500,"number theory;additive combinatorics",True,A276661
+2,9,100,no,"number theory;additive basis;primes",True,A006286
+3,10,100,no,"number theory;additive basis;primes",True,A387053
+4,14,100,no,"number theory;sidon sets;additive combinatorics",True,A143824;possible
+5,20,100,$1000,"combinatorics",True,A332077
+6,30,100,$1000,"number theory;sidon sets;additive combinatorics",True,A143824;A227590;A003022
+7,33,100,no,"number theory;additive basis",True,N/A
+8,36,100,no,"number theory;additive combinatorics",True,possible
+9,39,100,$500,"number theory;sidon sets;additive combinatorics",True,N/A
+10,41,100,$500,"number theory;sidon sets;additive combinatorics",True,N/A
+11,42,100,no,"number theory;sidon sets;additive combinatorics",True,N/A
+12,44,100,no,"number theory;sidon sets;additive combinatorics",True,N/A
+13,51,100,no,"number theory",True,A002202;A014197
+14,61,100,no,"graph theory",True,N/A
+15,68,100,no,"number theory;irrationality",True,A331373
+16,89,100,$500,"geometry;distances",True,A186704;A131628
+17,90,100,$500,"geometry;distances",True,A186705
+18,92,100,$500,"geometry;distances",True,possible
+19,108,100,no,"graph theory;chromatic number;cycles",True,possible
+20,125,100,no,"number theory;base representations",True,A367090
+21,126,100,$250,"number theory",True,possible
+22,138,100,$500,"additive combinatorics",True,A005346
+23,141,100,no,"additive combinatorics;primes;arithmetic progressi",True,A006560
+24,145,100,no,"number theory",True,A005117
+25,155,100,no,"additive combinatorics;sidon sets",True,A143824;A227590;A003022
+26,160,100,no,"additive combinatorics;arithmetic progressions",True,possible
+27,168,100,no,"additive combinatorics",True,A004059;A057561;A094708;A386439
+28,170,100,no,"additive combinatorics",True,A046693
+29,172,100,no,"additive combinatorics;ramsey theory",True,N/A
+30,208,100,no,"number theory",True,A005117;A076259
+31,243,100,no,"number theory",True,A000058
+32,249,100,no,"number theory;irrationality",True,A256936
+33,251,100,no,"number theory;irrationality",True,A098990
+34,283,100,no,"number theory;unit fractions",True,A380791
+35,295,100,no,"number theory;unit fractions",True,possible
+36,304,100,no,"number theory;unit fractions",True,possible
+37,313,100,no,"number theory;unit fractions",True,A054377
+38,319,100,no,"number theory;unit fractions",True,possible
+39,321,100,no,"number theory;unit fractions",True,A384927;in progress
+40,325,100,no,"number theory;powers",True,possible
+41,326,100,no,"number theory;additive basis",True,N/A
+42,329,100,no,"number theory",True,possible
+43,330,100,no,"number theory;additive basis",True,N/A
+44,340,100,no,"number theory;additive combinatorics;sidon sets",True,A080200;A005282
+45,357,100,no,"number theory",True,A364132;A364153;possible
+46,358,100,no,"number theory;additive basis;primes",True,possible
+47,359,100,no,"number theory",True,A002048
+48,361,100,no,"number theory",True,possible
+49,371,100,no,"number theory",True,A070089
+50,373,100,no,"number theory;factorials",True,A003135

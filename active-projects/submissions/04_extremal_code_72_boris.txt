@@ -1,0 +1,75 @@
+# Extremal Self-Dual Binary Code [72, 36, 16]
+
+## Goal
+
+Determine whether an extremal doubly-even self-dual binary code of length 72 exists.
+
+## Problem Statement
+
+A binary linear code C of length n and dimension k is a k-dimensional subspace of F₂ⁿ.
+
+The minimum distance d is the minimum Hamming weight of any nonzero codeword.
+
+A code is:
+- Self-dual if C = C⊥ (equals its dual)
+- Doubly-even if all codeword weights are divisible by 4
+- Extremal if it achieves the upper bound d = 4⌊n/24⌋ + 4
+
+## The Extremal Code Sequence
+
+| Length n | Dimension k | Min Distance d | Status |
+|----------|-------------|----------------|--------|
+| 8 | 4 | 4 | Hamming code ✓ |
+| 24 | 12 | 8 | Golay code ✓ |
+| 48 | 24 | 12 | Known (q48) ✓ |
+| 72 | 36 | 16 | **UNKNOWN** |
+| 96 | 48 | 20 | Unknown |
+
+## Your Task
+
+Either:
+1. Construct a binary code C with parameters [72, 36, 16] that is self-dual and doubly-even
+2. Prove no such code exists
+
+## Constraints
+
+- Length: 72 bits
+- Dimension: 36 (code has 2³⁶ codewords)
+- Minimum distance: 16 (all nonzero codewords have weight ≥ 16)
+- Self-dual: C = C⊥
+- Doubly-even: All weights ≡ 0 (mod 4)
+
+## You Decide
+
+- Construction method:
+  - Quadratic residue construction
+  - Circulant matrix approach
+  - Automorphism group exploitation
+  - Random search with constraints
+- Proof technique for non-existence
+- Generator matrix form
+
+## Verification
+
+A valid code must satisfy:
+1. Generator matrix G is 36 × 72 over F₂
+2. G · Gᵀ = 0 (self-orthogonality implies self-duality for n = 2k)
+3. All row weights ≡ 0 (mod 4)
+4. Minimum weight of span(G) is exactly 16
+
+## Context
+
+- The extended Golay code [24,12,8] has beautiful structure
+- Known extremal codes have rich automorphism groups
+- Conway and Sloane catalogued many self-dual codes
+- Recent work on automorphism groups narrows the search
+- If it exists, it would have at least 36 minimum weight codewords
+
+## Algebraic Structure
+
+Self-dual codes over F₂ are connected to:
+- Lattices (Construction A)
+- Modular forms (weight enumerators)
+- Finite simple groups (automorphisms)
+
+The [72, 36, 16] code, if it exists, would extend this beautiful theory.

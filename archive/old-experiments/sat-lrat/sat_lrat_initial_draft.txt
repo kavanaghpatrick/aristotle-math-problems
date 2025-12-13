@@ -1,0 +1,143 @@
+# SAT-Based Knot Invariant Verification with LRAT Proofs
+
+## The Goal
+
+Create a **publication-ready SAT-based verification system for knot invariants** with formally verified LRAT proof certificates.
+
+We want this publishable at FMCAD/CAV 2026 or similar verification conferences.
+
+## What We Need From You
+
+**Build a complete SAT-based verification system for knot invariants with formal LRAT proof checking in Lean 4.**
+
+You decide:
+- How to encode knot invariants as SAT constraints
+- Which knot invariants to verify (Jones polynomial? Unknot detection? HOMFLY-PT?)
+- How to structure the LRAT proof certificate format
+- What theorems to prove about the verification pipeline
+- How to balance completeness vs. feasibility
+
+## Why SAT + LRAT?
+
+**SAT solvers** are battle-tested for exhaustive verification of complex constraints.
+**LRAT certificates** provide verifiable proof traces that can be checked in Lean 4.
+
+**Key advantage**: Separates search (SAT solver does computation) from verification (Lean checks certificate).
+
+This is certificate-based verification - similar to successful projects like Spectral Gap proofs.
+
+## What We Know Works
+
+**From Jones Polynomial success** (269 lines, 0 sorries):
+- Computational verification has value
+- Simple, focused tasks succeed
+- Native computation via `native_decide` works well
+
+**From Spectral Gap success** (860 lines, 0 sorries):
+- Certificate-based verification scales
+- Concrete specifications work
+- External computation + Lean verification is powerful
+
+**From HOMFLY-PT challenges**:
+- Don't ask Lean to compute complex algebra directly
+- Use external tools for computation, Lean for verification
+- Certificate-based approaches avoid implementation bugs
+
+## Guidance (Not Requirements)
+
+**Typical SAT-based verification pipeline**:
+1. Encode problem as CNF (Conjunctive Normal Form)
+2. Run SAT solver to get solution + proof trace
+3. Convert proof trace to LRAT format
+4. Verify LRAT certificate in Lean 4
+5. Extract verified result
+
+**Typical theorems to prove**:
+- LRAT certificate checker is sound
+- Encoding correctly represents the problem
+- Verified results are mathematically correct
+- Pipeline preserves correctness end-to-end
+
+**But YOU decide** what's actually needed for publication!
+
+## Example Use Cases (You Choose Scope)
+
+**Easy (proof of concept)**:
+- Unknot detection for small knots (3-7 crossings)
+- Jones polynomial computation for simple braids
+- Verification via SAT that two knots are distinct
+
+**Medium (publication-worthy)**:
+- Jones polynomial verification for 10+ knots
+- Unknot detection with formal correctness proofs
+- LRAT certificate checking with soundness theorems
+
+**Ambitious (stretch goal)**:
+- HOMFLY-PT polynomial via SAT encoding
+- Reidemeister move verification
+- General knot invariant computation framework
+
+**You decide** what's achievable and publication-worthy!
+
+## Technical Context
+
+**SAT/LRAT Background**:
+- CNF: Conjunctive Normal Form (AND of ORs)
+- LRAT: Linear Resolution Asymmetric Tautology
+- Common format: DIMACS CNF for input, DRAT/LRAT for proofs
+
+**Existing Lean 4 work**:
+- Mathlib has basic SAT/CNF definitions
+- LRAT checkers exist in other proof assistants (Isabelle, Coq)
+- You may need to implement LRAT checker or use existing work
+
+**Knot theory encoding**:
+- Braid words as sequences of generators
+- Crossings as boolean constraints
+- Polynomial coefficients as arithmetic constraints
+
+## What Success Looks Like
+
+**Minimum viable**:
+- ✅ Working SAT encoding for at least one knot invariant
+- ✅ LRAT certificate verification in Lean 4
+- ✅ Some formal correctness proofs
+- ✅ Demonstration on 3-5 example knots
+
+**Target (publishable)**:
+- ✅ Complete SAT-based verification pipeline
+- ✅ LRAT certificate checker with soundness proof
+- ✅ Verified results for 10+ knots
+- ✅ End-to-end correctness theorems
+- ✅ Minimal sorries (ideally 0)
+
+**Stretch**:
+- ✅ Multiple knot invariants supported
+- ✅ General framework for SAT-based topology verification
+- ✅ Comparison to direct computation approaches
+- ✅ Performance analysis and scalability results
+
+## The Philosophy
+
+**Certificate-based verification**: Let external tools (SAT solvers) do heavy computation. Lean verifies the result is correct.
+
+**Separation of concerns**:
+- SAT solver: Search for solutions (untrusted)
+- LRAT certificate: Proof trace (verifiable artifact)
+- Lean checker: Verification (trusted)
+
+**Trade-off decision**: You make editorial choices about scope, completeness, and what to highlight for publication.
+
+## Output Format
+
+**Lean 4 file(s)** with:
+- SAT encoding definitions
+- LRAT certificate format and checker
+- Formal correctness proofs
+- Example verifications (concrete knots)
+- Clear documentation
+- Minimal sorries (ideally 0)
+
+---
+
+**In short**: Build a publication-ready SAT-based knot verification system with LRAT proofs. You're the expert on what that means!

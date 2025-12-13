@@ -1,0 +1,48 @@
+#!/bin/bash
+# Pre-commit hook to prevent API key exposure
+# Install: git config core.hooksPath .githooks
+
+# Patterns to block (add more as needed)
+PATTERNS=(
+    "arstl_[A-Za-z0-9_-]{20,}"     # Aristotle API keys
+    "sk-[A-Za-z0-9]{20,}"          # OpenAI API keys
+    "xai-[A-Za-z0-9]{20,}"         # xAI/Grok API keys
+    "ghp_[A-Za-z0-9]{36}"          # GitHub personal access tokens
+    "gho_[A-Za-z0-9]{36}"          # GitHub OAuth tokens
+    "Bearer [A-Za-z0-9_-]{20,}"    # Bearer tokens (generic)
+)
+
+# Files to check (staged files only)
+FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$FILES" ]; then
+    exit 0
+fi
+
+FOUND_SECRET=0
+
+for pattern in "${PATTERNS[@]}"; do
+    # Check each staged file
+    MATCHES=$(echo "$FILES" | xargs grep -lE "$pattern" 2>/dev/null)
+    if [ -n "$MATCHES" ]; then
+        echo "🚨 BLOCKED: Potential API key detected!"
+        echo "Pattern: $pattern"
+        echo "Files:"
+        echo "$MATCHES" | sed 's/^/  - /'
+        FOUND_SECRET=1
+    fi
+done
+
+if [ $FOUND_SECRET -eq 1 ]; then
+    echo ""
+    echo "❌ Commit blocked to prevent secret exposure."
+    echo ""
+    echo "To fix:"
+    echo "  1. Replace hardcoded keys with os.environ[\"KEY_NAME\"]"
+    echo "  2. Or add file to .gitignore"
+    echo ""
+    echo "To bypass (NOT RECOMMENDED): git commit --no-verify"
+    exit 1
+fi
+
+exit 0

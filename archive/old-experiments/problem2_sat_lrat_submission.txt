@@ -1,0 +1,179 @@
+# Formal Verification of SAT Resolution Proofs
+
+## Problem Statement
+
+Verify that resolution proofs for unsatisfiable SAT formulas are correct using Lean 4 formal verification.
+
+## Background
+
+Resolution is a proof system for establishing unsatisfiability of Boolean formulas in CNF (Conjunctive Normal Form). LRAT (Linear Resolution Asymmetric Tautology) proofs are a compact, verifiable format for resolution proofs.
+
+This task involves formally verifying LRAT proofs in Lean 4, ensuring they correctly establish unsatisfiability.
+
+## Task Overview
+
+We need to verify resolution proofs for 10 classic unsatisfiable SAT instances:
+
+1. **Pigeonhole Principle** (4 pigeons, 5 holes) - php-04-05
+2. **Pigeonhole Principle** (5 pigeons, 6 holes) - php-05-06
+3. **Random 3-SAT** instance (50 variables, UNSAT)
+4. **Random 3-SAT** instance (75 variables, UNSAT)
+5. **Crafted hard instance** - dubois20
+6. **AIM benchmark** - aim-50-yes
+7. **Pigeonhole Principle** (6 pigeons, 7 holes) - php-06-07
+8. **Random 3-SAT** instance (100 variables, UNSAT)
+9. **Crafted hard instance** - dubois22
+10. **AIM benchmark** - aim-100-yes
+
+## Verification Approach
+
+For each SAT instance, we provide:
+- CNF formula (Conjunctive Normal Form)
+- LRAT proof (sequence of resolution steps)
+
+Your task is to create Lean 4 code that:
+
+1. Represents the CNF formula as a data structure
+2. Represents the LRAT proof as a sequence of steps
+3. Implements (or imports) an LRAT verification function
+4. Proves the theorem: `theorem unsat : verify_lrat cnf proof = true`
+
+## Example Instance: Pigeonhole Principle (4 pigeons, 5 holes)
+
+**CNF Formula** (simplified representation):
+- 4 pigeons must go into 5 holes
+- Each pigeon must be in at least one hole
+- No two pigeons can be in the same hole
+
+This generates approximately 20 clauses.
+
+**LRAT Proof Structure**:
+The resolution proof will derive the empty clause through a sequence of resolution steps.
+
+## Lean 4 Formalization Requirements
+
+### Option 1: Use Existing Library (Preferred)
+If `lean-sat` or similar library exists in Mathlib or ecosystem:
+```lean
+import LeanSAT.LRAT
+
+def cnf_php_04_05 : CNF := [
+  -- Define clauses here
+]
+
+def proof_php_04_05 : LRATProof := [
+  -- Define proof steps here
+]
+
+theorem php_04_05_unsat : verify_lrat cnf_php_04_05 proof_php_04_05 = true := by
+  native_decide
+```
+
+### Option 2: Implement LRAT Checker (If No Library)
+```lean
+-- Define clause and literal types
+inductive Literal where
+  | pos : Nat → Literal
+  | neg : Nat → Literal
+
+def Clause := List Literal
+def CNF := List Clause
+
+-- Define LRAT proof step
+structure LRATStep where
+  id : Nat
+  clause : Clause
+  hints : List Nat
+
+def LRATProof := List LRATStep
+
+-- Implement verification function
+def verify_lrat (cnf : CNF) (proof : LRATProof) : Bool :=
+  -- Verification logic here
+  sorry
+
+-- Prove specific instance
+theorem php_04_05_unsat : verify_lrat cnf_php_04_05 proof_php_04_05 = true := by
+  native_decide
+```
+
+## Concrete Data for First Instance
+
+### PHP-04-05 CNF (Partial - Full version will be provided)
+
+Variables 1-20 represent: pigeon i in hole j
+
+**"Each pigeon in at least one hole"** (4 clauses):
+1. `(x1 ∨ x2 ∨ x3 ∨ x4 ∨ x5)` - Pigeon 1 in some hole
+2. `(x6 ∨ x7 ∨ x8 ∨ x9 ∨ x10)` - Pigeon 2 in some hole
+3. `(x11 ∨ x12 ∨ x13 ∨ x14 ∨ x15)` - Pigeon 3 in some hole
+4. `(x16 ∨ x17 ∨ x18 ∨ x19 ∨ x20)` - Pigeon 4 in some hole
+
+**"No two pigeons in same hole"** (10 clauses per hole × 5 holes):
+- `(¬x1 ∨ ¬x6)` - Pigeons 1,2 not both in hole 1
+- `(¬x1 ∨ ¬x11)` - Pigeons 1,3 not both in hole 1
+- ... (and so on)
+
+### LRAT Proof Sketch (Conceptual)
+The proof will:
+1. Apply resolution repeatedly to derive contradictions
+2. Use unit propagation and resolution rules
+3. Eventually derive the empty clause (⊥)
+
+## Success Criteria
+
+For each of the 10 instances:
+- ✅ Lean code compiles without errors
+- ✅ `verify_lrat cnf proof = true` is provable
+- ✅ Proof uses `native_decide` (decidable verification)
+- ✅ Zero `sorry`s in the generated code
+
+## Deliverables
+
+Please generate Lean 4 files that:
+1. Define the CNF formulas for all 10 instances
+2. Define the LRAT proofs (or proof structure)
+3. Prove unsatisfiability using formal verification
+4. Compile successfully with Lean 4
+
+## Implementation Strategy
+
+**Recommended Approach**:
+1. Start with the simplest instance (php-04-05)
+2. Implement or import LRAT verification function
+3. Verify it compiles and `native_decide` works
+4. Scale to remaining 9 instances
+
+**Key Technical Points**:
+- LRAT proofs are DECIDABLE (can be checked algorithmically)
+- This is pure verification, not proof search
+- Resolution proof checking is polynomial time
+- `native_decide` should work efficiently for these instance sizes
+
+## Notes on Complexity
+
+- **PHP-04-05**: ~20 clauses, small proof (~50 steps)
+- **PHP-06-07**: ~40 clauses, medium proof (~200 steps)
+- **Random 3-SAT (50 vars)**: ~200 clauses, variable proof length
+- **Dubois20**: Crafted hard instance, structured proof
+
+All instances chosen to be feasible for formal verification (not too large).
+
+## Related Work
+
+- LRAT format is standard in SAT competition
+- Used by state-of-the-art solvers (CaDiCaL, Kissat)
+- Verifiable proofs enable trusted SAT solving
+- Connection to automated theorem proving
+
+## Expected Outcome
+
+This provides:
+- Formal certification of SAT solver correctness
+- Bridge between automated reasoning and formal verification
+- Systematic verification methodology for decision procedures
+- Foundation for verifying larger SAT-based systems
+
+---
+
+**Please generate Lean 4 code that formally verifies the unsatisfiability of these 10 SAT instances using LRAT proof verification.**

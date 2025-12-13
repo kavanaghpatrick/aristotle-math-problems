@@ -1,0 +1,5 @@
+Project ID: 873537b2-608a-486e-9e19-ac40ab1f9a86
+Submission: SAT LRAT (Boris Pattern - No Code)
+Strategy: Aristotle generates ALL implementation
+Size: 276 lines
+Expected: 85-90% success
