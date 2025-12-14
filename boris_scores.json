@@ -1,0 +1,4417 @@
+[
+  {
+    "problem_num": 36,
+    "boris_score": 110,
+    "solved_count": 9,
+    "undergraduate_count": 0,
+    "test_count": 5,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "M_one",
+      "M_two",
+      "M_three",
+      "M_four",
+      "M_five",
+      "minimum_overlap.variants.lower.erdos_1955",
+      "minimum_overlap.variants.lower.scherk_1955",
+      "minimum_overlap.variants.lower.swierczkowski_1958",
+      "minimum_overlap.variants.lower.haugland_1996",
+      "minimum_overlap.variants.lower.white_2022",
+      "minimum_overlap.variants.upper.erdos_1955",
+      "minimum_overlap.variants.upper.MRS_1956",
+      "minimum_overlap.variants.upper.haugland_1996",
+      "minimum_overlap.variants.upper.haugland_2022",
+      "erdos_36.variants.lower",
+      "erdos_36.variants.upper",
+      "erdos_36.variants.exists",
+      "erdos_36"
+    ]
+  },
+  {
+    "problem_num": 707,
+    "boris_score": 85,
+    "solved_count": 6,
+    "undergraduate_count": 5,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_707",
+      "erdos_707.variants.prime_power",
+      "erdos_707.variants.prime",
+      "erdos_707.counterexample_prime",
+      "erdos_707.counterexample_mian_chowla",
+      "erdos_707.counterexample_hall",
+      "erdos_707.variants.perfect_difference_set_size_bound",
+      "erdos_707.variants.singer_construction",
+      "erdos_707.variants.example_sidon_set",
+      "erdos_707.variants.example_embedding",
+      "erdos_707.variants.small_sidon_sets"
+    ]
+  },
+  {
+    "problem_num": 340,
+    "boris_score": 60,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 9,
+    "has_decide": true,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 1,
+    "theorem_names": [
+      "greedySidon_go_singleton_two",
+      "greedySidon_go_pair_three",
+      "greedySidon_zero",
+      "greedySidon_one",
+      "greedySidon_two",
+      "greedySidon_three",
+      "greedySidon_four",
+      "greedySidon_five",
+      "greedySidon_ten",
+      "erdos_340",
+      "erdos_340.variants.isTheta",
+      "erdos_340.variants.third",
+      "erdos_340.variants.sub_hasPosDensity",
+      "erdos_340.variants._22_mem_sub",
+      "erdos_340.variants._33_mem_sub",
+      "erdos_340.variants.cofinite_sub",
+      "erdos_340.variants.co_density_zero_sub"
+    ]
+  },
+  {
+    "problem_num": 12,
+    "boris_score": 50,
+    "solved_count": 5,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "isGood_example",
+      "erdos_12.parts.i",
+      "erdos_12.parts.ii",
+      "erdos_12.parts.iii",
+      "erdos_12.variants.erdos_sarkozy_density_0",
+      "erdos_12.variants.erdos_sarkozy",
+      "erdos_12.variants.example",
+      "erdos_12.variants.schoen",
+      "erdos_12.variants.baier"
+    ]
+  },
+  {
+    "problem_num": 1,
+    "boris_score": 50,
+    "solved_count": 4,
+    "undergraduate_count": 2,
+    "test_count": 0,
+    "has_decide": true,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_1",
+      "erdos_1.variants.weaker",
+      "erdos_1.variants.lb",
+      "erdos_1.variants.lb_strong",
+      "erdos_1.variants.real",
+      "erdos_1.variants.least_N_3",
+      "erdos_1.variants.least_N_5",
+      "erdos_1.variants.least_N_9"
+    ]
+  },
+  {
+    "problem_num": 107,
+    "boris_score": 45,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_107",
+      "nonempty_cardSet",
+      "f_zero_eq",
+      "f_three_eq",
+      "ersz_bounds",
+      "su_bound",
+      "hmpt_bound"
+    ]
+  },
+  {
+    "problem_num": 946,
+    "boris_score": 45,
+    "solved_count": 5,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_946",
+      "erdos_946.variants.spiro_5040",
+      "erdos_946.variants.heathbrown_lower_bound",
+      "erdos_946.variants.hildebrand_lower_bound",
+      "erdos_946.variants.upper_bound"
+    ]
+  },
+  {
+    "problem_num": 470,
+    "boris_score": 45,
+    "solved_count": 5,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 10,
+    "theorem_names": [
+      "erdos_470.part1",
+      "erdos_470.part2",
+      "erdos_470.variants.weird_pos_density",
+      "erdos_470.variants.smallest_weird_eq_70",
+      "erdos_470.variants.prime_gap_imp_inf_prim_weird",
+      "erdos_470.variants.odd_weird_10_pow_21",
+      "erdos_470.variants.odd_weird_prime_div",
+      "erdos_470.variants.abundancy_index"
+    ]
+  },
+  {
+    "problem_num": 418,
+    "boris_score": 40,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_418",
+      "erdos_418.variants.conditional",
+      "erdos_418.variants.sigma",
+      "erdos_418.variants.soln",
+      "erdos_418.variants.density"
+    ]
+  },
+  {
+    "problem_num": 198,
+    "boris_score": 40,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_198",
+      "erdos_198.variant_concrete"
+    ]
+  },
+  {
+    "problem_num": 590,
+    "boris_score": 40,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "for",
+      "for",
+      "erdos_590",
+      "erdos_590.variants.two",
+      "erdos_590.variants.ge_three_false",
+      "erdos_590.variants.finite_cardinal"
+    ]
+  },
+  {
+    "problem_num": 26,
+    "boris_score": 40,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 7,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "not_isThick_of_finite",
+      "not_isThick_of_geom_one_lt",
+      "isThick_const",
+      "multiplesOf_eq_univ",
+      "isBehrend_of_contains_one",
+      "isWeaklyBehrend_of_ge_one",
+      "not_isWeaklyBehrend_of_neg",
+      "erdos_26",
+      "erdos_26.variants.rusza",
+      "erdos_26.variants.tenenbaum"
+    ]
+  },
+  {
+    "problem_num": 503,
+    "boris_score": 40,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 9,
+    "theorem_names": [
+      "erdos_503",
+      "erdos_503.variants.R2",
+      "erdos_503.variants.R3",
+      "erdos_503.variants.upper_bound",
+      "erdos_503.variants.lower_bound"
+    ]
+  },
+  {
+    "problem_num": 1074,
+    "boris_score": 40,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 3,
+    "has_decide": true,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 14,
+    "theorem_names": [
+      "erdos_1074.parts.i.i",
+      "erdos_1074.parts.i.ii",
+      "erdos_1074.parts.ii.i",
+      "erdos_1074.parts.ii.ii",
+      "erdos_1074.variants.mem_pillaiPrimes",
+      "erdos_1074.variants.EHSNumbers_infinite",
+      "erdos_1074.variants.PillaiPrimes_infinite",
+      "erdos_1074.variants.EHSNumbers_init",
+      "erdos_1074.variants.PillaiPrimes_init",
+      "erdos_1074.variants.EHSNumbers_one_half"
+    ]
+  },
+  {
+    "problem_num": 939,
+    "boris_score": 40,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "erdos_939",
+      "erdos_939.variants.infinite",
+      "erdos_939.variants.triples",
+      "erdos_939.variants.examples",
+      "erdos_939.variants.seven",
+      "erdos_939.variants.eight",
+      "erdos_939.variants.euler"
+    ]
+  },
+  {
+    "problem_num": 944,
+    "boris_score": 38,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 5,
+    "theorem_names": [
+      "erdos_944",
+      "erdos_944.variants.dirac_conjecture",
+      "erdos_944.variants.dirac_conjecture.k_eq_5",
+      "erdos_944.variants.dirac_conjecture.k_sub_one_not_prime",
+      "erdos_944.variants.dirac_conjecture.k_ge_five",
+      "erdos_944.dirac_conjecture.k_eq_four",
+      "erdos_944.variants.large_k_for_any_r"
+    ]
+  },
+  {
+    "problem_num": 377,
+    "boris_score": 35,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_377",
+      "erdos_377.variants.limit.i",
+      "erdos_377.variants.limit.ii",
+      "erdos_377.variants.ae",
+      "erdos_377.variants.ub"
+    ]
+  },
+  {
+    "problem_num": 264,
+    "boris_score": 35,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_264.parts.i",
+      "erdos_264.parts.ii",
+      "erdos_264.variants.example",
+      "erdos_264.variants.ko_tao_neg",
+      "erdos_264.variants.ko_tao_pos"
+    ]
+  },
+  {
+    "problem_num": 416,
+    "boris_score": 35,
+    "solved_count": 4,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_416.parts.i",
+      "erdos_416.parts.ii",
+      "erdos_416.variants.Pillai",
+      "erdos_416.variants.Erdos",
+      "erdos_416.variants.Maier_Pomerance",
+      "erdos_416.variants.Ford"
+    ]
+  },
+  {
+    "problem_num": 56,
+    "boris_score": 35,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 5,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "maxWeaklyDivisible_zero",
+      "maxWeaklyDivisible_one",
+      "maxWeaklyDivisible_zero_k",
+      "firstPrimesMultiples_one_card_zero",
+      "firstPrimesMultiples_zero_k_card_zero",
+      "erdos_56"
+    ]
+  },
+  {
+    "problem_num": 1052,
+    "boris_score": 35,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 5,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1052",
+      "even_of_isUnitaryPerfect",
+      "isUnitaryPerfect_6",
+      "isUnitaryPerfect_60",
+      "isUnitaryPerfect_90",
+      "isUnitaryPerfect_87360",
+      "isUnitaryPerfect_146361946186458562560000"
+    ]
+  },
+  {
+    "problem_num": 138,
+    "boris_score": 35,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "monoAP_guarantee_set_nonempty",
+      "monoAPNumber_two_one",
+      "monoAPNumber_two_two",
+      "erdos_138",
+      "erdos_138.variants.prime",
+      "erdos_138.variants.upper",
+      "erdos_138.variants.quotient",
+      "erdos_138.variants.difference",
+      "erdos_138.variants.dvd_two_pow"
+    ]
+  },
+  {
+    "problem_num": 1059,
+    "boris_score": 35,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 7,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_1059",
+      "allFactorialSubtractionsComposite_101",
+      "allFactorialSubtractionsComposite_211",
+      "notAllFactorialSubtractionsComposite_89",
+      "testFactorialsLessThanN"
+    ]
+  },
+  {
+    "problem_num": 350,
+    "boris_score": 30,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "decidableDistinctSubsetSums_1_2",
+      "distinctSubsetSums_1_2",
+      "DistinctSubsetSums_iff_DecidableDistinctSubsetSums",
+      "erdos_350",
+      "erdos_350.variants.strengthening"
+    ]
+  },
+  {
+    "problem_num": 678,
+    "boris_score": 30,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 4,
+    "has_decide": true,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_678"
+    ]
+  },
+  {
+    "problem_num": 97,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_97",
+      "erdos_97.variants.three_equidistant",
+      "erdos_97.variants.k_equidistant",
+      "erdos_97.variants.three_unit_distance",
+      "erdos_97.variants.three_unit_distance_cut_min"
+    ]
+  },
+  {
+    "problem_num": 6,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_6",
+      "erdos_6.variants.increasing",
+      "erdos_6.variants.decreasing"
+    ]
+  },
+  {
+    "problem_num": 509,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_509",
+      "erdos_509.variants.Cartan_bound",
+      "erdos_509.variants.Pommerenke_bound",
+      "erdos_509.variants.Pommerenke_connected"
+    ]
+  },
+  {
+    "problem_num": 499,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": []
+  },
+  {
+    "problem_num": 10,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_10",
+      "erdos_10.variants.gallagher",
+      "erdos_10.variants.granville_soundararajan_odd",
+      "erdos_10.variants.grechuk_example",
+      "erdos_10.variants.two_pows",
+      "erdos_10.variants.gretchuk"
+    ]
+  },
+  {
+    "problem_num": 723,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_723",
+      "erdos_723.prime_pow_is_projplane_order",
+      "erdos_723.leq_11",
+      "erdos_723.eq_12",
+      "bruck_ryser"
+    ]
+  },
+  {
+    "problem_num": 304,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_304.variants.upper_1950",
+      "erdos_304.variants.lower_1950",
+      "erdos_304.variants.upper_1985",
+      "upper_bound"
+    ]
+  },
+  {
+    "problem_num": 329,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_329",
+      "erdos_329.lower_bound",
+      "kruckeberg_1961",
+      "erdos_turan_1941",
+      "erdos_329.of_sub_perfectDifferenceSet",
+      "erdos_329.converse_implication",
+      "exists_sidon_pos_density"
+    ]
+  },
+  {
+    "problem_num": 11,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_11",
+      "erdos_11.variants.not_four_dvd",
+      "erdos_11.variants.two_pow_two",
+      "erdos_11.variants.finite_bound1",
+      "erdos_11.variants.finite_bound2",
+      "erdos_11.variants.granville_soundararajan"
+    ]
+  },
+  {
+    "problem_num": 427,
+    "boris_score": 30,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_427",
+      "erdos_427.shiu",
+      "erdos_427.of_shiu"
+    ]
+  },
+  {
+    "problem_num": 541,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_541",
+      "erdos_541.variants.general_moduli",
+      "erdos_541.variants.large_primes"
+    ]
+  },
+  {
+    "problem_num": 392,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_392",
+      "erdos_392.variants.lower",
+      "erdos_392.variants.implication"
+    ]
+  },
+  {
+    "problem_num": 402,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_402",
+      "erdos_402.variants.equality",
+      "erdos_402.variants.szegedy_zaharescu_weak"
+    ]
+  },
+  {
+    "problem_num": 316,
+    "boris_score": 25,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": true,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_316",
+      "erdos_316.variants.generalized"
+    ]
+  },
+  {
+    "problem_num": 245,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_245",
+      "erdos_245.variants.exists_limit",
+      "erdos_245.variants.two"
+    ]
+  },
+  {
+    "problem_num": 9,
+    "boris_score": 25,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 3,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos9A_contains_one",
+      "erdos9A_contains_three",
+      "erdos9A_not_contains_five",
+      "erdos_9_infinite",
+      "erdos_9"
+    ]
+  },
+  {
+    "problem_num": 141,
+    "boris_score": 25,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": true,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 11,
+    "theorem_names": [
+      "first_three_odd_primes",
+      "exists_three_consecutive_primes_in_ap",
+      "erdos_141",
+      "erdos_141.variant.first_cases",
+      "erdos_141.variant.eleven",
+      "erdos_141.variant.infinite_three",
+      "erdos_141.variant.infinite_general_case"
+    ]
+  },
+  {
+    "problem_num": 20,
+    "boris_score": 25,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 5,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "isSunflowerWithKernel_empty",
+      "isSunflowerWithKernel_singleton",
+      "isSunflower_empty",
+      "isSunflower_singleton",
+      "f_0_1",
+      "erdos_20"
+    ]
+  },
+  {
+    "problem_num": 830,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_830.parts.i",
+      "erdos_830.parts.ii",
+      "erdos_830.variants.erdos",
+      "erdos_830.variants.pomerance",
+      "erdos_830.variants.pomerance_stronger"
+    ]
+  },
+  {
+    "problem_num": 522,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_522",
+      "erdos_522.variants.number_real_roots",
+      "erdos_522.variants.yakir_solution"
+    ]
+  },
+  {
+    "problem_num": 145,
+    "boris_score": 25,
+    "solved_count": 3,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_145",
+      "erdos_145.variants.le_two",
+      "erdos_145.variants.le_three",
+      "erdos_145.variants.le_eleven_thirds"
+    ]
+  },
+  {
+    "problem_num": 508,
+    "boris_score": 23,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "HadwigerNelsonProblem",
+      "HadwigerNelsonAtLeastFive",
+      "HadwigerNelsonAtLeast4",
+      "HadwigerNelsonAtMostSeven",
+      "HadwigerNelsonAtLeastThree"
+    ]
+  },
+  {
+    "problem_num": 918,
+    "boris_score": 23,
+    "solved_count": 1,
+    "undergraduate_count": 2,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_918.parts.i",
+      "erdos_918.parts.ii",
+      "erdos_918.variants.all_subgraphs.parts.i",
+      "erdos_918.variants.all_subgraphs.parts.ii",
+      "erdos_918.variants.erdos_hajnal",
+      "erdos_918.variants.eq_aleph_0.parts.i",
+      "erdos_918.variants.eq_aleph_0_all_subgraphs.parts.i",
+      "erdos_918.variants.eq_aleph_0.parts.ii",
+      "erdos_918.variants.eq_aleph_0_all_subgraphs.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 672,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_672"
+    ]
+  },
+  {
+    "problem_num": 189,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_189",
+      "erdos_189.variants.square",
+      "erdos_189.variants.parallelogram"
+    ]
+  },
+  {
+    "problem_num": 188,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_188.nonempty",
+      "erdos_188.estimate",
+      "erdos_188"
+    ]
+  },
+  {
+    "problem_num": 219,
+    "boris_score": 20,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "primeArithmeticProgression_3_5_7",
+      "not_primeArithmeticProgression_1_2",
+      "empty_not_primeArithmeticProgression",
+      "erdos_219"
+    ]
+  },
+  {
+    "problem_num": 480,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_480",
+      "erdos_480.variants.chung_graham"
+    ]
+  },
+  {
+    "problem_num": 727,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_727",
+      "erdos_727_variants.k_2",
+      "erdos_727_variants.k_1",
+      "erdos_727_variants.k_1_2"
+    ]
+  },
+  {
+    "problem_num": 930,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_930",
+      "erdos_930.variant.consecutive_strong",
+      "erdos_930.variant.consecutive_integers"
+    ]
+  },
+  {
+    "problem_num": 4,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_4",
+      "erdos_4.variants.rankin"
+    ]
+  },
+  {
+    "problem_num": 229,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_229",
+      "theorem_1"
+    ]
+  },
+  {
+    "problem_num": 945,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_945",
+      "erdos_945.variants.constant",
+      "erdos_945.equivalence",
+      "erdos_945.variants.lower_bound",
+      "erdos_945.variants.upper_bound"
+    ]
+  },
+  {
+    "problem_num": 266,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_266",
+      "erdos_266.variants.all_rationals"
+    ]
+  },
+  {
+    "problem_num": 17,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_17",
+      "erdos_17.variants.upper_BES",
+      "erdos_17.variants.upper_Elsholtz",
+      "isClusterPrime_97_isLeast_non_cluster"
+    ]
+  },
+  {
+    "problem_num": 298,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_298",
+      "erdos_298.variants.upper_density"
+    ]
+  },
+  {
+    "problem_num": 67,
+    "boris_score": 20,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_67",
+      "erdos_67.variants.complex"
+    ]
+  },
+  {
+    "problem_num": 1104,
+    "boris_score": 18,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1104_lower",
+      "erdos_1104_upper"
+    ]
+  },
+  {
+    "problem_num": 61,
+    "boris_score": 18,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_61",
+      "erdos_61.variants.erha89",
+      "erdos_61.variants.bnss23"
+    ]
+  },
+  {
+    "problem_num": 69,
+    "boris_score": 15,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_69",
+      "erdos_69.specialisation_of_erdos_257"
+    ]
+  },
+  {
+    "problem_num": 351,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_351",
+      "erdos_351.variants.X",
+      "erdos_351.variants.X_sq"
+    ]
+  },
+  {
+    "problem_num": 33,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_33",
+      "erdos_33.variants.one_mem_lowerBounds",
+      "erdos_33.variants.vanDoorn"
+    ]
+  },
+  {
+    "problem_num": 868,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_868.parts.i",
+      "erdos_868.parts.ii",
+      "erdos_868.variants.fixed_\u03b5",
+      "erdos_868.variants.Hartter_Nathanson"
+    ]
+  },
+  {
+    "problem_num": 940,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_940",
+      "erdos_940.variants.two",
+      "erdos_940.variants.three_cubes",
+      "erdos_940.variants.large_integers",
+      "erdos_940.variants.three_powerful"
+    ]
+  },
+  {
+    "problem_num": 258,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_258",
+      "erdos_258.variants.Monotone",
+      "erdos_258.variants.Constant"
+    ]
+  },
+  {
+    "problem_num": 44,
+    "boris_score": 15,
+    "solved_count": 0,
+    "undergraduate_count": 4,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "maxSidonSubsetCard_icc_bound",
+      "erdos_44",
+      "erdos_44.empty_start",
+      "example_sidon_set",
+      "sidon_set_lower_bound",
+      "greedy_sidon_construction"
+    ]
+  },
+  {
+    "problem_num": 357,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_357.parts.i",
+      "erdos_357.parts.ii.bigO_version",
+      "erdos_357.parts.ii.bigO_version_symm",
+      "erdos_357.parts.ii.bigTheta_version",
+      "erdos_357.parts.ii.littleO_version",
+      "erdos_357.parts.ii.littleO_version_symm",
+      "erdos_357.variants.weisenberg",
+      "erdos_357.variants.infinite_set_lower_density",
+      "erdos_357.variants.infinite_set_density",
+      "erdos_357.variants.infinite_set_sum",
+      "erdos_357.variants.hegyvari",
+      "erdos_357.variants.monotone.parts.i",
+      "erdos_357.variants.monotone.parts.ii.bigO_version",
+      "erdos_357.variants.monotone.parts.ii.bigO_version_symm",
+      "erdos_357.variants.monotone.parts.ii.bigTheta_version",
+      "erdos_357.variants.monotone.parts.ii.littleO_version",
+      "erdos_357.variants.monotone.parts.ii.littleO_version_symm"
+    ]
+  },
+  {
+    "problem_num": 160,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_160.known_upper",
+      "erdos_160.known_lower",
+      "erdos_160.better_upper",
+      "erdos_160.better_lower"
+    ]
+  },
+  {
+    "problem_num": 321,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_321",
+      "erdos_321.variants.isTheta",
+      "erdos_321.variants.isBigO",
+      "erdos_321.variants.isLittleO",
+      "erdos_321.variants.lower",
+      "erdos_321.variants.upper"
+    ]
+  },
+  {
+    "problem_num": 233,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "immediately",
+      "sum_of_squares_of_prime_gaps_lower_bound",
+      "erdos_233",
+      "erdos_233.variant"
+    ]
+  },
+  {
+    "problem_num": 442,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_442",
+      "with",
+      "erdos_442.variants.tao"
+    ]
+  },
+  {
+    "problem_num": 267,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_267",
+      "erdos_267.variants.generalisation_ratio_limit_to_infinity",
+      "erdos_267.variants.specialization_pow_two",
+      "erdos_267.variants.fibonacci_inverse_sum"
+    ]
+  },
+  {
+    "problem_num": 119,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_119_1",
+      "erdos_119_2",
+      "erdos_119_3"
+    ]
+  },
+  {
+    "problem_num": 285,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_285",
+      "erdos_285.variants.lb"
+    ]
+  },
+  {
+    "problem_num": 888,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_888",
+      "erdos_888_S\u00e1rk\u00f6zy",
+      "erdos_888_primes"
+    ]
+  },
+  {
+    "problem_num": 373,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_373",
+      "erdos_373.variants.of_limit",
+      "erdos_373.variants.of_lower_bound",
+      "erdos_373.variants.maximal_solution",
+      "erdos_373.variants.suranyi"
+    ]
+  },
+  {
+    "problem_num": 979,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_979",
+      "erdos_979_k2",
+      "erdos_979_k3"
+    ]
+  },
+  {
+    "problem_num": 257,
+    "boris_score": 15,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_257",
+      "erdos_257.variants.tsum_top_eq",
+      "erdos_257.variants.tsum_top"
+    ]
+  },
+  {
+    "problem_num": 313,
+    "boris_score": 15,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_313_conjecture",
+      "erdos_313_solution_6_2_3",
+      "erdos_313_solution_42_2_3_7",
+      "erdos_313.variant.primary_pseudoperfect_are_infinite",
+      "exists_at_least_eight_primary_pseudoperfect"
+    ]
+  },
+  {
+    "problem_num": 299,
+    "boris_score": 15,
+    "solved_count": 2,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_299",
+      "erdos_299.variants.density"
+    ]
+  },
+  {
+    "problem_num": 259,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_259"
+    ]
+  },
+  {
+    "problem_num": 1041,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "exists_connected_component_contains_two_roots",
+      "erdos_1041"
+    ]
+  },
+  {
+    "problem_num": 306,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_306",
+      "erdos_306.variant.integer_three_primes"
+    ]
+  },
+  {
+    "problem_num": 307,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_307",
+      "erdos_307_coprime"
+    ]
+  },
+  {
+    "problem_num": 645,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_645"
+    ]
+  },
+  {
+    "problem_num": 48,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_48"
+    ]
+  },
+  {
+    "problem_num": 825,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_825",
+      "erdos_825.variants.necessary_cond"
+    ]
+  },
+  {
+    "problem_num": 366,
+    "boris_score": 10,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_366",
+      "exists_three_full_then_two_full",
+      "erdos_366.variant.three_two",
+      "erdos_366.variant.weaker"
+    ]
+  },
+  {
+    "problem_num": 274,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_274",
+      "erdos_274.variants.abelian",
+      "herzog_schonheim"
+    ]
+  },
+  {
+    "problem_num": 370,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_370"
+    ]
+  },
+  {
+    "problem_num": 269,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_269.variants.rational",
+      "erdos_269.variants.irrational",
+      "addresses",
+      "erdos_269.variant.infinite"
+    ]
+  },
+  {
+    "problem_num": 273,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_273",
+      "erdos_273.variants.three"
+    ]
+  },
+  {
+    "problem_num": 859,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_859.variants.erdos_upper_lower_bounds",
+      "erdos_859"
+    ]
+  },
+  {
+    "problem_num": 822,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_822"
+    ]
+  },
+  {
+    "problem_num": 931,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_931",
+      "erdos_931.variants.additional_condition",
+      "erdos_931.variants.additional_condition_nonempty",
+      "erdos_931.variants.exists_prime"
+    ]
+  },
+  {
+    "problem_num": 730,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_730",
+      "erdos_730.variants.explicit_pairs",
+      "erdos_730.variants.two_div_forall",
+      "erdos_730.variants.delta_ne_one"
+    ]
+  },
+  {
+    "problem_num": 42,
+    "boris_score": 10,
+    "solved_count": 0,
+    "undergraduate_count": 3,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_42",
+      "erdos_42.constructive",
+      "example_maximal_sidon",
+      "example_difference_set",
+      "maximal_sidon_contains_zero"
+    ]
+  },
+  {
+    "problem_num": 376,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 105,
+    "theorem_names": [
+      "erdos_376",
+      "erdos_376.variants.prime"
+    ]
+  },
+  {
+    "problem_num": 244,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_244",
+      "erdos_244.variants.Romanoff"
+    ]
+  },
+  {
+    "problem_num": 213,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_213",
+      "erdos_213.variants.KK08"
+    ]
+  },
+  {
+    "problem_num": 985,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_985",
+      "erdos_985.variants.two_three_five_primitive_root"
+    ]
+  },
+  {
+    "problem_num": 932,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_932",
+      "erdos_932.variants.one_le"
+    ]
+  },
+  {
+    "problem_num": 677,
+    "boris_score": 10,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": true,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_677"
+    ]
+  },
+  {
+    "problem_num": 913,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 8,
+    "theorem_names": [
+      "erdos_913",
+      "erdos_913.variants.infinite_many_8p_sq_add_one_primes",
+      "erdos_913.variants.conditional"
+    ]
+  },
+  {
+    "problem_num": 786,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_786.parts.i",
+      "erdos_786.parts.ii",
+      "erdos_786.parts.i.example",
+      "erdos_786.parts.i.selfridge"
+    ]
+  },
+  {
+    "problem_num": 694,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_694",
+      "erdos_694.variants.carmichael",
+      "erdos_694.variants.inf_unique"
+    ]
+  },
+  {
+    "problem_num": 250,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_250"
+    ]
+  },
+  {
+    "problem_num": 303,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_303"
+    ]
+  },
+  {
+    "problem_num": 349,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_349",
+      "complete_for_alpha_in_Ioo_one_to_goldenRatio",
+      "exists_t_for_k_disjoint_segments",
+      "erdos_349.variants.floor_3_halves_odd",
+      "erdos_349.variants.floor_3_halves_even"
+    ]
+  },
+  {
+    "problem_num": 488,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_488"
+    ]
+  },
+  {
+    "problem_num": 851,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_851.variants.romanoff",
+      "erdos_851"
+    ]
+  },
+  {
+    "problem_num": 295,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_295",
+      "erdos_295.variants.erdos_straus"
+    ]
+  },
+  {
+    "problem_num": 89,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_89",
+      "erdos_89.variants.n_dvd_log_n",
+      "provides",
+      "erdos_89.variants.implies_n_dvd_log_n"
+    ]
+  },
+  {
+    "problem_num": 647,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": true,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_647",
+      "erdos_647.variants.twenty_four",
+      "erdos_647.variants.lim",
+      "erdos_647.variants.infinite"
+    ]
+  },
+  {
+    "problem_num": 1097,
+    "boris_score": 10,
+    "solved_count": 0,
+    "undergraduate_count": 2,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1097",
+      "erdos_1097.variants.weaker",
+      "erdos_1097.variants.lower_bound"
+    ]
+  },
+  {
+    "problem_num": 1003,
+    "boris_score": 10,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1003",
+      "erdos_1003.variants.Icc",
+      "erdos_1003.variants.eps87"
+    ]
+  },
+  {
+    "problem_num": 74,
+    "boris_score": 8,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "SimpleGraph.edgeDistancesToBipartite_nonempty",
+      "SimpleGraph.subgraphEdgeDistsToBipartite_bddAbove",
+      "erdos_74",
+      "erdos_74.variants.sqrt"
+    ]
+  },
+  {
+    "problem_num": 326,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_326",
+      "erdos_326.variants.eq"
+    ]
+  },
+  {
+    "problem_num": 170,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": []
+  },
+  {
+    "problem_num": 828,
+    "boris_score": 5,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_828",
+      "erdos_828.variants.lehmer_conjecture",
+      "erdos_828.variants.phi_dvd_self_iff_pow2_pow3"
+    ]
+  },
+  {
+    "problem_num": 68,
+    "boris_score": 5,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_68",
+      "sum_factorial_inv_eq_geometric"
+    ]
+  },
+  {
+    "problem_num": 126,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_126",
+      "erdos_126.variants.IsBigO",
+      "erdos_126.variants.isLittleO"
+    ]
+  },
+  {
+    "problem_num": 1056,
+    "boris_score": 5,
+    "solved_count": 0,
+    "undergraduate_count": 2,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_1056",
+      "erdos_1056_k2",
+      "erdos_1056_k3",
+      "noll_simmons"
+    ]
+  },
+  {
+    "problem_num": 409,
+    "boris_score": 5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 2,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_409.parts.i",
+      "erdos_409.termination",
+      "erdos_409.parts.i.variants.isTheta",
+      "erdos_409.parts.i.variants.isBigO",
+      "erdos_409.parts.i.variants.isLittleO",
+      "erdos_409.parts.ii",
+      "erdos_409.parts.iii",
+      "erdos_409.variants.sigma.parts.i",
+      "erdos_409.variants.sigma.termination",
+      "erdos_409.variants.sigma.parts.i.isTheta",
+      "erdos_409.variants.sigma.parts.i.isBigO",
+      "erdos_409.variants.sigma.parts.i.isLittleO",
+      "erdos_409.variants.sigma.parts.ii",
+      "erdos_409.variants.sigma.parts.iii"
+    ]
+  },
+  {
+    "problem_num": 228,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_228"
+    ]
+  },
+  {
+    "problem_num": 253,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_253"
+    ]
+  },
+  {
+    "problem_num": 1051,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1051",
+      "erdos_1051.rapid_growth"
+    ]
+  },
+  {
+    "problem_num": 137,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_137",
+      "erdos_137.variants.perfect_power",
+      "erdos_137.multiple_powerful_factors"
+    ]
+  },
+  {
+    "problem_num": 897,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_897.parts.i",
+      "erdos_897.parts.ii",
+      "erdos_897.variants.log_growth",
+      "erdos_897.variants.parts.i",
+      "erdos_897.variants.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 247,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_247",
+      "erdos_247.variants.strong_condition"
+    ]
+  },
+  {
+    "problem_num": 139,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_139"
+    ]
+  },
+  {
+    "problem_num": 379,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_379"
+    ]
+  },
+  {
+    "problem_num": 1004,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1004",
+      "erdos_1004.EPS87_theorem"
+    ]
+  },
+  {
+    "problem_num": 41,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_41",
+      "erdos_41_i"
+    ]
+  },
+  {
+    "problem_num": 319,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_319",
+      "erdos_319.variants.isTheta",
+      "erdos_319.variants.isBigO",
+      "erdos_319.variants.isLittleO",
+      "erdos_319.variants.lb"
+    ]
+  },
+  {
+    "problem_num": 899,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_899"
+    ]
+  },
+  {
+    "problem_num": 817,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_817",
+      "erdos_817.variants.bdd_power"
+    ]
+  },
+  {
+    "problem_num": 587,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_587.variants.nguyen_vu"
+    ]
+  },
+  {
+    "problem_num": 168,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_168.parts.i",
+      "erdos_168.parts.ii",
+      "erdos_168.variants.limit_exists"
+    ]
+  },
+  {
+    "problem_num": 200,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_200",
+      "that",
+      "erdos_200.variants.upper"
+    ]
+  },
+  {
+    "problem_num": 283,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "on",
+      "erdos_283",
+      "erdos_283.variants.graham"
+    ]
+  },
+  {
+    "problem_num": 893,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_893",
+      "erdos_893.variants.unbounded"
+    ]
+  },
+  {
+    "problem_num": 325,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_325",
+      "erdos_325.variants.weaker",
+      "erdos_325.variants.wooley"
+    ]
+  },
+  {
+    "problem_num": 364,
+    "boris_score": 5,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_364",
+      "erdos_364.variants.strong",
+      "erdos_364.variants.weak"
+    ]
+  },
+  {
+    "problem_num": 1107,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_1107",
+      "erdos_1107.variants.two"
+    ]
+  },
+  {
+    "problem_num": 889,
+    "boris_score": 5,
+    "solved_count": 1,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_889",
+      "erdos_889.variants.v0_gt_1",
+      "erdos_889.variants.general",
+      "erdos_889.variants.v1_eq_1_finite",
+      "erdos_889.variants.V1_eq_1_finite"
+    ]
+  },
+  {
+    "problem_num": 64,
+    "boris_score": 3,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "erdos_64"
+    ]
+  },
+  {
+    "problem_num": 705,
+    "boris_score": 3,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_705"
+    ]
+  },
+  {
+    "problem_num": 1080,
+    "boris_score": 3,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1080"
+    ]
+  },
+  {
+    "problem_num": 128,
+    "boris_score": 3,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_128"
+    ]
+  },
+  {
+    "problem_num": 108,
+    "boris_score": 3,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_108"
+    ]
+  },
+  {
+    "problem_num": 371,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_371"
+    ]
+  },
+  {
+    "problem_num": 330,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_330_statement"
+    ]
+  },
+  {
+    "problem_num": 1094,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1094"
+    ]
+  },
+  {
+    "problem_num": 873,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_873"
+    ]
+  },
+  {
+    "problem_num": 598,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_598"
+    ]
+  },
+  {
+    "problem_num": 90,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "unitDistanceCounts_BddAbove",
+      "erdos_90"
+    ]
+  },
+  {
+    "problem_num": 218,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "erdos_218.variants.le",
+      "erdos_218.variants.ge",
+      "erdos_218.variants.infinite_equal_prime_gap"
+    ]
+  },
+  {
+    "problem_num": 845,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_845"
+    ]
+  },
+  {
+    "problem_num": 412,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_412"
+    ]
+  },
+  {
+    "problem_num": 469,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_469"
+    ]
+  },
+  {
+    "problem_num": 982,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_982"
+    ]
+  },
+  {
+    "problem_num": 1108,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1108.k_th_powers",
+      "erdos_1108.powerful_numbers"
+    ]
+  },
+  {
+    "problem_num": 203,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_203"
+    ]
+  },
+  {
+    "problem_num": 686,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_686"
+    ]
+  },
+  {
+    "problem_num": 389,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_389",
+      "erdos_389.variants.mehta_four"
+    ]
+  },
+  {
+    "problem_num": 681,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_681"
+    ]
+  },
+  {
+    "problem_num": 510,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_510"
+    ]
+  },
+  {
+    "problem_num": 414,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_414"
+    ]
+  },
+  {
+    "problem_num": 592,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_592"
+    ]
+  },
+  {
+    "problem_num": 212,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_212"
+    ]
+  },
+  {
+    "problem_num": 479,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_479"
+    ]
+  },
+  {
+    "problem_num": 398,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_398"
+    ]
+  },
+  {
+    "problem_num": 623,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_623"
+    ]
+  },
+  {
+    "problem_num": 434,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_434.parts.i",
+      "erdos_434.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 249,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_249"
+    ]
+  },
+  {
+    "problem_num": 248,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_248"
+    ]
+  },
+  {
+    "problem_num": 659,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 4,
+    "theorem_names": [
+      "erdos_659"
+    ]
+  },
+  {
+    "problem_num": 1093,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1093.parts.i",
+      "erdos_1093.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 458,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_458"
+    ]
+  },
+  {
+    "problem_num": 881,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_881"
+    ]
+  },
+  {
+    "problem_num": 317,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_317",
+      "erdos_317.variants.claim2",
+      "erdos_317.variants.counterexample"
+    ]
+  },
+  {
+    "problem_num": 383,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_383"
+    ]
+  },
+  {
+    "problem_num": 355,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_355"
+    ]
+  },
+  {
+    "problem_num": 251,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_251"
+    ]
+  },
+  {
+    "problem_num": 396,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_396"
+    ]
+  },
+  {
+    "problem_num": 1065,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1065a",
+      "erdos_1065b"
+    ]
+  },
+  {
+    "problem_num": 477,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_477",
+      "erdos_477.variants.strong_negation"
+    ]
+  },
+  {
+    "problem_num": 359,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_359.parts.i",
+      "erdos_359.parts.ii",
+      "erdos_359.variants.isGoodFor_1_low_values",
+      "erdos_359.variants.isGoodFor_1_asymptotic"
+    ]
+  },
+  {
+    "problem_num": 949,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_949",
+      "erdos_949.variants.sidon"
+    ]
+  },
+  {
+    "problem_num": 288,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_288",
+      "erdos_288.variants.i2_card_eq_1",
+      "erdos_288.variants.k_intervals",
+      "erdos_288.variants.exists_k_gt_2"
+    ]
+  },
+  {
+    "problem_num": 40,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_40",
+      "erdos_28_of_erdos_40"
+    ]
+  },
+  {
+    "problem_num": 749,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_749"
+    ]
+  },
+  {
+    "problem_num": 972,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_972"
+    ]
+  },
+  {
+    "problem_num": 421,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_421"
+    ]
+  },
+  {
+    "problem_num": 952,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_952"
+    ]
+  },
+  {
+    "problem_num": 1064,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1064",
+      "erdos_1064_k2"
+    ]
+  },
+  {
+    "problem_num": 728,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_728"
+    ]
+  },
+  {
+    "problem_num": 397,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_397"
+    ]
+  },
+  {
+    "problem_num": 196,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_196"
+    ]
+  },
+  {
+    "problem_num": 591,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_591"
+    ]
+  },
+  {
+    "problem_num": 354,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_354.parts.i",
+      "erdos_354.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 92,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 1,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "possible_f_values_BddAbove",
+      "erdos_92.variants.weak",
+      "erdos_92.variants.strong"
+    ]
+  },
+  {
+    "problem_num": 1055,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 1,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "exists_p",
+      "erdos_1055",
+      "erdos_1055.variants.erdos_limit",
+      "erdos_1055.variants.selfridge_limit"
+    ]
+  },
+  {
+    "problem_num": 125,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_125"
+    ]
+  },
+  {
+    "problem_num": 826,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_826"
+    ]
+  },
+  {
+    "problem_num": 172,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_172"
+    ]
+  },
+  {
+    "problem_num": 332,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_332"
+    ]
+  },
+  {
+    "problem_num": 324,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_324",
+      "erdos_324.variant.quintic"
+    ]
+  },
+  {
+    "problem_num": 312,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_312"
+    ]
+  },
+  {
+    "problem_num": 938,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_938"
+    ]
+  },
+  {
+    "problem_num": 406,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_406",
+      "erdos_406.variants.one_two"
+    ]
+  },
+  {
+    "problem_num": 846,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_846"
+    ]
+  },
+  {
+    "problem_num": 779,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_779"
+    ]
+  },
+  {
+    "problem_num": 850,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_850"
+    ]
+  },
+  {
+    "problem_num": 352,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_352"
+    ]
+  },
+  {
+    "problem_num": 276,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_276"
+    ]
+  },
+  {
+    "problem_num": 348,
+    "boris_score": 0,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": false,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_348"
+    ]
+  },
+  {
+    "problem_num": 1077,
+    "boris_score": -2,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1077"
+    ]
+  },
+  {
+    "problem_num": 85,
+    "boris_score": -2,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": true,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_85"
+    ]
+  },
+  {
+    "problem_num": 28,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_28"
+    ]
+  },
+  {
+    "problem_num": 936,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 2,
+    "theorem_names": [
+      "erdos_936.variants.two_pow_add_one",
+      "erdos_936.variants.two_pow_sub_one",
+      "erdos_936.variants.factorial_add_one",
+      "erdos_936.variants.factorial_sub_one"
+    ]
+  },
+  {
+    "problem_num": 424,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_424"
+    ]
+  },
+  {
+    "problem_num": 536,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_536"
+    ]
+  },
+  {
+    "problem_num": 853,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_853",
+      "erdos_853_strong"
+    ]
+  },
+  {
+    "problem_num": 347,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_347"
+    ]
+  },
+  {
+    "problem_num": 243,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_243"
+    ]
+  },
+  {
+    "problem_num": 242,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_242",
+      "erdos_242_schinzel_generalization"
+    ]
+  },
+  {
+    "problem_num": 3,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_3"
+    ]
+  },
+  {
+    "problem_num": 624,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_624"
+    ]
+  },
+  {
+    "problem_num": 14,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_14a",
+      "erdos_14b"
+    ]
+  },
+  {
+    "problem_num": 361,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_361.bigO",
+      "erdos_361.bigTheta",
+      "erdos_361.smallO"
+    ]
+  },
+  {
+    "problem_num": 463,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_463"
+    ]
+  },
+  {
+    "problem_num": 208,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_208.i",
+      "erdos_208.ii",
+      "erdos_208.variants.log_bound"
+    ]
+  },
+  {
+    "problem_num": 422,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_422",
+      "erdos_422.variants.surjective",
+      "erdos_422.variants.growth_rate",
+      "erdos_422.variants.eventually_const"
+    ]
+  },
+  {
+    "problem_num": 39,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_39"
+    ]
+  },
+  {
+    "problem_num": 680,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_680",
+      "erdos_680.variant"
+    ]
+  },
+  {
+    "problem_num": 695,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_695",
+      "erdos_695.variant.upperBound"
+    ]
+  },
+  {
+    "problem_num": 1073,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1073"
+    ]
+  },
+  {
+    "problem_num": 142,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "erdos_142",
+      "erdos_142.variants.lower",
+      "erdos_142.variants.upper",
+      "erdos_142.variants.three"
+    ]
+  },
+  {
+    "problem_num": 457,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_457",
+      "erdos_457.variants.qnk",
+      "erdos_457.variants.one_sub"
+    ]
+  },
+  {
+    "problem_num": 289,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_289"
+    ]
+  },
+  {
+    "problem_num": 358,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "f_id",
+      "erdos_358.parts.i",
+      "erdos_358.parts.ii",
+      "erdos_358.variants.prime_set",
+      "erdos_358.variants.prime_set_density_representation",
+      "erdos_358.variants.one_le"
+    ]
+  },
+  {
+    "problem_num": 143,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_143.parts.i",
+      "erdos_143.parts.ii"
+    ]
+  },
+  {
+    "problem_num": 155,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_155"
+    ]
+  },
+  {
+    "problem_num": 1106,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1106",
+      "erdos_1106_k2"
+    ]
+  },
+  {
+    "problem_num": 51,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_51"
+    ]
+  },
+  {
+    "problem_num": 689,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_689"
+    ]
+  },
+  {
+    "problem_num": 236,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_236"
+    ]
+  },
+  {
+    "problem_num": 30,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": true,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_30"
+    ]
+  },
+  {
+    "problem_num": 943,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 1,
+    "theorem_names": [
+      "erdos_943"
+    ]
+  },
+  {
+    "problem_num": 410,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_410"
+    ]
+  },
+  {
+    "problem_num": 942,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_942",
+      "erdos_942.variants.limsup",
+      "erdos_942.variants.density"
+    ]
+  },
+  {
+    "problem_num": 66,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_66"
+    ]
+  },
+  {
+    "problem_num": 1054,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 0,
+    "theorem_names": [
+      "erdos_1054.parts.i",
+      "erdos_1054.parts.ii",
+      "erdos_1054.parts.iii",
+      "f_undefined_at_2",
+      "f_undefined_at_3"
+    ]
+  },
+  {
+    "problem_num": 124,
+    "boris_score": -5,
+    "solved_count": 0,
+    "undergraduate_count": 0,
+    "test_count": 0,
+    "has_decide": false,
+    "has_asymptotics": true,
+    "has_graph_theory": false,
+    "has_sidon": false,
+    "prize_amount": 3,
+    "theorem_names": [
+      "erdos_124"
+    ]
+  }
+]

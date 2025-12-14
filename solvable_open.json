@@ -1,0 +1,3006 @@
+[
+  {
+    "num": 141,
+    "score": 60,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": true,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 11,
+    "theorems": [
+      "erdos_141",
+      "erdos_141.variant.eleven",
+      "erdos_141.variant.infinite_three",
+      "erdos_141.variant.infinite_general_case"
+    ]
+  },
+  {
+    "num": 931,
+    "score": 45,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_931",
+      "erdos_931.variants.additional_condition",
+      "erdos_931.variants.exists_prime"
+    ]
+  },
+  {
+    "num": 1074,
+    "score": 45,
+    "open": 5,
+    "answer_sorry": true,
+    "decide": true,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 14,
+    "theorems": [
+      "erdos_1074.parts.i.i",
+      "erdos_1074.parts.i.ii",
+      "erdos_1074.parts.ii.i",
+      "erdos_1074.parts.ii.ii",
+      "erdos_1074.variants.EHSNumbers_one_half"
+    ]
+  },
+  {
+    "num": 313,
+    "score": 45,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_313_conjecture",
+      "erdos_313.variant.primary_pseudoperfect_are_infinite"
+    ]
+  },
+  {
+    "num": 730,
+    "score": 40,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_730"
+    ]
+  },
+  {
+    "num": 1052,
+    "score": 40,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1052"
+    ]
+  },
+  {
+    "num": 1059,
+    "score": 40,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_1059"
+    ]
+  },
+  {
+    "num": 939,
+    "score": 40,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 3,
+    "theorems": [
+      "erdos_939",
+      "erdos_939.variants.infinite",
+      "erdos_939.variants.triples"
+    ]
+  },
+  {
+    "num": 845,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_845"
+    ]
+  },
+  {
+    "num": 1108,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1108.k_th_powers",
+      "erdos_1108.powerful_numbers"
+    ]
+  },
+  {
+    "num": 306,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_306"
+    ]
+  },
+  {
+    "num": 686,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_686"
+    ]
+  },
+  {
+    "num": 389,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_389"
+    ]
+  },
+  {
+    "num": 269,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_269.variants.rational",
+      "erdos_269.variants.irrational"
+    ]
+  },
+  {
+    "num": 434,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_434.parts.i",
+      "erdos_434.parts.ii"
+    ]
+  },
+  {
+    "num": 1093,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1093.parts.i",
+      "erdos_1093.parts.ii"
+    ]
+  },
+  {
+    "num": 213,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_213"
+    ]
+  },
+  {
+    "num": 340,
+    "score": 35,
+    "open": 6,
+    "answer_sorry": true,
+    "decide": true,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_340",
+      "erdos_340.variants.isTheta",
+      "erdos_340.variants.sub_hasPosDensity",
+      "erdos_340.variants._33_mem_sub",
+      "erdos_340.variants.cofinite_sub",
+      "erdos_340.variants.co_density_zero_sub"
+    ]
+  },
+  {
+    "num": 383,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_383"
+    ]
+  },
+  {
+    "num": 705,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_705"
+    ]
+  },
+  {
+    "num": 20,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_20"
+    ]
+  },
+  {
+    "num": 288,
+    "score": 35,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_288",
+      "erdos_288.variants.i2_card_eq_1",
+      "erdos_288.variants.k_intervals",
+      "erdos_288.variants.exists_k_gt_2"
+    ]
+  },
+  {
+    "num": 913,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 8,
+    "theorems": [
+      "erdos_913",
+      "erdos_913.variants.infinite_many_8p_sq_add_one_primes"
+    ]
+  },
+  {
+    "num": 1080,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1080"
+    ]
+  },
+  {
+    "num": 312,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_312"
+    ]
+  },
+  {
+    "num": 647,
+    "score": 35,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": true,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_647",
+      "erdos_647.variants.lim",
+      "erdos_647.variants.infinite"
+    ]
+  },
+  {
+    "num": 352,
+    "score": 35,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_352"
+    ]
+  },
+  {
+    "num": 1003,
+    "score": 35,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1003",
+      "erdos_1003.variants.Icc"
+    ]
+  },
+  {
+    "num": 672,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_672"
+    ]
+  },
+  {
+    "num": 873,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_873"
+    ]
+  },
+  {
+    "num": 307,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_307"
+    ]
+  },
+  {
+    "num": 366,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_366",
+      "erdos_366.variant.three_two"
+    ]
+  },
+  {
+    "num": 274,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_274",
+      "herzog_schonheim"
+    ]
+  },
+  {
+    "num": 510,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_510"
+    ]
+  },
+  {
+    "num": 414,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_414"
+    ]
+  },
+  {
+    "num": 623,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_623"
+    ]
+  },
+  {
+    "num": 930,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_930"
+    ]
+  },
+  {
+    "num": 97,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_97",
+      "erdos_97.variants.k_equidistant"
+    ]
+  },
+  {
+    "num": 659,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 4,
+    "theorems": [
+      "erdos_659"
+    ]
+  },
+  {
+    "num": 458,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_458"
+    ]
+  },
+  {
+    "num": 317,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_317",
+      "erdos_317.variants.claim2"
+    ]
+  },
+  {
+    "num": 355,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_355"
+    ]
+  },
+  {
+    "num": 509,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_509"
+    ]
+  },
+  {
+    "num": 421,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_421"
+    ]
+  },
+  {
+    "num": 397,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_397"
+    ]
+  },
+  {
+    "num": 125,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_125"
+    ]
+  },
+  {
+    "num": 172,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_172"
+    ]
+  },
+  {
+    "num": 10,
+    "score": 30,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_10",
+      "erdos_10.variants.granville_soundararajan_odd",
+      "erdos_10.variants.gretchuk"
+    ]
+  },
+  {
+    "num": 257,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_257"
+    ]
+  },
+  {
+    "num": 938,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_938"
+    ]
+  },
+  {
+    "num": 26,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_26",
+      "erdos_26.variants.tenenbaum"
+    ]
+  },
+  {
+    "num": 406,
+    "score": 30,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_406",
+      "erdos_406.variants.one_two"
+    ]
+  },
+  {
+    "num": 846,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_846"
+    ]
+  },
+  {
+    "num": 128,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_128"
+    ]
+  },
+  {
+    "num": 1097,
+    "score": 30,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1097"
+    ]
+  },
+  {
+    "num": 424,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_424"
+    ]
+  },
+  {
+    "num": 412,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_412"
+    ]
+  },
+  {
+    "num": 828,
+    "score": 25,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_828",
+      "erdos_828.variants.lehmer_conjecture"
+    ]
+  },
+  {
+    "num": 64,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 3,
+    "theorems": [
+      "erdos_64"
+    ]
+  },
+  {
+    "num": 203,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_203"
+    ]
+  },
+  {
+    "num": 68,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_68"
+    ]
+  },
+  {
+    "num": 398,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_398"
+    ]
+  },
+  {
+    "num": 727,
+    "score": 25,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_727",
+      "erdos_727_variants.k_2"
+    ]
+  },
+  {
+    "num": 248,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_248"
+    ]
+  },
+  {
+    "num": 251,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_251"
+    ]
+  },
+  {
+    "num": 1065,
+    "score": 25,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1065a",
+      "erdos_1065b"
+    ]
+  },
+  {
+    "num": 677,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": true,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_677"
+    ]
+  },
+  {
+    "num": 694,
+    "score": 25,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_694",
+      "erdos_694.variants.carmichael"
+    ]
+  },
+  {
+    "num": 354,
+    "score": 25,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_354.parts.i",
+      "erdos_354.parts.ii"
+    ]
+  },
+  {
+    "num": 826,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_826"
+    ]
+  },
+  {
+    "num": 304,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "upper_bound"
+    ]
+  },
+  {
+    "num": 276,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_276"
+    ]
+  },
+  {
+    "num": 108,
+    "score": 25,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_108"
+    ]
+  },
+  {
+    "num": 330,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_330_statement"
+    ]
+  },
+  {
+    "num": 598,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_598"
+    ]
+  },
+  {
+    "num": 90,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_90"
+    ]
+  },
+  {
+    "num": 536,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_536"
+    ]
+  },
+  {
+    "num": 469,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_469"
+    ]
+  },
+  {
+    "num": 347,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_347"
+    ]
+  },
+  {
+    "num": 940,
+    "score": 20,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_940",
+      "erdos_940.variants.three_cubes",
+      "erdos_940.variants.large_integers"
+    ]
+  },
+  {
+    "num": 825,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_825"
+    ]
+  },
+  {
+    "num": 1056,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_1056",
+      "noll_simmons"
+    ]
+  },
+  {
+    "num": 44,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_44",
+      "erdos_44.empty_start"
+    ]
+  },
+  {
+    "num": 681,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_681"
+    ]
+  },
+  {
+    "num": 212,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_212"
+    ]
+  },
+  {
+    "num": 479,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_479"
+    ]
+  },
+  {
+    "num": 273,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_273"
+    ]
+  },
+  {
+    "num": 418,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_418.variants.density"
+    ]
+  },
+  {
+    "num": 137,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_137",
+      "erdos_137.multiple_powerful_factors"
+    ]
+  },
+  {
+    "num": 249,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_249"
+    ]
+  },
+  {
+    "num": 42,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_42",
+      "erdos_42.constructive"
+    ]
+  },
+  {
+    "num": 376,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 105,
+    "theorems": [
+      "erdos_376"
+    ]
+  },
+  {
+    "num": 244,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_244"
+    ]
+  },
+  {
+    "num": 881,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_881"
+    ]
+  },
+  {
+    "num": 9,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_9"
+    ]
+  },
+  {
+    "num": 985,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_985"
+    ]
+  },
+  {
+    "num": 695,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_695",
+      "erdos_695.variant.upperBound"
+    ]
+  },
+  {
+    "num": 396,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_396"
+    ]
+  },
+  {
+    "num": 477,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_477",
+      "erdos_477.variants.strong_negation"
+    ]
+  },
+  {
+    "num": 949,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_949",
+      "erdos_949.variants.sidon"
+    ]
+  },
+  {
+    "num": 289,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_289"
+    ]
+  },
+  {
+    "num": 749,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_749"
+    ]
+  },
+  {
+    "num": 972,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_972"
+    ]
+  },
+  {
+    "num": 728,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_728"
+    ]
+  },
+  {
+    "num": 143,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_143.parts.i",
+      "erdos_143.parts.ii"
+    ]
+  },
+  {
+    "num": 155,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_155"
+    ]
+  },
+  {
+    "num": 786,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_786.parts.i",
+      "erdos_786.parts.ii"
+    ]
+  },
+  {
+    "num": 196,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_196"
+    ]
+  },
+  {
+    "num": 591,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_591"
+    ]
+  },
+  {
+    "num": 138,
+    "score": 20,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_138",
+      "erdos_138.variants.quotient",
+      "erdos_138.variants.difference",
+      "erdos_138.variants.dvd_two_pow"
+    ]
+  },
+  {
+    "num": 349,
+    "score": 20,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_349",
+      "complete_for_alpha_in_Ioo_one_to_goldenRatio",
+      "erdos_349.variants.floor_3_halves_odd",
+      "erdos_349.variants.floor_3_halves_even"
+    ]
+  },
+  {
+    "num": 918,
+    "score": 20,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_918.parts.i",
+      "erdos_918.parts.ii",
+      "erdos_918.variants.all_subgraphs.parts.i",
+      "erdos_918.variants.all_subgraphs.parts.ii"
+    ]
+  },
+  {
+    "num": 324,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_324",
+      "erdos_324.variant.quintic"
+    ]
+  },
+  {
+    "num": 723,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_723",
+      "erdos_723.eq_12"
+    ]
+  },
+  {
+    "num": 168,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_168.parts.i",
+      "erdos_168.parts.ii"
+    ]
+  },
+  {
+    "num": 283,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_283"
+    ]
+  },
+  {
+    "num": 850,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_850"
+    ]
+  },
+  {
+    "num": 942,
+    "score": 20,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_942"
+    ]
+  },
+  {
+    "num": 325,
+    "score": 20,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_325",
+      "erdos_325.variants.weaker"
+    ]
+  },
+  {
+    "num": 889,
+    "score": 20,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_889",
+      "erdos_889.variants.general",
+      "erdos_889.variants.v1_eq_1_finite",
+      "erdos_889.variants.V1_eq_1_finite"
+    ]
+  },
+  {
+    "num": 1094,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1094"
+    ]
+  },
+  {
+    "num": 1041,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1041"
+    ]
+  },
+  {
+    "num": 1077,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1077"
+    ]
+  },
+  {
+    "num": 107,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_107"
+    ]
+  },
+  {
+    "num": 351,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_351"
+    ]
+  },
+  {
+    "num": 868,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 2,
+    "theorems": [
+      "erdos_868.parts.i",
+      "erdos_868.parts.ii"
+    ]
+  },
+  {
+    "num": 126,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_126",
+      "erdos_126.variants.isLittleO"
+    ]
+  },
+  {
+    "num": 258,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_258"
+    ]
+  },
+  {
+    "num": 377,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_377"
+    ]
+  },
+  {
+    "num": 14,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_14a",
+      "erdos_14b"
+    ]
+  },
+  {
+    "num": 39,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_39"
+    ]
+  },
+  {
+    "num": 74,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_74",
+      "erdos_74.variants.sqrt"
+    ]
+  },
+  {
+    "num": 1073,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1073"
+    ]
+  },
+  {
+    "num": 945,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_945",
+      "erdos_945.variants.constant"
+    ]
+  },
+  {
+    "num": 457,
+    "score": 15,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_457",
+      "erdos_457.variants.qnk",
+      "erdos_457.variants.one_sub"
+    ]
+  },
+  {
+    "num": 119,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_119_3"
+    ]
+  },
+  {
+    "num": 358,
+    "score": 15,
+    "open": 5,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_358.parts.i",
+      "erdos_358.parts.ii",
+      "erdos_358.variants.prime_set",
+      "erdos_358.variants.prime_set_density_representation",
+      "erdos_358.variants.one_le"
+    ]
+  },
+  {
+    "num": 817,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_817"
+    ]
+  },
+  {
+    "num": 944,
+    "score": 15,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 5,
+    "theorems": [
+      "erdos_944",
+      "erdos_944.variants.dirac_conjecture",
+      "erdos_944.dirac_conjecture.k_eq_four"
+    ]
+  },
+  {
+    "num": 92,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_92.variants.weak",
+      "erdos_92.variants.strong"
+    ]
+  },
+  {
+    "num": 689,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_689"
+    ]
+  },
+  {
+    "num": 30,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_30"
+    ]
+  },
+  {
+    "num": 979,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_979"
+    ]
+  },
+  {
+    "num": 851,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_851"
+    ]
+  },
+  {
+    "num": 779,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_779"
+    ]
+  },
+  {
+    "num": 893,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_893"
+    ]
+  },
+  {
+    "num": 124,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 3,
+    "theorems": [
+      "erdos_124"
+    ]
+  },
+  {
+    "num": 85,
+    "score": 15,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_85"
+    ]
+  },
+  {
+    "num": 470,
+    "score": 15,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 10,
+    "theorems": [
+      "erdos_470.part1",
+      "erdos_470.part2"
+    ]
+  },
+  {
+    "num": 326,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_326"
+    ]
+  },
+  {
+    "num": 12,
+    "score": 10,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_12.parts.i",
+      "erdos_12.parts.ii",
+      "erdos_12.parts.iii"
+    ]
+  },
+  {
+    "num": 982,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_982"
+    ]
+  },
+  {
+    "num": 592,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_592"
+    ]
+  },
+  {
+    "num": 1051,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1051"
+    ]
+  },
+  {
+    "num": 422,
+    "score": 10,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_422",
+      "erdos_422.variants.surjective",
+      "erdos_422.variants.growth_rate",
+      "erdos_422.variants.eventually_const"
+    ]
+  },
+  {
+    "num": 897,
+    "score": 10,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_897.parts.i",
+      "erdos_897.parts.ii",
+      "erdos_897.variants.parts.i",
+      "erdos_897.variants.parts.ii"
+    ]
+  },
+  {
+    "num": 247,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_247"
+    ]
+  },
+  {
+    "num": 932,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_932"
+    ]
+  },
+  {
+    "num": 508,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "HadwigerNelsonProblem"
+    ]
+  },
+  {
+    "num": 267,
+    "score": 10,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 2,
+    "theorems": [
+      "erdos_267",
+      "erdos_267.variants.generalisation_ratio_limit_to_infinity"
+    ]
+  },
+  {
+    "num": 17,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_17"
+    ]
+  },
+  {
+    "num": 830,
+    "score": 10,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_830.parts.i",
+      "erdos_830.parts.ii"
+    ]
+  },
+  {
+    "num": 145,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_145"
+    ]
+  },
+  {
+    "num": 503,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 9,
+    "theorems": [
+      "erdos_503"
+    ]
+  },
+  {
+    "num": 295,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_295"
+    ]
+  },
+  {
+    "num": 348,
+    "score": 10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_348"
+    ]
+  },
+  {
+    "num": 1054,
+    "score": 10,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1054.parts.i",
+      "erdos_1054.parts.ii",
+      "erdos_1054.parts.iii"
+    ]
+  },
+  {
+    "num": 1,
+    "score": 10,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": true,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_1",
+      "erdos_1.variants.real"
+    ]
+  },
+  {
+    "num": 936,
+    "score": 5,
+    "open": 4,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 2,
+    "theorems": [
+      "erdos_936.variants.two_pow_add_one",
+      "erdos_936.variants.two_pow_sub_one",
+      "erdos_936.variants.factorial_add_one",
+      "erdos_936.variants.factorial_sub_one"
+    ]
+  },
+  {
+    "num": 3,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_3"
+    ]
+  },
+  {
+    "num": 409,
+    "score": 5,
+    "open": 12,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_409.parts.i",
+      "erdos_409.parts.i.variants.isTheta",
+      "erdos_409.parts.i.variants.isBigO",
+      "erdos_409.parts.i.variants.isLittleO",
+      "erdos_409.parts.ii",
+      "erdos_409.parts.iii",
+      "erdos_409.variants.sigma.parts.i",
+      "erdos_409.variants.sigma.parts.i.isTheta",
+      "erdos_409.variants.sigma.parts.i.isBigO",
+      "erdos_409.variants.sigma.parts.i.isLittleO",
+      "erdos_409.variants.sigma.parts.ii",
+      "erdos_409.variants.sigma.parts.iii"
+    ]
+  },
+  {
+    "num": 463,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_463"
+    ]
+  },
+  {
+    "num": 208,
+    "score": 5,
+    "open": 3,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_208.i",
+      "erdos_208.ii",
+      "erdos_208.variants.log_bound"
+    ]
+  },
+  {
+    "num": 680,
+    "score": 5,
+    "open": 2,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_680",
+      "erdos_680.variant"
+    ]
+  },
+  {
+    "num": 1004,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1004"
+    ]
+  },
+  {
+    "num": 51,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_51"
+    ]
+  },
+  {
+    "num": 200,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_200"
+    ]
+  },
+  {
+    "num": 943,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_943"
+    ]
+  },
+  {
+    "num": 410,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_410"
+    ]
+  },
+  {
+    "num": 89,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_89"
+    ]
+  },
+  {
+    "num": 66,
+    "score": 5,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_66"
+    ]
+  },
+  {
+    "num": 364,
+    "score": 5,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 2,
+    "theorems": [
+      "erdos_364",
+      "erdos_364.variants.strong"
+    ]
+  },
+  {
+    "num": 371,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_371"
+    ]
+  },
+  {
+    "num": 218,
+    "score": 0,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 3,
+    "theorems": [
+      "erdos_218.variants.le",
+      "erdos_218.variants.ge",
+      "erdos_218.variants.infinite_equal_prime_gap"
+    ]
+  },
+  {
+    "num": 188,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_188"
+    ]
+  },
+  {
+    "num": 357,
+    "score": 0,
+    "open": 15,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_357.parts.i",
+      "erdos_357.parts.ii.bigO_version",
+      "erdos_357.parts.ii.bigO_version_symm",
+      "erdos_357.parts.ii.bigTheta_version",
+      "erdos_357.parts.ii.littleO_version",
+      "erdos_357.parts.ii.littleO_version_symm",
+      "erdos_357.variants.infinite_set_density",
+      "erdos_357.variants.infinite_set_sum",
+      "erdos_357.variants.hegyvari",
+      "erdos_357.variants.monotone.parts.i",
+      "erdos_357.variants.monotone.parts.ii.bigO_version",
+      "erdos_357.variants.monotone.parts.ii.bigO_version_symm",
+      "erdos_357.variants.monotone.parts.ii.bigTheta_version",
+      "erdos_357.variants.monotone.parts.ii.littleO_version",
+      "erdos_357.variants.monotone.parts.ii.littleO_version_symm"
+    ]
+  },
+  {
+    "num": 264,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 2,
+    "theorems": [
+      "erdos_264.parts.ii"
+    ]
+  },
+  {
+    "num": 321,
+    "score": 0,
+    "open": 4,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_321",
+      "erdos_321.variants.isTheta",
+      "erdos_321.variants.isBigO",
+      "erdos_321.variants.isLittleO"
+    ]
+  },
+  {
+    "num": 61,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": true,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_61"
+    ]
+  },
+  {
+    "num": 359,
+    "score": 0,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_359.parts.i",
+      "erdos_359.parts.ii",
+      "erdos_359.variants.isGoodFor_1_asymptotic"
+    ]
+  },
+  {
+    "num": 41,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_41"
+    ]
+  },
+  {
+    "num": 319,
+    "score": 0,
+    "open": 4,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_319",
+      "erdos_319.variants.isTheta",
+      "erdos_319.variants.isBigO",
+      "erdos_319.variants.isLittleO"
+    ]
+  },
+  {
+    "num": 952,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_952"
+    ]
+  },
+  {
+    "num": 1064,
+    "score": 0,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_1064",
+      "erdos_1064_k2"
+    ]
+  },
+  {
+    "num": 1106,
+    "score": 0,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_1106",
+      "erdos_1106_k2"
+    ]
+  },
+  {
+    "num": 332,
+    "score": 0,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_332"
+    ]
+  },
+  {
+    "num": 373,
+    "score": 0,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_373",
+      "erdos_373.variants.maximal_solution",
+      "erdos_373.variants.suranyi"
+    ]
+  },
+  {
+    "num": 329,
+    "score": 0,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_329",
+      "erdos_329.of_sub_perfectDifferenceSet",
+      "erdos_329.converse_implication"
+    ]
+  },
+  {
+    "num": 11,
+    "score": 0,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 1,
+    "theorems": [
+      "erdos_11",
+      "erdos_11.variants.not_four_dvd",
+      "erdos_11.variants.two_pow_two"
+    ]
+  },
+  {
+    "num": 170,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": []
+  },
+  {
+    "num": 28,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_28"
+    ]
+  },
+  {
+    "num": 189,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": false,
+    "prize": 0,
+    "theorems": [
+      "erdos_189.variants.parallelogram"
+    ]
+  },
+  {
+    "num": 33,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_33"
+    ]
+  },
+  {
+    "num": 624,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_624"
+    ]
+  },
+  {
+    "num": 361,
+    "score": -5,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_361.bigO",
+      "erdos_361.bigTheta",
+      "erdos_361.smallO"
+    ]
+  },
+  {
+    "num": 160,
+    "score": -5,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_160.better_upper",
+      "erdos_160.better_lower"
+    ]
+  },
+  {
+    "num": 36,
+    "score": -5,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_36.variants.lower",
+      "erdos_36.variants.upper",
+      "erdos_36"
+    ]
+  },
+  {
+    "num": 40,
+    "score": -5,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_40"
+    ]
+  },
+  {
+    "num": 853,
+    "score": -10,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_853",
+      "erdos_853_strong"
+    ]
+  },
+  {
+    "num": 243,
+    "score": -10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_243"
+    ]
+  },
+  {
+    "num": 242,
+    "score": -10,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_242",
+      "erdos_242_schinzel_generalization"
+    ]
+  },
+  {
+    "num": 859,
+    "score": -10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_859"
+    ]
+  },
+  {
+    "num": 233,
+    "score": -10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_233"
+    ]
+  },
+  {
+    "num": 416,
+    "score": -10,
+    "open": 2,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_416.parts.i",
+      "erdos_416.parts.ii"
+    ]
+  },
+  {
+    "num": 888,
+    "score": -10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": true,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_888"
+    ]
+  },
+  {
+    "num": 1107,
+    "score": -10,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 2,
+    "theorems": [
+      "erdos_1107"
+    ]
+  },
+  {
+    "num": 142,
+    "score": -15,
+    "open": 4,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 3,
+    "theorems": [
+      "erdos_142",
+      "erdos_142.variants.lower",
+      "erdos_142.variants.upper",
+      "erdos_142.variants.three"
+    ]
+  },
+  {
+    "num": 1055,
+    "score": -15,
+    "open": 3,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 1,
+    "theorems": [
+      "erdos_1055",
+      "erdos_1055.variants.erdos_limit",
+      "erdos_1055.variants.selfridge_limit"
+    ]
+  },
+  {
+    "num": 236,
+    "score": -15,
+    "open": 1,
+    "answer_sorry": false,
+    "decide": false,
+    "finite": false,
+    "asymptotics": true,
+    "prize": 0,
+    "theorems": [
+      "erdos_236"
+    ]
+  }
+]

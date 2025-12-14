@@ -14,10 +14,17 @@
 *apikey*
 *secret*key*
 
-# Aristotle outputs
-*.lean
+# Aristotle outputs (but keep submissions/*.lean that aren't outputs)
 aristotle-*/
+*-output.lean
+*_output.lean
+*_OUTPUT.lean
 *.log
+
+# Lean build artifacts
+.lake/
+lake-manifest.json
+lakefile.olean
 
 # Python
 __pycache__/
@@ -44,6 +51,8 @@ Thumbs.db
 /tmp/
 *.bak
 .aristotle_submit.lock
+iterations/
+*-verify/
 
 # Large data files
 knotinfo_data/
