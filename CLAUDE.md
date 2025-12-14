@@ -10,6 +10,16 @@ Solve OPEN mathematical problems using Aristotle. Not verification. Not formaliz
 
 ---
 
+## Mental Model
+
+**Aristotle recombines Mathlib tactics. It doesn't invent new math.**
+
+When it hits a wall (`exact?` holes), it can't improvise. It stalls or explores instead.
+
+Implication: Only attack problems where the proof can be assembled from existing pieces.
+
+---
+
 ## The One Rule
 
 **Never let the proving agent write the theorem statement.**
