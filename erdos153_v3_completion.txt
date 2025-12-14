@@ -1,0 +1,107 @@
+# Erdős #153 - Complete the Proof
+
+## THE PROBLEM
+
+For ANY Sidon set A, the average squared gap in A+A tends to infinity as |A| → ∞.
+
+```lean
+theorem erdos_153 : ∀ M : ℝ, M > 0 → ∃ N : ℕ, ∀ A : Finset ℕ,
+  IsSidon A → A.card ≥ N → avg_squared_gap (A + A) > M
+```
+
+## PROVEN MACHINERY (Use These - Don't Re-derive)
+
+The following have been PROVEN in a previous attempt. Include them and build on them:
+
+### Core Sidon Properties
+```lean
+def IsSidon (A : Set ℕ) : Prop :=
+  ∀ a b c d, a ∈ A → b ∈ A → c ∈ A → d ∈ A → a + b = c + d → ({a, b} : Set ℕ) = {c, d}
+
+theorem card_sumset_sidon (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) :
+  (A + A).ncard = A.ncard * (A.ncard + 1) / 2
+
+theorem sidon_max_ge_choose_two (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) (hne : A.Nonempty) (n : ℕ) (hn : A.ncard = n) :
+  ∃ a ∈ A, a ≥ n * (n - 1) / 2
+
+theorem sidon_card_upper_bound (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) (n : ℕ) (hsub : A ⊆ Set.Icc 0 n) :
+  A.ncard * (A.ncard + 1) / 2 ≤ 2 * n + 1
+```
+
+### Gap Analysis
+```lean
+def IsIsolated (S : Set ℕ) (x : ℕ) : Prop :=
+  x ∈ S ∧ (x + 1) ∉ S ∧ (x = 0 ∨ (x - 1) ∉ S)
+
+def num_adjacencies (S : Set ℕ) : ℕ :=
+  {x ∈ S | x + 1 ∈ S}.ncard
+
+theorem isolated_lower_bound (S : Set ℕ) (hfin : S.Finite) :
+  (IsolatedElements S).ncard ≥ S.ncard - 2 * num_adjacencies S
+
+theorem adjacencies_le_solutions (A : Set ℕ) (hfin : A.Finite) :
+  num_adjacencies (A + A) ≤ solutions_diff_one A hfin
+```
+
+### Solution Counting
+```lean
+def solutions_diff_k (A : Set ℕ) (hfin : A.Finite) (k : ℕ) : ℕ :=
+  (hfin.toFinset ×ˢ hfin.toFinset ×ˢ hfin.toFinset ×ˢ hfin.toFinset).filter
+    (fun x => x.1 + x.2.1 = x.2.2.1 + x.2.2.2 + k) |>.card
+
+theorem sidon_diff_count_le_one (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) (k : ℤ) (hk : k ≠ 0) :
+  diff_count hfin.toFinset k ≤ 1
+
+theorem solutions_diff_k_bound (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) (k : ℕ) (hk : k > 0) :
+  solutions_diff_k A hfin k ≤ 2 * A.ncard + (difference_set A hfin ∩ ...).card
+```
+
+## THE MISSING CONNECTION
+
+We have:
+1. |A+A| = n(n+1)/2 ≈ n²/2
+2. Range of A+A ≈ n² (from sidon_max_ge_choose_two)
+3. Adjacencies ≤ O(n) (from solutions bounds)
+4. Therefore many "gaps" exist
+
+Need to prove:
+- Sum of gaps = range - |A+A| + 1 ≈ n²/2
+- With O(n²) elements and O(n²) total gap, average gap ≈ O(1)
+- BUT: gaps can't all be size 1 (bounded adjacencies)
+- So some gaps must be LARGE
+- Large gaps dominate squared average
+
+## KEY LEMMA NEEDED
+
+```lean
+-- The sum of squared gaps is at least (sum of gaps)² / (number of gaps)
+-- By Cauchy-Schwarz: (Σgᵢ)² ≤ (# gaps) · Σgᵢ²
+-- So: Σgᵢ² ≥ (Σgᵢ)² / (# gaps)
+
+-- For Sidon sets:
+-- Σgᵢ = range - |A+A| ≈ n²/2
+-- # gaps = |A+A| - 1 ≈ n²/2
+-- So Σgᵢ² ≥ (n²/2)² / (n²/2) = n²/4
+-- Avg squared gap = Σgᵢ² / (# gaps) ≥ (n²/4) / (n²/2) = 1/2
+
+-- Wait, this gives constant, not → ∞. Need different approach.
+
+-- BETTER: Use that adjacencies are O(n) not O(n²)
+-- # gaps with size ≥ 2 is Ω(n²) - O(n) = Ω(n²)
+-- These large gaps contribute Ω(n²) · 4 = Ω(n²) to sum of squares
+-- But actually we need them to be even larger...
+
+-- The real insight: Range grows faster than n²/2 for sparse Sidon sets
+-- Dense Sidon sets (like Singer sets) have small avg gap
+-- Sparse Sidon sets have large range → large gaps
+```
+
+## You Decide
+- The exact formulation connecting gaps to avg squared gap
+- Whether to use Cauchy-Schwarz or direct counting
+- How to handle the range vs density tradeoff
+
+## Success Criteria
+- Prove avg_squared_gap → ∞ for ALL Sidon sets
+- Zero sorries
+- Use the proven machinery above

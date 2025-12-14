@@ -1,0 +1,21 @@
+# Erdős Problem #167: Triangle Removal Bound
+
+## Problem Statement
+
+If G is a graph with at most k edge-disjoint triangles, can G be made triangle-free by removing at most 2k edges?
+
+## Context
+
+This is Erdős Problem #167, an open problem relating triangle packing to triangle covering.
+
+Two triangles are edge-disjoint if they share no edges.
+
+The question asks whether the minimum number of edges needed to destroy all triangles (edge cover number) is at most twice the maximum number of edge-disjoint triangles (edge packing number).
+
+## Goal
+
+Prove or disprove: For every graph G, if G contains at most k pairwise edge-disjoint triangles, then there exists a set of at most 2k edges whose removal makes G triangle-free.
+
+## Reference
+
+https://www.erdosproblems.com/167

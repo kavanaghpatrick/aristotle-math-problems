@@ -1,0 +1,3 @@
+3ab73560-8564-48d6-960e-b0e77d7b4ca6
+Submitted: 2025-12-14T03:15:28.289276
+Description: Erdős #64 v3: 2^k cycles (enhanced with GP context)

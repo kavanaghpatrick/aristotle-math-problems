@@ -1,0 +1,75 @@
+# Erdős Problem #153 - Average Squared Gap in Sidon Sumsets
+
+Prove or disprove the following conjecture from Erdős, Sárközy, and Sós (1994):
+
+## Problem Statement
+
+Let A be a finite Sidon set (all pairwise sums a+b are distinct).
+Let A+A = {s₁ < s₂ < ... < sₜ} be its sumset, sorted.
+
+Define the average squared gap as:
+  avgSqGap(A) = (1/t) · Σᵢ₌₁ᵗ⁻¹ (sᵢ₊₁ - sᵢ)²
+
+CONJECTURE: For any sequence of finite Sidon sets {Aₙ} with |Aₙ| → ∞,
+we have avgSqGap(Aₙ) → ∞.
+
+Equivalently: There is NO infinite sequence of Sidon sets with bounded average squared gap.
+
+## Formal Statement to Prove
+
+```
+-- A set is Sidon if all pairwise sums are distinct
+def IsSidon (A : Finset ℕ) : Prop :=
+  ∀ a b c d, a ∈ A → b ∈ A → c ∈ A → d ∈ A →
+    a + b = c + d → ({a, b} : Finset ℕ) = {c, d}
+
+-- The sumset A + A
+def sumset (A : Finset ℕ) : Finset ℕ :=
+  (A ×ˢ A).image (fun p => p.1 + p.2)
+
+-- Average squared gap (for sorted sumset)
+noncomputable def avgSqGap (A : Finset ℕ) : ℚ :=
+  let S := (sumset A).sort (·≤·)
+  let t := S.length
+  if t < 2 then 0
+  else (1 / t : ℚ) * (List.range (t-1)).map (fun i =>
+    ((S.get! (i+1) : ℚ) - (S.get! i))^2)).sum
+
+-- ERDŐS PROBLEM #153: The universal statement
+-- For all M, there exists N such that every Sidon set with |A| ≥ N
+-- has avgSqGap(A) > M
+theorem erdos_153 : ∀ M : ℚ, ∃ N : ℕ, ∀ A : Finset ℕ,
+    IsSidon A → A.card ≥ N → avgSqGap A > M := by
+  sorry
+```
+
+## Key Facts You May Use
+
+1. For Sidon set A: |A+A| = |A|(|A|+1)/2 (each sum a+b with a≤b is unique)
+
+2. Erdős-Sárközy-Sós (1994): For Sidon A ⊂ {1,...,N}, the sumset A+A
+   cannot contain more than C·√N consecutive integers.
+
+3. This "no long runs" property forces gaps in the sumset.
+
+## Proof Strategy Hints
+
+The key insight is that even for DENSE Sidon sets (where |A| ≈ √N):
+- The sumset A+A has ~|A|²/2 elements in range ~2N
+- Although average gap may be bounded (~4),
+- The VARIANCE of gaps grows, causing average SQUARED gap to grow
+
+The Erdős-Sárközy-Sós bound on consecutive integers forces this variance.
+
+## You Decide Everything Else
+
+- The exact proof technique
+- Which lemmas to prove
+- How to use the consecutive integer bound
+- Whether to prove or disprove (if false, find counterexample sequence)
+
+## Success Criterion
+
+Either:
+- PROVE: erdos_153 with zero sorries, OR
+- DISPROVE: Construct a sequence of Sidon sets with bounded avgSqGap

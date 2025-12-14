@@ -1,0 +1,53 @@
+# Integer Complexity Conjecture - Boris Pattern Submission
+
+## Goal
+Prove the Integer Complexity Conjecture for 2^k · 3^ℓ:
+
+For all non-negative integers k, ℓ (excluding k = ℓ = 0):
+||2^k · 3^ℓ|| = 2k + 3ℓ
+
+where ||n|| denotes the integer complexity of n (the minimum number of 1's
+needed to represent n using only addition, multiplication, and parentheses).
+
+## You Decide
+- Which proof strategy to use
+- Which lemmas to create
+- How to structure the formalization
+- Which intermediate theorems to prove
+
+## Mathematical Background
+
+### Definition
+The integer complexity f(n) = ||n|| is the minimum number of 1's needed to
+represent a positive integer n using:
+- The digit 1
+- Addition (+)
+- Multiplication (×)
+- Parentheses
+
+### Examples
+- ||1|| = 1 (just "1")
+- ||2|| = 2 (1+1)
+- ||3|| = 3 (1+1+1)
+- ||4|| = 4 ((1+1)×(1+1))
+- ||6|| = 5 ((1+1)×(1+1+1))
+- ||12|| = 7 ((1+1+1)×(1+1+1+1))
+
+### Known Results
+- Lower bound: ||n|| ≥ 3·log₃(n) for all n (Selfridge)
+- Verified: ||2^k · 3^ℓ|| = 2k + 3ℓ for k ≤ 48 and arbitrary ℓ
+- The conjecture essentially says: 2^k · 3^ℓ are "optimal" numbers
+
+### Equivalent Formulation
+The conjecture states that for numbers of the form 2^k · 3^ℓ:
+- The most efficient representation uses k copies of (1+1) and ℓ copies of (1+1+1)
+- No clever algebraic identity can reduce the count below 2k + 3ℓ
+
+## Constraint
+Must prove for ALL k, ℓ ≥ 0 with (k,ℓ) ≠ (0,0).
+
+## Success Criteria
+- ✅ Formal proof in Lean 4
+- ✅ Zero sorries
+- ✅ Compiles without errors
+- ✅ Proves ||2^k · 3^ℓ|| = 2k + 3ℓ for all valid k, ℓ

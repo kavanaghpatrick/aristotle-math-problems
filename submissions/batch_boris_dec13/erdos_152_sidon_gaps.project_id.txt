@@ -1,0 +1,3 @@
+fd233488-9454-45da-8fab-b56068e9db15
+Submitted: 2025-12-13T17:58:52.930552
+Description: Erdős #152: Sidon sumset gaps

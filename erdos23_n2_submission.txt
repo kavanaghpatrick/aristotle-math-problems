@@ -1,0 +1,40 @@
+# Erdős Problem #23 - Case n=2
+
+## THE PROBLEM
+
+Every triangle-free graph on 5n vertices can be made bipartite by deleting at most n² edges.
+
+For n=2: Every triangle-free graph on 10 vertices can be made bipartite by deleting at most 4 edges.
+
+## PRIOR SUCCESS
+
+The n=1 case has been PROVEN (verified, compiles):
+```lean
+theorem erdos_problem_23_case_n_1
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h_card : Fintype.card V = 5) (h_tf : G.CliqueFree 3) :
+  ∃ (s : Finset (Sym2 V)), s ⊆ G.edgeFinset ∧ s.card ≤ 1 ∧ (G.deleteEdges s).Colorable 2
+```
+
+## TARGET THEOREM
+
+```lean
+theorem erdos_problem_23_case_n_2
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h_card : Fintype.card V = 10) (h_tf : G.CliqueFree 3) :
+  ∃ (s : Finset (Sym2 V)), s ⊆ G.edgeFinset ∧ s.card ≤ 4 ∧ (G.deleteEdges s).Colorable 2
+```
+
+## You Decide
+- Proof strategy (computational, structural, or hybrid)
+- Whether to use the n=1 result
+- Which lemmas to develop
+
+## Definitions (reuse from n=1 proof if helpful)
+- Triangle-free = G.CliqueFree 3
+- Bipartite = G.Colorable 2
+- deleteEdges removes specified edges
+
+## Success Criteria
+- Zero sorries
+- Compiles with Lean 4.24.0 + Mathlib

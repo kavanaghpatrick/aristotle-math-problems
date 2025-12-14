@@ -49,3 +49,5 @@ Thumbs.db
 knotinfo_data/
 problem-databases/erdosproblems/
 problem-databases/formal-conjectures/
+**/.lake/packages/
+**/.lake/build/

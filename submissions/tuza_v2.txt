@@ -1,0 +1,82 @@
+# Tuza's Conjecture - Complete the Inductive Proof
+
+## Goal
+Prove Tuza's conjecture: τ(G) ≤ 2ν(G) where:
+- τ(G) = minimum number of edges to delete to make G triangle-free (triangle covering number)
+- ν(G) = maximum number of edge-disjoint triangles (triangle packing number)
+
+## Context: What You Already Proved
+From your previous attempt (efee5ffd), you achieved substantial progress:
+
+1. **Base case proved**: `tuza_base_case` - If ν(G)=0, then τ(G)=0
+2. **ν=1 case proved**: `tuza_case_nu_1` - If ν(G)=1, then τ(G)≤2
+3. **Inductive framework**: `tuza_conjecture_of_inductive_step` - reduces full conjecture to one lemma:
+   - If we can always find S with |S|≤2 and ν(G-S) < ν(G), then τ(G) ≤ 2ν(G)
+
+## What Remains
+
+### The Key Inductive Step Lemma
+You need to prove:
+```lean
+lemma tuza_inductive_step
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h : trianglePackingNumber G > 0) :
+  ∃ S : Finset (Sym2 V), S ⊆ G.edgeFinset ∧ S.card ≤ 2 ∧
+    trianglePackingNumber (G.deleteEdges S) < trianglePackingNumber G
+```
+
+### Strategy for the Inductive Step
+The key insight is: Given a maximum triangle packing, pick any triangle T in the packing.
+- If we delete 2 edges of T, we definitely reduce ν by at least 1
+- The question is: do we reduce it by exactly 1, or could we increase it elsewhere?
+
+**Approach**:
+1. Take any triangle T in a maximum packing
+2. Delete two edges of T (say edges e1, e2)
+3. Show that ν(G - {e1, e2}) ≤ ν(G) - 1
+
+This follows because:
+- T cannot be in any packing of G - {e1, e2} (missing edges)
+- Any new triangle packing in G - {e1, e2} was also a valid packing in G
+- But it couldn't be larger than the maximum, so ν decreases by at least 1
+
+## Previous Lean Code (use as foundation)
+```lean
+import Mathlib
+
+set_option maxHeartbeats 0
+noncomputable section
+
+def triangleEdges {V : Type} [DecidableEq V] (t : Finset V) : Finset (Sym2 V) :=
+  t.offDiag.image (fun x => Sym2.mk (x.1, x.2))
+
+def IsEdgeDisjoint {V : Type} [DecidableEq V] (T : Finset (Finset V)) : Prop :=
+  (T : Set (Finset V)).PairwiseDisjoint triangleEdges
+
+noncomputable def trianglePackingNumber {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  ((G.cliqueFinset 3).powerset.filter IsEdgeDisjoint).sup Finset.card
+
+def IsTriangleCovering {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] (S : Finset (Sym2 V)) : Prop :=
+  (G.deleteEdges S).cliqueFinset 3 = ∅
+
+noncomputable def triangleCoveringNumber {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  ((G.edgeFinset.powerset.filter (IsTriangleCovering G)).image Finset.card).min.getD G.edgeFinset.card
+
+-- You already proved these:
+lemma tuza_base_case ... := by sorry  -- ν=0 → τ=0
+lemma tuza_case_nu_1 ... := by sorry  -- ν=1 → τ≤2
+lemma tuza_conjecture_of_inductive_step ... := by sorry  -- Reduces to inductive step
+```
+
+## You Decide
+- How to prove the inductive step
+- Which supporting lemmas to add
+- How to handle edge cases
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves the full theorem: τ(G) ≤ 2ν(G) for all graphs G

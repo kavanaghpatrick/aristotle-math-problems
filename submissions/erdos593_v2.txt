@@ -1,0 +1,62 @@
+# Erdős Problem #593 - Hypergraph Chromatic Characterization
+
+## Goal
+Characterize which finite 3-uniform hypergraphs H have the property that every hypergraph with uncountable chromatic number contains H as a subhypergraph.
+
+## Context: What You Already Proved (from 43528a1d)
+
+### Definitions Created
+```lean
+structure Hypergraph3 (V : Type*) where
+  edges : Set (Set V)
+  is_uniform : ∀ e ∈ edges, e.ncard = 3
+
+def IsTwoColorable {V : Type*} (H : Hypergraph3 V) : Prop :=
+  ∃ c : V → Bool, ∀ e ∈ H.edges, ∃ x ∈ e, ∃ y ∈ e, c x ≠ c y
+
+def IsColoring {V C : Type*} (H : Hypergraph3 V) (c : V → C) : Prop :=
+  ∀ e ∈ H.edges, ∃ x ∈ e, ∃ y ∈ e, c x ≠ c y
+
+def EmbedsInto {V W : Type*} (H : Hypergraph3 V) (G : Hypergraph3 W) : Prop :=
+  ∃ f : V → W, Function.Injective f ∧ ∀ e ∈ H.edges, (f '' e) ∈ G.edges
+
+def AppearsInAllUncountableChromatic {V : Type*} (H : Hypergraph3 V) : Prop :=
+  Finite V ∧ ∀ (W : Type*) (G : Hypergraph3 W), HasChromaticNumberGtAleph0 G → EmbedsInto H G
+```
+
+### Key Theorems Proved
+1. `EmbedsInto_CompleteTwoColorable_Self`: Two-colorable graphs embed into complete two-colorable
+2. `EmbedsInto_CompleteBipartite_of_TwoColorable`: Finite two-colorable → embeds into K_{n,m}
+3. `EmbedsInto_Transitive`: Embedding is transitive
+4. `IsBergeCycle`: Berge cycle definition in 3-uniform hypergraphs
+5. `IncidenceGraph_Bipartite`: Incidence graph of any hypergraph is bipartite
+6. `IncidenceGraph_NeighborSet_Card`: Each edge has exactly 3 neighbors in incidence graph
+
+### Key Insight from Previous Attempt
+- Berge-acyclic hypergraphs are 2-colorable (proven via incidence graph)
+- The MyColoring function uses distance in the incidence graph
+- Need to connect: NOT 2-colorable → contains Berge cycle → appears in all uncountable chromatic
+
+## What Remains
+
+The characterization theorem:
+```lean
+theorem erdos_593_characterization {V : Type*} [Finite V] (H : Hypergraph3 V) :
+    AppearsInAllUncountableChromatic H ↔ ¬ IsTwoColorable H
+```
+
+**Key lemma needed**:
+```lean
+lemma not_two_colorable_iff_contains_berge_cycle (H : Hypergraph3 V) :
+    ¬ IsTwoColorable H ↔ ∃ k v e, IsBergeCycle H k v e
+```
+
+## You Decide
+- The proof approach
+- Which direction to prove first
+- How to connect Berge cycles to uncountable chromatic number
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves the characterization theorem above

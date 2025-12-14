@@ -1,0 +1,27 @@
+# Erdős Problem #153: Sidon Set Sumset Gap Variance
+
+## Problem Statement
+
+Let A be a finite Sidon set and A+A = {s₁ < s₂ < ... < sₜ}. Is it true that
+
+(1/t) ∑_{i=1}^{t-1} (s_{i+1} - s_i)² → ∞
+
+as |A| → ∞?
+
+## Context
+
+This is Erdős Problem #153, an open problem about the distribution of gaps in sumsets of Sidon sets.
+
+A Sidon set is a set of natural numbers such that all pairwise sums are distinct.
+
+The sumset A+A = {a+b : a,b ∈ A} can be written in increasing order as s₁ < s₂ < ... < sₜ.
+
+The question asks whether the average squared gap between consecutive elements of A+A tends to infinity as the Sidon set grows.
+
+## Goal
+
+Prove or disprove: For finite Sidon sets A, the quantity (1/t)∑(s_{i+1} - s_i)² is unbounded as |A| → ∞.
+
+## Reference
+
+https://www.erdosproblems.com/153

@@ -1,0 +1,67 @@
+# Erdős Problem #190 - Rainbow AP Asymptotic
+
+## THE PROBLEM
+
+H(k) = smallest N such that any finite coloring of {1,...,N} contains either:
+- A monochromatic k-term arithmetic progression, OR
+- A rainbow k-term arithmetic progression (all elements different colors)
+
+Main Question: Is it true that H(k)^{1/k} / k → ∞ as k → ∞?
+
+## KNOWN RESULTS
+- H(k) exists (follows from Szemerédi's theorem)
+- H(k)^{1/k} → ∞ (known)
+- OPEN: H(k)^{1/k} / k → ∞ ?
+
+## PRIOR SUBMISSION RESULT
+
+Aristotle proved a lower bound:
+```lean
+lemma H_ge_W (k : ℕ) (hk : k ≥ 2) (h_nonempty : {N | ValidN k N}.Nonempty) :
+  H k ≥ W k (k - 1)
+```
+
+This is partial progress but doesn't address the asymptotic question.
+
+## DEFINITIONS (verified correct)
+
+```lean
+def IsAP (l : List ℕ) : Prop :=
+  ∃ a d, l = List.ofFn (fun i : Fin l.length => a + i * d)
+
+def IsProperAP (l : List ℕ) : Prop :=
+  ∃ a d, d > 0 ∧ l = List.ofFn (fun i : Fin l.length => a + (i : ℕ) * d)
+
+def IsMono {α β : Type} [BEq β] (c : α → β) (l : List α) : Prop :=
+  ∃ y, ∀ x ∈ l, c x = y
+
+def IsRainbow {α β : Type} [BEq β] (c : α → β) (l : List α) : Prop :=
+  (l.map c).Nodup
+
+def ValidN (k N : ℕ) : Prop :=
+  ∀ (c : Fin N → ℕ), ∃ (l : List (Fin N)),
+    l.length = k ∧
+    IsProperAP (l.map (fun x => x.val + 1)) ∧
+    (IsMono c l ∨ IsRainbow c l)
+
+noncomputable def H (k : ℕ) : ℕ := sInf {N | ValidN k N}
+```
+
+## TARGET THEOREM
+
+```lean
+theorem H_asymptotic :
+  Filter.Tendsto (fun k => (H k : ℝ) ^ (1 / k : ℝ) / k) Filter.atTop Filter.atTop
+```
+
+Or equivalently: For any M > 0, there exists K such that for all k ≥ K, H(k)^{1/k} > M * k.
+
+## You Decide
+- The proof approach
+- Whether to establish bounds on H(k) first
+- How to handle the limit/Tendsto formalization
+
+## Success Criteria
+- Prove the asymptotic statement
+- Zero sorries
+- Compiles with Lean 4.24.0 + Mathlib

@@ -1,0 +1,25 @@
+# Erdős Problem #149: Strongly Independent Edge Decomposition
+
+## Problem Statement
+
+Let G be a graph with maximum degree Δ. Is G the union of at most (5/4)Δ² sets of strongly independent edges?
+
+A set of strongly independent edges is one where the induced subgraph consists only of vertex-disjoint edges (equivalently, no two edges share a vertex or are adjacent to each other).
+
+## Context
+
+This is Erdős Problem #149, an open problem in graph decomposition theory.
+
+This is equivalent to asking whether the chromatic number of L(G)², the square of the line graph, is bounded by (5/4)Δ².
+
+The proposed bound (5/4)Δ² is tight, as shown by constructions based on blowups of C₅.
+
+Recent progress: The best known bound is 1.772Δ² (Hurley, de Joannis de Verclos, and Kang, 2022).
+
+## Goal
+
+Prove or disprove: Every graph G with maximum degree Δ can be decomposed into at most (5/4)Δ² sets of strongly independent edges.
+
+## Reference
+
+https://www.erdosproblems.com/149

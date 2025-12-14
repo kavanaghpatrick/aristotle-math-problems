@@ -1,0 +1,56 @@
+# Resubmission IDs - December 14, 2025
+
+## Erdős #23 Option C (Structural)
+ID: c8304128-0391-4f64-a5be-b765108d4eea
+File: erdos23_optionC_v2.txt
+Strategy: Fill exact? holes + add triangle-free → C5-colorable lemma
+Expected Success: 85%
+
+## Tuza's Conjecture v2
+ID: 047671c7-692c-449b-8eeb-2c377d2de2b3
+File: tuza_v2.txt
+Strategy: Complete inductive step (reduce ν by removing ≤2 edges)
+Expected Success: 80%
+
+## Erdős #23 Combined Approach
+ID: 83aadeab-4a1e-4a9d-aec9-b91a1632d10d
+File: erdos23_combined_v2.txt
+Strategy: Merge C5 blow-up theory + structural proof + quantitative bounds
+Expected Success: 70%
+
+## Erdős #149 Strong Chromatic Index
+ID: 62beca3d-7cdd-4299-b079-3b36ba05a2df
+File: erdos149_v2.txt
+Strategy: Extend Δ≤2 proof to general case
+Expected Success: 60%
+
+## Erdős #153 Sidon Set Squared Gaps v4
+ID: 8c02ea36-ee21-40fc-a52d-ed81584b8fcb
+File: erdos153_v4.txt
+Strategy: Use proven building blocks (card_sumset_sidon, gap_count_le_solutions) + pigeonhole
+Expected Success: 75%
+
+## Erdős #593 Hypergraph Chromatic Characterization v2
+ID: 14271720-cb7a-4686-861f-5b0048d62d14
+File: erdos593_v2.txt
+Strategy: Connect Berge cycles to uncountable chromatic (building on embedding lemmas)
+Expected Success: 55%
+
+## Erdős #190 Van der Waerden Asymptotic v2
+ID: 8aeb661e-abf0-4e9c-99ad-e854f89eefcf
+File: erdos190_v2.txt
+Strategy: Use H_ge_W + probabilistic framework for W lower bound
+Expected Success: 50%
+
+## Erdős #153 UNIVERSAL (Correct Formalization) - PRIORITY
+ID: 87a1f043-ff82-4ebb-a6f5-90c3c21fad0d
+File: erdos153_UNIVERSAL_boris.txt
+Strategy: Boris pattern with CORRECT universal formalization
+Key: ∀ M, ∃ N, ∀ A, (Sidon A ∧ |A|>N) → avg_sq_gap(A) > M
+Previous Error: Proved existential (∃ A) instead of universal (∀ A)
+Expected Success: 40% (hard problem, correct formalization now)
+
+---
+Based on Grok-4 analysis of partial progress from previous attempts.
+Batch 2 submitted after context refresh.
+Erdős #153 resubmitted with CORRECT universal formalization after Grok analysis.

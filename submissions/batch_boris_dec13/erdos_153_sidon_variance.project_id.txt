@@ -1,0 +1,3 @@
+69ed8f00-c7cf-4d52-af0f-48440b6b4177
+Submitted: 2025-12-13T17:59:01.970171
+Description: Erdős #153: Sidon variance → ∞

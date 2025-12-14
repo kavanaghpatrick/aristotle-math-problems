@@ -1,0 +1,71 @@
+# Erdős Problem #190 - Van der Waerden Asymptotic
+
+## Goal
+Prove: H(k)^(1/k) / k → ∞ as k → ∞, where H(k) is the minimal N such that every coloring of {1,...,N} contains either a monochromatic or rainbow k-AP.
+
+## Context: What You Already Proved (from f1291070)
+
+### Definitions Created
+```lean
+def IsProperAP (l : List ℕ) : Prop :=
+  ∃ a d, d > 0 ∧ l = List.ofFn (fun i : Fin l.length => a + (i : ℕ) * d)
+
+def IsMono {α β : Type} (c : α → β) (l : List α) : Prop :=
+  ∃ y, ∀ x ∈ l, c x = y
+
+def IsRainbow {α β : Type} (c : α → β) (l : List α) : Prop :=
+  (l.map c).Nodup
+
+def ValidN (k N : ℕ) : Prop :=
+  ∀ (c : Fin N → ℕ), ∃ (l : List (Fin N)),
+    l.length = k ∧ IsProperAP (l.map (fun x => x.val + 1)) ∧ (IsMono c l ∨ IsRainbow c l)
+
+noncomputable def H (k : ℕ) : ℕ := sInf {N | ValidN k N}
+
+noncomputable def W (r k : ℕ) : ℕ := sInf {N | ValidW r k N}
+```
+
+### Key Theorems Proved
+1. `H_ge_W (k : ℕ) (hk : k ≥ 2)`: H(k) ≥ W(k-1, k)
+2. `countAPs_le (k N : ℕ)`: |ValidPairs k N| ≤ N²
+3. `card_mono_on_indices`: Counting monochromatic colorings on fixed indices
+4. `card_BadColorings_le`: Total bad colorings bounded
+5. `bad_card_bound`: If N² < r^(k-1), then |BadColorings| < r^N
+6. `not_validW_of_lt_bound`: Probabilistic non-existence of good colorings
+
+### Probabilistic Framework Built
+- ValidPairs: Set of (a,d) pairs giving valid k-APs
+- BadColorings: Colorings with monochromatic k-AP
+- indicesOfAP_fin, indicesOfAP_list: Converting pairs to index sets
+
+## What Remains
+
+The key step is connecting H(k) to W(k-1,k) and using known Van der Waerden lower bounds.
+
+**Strategy**:
+1. From `H_ge_W`: H(k) ≥ W(k-1, k)
+2. Known: W(r,k) ≥ (r/e)^(k-1) asymptotically (Erdős-Rado)
+3. Therefore: H(k) ≥ ((k-1)/e)^(k-1)
+4. This gives: H(k)^(1/k) ≥ (k-1)^((k-1)/k) / e^((k-1)/k) ~ k/e
+5. So H(k)^(1/k) / k → 1/e (at minimum), actually → ∞ with better bounds
+
+**Key Lemma Needed**:
+```lean
+lemma W_lower_bound (r k : ℕ) (hr : r ≥ 2) (hk : k ≥ 2) :
+    (W r k : ℝ) ≥ ((r : ℝ) / Real.exp 1) ^ (k - 1)
+```
+
+Then:
+```lean
+theorem erdos_190 : Filter.Tendsto (fun k => (H k : ℝ) ^ (1 / k : ℝ) / k) Filter.atTop Filter.atTop
+```
+
+## You Decide
+- Whether to prove the W lower bound from scratch or use existing bounds
+- The exact formulation of asymptotic statements
+- Which intermediate lemmas to create
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves the asymptotic divergence H(k)^(1/k)/k → ∞

@@ -1,0 +1,25 @@
+# Erdős Problem #593: Hypergraph Characterization ($500 Prize)
+
+## Problem Statement
+
+Characterize those finite 3-uniform hypergraphs which appear in every 3-uniform hypergraph of chromatic number > ℵ₀.
+
+## Context
+
+This is Erdős Problem #593, an open problem in infinite combinatorics with a $500 prize.
+
+A 3-uniform hypergraph is a hypergraph where every edge contains exactly 3 vertices.
+
+The chromatic number of a hypergraph is the minimum number of colours needed to colour the vertices so that no edge is monochromatic.
+
+ℵ₀ (aleph-null) is the cardinality of the natural numbers, so chromatic number > ℵ₀ means uncountably many colours are required.
+
+For ordinary graphs (2-uniform hypergraphs), this problem is solved: any graph with chromatic number ≥ ℵ₁ must contain all finite bipartite graphs but need not contain any fixed odd cycle.
+
+## Goal
+
+Characterize the family of finite 3-uniform hypergraphs H such that H appears as a subhypergraph in every 3-uniform hypergraph with uncountable chromatic number.
+
+## Reference
+
+https://www.erdosproblems.com/593

@@ -1,0 +1,82 @@
+# Erdős Problem #23 - Complete the Structural Proof
+
+## Goal
+Complete the publication-ready proof that every triangle-free graph on 5n vertices can be made bipartite by deleting at most n² edges.
+
+## Context: What You Already Proved (from previous attempt)
+You successfully proved the core structural result:
+- `erdos_problem_23_C5_colorable`: Any C5-colorable graph on 5n vertices can be made bipartite by deleting ≤n² edges
+- `min_prod_le_sq`: Given 5 naturals summing to 5n, some adjacent pair has product ≤n²
+- `pathGraph_bipartite`: Path graphs are bipartite
+- `cycleGraph_five_delete_edge_bipartite`: Deleting any edge from C5 makes it bipartite
+
+## What Remains
+
+### 1. Fill two holes in the structural proof
+The previous proof has two `exact?` holes:
+
+**Hole 1** in `bipartite_of_hom`:
+```lean
+lemma bipartite_of_hom {V W : Type*} (G : SimpleGraph V) (H : SimpleGraph W)
+    (f : G →g H) (h : H.IsBipartite) : G.IsBipartite := by
+  exact?
+```
+This should follow from the fact that homomorphisms preserve bipartiteness.
+
+**Hole 2** in `bipartite_pullback_deletion`:
+```lean
+lemma bipartite_pullback_deletion ... := by
+  ...
+  exact?
+```
+This should use the homomorphism to the deleted graph.
+
+### 2. The Key Missing Step
+The structural proof covers C5-colorable graphs. To complete Erdős #23, you need ONE of:
+
+**Option A (Recommended)**: Prove all triangle-free graphs with ≥5n vertices have a C5-homomorphism
+- Use that triangle-free graphs are 3-colorable
+- A 3-coloring gives a homomorphism to K3
+- But we need C5... Key insight: the C5 blow-up is the extremal example
+
+**Option B**: Handle non-C5-colorable triangle-free graphs separately
+- For triangle-free graphs that don't admit C5-homomorphism, prove a BETTER bound
+- They must be "simpler" structurally
+
+## You Decide
+- Which theorems to prove
+- Which proof strategy to use
+- How to fill the holes
+
+## Previous Lean Code (use as foundation)
+```lean
+import Mathlib
+
+set_option maxHeartbeats 0
+
+noncomputable section
+open SimpleGraph Finset
+
+-- Your previous definitions
+def IsC5Colorable {V : Type*} (G : SimpleGraph V) : Prop :=
+  Nonempty (G →g cycleGraph 5)
+
+-- Key lemma you proved
+lemma min_prod_le_sq (n : ℕ) (x : Fin 5 → ℕ) (h_sum : ∑ i, x i = 5 * n) :
+  ∃ i, x i * x (i + 1) ≤ n ^ 2 := by
+    contrapose! h_sum with h
+    have h_amgm : ∀ i, x i + x (i + 1) > 2 * n := by
+      exact fun i => by nlinarith only [sq_nonneg (x i - x (i + 1) : ℤ), h i]
+    exact ne_of_gt (by simpa [Fin.sum_univ_five] using by linarith! [h_amgm 0, h_amgm 1, h_amgm 2, h_amgm 3, h_amgm 4])
+
+-- Your main theorem for C5-colorable case (already proved)
+theorem erdos_problem_23_C5_colorable (n : ℕ) (G : SimpleGraph (Fin (5 * n)))
+  (h_hom : Nonempty (G →g cycleGraph 5)) :
+  ∃ (S : Finset (Sym2 (Fin (5 * n)))), S.card ≤ n^2 ∧ (G.deleteEdges ↑S).IsBipartite := by
+  sorry -- YOUR PROOF FROM BEFORE GOES HERE
+```
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves the full Erdős #23: Any triangle-free graph on 5n vertices → bipartite by deleting ≤n² edges

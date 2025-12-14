@@ -1,0 +1,49 @@
+# Erdős Problem #149 - Strong Chromatic Index
+
+## THE ACTUAL CONJECTURE (Open since 1985)
+
+Prove: For every graph G with maximum degree Δ,
+  χs(G) ≤ (5/4)Δ²
+
+where χs(G) is the strong chromatic index (minimum colors to edge-color G so no two edges at distance ≤ 2 share a color).
+
+Equivalently: χ(L(G)²) ≤ (5/4)Δ² where L(G) is the line graph.
+
+## Known Results (DO NOT just reprove these)
+- Trivial bound: 2Δ² (greedy)
+- Molloy-Reed 1997: 1.998Δ²  
+- Bruhn-Joos 2018: 1.93Δ²
+- Hurley et al 2022: 1.772Δ² (current best)
+- CONJECTURE: (5/4)Δ² = 1.25Δ² (tight for blowups of C₅)
+
+## What We Want
+PROVE the (5/4)Δ² bound, OR find a counterexample.
+
+Do NOT just prove a weaker bound like 2Δ² or 4Δ² - that's already known and not novel.
+
+## Formal Statement
+
+```lean
+def SimpleGraph.strongChromaticIndex (G : SimpleGraph V) : ℕ :=
+  G.lineGraph.square.chromaticNumber
+
+-- THE CONJECTURE
+theorem erdos_149 : ∀ (V : Type*) [Fintype V] [DecidableEq V] 
+  (G : SimpleGraph V) [DecidableRel G.Adj],
+  (G.strongChromaticIndex : ℚ) ≤ (5/4) * (G.maxDegree : ℚ)^2 := by
+  sorry
+```
+
+## Key Insight
+The bound is TIGHT for blowups of C₅ (5-cycle). This suggests:
+- The proof must use properties that C₅ blowups saturate
+- Probabilistic methods alone won't suffice
+- Need structural graph theory
+
+## You Decide
+- The proof technique
+- Whether to prove or disprove
+- Which lemmas to develop
+
+## Success Criterion
+Prove erdos_149 with the (5/4) constant, zero sorries.

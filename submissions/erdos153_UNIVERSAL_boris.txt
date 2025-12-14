@@ -1,0 +1,47 @@
+# Erdős Problem #153 - UNIVERSAL Version
+
+## The Exact Problem (from Erdős-Sárközy-Szemerédi 1994)
+
+Let A be a finite Sidon set and A+A = {s₁ < s₂ < ⋯ < sₜ}.
+
+**Prove or disprove**: For ALL finite Sidon sets A, the average squared gap
+(1/t) ∑_{i=1}^{t-1} (s_{i+1} - s_i)² → ∞ as |A| → ∞.
+
+## Formal Statement
+
+```lean
+-- A Sidon set: all pairwise sums are distinct
+def IsSidonSet (A : Finset ℕ) : Prop :=
+  ∀ a b c d, a ∈ A → b ∈ A → c ∈ A → d ∈ A → a + b = c + d → ({a, b} : Finset ℕ) = {c, d}
+
+-- The sumset A + A
+def sumset (A : Finset ℕ) : Finset ℕ := (A ×ˢ A).image (fun x => x.1 + x.2)
+
+-- Average squared gap of sorted sumset
+def averageSquaredGap (A : Finset ℕ) : ℚ := ...
+
+-- THE UNIVERSAL CLAIM (this is Erdős #153):
+theorem erdos_153_universal :
+  ∀ M : ℚ, ∃ N : ℕ, ∀ A : Finset ℕ,
+    (IsSidonSet A ∧ A.card > N) → averageSquaredGap A > M
+```
+
+## Critical Distinction
+
+- WRONG (existential): ∀ M, ∀ N, ∃ A, (Sidon A ∧ |A|>N ∧ gap>M)
+  This just says SOME family has unbounded gaps. TRIVIAL.
+
+- RIGHT (universal): ∀ M, ∃ N, ∀ A, (Sidon A ∧ |A|>N) → gap>M
+  This says ALL large Sidon sets have large gaps. THIS IS THE PROBLEM.
+
+## You Decide
+
+- The proof strategy
+- Which lemmas to create
+- Whether to prove it true or construct a counterexample
+
+## Success Criteria
+
+- Zero sorries
+- Compiles without errors
+- Proves the UNIVERSAL statement above (or disproves it with counterexample)

@@ -1,0 +1,66 @@
+# Pach Coloring Conjecture - Boris Pattern Submission
+
+## Goal
+Prove or characterize for which positive integers n there exists an n-satisfactory
+coloring of the positive integers.
+
+An n-satisfactory coloring is a function c: ℤ⁺ → {1,2,...,n} such that for every
+positive integer a, the values c(a), c(2a), c(3a), ..., c(na) are all distinct.
+
+## You Decide
+- Which proof strategy to use
+- Which lemmas to create
+- How to structure the formalization
+- Which intermediate theorems to prove
+
+## Mathematical Background
+
+### The Problem
+For which n does there exist a coloring c: ℤ⁺ → {1,2,...,n} such that for every a ∈ ℤ⁺,
+the n numbers a, 2a, 3a, ..., na all receive different colors?
+
+### Known Results (Caicedo, Chartier, Pach 2021)
+
+**Sufficient conditions for n-satisfactory coloring to exist:**
+- n + 1 is prime
+- 2n + 1 is prime
+- n = p² - p for some prime p
+
+**Characterization:**
+An n-satisfactory coloring exists if and only if there is an abelian group operation ⊕
+on {1,2,...,n} compatible with multiplication: whenever i, j, and ij are all in {1,...,n},
+then ij = i ⊕ j.
+
+**Equivalence:**
+There is an n-satisfactory coloring of ℤ⁺ if and only if there is such a coloring
+of Kₙ (the set of n-smooth numbers).
+
+**Small cases verified:**
+- n = 2: ✅ (color by parity of 2-adic valuation)
+- n = 3: ✅ (n+1 = 4 is not prime, but 2n+1 = 7 is prime)
+- n = 4: ✅ (n+1 = 5 is prime)
+- n = 5: ✅ (2n+1 = 11 is prime)
+- n = 6: ✅ (n+1 = 7 is prime)
+
+**Connection to tilings:**
+The existence question is equivalent to a problem about tilings, providing a
+geometric characterization of multiplicative colorings.
+
+### Open Cases
+The first open case is n = 10 (where n+1=11 prime works) but the general
+characterization for arbitrary n is unknown.
+
+## Constraint
+Must establish a complete characterization or prove existence/non-existence
+for the general case.
+
+## Success Criteria
+- ✅ Formal proof in Lean 4
+- ✅ Zero sorries
+- ✅ Compiles without errors
+- ✅ Either: proves general characterization, OR proves specific open cases
+
+## References
+- arXiv:1902.00446 (Caicedo, Chartier, Pach)
+- Electronic Journal of Combinatorics, Vol 28(1), 2021
+- MathOverflow question 26358 (original problem statement)

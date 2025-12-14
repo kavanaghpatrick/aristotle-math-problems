@@ -1,0 +1,68 @@
+# Erdős Problem #23 - THE FULL CONJECTURE
+
+## THE PROBLEM (Open Problem)
+
+**Conjecture**: Every triangle-free graph on 5n vertices can be made bipartite by deleting at most n² edges.
+
+## WHAT WE WANT
+
+Prove ANY of the following (in order of preference):
+
+### Option A: The General Conjecture (IDEAL)
+```lean
+theorem erdos_23_general (n : ℕ) (hn : n > 0)
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h_card : Fintype.card V = 5 * n) (h_tf : G.CliqueFree 3) :
+  ∃ s, s ⊆ G.edgeFinset ∧ s.card ≤ n^2 ∧ (G.deleteEdges s).Colorable 2
+```
+
+### Option B: Beat the Current Best Bound
+Current best: 1.064n² (Balogh-Clemen-Lidický 2021)
+
+Prove for ANY constant c < 1.064:
+```lean
+theorem erdos_23_improved (n : ℕ) (hn : n > 0)
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h_card : Fintype.card V = 5 * n) (h_tf : G.CliqueFree 3) :
+  ∃ s, s ⊆ G.edgeFinset ∧ (s.card : ℝ) ≤ c * n^2 ∧ (G.deleteEdges s).Colorable 2
+```
+
+### Option C: Prove for All n (Structural Proof)
+A non-computational proof that works for arbitrary n, even if we can't compute the exact bound.
+
+## KEY INSIGHT: The Extremal Graph
+
+The bound n² is TIGHT for the blow-up of C₅:
+- Take the 5-cycle C₅ = (v₀, v₁, v₂, v₃, v₄)
+- Replace each vertex vᵢ with an independent set Vᵢ of n vertices
+- Connect all of Vᵢ to all of Vᵢ₊₁ (indices mod 5)
+- This graph is triangle-free and has 5n vertices
+- Removing its odd cycle structure requires removing exactly n² edges
+
+Any proof must show that C₅ blow-ups are the WORST CASE.
+
+## PRIOR RESULT (Already Proved)
+
+The n=1 case was proved computationally:
+```lean
+theorem erdos_problem_23_case_n_1
+  (h_card : Fintype.card V = 5) (h_tf : G.CliqueFree 3) :
+  ∃ s, s ⊆ G.edgeFinset ∧ s.card ≤ 1 ∧ (G.deleteEdges s).Colorable 2
+```
+
+This used brute-force over 1024 graphs. That approach does NOT scale.
+
+## You Decide
+- Which option to pursue (A, B, or C)
+- The proof technique (structural decomposition, probabilistic, spectral, etc.)
+- Whether to analyze the C₅ blow-up structure
+- Which lemmas and intermediate results to develop
+
+## DO NOT
+- Just prove another small case (n=2, n=3) computationally
+- That doesn't advance the mathematics
+
+## Success Criteria
+- Prove a result that applies to INFINITELY MANY values of n
+- Zero sorries
+- Compiles with Lean 4.24.0 + Mathlib

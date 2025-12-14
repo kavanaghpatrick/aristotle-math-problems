@@ -1,0 +1,34 @@
+# Erdős Problem #64: Cycles of Length 2^k ($1000 Prize)
+
+## Problem Statement
+
+Does every finite graph with minimum degree at least 3 contain a cycle of length 2^k for some k ≥ 2?
+
+## Context
+
+This is Erdős Problem #64, an open problem in graph theory with a $1000 prize.
+
+The question asks: if G is a finite graph where every vertex has degree at least 3, must G contain a cycle whose length is a power of 2 (specifically 4, 8, 16, 32, ...)?
+
+## Goal
+
+Prove or disprove: For every finite graph G with minimum degree δ(G) ≥ 3, there exists an integer k ≥ 2 such that G contains a cycle of length exactly 2^k.
+
+## Previous Attempts (For Context Only)
+
+A previous computational attempt explored Generalized Petersen graphs GP(n,k) as potential counterexamples. Key findings:
+- The Petersen graph GP(5,2) was proven to contain an 8-cycle, eliminating it as a counterexample
+- A systematic search over GP(n,k) parameters was implemented but timed out before completion
+- Definitions for GP graphs and DFS-based cycle detection were successfully formalized in Lean 4
+
+You are completely free to:
+- Continue exploring Generalized Petersen graphs or other graph families
+- Try a completely different approach (structural proofs, girth arguments, eigenvalue methods)
+- Attempt a general proof showing such cycles must exist
+- Search for counterexamples in other graph classes (snarks, cages, cubic graphs)
+
+The choice of strategy is entirely yours.
+
+## Reference
+
+https://www.erdosproblems.com/64

@@ -1,0 +1,60 @@
+# Erdős Problem #23 - Combined Approach
+
+## Goal
+Prove: Every triangle-free graph on 5n vertices can be made bipartite by deleting at most n² edges.
+
+## Strategy: Combine Three Partial Results
+
+From previous attempts, we have three complementary pieces:
+
+### Piece 1: C5 Blow-Up Theory (b2749da7)
+- **Proved**: C5 blow-up is triangle-free with exactly 5n² edges
+- **Proved**: C5 blow-up needs exactly n² edge deletions (tight!)
+- **Proved**: Any graph respecting C5 partition → ≤n² deletions
+
+### Piece 2: Structural Approach (dbd91222)
+- **Proved**: C5-colorable graphs → ≤n² deletions
+- **Key insight**: Uses fiber sizes and pigeonhole principle
+
+### Piece 3: Quantitative Bounds (4cdc2339)
+- **Proved**: Erdos23Bound 1.5625 (i.e., any triangle-free graph → ≤1.5625n² deletions)
+- **Technique**: Mantel's theorem + Cauchy-Schwarz + probabilistic method
+
+## Combined Strategy
+
+The key observation: **Andrásfai-Kruskal-Szemerédi theorem** (1974) states:
+- If G is triangle-free and has minimum degree δ(G) > 2n/5, then G is bipartite
+
+This means for triangle-free graphs:
+1. If min degree > 2n (on 5n vertices, so 2n/5 of total = 2n when total = 5n), G is ALREADY bipartite (0 deletions needed)
+2. If min degree ≤ 2n, we can use the structural approach
+
+**Alternative**: Use the fact that triangle-free graphs are 3-chromatic, and 3-colorable graphs have nice structure.
+
+## You Decide
+
+Choose the approach that works best:
+
+**Option A**: Use Andrásfai-Kruskal-Szemerédi directly
+- High min degree → already bipartite
+- Low min degree → use Turán-type bounds
+
+**Option B**: Use C5 blow-up as extremal example
+- Prove any triangle-free graph is a subgraph of a C5 blow-up (or bounded by it)
+- Apply the subgraph bound theorem
+
+**Option C**: Pure structural via homomorphisms
+- Triangle-free → 3-colorable → admits specific structure
+- Exploit structure for edge deletion bound
+
+## Useful Mathlib Theorems
+- `SimpleGraph.CliqueFree` - triangle-free condition
+- `SimpleGraph.Colorable` - k-colorability
+- `SimpleGraph.deleteEdges` - edge deletion
+- `SimpleGraph.IsBipartite` - bipartiteness (= 2-colorable)
+- Turán-type bounds in `Mathlib.Combinatorics.SimpleGraph.Turan`
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves: ∀ n, ∀ G on 5n vertices, G.CliqueFree 3 → ∃ S, S.card ≤ n² ∧ (G.deleteEdges S).IsBipartite

@@ -1,0 +1,39 @@
+# Erdős Problem #23 - Option B: Beat the 1.064n² Bound
+
+## THE PROBLEM
+
+Current best result (Balogh-Clemen-Lidický 2021): Every triangle-free graph on 5n vertices can be made bipartite by deleting at most **1.064n²** edges.
+
+Conjecture: The true bound is **n²**.
+
+## YOUR GOAL
+
+Prove a better bound than 1.064n². Any constant c < 1.064 is progress.
+
+## TARGET THEOREM
+
+```lean
+theorem erdos_23_improved (n : ℕ) (hn : n > 0)
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+  (h_card : Fintype.card V = 5 * n) (h_tf : G.CliqueFree 3) :
+  ∃ s, s ⊆ G.edgeFinset ∧ (s.card : ℝ) ≤ c * n^2 ∧ (G.deleteEdges s).Colorable 2
+```
+
+Where c is any constant you can prove, ideally c < 1.064.
+
+Even c = 1.05 or c = 1.02 would be significant.
+
+## KNOWN BOUNDS
+- Trivial: 2.5n² (greedy)
+- Old: ~1.5n²
+- Current best: 1.064n²
+- Conjecture: n²
+
+## You Decide
+- Which constant c to target
+- The proof technique (flag algebras, regularity lemma, probabilistic, etc.)
+- Whether to adapt Balogh-Clemen-Lidický's approach
+
+## Success Criteria
+- Proves bound with c < 1.064
+- Zero sorries

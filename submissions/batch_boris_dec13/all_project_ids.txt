@@ -1,0 +1,9 @@
+Batch Boris Submissions - 2025-12-13T17:59:11.462939
+============================================================
+erdos_023: 1fb321d5-ff87-4ba1-8ab1-bc57fa287fd6
+erdos_152_sidon_gaps: fd233488-9454-45da-8fab-b56068e9db15
+erdos_153_sidon_variance: 69ed8f00-c7cf-4d52-af0f-48440b6b4177
+erdos_190_rainbow_ap: 8a1e3f85-1ee7-4880-b4c5-af0711ed8c50
+erdos_149_strongly_independent_edges: ERROR: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+erdos_167_triangle_removal: ERROR: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.
+erdos_593_hypergraph_characterization: ERROR: You currently already have 5 projects in progress. Please wait for a project to complete before starting a new one.

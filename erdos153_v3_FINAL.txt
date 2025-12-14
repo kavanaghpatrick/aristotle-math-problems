@@ -1,0 +1,73 @@
+# Erdős Problem #153 - Average Squared Gap in Sidon Sumsets
+
+## THE PROBLEM (Erdős-Sárközy-Sós)
+
+For ANY sequence of Sidon sets Aₙ with |Aₙ| → ∞, the average squared gap in Aₙ+Aₙ tends to infinity.
+
+## PRECISE FORMULATION
+
+Let A be a Sidon set with |A| = n. Let A+A = {s₁ < s₂ < ... < sₜ} where t = n(n+1)/2.
+
+```lean
+def avg_squared_gap (S : Finset ℕ) : ℝ :=
+  let sorted := S.sort (·≤·)
+  let gaps := List.zipWith (·-·) sorted.tail sorted
+  (gaps.map (fun g => (g : ℝ)^2)).sum / (S.card - 1 : ℝ)
+
+theorem erdos_153 : ∀ M : ℝ, M > 0 →
+  ∃ N : ℕ, ∀ A : Finset ℕ, IsSidon A → A.card ≥ N →
+    avg_squared_gap (A + A) > M
+```
+
+## KEY INSIGHT: The Hard Case
+
+**Sparse Sidon sets** (like {1, 2, 4, 8, ...}): Trivially true - gaps grow exponentially.
+
+**Dense Sidon sets** (Singer sets in [0, n²]): THIS IS THE HARD CASE
+- Range ≈ 2n², elements ≈ n²/2
+- Average gap ≈ 4 (CONSTANT!)
+- BUT average SQUARED gap → ∞
+
+This means: **The sumset cannot be uniformly distributed.** Even for the densest Sidon sets, some gaps must be unusually large.
+
+## PROVEN MACHINERY (From Previous Attempt)
+
+Use these proven results:
+
+```lean
+-- |A+A| = n(n+1)/2 for Sidon sets
+theorem card_sumset_sidon (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) :
+  (A + A).ncard = A.ncard * (A.ncard + 1) / 2
+
+-- Adjacencies (consecutive elements) are bounded
+theorem adjacencies_le_solutions (A : Set ℕ) (hfin : A.Finite) :
+  num_adjacencies (A + A) ≤ solutions_diff_one A hfin
+
+-- Solutions to a+b=c+d+k are bounded
+theorem solutions_diff_k_bound (A : Set ℕ) (hA : IsSidon A) (hfin : A.Finite) (k : ℕ) (hk : k > 0) :
+  solutions_diff_k A hfin k ≤ 2 * A.ncard + small_term
+
+-- At most 1 pair per non-zero difference
+theorem sidon_diff_count_le_one (A : Set ℕ) (hA : IsSidon A) (k : ℤ) (hk : k ≠ 0) :
+  diff_count A k ≤ 1
+```
+
+## THE MISSING PIECE
+
+Need to show: Bounded solutions to a+b=c+d+k implies gaps have high variance.
+
+**Approach 1**: Show that if avg_squared_gap is bounded, then solutions to a+b=c+d+1 would be Ω(n²), contradicting the O(n) bound.
+
+**Approach 2**: Use that consecutive pairs (adjacencies) are O(n), so most elements are "isolated" (gap ≥ 2 on at least one side). Count contribution of isolated elements to squared gaps.
+
+**Approach 3**: Pigeonhole - with n²/2 elements in range ~n² and only O(n) adjacencies, there must be Ω(n) gaps of size ≥ n/c for some constant c.
+
+## You Decide
+- Which approach to take
+- The exact variance/moment argument
+- How to formalize "gaps can't be uniform"
+
+## Success Criteria
+- Prove avg_squared_gap → ∞ for ALL Sidon sets
+- Must handle dense Sidon sets (the hard case)
+- Zero sorries

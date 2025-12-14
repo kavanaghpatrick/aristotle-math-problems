@@ -1,0 +1,25 @@
+# Erdős Problem #190: Rainbow vs Monochromatic Arithmetic Progressions
+
+## Problem Statement
+
+Let H(k) be the smallest N such that in any finite colouring of {1, ..., N} (into any number of colours) there is always either a monochromatic k-term arithmetic progression or a rainbow arithmetic progression (where all elements have different colours).
+
+Is it true that H(k)^(1/k) / k → ∞ as k → ∞?
+
+## Context
+
+This is Erdős Problem #190, combining Ramsey theory with rainbow combinatorics.
+
+A monochromatic arithmetic progression is a sequence a, a+d, a+2d, ..., a+(k-1)d where all terms have the same colour.
+
+A rainbow arithmetic progression is an arithmetic progression where all terms have distinct colours.
+
+H(k) captures the threshold where one of these two structured patterns must appear.
+
+## Goal
+
+Determine whether H(k)^(1/k) / k tends to infinity as k → ∞.
+
+## Reference
+
+https://www.erdosproblems.com/190

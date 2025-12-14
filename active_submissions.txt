@@ -1,0 +1,60 @@
+
+=== Submissions Dec 13, 2025 ===
+
+## Earlier Today
+Erdős #149 v2 (Strong Chromatic Index - (5/4)Δ²)
+Project ID: 7ff9972c-0f95-469d-9aa1-0a2ba49eba21
+Target: Prove χs(G) ≤ (5/4)Δ² (the actual 40-year conjecture)
+
+Erdős #593 v2 (Hypergraph Characterization - $500 prize)
+Project ID: 43528a1d-8610-4bd1-a2a8-6c56027f4af1
+Target: Characterize 3-uniform hypergraphs appearing in all χ > ℵ₀ hypergraphs
+
+Erdős #153 v2 (Average Squared Gap - Universal)
+Project ID: d65cea24-2345-4b1e-a478-9c3eb4230171
+Target: Prove avg squared gap → ∞ for ALL Sidon sets
+
+Erdős #153 v3 (With Gemini Insight) ⭐
+Project ID: fbd1ef6b-afba-45d2-94f0-873daa73484f
+Target: Focus on DENSE Sidon sets (the hard case)
+Insight: Avg gap constant but avg SQUARED gap → ∞ means high variance
+
+## New Batch (Grok-Verified Formalizations)
+
+Erdős #23 n=2 (Triangle-Free → Bipartite)
+Project ID: 18c40221-3dec-4c6f-b4c8-f6f900349c7c
+Target: 10 vertices, remove ≤4 edges to make bipartite
+Note: n=1 case VERIFIED COMPLETE (compiled successfully)
+
+Erdős #23 GENERAL (The Full Conjecture)
+Project ID: b2749da7-4e26-4907-9910-8b03ee9df66a
+Target: Prove for ALL n, or beat 1.064n² bound, or structural proof
+Note: Combined approach - let Aristotle choose
+
+Erdős #23 Option A - General Conjecture ⭐
+Project ID: fee4016a-aad3-4730-a804-fbca6d1be3af
+Target: Prove for ALL n that n² edges suffice
+
+Erdős #23 Option B - Beat the Bound ⭐
+Project ID: 4cdc2339-ec96-4c8a-9249-44bd03d5b849
+Target: Prove c*n² for any c < 1.064
+
+Erdős #23 Option C - Structural Proof ⭐
+Project ID: dbd91222-585c-4c38-b64d-84cf2874bb21
+Target: Non-computational proof for infinitely many n
+
+Tuza's Conjecture (τ ≤ 2ν)
+Project ID: efee5ffd-f43f-4c90-b958-a9fac22953ba
+Target: Prove τ(G) ≤ 2ν(G) (open since 1981)
+Note: Prior attempt proved weaker τ ≤ 3ν
+
+Erdős #190 (Rainbow AP - Asymptotic)
+Project ID: f1291070-95a1-4b5c-90c9-317600d36c53
+Target: Prove H(k)^{1/k}/k → ∞
+Note: Prior attempt proved H(k) ≥ W(k, k-1)
+
+Pach Coloring - THE HARD PROBLEM ⭐⭐
+Project ID: d83eb80a-5954-4077-aa80-26767b13da9e
+Target: Prove characterization is NECESSARY (not just sufficient)
+Options: A) Prove necessity, B) Find non-multiplicative coloring, C) Prove non-existence
+Note: Prior attempt only proved KNOWN sufficient conditions

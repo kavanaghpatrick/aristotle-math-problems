@@ -1,0 +1,23 @@
+# Erdős Problem #152: Sidon Set Sumset Gaps
+
+## Problem Statement
+
+For any M ≥ 1, if A ⊂ ℕ is a sufficiently large finite Sidon set, then there exist at least M many elements a ∈ A+A such that a+1 ∉ A+A and a-1 ∉ A+A.
+
+## Context
+
+This is Erdős Problem #152, an open problem about Sidon sets (also called B₂ sequences).
+
+A Sidon set is a set of natural numbers such that all pairwise sums are distinct: if a+b = c+d for elements a,b,c,d in A, then {a,b} = {c,d}.
+
+The sumset A+A is the set of all pairwise sums {a+b : a,b ∈ A}.
+
+An element x ∈ A+A is called "isolated" or has a "gap" if neither x+1 nor x-1 belongs to A+A.
+
+## Goal
+
+Prove: For every positive integer M, there exists a threshold N such that every Sidon set A with |A| ≥ N contains at least M isolated elements in its sumset A+A.
+
+## Reference
+
+https://www.erdosproblems.com/152

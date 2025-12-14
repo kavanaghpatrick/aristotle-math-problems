@@ -1,0 +1,78 @@
+# Erdős Problem #149 - Strong Chromatic Index
+
+## Goal
+Prove the Erdős-Nešetřil conjecture: χ'_s(G) ≤ (5/4)Δ² where:
+- χ'_s(G) = strong chromatic index (chromatic number of the square of the line graph)
+- Δ = maximum degree of G
+
+## Context: What You Already Proved (from 7ff9972c)
+
+### Definitions Created
+- `SimpleGraph.square` - graph with edges between vertices at distance 1 or 2
+- `SimpleGraph.strongChromaticIndex` - χ'_s(G) := χ(L(G)²)
+
+### Theorems Proved
+1. `erdos_149_C5` - Conjecture holds for the 5-cycle
+2. `lineGraph_maxDegree_le_of_maxDegree_le_two` - Δ ≤ 2 implies Δ(L(G)) ≤ 2
+3. `maxDegree_square_le_sq_maxDegree` - Δ(G²) ≤ Δ(G)²
+4. `chromaticNumber_le_maxDegree_succ` - χ(G) ≤ Δ + 1 (greedy coloring)
+5. `strongChromaticIndex_eq_zero_of_maxDegree_eq_zero` - Δ = 0 ⟹ χ'_s = 0
+6. `strongChromaticIndex_le_one_of_maxDegree_eq_one` - Δ = 1 ⟹ χ'_s ≤ 1
+7. `erdos_149_delta_le_2` - Δ ≤ 2 ⟹ χ'_s ≤ (5/4)Δ²
+
+### Holes Remaining
+- Two `exact?` holes in `maxDegree_square_le_sq_maxDegree` and `erdos_149_delta_le_2`
+
+## What Remains for Full Conjecture
+
+The Δ ≤ 2 case is done. For general Δ, the approaches are:
+
+### Approach 1: Induction on Δ
+- Base cases (Δ = 0, 1, 2) are done
+- Need inductive step: reduce to smaller Δ cases
+
+### Approach 2: Direct Bound via Structure
+- Use that L(G)² has Δ ≤ 2Δ(G) - 2 (for Δ ≥ 2)
+- Then Δ(L(G)²) ≤ (2Δ - 2)² = 4Δ² - 8Δ + 4
+- Apply χ ≤ Δ + 1 to get χ'_s ≤ 4Δ² - 8Δ + 5
+- This is WORSE than (5/4)Δ², so more structure needed
+
+### Approach 3: Special Graph Classes
+- The conjecture is known for:
+  - Bipartite graphs
+  - Subcubic graphs (Δ ≤ 3)
+  - Chordal graphs
+- Reduce general case to these
+
+## Key Insight
+For Δ ≥ 3, the bound (5/4)Δ² is tight for the graph C5^(Δ/2) (blow-up of C5).
+This suggests the extremal structure is C5-related, similar to Erdős #23!
+
+## Previous Lean Code (use as foundation)
+```lean
+import Mathlib
+
+set_option maxHeartbeats 0
+noncomputable section
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+def SimpleGraph.square (G : SimpleGraph V) : SimpleGraph V where
+  Adj u v := G.dist u v = 1 ∨ G.dist u v = 2
+  symm u v h := by aesop; · exact Or.inl h_1.symm; · rw [SimpleGraph.dist_comm]; tauto
+  loopless v h := by simp [SimpleGraph.dist] at h
+
+def SimpleGraph.strongChromaticIndex (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  ENat.toNat (SimpleGraph.square G.lineGraph).chromaticNumber
+
+-- Already proved for Δ ≤ 2
+theorem erdos_149_delta_le_2 (G : SimpleGraph V) [DecidableRel G.Adj]
+    (h : G.maxDegree ≤ 2) :
+    (G.strongChromaticIndex : ℚ) ≤ (5/4) * (G.maxDegree : ℚ)^2 := by
+  sorry -- YOUR PROOF FROM BEFORE
+```
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves: ∀ G, (G.strongChromaticIndex : ℚ) ≤ (5/4) * (G.maxDegree : ℚ)^2

@@ -1,0 +1,21 @@
+# Erdős Problem #64: Cycles of Length 2^k ($1000 Prize)
+
+## Problem Statement
+
+Does every finite graph with minimum degree at least 3 contain a cycle of length 2^k for some k ≥ 2?
+
+## Context
+
+This is Erdős Problem #64, an open problem in graph theory with a $1000 prize.
+
+The question asks: if G is a finite graph where every vertex has degree at least 3, must G contain a cycle whose length is a power of 2 (specifically 4, 8, 16, 32, ...)?
+
+A cycle of length n in a graph is a closed path visiting exactly n distinct vertices.
+
+## Goal
+
+Prove or disprove: For every finite graph G with minimum degree δ(G) ≥ 3, there exists an integer k ≥ 2 such that G contains a cycle of length exactly 2^k.
+
+## Reference
+
+https://www.erdosproblems.com/64

@@ -1,0 +1,35 @@
+# Erdős Problem #152: Sidon Set Sumset Gaps
+
+## Problem Statement
+
+For any M ≥ 1, if A ⊂ ℕ is a sufficiently large finite Sidon set, then there exist at least M many elements a ∈ A+A such that a+1 ∉ A+A and a-1 ∉ A+A.
+
+## Context
+
+This is Erdős Problem #152, an open problem about Sidon sets (B₂ sequences).
+
+A Sidon set is a set of natural numbers such that all pairwise sums are distinct.
+The sumset A+A is the set of all pairwise sums {a+b : a,b ∈ A}.
+An element x ∈ A+A is "isolated" if neither x+1 nor x-1 belongs to A+A.
+
+## Goal
+
+Prove: For every positive integer M, there exists a threshold N such that every Sidon set A with |A| ≥ N contains at least M isolated elements in its sumset A+A.
+
+## Previous Attempts (For Context Only)
+
+A previous attempt made substantial progress formalizing Sidon set theory in Lean 4:
+- Defined `SidonSet A` as: ∀ a,b,c,d ∈ A, a+b=c+d → {a,b}={c,d}
+- Proved `SidonSet_no_3_AP`: Sidon sets contain no 3-term arithmetic progressions
+- Proved `SidonSet_at_most_one_consecutive_pair`: At most one pair of consecutive integers
+- Proved `SidonSet_card_sum_eq`: |A+A| = |A|(|A|+1)/2 for finite Sidon sets
+- Defined `S_minus A` and `S_plus A` for tracking 2b±1 membership
+- Proved injectivity lemmas for these maps
+
+This established foundational theory but did not complete the main theorem.
+
+You are free to build on these foundations, take a different approach, or start fresh. The strategy is yours to choose.
+
+## Reference
+
+https://www.erdosproblems.com/152

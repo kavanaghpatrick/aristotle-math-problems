@@ -1,0 +1,96 @@
+# Pach Coloring - THE ACTUAL OPEN PROBLEM
+
+## Background
+
+An n-satisfactory coloring is c: ℤ⁺ → {1,...,n} where for every a ∈ ℤ⁺,
+the values c(a), c(2a), c(3a), ..., c(na) are ALL DISTINCT.
+
+## ALREADY PROVEN (Do NOT re-prove these)
+
+Aristotle has already formalized these KNOWN sufficient conditions:
+
+```lean
+-- These are DONE - don't waste time on them
+theorem SatisfactoryColoring_of_Succ_Prime (n : ℕ) (h : (n + 1).Prime) :
+  ExistsSatisfactoryColoring n  -- PROVEN
+
+theorem SatisfactoryColoring_of_TwoMulSucc_Prime (n : ℕ) (h : (2 * n + 1).Prime) :
+  ExistsSatisfactoryColoring n  -- PROVEN
+```
+
+## THE ACTUAL OPEN PROBLEM
+
+The Caicedo-Chartier-Pach paper (2021) established:
+
+**Theorem (Known)**: An n-satisfactory coloring exists IF there is a compatible
+abelian group structure on {1,...,n}.
+
+**OPEN QUESTION**: Is this condition also NECESSARY?
+
+In other words: Does n-satisfactory coloring exist ONLY IF compatible group exists?
+
+## WHAT WE WANT YOU TO PROVE
+
+### Option A: Prove Necessity (The Characterization)
+
+```lean
+-- The compatible group condition
+def CompatibleGroup (n : ℕ) : Prop :=
+  ∃ (G : Type) (_ : AddCommGroup G) (_ : Fintype G) (e : G ≃ Fin n),
+    let val (g : G) := (e g).val + 1
+    ∀ g h : G, val g * val h ≤ n → val (g + h) = val g * val h
+
+-- THE OPEN CHARACTERIZATION
+theorem pach_characterization (n : ℕ) (hn : n ≥ 1) :
+  ExistsSatisfactoryColoring n ↔ CompatibleGroup n
+```
+
+This would prove the converse: satisfactory coloring → compatible group.
+
+### Option B: Find a Counterexample
+
+Find an n where:
+- No known sufficient condition applies (n+1 not prime, 2n+1 not prime, n ≠ p²-p)
+- But an n-satisfactory coloring DOES exist
+- Using a NON-MULTIPLICATIVE construction
+
+### Option C: Prove Non-Existence for Some n
+
+Find the smallest n where NO n-satisfactory coloring exists, and prove it.
+
+```lean
+theorem no_satisfactory_coloring (n : ℕ) (hn : specific_condition n) :
+  ¬ ExistsSatisfactoryColoring n
+```
+
+## Key Insight
+
+The sufficient conditions cover:
+- n = 2, 4, 6, 10, 12, 16, 18, 22, 28, 30, ... (n+1 prime)
+- n = 1, 2, 3, 5, 6, 8, 9, 11, 14, 15, 20, ... (2n+1 prime)
+- n = 2, 6, 12, 20, 30, 42, ... (n = p²-p)
+
+First values NOT covered by any condition: n = 7, 13, 19, 21, 25, ...
+
+For n = 7: n+1 = 8 (not prime), 2n+1 = 15 (not prime), 7 ≠ p²-p
+→ Does 7-satisfactory coloring exist?
+
+## Definitions To Use
+
+```lean
+def SatisfactoryColoring (n : ℕ) (c : ℕ+ → Fin n) : Prop :=
+  ∀ a : ℕ+, Function.Injective (fun (k : Fin n) => c (a * ⟨k.val + 1, Nat.succ_pos _⟩))
+
+def ExistsSatisfactoryColoring (n : ℕ) : Prop :=
+  ∃ c : ℕ+ → Fin n, SatisfactoryColoring n c
+```
+
+## You Decide
+- Which option to pursue (A, B, or C)
+- The proof strategy
+- Whether to focus on specific small cases (n = 7, 13, 19, ...)
+
+## Success Criteria
+- Prove something NEW (not the known sufficient conditions)
+- Either: prove necessity, find counterexample, or prove non-existence
+- Zero sorries

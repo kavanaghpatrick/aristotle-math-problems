@@ -1,0 +1,59 @@
+# Erdős Problem #153 - Sidon Set Average Squared Gap
+
+## Goal
+Prove: For any infinite Sidon set A, the average squared gap in A+A tends to infinity as |A| → ∞.
+
+## Context: What You Already Proved (from fbd1ef6b and d65cea24)
+
+### Definitions Created
+```lean
+def IsSidon (A : Set ℕ) : Prop :=
+  ∀ a ∈ A, ∀ b ∈ A, ∀ c ∈ A, ∀ d ∈ A, a + b = c + d → ({a, b} : Set ℕ) = {c, d}
+
+def avg_squared_gap (S : Finset ℕ) : ℝ :=
+  let sorted := S.sort (·≤·)
+  let gaps := List.zipWith (·-·) sorted.tail sorted
+  (gaps.map (fun g => (g : ℝ)^2)).sum / (S.card - 1 : ℝ)
+```
+
+### Key Theorems Proved
+1. `card_sumset_sidon`: |A+A| = |A|(|A|+1)/2 for Sidon sets
+2. `sidon_diff_count_le_one`: diff_count A k ≤ 1 for k ≠ 0
+3. `adjacencies_le_solutions`: num_adjacencies(A+A) ≤ solutions_diff_k A 1
+4. `gap_count_le_solutions`: count_gaps_eq(A+A, k) ≤ solutions_diff_k A k
+5. `sumset_subset_interval`: A+A ⊆ [2·min(A), 2·max(A)]
+
+### Computational Exploration
+- Mian-Chowla sequences computed up to n=25
+- Singer difference sets for various primes
+- avg_squared_gap increases with |A|
+
+## What Remains
+
+The key insight is:
+- A+A has |A|(|A|+1)/2 elements
+- A+A is contained in an interval of length 2(max(A) - min(A))
+- By pigeonhole, the gaps must grow
+
+**Strategy**:
+1. Average gap in A+A = (2·max(A) - 2·min(A)) / (|A+A| - 1) ≈ 4·max(A) / |A|²
+2. For Sidon sets, max(A) ≥ c·|A|² (from sumset density)
+3. Therefore average gap ≥ c' (constant)
+4. But average squared gap ≥ (average gap)² by convexity... NOT quite right
+5. Need to use that gaps cannot all be small (pigeonhole on sumset)
+
+**Key Lemma Needed**:
+```lean
+lemma sidon_gap_variance_bound (A : Finset ℕ) (hA : IsSidon A) :
+  avg_squared_gap (sumset A) ≥ c * A.card  -- for some constant c
+```
+
+## You Decide
+- The proof approach
+- Which auxiliary lemmas to add
+- How to formalize the growth rate
+
+## Success Criteria
+- Zero sorries
+- Compiles without errors
+- Proves: For Sidon A, avg_squared_gap(A+A) → ∞ as |A| → ∞

@@ -273,6 +273,65 @@ Constraint: Must verify PHP-4-3
 
 ---
 
+## 🚨 The Quantifier Trap (Dec 2025 Discovery)
+
+**CRITICAL**: Aristotle takes the path of least resistance. Given ambiguity, it proves the EASIEST valid interpretation—even if trivial.
+
+### The Problem
+
+Natural language "f(A) → ∞ as |A| → ∞" is ambiguous:
+
+| Interpretation | Quantifiers | Difficulty | What Aristotle Chooses |
+|---------------|-------------|------------|----------------------|
+| **Existential** | ∀M, ∀N, **∃A**, ... | Trivial | ✅ This one |
+| **Universal** | ∀M, **∃N**, ∀A, ... | Hard | ❌ Avoids |
+
+**Case Study**: Erdős #153
+- Problem asked: "For ALL Sidon sets, avg_sq_gap → ∞"
+- Aristotle proved: "There EXISTS a family where avg_sq_gap → ∞"
+- Result: 0 sorries, compiles, **WRONG ANSWER**
+
+### The Fix: Explicit Lean Theorem Statements
+
+**BAD** (ambiguous):
+```
+Prove: avg_sq_gap → ∞ as |A| → ∞ for Sidon sets
+```
+
+**GOOD** (explicit quantifiers):
+```lean
+theorem erdos_153 : ∀ M : ℚ, ∃ N : ℕ, ∀ A : Finset ℕ,
+  (IsSidonSet A ∧ A.card > N) → averageSquaredGap A > M
+```
+
+### Quantifier Patterns to Watch
+
+| Natural Language | Likely Intent | Write Explicitly |
+|-----------------|---------------|------------------|
+| "X → ∞ as n → ∞" | Universal | ∀ε, ∃N, ∀n>N, X>ε |
+| "For large n, P holds" | Universal | ∃N, ∀n>N, P(n) |
+| "P(n) is unbounded" | Depends! | Clarify ∃ vs ∀ |
+| "Every X has property P" | Universal | ∀X, P(X) |
+
+### Post-Success Verification (MANDATORY)
+
+After ANY Aristotle "success" (0 sorries + compiles):
+
+```
+□ Extract main theorem statement
+□ Compare quantifier-by-quantifier with original problem
+□ Run Grok: "Does this theorem EXACTLY match [original]?"
+□ If ∃/∀ mismatch → RESUBMIT with explicit Lean statement
+```
+
+**NEW SUCCESS METRIC**:
+```
+OLD: 0 sorries + compiles = solved
+NEW: 0 sorries + compiles + QUANTIFIERS MATCH = solved
+```
+
+---
+
 ## Project Context
 
 **Type**: Solving OPEN mathematical problems via AI-assisted theorem proving

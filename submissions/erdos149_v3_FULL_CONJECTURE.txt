@@ -1,0 +1,49 @@
+# Erdős #149: Strong Chromatic Index Conjecture (Full)
+
+## Problem Statement (Erdős-Nešetřil 1985)
+
+For ANY graph G with maximum degree Δ, the strong chromatic index satisfies:
+χ'_s(G) ≤ (5/4)Δ²
+
+The strong chromatic index is the minimum number of colors needed to color edges such that edges at distance ≤ 1 (sharing a vertex or sharing an adjacent edge) receive different colors.
+
+## CRITICAL CONSTRAINT
+
+**DO NOT add any restrictive hypotheses.** The previous attempt incorrectly added `h : G.maxDegree ≤ 2`, proving only a trivial case. This submission requires the FULL conjecture for ALL graphs, regardless of maximum degree.
+
+**DO NOT modify the theorem statement.** Prove it EXACTLY as given below.
+
+## Formal Lean 4 Theorem (PROVE EXACTLY AS STATED)
+
+```lean
+import Mathlib.Combinatorics.SimpleGraph.Basic
+import Mathlib.Combinatorics.SimpleGraph.Coloring
+import Mathlib.Data.Rat.Basic
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- Strong chromatic index: minimum colors for edge coloring where edges at distance ≤ 1 get different colors -/
+noncomputable def SimpleGraph.strongChromaticIndex (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sorry -- Standard definition via edge distance graph
+
+/-- Erdős-Nešetřil Conjecture (1985): χ'_s(G) ≤ (5/4)Δ² for all graphs G -/
+theorem erdos_149 (G : SimpleGraph V) [DecidableRel G.Adj] :
+    (G.strongChromaticIndex : ℚ) ≤ (5/4) * (G.maxDegree : ℚ)^2 := by
+  sorry
+```
+
+## Success Criteria
+
+1. Zero sorries in the main theorem `erdos_149`
+2. Theorem applies to ALL graphs (no degree restrictions)
+3. Uses the exact bound (5/4)Δ²
+4. Compiles with Mathlib v4.24.0
+
+## You Decide
+
+- How to define `strongChromaticIndex` formally
+- Which proof strategy to use
+- What helper lemmas to create
+- How to structure the proof
+
+But you MUST prove the full conjecture without adding hypotheses like `maxDegree ≤ k` for any k.

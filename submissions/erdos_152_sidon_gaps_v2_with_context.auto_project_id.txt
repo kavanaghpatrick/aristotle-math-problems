@@ -1,0 +1,3 @@
+42d3496d-fe0a-449c-99ad-6fc64cfffd2d
+Submitted: 2025-12-14T03:17:34.898496
+Description: Erdős #152 v2: Sidon gaps (enhanced with prior lemmas)

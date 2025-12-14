@@ -1,0 +1,46 @@
+# Erdős Problem #23 - Option C: Structural Proof
+
+## THE PROBLEM
+
+Every triangle-free graph on 5n vertices can be made bipartite by deleting at most n² edges.
+
+## YOUR GOAL
+
+Find a STRUCTURAL proof that works for infinitely many n, without relying on computation.
+
+## APPROACH
+
+Instead of checking all graphs computationally, prove structural lemmas about triangle-free graphs:
+
+1. **Characterize the obstruction**: What makes a graph need many edge deletions?
+
+2. **The C₅ blow-up structure**:
+   - The worst case is blow-ups of C₅
+   - Prove that graphs "far" from C₅ blow-ups need fewer deletions
+
+3. **Decomposition approach**:
+   - Decompose triangle-free graphs based on their structure
+   - Handle each case separately
+
+## POSSIBLE LEMMAS
+
+```lean
+-- Graphs with no 5-cycle need 0 edges removed (they're already bipartite)
+lemma bipartite_of_no_odd_cycle (G : SimpleGraph V)
+  (h : ∀ k, Odd k → ¬G.HasCycleOfLength k) : G.Colorable 2
+
+-- Graphs with bounded odd girth have structured deletions
+lemma deletion_bound_from_structure (G : SimpleGraph V)
+  (h_tf : G.CliqueFree 3) (h_struct : SomeStructuralProperty G) :
+  ∃ s, s.card ≤ f(n) ∧ (G.deleteEdges s).Colorable 2
+```
+
+## You Decide
+- Which structural properties to exploit
+- How to characterize graphs needing many deletions
+- The proof architecture
+
+## Success Criteria
+- Proves the bound for infinitely many n (not just fixed small cases)
+- Uses structural reasoning, not brute force
+- Zero sorries

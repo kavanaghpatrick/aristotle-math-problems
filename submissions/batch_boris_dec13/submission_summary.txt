@@ -1,0 +1,11 @@
+Batch Submission Summary
+Time: 2025-12-13T17:58:26.389139
+============================================================
+
+erdos_023_triangle_free_bipartite.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_152_sidon_gaps.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_153_sidon_variance.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_190_rainbow_ap.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_149_strongly_independent_edges.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_167_triangle_removal.txt: ERROR: 'str' object has no attribute 'project_id'
+erdos_593_hypergraph_characterization.txt: ERROR: 'str' object has no attribute 'project_id'

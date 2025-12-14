@@ -1,0 +1,62 @@
+# Tuza's Conjecture - The Full τ ≤ 2ν Bound
+
+## THE PROBLEM (Open since 1981)
+
+For any graph G:
+  τ(G) ≤ 2ν(G)
+
+Where:
+- ν(G) = maximum number of edge-disjoint triangles (triangle packing number)
+- τ(G) = minimum size of edge set hitting all triangles (triangle covering number)
+
+## KNOWN RESULTS
+- Trivial bound: τ(G) ≤ 3ν(G) (ALREADY PROVEN in prior submission)
+- Conjecture: τ(G) ≤ 2ν(G) (THIS IS WHAT WE WANT)
+- Known to hold for: planar graphs, sparse graphs, random graphs
+
+## PRIOR SUBMISSION RESULT
+
+Aristotle proved the WEAKER bound:
+```lean
+theorem triangleCoveringNumber_le_three_mul_trianglePackingNumber :
+    triangleCoveringNumber G ≤ 3 * trianglePackingNumber G
+```
+
+This is NOT enough. We need the FULL conjecture.
+
+## DEFINITIONS (verified correct)
+
+```lean
+def triangleEdges (t : Finset V) : Finset (Sym2 V) :=
+  t.offDiag.image (fun x => Sym2.mk (x.1, x.2))
+
+def IsEdgeDisjoint (T : Finset (Finset V)) : Prop :=
+  (T : Set (Finset V)).PairwiseDisjoint triangleEdges
+
+noncomputable def trianglePackingNumber : ℕ :=
+  ((G.cliqueFinset 3).powerset.filter IsEdgeDisjoint).sup card
+
+def IsTriangleCovering (S : Finset (Sym2 V)) : Prop :=
+  (G.deleteEdges S).cliqueFinset 3 = ∅
+
+noncomputable def triangleCoveringNumber : ℕ :=
+  ((G.edgeFinset.powerset.filter (IsTriangleCovering G)).image card).min.getD G.edgeFinset.card
+```
+
+## TARGET THEOREM
+
+```lean
+theorem Tuza_conjecture
+  {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] :
+    triangleCoveringNumber G ≤ 2 * trianglePackingNumber G
+```
+
+## You Decide
+- The proof technique
+- Whether to use LP relaxation, structural decomposition, or other methods
+- Which special cases to handle first
+
+## Success Criteria
+- Prove τ ≤ 2ν (NOT 3ν - that's already done)
+- Zero sorries
+- Compiles with Lean 4.24.0 + Mathlib

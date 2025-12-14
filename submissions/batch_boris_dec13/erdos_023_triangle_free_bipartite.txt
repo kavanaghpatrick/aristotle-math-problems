@@ -1,0 +1,20 @@
+# Erdős Problem #23: Triangle-Free Bipartite
+
+## Problem Statement
+
+Can every triangle-free graph on 5n vertices be made bipartite by deleting at most n² edges?
+
+## Context
+
+This is Erdős Problem #23, an open problem in extremal graph theory.
+
+A graph is triangle-free if it contains no cycle of length 3.
+A graph is bipartite if its vertices can be partitioned into two sets such that every edge connects a vertex in one set to a vertex in the other.
+
+## Goal
+
+Prove or disprove: For all positive integers n, every triangle-free graph G on 5n vertices can be made bipartite by removing at most n² edges.
+
+## Reference
+
+https://www.erdosproblems.com/23

@@ -1,0 +1,2 @@
+14271720-cb7a-4686-861f-5b0048d62d14
+# Task: Erdős #593: Hypergraph chromatic characterization

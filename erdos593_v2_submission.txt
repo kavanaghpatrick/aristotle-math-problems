@@ -1,0 +1,64 @@
+# Erdős Problem #593 - Hypergraphs in Uncountable Chromatic Hypergraphs
+
+## THE PROBLEM ($500 Prize)
+
+Characterize those finite 3-uniform hypergraphs which appear (as subhypergraphs) in EVERY 3-uniform hypergraph of chromatic number > ℵ₀.
+
+## Expected Answer (Based on Graph Analog)
+
+For graphs: A finite graph appears in every graph with χ ≥ ℵ₁ iff it is BIPARTITE.
+
+For 3-uniform hypergraphs: A finite hypergraph H appears in every hypergraph with χ > ℵ₀ iff H is 2-COLORABLE.
+
+## Definitions
+
+A 3-uniform hypergraph H = (V, E) where every edge has exactly 3 vertices.
+
+H is 2-colorable if there exists c : V → {0,1} such that no edge is monochromatic.
+
+H embeds into G if there's an injective f : V(H) → V(G) mapping edges to edges.
+
+## Formal Statement
+
+```lean
+structure Hypergraph3 (V : Type*) where
+  edges : Set (Set V)
+  is_uniform : ∀ e ∈ edges, e.ncard = 3
+
+def IsTwoColorable (H : Hypergraph3 V) : Prop :=
+  ∃ c : V → Bool, ∀ e ∈ H.edges, ∃ x y ∈ e, c x ≠ c y
+
+def HasChromaticNumberGtAleph0 (H : Hypergraph3 V) : Prop :=
+  ∀ (c : V → ℕ), ¬ IsColoring H c
+
+def AppearsInAllUncountableChromatic (H : Hypergraph3 V) : Prop :=
+  Finite V ∧ ∀ G : Hypergraph3 W, HasChromaticNumberGtAleph0 G → EmbedsInto H G
+
+-- THE CONJECTURE: Characterization
+theorem erdos_593 : ∀ (V : Type*) (H : Hypergraph3 V) [Finite V],
+  AppearsInAllUncountableChromatic H ↔ IsTwoColorable H := by
+  sorry
+```
+
+## Two Directions to Prove
+
+1. **IsTwoColorable H → AppearsInAllUncountableChromatic H**
+   Every 2-colorable hypergraph embeds into every hypergraph with χ > ℵ₀.
+   (The partial proof already has progress on this direction!)
+
+2. **AppearsInAllUncountableChromatic H → IsTwoColorable H**
+   If H is NOT 2-colorable, construct a hypergraph with χ > ℵ₀ that doesn't contain H.
+
+## Previous Progress (from partial output)
+
+The partial proof established:
+- EmbedsInto_CompleteTwoColorable: 2-colorable H embeds into complete 2-colorable hypergraph
+- Direction 1 conditional on Erdős-Hajnal property
+
+## You Decide
+- How to complete direction 1
+- How to prove direction 2 (likely construct explicit counterexample)
+- Which auxiliary lemmas to develop
+
+## Success Criterion
+Prove the full characterization (both directions) with zero sorries.

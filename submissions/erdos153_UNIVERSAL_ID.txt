@@ -1,0 +1,4 @@
+87a1f043-ff82-4ebb-a6f5-90c3c21fad0d
+# Erdős #153 UNIVERSAL formalization
+# Boris-style submission
+# Key: ∀ M, ∃ N, ∀ A, (Sidon A ∧ |A|>N) → avg_sq_gap(A) > M

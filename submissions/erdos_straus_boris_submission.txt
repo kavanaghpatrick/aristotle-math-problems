@@ -1,0 +1,32 @@
+# Erdős-Straus Conjecture - Boris Pattern Submission
+
+## Goal
+Prove the Erdős-Straus conjecture for all positive integers n ≥ 2:
+Every positive integer n ≥ 2 can be expressed as 4/n = 1/x + 1/y + 1/z
+for some positive integers x, y, z.
+
+## You Decide
+- Which proof strategy to use (modular arithmetic, case analysis, etc.)
+- Which lemmas to create
+- How to structure the formalization
+- Which intermediate theorems to prove
+
+## Mathematical Background
+- Conjecture formulated by Paul Erdős and Ernst G. Straus (1948)
+- Verified computationally for n ≤ 10^17 (Salez, 2014)
+- Known to hold when n ≡ 0 (mod 4) or n ≡ 2 (mod 3) or n ≡ 3 (mod 4)
+- Only unresolved residue classes modulo 840: {1, 121, 169, 289, 361, 529}
+
+## Key Constraint
+The equation 4/n = 1/x + 1/y + 1/z must have a solution in positive integers
+x, y, z for EVERY positive integer n ≥ 2.
+
+## Equivalent Formulation
+For all n ≥ 2, there exist positive integers x, y, z such that:
+4xyz = n(yz + xz + xy)
+
+## Success Criteria
+- ✅ Formal proof in Lean 4
+- ✅ Zero sorries
+- ✅ Compiles without errors
+- ✅ Covers all positive integers n ≥ 2
