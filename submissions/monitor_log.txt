@@ -879,3 +879,26 @@ NOVELTY ASSESSMENT:
   * disjoint_triangles_cover (Case 0)
   * bowtie_structure (Case 1 setup)
   * bowtie_cover (Case 1 construction)
+
+=== ENHANCED SUBMISSIONS (Grok Reviewed) ===
+Date: $(date)
+
+erdos677_enhanced (fc15d71d-299c-45d0-8844-e7b18755c13f)
+  - Grok Rating: 9/10
+  - Fixed syntax error: (by omega : p ≠ 0) → (show p ≠ 0 by omega)
+  - Enhanced with: forbidden_zone_range, chain_or_growth, M_upper_bound
+
+erdos593_enhanced (e7264118-2f22-4159-a0e0-d12e9b3b8098)
+  - Grok Rating: 9/10
+  - Enhanced with: erdos_rado_pairs, stationary_monochromatic, not_propertyB_has_odd_structure, shift_no_odd_cycle
+
+erdos128_enhanced (db5490cf-ba8e-43c5-8abc-5a42b88832c8)
+  - Grok Rating: 8/10
+  - Enhanced with: mantel theorem, indep_number_lower_bound, find_large_indep_set, extend_to_half
+
+All enhanced versions ready. Submitted $(date +%Y-%m-%d\ %H:%M)
+
+TOTAL ACTIVE SUBMISSIONS: 8
+- 3 original Erdős submissions
+- 3 enhanced Erdős submissions
+- 2 Tuza ν=2 submissions
