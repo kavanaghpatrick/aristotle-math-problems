@@ -1,0 +1,117 @@
+{
+  "submissions/tuza_iteration3.lean": {
+    "project_id": "beae6b6a-05b7-4efb-b12e-b9581793032a",
+    "submitted_at": "2024-12-14T18:17:39",
+    "status": "queued"
+  },
+  "submissions/erdos128_corrected.lean": {
+    "project_id": "35e85121-c737-4e22-8b76-7011aeec84f9",
+    "submitted_at": "2024-12-14T17:30:00",
+    "status": "in_progress"
+  },
+  "submissions/batch_dec14_precise/erdos1094_v2.lean": {
+    "project_id": "unknown",
+    "submitted_at": "2024-12-14T17:00:00",
+    "status": "in_progress"
+  },
+  "submissions/batch_dec14_precise/erdos141_v2.lean": {
+    "project_id": "unknown",
+    "submitted_at": "2024-12-14T17:00:00",
+    "status": "in_progress"
+  },
+  "submissions/batch_dec14_precise/erdos939_v2.lean": {
+    "project_id": "unknown",
+    "submitted_at": "2024-12-14T17:00:00",
+    "status": "in_progress"
+  },
+  "submissions/batch_dec14_precise/erdos1059_v2.lean": {
+    "project_id": "unknown",
+    "submitted_at": "2024-12-14T17:00:00",
+    "status": "in_progress"
+  },
+  "submissions/batch_dec14_precise/erdos1108_precise.lean": {
+    "project_id": "unknown",
+    "submitted_at": "2024-12-14T17:00:00",
+    "status": "in_progress"
+  },
+  "submissions/tuza_iteration3_alt.lean": {
+    "project_id": "7f9d358e-f2cc-4094-b560-709d55a7af1d",
+    "submitted_at": "2025-12-14T18:22:27.420347",
+    "status": "submitted"
+  },
+  "submissions/batch_dec14_precise/erdos677_precise.lean": {
+    "project_id": "dd401d5c-f3a5-4b1d-96a8-3989c86164de",
+    "submitted_at": "2025-12-14T18:23:09.411729",
+    "status": "submitted"
+  },
+  "submissions/batch_dec14_precise/erdos340_precise.lean": {
+    "project_id": "a58f4d00-cdf2-4391-8b84-e0d5cb6af6c8",
+    "submitted_at": "2025-12-14T18:27:26.176439",
+    "status": "submitted"
+  },
+  "submissions/batch_dec14_precise/erdos730_precise.lean": {
+    "project_id": "d0512713-e4fb-41db-88d4-16391aa5498f",
+    "submitted_at": "2025-12-14T18:28:34.557333",
+    "status": "submitted"
+  },
+  "submissions/tuza_full_induction.lean": {
+    "project_id": "6e552983-3645-4633-8a21-e301212e9eb9",
+    "submitted_at": "2025-12-14T18:53:34.076009",
+    "status": "submitted"
+  },
+  "submissions/batch_dec14_precise/erdos931_precise.lean": {
+    "project_id": "a6cb4923-a8bf-45d8-b456-ded979bbd9fc",
+    "submitted_at": "2025-12-14T19:00:48.088489",
+    "status": "submitted"
+  },
+  "submissions/tuza_FULL_CONJECTURE.lean": {
+    "project_id": "3236adf0-cb8c-43c5-94c9-4528d4b05fa7",
+    "submitted_at": "2025-12-15T00:29:56.396214",
+    "status": "resubmitted"
+  },
+  "submissions/erdos313_constructive.lean": {
+    "project_id": "7eb2f5e8-5aa7-4be5-96d4-f20488d11984",
+    "submitted_at": "2025-12-14T21:53:54.482208",
+    "status": "submitted"
+  },
+  "submissions/erdos128_structural.lean": {
+    "project_id": "b1393afd-9fe3-45b2-87ab-6d14dc65346a",
+    "submitted_at": "2025-12-14T22:42:45.392351",
+    "status": "submitted"
+  },
+  "submissions/erdos677_prime_strategy.lean": {
+    "project_id": "1f81c745-d0e0-4749-907a-6f1446d99252",
+    "submitted_at": "2025-12-14T23:13:27.966850",
+    "status": "submitted"
+  },
+  "submissions/erdos677_gap_strategy.lean": {
+    "project_id": "b373331f-4557-471f-9b39-511e27b29916",
+    "submitted_at": "2025-12-14T23:38:22.528442",
+    "status": "submitted"
+  },
+  "submissions/erdos593_galvin_refined.lean": {
+    "project_id": "0bdf312e-2400-4a09-adcf-33d63d7f1866",
+    "submitted_at": "2025-12-14T23:54:57.625804",
+    "status": "submitted"
+  },
+  "submissions/erdos593_simplified.lean": {
+    "project_id": "dae067a9-aad2-4f47-8c20-98b1db6d4848",
+    "submitted_at": "2025-12-15T00:06:10.655591",
+    "status": "submitted"
+  },
+  "submissions/erdos730_kummer.lean": {
+    "project_id": "4ed9410b-d82e-4cb3-874e-78e49bbeee64",
+    "submitted_at": "2025-12-15T00:06:10.655596",
+    "status": "submitted"
+  },
+  "submissions/erdos593_v3.lean": {
+    "project_id": "47ebf948-8515-446a-87f8-077ebbcfb0a9",
+    "submitted_at": "2025-12-15T00:25:41.053757",
+    "status": "submitted"
+  },
+  "submissions/erdos730_v3.lean": {
+    "project_id": "bf62a5fb-f975-452b-be1a-43194654f5fd",
+    "submitted_at": "2025-12-15T00:25:41.053764",
+    "status": "submitted"
+  }
+}

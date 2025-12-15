@@ -1,320 +1,273 @@
 #!/usr/bin/env python3
 """
-Aristotle Queue Monitor & Auto-Submitter
-
-Features:
-- Monitors project status every N seconds
-- Auto-submits queued submissions when slots open
-- Downloads completed results automatically
-- Logs all activity
-- Sends desktop notifications (macOS)
-
-Usage:
-    python3 scripts/aristotle_monitor.py [--interval 60] [--once]
+Aristotle Monitor v1 - Monitors, downloads, analyzes Aristotle outputs
 """
 
+import json
 import asyncio
 import argparse
-import os
-import sys
-import json
+import re
 from pathlib import Path
 from datetime import datetime
 from typing import Optional
 
-try:
-    from aristotlelib import Project, ProjectInputType, ProjectStatus, set_api_key
-except ImportError:
-    print("ERROR: aristotlelib not installed. Run: pip install aristotlelib")
-    sys.exit(1)
+SUBMISSIONS_LOG = "submissions/submitted_projects.json"
+RESULTS_DIR = "submissions/results"
+ANALYSIS_LOG = "submissions/analysis_log.json"
 
-# Configuration
-MAX_CONCURRENT = 5  # Aristotle's limit
-CHECK_INTERVAL = 60  # seconds
-DOWNLOADS_DIR = Path.home() / "Downloads"
-LOG_FILE = Path(__file__).parent.parent / "submissions" / "monitor_log.txt"
+def log(msg: str):
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
-# Pending submissions queue (priority order)
-PENDING_SUBMISSIONS = [
-    {
-        "file": "submissions/erdos_064_2k_cycles_boris_v3_with_context.txt",
-        "desc": "Erdős #64 v3: 2^k cycles (enhanced with GP context)",
-        "priority": 1,
-    },
-    {
-        "file": "submissions/erdos_152_sidon_gaps_v2_with_context.txt",
-        "desc": "Erdős #152 v2: Sidon gaps (enhanced with prior lemmas)",
-        "priority": 2,
-    },
-]
-
-# Track what we've submitted to avoid duplicates
-SUBMITTED_FILE = Path(__file__).parent.parent / "submissions" / "auto_submitted.json"
-
-
-def log(msg: str, also_print: bool = True):
-    """Log message to file and optionally print."""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_msg = f"[{timestamp}] {msg}"
-
-    if also_print:
-        print(log_msg)
-
+def load_json(path: str) -> dict:
     try:
-        with open(LOG_FILE, "a") as f:
-            f.write(log_msg + "\n")
+        with open(path, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+def save_json(path: str, data: dict):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with open(path, 'w') as f:
+        json.dump(data, f, indent=2, default=str)
+
+async def get_all_projects() -> list:
+    try:
+        from aristotlelib import Project
+        projects = await Project.list_projects()
+        all_projects = []
+        for item in projects:
+            if isinstance(item, list):
+                all_projects.extend(item)
+        return all_projects
     except Exception as e:
-        print(f"Warning: Could not write to log: {e}")
+        log(f"Error fetching projects: {e}")
+        return []
 
-
-def notify(title: str, message: str):
-    """Send macOS desktop notification."""
+async def download_output(project_id: str, output_dir: str = RESULTS_DIR) -> Optional[str]:
     try:
-        os.system(f'''osascript -e 'display notification "{message}" with title "{title}"' ''')
-    except:
-        pass  # Notifications are optional
-
-
-def load_submitted() -> set:
-    """Load set of already-submitted files."""
-    if SUBMITTED_FILE.exists():
-        try:
-            with open(SUBMITTED_FILE) as f:
-                return set(json.load(f))
-        except:
-            return set()
-    return set()
-
-
-def save_submitted(submitted: set):
-    """Save set of submitted files."""
-    try:
-        with open(SUBMITTED_FILE, "w") as f:
-            json.dump(list(submitted), f, indent=2)
-    except Exception as e:
-        log(f"Warning: Could not save submitted state: {e}")
-
-
-async def get_queue_status() -> dict:
-    """Get current queue status."""
-    projects, _ = await Project.list_projects(limit=30)
-
-    status = {
-        "in_progress": [],
-        "queued": [],
-        "complete": [],
-        "failed": [],
-        "total_active": 0,
-    }
-
-    for p in projects:
-        s = str(p.status)
-        entry = {
-            "id": p.project_id,
-            "desc": p.description or "N/A",
-            "status": s,
-        }
-
-        if "IN_PROGRESS" in s:
-            status["in_progress"].append(entry)
-        elif "QUEUED" in s:
-            status["queued"].append(entry)
-        elif "COMPLETE" in s:
-            status["complete"].append(entry)
-        elif "FAILED" in s:
-            status["failed"].append(entry)
-
-    status["total_active"] = len(status["in_progress"]) + len(status["queued"])
-    return status
-
-
-async def download_result(project_id: str, desc: str) -> Optional[Path]:
-    """Download result for a completed project."""
-    try:
+        from aristotlelib import Project
         project = await Project.from_id(project_id)
-        await project.refresh()
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        output_path = f"{output_dir}/{project_id}-output.lean"
 
-        # Get output content
         if hasattr(project, 'output') and project.output:
-            filename = f"{project_id[:12]}-output.lean"
-            filepath = DOWNLOADS_DIR / filename
-
-            with open(filepath, 'w') as f:
+            with open(output_path, 'w') as f:
                 f.write(project.output)
-
-            log(f"✅ Downloaded: {filename}")
-            return filepath
-        else:
-            log(f"⚠️  No output available for {project_id[:12]}")
-            return None
-
+            return output_path
+        elif hasattr(project, 'download_output'):
+            await project.download_output(output_path)
+            if Path(output_path).exists():
+                return output_path
+        return None
     except Exception as e:
-        log(f"❌ Download failed for {project_id[:12]}: {e}")
+        log(f"Error downloading {project_id}: {e}")
         return None
 
+def analyze_output(filepath: str) -> dict:
+    try:
+        with open(filepath, 'r') as f:
+            content = f.read()
+    except FileNotFoundError:
+        return {'status': 'error', 'message': 'File not found'}
 
-async def submit_pending(submitted: set) -> Optional[str]:
-    """Submit next pending problem if slot available. Returns project_id if submitted."""
-    for item in PENDING_SUBMISSIONS:
-        filepath = Path(item["file"])
+    analysis = {
+        'filepath': filepath,
+        'status': 'unknown',
+        'sorries': 0,
+        'proven_lemmas': [],
+        'failed_lemmas': [],
+        'negated_theorems': [],
+        'syntax_errors': [],
+        'suggestions': []
+    }
 
-        if str(filepath) in submitted:
-            continue
+    # Count real sorries (not in comments)
+    # Simple: count "sorry" not preceded by /- or --
+    analysis['sorries'] = len(re.findall(r'(?<![-/])\bsorry\b', content))
 
-        if not filepath.exists():
-            log(f"⚠️  File not found: {filepath}")
-            continue
+    # Check for negations
+    if 'The following was negated by Aristotle:' in content:
+        negation_match = re.search(r'The following was negated by Aristotle:\s*\n(.*?)(?=Here is the code|$)',
+                                    content, re.DOTALL)
+        if negation_match:
+            negated = negation_match.group(1).strip()
+            analysis['negated_theorems'] = [line.strip() for line in negated.split('\n')
+                                            if line.strip().startswith('-')]
+        analysis['status'] = 'negated'
+        analysis['suggestions'].append('Check formalization matches original problem')
+        analysis['suggestions'].append('Look for floor/ceil, quantifier issues')
 
-        try:
-            log(f"📤 Submitting: {item['desc']}")
+    # Check for syntax errors
+    if 'Aristotle failed to load this code' in content:
+        analysis['syntax_errors'].append('Load error detected')
+        analysis['status'] = 'syntax_error'
+        analysis['suggestions'].append('Fix syntax errors before resubmitting')
 
-            project_id = await Project.prove_from_file(
-                input_file_path=str(filepath),
-                project_input_type=ProjectInputType.INFORMAL,
-                wait_for_completion=False
-            )
-
-            log(f"✅ Submitted! Project ID: {project_id}")
-            notify("Aristotle Submission", f"Submitted: {item['desc'][:30]}...")
-
-            # Save project ID
-            id_file = filepath.with_suffix('.auto_project_id.txt')
-            with open(id_file, 'w') as f:
-                f.write(f"{project_id}\n")
-                f.write(f"Submitted: {datetime.now().isoformat()}\n")
-                f.write(f"Description: {item['desc']}\n")
-
-            # Mark as submitted
-            submitted.add(str(filepath))
-            save_submitted(submitted)
-
-            return project_id
-
-        except Exception as e:
-            if "5 projects in progress" in str(e):
-                log(f"⏳ Queue full, will retry later")
-                return None
+    # Find all lemma/theorem names
+    lemma_names = re.findall(r'(?:lemma|theorem)\s+(\w+)', content)
+    
+    # For each lemma, check if it has sorry in its body
+    for name in lemma_names:
+        # Find the lemma definition and its body
+        pattern = rf'(?:lemma|theorem)\s+{re.escape(name)}.*?:=\s*by(.*?)(?=\n(?:lemma|theorem|def |end\b|/-)|$)'
+        match = re.search(pattern, content, re.DOTALL)
+        if match:
+            body = match.group(1)
+            if 'sorry' in body or 'negate_state' in body:
+                analysis['failed_lemmas'].append(name)
             else:
-                log(f"❌ Submission error: {e}")
-                continue
+                analysis['proven_lemmas'].append(name)
+        else:
+            # Might be a declaration with sorry at top level
+            simple_pattern = rf'(?:lemma|theorem)\s+{re.escape(name)}[^:]*:.*?:=.*?sorry'
+            if re.search(simple_pattern, content, re.DOTALL):
+                analysis['failed_lemmas'].append(name)
 
-    return None
+    # Determine overall status
+    if analysis['status'] == 'unknown':
+        if analysis['sorries'] == 0 and analysis['proven_lemmas']:
+            analysis['status'] = 'success'
+            analysis['suggestions'].append('🎉 Complete proof! Verify against original problem.')
+        elif analysis['proven_lemmas'] and analysis['failed_lemmas']:
+            analysis['status'] = 'partial'
+            analysis['suggestions'].append(f'Partial: {len(analysis["proven_lemmas"])} proven, {len(analysis["failed_lemmas"])} need work')
+        elif analysis['sorries'] > 0:
+            analysis['status'] = 'incomplete'
 
+    # Special pattern checks
+    if 'C5' in content or 'cycleGraph 5' in content:
+        analysis['suggestions'].append('Contains C5 cycle - verify counterexample')
+    if 'negate_state' in content and analysis['status'] != 'negated':
+        analysis['suggestions'].append('Uses negate_state - check validity')
 
-async def check_for_new_completions(known_complete: set) -> list:
-    """Check for newly completed projects."""
-    status = await get_queue_status()
-    new_completions = []
+    return analysis
 
-    for proj in status["complete"]:
-        if proj["id"] not in known_complete:
-            new_completions.append(proj)
-            known_complete.add(proj["id"])
+def print_analysis(analysis: dict):
+    status_emoji = {
+        'success': '✅', 'partial': '🔶', 'negated': '⚠️',
+        'syntax_error': '❌', 'incomplete': '📝', 'unknown': '❓', 'error': '💥'
+    }
+    emoji = status_emoji.get(analysis['status'], '❓')
+    
+    print(f"\n{'='*60}")
+    print(f"{emoji} STATUS: {analysis['status'].upper()}")
+    print(f"   File: {Path(analysis.get('filepath', 'N/A')).name}")
+    print(f"{'='*60}")
 
-    return new_completions
+    if analysis['proven_lemmas']:
+        print(f"\n✅ PROVEN ({len(analysis['proven_lemmas'])}):")
+        for name in analysis['proven_lemmas']:
+            print(f"   • {name}")
 
+    if analysis['failed_lemmas']:
+        print(f"\n❌ FAILED/SORRY ({len(analysis['failed_lemmas'])}):")
+        for name in analysis['failed_lemmas']:
+            print(f"   • {name}")
 
-async def monitor_loop(interval: int, run_once: bool = False):
-    """Main monitoring loop."""
-    log("=" * 60)
-    log("🚀 Aristotle Monitor Started")
+    if analysis['negated_theorems']:
+        print(f"\n⚠️  NEGATED ({len(analysis['negated_theorems'])}):")
+        for neg in analysis['negated_theorems'][:5]:
+            print(f"   {neg[:70]}...")
+
+    if analysis['syntax_errors']:
+        print(f"\n💥 SYNTAX ERRORS: {len(analysis['syntax_errors'])}")
+
+    if analysis['sorries']:
+        print(f"\n📝 Remaining sorries: {analysis['sorries']}")
+
+    if analysis['suggestions']:
+        print(f"\n💡 SUGGESTIONS:")
+        for sug in analysis['suggestions']:
+            print(f"   → {sug}")
+    print()
+
+async def check_completions() -> list:
+    submissions = load_json(SUBMISSIONS_LOG)
+    analysis_log = load_json(ANALYSIS_LOG)
+    projects = await get_all_projects()
+    completed = []
+
+    for project in projects:
+        status = str(project.status).split('.')[-1]
+        pid = project.project_id
+
+        our_submission = None
+        for filepath, info in submissions.items():
+            if info.get('project_id') == pid:
+                our_submission = filepath
+                break
+        if not our_submission:
+            continue
+
+        if pid in analysis_log:
+            continue
+
+        if status in ['COMPLETE', 'FAILED', 'ERROR']:
+            log(f"Completed: {pid[:8]}... ({status}) - {Path(our_submission).name}")
+            output_path = await download_output(pid)
+
+            if output_path and Path(output_path).exists():
+                analysis = analyze_output(output_path)
+                analysis['project_id'] = pid
+                analysis['original_file'] = our_submission
+                analysis['completion_status'] = status
+
+                analysis_log[pid] = analysis
+                save_json(ANALYSIS_LOG, analysis_log)
+
+                submissions[our_submission]['status'] = status.lower()
+                submissions[our_submission]['analyzed'] = True
+                submissions[our_submission]['analysis_status'] = analysis['status']
+                save_json(SUBMISSIONS_LOG, submissions)
+
+                completed.append(analysis)
+                print_analysis(analysis)
+
+    return completed
+
+async def watch_loop(interval: int = 120):
+    log("🔍 Starting Aristotle Monitor...")
     log(f"   Check interval: {interval}s")
-    log(f"   Pending submissions: {len(PENDING_SUBMISSIONS)}")
-    log("=" * 60)
-
-    # Set API key
-    api_key = os.environ.get("ARISTOTLE_API_KEY")
-    if not api_key:
-        log("ERROR: ARISTOTLE_API_KEY not set")
-        sys.exit(1)
-    set_api_key(api_key)
-
-    # Load state
-    submitted = load_submitted()
-    known_complete = set()
-
-    # Initial scan to populate known_complete
-    status = await get_queue_status()
-    for proj in status["complete"]:
-        known_complete.add(proj["id"])
-
-    iteration = 0
+    log(f"   Results dir: {RESULTS_DIR}")
 
     while True:
-        iteration += 1
-        log(f"\n--- Check #{iteration} ---")
-
         try:
-            # Get current status
-            status = await get_queue_status()
-
-            active = status["total_active"]
-            in_prog = len(status["in_progress"])
-            queued = len(status["queued"])
-            complete = len(status["complete"])
-
-            log(f"📊 Queue: {in_prog} processing, {queued} queued, {complete} complete")
-
-            # Check for new completions
-            new_completions = await check_for_new_completions(known_complete)
-            if new_completions:
-                log(f"🎉 {len(new_completions)} NEW COMPLETION(S)!")
-                for proj in new_completions:
-                    desc_short = proj["desc"][:40] + "..." if len(proj["desc"]) > 40 else proj["desc"]
-                    log(f"   ✅ {proj['id'][:12]}: {desc_short}")
-                    notify("Aristotle Complete!", desc_short)
-
-                    # Auto-download
-                    await download_result(proj["id"], proj["desc"])
-
-            # Try to submit pending if slots available
-            slots_available = MAX_CONCURRENT - in_prog
-            pending_count = len([p for p in PENDING_SUBMISSIONS if str(Path(p["file"])) not in submitted])
-
-            if slots_available > 0 and pending_count > 0:
-                log(f"📥 {slots_available} slot(s) available, {pending_count} pending")
-                project_id = await submit_pending(submitted)
-                if project_id:
-                    log(f"   → Submitted to slot")
-            elif pending_count == 0:
-                log(f"📭 No pending submissions remaining")
+            completed = await check_completions()
+            if completed:
+                successes = [c for c in completed if c['status'] == 'success']
+                negated = [c for c in completed if c['status'] == 'negated']
+                
+                if successes:
+                    log(f"🎉 {len(successes)} SUCCESS(ES)!")
+                if negated:
+                    log(f"⚠️  {len(negated)} NEGATED - check formalization!")
             else:
-                log(f"⏳ Queue full ({in_prog}/{MAX_CONCURRENT}), waiting...")
-
-            # Show currently processing
-            if status["in_progress"]:
-                log("🔄 Currently processing:")
-                for proj in status["in_progress"][:3]:
-                    desc_short = proj["desc"][:45] + "..." if len(proj["desc"]) > 45 else proj["desc"]
-                    log(f"   • {desc_short}")
-                if len(status["in_progress"]) > 3:
-                    log(f"   ... and {len(status['in_progress']) - 3} more")
-
+                log("No new completions")
         except Exception as e:
-            log(f"❌ Error during check: {e}")
+            log(f"Error: {e}")
 
-        if run_once:
-            log("\n--- Single check complete ---")
-            break
-
-        # Wait for next check
-        log(f"⏰ Next check in {interval}s...")
+        log(f"Next check in {interval}s...")
         await asyncio.sleep(interval)
 
-
 def main():
-    parser = argparse.ArgumentParser(description="Aristotle Queue Monitor")
-    parser.add_argument("--interval", type=int, default=CHECK_INTERVAL,
-                        help=f"Check interval in seconds (default: {CHECK_INTERVAL})")
-    parser.add_argument("--once", action="store_true",
-                        help="Run single check and exit")
+    parser = argparse.ArgumentParser(description="Aristotle Monitor")
+    parser.add_argument("--watch", action="store_true", help="Continuous monitoring")
+    parser.add_argument("--check-once", action="store_true", help="Single check")
+    parser.add_argument("--analyze", type=str, help="Analyze specific file")
+    parser.add_argument("--interval", type=int, default=120, help="Check interval (s)")
     args = parser.parse_args()
 
-    try:
-        asyncio.run(monitor_loop(args.interval, args.once))
-    except KeyboardInterrupt:
-        log("\n👋 Monitor stopped by user")
-
+    if args.analyze:
+        analysis = analyze_output(args.analyze)
+        print_analysis(analysis)
+        return
+    if args.check_once:
+        asyncio.run(check_completions())
+        return
+    if args.watch:
+        asyncio.run(watch_loop(args.interval))
+        return
+    parser.print_help()
 
 if __name__ == "__main__":
     main()

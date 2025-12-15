@@ -167,6 +167,30 @@ python3 scripts/extract_solvable_open.py
 
 ---
 
+## Grok for Lean Code Review
+
+**Key**: Tell Grok to check CODE, not solve MATH (or it times out reasoning).
+
+```bash
+# System prompt: "Lean 4 syntax checker. DO NOT solve math. ONLY check if code compiles."
+# Settings: temperature=0, max_tokens=800, timeout=180s
+```
+
+**Use for**: Syntax errors, missing instances, Mathlib API issues
+**Don't use for**: Theorem proving, deep math analysis (use Gemini)
+
+---
+
+## Lean/Mathlib Pitfalls
+
+**Set vs Finset**: `(G.induce S).edgeFinset` needs `DecidablePred (· ∈ S)` → use `Finset V` not `Set V`
+
+**Required instances**: `[Fintype V] [DecidableEq V] [DecidableRel G.Adj]`
+
+**Aristotle error?** Check: missing `DecidableRel`, Set/Finset mismatch, missing `Fintype`
+
+---
+
 ## Success Metrics
 
 | Metric | Target | Notes |
