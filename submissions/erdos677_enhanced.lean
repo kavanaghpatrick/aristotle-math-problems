@@ -196,7 +196,7 @@ theorem erdos_677_n_ge_k (n k m : ℕ) (hk : k ≥ 1) (hn : n ≥ k) (hm : m ≥
   · exact forbidden_zone n k j m p hk hj hp hpk hpdiv hm hzone
   · push_neg at hzone
     by_cases hlarge : m + k > M n k
-    · exact M_grows_large n k m hk hlarge
+    · exact (M_grows_large n k m hk hlarge).symm
     · -- Need iteration: the new interval has a new prime
       -- This is the key technical step
       sorry

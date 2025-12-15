@@ -88,12 +88,12 @@ lemma uncountable_chromatic_mono_edge (W : Type*) (G : Hypergraph3 W)
   by_contra hne
   exact hmono x hx y hy hne
 
-/-- Erdős-Rado partition theorem: For uncountable κ, coloring [κ]² with countably many
-    colors yields an uncountable homogeneous set -/
-lemma erdos_rado_pairs (κ : Cardinal) (hκ : κ > ℵ₀) :
-    ∀ c : Ordinal × Ordinal → ℕ,
-    ∃ (S : Set Ordinal), Cardinal.mk S ≥ ℵ₁ ∧
-      ∃ color : ℕ, ∀ x ∈ S, ∀ y ∈ S, x < y → c (x, y) = color := by
+/-- Erdős-Rado partition theorem: For uncountable κ, coloring pairs from ordinals < κ
+    with countably many colors yields an uncountable homogeneous set -/
+lemma erdos_rado_pairs (κ : Cardinal) (hκ : κ > ℵ₀)
+    (c : {α : Ordinal // α < κ.ord} → {α : Ordinal // α < κ.ord} → ℕ) :
+    ∃ (S : Set {α : Ordinal // α < κ.ord}), Cardinal.mk S ≥ ℵ₁ ∧
+      ∃ color : ℕ, ∀ x ∈ S, ∀ y ∈ S, x.val < y.val → c x y = color := by
   -- This is the Erdős-Rado theorem for pairs
   sorry
 
@@ -126,100 +126,39 @@ theorem propertyB_implies_unavoidable [Finite V] (H : Hypergraph3 V)
   intro W G hchi
   exact ramsey_embedding_lemma H hB W G hchi
 
-/-! ## Intermediate Lemmas for Direction 2 (¬Property B → Avoidable) -/
+/-! ## Intermediate Lemmas for Direction 2 (¬Property B → Avoidable)
 
-/-- The shift hypergraph on ordinals -/
-def ShiftHypergraph (κ : Cardinal) (n m : ℕ) : Hypergraph3 (Ordinal.{0}) where
-  edges := {e | ∃ α β γ : Ordinal, α < β ∧ β < γ ∧
-                β = α + n ∧ γ = β + m ∧ e = {α, β, γ} ∧
-                γ < κ.ord}
-  uniform := by
-    intro e ⟨α, β, γ, hαβ, hβγ, _, _, he, _⟩
-    rw [he]
-    have hne1 : α ≠ β := ne_of_lt hαβ
-    have hne2 : β ≠ γ := ne_of_lt hβγ
-    have hne3 : α ≠ γ := ne_of_lt (lt_trans hαβ hβγ)
-    simp only [Set.ncard_insert_of_not_mem, Set.ncard_singleton,
-               Set.mem_insert_iff, Set.mem_singleton_iff,
-               hne1, hne2, hne3, not_false_eq_true]
-    sorry -- ncard computation
+NOTE: The simple shift hypergraph {α, α+n, α+n+m} is COUNTABLY COLORABLE
+via c(α) = α mod ω. Aristotle proved this!
 
-/-- Stationary set lemma: In ω₁, any countable coloring has a stationary monochromatic set -/
-lemma stationary_monochromatic (c : Ordinal → ℕ) :
-    ∃ color : ℕ, ∃ S : Set Ordinal,
-      (∀ α ∈ S, α < Cardinal.aleph1.ord) ∧
-      Cardinal.mk S ≥ ℵ₁ ∧
-      (∀ α ∈ S, c α = color) := by
-  -- Pigeonhole on uncountably many ordinals with countably many colors
-  sorry
+CORRECT APPROACH: Use Kneser hypergraph or Steiner system construction.
+The key is that non-Property-B hypergraphs have specific structure that
+can be avoided by carefully constructed uncountably chromatic hypergraphs.
+-/
 
-/-- Shift forces monochromatic edges via stationary sets -/
-lemma shift_mono_from_stationary (n m : ℕ) (hn : n ≥ 1) (hm : m ≥ 1)
-    (c : Ordinal → ℕ) (S : Set Ordinal) (hS_large : Cardinal.mk S ≥ ℵ₁)
-    (hS_mono : ∀ α ∈ S, c α = 0) (hS_bound : ∀ α ∈ S, α < Cardinal.aleph1.ord) :
-    ∃ e ∈ (ShiftHypergraph Cardinal.aleph1 n m).edges,
-      ∀ x ∈ e, c x = 0 := by
-  -- In a large stationary set of the same color,
-  -- find α, α+n, α+n+m all in S (possible since S is uncountable)
-  sorry
+/-- Kneser-type hypergraph: 3-uniform edges with pairwise intersection bounded.
+    Parameter r controls intersection bound. This has high chromatic number. -/
+def KneserHypergraph (n r : ℕ) : Hypergraph3 (Fin n → Bool) where
+  edges := {e | e.ncard = 3 ∧ ∀ x ∈ e, ∀ y ∈ e, x ≠ y →
+                (Finset.filter (fun i => x i = true ∧ y i = true) Finset.univ).card ≤ r}
+  uniform := by intro e he; exact he.1
 
-/-- Shift hypergraph has uncountable chromatic number for uncountable κ -/
-lemma shift_uncountable_chromatic (κ : Cardinal) (hκ : κ > ℵ₀) (n m : ℕ)
-    (hn : n ≥ 1) (hm : m ≥ 1) :
-    HasUncountableChromatic (ShiftHypergraph κ n m) := by
-  intro c hproper
-  -- Get stationary monochromatic set
-  obtain ⟨color, S, hS_bound, hS_large, hS_mono⟩ := stationary_monochromatic c
-  -- Find monochromatic edge in this set
-  obtain ⟨e, he, hmono⟩ := shift_mono_from_stationary n m hn hm c S
-    (by simp_all) (by simp_all) (by simp_all)
-  -- Contradict proper coloring
-  unfold IsProperColoring at hproper
-  obtain ⟨x, hx, y, hy, hne⟩ := hproper e he
-  have := hmono x hx
-  have := hmono y hy
-  simp_all
-
-/-- Non-2-colorable hypergraph has an "odd cycle" structure -/
-lemma not_propertyB_has_odd_structure [Finite V] (H : Hypergraph3 V)
-    (hnotB : ¬ HasPropertyB H) :
-    ∃ (cycle : List (Finset V)), cycle.length ≥ 3 ∧ Odd cycle.length ∧
-      (∀ e ∈ cycle, (e : Set V) ∈ H.edges ∧ e.card = 3) := by
-  -- Non-2-colorable implies existence of odd hypercycle
-  sorry
-
-/-- Odd structures cannot embed in shift graphs (linear order prevents cycles) -/
-lemma shift_no_odd_cycle (n m : ℕ) (hn : n ≥ 1) (hm : m ≥ 1)
-    (cycle : List (Finset Ordinal)) (hcycle : cycle.length ≥ 3) (hodd : Odd cycle.length)
-    (hedge : ∀ e ∈ cycle, (e : Set Ordinal) ∈ (ShiftHypergraph Cardinal.aleph1 n m).edges) :
-    False := by
-  -- The linear order on ordinals prevents odd cycles
-  -- Each edge has form {α, α+n, α+n+m} with strict ordering
-  -- Cycling through edges forces a contradiction with ordering
-  sorry
-
-/-- Non-Property-B hypergraphs cannot embed in shift graphs -/
-lemma shift_avoids_nonB [Finite V] (H : Hypergraph3 V) (hnotB : ¬ HasPropertyB H) :
-    ∃ n m : ℕ, n ≥ 1 ∧ m ≥ 1 ∧
-      ¬ EmbedsInto H (ShiftHypergraph Cardinal.aleph1 n m) := by
-  -- Get the odd structure from H
-  obtain ⟨cycle, hlen, hodd, hedge⟩ := not_propertyB_has_odd_structure H hnotB
-  -- Choose shifts based on H's structure
-  use 1, 1
-  constructor; · omega
-  constructor; · omega
-  -- If H embeds, its odd cycle would embed, but that's impossible
-  intro ⟨f, hf_inj, hf_edge⟩
-  -- Map the cycle through f
+/-- For non-Property-B hypergraph H, there exists construction G with
+    χ(G) > ℵ₀ that avoids H -/
+lemma avoidance_construction [Finite V] (H : Hypergraph3 V) (hnotB : ¬ HasPropertyB H) :
+    ∃ (W : Type*) (G : Hypergraph3 W), HasUncountableChromatic G ∧ ¬ EmbedsInto H G := by
+  -- Non-Property-B means H has an odd tight cycle or Fano-like structure
+  -- Construct G to be "bipartite-like" in a way that avoids such structures
+  -- Key: G has uncountable chromatic number but all finite subhypergraphs
+  -- are 2-colorable in a specific sense
   sorry
 
 /-- ¬Property B implies avoidable -/
 theorem not_propertyB_implies_avoidable [Finite V] (H : Hypergraph3 V)
     (hnotB : ¬ HasPropertyB H) : ¬ IsUnavoidable H := by
+  obtain ⟨W, G, hchi, havoid⟩ := avoidance_construction H hnotB
   intro ⟨_, hforall⟩
-  obtain ⟨n, m, hn, hm, havoid⟩ := shift_avoids_nonB H hnotB
-  have hchi := shift_uncountable_chromatic Cardinal.aleph1 (by simp) n m hn hm
-  exact havoid (hforall Ordinal (ShiftHypergraph Cardinal.aleph1 n m) hchi)
+  exact havoid (hforall W G hchi)
 
 /-! ## Main Characterization -/
 
