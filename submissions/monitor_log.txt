@@ -870,3 +870,12 @@ NOVELTY ASSESSMENT:
 - ν=2 case (ATTEMPTING): Also likely folklore, but novel formal proof
 - Key contribution: Machine-verifiable proofs of small Tuza cases
 - Boris pattern: Looking for formalization gaps, not solving "new" math
+
+[2025-12-15] SUBMITTED: tuza_nu2_case_v6.lean (710c3ede-9212-4d9c-8013-aa09c62e7cf9)
+- Enhanced scaffolding with 6 additional lemmas vs v5
+- Grok review: NO compilation errors, scaffolding "mostly complete"
+- Key additions:
+  * triangle_shares_edge_with_packing (core constraint)
+  * disjoint_triangles_cover (Case 0)
+  * bowtie_structure (Case 1 setup)
+  * bowtie_cover (Case 1 construction)
