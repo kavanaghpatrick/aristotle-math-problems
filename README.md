@@ -1,227 +1,148 @@
 # Solving Open Mathematical Problems with AI
 
-> **Mission**: Use [Aristotle](https://aristotle.harmonic.fun) to solve genuinely **OPEN, UNSOLVED** mathematical problems - not just verify known results.
+> **Mission**: Use [Aristotle](https://aristotle.harmonic.fun) to solve genuinely **OPEN, UNSOLVED** mathematical problems.
 
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
 [![Open Problems](https://img.shields.io/badge/Focus-Open%20Problems-red)](https://erdosproblems.com)
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-purple)](https://lean-lang.org/)
 
-**Last Updated**: December 13, 2025
+**Last Updated**: December 16, 2024
 
 ---
 
-## 🚨 What This Project Is (And Isn't)
+## Current Focus Areas
 
-### ✅ What We Do
-- Submit **genuinely unsolved** mathematical problems to Aristotle
-- Use the **Boris pattern**: minimal intervention, maximum autonomy
-- Target problems with **bounded complexity** that Aristotle can tractably explore
-- Build a **problem database** of 1,244+ scored open problems
+### 1. Tuza's Conjecture (Graph Theory)
+**Conjecture**: For any graph G, τ(G) ≤ 2ν(G) where τ = min edge cover of triangles, ν = max edge-disjoint triangles.
 
-### ❌ What We Don't Do
-- Formalize known theorems (Ramsey R(3,3)=6, etc.)
-- Verify existing code/computations
-- Polish "publication-ready" versions of solved results
-- Any work where the mathematical result is already known
+| Case | Status | Notes |
+|------|--------|-------|
+| ν = 0 | PROVED | Base case |
+| ν = 1 | **PROVED** | K₄ structure analysis |
+| ν = 2 | In Progress | 5 parallel approaches running |
+| General | Target | Induction strategy |
 
-**If it's not OPEN, we don't work on it.**
+### 2. Erdős Problems
+| Problem | Status | Key Finding |
+|---------|--------|-------------|
+| #677 (LCM) | v3 running | Negation revealed hypothesis bug (n≥1 → n≥k) |
+| #593 (Hypergraphs) | Shelved | Too hard, timeout |
+| #128, #152, #1052 | Various | See submissions/ |
+
+### 3. Algorithm Discovery
+Exploring whether Aristotle can discover algorithmic improvements:
+- Matrix multiplication (ω < 2.371?)
+- APSP (truly subcubic?)
+- Integer multiplication
+
+**Learning**: Aristotle rejects axioms but accepts full proven lemmas.
 
 ---
 
-## 🎯 The Boris Pattern (90% Success Rate)
+## The Boris Pattern
 
-Boris Alexeev solved **Erdős #124** (open since 1979) by:
+Boris Alexeev solved **Erdős #124** (open since 1979) with minimal intervention:
 
-1. Selecting formal problem statement
-2. Submitting to Aristotle (`--informal` mode)
-3. **Going to bed** (zero intervention)
-4. Waking up 6 hours later → **SOLVED**
+1. Select problem → 2. Submit → 3. **Go to bed** → 4. Wake up to solution
+
+| Approach | Success Rate |
+|----------|--------------|
+| Boris (minimal) | **90%** |
+| Prescriptive | 45% |
 
 **Key insight**: The less you specify, the better Aristotle performs.
 
-| Approach | Human Effort | Success Rate |
-|----------|--------------|--------------|
-| **Boris (Pure)** | 5% | **90%** ✅ |
-| **Ultra-Minimal** | 30% | 85% |
-| **Outcome-Focused** | 50% | 80% |
-| **Prescriptive** | 70% | **45%** ❌ |
-
 ---
 
-## 🚀 Active Open Problem Submissions
+## Key Learnings (December 2024)
 
-### Erdős #152 - Sidon Set Gaps
-**Status**: Submitted (Boris pattern)
-**Project ID**: `e1c63a08-49ae-4aaa-b264-eaffb3aa64a4`
-**Problem**: Prove gaps in Sidon sets grow unboundedly
-**Why tractable**: Bounded, algebraic structure, recent progress
+### Feeding Back Proven Work
 
-### Erdős #64 - Power of 2 Cycles ($1000 reward)
-**Status**: Submitted (Boris pattern)
-**Project ID**: `00acedfc-8a61-41a6-b237-5f59ea9c665f`
-**Problem**: Does every graph with min degree ≥3 contain a 2^k cycle?
-**Why tractable**: Graph theory, falsifiable, bounded search
+**CRITICAL**: Aristotle rejects `axiom` declarations.
 
-### More in Queue
-See `problem-databases/` for 1,244 scored open problems ready for submission.
+```lean
+-- WRONG (rejected):
+axiom my_lemma : statement
 
----
-
-## 📊 Problem Database
-
-We maintain a comprehensive database of open mathematical problems:
-
-```
-problem-databases/
-├── unified_problems_database.json   # 1,244 problems
-├── problems.db                      # SQLite with full metadata
-├── score_tractability.py            # Tractability scoring
-├── verify_status.py                 # Status verification
-└── scrapers/                        # Data sources
+-- RIGHT (works):
+lemma my_lemma : statement := by
+  <full proof from Aristotle's output>
 ```
 
-### Tractability Scoring
+**Pattern**: Extract complete proofs from v1 output → include in v2 → Aristotle builds on them.
 
-Problems are scored based on Aristotle's proven strengths:
+### Negation as Discovery
 
-| Factor | Score Impact |
-|--------|--------------|
-| Sidon/additive combinatorics | +25 |
-| Bounded parameters | +20 |
-| Graph theory | +15 |
-| Algebraic structure | +15 |
-| Asymptotic (unbounded) | -15 |
-| Infinite structures | -20 |
-| Famous/intractable | -25 |
+When Aristotle NEGATES a lemma, it's valuable:
+- Reveals formalization bugs
+- Provides counterexamples
+- Guides hypothesis correction
 
-**Top candidates**: 77 problems scored 90-100
+Example: Erdős #677 - Aristotle found n=1, k=5 breaks sylvester_schur_weak.
 
 ---
 
-## 🔐 Security
-
-This repo includes protections against accidental secret exposure:
-
-```bash
-# Pre-commit hook blocks:
-- arstl_* (Aristotle API keys)
-- sk-* (OpenAI)
-- xai-* (Grok)
-- ghp_*/gho_* (GitHub tokens)
-```
-
-**Setup**: `git config core.hooksPath .githooks`
-
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 math/
-├── README.md                    # This file
-├── CLAUDE.md                    # Project rules (OPEN problems only)
-├── .githooks/pre-commit         # Secret protection
-│
-├── problem-databases/           # 1,244 open problems
-│   ├── active-projects/         # Current submissions
-│   ├── unified_problems_database.json
-│   └── score_tractability.py
-│
-├── scripts/                     # Submission tools
-│   ├── safe_aristotle_submit.py
-│   └── submit_batch.sh
-│
-├── docs/                        # Documentation
-│   ├── BORIS_VS_OUR_APPROACH.md
-│   └── ARISTOTLE_COMPLETE_GUIDE.md
-│
-└── archive/                     # Historical (verification work - deprecated)
+├── CLAUDE.md                # Project rules & patterns
+├── README.md                # This file
+├── submissions/             # 92 Lean submission files
+│   ├── tuza_*.lean          # Tuza's conjecture attempts
+│   ├── erdos*.lean          # Erdős problems
+│   └── algo_*.lean          # Algorithm discovery
+├── problem-databases/       # 1,244 scored open problems
+├── scripts/                 # Submission tools
+├── docs/                    # Documentation
+├── proven/                  # Verified successes
+└── archive/                 # Historical work
 ```
 
 ---
 
-## 🛠️ Quick Start
+## Quick Start
 
-### 1. Check Problem Database
-
-```bash
-cd problem-databases
-python3 query_db.py --top 10  # Top 10 tractable problems
-```
-
-### 2. Submit Open Problem (Boris Pattern)
+### 1. Submit a Problem
 
 ```bash
-# Create minimal submission file
-echo "Solve Erdős Problem #XXX: [formal statement]" > problem.txt
-
-# Submit
-export ARISTOTLE_API_KEY="your_key"
-aristotle prove-from-file --informal problem.txt --no-wait
+aristotle prove-from-file submissions/problem.lean --no-wait
 ```
 
-### 3. Monitor Submissions
+### 2. Check Status
 
 ```python
-import asyncio
 from aristotlelib import Project
-
-async def check():
-    p = await Project.from_id("your-project-id")
-    await p.refresh()
-    print(f"Status: {p.status}")
-
-asyncio.run(check())
+p = await Project.from_id("your-project-id")
+print(p.status)
 ```
 
----
+### 3. Iterate on Results
 
-## 📚 Key Principles
-
-### The Three Laws
-
-**Law 1: ONLY Open Problems**
-- If result is known → REFUSE to work on it
-- Ask "Is this OPEN?" before ANY work
-
-**Law 2: Minimal Intervention**
-- Boris (5%) beats Prescriptive (70%)
-- Trust Aristotle's autonomy
-
-**Law 3: Tractability Check**
-- Bounded search space (< 2^20)
-- No infinite structures
-- Algebraic/combinatorial preferred
-
-### What We Learned (December 2025)
-
-**Mistake**: Spent time on Jones, HOMFLY, Ramsey verification
-**Lesson**: Verification feels productive but isn't novel
-**Fix**: CLAUDE.md now bans verification work explicitly
+1. Read output file from Aristotle
+2. Extract PROVEN lemmas (full proofs)
+3. Include in next version
+4. Focus Aristotle on remaining targets
 
 ---
 
-## 🔗 Resources
+## Resources
 
 - **Aristotle**: https://aristotle.harmonic.fun
 - **Erdős Problems**: https://erdosproblems.com
-- **Open Problem Garden**: https://garden.irmacs.sfu.ca
+- **Aristotle Paper**: https://arxiv.org/abs/2510.01346
 - **Lean 4**: https://lean-lang.org
-- **Mathlib**: https://leanprover-community.github.io
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- **Boris Alexeev** - Pioneered the minimal intervention approach (Erdős #124)
+- **Boris Alexeev** - Pioneered minimal intervention approach
 - **Harmonic AI** - Aristotle theorem prover
-- **Erdős Problems Project** - Problem database
-- **Lean Community** - Lean 4 and Mathlib
+- **Terence Tao** - Insights on formalization gaps
 
 ---
 
-**Current Focus**: Submitting OPEN problems with Boris pattern
+**Success Metric**: Number of genuinely OPEN problems solved.
 
-**Success Metric**: Number of genuinely OPEN problems solved
-
-*Not lines of code. Not publication polish. Just solving what hasn't been solved.*
+*Not verification. Not polish. Just solving what hasn't been solved.*

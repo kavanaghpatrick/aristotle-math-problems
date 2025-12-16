@@ -256,8 +256,41 @@ theorem problem_improvement :
 ### Iteration Protocol
 
 1. **First run**: Minimal spec, let Aristotle explore
-2. **If partial**: Extract proven lemmas → axioms in next run
+2. **If partial**: Extract proven lemmas → feed back as FULL PROOFS (see below)
 3. **Build on Aristotle's work**, don't prescribe proof strategy
+
+---
+
+## Feeding Back Proven Work
+
+**CRITICAL**: Aristotle rejects `axiom` declarations as "unexpected axioms".
+
+### Wrong (will fail):
+```lean
+axiom my_lemma (n : ℕ) : n + 1 > n  -- REJECTED
+```
+
+### Right (works):
+```lean
+lemma my_lemma (n : ℕ) : n + 1 > n := by omega  -- Full proof included
+```
+
+### Pattern for Iteration:
+1. Run v1 → Aristotle proves some lemmas, fails on others
+2. Copy FULL PROVEN PROOFS from output file (not just statements)
+3. Include them in v2 as regular lemmas with `:= by <proof>`
+4. Aristotle typechecks them instantly, builds on them
+
+**Example** (from Tuza success):
+```lean
+-- v1 output had this PROVEN lemma
+lemma packing_one_implies_intersect ... := by
+  contrapose! h
+  refine' ne_of_gt (lt_of_lt_of_le _ ...)
+  -- [full proof from Aristotle]
+```
+
+Include the entire proof. Aristotle won't re-prove, just typecheck and use.
 
 ### Key Files
 
