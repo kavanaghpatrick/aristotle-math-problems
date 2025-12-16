@@ -214,6 +214,58 @@ python3 scripts/extract_solvable_open.py
 
 ---
 
+## Algorithm Discovery Strategy
+
+**Different from Erdős problems.** Algorithm discovery = finding that known math implies better algorithms.
+
+### Core Principle: Connection Discovery
+
+Aristotle doesn't invent - it finds that **Known Theorem T** from **Area A** implies **Better Algorithm**.
+
+This is what Boris did: formalization exposed connection to Brown's criterion.
+
+### Sweet Spot Targets (vs Ambitious Targets)
+
+| Property | BAD Target | GOOD Target |
+|----------|------------|-------------|
+| Fame | Heavily studied | Underserved |
+| Gap | Large (6+ units) | Tight (1-2 units) |
+| Instance | Large n | Small n (≤15) |
+| Competition | Many researchers | Few working on it |
+
+### Current Algorithm Targets (IMPROVEMENT-FOCUSED)
+
+| Problem | Prob | Goal | Gap |
+|---------|------|------|-----|
+| Matrix Mult ω | HIGH | Find ω < 2.371 | 0.37 to ω=2 |
+| Integer Mult | MED-HIGH | Remove log* factor → pure O(n log n) | log* factor |
+| APSP | MEDIUM | Truly subcubic O(n^{3-ε}) | polylog → constant ε |
+
+**Key**: Only target problems where IMPROVEMENT is believed possible. Never target "prove optimality".
+
+### Template Pattern
+
+```lean
+-- ONLY ask for improvement, never disjunctive with optimality
+theorem problem_improvement :
+  ∃ better, property better ∧ metric better < current_best
+```
+
+**Key**: Ask ONLY for improvement. Never "improve OR prove optimal" - that wastes effort on status quo.
+
+### Iteration Protocol
+
+1. **First run**: Minimal spec, let Aristotle explore
+2. **If partial**: Extract proven lemmas → axioms in next run
+3. **Build on Aristotle's work**, don't prescribe proof strategy
+
+### Key Files
+
+- `ALGORITHM_CONNECTION_DISCOVERY.md` - Full framework
+- `submissions/` - Algorithm submissions
+
+---
+
 ## Appendix: Boris's Exact Process
 
 From [Xena Project writeup](https://xenaproject.wordpress.com/2025/12/05/formalization-of-erdos-problems/):

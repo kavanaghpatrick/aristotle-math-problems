@@ -213,9 +213,9 @@ theorem tuza_case_nu_2 {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V
     (h : trianglePackingNumber G = 2) : triangleCoveringNumber G ≤ 4 := by
   -- Step 1: Get the two edge-disjoint triangles
   obtain ⟨t1, t2, ht1, ht2, hne, hdisj⟩ := packing_two_triangles G h
-  -- Step 2: Extract card properties from membership
-  have ht1_card : t1.card = 3 := ht1.2
-  have ht2_card : t2.card = 3 := ht2.2
+  -- Step 2: Extract card properties from membership (use mem_cliqueFinset_iff)
+  have ht1_card : t1.card = 3 := (SimpleGraph.mem_cliqueFinset_iff.mp ht1).2
+  have ht2_card : t2.card = 3 := (SimpleGraph.mem_cliqueFinset_iff.mp ht2).2
   -- Step 3: They share at most 1 vertex (≥2 would contradict hdisj)
   have h_inter_le_1 : (t1 ∩ t2).card ≤ 1 := by
     by_contra h_contra; push_neg at h_contra

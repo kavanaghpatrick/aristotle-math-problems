@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "description": "Algorithm discovery candidates for ATP (Aristotle)",
+    "source": "Grok-4 deep analysis (Dec 2024)",
+    "goal": "Discover NEW algorithms that BEAT state-of-the-art",
+    "key_insight": "Asymptotic problems are <1% tractable. FINITE INSTANCES with unknown optimal are the real opportunity.",
+    "methodology": "Curry-Howard correspondence: constructive existence proof → executable algorithm"
+  },
+
+  "asymptotic_problems": {
+    "description": "Problems where we'd try to beat SOTA for general n - mostly FANTASY for ATP (<1% success)",
+    "grok_assessment": "ATPs excel at VERIFICATION, not DISCOVERY. These require novel mathematical insights humans haven't found in decades.",
+    "problems": [
+      {
+        "id": "matrix_mult",
+        "name": "Matrix Multiplication",
+        "category": "numerical",
+        "upper_bound": "O(n^2.371552)",
+        "upper_source": "Alman-Williams 2022 (laser method)",
+        "lower_bound": "Ω(n²)",
+        "lower_source": "Algebraic complexity (output size)",
+        "gap": "Exponent ω: 2 ≤ ω < 2.371552",
+        "tractability_score": 2,
+        "search_space": "Tensor decompositions, bilinear algorithms (~100 dims)",
+        "why_hard": "Unbounded search space. Requires novel algebraic identities.",
+        "prior_ai_success": "AlphaTensor (DeepMind) via RL, NOT theorem proving",
+        "practical_impact": "Would revolutionize ML training, linear algebra"
+      },
+      {
+        "id": "apsp",
+        "name": "All-Pairs Shortest Paths (Dense, Small Integer Weights)",
+        "category": "graph",
+        "upper_bound": "O(n³ (log log n / log n)^{1/3})",
+        "upper_source": "Chan-Williams 2023",
+        "lower_bound": "Ω(n²)",
+        "lower_source": "RAM model (output size)",
+        "gap": "Upper ~O(n³/polylog) vs lower Ω(n²) - polynomial gap",
+        "tractability_score": 3,
+        "search_space": "Min-plus convolution, rectangular matrix methods",
+        "why_hard": "SOTA uses algebraic methods - ATP search too open-ended",
+        "mathlib_support": "Strong graph theory (7/10)",
+        "practical_impact": "Network routing, social graph analysis"
+      },
+      {
+        "id": "edit_distance",
+        "name": "Edit Distance (Levenshtein)",
+        "category": "string",
+        "upper_bound": "O(n² / log² n)",
+        "upper_source": "Andoni et al. 2020 (embeddings)",
+        "lower_bound": "Ω(n log n)",
+        "lower_source": "Decision tree model",
+        "gap": "Near-quadratic. SETH conjectures Ω(n^{2-o(1)})",
+        "tractability_score": 3,
+        "search_space": "DP optimizations, embedding techniques",
+        "why_hard": "Discovery needs clever embeddings - fantasy for ATP",
+        "practical_impact": "DNA alignment, plagiarism detection"
+      },
+      {
+        "id": "dynamic_range_2d",
+        "name": "Dynamic Orthogonal Range Queries (2D)",
+        "category": "data_structures",
+        "upper_bound": "O(log n log log n) amortized",
+        "upper_source": "Chan-Tsakalidis 2017",
+        "lower_bound": "Ω(log n / log log n)",
+        "lower_source": "Cell-probe model (Pătraşcu 2010)",
+        "gap": "log log n factor gap",
+        "tractability_score": 4,
+        "search_space": "Tree transformations, fusion techniques",
+        "why_hard": "Bounded to tree-based structures but still requires inventing new amortization tricks",
+        "practical_impact": "Spatial databases, GIS systems"
+      },
+      {
+        "id": "subset_sum",
+        "name": "Subset Sum",
+        "category": "combinatorial",
+        "upper_bound": "O(2^{0.291n})",
+        "upper_source": "Howgrave-Graham-Joux 2010 (lattice-based)",
+        "lower_bound": "Ω(2^{n/32})",
+        "lower_source": "Abboud et al. 2018 (SETH-independent)",
+        "gap": "Exponential gap in exponent: 0.291 vs 0.03125",
+        "tractability_score": 2,
+        "search_space": "Partitioning strategies, lattice reductions",
+        "why_hard": "Enormous combinatorial search space. Pure fantasy.",
+        "practical_impact": "Cryptography, scheduling"
+      },
+      {
+        "id": "max_flow_unit",
+        "name": "Maximum Flow (Unit-Capacity Networks)",
+        "category": "graph",
+        "upper_bound": "O(m^{10/7} + n^{8/5})",
+        "upper_source": "Kathuria et al. 2021",
+        "lower_bound": "Ω(n^{4/3})",
+        "lower_source": "APSP-like reductions",
+        "gap": "Upper ~O(n^{1.6}) for dense vs lower Ω(n^{1.33})",
+        "tractability_score": 3,
+        "search_space": "Flow augmentation paths, potential functions",
+        "why_hard": "Requires novel potential functions or layering schemes",
+        "practical_impact": "Image segmentation, network optimization"
+      },
+      {
+        "id": "integer_mult",
+        "name": "Integer Multiplication",
+        "category": "numerical",
+        "upper_bound": "O(n log n)",
+        "upper_source": "Harvey-van der Hoeven 2019",
+        "lower_bound": "Ω(n log n) in multitape TM",
+        "lower_source": "Kolmogorov complexity, carry propagation",
+        "gap": "Tight asymptotically - only constant factors remain",
+        "tractability_score": 5,
+        "search_space": "FFT-like transforms, polynomial evaluation (bounded to rings)",
+        "why_best_of_bad": "MOST TRACTABLE of asymptotic. Tight bounds mean constant-factor improvements. Strong Mathlib support.",
+        "practical_impact": "Cryptography, big-integer arithmetic"
+      }
+    ]
+  },
+
+  "finite_instances": {
+    "description": "TRACTABLE: Specific instances where optimal is UNKNOWN - real discovery potential (6-8 score)",
+    "grok_assessment": "Computers have ALREADY found improvements in similar problems. Finite search space. SAT solvers succeeded on related instances.",
+    "key_properties": [
+      "Small fixed n (not asymptotic)",
+      "Finite exhaustible search space (~2^25 to 2^35)",
+      "Optimal for that specific n is UNKNOWN",
+      "Constructive proofs yield executable algorithms",
+      "Prior computer-assisted discoveries exist"
+    ],
+    "problems": [
+      {
+        "id": "selection_3rd_n9",
+        "name": "Find 3rd smallest in 9 elements",
+        "category": "selection",
+        "current_best": 12,
+        "target": 11,
+        "lower_bound": 10,
+        "search_space": "~2^25 decision trees",
+        "why_unknown": "Optimal selection solved for small k/n but k=3, n=9 open",
+        "prior_art": "Computers found optimal median of 7 (10 comparisons)",
+        "tractability_score": 8,
+        "lean_file": "submissions/selection_3rd_n9_v2.lean",
+        "lean_theorem": "∃ t : CmpTree 9, t.findsKth 3 ∧ t.depth ≤ 11",
+        "submission_status": "ready"
+      },
+      {
+        "id": "merge_6_7",
+        "name": "Merge two sorted lists (6 + 7 elements)",
+        "category": "merging",
+        "current_best": 11,
+        "target": 10,
+        "lower_bound": 9,
+        "search_space": "~2^28 ladder structures",
+        "why_unknown": "Asymmetric merge cases not fully explored",
+        "prior_art": "SAT improved 5+5 merging to 9 comparators",
+        "tractability_score": 8,
+        "lean_file": "submissions/merge_6_7.lean",
+        "lean_theorem": "∃ net : MergingNetwork 13, net.correct 6 7 ∧ net.length ≤ 10",
+        "submission_status": "ready"
+      },
+      {
+        "id": "max_two_n12",
+        "name": "Find two largest in 12 elements",
+        "category": "selection",
+        "current_best": 15,
+        "target": 14,
+        "lower_bound": 13,
+        "search_space": "~2^30 tournament trees",
+        "why_unknown": "Tournament structure for n=12 not fully explored",
+        "prior_art": "Computers optimized n=10 (12 comparisons)",
+        "tractability_score": 8,
+        "lean_file": null,
+        "lean_theorem": "∃ tree : MaxTwoTree 12, height tree ≤ 14 ∧ finds_max_two tree",
+        "submission_status": "needs_formalization"
+      },
+      {
+        "id": "sorting_network_n11",
+        "name": "Sorting Network for n=11 (comparator count)",
+        "category": "sorting_networks",
+        "current_best": 35,
+        "target": 34,
+        "lower_bound": 29,
+        "search_space": "~2^30 after symmetry reduction",
+        "why_unknown": "SAT solvers got close for n=9-10 but n=11 search not exhausted",
+        "prior_art": "Computers found optimal for n=9 (25), n=10 (29)",
+        "tractability_score": 8,
+        "lean_file": "submissions/sorting_network_n11.lean",
+        "lean_theorem": "∃ net : SortNet 11, net.sorts ∧ net.size ≤ 34",
+        "submission_status": "ready"
+      },
+      {
+        "id": "sorting_network_depth_n13",
+        "name": "Sorting Network for n=13 (depth/parallel time)",
+        "category": "sorting_networks",
+        "current_best": 9,
+        "target": 8,
+        "lower_bound": 8,
+        "search_space": "~2^35 for parallel layers",
+        "why_unknown": "SAT improved n=11-12 depths but n=13 still open",
+        "prior_art": "2014 SAT work revealed missed parallelizations",
+        "tractability_score": 7,
+        "lean_file": null,
+        "lean_theorem": "∃ net : SortingNetwork 13, depth net ≤ 8 ∧ sorts_all net",
+        "submission_status": "needs_formalization"
+      },
+      {
+        "id": "pancake_n10",
+        "name": "Pancake Sorting for n=10 (worst-case flips)",
+        "category": "sorting",
+        "current_best": 15,
+        "target": 14,
+        "lower_bound": 13,
+        "search_space": "~10! permutations, ~2^32 effective states",
+        "why_unknown": "Known up to n=9 (12 flips), n=10 open",
+        "prior_art": "Computers computed n=8-9 optima",
+        "tractability_score": 7,
+        "lean_file": null,
+        "lean_theorem": "∃ d : ℕ, d ≤ 14 ∧ pancake_diameter 10 = d",
+        "submission_status": "needs_formalization",
+        "historical_note": "Bill Gates co-authored paper on this problem"
+      },
+      {
+        "id": "multiplier_4bit",
+        "name": "4-bit Multiplier Boolean Circuit (gate count)",
+        "category": "circuits",
+        "current_best": 45,
+        "target": 42,
+        "lower_bound": 40,
+        "search_space": "~2^35 acyclic graphs",
+        "why_unknown": "Carry propagation complexity not fully optimized",
+        "prior_art": "Evolutionary algorithms found better 3-bit adders",
+        "tractability_score": 6,
+        "lean_file": null,
+        "lean_theorem": "∃ circ : BoolCircuit (4×4→8), gates circ ≤ 42 ∧ computes_mult circ",
+        "submission_status": "needs_formalization"
+      }
+    ]
+  },
+
+  "already_submitted": {
+    "description": "Algorithm problems already submitted to Aristotle (re-deriving KNOWN optimal, not discovery)",
+    "note": "These verify known algorithms, not discover new ones",
+    "problems": [
+      {
+        "id": "sorting_network_n4",
+        "name": "Sorting Network for n=4",
+        "known_optimal": 5,
+        "submission_id": "5ca56598",
+        "status": "QUEUED",
+        "discovery_potential": "NONE - optimal is known"
+      },
+      {
+        "id": "optimal_minmax",
+        "name": "Find min and max simultaneously",
+        "known_optimal": "ceil(3n/2) - 2",
+        "submission_id": "451e4e93",
+        "status": "COMPLETED",
+        "discovery_potential": "NONE - optimal is known",
+        "result": {
+          "min_comparisons_exact": "PROVEN - finds minimum in n-1 comparisons",
+          "second_min_comparisons": "PROVEN - finds 1st and 2nd smallest",
+          "exists_optimal_minmax": "FAILED - LinearOrder typeclass error",
+          "minmax_lower_bound": "FAILED - LinearOrder typeclass error",
+          "lesson": "Typeclass instances must be explicit in structure definitions"
+        }
+      }
+    ]
+  },
+
+  "ranked_for_submission": [
+    {"rank": 1, "id": "selection_3rd_n9", "score": 8, "rationale": "Smallest search space (~2^25), concrete decision tree, READY"},
+    {"rank": 2, "id": "merge_6_7", "score": 8, "rationale": "Well-structured ladder networks, prior SAT success, READY"},
+    {"rank": 3, "id": "sorting_network_n11", "score": 8, "rationale": "Classic problem, extensive prior work, READY"},
+    {"rank": 4, "id": "max_two_n12", "score": 8, "rationale": "Tournament tree structure, needs formalization"},
+    {"rank": 5, "id": "sorting_network_depth_n13", "score": 7, "rationale": "Lower bound IS 8, just undiscovered"},
+    {"rank": 6, "id": "pancake_n10", "score": 7, "rationale": "BFS tractable, needs formalization"},
+    {"rank": 7, "id": "multiplier_4bit", "score": 6, "rationale": "Larger search space, complex equivalence checking"}
+  ],
+
+  "submission_queue": {
+    "ready": ["selection_3rd_n9", "merge_6_7", "sorting_network_n11"],
+    "needs_formalization": ["max_two_n12", "sorting_network_depth_n13", "pancake_n10", "multiplier_4bit"]
+  }
+}
