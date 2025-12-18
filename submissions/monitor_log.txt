@@ -949,3 +949,5 @@ $(date '+%Y-%m-%d %H:%M:%S') | tuza_FULL_v5 INFORMAL | ef7e7f99-00d4-4273-a181-0
 2025-12-18 14:29:11 | tuza_FULL_v6 INFORMAL | cca06048-9d55-432f-97ae-510829f1cf0a | Explains counterexample fix
 2025-12-18 14:34:54 | tuza_FULL_v7 FORMAL MINIMAL | a64e90b3-d652-42be-881a-e2d44ff99a34 | Boris pattern: definitions + theorem only
 2025-12-18 14:34:54 | tuza_FULL_v7 INFORMAL MINIMAL | 085f46d5-8f2f-4fd4-bf00-99f557724f2e | Boris pattern: 10 lines total
+2025-12-18 14:49:00 | tuza_FULL_v8 FORMAL SCAFFOLDED | 21873a56-0354-4825-b878-cb17687184dd | 7 proven lemmas, no hints (Grok: 9/10)
+2025-12-18 14:49:00 | tuza_FULL_v8 INFORMAL | 4828661f-89e2-4997-8a84-7787f10886a9 | Building blocks listed, no strategy
