@@ -945,3 +945,5 @@ Key gap: exists_two_edge_reduction (removing 2 edges from packing triangle reduc
 Expected runtime: 6+ hours per submission
 $(date '+%Y-%m-%d %H:%M:%S') | tuza_FULL_v5 FORMAL | e900e161-51fb-415e-bbe2-0d1a8b3c7e25 | Clean 227-line submission, one sorry
 $(date '+%Y-%m-%d %H:%M:%S') | tuza_FULL_v5 INFORMAL | ef7e7f99-00d4-4273-a181-03ab96c22c4d | Natural language proof hints
+2025-12-18 14:29:11 | tuza_FULL_v6 FORMAL | 380fb7d3-da30-4942-9931-91d6efc7701e | CORRECTED: direct cover construction
+2025-12-18 14:29:11 | tuza_FULL_v6 INFORMAL | cca06048-9d55-432f-97ae-510829f1cf0a | Explains counterexample fix
