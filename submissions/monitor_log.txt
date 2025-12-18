@@ -902,3 +902,44 @@ TOTAL ACTIVE SUBMISSIONS: 8
 - 3 original Erdős submissions
 - 3 enhanced Erdős submissions
 - 2 Tuza ν=2 submissions
+[2025-12-16 17:17] tuza_nu2_v3 submitted: f8825e7a - includes ν=1 template (packing_one_implies_intersect)
+[2025-12-16 17:25] erdos677_v2 (f977b4a7): FAILED - axiom rejection. File couldn't load.
+[2025-12-16 19:08] erdos677_v3 (c560a64d): PARTIAL SUCCESS - All 10 building blocks loaded. Blocked on sylvester_schur (needs Chebyshev bounds).
+[2025-12-16 19:36] erdos677_v4 submitted: 31143cfc - binomial coefficient approach for Sylvester-Schur
+[2025-12-16 21:01] Tuza (4610138e): 9 new building blocks PROVED for ν=2 case. tuza_case_nu_2 still sorry.
+[2025-12-16 21:01] algo_matrix_mult_v5 (f98b567a): naive_exists PROVED. strassen_correct NEGATED - our coefficients were wrong!
+
+=== SUBMISSIONS Dec 17, 2025 (Second Round - Full Proofs) ===
+
+1. tuza_nu2_v8_forbidden.lean
+   Project ID: 7a29e24c-9927-48bc-8bef-d476437778ab
+   Mode: FORMAL with complete building blocks
+   KEY GAP: extension_triangle_exists_nu2 (line 265)
+   Architecture: Forbidden K₄ structure approach
+   All helper proofs included with FULL proofs from 5e72ffae output
+
+2. tuza_nu2_discovery.lean
+   Project ID: d2598ba5-1ef8-4d86-b43c-7ed11f316816
+   Mode: DISCOVERY (free exploration)
+   Building blocks included, multiple exploration targets
+
+3. tuza_nu2_informal.lean
+   Project ID: 86e8ac29-8ce2-4636-bca1-bbf42fa815d2
+   Mode: INFORMAL reasoning
+   Mathematical walkthrough included
+
+Review Status:
+- Grok-4 (2nd round): PASSED
+  - KEY GAP clearly isolated ✓
+  - Proof architecture sound ✓
+  - No circular dependencies ✓
+- Gemini: Timed out
+
+Runtime expected: 6+ hours per submission
+
+=== TUZA FULL CONJECTURE SUBMISSIONS Thu Dec 18 07:51:34 CST 2025 ===
+FORMAL: d50cf3fb-b826-4000-84ac-71c7e9195a86 (tuza_FULL_v4.lean)
+INFORMAL: b4549d16-372d-4cbf-8c29-e4aca74ee1be (tuza_FULL_v4_informal.md)
+Strategy: Strong induction via 2-edge reduction lemma
+Key gap: exists_two_edge_reduction (removing 2 edges from packing triangle reduces ν)
+Expected runtime: 6+ hours per submission
