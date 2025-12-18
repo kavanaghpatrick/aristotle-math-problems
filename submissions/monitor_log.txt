@@ -943,3 +943,5 @@ INFORMAL: b4549d16-372d-4cbf-8c29-e4aca74ee1be (tuza_FULL_v4_informal.md)
 Strategy: Strong induction via 2-edge reduction lemma
 Key gap: exists_two_edge_reduction (removing 2 edges from packing triangle reduces ν)
 Expected runtime: 6+ hours per submission
+$(date '+%Y-%m-%d %H:%M:%S') | tuza_FULL_v5 FORMAL | e900e161-51fb-415e-bbe2-0d1a8b3c7e25 | Clean 227-line submission, one sorry
+$(date '+%Y-%m-%d %H:%M:%S') | tuza_FULL_v5 INFORMAL | ef7e7f99-00d4-4273-a181-03ab96c22c4d | Natural language proof hints
