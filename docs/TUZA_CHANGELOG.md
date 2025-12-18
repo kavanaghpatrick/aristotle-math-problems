@@ -2,7 +2,77 @@
 
 This changelog documents the progression of Tuza work, including version submissions, key changes, and results.
 
-## December 17-18, 2025
+**See [TUZA_COMPLETE_HISTORY.md](TUZA_COMPLETE_HISTORY.md) for the DEFINITIVE comprehensive documentation.**
+
+---
+
+## December 14, 2025 - INITIAL SUCCESS (ν=1 Case)
+
+### iteration2 (c7732074)
+- First serious attempt at ν=1 case
+- **PROVEN:** tuza_base_case, triangleCoveringNumber_le_card_add_deleteEdges
+- **PROVEN:** exists_max_packing, packing_one_implies_intersect, k4_tau_le_2
+
+### iteration3 (beae6b6a)
+- Completed k4_is_maximal_if_nu_1 lemma
+- Key insight: Any triangle shares edge with K₄ triangles when ν=1
+
+### iteration3_alt_SUCCESS (7f9d358e) ⭐
+- **FULL PROOF of tuza_conjecture_nu_1: ν=1 → τ≤2**
+- 400+ lines of Lean 4
+- **MAJOR MILESTONE**
+
+---
+
+## December 15, 2025 - Full Conjecture & ν=2 Attempts
+
+### FULL_v2 (ff11a2fe → 3236adf0)
+- Attempted full τ ≤ 2ν
+- **PROVEN:** tuza_base_case, packing_mono_deleteEdges
+- FAILED: tuza_case_nu_1 (missing import)
+
+### ν=2 case attempts (v1-v6)
+- 91eb28ea: ERROR - "Unexpected axioms" (used axiom instead of sorry)
+- f62d4c0a: v5 with case analysis on |T₁ ∩ T₂|
+- 710c3ede: v6 with enhanced scaffolding
+
+---
+
+## December 16, 2025 - ν=2 Deep Dive
+
+### Three parallel approaches
+- approach1_blocking: Block structure analysis
+- approach2_forbidden: Forbidden subgraph approach
+- approach3_deletion: Edge deletion strategy
+
+### Main branch (4610138e) ⭐
+**9 building blocks PROVED:**
+1. nu_eq_two_of_unique_edge
+2. packing_intersects_unique_triangle_edges
+3. nu_le_one_of_disjoint_T
+4. covering_le_delete_add_card
+5. nu_le_one_of_delete_other_edges
+6. unique_edge_implies_tau_le_4
+7. triangle_share_edge_implies_eq_or_intersect_eq_singleton
+8. extension_triangle_exists_nu2 (KEY LEMMA!)
+9. triangle_shares_edge_with_packing
+
+---
+
+## December 17, 2025 - Discovery Mode
+
+### v8_forbidden (7a29e24c)
+- Formal with complete building blocks
+
+### discovery (d2598ba5)
+- Free exploration mode
+
+### informal (86e8ac29)
+- Natural language proof walkthrough
+
+---
+
+## December 18, 2025 - Full Conjecture Push
 
 ### v4 (d50cf3fb / b4549d16)
 **Date:** Dec 18, 2025 07:51 CST
