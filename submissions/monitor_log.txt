@@ -1013,3 +1013,44 @@ v11 PENDING: tuza_nu2_v11_case_analysis.lean
   - Created with revised strategy
   - Rate limited (429) - will retry
   - Project ID pending: c00da301-ef1f-481d-84f3-e777db790baa (failed)
+
+=== Dec 19, 2025 - v12 Submissions (Grok Strategy) ===
+
+v12-minimal (1239f09d-c12f-4ccc-8b13-c06c343c678e):
+  - Boris-style: 35 lines, definitions + theorem only
+  - Status: CREATED but NOT_STARTED (rate limited)
+  - Will retry when slot frees
+
+v12-scaffolded (b306bb40-d279-4ea6-ae50-1b5708fb4ae2):
+  - 100 lines: proven lemmas, NO comments
+  - Status: CREATED but NOT_STARTED (rate limited)
+  - Will retry when slot frees
+
+Strategy (per Grok-4 analysis):
+1. Try minimal FIRST (Boris pattern)
+2. If fails, try scaffolded
+3. Comments HURT Aristotle's exploration
+4. Counterexamples are wins (discovery)
+
+Waiting for 5 in-progress projects to complete...
+
+=== SUBMISSION AUDIT: FORMAL vs INFORMAL (Dec 19, 2025) ===
+
+PATTERN ANALYSIS:
+- v7 INFORMAL (Boris minimal) produced BEST results
+- Informal proved K₄, K₅ tightness that formal missed
+- Erdős problems: All successes were FORMAL
+
+SUCCESS BREAKDOWN:
+| Mode | Successes | Best Result |
+|------|-----------|-------------|
+| FORMAL | 4 | ν=1 proof, v9 outlier lemma |
+| INFORMAL | 2 | v7: τ≤3ν + K₄/K₅ tight |
+| Paired | Similar | But informal sometimes better |
+
+v12 SUBMISSIONS READY (rate limited):
+- tuza_nu2_v12_minimal.lean (FORMAL, 35 lines)
+- tuza_nu2_v12_minimal.md (INFORMAL, Boris pattern)
+- tuza_nu2_v12_scaffolded.lean (FORMAL fallback, 100 lines)
+
+STRATEGY: Submit BOTH formal + informal when slots free
