@@ -2,21 +2,24 @@
 
 ## Executive Summary
 
-**Total Novel Discoveries by Aristotle: 8+**
+**Total Novel Discoveries by Aristotle: 7+**
 
 | Category | Count | Value |
 |----------|-------|-------|
 | Counterexamples to lemmas | 5 | Strategy refinement |
-| Counterexamples to conjectures | 2 | Potential publications |
+| Counterexamples to conjectures | 1 | Erdős #677 hypothesis fix |
 | Algorithm flaws found | 1 | Bug discovery |
+| Formalization bugs found | 1 | Erdős #128 (not a counterexample) |
 
 **Key Finding**: Aristotle excels at DISPROVING claims, not just proving them. This is its most valuable capability for novel discovery.
+
+**⚠️ Important Correction (Dec 19, 2025)**: The Erdős #128 "C₅ counterexample" was initially thought to disprove the $250 conjecture. Upon analysis, this was a counterexample to our INCORRECT formalization, not the original problem. Always verify formalizations against original statements.
 
 ---
 
 ## Complete Discovery Inventory
 
-### 1. Erdős #128: C₅ Counterexample ⭐ MAJOR
+### 1. Erdős #128: C₅ Counterexample ⚠️ FORMALIZATION BUG (NOT VALID)
 
 **File**: `erdos128_FORMALIZATION_BUG.lean`
 **UUID**: `4dc5bdd3-b001-4851-9237-ea4c5d954b58`
@@ -28,12 +31,27 @@ theorem erdos_128 (G : SimpleGraph V) [DecidableRel G.Adj] :
     HasDenseInducedSubgraphs G → ∃ (a b c : V), G.Adj a b ∧ G.Adj b c ∧ G.Adj a c
 ```
 
-**Discovery**: C₅ (5-cycle) is a counterexample!
-- C₅ is triangle-free
-- BUT every induced subgraph on ≥3 vertices has >n²/50 edges
-- **The $250 conjecture may be FALSE as stated**
+**Initial Claim**: C₅ (5-cycle) was found as counterexample.
 
-**Impact**: Potential publication-worthy result. The formalization revealed a possible flaw in the original problem statement.
+**⚠️ CORRECTION (Dec 19, 2025)**: This is NOT a valid counterexample to the original problem!
+
+**The Bug**: Our formalization used the wrong threshold condition:
+- **Our formalization**: `2 * S.ncard ≥ n` → checks subsets of size ≥ ⌈n/2⌉
+- **Formal Conjectures**: `2 * S.ncard + 1 ≥ n` → checks subsets of size ≥ ⌊n/2⌋
+- **Original problem**: "≥ n/2 vertices" (matches FC interpretation)
+
+**For n=5**:
+- Our formalization only checks |S| ≥ 3 (missing the +1)
+- Correct formalization checks |S| ≥ 2
+
+**Why C₅ fails under correct formalization**:
+- C₅ has independent sets of size 2: {0,2}, {1,3}, {0,3}, {1,4}, {2,4}
+- These have 0 edges → fail the "50 × edges > n²" condition
+- Therefore C₅ does NOT satisfy the hypothesis in the correct formalization!
+
+**Actual Impact**: Aristotle correctly found a counterexample to our BUGGY formalization. The original Erdős #128 ($250) problem is NOT disproved. This discovery revealed our formalization error, not a flaw in the mathematical conjecture.
+
+**Lesson**: Always verify formalizations against original problem statements AND existing repositories (Formal Conjectures).
 
 ---
 
@@ -213,17 +231,20 @@ theorem main_goal : ... := by
 
 ## Publication Value
 
-| Discovery | Publication Potential | Venue |
-|-----------|----------------------|-------|
-| Erdős #128 C₅ | ⭐⭐⭐ HIGH | Combinatorics journal |
-| Tuza counterexamples (3) | ⭐⭐ MEDIUM | Formal methods paper |
-| Erdős #677 hypothesis fix | ⭐ LOW | Appendix in larger paper |
+| Discovery | Publication Potential | Venue | Notes |
+|-----------|----------------------|-------|-------|
+| ~~Erdős #128 C₅~~ | ❌ NONE | - | Formalization bug, not valid counterexample |
+| Tuza counterexamples (3) | ⭐⭐ MEDIUM | Formal methods paper | Valid proof strategy refinements |
+| Erdős #677 hypothesis fix | ⭐ LOW | Appendix in larger paper | Boundary condition correction |
+
+**Lesson Learned**: Verify ALL counterexamples against original problem statements before claiming discovery.
 
 ---
 
 ## Files to Reference
 
-- `erdos128_FORMALIZATION_BUG.lean` - C₅ counterexample
+- `erdos128_FORMALIZATION_BUG.lean` - C₅ counterexample (NOTE: formalization bug, not valid)
+- `docs/ERDOS128_ANALYSIS.md` - Full postmortem on #128 formalization error
 - `tuza_COUNTEREXAMPLE_v6.lean` - K₄ counterexample with full proof
 - `erdos677_v3.lean` - Hypothesis corrections from counterexamples
 - `monitor_log.txt` - Complete submission history with outcomes

@@ -191,6 +191,53 @@ python3 scripts/extract_solvable_open.py
 
 ---
 
+## CRITICAL: Formalization Verification Protocol
+
+**⚠️ Lesson from Erdős #128 (Dec 2025)**: We claimed C₅ was a counterexample to the $250 problem. It wasn't - our formalization was WRONG.
+
+### The Bug
+- **Original**: "≥ n/2 vertices" (conventionally means ⌊n/2⌋)
+- **Formal Conjectures**: `2 * |S| + 1 ≥ n` ✓
+- **Our submission**: `2 * |S| ≥ n` ✗ (missing +1)
+- **For n=5**: FC checks |S|≥2, ours only checks |S|≥3
+
+### Verification Checklist
+
+Before claiming ANY counterexample or negation:
+
+1. **Compare to Formal Conjectures**
+   - URL: https://github.com/google-deepmind/formal-conjectures
+   - 265 Erdős problems already formalized
+   - If our formalization differs, WE are probably wrong
+
+2. **Check original problem statement**
+   - Read erdosproblems.com or original paper
+   - Watch for floor/ceiling differences
+   - Watch for ≤ vs < differences
+   - Watch for strict vs non-strict inequalities
+
+3. **Verify counterexample applies to BOTH**
+   - Does it break our formalization? (Aristotle checked this)
+   - Does it break the FC formalization? (WE must check this)
+   - Does it break the original English statement? (WE must check this)
+
+4. **Test edge cases mathematically**
+   - For small n (especially odd n), calculate thresholds manually
+   - Different rounding conventions matter for small n
+
+### Red Flags
+
+| Sign | Action |
+|------|--------|
+| Counterexample only works for small n | Verify threshold conditions |
+| Our formalization differs from FC | Assume WE are wrong |
+| Floor vs ceiling ambiguity | Check original paper |
+| Counterexample is "too easy" | Probably formalization bug |
+
+See `docs/ERDOS128_ANALYSIS.md` for the full postmortem.
+
+---
+
 ## Success Metrics
 
 | Metric | Target | Notes |
