@@ -1078,3 +1078,14 @@ Parker's proof structure:
 - Induction: τ ≤ τ(T_e) + 2(ν-1), need τ(T_e) ≤ 2
 
 Why ν ≤ 3 works, ν = 4 breaks: See docs/PARKER_NU4_ANALYSIS.md
+
+=== 2025-12-19 08:30 ===
+FORMAL/INFORMAL STRATEGY UPDATE:
+Added: parker_nu3_v1.md (55d1ec45) - INFORMAL
+
+Current mix:
+  FORMAL:   4 submissions (v12 minimal, v12 scaffolded, parker v1, parker v2)
+  INFORMAL: 2 submissions (v12 minimal.md, parker v1.md)
+
+Rationale: v7 INFORMAL outperformed FORMAL on Tuza weak bound.
+Queue both modes for important results.
