@@ -1089,3 +1089,95 @@ Current mix:
 
 Rationale: v7 INFORMAL outperformed FORMAL on Tuza weak bound.
 Queue both modes for important results.
+
+=== 2025-12-19 09:30 ===
+TUZA ν=4 PORTFOLIO v3 PREPARED (pending submission):
+
+Files created (awaiting slots):
+1. tuza_nu4_v1_boris_prime.lean - Slot 1: Boris Prime (INFORMAL open exploration)
+2. tuza_nu4_v1_boris_prime.md   - Slot 1: Boris Prime informal text version
+3. tuza_nu4_v2_architect.lean   - Slot 2: The Architect (FORMAL zero-comment structures)
+4. tuza_nu4_v3_surgeon.lean     - Slot 3: The Surgeon (FORMAL Parker failure attack)
+5. tuza_nu4_v4_finite_check.lean- Slot 4: The Finite Check (FORMAL dec_trivial)
+6. tuza_nu4_v5_conflict_graph.md- Slot 5: Conflict Graph (INFORMAL scaffold)
+7. tuza_nu4_v6_pessimist.lean   - Slot 6: The Pessimist (INFORMAL counterexample)
+8. tuza_nu4_v7_slicer.lean      - Slot 7: The Slicer (FORMAL K₄-free case)
+
+Strategy (from 2-round AI debate):
+- Ratio: 4 formal : 3 informal (57% formal) 
+- Key innovation: "The Surgeon" attacks Parker's exact failure point
+- Key innovation: "The Slicer" isolates K₄ dense obstructions
+- Runtime: 24-hour checkpoint recommended
+
+QUEUE STATUS: Full (5/5 legal project). Run submit_tuza_nu4_portfolio.sh when slots free.
+
+=== 2025-12-19 PARKER COMPLETION SUBMISSIONS ===
+STRATEGY: Submit BOTH informal and formal with proven context
+
+Submission 1 (INFORMAL + CONTEXT):
+  File: tuza_parker_completion.md
+  Mode: --informal --context-folder submissions/parker_context
+  Project ID: 3057dfda-995d-4125-96d4-c63a0c3b6d68
+  Context: aristotle_parker_proven.lean + aristotle_nu1_proven.lean
+
+Submission 2 (FORMAL + CONTEXT):
+  File: tuza_combined_parker_v2.lean
+  Mode: --context-folder submissions/parker_context
+  Project ID: 3db6b2f3-f967-4498-8407-098282a70fb4
+  Context: aristotle_parker_proven.lean + aristotle_nu1_proven.lean
+
+CONTEXT FILES PROVIDED:
+- aristotle_parker_proven.lean: lemma_2_2, lemma_2_3, inductive_bound, intersecting_family_structure_corrected
+- aristotle_nu1_proven.lean: covering_number_le_two_of_subset_four
+
+GOAL: Complete τ ≤ 2ν for ν ≤ 3 (first machine-verified Parker proof)
+
+EXPECTED RUNTIME: 6-24 hours
+
+=== 2025-12-19 ν=4 PORTFOLIO SUBMISSIONS ===
+STRATEGY: Mixed formal/informal portfolio targeting genuinely open ν=4
+
+Submissions:
+1. tuza_nu4_v1_boris_prime.md (INFORMAL)
+   Project ID: 0cbcf556-28ff-4fb4-9584-9d96250de901
+   Strategy: Open exploration, no constraints
+
+2. tuza_nu4_v3_surgeon.lean (FORMAL)
+   Project ID: e4408087-0cc1-4106-8db3-4c8fc04d5839
+   Strategy: Attacks Parker's exact failure point at ν=4
+
+3. tuza_nu4_v5_conflict_graph.md (INFORMAL)
+   Project ID: aaf89ca2-9a63-4039-b1ac-dbd68ae784a4
+   Strategy: Structural analysis of triangle overlaps
+
+4. tuza_nu4_v6_pessimist.lean (FORMAL)
+   Project ID: d6195535-bfee-41df-8e25-c29eb2c6c6c7
+   Strategy: Counterexample hunt (valuable if finds one!)
+
+5. tuza_nu4_v7_slicer.lean (FORMAL)
+   Project ID: 8026542a-86a0-4ed4-a1f5-8f1e1595504e
+   Strategy: K₄-free case isolation
+
+REMAINING TO SUBMIT (when slots free):
+- tuza_nu4_v2_architect.lean (zero-comment structures)
+- tuza_nu4_v4_finite_check.lean (dec_trivial small graphs)
+- tuza_nu4_v1_boris_prime.lean (formal version)
+
+EXPECTED RUNTIME: 6-24 hours
+
+=== 2025-12-19 ν=4 PORTFOLIO COMPLETE ===
+Additional submissions:
+
+6. tuza_nu4_v2_architect.lean (FORMAL)
+   Project ID: 78959cfe-6df6-4570-8729-69d1c24f4dec
+   Strategy: Zero-comment structures, let Aristotle explore
+
+7. tuza_nu4_v4_finite_check.lean (FORMAL)
+   Project ID: 33945e8c-94ec-4c27-b1a0-96d85500b88e
+   Strategy: dec_trivial on small graphs (≤15 vertices)
+
+TOTAL ACTIVE SUBMISSIONS: 9
+- Parker completion: 2 (informal + formal)
+- ν=4 portfolio: 7 (4 formal, 3 informal)
+
+Full portfolio now running. Check results in 6-24 hours.

@@ -14,32 +14,55 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Submissions | 120+ |
-| Theorems Proven by Aristotle | 20+ |
+| Total Submissions | 130+ |
+| Theorems Proven by Aristotle | 25+ |
 | Counterexamples Found | 3 |
-| Erdős Problems Attempted | 12 |
-| **Active Aristotle Jobs** | **7** |
+| Erdos Problems Attempted | 12 |
+| **Active Aristotle Jobs** | **9** |
 
 ### Key Results
 
 | Problem | Result | File |
 |---------|--------|------|
-| **Tuza ν=1** | ✅ `τ(G) ≤ 2` when `ν(G) = 1` | `tuza_SUCCESS_nu1_case.lean` |
-| **Tuza weak** | ✅ `τ(G) ≤ 3ν(G)` for all graphs | `tuza_v8_OUTPUT_tau_le_3nu.lean` |
-| **Tuza ν=2** | 🔶 5 submissions running | `tuza_nu2_v12_*.lean` |
-| **Tuza ν≤3 (Parker)** | 🔶 2 submissions running | `parker_nu3_*.lean` |
-| **Erdős #1052** | ✅ All unitary perfect numbers are even | `erdos1052_SUCCESS_even.lean` |
-| **Erdős #153** | ✅ Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
+| **Tuza v=1** | Proven: `t(G) <= 2` when `v(G) = 1` | `tuza_SUCCESS_nu1_case.lean` |
+| **Tuza weak** | Proven: `t(G) <= 3v(G)` for all graphs | `tuza_v8_OUTPUT_tau_le_3nu.lean` |
+| **Tuza v<=3 (Parker)** | Proven lemmas (see below) | `aristotle_parker_proven.lean` |
+| **Tuza v=4** | Active: 7 submissions running | `tuza_nu4_*.lean` |
+| **Erdos #1052** | Proven: All unitary perfect numbers are even | `erdos1052_SUCCESS_even.lean` |
+| **Erdos #153** | Proven: Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
+
+### Breakthrough: Parker's Proof Lemmas (Proven by Aristotle)
+
+Aristotle has **fully proven** the core lemmas from Parker's 2025 paper:
+
+| Lemma | Statement | Status |
+|-------|-----------|--------|
+| `lemma_2_2` | For e in max packing M, triangles in S_e pairwise share an edge | Proven |
+| `lemma_2_3` | v(G \ T_e) = v - 1 | Proven |
+| `inductive_bound` | t(G) <= t(T_e) + t(G \ T_e) | Proven |
+| `intersecting_family_structure` | Intersecting family is star OR contained in K4 | Proven |
+| `covering_number_le_two_of_subset_four` | t <= 2 if triangles in <= 4 vertices | Proven |
+
+**What remains**: Assembly of these lemmas into the final theorem `t <= 2v` for `v <= 3`.
 
 ### Active Aristotle Submissions (Dec 19, 2025)
 
-| File | UUID | Target | Method |
-|------|------|--------|--------|
-| `tuza_nu2_v12_minimal.lean` | `8a5948f4` | ν=2 | K₄-extension (Boris) |
-| `tuza_nu2_v12_minimal.md` | `f398b5a5` | ν=2 | K₄-extension (informal) |
-| `tuza_nu2_v12_scaffolded.lean` | `232aa9cd` | ν=2 | K₄-extension (scaffolded) |
-| `parker_nu3_v1.lean` | `d096deb8` | ν≤3 | Parker (Boris) |
-| `parker_nu3_v2_scaffolded.lean` | `a2f49fd5` | ν≤3 | Parker (scaffolded) |
+**Parker Completion (v <= 3)**:
+| File | Mode | Project ID | Strategy |
+|------|------|------------|----------|
+| `tuza_parker_completion.md` | Informal + Context | `3057dfda` | Proven lemmas as context |
+| `tuza_combined_parker_v2.lean` | Formal + Context | `3db6b2f3` | Formal with sorry placeholders |
+
+**v=4 Portfolio (Genuinely Open)**:
+| File | Mode | Project ID | Strategy |
+|------|------|------------|----------|
+| `tuza_nu4_v1_boris_prime.md` | Informal | `0cbcf556` | Open exploration |
+| `tuza_nu4_v2_architect.lean` | Formal | `78959cfe` | Zero-comment structures |
+| `tuza_nu4_v3_surgeon.lean` | Formal | `e4408087` | Attacks Parker's failure point |
+| `tuza_nu4_v4_finite_check.lean` | Formal | `33945e8c` | dec_trivial small graphs |
+| `tuza_nu4_v5_conflict_graph.md` | Informal | `aaf89ca2` | Structural analysis |
+| `tuza_nu4_v6_pessimist.lean` | Formal | `d6195535` | Counterexample hunt |
+| `tuza_nu4_v7_slicer.lean` | Formal | `8026542a` | K4-free case isolation |
 
 ### Counterexamples Discovered
 
@@ -48,101 +71,70 @@ Aristotle's negation capability revealed flaws in proof strategies:
 | Lemma | What Aristotle Found | Impact |
 |-------|---------------------|--------|
 | `TuzaReductionProperty` | 2 triangles sharing edge break reduction | Strong induction approach invalid |
-| `two_edges_cover_nearby` | K₄ counterexample | "Nearby triangles" approach invalid |
+| `two_edges_cover_nearby` | K4 counterexample | "Nearby triangles" approach invalid |
 | `two_K4_almost_disjoint` | 6-vertex counterexample with shared edge | Revised to case analysis |
 
 ---
 
 ## Current Focus: Tuza's Conjecture
 
-**Conjecture (Tuza, 1981)**: For any graph G, τ(G) ≤ 2ν(G)
-- τ(G) = minimum edges to hit all triangles (triangle covering number)
-- ν(G) = maximum edge-disjoint triangles (triangle packing number)
+**Conjecture (Tuza, 1981)**: For any graph G, t(G) <= 2v(G)
+- t(G) = minimum edges to hit all triangles (triangle covering number)
+- v(G) = maximum edge-disjoint triangles (triangle packing number)
 
 ### Known Results (Literature)
 
 | Result | Source |
 |--------|--------|
-| τ ≤ (66/23)ν ≈ 2.87ν for all graphs | Haxell 1999 |
-| **ν ≤ 3 ⟹ τ ≤ 2ν** | **Parker 2025** ⭐ NEW |
+| t <= (66/23)v ~ 2.87v for all graphs | Haxell 1999 |
+| **v <= 3 => t <= 2v** | **Parker 2025** (NEW) |
 | Holds for planar graphs | Tuza 1985 |
 | Holds for tripartite graphs | Haxell 1993 |
-| Holds for treewidth ≤ 6 | Botler et al. 2021 |
-| Tight at K₄ and K₅ | Tuza 1990 |
-
-**🆕 Critical Discovery (Dec 2025)**: Alex Parker's paper ([arXiv:2406.06501](https://arxiv.org/abs/2406.06501), published EJC May 2025) proves Tuza for **ν ≤ 3** using hypergraph (k-1)-matchings.
-
-**Our Value Shift**: Our ν=2 work is now the **first machine-verified proof** using a **different method** (K₄-extension vs Parker's hypergraph approach). Both the formalization and the novel proof technique remain valuable.
+| Holds for treewidth <= 6 | Botler et al. 2021 |
+| Tight at K4 and K5 | Tuza 1990 |
 
 ### Our Progress
 
 | Case | Status | Method | Notes |
 |------|--------|--------|-------|
-| ν = 0 | ✅ Proven | - | Trivial base case |
-| ν = 1 | ✅ Proven | K₄-extension | First machine-verified (400+ lines) |
-| τ ≤ 3ν | ✅ Proven | Greedy | Weak bound, all graphs |
-| ν = 2 | 🔶 In progress | K₄-extension | 5 submissions running |
-| ν ≤ 3 | 🔶 In progress | Parker's method | 2 submissions running |
-| **ν = 4** | 🎯 Next target | Hybrid? | **Genuinely open** |
+| v = 0 | Proven | - | Trivial base case |
+| v = 1 | Proven | K4-extension | First machine-verified (400+ lines) |
+| t <= 3v | Proven | Greedy | Weak bound, all graphs |
+| v <= 3 | PROVEN LEMMAS | Parker's method | Assembly submission running |
+| **v = 4** | TARGET | Hybrid | **Genuinely open** |
 
-### The ν=2 Case: Current Strategy
+### Why v = 4 Is the Real Target
 
-**Goal**: Prove τ(G) ≤ 4 when ν(G) = 2
+Parker's proof works for v <= 3 but **not v = 4**:
+- At v <= 3: Can guarantee t(T_e) <= 2 for some edge e in packing M
+- At v = 4: Overlap patterns make this impossible
+- Induction gives t <= 3 + 2(3) = 9, but Tuza requires <= 8
 
-**Approach** (after counterexample-driven refinement):
-1. When τ > 4 with ν = 2, each packing triangle extends to K₄
-2. Get K₄s s₁ ⊇ T₁ and s₂ ⊇ T₂ where T₁, T₂ are edge-disjoint
-3. Case analysis on |s₁ ∩ s₂|:
-   - **0-1 vertices**: Independent K₄s, τ ≤ 2+2 = 4
-   - **2 vertices** (shared edge): Shared edge covers both, τ ≤ 3
-   - **3 vertices**: Union is K₅, τ(K₅) = 4
-   - **4 vertices**: Same K₄, τ = 2
+**v = 4 would be genuinely new mathematics** - not covered by any existing proof.
 
-**Key Lemmas Proven**:
-- `exists_disjoint_in_K4`: Outlier triangle avoidance in K₄ (proven by Aristotle v9)
-- `k4_avoidance_helper`: In 4-set, any edge has a 3-subset avoiding it
-- `triangle_shares_edge_with_packing`: Every triangle shares edge with max packing
-- `extensions_form_K4`: Packing triangles extend to K₄ when τ > 2ν
-
-**Remaining Gaps**:
-- `two_K4_cover_by_cases`: Case analysis covering argument
-- `extensions_form_K4`: Full proof (currently sorry)
-
-**Novelty Assessment**:
-Our K₄-extension approach is different from Parker's hypergraph method. If completed, this would be the first machine-verified proof of ν=2, using a novel technique.
-
-### Parker's Method (ν ≤ 3)
-
-We're also formalizing Parker's 2025 proof for comparison:
+### Parker's Method (What Aristotle Proved)
 
 **Key Definitions**:
-- **M**: Maximum edge-disjoint triangle packing (|M| = ν)
-- **T_e**: Triangles sharing an edge with e ∈ M
-- **S_e**: Triangles sharing edge with e but NOT with any other f ∈ M
+- **M**: Maximum edge-disjoint triangle packing (|M| = v)
+- **T_e**: Triangles sharing an edge with e in M
+- **S_e**: Triangles sharing edge with e but NOT with any other f in M
 
-**Key Lemmas**:
-- **Lemma 2.2**: ν(S_e) = 1 (any two triangles in S_e share an edge)
-- **Lemma 2.3**: ν(G \ T_e) = ν - 1 (removing T_e reduces packing by 1)
+**Key Lemmas (All Proven)**:
+- **Lemma 2.2**: v(S_e) = 1 (any two triangles in S_e share an edge)
+- **Lemma 2.3**: v(G \ T_e) = v - 1 (removing T_e reduces packing by 1)
+- **Inductive bound**: t(G) <= t(T_e) + t(G \ T_e)
+- **Intersecting structure**: Intersecting family -> star OR K4
 
-**Induction**: τ(G) ≤ τ(T_e) + 2(ν-1). For Tuza bound, need τ(T_e) ≤ 2.
-
-### Why ν = 4 Is the Real Target
-
-Parker's proof works for ν ≤ 3 but **not ν = 4**:
-- At ν = 4, case analysis can't guarantee τ(T_e) ≤ 2 for any e ∈ M
-- More complex matching configurations allow τ(T_e) = 3+
-- The extra edge breaks the 2ν bound in induction
-
-**ν = 4 would be genuinely new mathematics** - not covered by any existing proof.
+**What's left**: Show t(S_e) <= 2, then final induction completes the proof.
 
 ---
 
 ## The Boris Pattern
 
-Boris Alexeev solved **Erdős #124** (open since 1979) with minimal intervention:
+Boris Alexeev solved **Erdos #124** (open since 1979) with minimal intervention:
 
 ```
-1. Select problem  →  2. Submit  →  3. Go to bed  →  4. Wake up to solution
+1. Select problem  ->  2. Submit  ->  3. Go to bed  ->  4. Wake up to solution
 ```
 
 | Approach | Success Rate | Notes |
@@ -154,9 +146,47 @@ Boris Alexeev solved **Erdős #124** (open since 1979) with minimal intervention
 
 ---
 
-## Key Learnings (December 2024-2025)
+## Key Learnings (December 2025)
 
-### 1. Axioms Are Rejected - Use Full Proofs
+### 1. Context Files Are Powerful
+
+Aristotle's `--context-folder` and `--formal-input-context` flags allow feeding proven lemmas:
+
+```bash
+# Informal problem + formal context
+aristotle prove-from-file problem.md --informal \
+  --context-folder path/to/proven_lemmas/ --no-wait
+
+# Formal problem + context folder
+aristotle prove-from-file problem.lean \
+  --context-folder path/to/context/ --no-wait
+```
+
+This is how we feed Aristotle's own proven lemmas back for completion.
+
+### 2. Multi-Agent Debate for Strategy
+
+Using Grok-4, Gemini, and Codex in parallel debates:
+- Each AI critiques proposed submission strategies
+- Synthesize into portfolio of 7 submissions per target
+- Mix formal (67%) and informal (33%) modes
+- Key insight: "The Surgeon" pattern attacks exact failure points
+
+### 3. Submission Portfolio Strategy
+
+From our v=4 debate:
+
+| Slot | Pattern | Description |
+|------|---------|-------------|
+| 1 | Boris Prime | Minimal, open exploration |
+| 2 | Architect | Zero-comment structure |
+| 3 | Surgeon | Attack known failure point |
+| 4 | Finite Check | dec_trivial for small n |
+| 5 | Conflict Graph | Structural analysis |
+| 6 | Pessimist | Counterexample search |
+| 7 | Slicer | Isolate obstructions |
+
+### 4. Axioms Are Rejected - Use Full Proofs
 
 ```lean
 -- WRONG (Aristotle rejects):
@@ -167,36 +197,21 @@ lemma my_lemma : statement := by
   <full proof from previous Aristotle output>
 ```
 
-**Pattern**: Extract complete proofs from v1 output → include in v2 → Aristotle builds on them.
+### 5. Negation = Discovery
 
-### 2. Negation = Discovery
+When Aristotle **negates** a lemma:
+- Reveals invalid assumptions
+- Provides concrete counterexamples
+- Guides strategy refinement
 
-When Aristotle **negates** a lemma instead of proving it:
-- Reveals invalid assumptions in proof strategies
-- Provides concrete counterexamples with verified proofs
-- Guides hypothesis correction and strategy refinement
+### 6. Comments Hurt Exploration
 
-**Examples**:
-- Erdős #677: Aristotle found n=1, k=5 breaks `sylvester_schur_weak`
-- Tuza: Three separate counterexamples refined our ν=2 proof strategy
-- `two_K4_almost_disjoint`: Fin 6 counterexample with s₁∩s₂ = 2 vertices
+Strategic comments constrain Aristotle's search:
 
-### 3. Every Triangle Shares an Edge with Max Packing
-
-A key lemma proven for Tuza that generalizes:
-
-> If P is a maximum edge-disjoint triangle packing, then every triangle in G shares at least one edge with some triangle in P.
-
-This follows directly from maximality and is the foundation of the induction strategy.
-
-### 4. Informal Mode for Complex Reasoning
-
-Aristotle has an `--informal` flag for natural language proof hints:
-```bash
-aristotle prove-from-file problem.md --informal --no-wait
+```lean
+-- BAD: "-- Use induction on triangle count"
+-- GOOD: (no comment, just theorem statement)
 ```
-
-Use `.md`, `.txt`, or `.tex` files with detailed proof sketches.
 
 ---
 
@@ -204,33 +219,35 @@ Use `.md`, `.txt`, or `.tex` files with detailed proof sketches.
 
 ```
 math/
-├── CLAUDE.md                    # Project rules & AI patterns
-├── README.md                    # This file
-├── SECURITY.md                  # Security guidelines
-│
-├── submissions/                 # 106 Lean submission files
-│   ├── tuza_*.lean              # 35 Tuza's conjecture files
-│   ├── erdos*.lean              # 50 Erdős problem files
-│   ├── algo_*.lean              # 14 Algorithm discovery files
-│   ├── *_SUCCESS*.lean          # 7 verified successes
-│   ├── *_OUTPUT*.lean           # Aristotle output files
-│   └── monitor_log.txt          # Submission tracking log
-│
-├── problem-databases/           # Problem intelligence
-│   ├── boris_scores.json        # 261 Erdős problems scored
-│   ├── unified_problems_database.json
-│   ├── solvable_open.json       # Tractability rankings
-│   └── algorithms.json          # Algorithm discovery targets
-│
-├── docs/                        # Documentation (25+ files)
-│   ├── aristotle_documentation.md
-│   ├── TUZA_*.md                # Tuza strategy docs
-│   ├── ALGORITHM_*.md           # Algorithm discovery docs
-│   └── ...
-│
-├── scripts/                     # Automation tools
-├── proven/                      # Verified proofs
-└── archive/                     # Historical work
+|-- CLAUDE.md                    # Project rules & AI patterns
+|-- README.md                    # This file
+|-- SECURITY.md                  # Security guidelines
+|
+|-- submissions/                 # 130+ Lean submission files
+|   |-- tuza_*.lean              # 45 Tuza's conjecture files
+|   |-- tuza_nu4_*.lean          # 8 v=4 portfolio files
+|   |-- aristotle_*_proven.lean  # Proven lemma collections
+|   |-- parker_context/          # Context folder for completion
+|   |-- erdos*.lean              # 50 Erdos problem files
+|   |-- *_SUCCESS*.lean          # 7 verified successes
+|   |-- *_OUTPUT*.lean           # Aristotle output files
+|   |-- monitor_log.txt          # Submission tracking log
+|
+|-- problem-databases/           # Problem intelligence
+|   |-- boris_scores.json        # 261 Erdos problems scored
+|   |-- unified_problems_database.json
+|   |-- solvable_open.json       # Tractability rankings
+|   |-- algorithms.json          # Algorithm discovery targets
+|
+|-- docs/                        # Documentation (35+ files)
+|   |-- TUZA_STRATEGY_DEC19.md   # Current Tuza strategy
+|   |-- PARKER_NU4_ANALYSIS.md   # Why v=4 is open
+|   |-- ERDOS128_ANALYSIS.md     # Formalization bug postmortem
+|   |-- ...
+|
+|-- scripts/                     # Automation tools
+|-- proven/                      # Verified proofs
+|-- archive/                     # Historical work
 ```
 
 ---
@@ -251,6 +268,10 @@ aristotle prove-from-file submissions/problem.lean --no-wait
 
 # Informal mode (markdown with proof hints)
 aristotle prove-from-file problem.md --informal --no-wait
+
+# With context (proven lemmas)
+aristotle prove-from-file problem.lean \
+  --context-folder path/to/lemmas/ --no-wait
 ```
 
 ### 3. Check Status
@@ -270,14 +291,14 @@ asyncio.run(check())
 
 1. Read output file from Aristotle
 2. Extract PROVEN lemmas (with full proofs, not axioms)
-3. Include in next version
-4. Focus Aristotle on remaining `sorry` targets
+3. Put in context folder
+4. Submit next version with `--context-folder`
 
 ---
 
 ## Problem Selection Intelligence
 
-We maintain a scored database of 261 Erdős problems:
+We maintain a scored database of 261 Erdos problems:
 
 | Score Range | Tractability | Count |
 |-------------|--------------|-------|
@@ -293,18 +314,21 @@ We maintain a scored database of 261 Erdős problems:
 
 ---
 
-## Algorithm Discovery
+## Timeline
 
-We're exploring whether Aristotle can discover algorithmic improvements:
-
-| Problem | Status | Notes |
-|---------|--------|-------|
-| Matrix Mult ω | Explored | Found coefficient errors in Strassen variant |
-| APSP | Multiple versions | Targeting truly subcubic |
-| Sorting Networks | N=4,11 | Finite verification |
-| Integer Mult | Targeting | Remove log* factor |
-
-**Key insight**: Aristotle finds **connections** between known theorems, not fundamentally new algorithms.
+| Date | Milestone |
+|------|-----------|
+| Dec 5, 2024 | Boris Alexeev solves Erdos #124 |
+| Dec 11, 2024 | Project started |
+| Dec 14, 2024 | First successes: Erdos #153, #190, #593, #1052 |
+| Dec 14, 2024 | **Tuza v=1 PROVED** |
+| Dec 15-17, 2024 | Tuza v=2: 8 lemmas proved |
+| Dec 18, 2024 | **t <= 3v PROVED** (weak bound) |
+| Dec 18, 2024 | Counterexamples to flawed strategies |
+| Dec 19, 2024 | **exists_disjoint_in_K4 PROVED** by Aristotle |
+| Dec 19, 2025 | Parker 2025 discovery: v <= 3 proven in literature |
+| Dec 19, 2025 | **Parker lemmas FULLY PROVEN** by Aristotle |
+| Dec 19, 2025 | 9 submissions active: 2 Parker completion + 7 v=4 portfolio |
 
 ---
 
@@ -312,35 +336,16 @@ We're exploring whether Aristotle can discover algorithmic improvements:
 
 - **Aristotle**: https://aristotle.harmonic.fun
 - **Aristotle Paper**: https://arxiv.org/abs/2510.01346
-- **Erdős Problems**: https://erdosproblems.com
+- **Erdos Problems**: https://erdosproblems.com
 - **Formal Conjectures**: https://github.com/google-deepmind/formal-conjectures
 - **Lean 4**: https://lean-lang.org
 - **Mathlib 4**: https://leanprover-community.github.io/mathlib4_docs/
 
 ### Key Papers (Tuza's Conjecture)
 
-- **Parker 2025**: [arXiv:2406.06501](https://arxiv.org/abs/2406.06501) - Proves ν ≤ 3 via (k-1)-matchings
-- **Haxell 1999**: τ ≤ (66/23)ν for all graphs
-- **Tuza 1981**: Original conjecture (τ ≤ 2ν)
-
----
-
-## Timeline
-
-| Date | Milestone |
-|------|-----------|
-| Dec 5, 2024 | Boris Alexeev solves Erdős #124 |
-| Dec 11, 2024 | Project started |
-| Dec 14, 2024 | First successes: Erdős #153, #190, #593, #1052 |
-| Dec 14, 2024 | **Tuza ν=1 PROVED** |
-| Dec 15-17, 2024 | Tuza ν=2: 8 lemmas proved |
-| Dec 18, 2024 | Full Tuza attempted; **τ ≤ 3ν PROVED** (weak bound) |
-| Dec 18, 2024 | Counterexamples to reduction property and nearby triangles approach |
-| Dec 19, 2024 | **exists_disjoint_in_K4 PROVED** by Aristotle (v9) |
-| Dec 19, 2024 | Counterexample to `two_K4_almost_disjoint` found; strategy revised |
-| Dec 19, 2025 | **Parker 2025 discovery**: ν ≤ 3 already proven in literature |
-| Dec 19, 2025 | Strategic pivot: ν=2 for machine-verification, **ν=4 for new math** |
-| Dec 19, 2025 | Parker's method formalized; 7 Aristotle submissions active |
+- **Parker 2025**: [arXiv:2406.06501](https://arxiv.org/abs/2406.06501) - Proves v <= 3 via (k-1)-matchings
+- **Haxell 1999**: t <= (66/23)v for all graphs
+- **Tuza 1981**: Original conjecture (t <= 2v)
 
 ---
 
@@ -348,7 +353,7 @@ We're exploring whether Aristotle can discover algorithmic improvements:
 
 This is an experimental research project. Key ways to contribute:
 
-1. **Problem selection**: Identify Erdős problems with formalization gaps
+1. **Problem selection**: Identify Erdos problems with formalization gaps
 2. **Scaffolding**: Write helper lemmas that guide Aristotle
 3. **Analysis**: Interpret Aristotle's negations and partial proofs
 4. **Documentation**: Improve proof strategies

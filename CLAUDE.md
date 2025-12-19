@@ -55,6 +55,16 @@ Boris Alexeev's success on Erdős #124 came from:
 | Famous hard problems | Extensively studied, unlikely gaps |
 | High prize ($1000+) | Serious mathematicians have tried |
 
+### Prize Level Heuristics (Learned Dec 2025)
+
+| Prize | Pattern |
+|-------|---------|
+| **$25-100** | Often have formalization gaps (less scrutiny) |
+| **$250-500** | Moderate attention, gaps possible |
+| **$500+** | Extensively studied, gaps unlikely |
+
+**"Too easy" counterexample?** Usually means YOUR formalization is wrong, not the problem.
+
 ---
 
 ## Workflow
@@ -127,6 +137,85 @@ aristotle prove-from-file problem.lean --no-wait
 
 ---
 
+## Submission Patterns (Learned Dec 2025)
+
+Three distinct patterns with different use cases:
+
+| Pattern | Lines | When to Use | Expected Outcome |
+|---------|-------|-------------|------------------|
+| **Boris Minimal** | 35-47 | First attempt, exploration | Highest success rate |
+| **Scaffolded** | 100+ | After gaps identified | Builds on proven lemmas |
+| **Prescriptive** | 150+ | Test specific strategy | Often finds COUNTEREXAMPLES |
+
+### Boris Minimal (Recommended Default)
+
+- Just definitions + theorem statement
+- **NO comments** - comments constrain Aristotle's search space
+- Let Aristotle explore freely
+- Example: v7 minimal proved τ ≤ 3ν + K₄/K₅ tightness
+
+### Scaffolded (For Gap-Filling)
+
+- Include FULL PROVEN PROOFS as helper lemmas (not axioms)
+- No strategic comments
+- Feeds Aristotle verified building blocks to extend
+
+### Prescriptive (Strategy Testing)
+
+- Explicit proof strategy in structure
+- High discovery rate for FLAWED strategies
+- Often leads Aristotle to disprove your approach
+- **Counterexamples found this way are valuable** - they eliminate dead ends
+
+### Submit BOTH Formal AND Informal
+
+For important problems, submit two versions:
+```
+problem_v1.lean  → Aristotle (formal Lean)
+problem_v1.md    → Aristotle (natural language proof)
+```
+
+**Why**: Informal sometimes proves what formal misses. Different search dynamics.
+
+### Comments Hurt Exploration
+
+From Grok analysis: strategic comments constrain search space.
+
+```lean
+-- BAD: "-- Use induction on triangle count"
+-- GOOD: (no comment at all, just the theorem statement)
+```
+
+Aristotle's 200B+ parameter system explores better without human hints.
+
+---
+
+## Operational: Job Tracking
+
+### Rate Limit
+
+**5-7 concurrent Aristotle slots.** Project is bottlenecked here.
+
+Check before submitting more:
+```bash
+aristotle list                    # Active jobs
+cat submissions/monitor_log.txt   # Full history
+```
+
+### Submission Tracking
+
+Each submission gets a UUID:
+```bash
+aristotle prove-from-file problem.lean --no-wait
+# Returns: Job submitted with UUID: abc123...
+
+aristotle status abc123           # Check specific job
+```
+
+Track in `submissions/monitor_log.txt` with status (Running/Queued/Complete/Failed).
+
+---
+
 ## What We Learned (Dec 2024)
 
 ### Wrong Assumptions We Had
@@ -145,6 +234,73 @@ aristotle prove-from-file problem.lean --no-wait
 2. **Mathlib coverage** - Do relevant lemmas exist?
 3. **Patience** - Let it run for hours
 4. **Volume** - Submit multiple problems in parallel
+
+---
+
+## What We Learned (Dec 2025)
+
+### New Tactical Knowledge
+
+| Discovery | Implication |
+|-----------|-------------|
+| Comments hurt exploration | Submit minimal files, no strategic hints |
+| Informal proofs work | Submit .md alongside .lean |
+| Prescriptive → counterexamples | "Failures" often produce valuable negations |
+| Counterexamples = value | 3 flawed strategies eliminated via negation |
+| Parker proved ν≤3 | Pivot to ν=4 for genuinely open territory |
+| Context folders work | Feed proven lemmas back via `--context-folder` |
+| Multi-agent debate | Use Grok+Gemini+Codex to design submission portfolios |
+
+### Pattern Refinements
+
+- **Boris minimal** is the best default (35-47 lines, no comments)
+- **Scaffolded** works for gap-filling (100+ lines, include full proofs)
+- **Formal + Informal** dual submission increases success rate
+- **Rate limit awareness** - 5-7 concurrent slots, plan submissions accordingly
+- **Context folder iteration** - proven lemmas → context folder → next submission
+
+### Context Folder Pattern (NEW Dec 2025)
+
+```bash
+# Create context folder with proven lemmas
+mkdir -p submissions/parker_context
+cp aristotle_output_proven.lean submissions/parker_context/
+
+# Submit with context
+aristotle prove-from-file problem.md --informal \
+  --context-folder submissions/parker_context/ --no-wait
+
+# Or formal with context
+aristotle prove-from-file problem.lean \
+  --context-folder submissions/parker_context/ --no-wait
+```
+
+This is how we feed Aristotle's proven lemmas back for completion work.
+
+### Multi-Agent Debate Pattern (NEW Dec 2025)
+
+For strategic decisions, run parallel debates:
+
+1. **Grok-4**: Critical review, counterexample thinking
+2. **Gemini**: Architecture analysis, literature connections
+3. **Codex**: Implementation feasibility, code structure
+
+Synthesize into a 7-slot portfolio:
+| Slot | Pattern | Purpose |
+|------|---------|---------|
+| 1 | Boris Prime | Open exploration |
+| 2 | Architect | Zero-comment structures |
+| 3 | Surgeon | Attack known failure point |
+| 4 | Finite Check | dec_trivial for small n |
+| 5 | Conflict Graph | Structural analysis |
+| 6 | Pessimist | Counterexample hunt |
+| 7 | Slicer | Isolate obstructions |
+
+Mix: 67% formal, 33% informal.
+
+### Formalization Bug Lesson
+
+Erdős #128 taught us: if counterexample seems "too easy," check formalization against Formal Conjectures. Our threshold was off by +1.
 
 ---
 
@@ -258,6 +414,64 @@ See `docs/ERDOS128_ANALYSIS.md` for the full postmortem.
 **"Check results"** → Phase 4 analysis
 
 **"Why did X fail?"** → Deep analysis of formalization vs. problem
+
+---
+
+## Current Study: Tuza's Conjecture (τ ≤ 2ν)
+
+**The Conjecture**: For any graph G, τ(G) ≤ 2ν(G), where:
+- τ(G) = minimum edges to hit all triangles (covering number)
+- ν(G) = maximum edge-disjoint triangles (packing number)
+
+### Proven Results
+
+| Case | Status | Method |
+|------|--------|--------|
+| ν=0, ν=1 | ✅ Proven | Base case + K₄-extension |
+| τ ≤ 3ν (weak bound) | ✅ Proven | Greedy algorithm (all graphs) |
+| K₄, K₅ tightness | ✅ Proven | Direct verification |
+| **Parker lemmas** | ✅ **PROVEN** | lemma_2_2, 2_3, inductive_bound, intersecting_structure |
+| covering_number_le_two_of_subset_four | ✅ Proven | τ ≤ 2 if triangles in ≤4 vertices |
+
+### Parker Lemmas Breakthrough (Dec 2025)
+
+Aristotle has **fully proven** the core lemmas from Parker's 2025 paper:
+
+```
+submissions/aristotle_parker_proven.lean  (29KB) - lemma_2_2, lemma_2_3, inductive_bound, intersecting_structure
+submissions/aristotle_nu1_proven.lean     (22KB) - covering_number_le_two_of_subset_four
+```
+
+**What remains for ν ≤ 3**: Assembly into final theorem. Submissions running with context folders.
+
+### Counterexamples Found (Valuable Negations)
+
+Three counterexamples to flawed proof strategies:
+
+1. **TuzaReductionProperty** - Edge reduction doesn't preserve bounds
+2. **two_edges_cover_nearby** - K₄ nearby triangles need 3+ edges
+3. **two_K4_almost_disjoint** - "Disjoint" K₄s can share edges
+
+### Open Frontier: ν=4 (Genuinely Open)
+
+**Key Discovery (Dec 2025)**: Parker (arXiv:2406.06501, EJC May 2025) proved Tuza for **ν ≤ 3**.
+
+**Why Parker fails at ν=4**:
+- At ν=1,2,3: Can guarantee τ(T_e) ≤ 2 for some edge e in packing M
+- At ν=4: Overlap patterns make this impossible
+- Induction gives τ ≤ 3 + 2(3) = 9, but Tuza requires ≤ 8
+
+**Current ν=4 portfolio** (7 submissions running):
+- Boris Prime, Architect, Surgeon, Finite Check, Conflict Graph, Pessimist, Slicer
+
+### Key Files
+
+- `submissions/tuza_*.lean` - All Tuza submissions
+- `submissions/tuza_nu4_*.lean` - ν=4 portfolio (7 files)
+- `submissions/aristotle_*_proven.lean` - Proven lemma collections
+- `submissions/parker_context/` - Context folder for completion
+- `docs/TUZA_STRATEGY_DEC19.md` - Current strategy
+- `docs/PARKER_NU4_ANALYSIS.md` - Why ν=4 is genuinely open
 
 ---
 
