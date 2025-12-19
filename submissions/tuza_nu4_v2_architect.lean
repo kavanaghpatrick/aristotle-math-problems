@@ -13,40 +13,29 @@ noncomputable section
 
 variable {V : Type*} [Fintype V] [DecidableEq V]
 
-structure Triangle (V : Type*) where
-  vertices : Finset V
-  card_eq : vertices.card = 3
+def triangleEdges (t : Finset V) : Finset (Sym2 V) :=
+  t.offDiag.image (fun x => Sym2.mk (x.1, x.2))
 
-def Triangle.edges (t : Triangle V) : Finset (Sym2 V) :=
-  t.vertices.offDiag.image (fun x => Sym2.mk (x.1, x.2))
+def IsEdgeDisjoint (T : Finset (Finset V)) : Prop :=
+  (T : Set (Finset V)).PairwiseDisjoint triangleEdges
 
-def Triangle.sharesEdge (t1 t2 : Triangle V) : Prop :=
-  ¬Disjoint t1.edges t2.edges
+def IsTrianglePacking (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V)) : Prop :=
+  M ⊆ G.cliqueFinset 3 ∧ IsEdgeDisjoint M
 
-structure TrianglePacking (G : SimpleGraph V) [DecidableRel G.Adj] where
-  triangles : Finset (Triangle V)
-  edge_disjoint : (triangles : Set (Triangle V)).PairwiseDisjoint Triangle.edges
-  valid : ∀ t ∈ triangles, G.IsClique t.vertices
+def IsTriangleCover (G : SimpleGraph V) [DecidableRel G.Adj] (E : Finset (Sym2 V)) : Prop :=
+  ∀ t ∈ G.cliqueFinset 3, ¬Disjoint (triangleEdges t) E
 
-def TrianglePacking.size (P : TrianglePacking G) : ℕ := P.triangles.card
+def packingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sSup {n : ℕ | ∃ M : Finset (Finset V), M.card = n ∧ IsTrianglePacking G M}
 
-structure TriangleCover (G : SimpleGraph V) [DecidableRel G.Adj] where
-  edges : Finset (Sym2 V)
-  covers : ∀ t : Finset V, t ∈ G.cliqueFinset 3 → ¬Disjoint (t.offDiag.image (fun x => Sym2.mk (x.1, x.2))) edges
+def coveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf {n : ℕ | ∃ E : Finset (Sym2 V), E.card = n ∧ IsTriangleCover G E}
 
-def TriangleCover.size (C : TriangleCover G) : ℕ := C.edges.card
-
-def T_e (G : SimpleGraph V) [DecidableRel G.Adj] (e : Triangle V) : Finset (Finset V) :=
-  (G.cliqueFinset 3).filter (fun t => ¬Disjoint (t.offDiag.image (fun x => Sym2.mk (x.1, x.2))) e.edges)
-
-def maxPackingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
-  sSup {P.size | P : TrianglePacking G}
-
-def minCoverNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
-  sInf {C.size | C : TriangleCover G}
+def T_e (G : SimpleGraph V) [DecidableRel G.Adj] (e : Finset V) : Finset (Finset V) :=
+  (G.cliqueFinset 3).filter (fun t => ¬Disjoint (triangleEdges t) (triangleEdges e))
 
 theorem tuza_nu4_architect (G : SimpleGraph V) [DecidableRel G.Adj]
-    (h : maxPackingNumber G = 4) : minCoverNumber G ≤ 8 := by
+    (h : packingNumber G = 4) : coveringNumber G ≤ 8 := by
   sorry
 
 end
