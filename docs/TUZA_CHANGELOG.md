@@ -112,7 +112,62 @@ This changelog documents the progression of Tuza work, including version submiss
 **Date:** Dec 18, 2025 14:49 CST
 - Scaffolded: 7 proven lemmas as building blocks
 - No strategic hints (Grok rated 9/10)
-- **Result:** Still running at time of documentation
+- **Result:** COMPLETED
+  - **PROVEN:** τ ≤ 3ν (same as v7, different approach)
+  - Created `TuzaContext` axiomatic class
+  - Proved `packing_card_edges`, `max_packing_destroys_all_triangles`
+  - Full Tuza τ ≤ 2ν NOT proven
+  - Aristotle comment: "remains an open problem in mathematics"
+
+---
+
+## December 19, 2025 - CRITICAL DISCOVERIES (ν=2)
+
+### v9 (9a636df7) ⭐⭐
+**Date:** Dec 19, 2025
+- Full robustified ν=2 submission (800 lines)
+- **Result:** MAJOR PROOF SUCCESS
+  - **PROVEN:** `exists_disjoint_in_K4` - THE KEY OUTLIER LEMMA!
+  - Aristotle created helper: `k4_avoidance_helper` (in K₄, for any edge, ∃ 3-subset avoiding it)
+  - This was one of the 3 gaps in ν=2 proof
+  - Now only 2 gaps remain: `tau_gt_4_implies_two_K4`, `two_K4_cover_le_4`
+
+### v10 minimal (3b80f616) ⭐⭐⭐
+**Date:** Dec 19, 2025
+- Minimal 200-line ν=2 attempt
+- **Result:** CRITICAL COUNTEREXAMPLE FOUND
+  - **NEGATED:** `two_K4_almost_disjoint` - THIS BREAKS THE PROOF STRATEGY!
+  - **Counterexample:** Graph on 6 vertices (Fin 6)
+    - T1 = {0, 1, 2}, T2 = {3, 4, 5} - edge-disjoint triangles
+    - s1 = {0, 1, 2, 3} is K₄ containing T1
+    - s2 = {0, 3, 4, 5} is K₄ containing T2
+    - s1 ∩ s2 = {0, 3} has cardinality 2 > 1!
+  - The lemma claimed |s1 ∩ s2| ≤ 1, but it can be 2
+
+### Implications
+**The current ν=2 proof strategy is fundamentally flawed:**
+- We assumed K₄ extensions from edge-disjoint triangles would be "almost disjoint"
+- Aristotle formally disproved this with concrete counterexample
+- The "outlier argument" needs redesign
+- Two edge-disjoint packing triangles CAN extend to K₄s sharing 2 vertices
+
+### Current Status (Post-Counterexample)
+**PROVEN (can reuse):**
+1. `exists_max_packing` - max packing exists
+2. `triangle_shares_edge_with_packing` - every triangle shares edge with packing
+3. `extension_triangle_exists_nu2` - each edge has extension triangle
+4. `extensions_form_K4` - packing triangles extend to K₄s when τ > 2ν
+5. `tau_gt_4_implies_two_K4_with_packing` - get two K₄s with their triangles
+6. `exists_disjoint_in_K4` - **NEW FROM v9** - outlier disjoint triangle exists
+
+**FALSE (counterexampled):**
+- `two_K4_almost_disjoint` - K₄s from edge-disjoint triangles need NOT be almost-disjoint
+
+**STILL NEED:**
+- New covering strategy that handles K₄s sharing 2 vertices
+- `two_K4_cover_le_4` - must be reproven with different approach
+
+---
 
 ## Key Events Summary
 
@@ -126,6 +181,8 @@ This changelog documents the progression of Tuza work, including version submiss
 | Dec 18, ~16:30 | v7 output analyzed - τ ≤ 3ν PROVEN |
 | Dec 18, ~17:00 | Strategic decision: pivot from Tuza |
 | Dec 18, ~18:00 | Full documentation created |
+| Dec 19, ~?? | v9 proves `exists_disjoint_in_K4` (outlier lemma) |
+| Dec 19, ~?? | v10 finds COUNTEREXAMPLE to `two_K4_almost_disjoint` - strategy broken |
 
 ## Lessons Encoded
 

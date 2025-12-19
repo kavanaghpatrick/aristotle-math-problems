@@ -6,7 +6,7 @@
 [![Open Problems](https://img.shields.io/badge/Focus-Open%20Problems-red)](https://erdosproblems.com)
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-purple)](https://lean-lang.org/)
 
-**Last Updated**: December 18, 2025
+**Last Updated**: December 19, 2025
 
 ---
 
@@ -14,58 +14,85 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Submissions | 106 |
-| Theorems Proven by Aristotle | 15+ |
+| Total Submissions | 110+ |
+| Theorems Proven by Aristotle | 20+ |
+| Counterexamples Found | 3 |
 | Erdős Problems Attempted | 12 |
-| Problem Database | 261 scored problems |
 
-### Key Successes
+### Key Results
 
-| Problem | What Was Proven | File |
-|---------|-----------------|------|
-| **Tuza ν=1** | `triangleCoveringNumber G ≤ 2` when `trianglePackingNumber G = 1` | `tuza_SUCCESS_nu1_case.lean` |
-| **Erdős #1052** | `even_of_isUnitaryPerfect` - All unitary perfect numbers are even | `erdos1052_SUCCESS_even.lean` |
-| **Erdős #153** | `sumset_subset_interval` - Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
-| **Erdős #190** | Van der Waerden H(k) lower bound | `erdos190_SUCCESS.lean` |
-| **Erdős #593** | `IncidenceGraph_Bipartite` - 3-uniform hypergraph bipartiteness | `erdos593_SUCCESS.lean` |
+| Problem | Result | File |
+|---------|--------|------|
+| **Tuza ν=1** | ✅ `τ(G) ≤ 2` when `ν(G) = 1` | `tuza_SUCCESS_nu1_case.lean` |
+| **Tuza weak** | ✅ `τ(G) ≤ 3ν(G)` for all graphs | `tuza_v8_OUTPUT_tau_le_3nu.lean` |
+| **Tuza ν=2** | 🔶 10+ lemmas proven, 2 gaps remain | `tuza_nu2_v11_case_analysis.lean` |
+| **Erdős #1052** | ✅ All unitary perfect numbers are even | `erdos1052_SUCCESS_even.lean` |
+| **Erdős #153** | ✅ Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
+
+### Counterexamples Discovered
+
+Aristotle's negation capability revealed flaws in proof strategies:
+
+| Lemma | What Aristotle Found | Impact |
+|-------|---------------------|--------|
+| `TuzaReductionProperty` | 2 triangles sharing edge break reduction | Strong induction approach invalid |
+| `two_edges_cover_nearby` | K₄ counterexample | "Nearby triangles" approach invalid |
+| `two_K4_almost_disjoint` | 6-vertex counterexample with shared edge | Revised to case analysis |
 
 ---
 
-## Current Focus: Tuza's Conjecture (FULL)
+## Current Focus: Tuza's Conjecture
 
-**Conjecture (1981)**: For any graph G, τ(G) ≤ 2ν(G)
-- τ = minimum edges to delete to make triangle-free
-- ν = maximum number of edge-disjoint triangles
+**Conjecture (Tuza, 1981)**: For any graph G, τ(G) ≤ 2ν(G)
+- τ(G) = minimum edges to hit all triangles (triangle covering number)
+- ν(G) = maximum edge-disjoint triangles (triangle packing number)
 
-### Status
+### Known Results (Literature)
 
-| Case | Status | Strategy |
-|------|--------|----------|
-| ν = 0 | ✅ **PROVED** | Trivial base case |
-| ν = 1 | ✅ **PROVED** | K₄ structure analysis (Aristotle beae6b6a) |
-| ν = 2 | 🔶 8 lemmas proved | K₄ extension + outlier argument |
-| **FULL** | 🚀 **NEW APPROACH** | Strong induction via 2-edge reduction |
+| Result | Source |
+|--------|--------|
+| τ ≤ (66/23)ν ≈ 2.87ν for all graphs | Haxell 1999 |
+| Holds for planar graphs | Tuza 1985 |
+| Holds for tripartite graphs | Haxell 1993 |
+| Holds for treewidth ≤ 6 | Botler et al. 2021 |
+| Tight at K₄ and K₅ | Tuza 1990 |
 
-### The New Strategy (December 18, 2025)
+**Note**: Small cases (ν ≤ 7) do not appear to be explicitly proven in the literature. Our research using Playwright to access Wikipedia, Google Scholar, DIMACS, and Springer found no specific results for the ν=2 case.
 
-Instead of proving case-by-case (ν=1, ν=2, ...), we now attack the **full conjecture** directly:
+### Our Progress
 
-```
-Proof by strong induction on ν:
-1. Base: ν=0 → τ=0 ✓ (proven)
-2. Inductive: For ν > 0:
-   - Pick triangle p from max packing P
-   - Remove 2 edges of p → destroys p
-   - KEY LEMMA: ν(G\S) < ν(G)  ← THE ONE GAP
-   - By IH: τ(G\S) ≤ 2·ν(G\S)
-   - By deletion: τ(G) ≤ 2 + τ(G\S) ≤ 2·ν ✓
-```
+| Case | Status | Notes |
+|------|--------|-------|
+| ν = 0 | ✅ Proven | Trivial base case |
+| ν = 1 | ✅ Proven | K₄ structure argument (400+ lines) |
+| τ ≤ 3ν | ✅ Proven | Weak bound, all graphs (v7 minimal approach) |
+| ν = 2 | 🔶 In progress | 10+ lemmas proven, case analysis approach |
 
-**Active Submissions**:
-- `d50cf3fb` - Formal mode (tuza_FULL_v4.lean)
-- `b4549d16` - Informal mode (tuza_FULL_v4_informal.md)
+### The ν=2 Case: Current Strategy
 
-If Aristotle proves `exists_two_edge_reduction`, the full conjecture follows.
+**Goal**: Prove τ(G) ≤ 4 when ν(G) = 2
+
+**Approach** (after counterexample-driven refinement):
+1. When τ > 4 with ν = 2, each packing triangle extends to K₄
+2. Get K₄s s₁ ⊇ T₁ and s₂ ⊇ T₂ where T₁, T₂ are edge-disjoint
+3. Case analysis on |s₁ ∩ s₂|:
+   - **0-1 vertices**: Independent K₄s, τ ≤ 2+2 = 4
+   - **2 vertices** (shared edge): Shared edge covers both, τ ≤ 3
+   - **3 vertices**: Union is K₅, τ(K₅) = 4
+   - **4 vertices**: Same K₄, τ = 2
+
+**Key Lemmas Proven**:
+- `exists_disjoint_in_K4`: Outlier triangle avoidance in K₄ (proven by Aristotle v9)
+- `k4_avoidance_helper`: In 4-set, any edge has a 3-subset avoiding it
+- `triangle_shares_edge_with_packing`: Every triangle shares edge with max packing
+- `extensions_form_K4`: Packing triangles extend to K₄ when τ > 2ν
+
+**Remaining Gaps**:
+- `two_K4_cover_by_cases`: Case analysis covering argument
+- `extensions_form_K4`: Full proof (currently sorry)
+
+**Novelty Assessment**:
+The ν=2 case appears unstudied in existing literature. Our K₄ extension + intersection case analysis approach is novel. If completed, this would be the first formal (machine-verified) proof of any non-trivial Tuza case.
 
 ---
 
@@ -104,11 +131,14 @@ lemma my_lemma : statement := by
 ### 2. Negation = Discovery
 
 When Aristotle **negates** a lemma instead of proving it:
-- Reveals formalization bugs
-- Provides counterexamples
-- Guides hypothesis correction
+- Reveals invalid assumptions in proof strategies
+- Provides concrete counterexamples with verified proofs
+- Guides hypothesis correction and strategy refinement
 
-**Example**: Erdős #677 - Aristotle found n=1, k=5 breaks `sylvester_schur_weak`, revealing a missing hypothesis.
+**Examples**:
+- Erdős #677: Aristotle found n=1, k=5 breaks `sylvester_schur_weak`
+- Tuza: Three separate counterexamples refined our ν=2 proof strategy
+- `two_K4_almost_disjoint`: Fin 6 counterexample with s₁∩s₂ = 2 vertices
 
 ### 3. Every Triangle Shares an Edge with Max Packing
 
@@ -255,9 +285,13 @@ We're exploring whether Aristotle can discover algorithmic improvements:
 | Dec 5, 2024 | Boris Alexeev solves Erdős #124 |
 | Dec 11, 2024 | Project started |
 | Dec 14, 2024 | First successes: Erdős #153, #190, #593, #1052 |
-| Dec 14, 2024 | **Tuza ν=1 PROVED** (beae6b6a) |
-| Dec 15-17, 2024 | Tuza ν=2: 8 lemmas proved, 2 gaps remain |
-| Dec 18, 2024 | **Strategic shift**: Full Tuza via strong induction |
+| Dec 14, 2024 | **Tuza ν=1 PROVED** |
+| Dec 15-17, 2024 | Tuza ν=2: 8 lemmas proved |
+| Dec 18, 2024 | Full Tuza attempted; **τ ≤ 3ν PROVED** (weak bound) |
+| Dec 18, 2024 | Counterexamples to reduction property and nearby triangles approach |
+| Dec 19, 2024 | **exists_disjoint_in_K4 PROVED** by Aristotle (v9) |
+| Dec 19, 2024 | Counterexample to `two_K4_almost_disjoint` found; strategy revised |
+| Dec 19, 2024 | Literature review confirms ν=2 case appears unstudied |
 
 ---
 

@@ -986,3 +986,30 @@ RECOMMENDATIONS:
 1. Document τ ≤ 3ν proof as publishable formalization
 2. Try special graph classes (planar, bounded-degree)
 3. Consider pivoting to problems where Aristotle can win completely
+
+=== CRITICAL DISCOVERIES - Dec 19, 2025 ===
+
+v9 (9a636df7): BREAKTHROUGH
+  - PROVEN: exists_disjoint_in_K4 (outlier lemma)
+  - Aristotle created helper: k4_avoidance_helper
+  - Now only 2 gaps remain in ν=2 proof
+
+v10 minimal (3b80f616): COUNTEREXAMPLE FOUND
+  - NEGATED: two_K4_almost_disjoint
+  - Counterexample on Fin 6:
+    - T1 = {0,1,2}, T2 = {3,4,5} edge-disjoint
+    - s1 = {0,1,2,3} is K₄ containing T1
+    - s2 = {0,3,4,5} is K₄ containing T2
+    - s1 ∩ s2 = {0,3} has card 2 > 1!
+
+FIX (Grok analysis): Case analysis on |s1 ∩ s2|
+  - |s1 ∩ s2| = 0: τ ≤ 2+2 = 4 ✓
+  - |s1 ∩ s2| = 1: τ ≤ 2+2 = 4 ✓
+  - |s1 ∩ s2| = 2: Shared edge covers both! τ ≤ 3 ✓
+  - |s1 ∩ s2| = 3: Union is K₅, τ(K₅) = 4 ✓
+  - |s1 ∩ s2| = 4: s1 = s2, τ ≤ 2 ✓
+
+v11 PENDING: tuza_nu2_v11_case_analysis.lean
+  - Created with revised strategy
+  - Rate limited (429) - will retry
+  - Project ID pending: c00da301-ef1f-481d-84f3-e777db790baa (failed)

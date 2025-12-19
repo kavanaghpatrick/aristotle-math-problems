@@ -60,7 +60,7 @@ Tuza's Conjecture states that in any graph, the triangle covering number τ(G) (
 | **v5** | e900e161 / ef7e7f99 | Fixed bug. **COUNTEREXAMPLE to TuzaReductionProperty**. 10+ lemmas proven |
 | **v6** | 380fb7d3 / cca06048 | NearbyTriangles approach. **SECOND COUNTEREXAMPLE (K₄)** |
 | **v7** | a64e90b3 / 085f46d5 | Boris pattern (47 lines). **PROVEN: τ ≤ 3ν, K₄/K₅ tight** |
-| v8 | 21873a56 / 4828661f | Scaffolded with 7 proven lemmas. Still running |
+| **v8** | 21873a56 / 4828661f | Scaffolded with 7 proven lemmas. **PROVEN: τ ≤ 3ν (axiomatic approach)** |
 
 ---
 
@@ -90,8 +90,11 @@ Tuza's Conjecture states that in any graph, the triangle covering number τ(G) (
 | 20 | triangle_shares_edge_with_packing | Every triangle shares edge with packing | 4610138e |
 | 21 | **counterexample_disproves_strong_claim** | **TuzaReductionProperty FALSE** | ef7e7f99 |
 | 22 | **two_edges_cover_nearby_counterexample** | **NearbyTriangles FALSE** | cca06048 |
+| 23 | packing_card_edges | Edges in packing = 3 × |P| | 4828661f |
+| 24 | max_packing_destroys_all_triangles | ν=0 after removing max packing | 4828661f |
+| 25 | tau_le_3_nu (axiomatic) | τ ≤ 3ν via TuzaContext class | 4828661f |
 
-**Total: 22 proven theorems**
+**Total: 25 proven theorems**
 
 ---
 
@@ -148,11 +151,11 @@ Tuza's Conjecture states that in any graph, the triangle covering number τ(G) (
 | Metric | Count |
 |--------|-------|
 | Total submissions | 25+ |
-| Successful lemma proofs | 22 |
-| Full case proofs | 2 (ν=1, weak Tuza) |
+| Successful lemma proofs | 25 |
+| Full case proofs | 3 (ν=1, weak Tuza v7, weak Tuza v8) |
 | Counterexamples found | 2 |
 | Major errors | 1 (axiom bug) |
-| Still running | 1 (v8) |
+| Completed | All |
 
 ### Timeline
 - **Dec 14**: ν=1 case SOLVED
