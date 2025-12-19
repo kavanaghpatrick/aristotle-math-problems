@@ -113,5 +113,10 @@
     "project_id": "bf62a5fb-f975-452b-be1a-43194654f5fd",
     "submitted_at": "2025-12-15T00:25:41.053764",
     "status": "submitted"
+  },
+  "submissions/tuza_nu2_v12_minimal.lean": {
+    "project_id": "8a5948f4-1973-4ab2-8510-58ae7dc2c531",
+    "submitted_at": "2025-12-19T07:34:13.318774",
+    "status": "submitted"
   }
 }

@@ -1054,3 +1054,15 @@ v12 SUBMISSIONS READY (rate limited):
 - tuza_nu2_v12_scaffolded.lean (FORMAL fallback, 100 lines)
 
 STRATEGY: Submit BOTH formal + informal when slots free
+
+=== 2025-12-19 07:45 ===
+SUBMISSIONS ACTIVE:
+- v12-minimal.lean: 8a5948f4 (FORMAL) - Boris pattern, 35 lines
+- v12-minimal.md: f398b5a5 (INFORMAL) - Natural language context
+- v12-scaffolded.lean: 232aa9cd (FORMAL) - 100 lines with proven lemmas
+
+STRATEGIC UPDATE (Parker 2025 discovery):
+- Parker (arXiv:2406.06501) proved Tuza for ν ≤ 3
+- Our ν=2 work = first MACHINE-VERIFIED proof (different method)
+- Created docs/TUZA_STRATEGY_DEC19.md with full plan
+- Priority: Complete ν=2, then pivot to ν=4 (genuinely open)
