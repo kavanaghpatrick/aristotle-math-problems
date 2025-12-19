@@ -1066,3 +1066,15 @@ STRATEGIC UPDATE (Parker 2025 discovery):
 - Our ν=2 work = first MACHINE-VERIFIED proof (different method)
 - Created docs/TUZA_STRATEGY_DEC19.md with full plan
 - Priority: Complete ν=2, then pivot to ν=4 (genuinely open)
+
+=== 2025-12-19 08:15 ===
+PARKER FORMALIZATION SUBMITTED:
+- parker_nu3_v1.lean: d096deb8 (minimal, Boris pattern)
+- parker_nu3_v2_scaffolded.lean: a2f49fd5 (with lemmas 2.2, 2.3)
+
+Parker's proof structure:
+- Lemma 2.2: ν(S_e) = 1 (any two in S_e share edge)
+- Lemma 2.3: ν(G \ T_e) = ν - 1
+- Induction: τ ≤ τ(T_e) + 2(ν-1), need τ(T_e) ≤ 2
+
+Why ν ≤ 3 works, ν = 4 breaks: See docs/PARKER_NU4_ANALYSIS.md
