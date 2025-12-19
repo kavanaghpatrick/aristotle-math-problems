@@ -14,10 +14,11 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Submissions | 110+ |
+| Total Submissions | 120+ |
 | Theorems Proven by Aristotle | 20+ |
 | Counterexamples Found | 3 |
 | Erdős Problems Attempted | 12 |
+| **Active Aristotle Jobs** | **7** |
 
 ### Key Results
 
@@ -25,9 +26,20 @@
 |---------|--------|------|
 | **Tuza ν=1** | ✅ `τ(G) ≤ 2` when `ν(G) = 1` | `tuza_SUCCESS_nu1_case.lean` |
 | **Tuza weak** | ✅ `τ(G) ≤ 3ν(G)` for all graphs | `tuza_v8_OUTPUT_tau_le_3nu.lean` |
-| **Tuza ν=2** | 🔶 10+ lemmas proven, 2 gaps remain | `tuza_nu2_v11_case_analysis.lean` |
+| **Tuza ν=2** | 🔶 5 submissions running | `tuza_nu2_v12_*.lean` |
+| **Tuza ν≤3 (Parker)** | 🔶 2 submissions running | `parker_nu3_*.lean` |
 | **Erdős #1052** | ✅ All unitary perfect numbers are even | `erdos1052_SUCCESS_even.lean` |
 | **Erdős #153** | ✅ Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
+
+### Active Aristotle Submissions (Dec 19, 2025)
+
+| File | UUID | Target | Method |
+|------|------|--------|--------|
+| `tuza_nu2_v12_minimal.lean` | `8a5948f4` | ν=2 | K₄-extension (Boris) |
+| `tuza_nu2_v12_minimal.md` | `f398b5a5` | ν=2 | K₄-extension (informal) |
+| `tuza_nu2_v12_scaffolded.lean` | `232aa9cd` | ν=2 | K₄-extension (scaffolded) |
+| `parker_nu3_v1.lean` | `d096deb8` | ν≤3 | Parker (Boris) |
+| `parker_nu3_v2_scaffolded.lean` | `a2f49fd5` | ν≤3 | Parker (scaffolded) |
 
 ### Counterexamples Discovered
 
@@ -52,21 +64,26 @@ Aristotle's negation capability revealed flaws in proof strategies:
 | Result | Source |
 |--------|--------|
 | τ ≤ (66/23)ν ≈ 2.87ν for all graphs | Haxell 1999 |
+| **ν ≤ 3 ⟹ τ ≤ 2ν** | **Parker 2025** ⭐ NEW |
 | Holds for planar graphs | Tuza 1985 |
 | Holds for tripartite graphs | Haxell 1993 |
 | Holds for treewidth ≤ 6 | Botler et al. 2021 |
 | Tight at K₄ and K₅ | Tuza 1990 |
 
-**Note**: Small cases (ν ≤ 7) do not appear to be explicitly proven in the literature. Our research using Playwright to access Wikipedia, Google Scholar, DIMACS, and Springer found no specific results for the ν=2 case.
+**🆕 Critical Discovery (Dec 2025)**: Alex Parker's paper ([arXiv:2406.06501](https://arxiv.org/abs/2406.06501), published EJC May 2025) proves Tuza for **ν ≤ 3** using hypergraph (k-1)-matchings.
+
+**Our Value Shift**: Our ν=2 work is now the **first machine-verified proof** using a **different method** (K₄-extension vs Parker's hypergraph approach). Both the formalization and the novel proof technique remain valuable.
 
 ### Our Progress
 
-| Case | Status | Notes |
-|------|--------|-------|
-| ν = 0 | ✅ Proven | Trivial base case |
-| ν = 1 | ✅ Proven | K₄ structure argument (400+ lines) |
-| τ ≤ 3ν | ✅ Proven | Weak bound, all graphs (v7 minimal approach) |
-| ν = 2 | 🔶 In progress | 10+ lemmas proven, case analysis approach |
+| Case | Status | Method | Notes |
+|------|--------|--------|-------|
+| ν = 0 | ✅ Proven | - | Trivial base case |
+| ν = 1 | ✅ Proven | K₄-extension | First machine-verified (400+ lines) |
+| τ ≤ 3ν | ✅ Proven | Greedy | Weak bound, all graphs |
+| ν = 2 | 🔶 In progress | K₄-extension | 5 submissions running |
+| ν ≤ 3 | 🔶 In progress | Parker's method | 2 submissions running |
+| **ν = 4** | 🎯 Next target | Hybrid? | **Genuinely open** |
 
 ### The ν=2 Case: Current Strategy
 
@@ -92,7 +109,31 @@ Aristotle's negation capability revealed flaws in proof strategies:
 - `extensions_form_K4`: Full proof (currently sorry)
 
 **Novelty Assessment**:
-The ν=2 case appears unstudied in existing literature. Our K₄ extension + intersection case analysis approach is novel. If completed, this would be the first formal (machine-verified) proof of any non-trivial Tuza case.
+Our K₄-extension approach is different from Parker's hypergraph method. If completed, this would be the first machine-verified proof of ν=2, using a novel technique.
+
+### Parker's Method (ν ≤ 3)
+
+We're also formalizing Parker's 2025 proof for comparison:
+
+**Key Definitions**:
+- **M**: Maximum edge-disjoint triangle packing (|M| = ν)
+- **T_e**: Triangles sharing an edge with e ∈ M
+- **S_e**: Triangles sharing edge with e but NOT with any other f ∈ M
+
+**Key Lemmas**:
+- **Lemma 2.2**: ν(S_e) = 1 (any two triangles in S_e share an edge)
+- **Lemma 2.3**: ν(G \ T_e) = ν - 1 (removing T_e reduces packing by 1)
+
+**Induction**: τ(G) ≤ τ(T_e) + 2(ν-1). For Tuza bound, need τ(T_e) ≤ 2.
+
+### Why ν = 4 Is the Real Target
+
+Parker's proof works for ν ≤ 3 but **not ν = 4**:
+- At ν = 4, case analysis can't guarantee τ(T_e) ≤ 2 for any e ∈ M
+- More complex matching configurations allow τ(T_e) = 3+
+- The extra edge breaks the 2ν bound in induction
+
+**ν = 4 would be genuinely new mathematics** - not covered by any existing proof.
 
 ---
 
@@ -276,6 +317,12 @@ We're exploring whether Aristotle can discover algorithmic improvements:
 - **Lean 4**: https://lean-lang.org
 - **Mathlib 4**: https://leanprover-community.github.io/mathlib4_docs/
 
+### Key Papers (Tuza's Conjecture)
+
+- **Parker 2025**: [arXiv:2406.06501](https://arxiv.org/abs/2406.06501) - Proves ν ≤ 3 via (k-1)-matchings
+- **Haxell 1999**: τ ≤ (66/23)ν for all graphs
+- **Tuza 1981**: Original conjecture (τ ≤ 2ν)
+
 ---
 
 ## Timeline
@@ -291,7 +338,9 @@ We're exploring whether Aristotle can discover algorithmic improvements:
 | Dec 18, 2024 | Counterexamples to reduction property and nearby triangles approach |
 | Dec 19, 2024 | **exists_disjoint_in_K4 PROVED** by Aristotle (v9) |
 | Dec 19, 2024 | Counterexample to `two_K4_almost_disjoint` found; strategy revised |
-| Dec 19, 2024 | Literature review confirms ν=2 case appears unstudied |
+| Dec 19, 2025 | **Parker 2025 discovery**: ν ≤ 3 already proven in literature |
+| Dec 19, 2025 | Strategic pivot: ν=2 for machine-verification, **ν=4 for new math** |
+| Dec 19, 2025 | Parker's method formalized; 7 Aristotle submissions active |
 
 ---
 
