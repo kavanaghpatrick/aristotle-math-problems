@@ -30,7 +30,7 @@ def IsTriangleCovering (G : SimpleGraph V) [DecidableRel G.Adj] (S : Finset (Sym
   (G.deleteEdges S).cliqueFinset 3 = ∅
 
 def coveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] (triangles : Finset (Finset V)) : ℕ :=
-  sInf {S.card | S : Finset (Sym2 V) // ∀ t ∈ triangles, ¬Disjoint (triangleEdges t) S}
+  sInf {n : ℕ | ∃ S : Finset (Sym2 V), S.card = n ∧ ∀ t ∈ triangles, ¬Disjoint (triangleEdges t) S}
 
 theorem parker_lemma_nu4 (G : SimpleGraph V) [DecidableRel G.Adj]
     (M : Finset (Finset V)) (hM : IsMaxPacking G M) (hcard : M.card = 4) :

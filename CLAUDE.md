@@ -337,6 +337,59 @@ python3 scripts/extract_solvable_open.py
 
 ---
 
+## Pre-Submission Validation (CRITICAL)
+
+**Always validate formal submissions before sending to Aristotle.**
+
+The v3_surgeon submission failed because of a Lean syntax error we could have caught locally.
+
+### Validation Command
+
+```bash
+# Validate a single file
+lake env lean submissions/file.lean
+
+# Expected output for valid file:
+# warning: declaration uses 'sorry'  ← This is OK, Aristotle fills these
+
+# Bad output (DO NOT SUBMIT):
+# error: unexpected token...
+# error: unknown identifier...
+```
+
+### First-Time Setup
+
+```bash
+cd /Users/patrickkavanagh/math
+lake update                  # Get Mathlib dependencies
+lake exe cache get          # Download pre-built Mathlib (~5 min)
+```
+
+### Validation Script
+
+```bash
+./scripts/validate_submission.sh submissions/file.lean
+```
+
+### What Validation Catches
+
+| Error Type | Example | Caught? |
+|------------|---------|---------|
+| Syntax errors | `{x | T // P}` mixed notation | ✓ |
+| Missing imports | `import Mathlib` typo | ✓ |
+| Type errors | Wrong function signature | ✓ |
+| Unknown identifiers | Typo in Mathlib name | ✓ |
+| `sorry` warnings | Expected - Aristotle fills | ✓ (OK) |
+
+### Workflow
+
+1. Write submission file
+2. Run `lake env lean submissions/file.lean`
+3. Fix any errors (not `sorry` warnings)
+4. Only then: `aristotle prove-from-file submissions/file.lean --no-wait`
+
+---
+
 ## Lean/Mathlib Pitfalls
 
 **Set vs Finset**: `(G.induce S).edgeFinset` needs `DecidablePred (· ∈ S)` → use `Finset V` not `Set V`
@@ -344,6 +397,12 @@ python3 scripts/extract_solvable_open.py
 **Required instances**: `[Fintype V] [DecidableEq V] [DecidableRel G.Adj]`
 
 **Aristotle error?** Check: missing `DecidableRel`, Set/Finset mismatch, missing `Fintype`
+
+**Set-builder vs Subtype**: Don't mix `{x | P}` with `{x : T // P}` - use proper syntax:
+```lean
+-- WRONG: {S.card | S : Finset V // P S}
+-- RIGHT: {n : ℕ | ∃ S : Finset V, S.card = n ∧ P S}
+```
 
 ---
 

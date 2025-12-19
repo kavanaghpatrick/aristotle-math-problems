@@ -1181,3 +1181,17 @@ TOTAL ACTIVE SUBMISSIONS: 9
 - ν=4 portfolio: 7 (4 formal, 3 informal)
 
 Full portfolio now running. Check results in 6-24 hours.
+
+=== 2025-12-19 VALIDATION WORKFLOW ADDED ===
+LESSON LEARNED: v3_surgeon failed due to Lean syntax error we could have caught locally.
+
+FIX: Added pre-submission validation workflow
+- Run: lake env lean submissions/file.lean
+- Catches syntax/type errors BEFORE wasting Aristotle slots
+- Mathlib cache now set up (one-time)
+
+v3_surgeon FIXED and RESUBMITTED:
+- Fixed: {S.card | S : T // P} → {n : ℕ | ∃ S : T, S.card = n ∧ P}
+- New Project ID: 9b828286-4540-43cd-8b48-80741a664833
+
+GROK SANITY CHECK: Confirmed this is good practice, not over-engineering.

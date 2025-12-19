@@ -2,11 +2,16 @@ import Lake
 open Lake DSL
 
 package «math» where
-  -- add package configuration options here
+  leanOptions := #[
+    ⟨`pp.unicode.fun, true⟩,
+    ⟨`autoImplicit, false⟩
+  ]
 
-lean_lib «Math» where
-  -- add library configuration options here
+require mathlib from git
+  "https://github.com/leanprover-community/mathlib4.git" @ "v4.24.0"
 
+-- Validation target for checking submission files
 @[default_target]
-lean_exe «math» where
-  root := `Main
+lean_lib Validate where
+  srcDir := "."
+  roots := #[`Validate]
