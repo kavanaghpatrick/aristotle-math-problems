@@ -8,23 +8,56 @@
 
 ---
 
-## Current Status
+## Current Status (Updated Dec 19)
 
-### Running Submissions
-| Version | UUID | Mode | Status |
-|---------|------|------|--------|
-| v12-minimal | 8a5948f4 | FORMAL | ✅ Running (Boris pattern, 35 lines) |
-| v12-minimal.md | - | INFORMAL | ⏳ Rate limited |
-| v12-scaffolded | - | FORMAL | ⏳ Rate limited |
+### Major Breakthrough: 30 Proven Lemmas
 
-### What We've Proven
+Three Aristotle runs completed with **zero sorry statements**:
+- `aristotle_tuza_nu1_infrastructure.lean` - 11 lemmas
+- `aristotle_tuza_parker_extended.lean` - 11 lemmas
+- `aristotle_tuza_conflict_graph.lean` - 8 lemmas
+
+### Proven Lemma Inventory
+
+**nu1_infrastructure (11 lemmas)**:
+- `trivial_bound` - τ ≤ 3ν (weak Tuza bound for ALL graphs)
+- `nu_1_implies_intersect` - ν=1 triangles share vertex
+- `edge_forced_of_nu_1` - edge constraint for ν=1
+- `common_vertex_of_nu_1` - common vertex structure
+- `K4_of_nu_1_witnesses` - K₄ structure in ν=1 case
+- `exists_K4_of_nu_1_tau_gt_2` - K₄ exists when τ>2, ν=1
+- `all_triangles_in_K4_of_nu_1` - triangles contained in K₄
+- `K4_covering_number_le_2` - τ ≤ 2 for K₄ subgraphs
+
+**parker_extended (11 lemmas)**:
+- `lemma_2_2` - Parker's Lemma 2.2
+- `lemma_2_3` - Parker's Lemma 2.3
+- `inductive_bound` - Induction step
+- `covering_number_le_two_of_subset_four` - τ ≤ 2 if triangles in ≤4 vertices
+- `tau_star` - τ* bound
+- `intersecting_triples_structure` - Structure of intersecting triples
+- `tau_S_le_2` - τ(S) ≤ 2 bound
+- `tuza_case_nu_0` - Base case ν=0
+
+**conflict_graph (8 lemmas)**:
+- `neighbors_are_packing_of_triangle_free_conflict_graph`
+- `degree_le_three_of_triangle_free_conflict_graph`
+- `local_covering_of_triangle_free`
+- `edge_in_at_most_two_triangles`
+- `neighbor_in_conflict_graph_not_in_packing`
+- `not_neighbor_implies_edge_disjoint`
+- `private_neighbor_is_edge_disjoint_from_rest`
+- `private_neighbors_le_one`
+
+### Summary
 | Result | Status | Lines | Value |
 |--------|--------|-------|-------|
 | ν=0 | ✅ | Trivial | Base case |
 | ν=1 | ✅ | 400+ | **First machine-verified** |
 | τ ≤ 3ν | ✅ | ~120 | All graphs, weak bound |
 | K₄, K₅ tight | ✅ | - | Confirmed tightness |
-| ν=2 | 🔶 | 2 gaps | 90% complete |
+| Parker lemmas | ✅ | ~600 | lemma_2_2, 2_3, inductive_bound |
+| ν=2 | 🔶 | 2 gaps | 90% complete - assembly needed |
 
 ### Counterexamples Discovered (Publication-worthy)
 | Lemma | Counterexample | Insight |
