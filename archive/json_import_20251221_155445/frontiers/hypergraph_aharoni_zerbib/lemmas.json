@@ -1,0 +1,113 @@
+{
+  "frontier": "hypergraph_aharoni_zerbib",
+  "description": "Lemmas applicable to r-uniform hypergraph generalization",
+
+  "generalization_mapping": {
+    "r=3_is_tuza": "Our Tuza lemmas are the r=3 special case",
+    "triangle_becomes_hyperedge": "3-clique → r-clique (r-edge)",
+    "edge_cover_becomes_subhyperedge": "2-edge cover → (r-1)-edge cover"
+  },
+
+  "our_lemmas_that_generalize": [
+    {
+      "name": "intersecting_family_structure",
+      "r3_version": "Pairwise sharing triangles → star OR K4",
+      "r_generalized": "Pairwise sharing r-edges → common (r-1)-face OR bounded vertex set",
+      "generalization_difficulty": "Medium - Helly property arguments extend",
+      "lean_r_version": "lemma intersecting_hyperedges_structure (H : Hypergraph V r) (F : Finset (Finset V)) (h_edges : F ⊆ H.edges) (h_pair : ∀ e1 e2 ∈ F, (e1 ∩ e2).card ≥ r-1) : (∃ face : Finset V, face.card = r-1 ∧ ∀ e ∈ F, face ⊆ e) ∨ (F.biUnion id).card ≤ r+1"
+    },
+    {
+      "name": "tau_star",
+      "r3_version": "Star structure → τ ≤ 1",
+      "r_generalized": "Common (r-1)-face → τ ≤ 1",
+      "generalization_difficulty": "Easy - same argument",
+      "lean_r_version": "lemma tau_star_hypergraph (H : Hypergraph V r) (F : Finset (Finset V)) (face : Finset V) (hface : face.card = r-1) (h_sub : ∀ e ∈ F, face ⊆ e) : coveringNumber H F ≤ 1"
+    },
+    {
+      "name": "structural_cover",
+      "r3_version": "Pairwise sharing → τ ≤ 2",
+      "r_generalized": "Pairwise sharing r-edges → τ ≤ ⌈(r+1)/2⌉",
+      "generalization_difficulty": "Hard - bound depends on r",
+      "lean_r_version": "lemma structural_cover_hypergraph (H : Hypergraph V r) (F : Finset (Finset V)) (h_pair : ∀ e1 e2 ∈ F, (e1 ∩ e2).card ≥ r-1) : coveringNumber H F ≤ (r+1)/2 + 1"
+    },
+    {
+      "name": "inductive_bound",
+      "r3_version": "τ(G) ≤ τ(T_e) + τ(G\\T_e)",
+      "r_generalized": "τ(H) ≤ τ(T_e) + τ(H\\T_e)",
+      "generalization_difficulty": "Easy - same decomposition argument",
+      "lean_r_version": "lemma inductive_bound_hypergraph (H : Hypergraph V r) (e : Finset V) (he : e ∈ H.edges) : coveringNumber H ≤ coveringNumber H (T_e H e) + coveringNumber H (H.edges \\ T_e H e)"
+    },
+    {
+      "name": "lemma_2_2",
+      "r3_version": "S_e triangles pairwise share edges",
+      "r_generalized": "S_e r-edges pairwise share (r-1)-faces",
+      "generalization_difficulty": "Medium - maximality argument extends",
+      "lean_r_version": "lemma S_e_pairwise_share_hypergraph (H : Hypergraph V r) (M : Finset (Finset V)) (hM : isMaxPacking H M) (e : Finset V) (he : e ∈ M) : ∀ f1 f2 ∈ S H e M, (f1 ∩ f2).card ≥ r-1"
+    }
+  ],
+
+  "new_hypergraph_lemmas_needed": [
+    {
+      "name": "hypergraph_cover_bound",
+      "statement": "For r-uniform hypergraph H: τ(H) ≤ ⌈(r+1)/2⌉ν(H)",
+      "target_statement": "theorem aharoni_zerbib (H : Hypergraph V r) : coveringNumber H ≤ ((r+1)/2).ceil * packingNumber H",
+      "cases": {
+        "r=3": "τ ≤ 2ν (Tuza, our focus)",
+        "r=4": "τ ≤ 2.5ν (OPEN, first new case)",
+        "r=5": "τ ≤ 3ν (OPEN)"
+      }
+    },
+    {
+      "name": "fractional_hypergraph",
+      "statement": "Fractional version: τ*(H) = ν*(H) for all r",
+      "source": "Aharoni-Zerbib 2020",
+      "status": "PROVEN in literature, need to formalize"
+    },
+    {
+      "name": "ryser_connection",
+      "statement": "For r-partite r-uniform: τ ≤ (r-1)ν",
+      "source": "Ryser's conjecture (open for r ≥ 4)",
+      "connection": "Aharoni-Zerbib is intermediate between Tuza and Ryser"
+    }
+  ],
+
+  "literature_to_formalize": [
+    {
+      "authors": "Aharoni, Zerbib",
+      "year": 2020,
+      "key_results": [
+        "Fractional version holds for all r",
+        "τ*(H) = ν*(H) by LP duality",
+        "Integral gap is the open problem"
+      ],
+      "arxiv": "1611.07497"
+    },
+    {
+      "authors": "Abu-Khazneh",
+      "year": 2022,
+      "key_results": [
+        "Partial results for small r",
+        "r=4 case analysis"
+      ],
+      "arxiv": "2110.10095"
+    }
+  ],
+
+  "attack_strategy": {
+    "target": "r=4 case: τ ≤ 2.5ν",
+    "approach": "Generalize our ν≤3 proof structure to r=4",
+    "scaffold_with": [
+      "Our r=3 lemmas as templates",
+      "Hypergraph Mathlib basics (if available)",
+      "Parker-style induction generalized"
+    ],
+    "why_tractable": "Our 30 lemmas are scaffolding no one else has formalized for r>3"
+  },
+
+  "mathlib_hypergraph_status": {
+    "note": "Mathlib hypergraph support is LIMITED",
+    "available": ["Basic hypergraph definition", "Hypergraph.SimpleGraph coercion for r=2"],
+    "missing": ["r-uniform hypergraph formalization", "Hyperedge covers", "Hypergraph packing"],
+    "implication": "May need to define r-uniform structures ourselves"
+  }
+}

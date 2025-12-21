@@ -1,0 +1,44 @@
+{
+  "id": "botler2020",
+  "title": "On Tuza's conjecture for triangulations and graphs with small treewidth",
+  "authors": ["Fábio Botler", "et al."],
+  "year": 2020,
+  "arxiv": "2002.07925",
+  "doi": null,
+  "publication": "arXiv preprint",
+  "status": "partial",
+  "relevance_to_nu4": "medium",
+  "main_result": "Tuza holds for treewidth <= 6",
+
+  "lemmas": [
+    {
+      "id": "botler2020_treewidth6",
+      "name": "tuza_treewidth_6",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_treewidth_6 (G : SimpleGraph V) (h : treewidth G ≤ 6) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Graphs with treewidth at most 6 satisfy Tuza",
+      "proof_status": "axiom",
+      "proof_technique": "Tree decomposition + structural analysis",
+      "validated": false,
+      "needs_validation": "Need to define treewidth in Lean (complex)",
+      "implications": ["Many structured graphs satisfy Tuza", "nu=4 counterexample must have treewidth >= 7"]
+    },
+    {
+      "id": "botler2020_triangulation",
+      "name": "tuza_triangulation",
+      "source_ref": "Theorem 2",
+      "type": "theorem",
+      "statement": "theorem tuza_triangulation (G : SimpleGraph V) (h : isTriangulation G) (hne : G ≠ K4) : 2 * triangleCoveringNumber G ≤ 3 * trianglePackingNumber G",
+      "english": "Planar triangulations (except K4) have tau <= (3/2)*nu",
+      "proof_status": "axiom",
+      "validated": false,
+      "implications": ["Better than Tuza for special class"]
+    }
+  ],
+
+  "key_insight": "Bounded treewidth implies Tuza. Any nu=4 counterexample must have treewidth >= 7.",
+  "formalization_status": "blocked",
+  "blocker": "Treewidth definition in Lean is complex, not in Mathlib",
+  "notes": "Could potentially use as constraint on counterexample search"
+}

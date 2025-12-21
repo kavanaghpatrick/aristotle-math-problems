@@ -1,0 +1,57 @@
+{
+  "id": "krivelevich1995",
+  "title": "On a conjecture of Tuza about packing and covering of triangles",
+  "authors": ["Michael Krivelevich"],
+  "year": 1995,
+  "arxiv": null,
+  "doi": "10.1016/0012-365X(94)00039-L",
+  "publication": "Discrete Mathematics 142:281-286",
+  "status": "partial",
+  "relevance_to_nu4": "high",
+  "main_result": "tau* = nu* by LP duality; Tuza for K_{3,3}-free graphs",
+
+  "lemmas": [
+    {
+      "id": "krivelevich1995_fractional_duality",
+      "name": "fractional_duality",
+      "source_ref": "Theorem 1",
+      "type": "theorem",
+      "statement": "theorem fractional_duality (G : SimpleGraph V) : fractionalCoveringNumber G = fractionalPackingNumber G",
+      "english": "The fractional triangle covering number equals the fractional triangle packing number",
+      "proof_status": "axiom",
+      "proof_technique": "LP strong duality",
+      "why_trust": "Standard LP duality argument, well-established in literature",
+      "validated": false,
+      "needs_validation": "Need to verify fractional definitions match paper exactly",
+      "implications": ["Tuza conjecture is equivalent to: integrality gap <= 2"]
+    },
+    {
+      "id": "krivelevich1995_chain",
+      "name": "covering_packing_chain",
+      "source_ref": "Corollary (implicit)",
+      "type": "lemma",
+      "statement": "lemma covering_packing_chain (G : SimpleGraph V) : triangleCoveringNumber G ≥ fractionalCoveringNumber G ∧ fractionalCoveringNumber G = fractionalPackingNumber G ∧ fractionalPackingNumber G ≥ trianglePackingNumber G",
+      "english": "tau >= tau* = nu* >= nu",
+      "proof_status": "axiom",
+      "proof_technique": "Integer solutions are feasible for relaxation",
+      "validated": false
+    },
+    {
+      "id": "krivelevich1995_k33_free",
+      "name": "tuza_K33_free",
+      "source_ref": "Theorem 2",
+      "type": "theorem",
+      "statement": "theorem tuza_K33_free (G : SimpleGraph V) (h : ¬hasK33Subdivision G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Graphs with no K_{3,3} subdivision satisfy Tuza",
+      "proof_status": "axiom",
+      "proof_technique": "Structural argument using K_{3,3}-free property",
+      "validated": false,
+      "needs_validation": "Need to define hasK33Subdivision correctly",
+      "implications": ["Many sparse graphs satisfy Tuza"]
+    }
+  ],
+
+  "key_insight": "Fractional version is ALWAYS tight (tau* = nu*). The real question is bounding the integrality gap.",
+  "formalization_status": "not_started",
+  "notes": "Need to formalize fractional packing/covering definitions before these can be used"
+}

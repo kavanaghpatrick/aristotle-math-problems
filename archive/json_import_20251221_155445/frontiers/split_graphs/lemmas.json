@@ -1,0 +1,111 @@
+{
+  "frontier": "split_graphs",
+  "description": "Lemmas applicable to Split Graph frontier",
+
+  "our_applicable_lemmas": [
+    {
+      "name": "intersecting_family_structure",
+      "status": "PROVEN",
+      "uuid": "181fa406",
+      "applicability": "Direct - split graph triangles are highly structured",
+      "how_to_use": "All triangles in split graph use ≥2 clique vertices, so pairwise sharing is common"
+    },
+    {
+      "name": "tau_star",
+      "status": "PROVEN",
+      "uuid": "181fa406",
+      "applicability": "Direct - star structures common in split graphs",
+      "how_to_use": "If triangles share common edge in clique, τ ≤ 1"
+    },
+    {
+      "name": "structural_cover",
+      "status": "PROVEN",
+      "uuid": "b0891cdd",
+      "applicability": "Direct - split graph triangles often pairwise share",
+      "how_to_use": "Any set of pairwise sharing triangles has τ ≤ 2"
+    },
+    {
+      "name": "inductive_bound",
+      "status": "PROVEN",
+      "uuid": "181fa406",
+      "applicability": "Framework - works for any graph",
+      "how_to_use": "τ(G) ≤ τ(T_e) + τ(G\\T_e)"
+    },
+    {
+      "name": "lemma_2_2",
+      "status": "PROVEN",
+      "uuid": "181fa406",
+      "applicability": "Framework - S_e pairwise sharing",
+      "how_to_use": "S_e triangles always pairwise share edges"
+    },
+    {
+      "name": "covering_number_le_two_of_subset_four",
+      "status": "PROVEN",
+      "uuid": "181fa406",
+      "applicability": "High - split graphs with small clique",
+      "how_to_use": "If triangles span ≤4 vertices, τ ≤ 2"
+    }
+  ],
+
+  "literature_lemmas_to_formalize": [
+    {
+      "name": "split_graph_triangle_structure",
+      "source": "Need to formalize",
+      "statement": "In split graph G = (K ∪ I, E), every triangle has ≥2 vertices in K",
+      "lean_sketch": "lemma split_triangle_in_clique (G : SimpleGraph V) (K I : Finset V) (h_split : isSplitGraph G K I) (t : Finset V) (ht : t ∈ G.cliqueFinset 3) : (t ∩ K).card ≥ 2",
+      "proof_idea": "Triangles need 3 pairwise adjacent vertices. I is independent, so ≤1 vertex in I."
+    },
+    {
+      "name": "threshold_graph_nested",
+      "source": "Botler et al. 2021",
+      "statement": "Threshold graphs have nested neighborhoods",
+      "lean_sketch": "lemma threshold_nested (G : SimpleGraph V) (h : isThreshold G) : ∀ u v : V, N(u) ⊆ N(v) ∨ N(v) ⊆ N(u)",
+      "proof_idea": "Definition of threshold graphs"
+    },
+    {
+      "name": "threshold_tuza",
+      "source": "Botler et al. 2021",
+      "statement": "Tuza holds for threshold graphs",
+      "lean_sketch": "theorem tuza_threshold (G : SimpleGraph V) (h : isThreshold G) : coveringNumber G ≤ 2 * packingNumber G",
+      "proof_idea": "Induction on threshold construction sequence"
+    }
+  ],
+
+  "new_lemmas_needed": [
+    {
+      "name": "split_clique_triangles_share",
+      "statement": "Triangles in split graph with same clique edge share that edge",
+      "target_statement": "lemma split_clique_triangles_share (G : SimpleGraph V) (K I : Finset V) (h_split : isSplitGraph G K I) (e : Finset V) (he : e ⊆ K) (he2 : e.card = 2) : ∀ t1 t2 ∈ {t ∈ G.cliqueFinset 3 | e ⊆ t}, (t1 ∩ t2).card ≥ 2",
+      "why_needed": "Key structural property - triangles using clique edge e share e",
+      "proof_approach": "e ⊆ t1, e ⊆ t2 → e ⊆ t1 ∩ t2"
+    },
+    {
+      "name": "split_induction",
+      "statement": "Induction on clique size for split graphs",
+      "target_statement": "lemma split_induction (G : SimpleGraph V) (K I : Finset V) (h_split : isSplitGraph G K I) (P : SimpleGraph V → Prop) (h_base : P empty) (h_step : ∀ G' K' v, isSplitGraph G' K' I → v ∈ K' → P (G' \\ v) → P G') : P G",
+      "why_needed": "Framework for inductive proofs on split graphs",
+      "proof_approach": "Induct on |K|, removing clique vertices one at a time"
+    },
+    {
+      "name": "split_clique_edge_cover",
+      "statement": "Clique edges suffice to cover all triangles in split graph",
+      "target_statement": "lemma split_clique_edge_cover (G : SimpleGraph V) (K I : Finset V) (h_split : isSplitGraph G K I) : ∃ C ⊆ edgesIn K, isCover G C ∧ |C| ≤ 2 * packingNumber G",
+      "why_needed": "Shows covering can focus on clique structure",
+      "proof_approach": "Use split_triangle_in_clique + inductive_bound"
+    }
+  ],
+
+  "attack_submission_scaffold": {
+    "approach": "Induction on clique size with our proven lemmas",
+    "context_to_include": [
+      "structural_cover",
+      "tau_star",
+      "intersecting_family_structure",
+      "covering_number_le_two_of_subset_four"
+    ],
+    "key_definitions": [
+      "isSplitGraph G K I ⟷ K is clique ∧ I is independent ∧ K ∪ I = V",
+      "isThreshold G ⟷ ∃ nested neighborhood ordering"
+    ]
+  }
+}

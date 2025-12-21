@@ -1,0 +1,47 @@
+{
+  "id": "dense2024",
+  "title": "On Tuza's Conjecture in Dense Graphs",
+  "authors": ["Multiple"],
+  "year": 2024,
+  "arxiv": "2405.11409",
+  "doi": null,
+  "publication": "arXiv preprint",
+  "status": "partial",
+  "relevance_to_nu4": "high",
+  "main_result": "tau <= (3/2)*nu for complete 4-partite graphs (optimal)",
+
+  "lemmas": [
+    {
+      "id": "dense2024_4partite",
+      "name": "tuza_complete_4partite",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_complete_4partite (G : SimpleGraph V) (h : isComplete4Partite G) : 2 * triangleCoveringNumber G ≤ 3 * trianglePackingNumber G",
+      "english": "Complete 4-partite graphs have tau <= (3/2)*nu",
+      "proof_status": "axiom",
+      "proof_technique": "Unknown - need to read",
+      "validated": false,
+      "needs_validation": "Need to define isComplete4Partite correctly",
+      "implications": ["For nu=4 complete 4-partite: tau <= 6", "BETTER than Tuza's tau <= 8"]
+    },
+    {
+      "id": "dense2024_tight",
+      "name": "complete_4partite_tight",
+      "source_ref": "Tightness example",
+      "type": "lemma",
+      "statement": "This bound is tight - examples exist achieving tau = (3/2)*nu",
+      "english": "The 3/2 bound is optimal for complete 4-partite",
+      "proof_status": "informal",
+      "validated": false
+    }
+  ],
+
+  "key_insight": "Dense graphs (complete multipartite) satisfy BETTER bounds than Tuza. Bad graphs for nu=4 must avoid this structure.",
+  "implications_for_nu4": [
+    "Complete 4-partite nu=4: tau <= 6 (not a counterexample)",
+    "If nu=4 has tau >= 9, it's NOT complete 4-partite",
+    "'Bad' graphs are sparse and non-multipartite"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Strong evidence that dense nu=4 graphs are fine"
+}

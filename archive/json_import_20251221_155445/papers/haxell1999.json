@@ -1,0 +1,43 @@
+{
+  "id": "haxell1999",
+  "title": "Packing and covering triangles in graphs",
+  "authors": ["Penny Haxell"],
+  "year": 1999,
+  "arxiv": null,
+  "doi": "10.1016/S0012-365X(98)00387-2",
+  "publication": "Discrete Mathematics 195(1):251-254",
+  "status": "partial",
+  "relevance_to_nu4": "medium",
+  "main_result": "tau <= (66/23) * nu for all graphs",
+
+  "lemmas": [
+    {
+      "id": "haxell1999_bound",
+      "name": "haxell_bound",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem haxell_bound (G : SimpleGraph V) : 23 * triangleCoveringNumber G ≤ 66 * trianglePackingNumber G",
+      "english": "tau <= (66/23) * nu ≈ 2.87 * nu for all graphs",
+      "proof_status": "axiom",
+      "proof_technique": "Unknown - need to read full paper",
+      "validated": false,
+      "needs_validation": "Need to read full paper for proof technique",
+      "implications": ["Best known general bound", "For nu=4: tau <= 11.48 (Tuza claims tau <= 8)"]
+    },
+    {
+      "id": "haxell1999_epsilon",
+      "name": "haxell_epsilon",
+      "source_ref": "Main Theorem (reformulation)",
+      "type": "lemma",
+      "statement": "lemma haxell_epsilon (G : SimpleGraph V) : ∃ ε > 3/23, triangleCoveringNumber G ≤ (3 - ε) * trianglePackingNumber G",
+      "english": "There exists epsilon > 3/23 such that tau <= (3 - epsilon) * nu",
+      "proof_status": "axiom",
+      "validated": false,
+      "implications": ["First improvement over trivial tau <= 3*nu bound"]
+    }
+  ],
+
+  "key_insight": "Best general bound is 66/23 ≈ 2.87, significantly worse than Tuza's 2. Gap hasn't been improved since 1999.",
+  "formalization_status": "not_started",
+  "notes": "26 years with no improvement on general bound suggests new techniques needed"
+}

@@ -343,6 +343,28 @@ python3 scripts/extract_solvable_open.py
 
 The v3_surgeon submission failed because of a Lean syntax error we could have caught locally.
 
+### NEW: Comprehensive Verification Workflow (Dec 2025)
+
+**After discovering multiple formalization bugs (sInf, sym2, Erdős #128), we now have a rigorous verification system.**
+
+**Quick Start**:
+```bash
+# Before EVERY submission:
+./scripts/validate_submission.sh submissions/file.lean
+./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
+
+# After results arrive:
+./scripts/verify_output.sh submissions/output/<UUID>.lean
+```
+
+**Full Documentation**:
+- **Reference card** (print this): `docs/VERIFICATION_REFERENCE_CARD.md`
+- **Quick start guide**: `docs/VERIFICATION_QUICKSTART.md`
+- **Complete workflow**: `docs/VERIFICATION_WORKFLOW.md`
+- **Visual diagrams**: `docs/VERIFICATION_VISUAL.md`
+
+**Database Tracking**: All submissions tracked in SQLite database at `submissions/tracking.db`.
+
 ### Validation Command
 
 ```bash
@@ -365,10 +387,17 @@ lake update                  # Get Mathlib dependencies
 lake exe cache get          # Download pre-built Mathlib (~5 min)
 ```
 
-### Validation Script
+### Enhanced Validation Script
 
 ```bash
+# NEW: Comprehensive validation including definition audit
 ./scripts/validate_submission.sh submissions/file.lean
+
+# Checks:
+# 1. Syntax and types (lake env lean)
+# 2. Definition bugs (sInf, sym2, Set/Finset)
+# 3. Missing instances
+# 4. Required imports
 ```
 
 ### What Validation Catches
@@ -379,14 +408,18 @@ lake exe cache get          # Download pre-built Mathlib (~5 min)
 | Missing imports | `import Mathlib` typo | ✓ |
 | Type errors | Wrong function signature | ✓ |
 | Unknown identifiers | Typo in Mathlib name | ✓ |
+| **sInf unrestricted** | `sInf` without `E ⊆ G.edgeFinset` | ✓ **NEW** |
+| **sym2 self-loops** | `t.sym2` for triangle edges | ✓ **NEW** |
+| **Set/Finset issues** | `Set V` without `DecidablePred` | ✓ **NEW** |
 | `sorry` warnings | Expected - Aristotle fills | ✓ (OK) |
 
 ### Workflow
 
 1. Write submission file
-2. Run `lake env lean submissions/file.lean`
+2. Run `./scripts/validate_submission.sh submissions/file.lean`
 3. Fix any errors (not `sorry` warnings)
-4. Only then: `aristotle prove-from-file submissions/file.lean --no-wait`
+4. Run `./scripts/track_submission.sh` to record in database
+5. Only then: `aristotle prove-from-file submissions/file.lean --no-wait`
 
 ---
 
@@ -403,6 +436,27 @@ lake exe cache get          # Download pre-built Mathlib (~5 min)
 -- WRONG: {S.card | S : Finset V // P S}
 -- RIGHT: {n : ℕ | ∃ S : Finset V, S.card = n ∧ P S}
 ```
+
+### CRITICAL: Finset.sym2 Includes Self-Loops!
+
+```lean
+#eval ({1, 2, 3} : Finset ℕ).sym2
+-- Output: {s(1,1), s(1,2), s(1,3), s(2,2), s(2,3), s(3,3)}
+--         ^^^^^^ SELF-LOOPS INCLUDED!
+```
+
+**Triangle covering MUST restrict to actual graph edges**:
+```lean
+-- WRONG: allows self-loops and non-edges
+def coveringNumber ... : ℕ :=
+  sInf {n | ∃ E : Finset (Sym2 V), E.card = n ∧ ...}
+
+-- CORRECT: restricts to actual graph edges
+def coveringNumber ... : ℕ :=
+  G.edgeFinset.powerset.filter (...) |>.image Finset.card |>.min |>.getD 0
+```
+
+Files using `sInf` without `E ⊆ G.edgeFinset` are **INVALID** - archived in `submissions/CORRUPTED/`.
 
 ---
 
@@ -482,55 +536,28 @@ See `docs/ERDOS128_ANALYSIS.md` for the full postmortem.
 - τ(G) = minimum edges to hit all triangles (covering number)
 - ν(G) = maximum edge-disjoint triangles (packing number)
 
-### Proven Results
+### Verified Results (Correct Definitions, No Sorry)
 
-| Case | Status | Method |
-|------|--------|--------|
-| ν=0, ν=1 | ✅ Proven | Base case + K₄-extension |
-| τ ≤ 3ν (weak bound) | ✅ Proven | Greedy algorithm (all graphs) |
-| K₄, K₅ tightness | ✅ Proven | Direct verification |
-| **Parker lemmas** | ✅ **PROVEN** | lemma_2_2, 2_3, inductive_bound, intersecting_structure |
-| covering_number_le_two_of_subset_four | ✅ Proven | τ ≤ 2 if triangles in ≤4 vertices |
+| Result | File |
+|--------|------|
+| Parker Lemma 2.2 (S_e triangles share edges) | `aristotle_parker_proven.lean` |
+| Base case ν=0 → τ=0 | `aristotle_tuza_nu1_PROVEN.lean` |
 
-### Parker Lemmas Breakthrough (Dec 2025)
+### Known Literature
 
-Aristotle has **fully proven** the core lemmas from Parker's 2025 paper:
+Parker (arXiv:2406.06501, May 2025) proved Tuza for **ν ≤ 3** using induction.
 
-```
-submissions/aristotle_parker_proven.lean  (29KB) - lemma_2_2, lemma_2_3, inductive_bound, intersecting_structure
-submissions/aristotle_nu1_proven.lean     (22KB) - covering_number_le_two_of_subset_four
-```
+### Current Work
 
-**What remains for ν ≤ 3**: Assembly into final theorem. Submissions running with context folders.
-
-### Counterexamples Found (Valuable Negations)
-
-Three counterexamples to flawed proof strategies:
-
-1. **TuzaReductionProperty** - Edge reduction doesn't preserve bounds
-2. **two_edges_cover_nearby** - K₄ nearby triangles need 3+ edges
-3. **two_K4_almost_disjoint** - "Disjoint" K₄s can share edges
-
-### Open Frontier: ν=4 (Genuinely Open)
-
-**Key Discovery (Dec 2025)**: Parker (arXiv:2406.06501, EJC May 2025) proved Tuza for **ν ≤ 3**.
-
-**Why Parker fails at ν=4**:
-- At ν=1,2,3: Can guarantee τ(T_e) ≤ 2 for some edge e in packing M
-- At ν=4: Overlap patterns make this impossible
-- Induction gives τ ≤ 3 + 2(3) = 9, but Tuza requires ≤ 8
-
-**Current ν=4 portfolio** (7 submissions running):
-- Boris Prime, Architect, Surgeon, Finite Check, Conflict Graph, Pessimist, Slicer
+- `tuza_nu3_FIXED.lean` (UUID: 4736da84) - Correct definitions, running
+- Previous submissions with incorrect definitions archived in `submissions/CORRUPTED/`
 
 ### Key Files
 
-- `submissions/tuza_*.lean` - All Tuza submissions
-- `submissions/tuza_nu4_*.lean` - ν=4 portfolio (7 files)
-- `submissions/aristotle_*_proven.lean` - Proven lemma collections
-- `submissions/parker_context/` - Context folder for completion
-- `docs/TUZA_STRATEGY_DEC19.md` - Current strategy
-- `docs/PARKER_NU4_ANALYSIS.md` - Why ν=4 is genuinely open
+- `submissions/aristotle_parker_proven.lean` - Verified lemmas
+- `submissions/aristotle_tuza_nu1_PROVEN.lean` - Base case
+- `submissions/tuza_nu3_FIXED.lean` - Current submission with correct definitions
+- `docs/CONTAMINATION_REPORT.md` - Details on formalization issues
 
 ---
 

@@ -1,0 +1,138 @@
+{
+  "id": "parker2024",
+  "title": "New bounds on a generalization of Tuza's conjecture",
+  "authors": ["Adam Parker"],
+  "year": 2024,
+  "arxiv": "2406.06501",
+  "doi": null,
+  "publication": "European Journal of Combinatorics (May 2025)",
+  "status": "read",
+  "relevance_to_nu4": "high",
+  "main_result": "Tuza holds for nu <= 3",
+  "why_it_fails_nu4": "Bridges can attach to 3 packing elements, breaking tau(T_e) <= 2 guarantee",
+
+  "lemmas": [
+    {
+      "id": "parker2024_def_packing",
+      "name": "isTrianglePacking",
+      "source_ref": "Definition (implicit)",
+      "type": "definition",
+      "statement": "def isTrianglePacking (G : SimpleGraph V) (S : Finset (Finset V)) : Prop := S ⊆ G.cliqueFinset 3 ∧ Set.Pairwise (S : Set (Finset V)) (fun t1 t2 => (t1 ∩ t2).card ≤ 1)",
+      "proof_status": "definition",
+      "validated": true
+    },
+    {
+      "id": "parker2024_def_T_e",
+      "name": "trianglesSharingEdge",
+      "source_ref": "T_e definition",
+      "type": "definition",
+      "statement": "def trianglesSharingEdge (G : SimpleGraph V) (t : Finset V) : Finset (Finset V) := (G.cliqueFinset 3).filter (fun x => (x ∩ t).card ≥ 2)",
+      "proof_status": "definition",
+      "validated": true
+    },
+    {
+      "id": "parker2024_def_S_e",
+      "name": "S",
+      "source_ref": "S_e definition",
+      "type": "definition",
+      "statement": "def S (G : SimpleGraph V) (t : Finset V) (M : Finset (Finset V)) : Finset (Finset V) := (trianglesSharingEdge G t).filter (fun x => ∀ m ∈ M, m ≠ t → (x ∩ m).card ≤ 1)",
+      "proof_status": "definition",
+      "validated": true
+    },
+    {
+      "id": "parker2024_lemma_2_2",
+      "name": "lemma_2_2",
+      "source_ref": "Lemma 2.2",
+      "type": "lemma",
+      "statement": "lemma lemma_2_2 (M : Finset (Finset V)) (hM : isMaxPacking G M) (e : Finset V) (he : e ∈ M) : ∀ t1 t2, t1 ∈ S G e M → t2 ∈ S G e M → shareEdge t1 t2",
+      "english": "All triangles in S_e pairwise share edges",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "Maximality contradiction - if t1, t2 don't share edge, M' = (M \\ {e}) ∪ {t1, t2} is larger packing",
+      "validated": true
+    },
+    {
+      "id": "parker2024_lemma_2_3",
+      "name": "lemma_2_3",
+      "source_ref": "Lemma 2.3",
+      "type": "lemma",
+      "statement": "lemma lemma_2_3 (M : Finset (Finset V)) (hM : isMaxPacking G M) (e : Finset V) (he : e ∈ M) : trianglePackingNumberOn G ((G.cliqueFinset 3) \\ (trianglesSharingEdge G e)) = trianglePackingNumber G - 1",
+      "english": "nu(G \\ T_e) = nu(G) - 1",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "M \\ {e} is valid packing in residual",
+      "validated": true
+    },
+    {
+      "id": "parker2024_inductive_bound",
+      "name": "inductive_bound",
+      "source_ref": "Key decomposition",
+      "type": "lemma",
+      "statement": "lemma inductive_bound (M : Finset (Finset V)) (hM : isMaxPacking G M) (e : Finset V) (he : e ∈ M) : triangleCoveringNumber G ≤ triangleCoveringNumberOn G (trianglesSharingEdge G e) + triangleCoveringNumberOn G ((G.cliqueFinset 3) \\ (trianglesSharingEdge G e))",
+      "english": "tau(G) <= tau(T_e) + tau(G \\ T_e)",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "Union of covers for T_e and complement covers all",
+      "validated": true
+    },
+    {
+      "id": "parker2024_k4_cover",
+      "name": "covering_number_le_two_of_subset_four",
+      "source_ref": "Proposition (implicit in star/K4 argument)",
+      "type": "lemma",
+      "statement": "lemma covering_number_le_two_of_subset_four (U : Finset V) (hU : U.card ≤ 4) (h_subset : ∀ t ∈ G.cliqueFinset 3, t ⊆ U) : triangleCoveringNumber G ≤ 2",
+      "english": "Triangles on <=4 vertices have tau <= 2",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "Case analysis on 0-4 vertices, explicit edge selection",
+      "validated": true
+    },
+    {
+      "id": "parker2024_intersecting_structure",
+      "name": "intersecting_family_structure_corrected",
+      "source_ref": "Structure theorem for intersecting families",
+      "type": "lemma",
+      "statement": "lemma intersecting_family_structure_corrected (S : Finset (Finset V)) (hS_nonempty : S.Nonempty) (hS : S ⊆ G.cliqueFinset 3) (h_pair : Set.Pairwise (S : Set (Finset V)) shareEdge) : isStar S ∨ isK4 S",
+      "english": "Pairwise edge-sharing triangles form a star OR fit in K4",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "If 3 triangles don't share common edge, union has 4 vertices",
+      "validated": true
+    },
+    {
+      "id": "parker2024_tau_star",
+      "name": "tau_star",
+      "source_ref": "Star covering bound",
+      "type": "lemma",
+      "statement": "lemma tau_star (S : Finset (Finset V)) (hS : S ⊆ G.cliqueFinset 3) (h_star : isStar S) : triangleCoveringNumberOn G S ≤ 1",
+      "english": "Star structure has tau <= 1",
+      "proof_status": "proven",
+      "proof_uuid": "181fa406",
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "Common edge covers all triangles in star",
+      "validated": true
+    },
+    {
+      "id": "parker2024_tau_S_le_2",
+      "name": "tau_S_le_2",
+      "source_ref": "Main S_e covering bound",
+      "type": "lemma",
+      "statement": "lemma tau_S_le_2 (M : Finset (Finset V)) (hM : isMaxPacking G M) (e : Finset V) (he : e ∈ M) : triangleCoveringNumberOn G (S G e M) ≤ 2",
+      "english": "tau(S_e) <= 2 always",
+      "proof_status": "proven",
+      "proof_uuid": ["181fa406", "b0891cdd"],
+      "proof_file": "proven/tuza/lemmas/parker_lemmas.lean",
+      "proof_technique": "Combines intersecting_family_structure with tau_star and K4 bound",
+      "validated": true
+    }
+  ],
+
+  "key_insight": "At nu <= 3, can guarantee some e in M has tau(T_e) <= 2. At nu >= 4, bridges can attach to 3+ elements, breaking this.",
+  "formalization_status": "complete",
+  "notes": "Our formalization matches this paper exactly. Parker's method is the foundation we build on."
+}

@@ -1,0 +1,80 @@
+{
+  "id": "lakshmanan2012",
+  "title": "Small Edge Sets Meeting All Triangles of a Graph",
+  "authors": ["S. Aparna Lakshmanan", "Csilla Bujtás", "Zsolt Tuza"],
+  "year": 2012,
+  "arxiv": null,
+  "doi": "10.1007/s00373-012-1136-4",
+  "publication": "Graphs and Combinatorics 28:381-392",
+  "status": "extracted",
+  "relevance_to_nu4": "high",
+  "main_result": "Tuza holds for 4-colorable and triangle-3-colorable graphs",
+
+  "lemmas": [
+    {
+      "id": "lakshmanan2012_4colorable",
+      "name": "tuza_4colorable",
+      "source_ref": "Corollary 1",
+      "type": "theorem",
+      "statement": "theorem tuza_4colorable (G : SimpleGraph V) (h : chromaticNumber G ≤ 4) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "4-colorable graphs satisfy Tuza's conjecture",
+      "proof_status": "axiom",
+      "proof_technique": "Via triangle-3-colorability",
+      "validated": false,
+      "needs_validation": "Need chromaticNumber from Mathlib",
+      "implications": ["Any nu=4 counterexample has χ(G) ≥ 5", "Must contain K5 minor or equivalent"]
+    },
+    {
+      "id": "lakshmanan2012_triangle3color",
+      "name": "tuza_triangle_3_colorable",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_triangle_3_colorable (G : SimpleGraph V) (h : isTriangle3Colorable G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Triangle-3-colorable graphs satisfy Tuza",
+      "proof_status": "axiom",
+      "proof_technique": "Edge coloring argument",
+      "validated": false,
+      "needs_validation": "Need to define isTriangle3Colorable"
+    },
+    {
+      "id": "lakshmanan2012_4partite",
+      "name": "tuza_4partite",
+      "source_ref": "Corollary 2",
+      "type": "theorem",
+      "statement": "theorem tuza_4partite (G : SimpleGraph V) (h : is4Partite G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "4-partite graphs satisfy Tuza",
+      "proof_status": "axiom",
+      "validated": false
+    },
+    {
+      "id": "lakshmanan2012_oddwheel_free",
+      "name": "tuza_oddwheel_free",
+      "source_ref": "Theorem 3",
+      "type": "theorem",
+      "statement": "theorem tuza_oddwheel_free (G : SimpleGraph V) (h : isOddWheelFree G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Odd-wheel-free graphs satisfy Tuza",
+      "proof_status": "axiom",
+      "validated": false
+    },
+    {
+      "id": "lakshmanan2012_recognition_hard",
+      "name": "triangle_3_colorable_recognition_hard",
+      "source_ref": "Theorem 4",
+      "type": "theorem",
+      "statement": "Recognizing triangle-3-colorable graphs is NP-complete",
+      "english": "Cannot efficiently test if a graph is triangle-3-colorable",
+      "proof_status": "informal",
+      "validated": false,
+      "implications": ["This property is not easily checkable"]
+    }
+  ],
+
+  "key_insight": "Triangle-3-colorability (edge 3-coloring where each triangle gets distinct colors) implies Tuza. 4-colorable graphs are triangle-3-colorable.",
+  "implications_for_nu4": [
+    "Counterexample must have chromatic number >= 5",
+    "Counterexample is NOT odd-wheel-free",
+    "Must contain certain substructures"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Important structural result - constrains counterexample heavily"
+}

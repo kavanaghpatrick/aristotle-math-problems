@@ -1,0 +1,81 @@
+{
+  "frontier": "counterexample_hunt",
+  "name": "Constrained Counterexample Search",
+  "status": "SUBMITTED",
+  "last_updated": "2025-12-21",
+
+  "submissions": {
+    "formal": {
+      "uuid": "1139ada9-099a-4b35-8d08-b3fbc037812c",
+      "file": "submissions/frontier_counterexample_hunt.lean",
+      "submitted": "2025-12-21",
+      "status": "running"
+    },
+    "informal": {
+      "uuid": "eafe6226-13a3-4ce0-a794-63115a78d65e",
+      "file": "submissions/frontier_counterexample_hunt.md",
+      "submitted": "2025-12-21",
+      "status": "running"
+    }
+  },
+  "description": "Search for counterexample to τ ≤ 2ν within highly constrained graph classes. Even proving non-existence in subclasses is publishable.",
+
+  "necessary_conditions": {
+    "packing_number": "ν ≥ 4 (ν ≤ 3 proven by Parker 2024)",
+    "chromatic_number": "χ ≥ 5 (χ ≤ 4 proven)",
+    "treewidth": "tw ≥ 7 (tw ≤ 6 proven by Botler-Sambinelli 2024)",
+    "max_avg_degree": "mad ≥ 7 (mad < 7 proven by Puleo 2015)",
+    "girth": "g = 3 (must have triangles)",
+    "density": "requires dense core but χ ≥ 5"
+  },
+
+  "known_non_counterexamples": [
+    "K₆ (ν=3, χ=6) - ν too small",
+    "Random graphs G(n,p) - achieve τ ≈ 1.5ν asymptotically",
+    "Paley graphs - achieve τ < 2ν",
+    "Strongly regular graphs tested - all satisfy"
+  ],
+
+  "literature": [
+    {
+      "authors": "Haxell",
+      "year": 1999,
+      "result": "τ ≤ (66/23)ν ≈ 2.87ν (best known bound)",
+      "note": "No improvement in 26 years suggests tightness unclear"
+    },
+    {
+      "authors": "Baron, Kahn",
+      "year": 2016,
+      "result": "Fractional version holds: τ* ≤ 2ν",
+      "note": "Gap between fractional and integral is the mystery"
+    }
+  ],
+
+  "connection_to_our_lemmas": {
+    "conflict_obstruction": "Our Theorem: 2_conflict_cover → obstruction_structure",
+    "tau_star_gap": "We've proven τ*(G) ≤ 2ν. Counterexample needs integral gap",
+    "K5_subgraph": "Counterexample likely contains K₅ subdivisions"
+  },
+
+  "attack_strategy": {
+    "approach": "Constrained search in algebraic/Cayley graphs with χ ≥ 5, tw ≥ 7",
+    "candidates": [
+      "Cayley graphs of non-abelian groups",
+      "Generalized Petersen graphs with high chromatic number",
+      "Graph products that amplify chromatic number"
+    ],
+    "scaffold_with": [
+      "conflict_graph_obstruction",
+      "two_conflict_implies_structure",
+      "chromatic_lower_bound_technique"
+    ]
+  },
+
+  "formalization_needed": [
+    "Predicate: is_potential_counterexample G",
+    "Necessary condition checker",
+    "Small case exhaustion for ν=4, n≤20"
+  ],
+
+  "value_of_negative_results": "Proving 'no counterexample exists in class C' is publishable if C is natural (e.g., Cayley graphs, split graphs)"
+}

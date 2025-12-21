@@ -1,0 +1,135 @@
+{
+  "frontier": "bound_improvement",
+  "description": "Lemmas for improving 2.87 → 2.5 bound",
+
+  "current_best_bound": {
+    "value": "66/23 ≈ 2.869",
+    "author": "Haxell",
+    "year": 1999,
+    "technique": "Probabilistic method + local ratio",
+    "years_without_improvement": 26
+  },
+
+  "target_bounds": [
+    {"target": "2.5", "gap_from_current": "0.369", "significance": "First improvement in 26 years"},
+    {"target": "2.33", "gap_from_current": "0.536", "significance": "Would suggest 2 is tight"},
+    {"target": "2.0", "gap_from_current": "0.869", "significance": "Full Tuza"}
+  ],
+
+  "our_relevant_lemmas": [
+    {
+      "name": "tau_S_le_2",
+      "relevance": "Proves τ(S_e) ≤ 2 for any ν",
+      "contribution": "Establishes baseline for what we can cover cheaply",
+      "bound_implication": "Can cover S_e triangles with ≤2 edges"
+    },
+    {
+      "name": "inductive_bound",
+      "relevance": "τ ≤ τ(T_e) + τ(rest)",
+      "contribution": "Framework for recursive bounds",
+      "bound_implication": "Need good bound on τ(T_e) to improve overall"
+    },
+    {
+      "name": "structural_cover",
+      "relevance": "Pairwise sharing → τ ≤ 2",
+      "contribution": "Identifies when structure helps",
+      "bound_implication": "Good structure → better than 2.87"
+    },
+    {
+      "name": "intersecting_family_structure",
+      "relevance": "Dichotomy: star OR K4",
+      "contribution": "Reduces cases to analyze",
+      "bound_implication": "Can focus analysis on non-structured cases"
+    }
+  ],
+
+  "haxell_technique_analysis": {
+    "probabilistic_component": {
+      "method": "Random selection + probabilistic method",
+      "limitation": "Gives 3ν easily, hard to push below 2.87"
+    },
+    "local_ratio": {
+      "method": "Amortized analysis across triangles",
+      "constant": "c = 66/23 comes from local ratio balance",
+      "limitation": "Seems to be tight for this technique"
+    },
+    "possible_improvements": [
+      "Tighter local ratio constants",
+      "Structure-aware random selection",
+      "LP rounding instead of probabilistic"
+    ]
+  },
+
+  "approach_1_integrality_gap": {
+    "idea": "Bound τ/τ* directly",
+    "known": "τ* = ν* by LP duality (fractional version)",
+    "target": "Show τ ≤ 2τ* would give τ ≤ 2ν",
+    "our_contribution": "tau_star lemma shows star → τ ≤ 1, suggesting good integrality",
+    "lemmas_needed": [
+      {
+        "name": "integrality_gap_bound",
+        "statement": "τ ≤ 2τ* for all graphs",
+        "difficulty": "Very Hard - essentially proves Tuza"
+      },
+      {
+        "name": "integrality_gap_structured",
+        "statement": "τ ≤ 2τ* for structured graph classes",
+        "difficulty": "Medium - might work for special cases"
+      }
+    ]
+  },
+
+  "approach_2_parker_extension": {
+    "idea": "Extend Parker's ν≤3 induction to general graphs",
+    "parker_limitation": "Works when τ(T_e) ≤ 2 is guaranteed (ν≤3)",
+    "extension_idea": "Amortize over multiple T_e simultaneously",
+    "our_contribution": [
+      "Full Parker machinery formalized",
+      "Building blocks for packing pair decomposition",
+      "tau_X_le_2 for shared vertices"
+    ],
+    "lemmas_needed": [
+      {
+        "name": "average_T_e_bound",
+        "statement": "Average τ(T_e) over all e in packing ≤ c for some c < 2.87",
+        "difficulty": "Hard"
+      },
+      {
+        "name": "good_pair_exists",
+        "statement": "For any packing, ∃ pair with τ(T_e ∪ T_f) ≤ 4",
+        "difficulty": "Medium - related to our ν=4 work"
+      }
+    ]
+  },
+
+  "approach_3_lp_rounding": {
+    "idea": "Use LP relaxation and rounding",
+    "source": "Guruswami-Sandeep 2025 achieves t/2 + O(√t log t)",
+    "limitation": "Additive error, not multiplicative",
+    "adaptation": "Convert additive to multiplicative for small ν",
+    "lemmas_needed": [
+      {
+        "name": "lp_rounding_multiplicative",
+        "statement": "LP rounding gives τ ≤ 2.5ν for ν ≥ 10",
+        "difficulty": "Medium - adapt Guruswami-Sandeep"
+      }
+    ]
+  },
+
+  "why_26_years_stuck": {
+    "hypothesis_1": "2.87 might be tight for local ratio",
+    "hypothesis_2": "Fundamentally new technique needed",
+    "hypothesis_3": "2 is actually NOT tight, counterexample exists",
+    "our_advantage": "Computational scaffolding no one else has formalized"
+  },
+
+  "realistic_assessment": {
+    "probability_of_success": "LOW",
+    "why_attempt": [
+      "Our lemma library is unprecedented",
+      "Aristotle finds unexpected connections",
+      "Even partial progress would be notable"
+    ],
+    "fallback": "If bound improvement fails, insights transfer to other frontiers"
+  }
+}

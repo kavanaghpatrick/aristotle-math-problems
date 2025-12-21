@@ -1,0 +1,47 @@
+{
+  "id": "haxell_kohayakawa1998",
+  "title": "Packing and Covering Triangles in Tripartite Graphs",
+  "authors": ["P.E. Haxell", "Y. Kohayakawa"],
+  "year": 1998,
+  "arxiv": null,
+  "doi": "10.1007/s003730050004",
+  "publication": "Graphs and Combinatorics 14(1):1-10",
+  "status": "extracted",
+  "relevance_to_nu4": "medium",
+  "main_result": "Tuza holds for tripartite graphs",
+
+  "lemmas": [
+    {
+      "id": "haxell1998_tripartite",
+      "name": "tuza_tripartite",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_tripartite (G : SimpleGraph V) (h : isTripartite G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Tripartite graphs satisfy Tuza's conjecture",
+      "proof_status": "axiom",
+      "proof_technique": "Structural analysis of triangle intersections in tripartite setting",
+      "validated": false,
+      "needs_validation": "Need to define isTripartite",
+      "implications": ["Any nu=4 counterexample is NOT tripartite", "Must have chromatic number >= 4"]
+    },
+    {
+      "id": "haxell1998_tripartite_structure",
+      "name": "tripartite_triangle_structure",
+      "source_ref": "Lemma 2",
+      "type": "lemma",
+      "statement": "In tripartite G, triangles have exactly one vertex in each part",
+      "english": "Tripartite triangles are 'rainbow' across parts",
+      "proof_status": "axiom",
+      "validated": false,
+      "implications": ["Restricts triangle intersection patterns"]
+    }
+  ],
+
+  "key_insight": "Tripartite structure severely restricts how triangles can intersect, making Tuza provable.",
+  "implications_for_nu4": [
+    "Counterexample must have chromatic number >= 4",
+    "Rules out bipartite + one vertex type constructions"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Earlier than Haxell 1999 (66/23 bound). Different technique."
+}

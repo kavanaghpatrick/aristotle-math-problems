@@ -1,0 +1,110 @@
+{
+  "frontier": "counterexample_hunt",
+  "description": "Lemmas applicable to Counterexample Search frontier",
+
+  "constraints_from_our_lemmas": [
+    {
+      "name": "tau_S_le_2",
+      "constraint": "S_e always has τ ≤ 2",
+      "implication": "Counterexample must have τ(T_e \\ S_e) > 2·ν - 2 for all e"
+    },
+    {
+      "name": "intersecting_family_structure",
+      "constraint": "Pairwise sharing → star OR K4",
+      "implication": "Counterexample can't have all triangles pairwise sharing"
+    },
+    {
+      "name": "inductive_bound",
+      "constraint": "τ ≤ τ(T_e) + τ(rest)",
+      "implication": "Need both T_e AND rest to be 'bad'"
+    },
+    {
+      "name": "lemma_2_3",
+      "constraint": "ν(G \\ T_e) = ν - 1",
+      "implication": "Induction always reduces ν by 1"
+    }
+  ],
+
+  "literature_constraints": [
+    {
+      "constraint": "χ ≥ 5",
+      "source": "Haxell 1993",
+      "why": "χ ≤ 4 graphs satisfy Tuza"
+    },
+    {
+      "constraint": "treewidth ≥ 7",
+      "source": "Botler-Sambinelli 2024",
+      "why": "tw ≤ 6 graphs satisfy Tuza"
+    },
+    {
+      "constraint": "mad ≥ 7",
+      "source": "Puleo 2015",
+      "why": "max average degree < 7 graphs satisfy Tuza"
+    },
+    {
+      "constraint": "ν ≥ 4",
+      "source": "Parker 2024 + Our formalization",
+      "why": "ν ≤ 3 proven by us"
+    },
+    {
+      "constraint": "min degree > n/2",
+      "source": "Minimal counterexample structure",
+      "why": "Low degree vertices can be removed"
+    }
+  ],
+
+  "counterexample_lemmas_to_formalize": [
+    {
+      "name": "counterexample_χ_lower_bound",
+      "statement": "Any counterexample has χ ≥ 5",
+      "lean_sketch": "lemma counterex_chromatic (G : SimpleGraph V) (h : coveringNumber G > 2 * packingNumber G) : chromaticNumber G ≥ 5",
+      "source": "Literature - Haxell"
+    },
+    {
+      "name": "counterexample_treewidth_lower_bound",
+      "statement": "Any counterexample has tw ≥ 7",
+      "lean_sketch": "lemma counterex_treewidth (G : SimpleGraph V) (h : coveringNumber G > 2 * packingNumber G) : treewidth G ≥ 7",
+      "source": "Botler-Sambinelli"
+    },
+    {
+      "name": "counterexample_minimum_degree",
+      "statement": "Minimal counterexample has min degree > n/2",
+      "lean_sketch": "lemma minimal_counterex_degree (G : SimpleGraph V) (h : isMinimalCounterexample G) : ∀ v, degree G v > Fintype.card V / 2",
+      "source": "Standard minimal counterexample argument"
+    }
+  ],
+
+  "search_strategies": [
+    {
+      "strategy": "Cayley graphs",
+      "description": "Non-abelian group Cayley graphs can have high chromatic number",
+      "candidate_groups": ["S_n for n ≥ 5", "A_5", "PSL(2,p)"],
+      "why_promising": "Algebraic structure might evade our lemmas"
+    },
+    {
+      "strategy": "Graph products",
+      "description": "Products can amplify bad properties",
+      "operations": ["Cartesian product", "Tensor product", "Strong product"],
+      "why_promising": "Can build up chromatic number while controlling ν"
+    },
+    {
+      "strategy": "Algebraic constructions",
+      "description": "Finite geometry constructions",
+      "candidates": ["Paley graphs", "Polarity graphs", "Incidence graphs"],
+      "why_promising": "High symmetry might prevent good covers"
+    }
+  ],
+
+  "our_counterexample_experience": {
+    "K4_counterexample": "Disproved 'cover with 2 edges OF e' for S_e",
+    "fan_counterexample": "Disproved '|S_e| ≤ 4'",
+    "flower_counterexample": "Disproved 'τ(T_e) ≤ 2 always'",
+    "lesson": "Our counterexamples eliminate STRATEGIES, not the conjecture. Need to search HARDER."
+  },
+
+  "formalization_for_search": {
+    "is_potential_counterexample": "def isPotentialCounterexample (G : SimpleGraph V) : Prop := coveringNumber G > 2 * packingNumber G",
+    "necessary_conditions": "def passesNecessaryConditions (G : SimpleGraph V) : Prop := chromaticNumber G ≥ 5 ∧ treewidth G ≥ 7 ∧ packingNumber G ≥ 4",
+    "decidable_for_finite": "For finite V with DecidableEq, can check all conditions"
+  }
+}

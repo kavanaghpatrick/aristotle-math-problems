@@ -1,0 +1,89 @@
+{
+  "frontier": "bound_improvement",
+  "name": "Improve 2.87 → 2.5 Bound",
+  "status": "genuinely_open_high_risk",
+  "description": "Haxell 1999 proved τ ≤ (66/23)ν ≈ 2.87ν. No improvement in 26 years. Goal: prove τ ≤ 2.5ν or better.",
+
+  "current_best": {
+    "bound": "τ ≤ (66/23)ν ≈ 2.869ν",
+    "author": "Haxell",
+    "year": 1999,
+    "technique": "Probabilistic method + local ratio"
+  },
+
+  "target_bounds": [
+    {
+      "bound": "τ ≤ 2.5ν",
+      "difficulty": "Hard",
+      "significance": "First improvement in 26 years"
+    },
+    {
+      "bound": "τ ≤ 2.33ν",
+      "difficulty": "Very Hard",
+      "significance": "Would suggest 2 is tight"
+    },
+    {
+      "bound": "τ ≤ 2ν",
+      "difficulty": "Conjecture",
+      "significance": "Full Tuza"
+    }
+  ],
+
+  "known_techniques": [
+    {
+      "technique": "Probabilistic method",
+      "limitation": "Gives 3ν easily, 2.87 with work, stuck below"
+    },
+    {
+      "technique": "Local ratio",
+      "limitation": "Haxell's approach, seems exhausted"
+    },
+    {
+      "technique": "LP relaxation + rounding",
+      "limitation": "Fractional gap is the obstacle"
+    },
+    {
+      "technique": "Structural decomposition",
+      "status": "Parker's approach, works for ν≤3"
+    }
+  ],
+
+  "why_stuck": {
+    "observation": "26 years with no improvement suggests either: (1) 2.87 is tight for current techniques, or (2) fundamentally new approach needed",
+    "fractional_gap": "τ* ≤ 2ν is tight. Integral gap between τ and τ* is mystery."
+  },
+
+  "connection_to_our_lemmas": {
+    "tau_star_bound": "We've proven τ* ≤ 2ν (fractional)",
+    "structural_decomposition": "Our Parker lemmas give inductive structure",
+    "key_gap": "Need to bound integrality gap τ/τ*"
+  },
+
+  "attack_strategy": {
+    "approach_1": {
+      "name": "Integrality gap analysis",
+      "idea": "Prove τ ≤ c·τ* for some c < 1.435",
+      "scaffold": ["tau_star_upper_bound", "fractional_covering_LP"]
+    },
+    "approach_2": {
+      "name": "Structural induction extension",
+      "idea": "Extend Parker's ν≤3 technique to general graphs",
+      "scaffold": ["inductive_bound", "packing_decomposition"]
+    },
+    "approach_3": {
+      "name": "Local improvement",
+      "idea": "Haxell uses c=66/23. Find tighter local ratio",
+      "scaffold": ["local_ratio_framework", "amortized_analysis"]
+    }
+  },
+
+  "formalization_needed": [
+    "Statement: τ ≤ 2.5ν",
+    "Integrality gap bound",
+    "Enhanced local ratio machinery"
+  ],
+
+  "risk_assessment": "HIGH RISK. 26 years of no progress suggests this is very hard. But: our 30 lemmas give computational scaffolding not available before.",
+
+  "why_attempt_anyway": "Aristotle's strength is finding unexpected connections. Our lemma library is unprecedented scaffolding."
+}

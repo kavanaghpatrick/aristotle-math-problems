@@ -1,0 +1,55 @@
+{
+  "id": "aharoni_zerbib2020",
+  "title": "A Generalization of Tuza's Conjecture",
+  "authors": ["Ron Aharoni", "Shira Zerbib"],
+  "year": 2020,
+  "arxiv": "1611.07497",
+  "doi": "10.1002/jgt.22533",
+  "publication": "Journal of Graph Theory 94:445-462",
+  "status": "extracted",
+  "relevance_to_nu4": "medium",
+  "main_result": "Hypergraph generalization of Tuza",
+
+  "lemmas": [
+    {
+      "id": "aharoni2020_generalized",
+      "name": "tuza_generalized_rgraph",
+      "source_ref": "Main Conjecture",
+      "type": "conjecture",
+      "statement": "For any r-uniform hypergraph H: τ(H)/ν(H) ≤ ⌈(r+1)/2⌉",
+      "english": "r-graphs have τ/ν ≤ ⌈(r+1)/2⌉",
+      "proof_status": "open",
+      "validated": false,
+      "implications": ["r=3 (graphs with triangles): τ/ν ≤ 2 = Tuza's conjecture"]
+    },
+    {
+      "id": "aharoni2020_fractional",
+      "name": "tuza_fractional_generalized",
+      "source_ref": "Theorem 1",
+      "type": "theorem",
+      "statement": "The fractional version τ*/ν* ≤ (r+1)/2 holds",
+      "english": "Fractional generalized Tuza is true",
+      "proof_status": "axiom",
+      "proof_technique": "LP duality",
+      "validated": false
+    },
+    {
+      "id": "aharoni2020_matching_cover",
+      "name": "matching_cover_duality",
+      "source_ref": "Section 2",
+      "type": "lemma",
+      "statement": "Relates to edge-disjoint matchings and vertex covers in hypergraphs",
+      "english": "Generalizes matching-cover duality",
+      "proof_status": "axiom",
+      "validated": false
+    }
+  ],
+
+  "key_insight": "Tuza's conjecture is a special case of a broader hypergraph phenomenon. The fractional version holds in full generality.",
+  "implications_for_nu4": [
+    "Puts Tuza in broader context",
+    "Fractional bound techniques may help"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Influential paper - connects to hypergraph theory"
+}

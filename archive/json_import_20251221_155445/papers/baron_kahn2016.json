@@ -1,0 +1,47 @@
+{
+  "id": "baron_kahn2016",
+  "title": "Tuza's Conjecture is Asymptotically Tight for Dense Graphs",
+  "authors": ["Jonathan D. Baron", "Jeff Kahn"],
+  "year": 2016,
+  "arxiv": "1408.4870",
+  "doi": "10.1017/S0963548316000067",
+  "publication": "Combinatorics, Probability and Computing 25:645-667",
+  "status": "partial",
+  "relevance_to_nu4": "high",
+  "main_result": "Tuza bound tau/nu <= 2 is asymptotically tight for dense graphs",
+
+  "lemmas": [
+    {
+      "id": "baron_kahn2016_tightness",
+      "name": "tuza_asymptotically_tight",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_asymptotically_tight : ∀ ε > 0, ∃ G : SimpleGraph V, (triangleCoveringNumber G : ℚ) / trianglePackingNumber G > 2 - ε",
+      "english": "For any epsilon > 0, there exist graphs with tau/nu > 2 - epsilon",
+      "proof_status": "axiom",
+      "proof_technique": "Partly random construction",
+      "validated": false,
+      "implications": ["Tuza's bound cannot be improved to tau <= (2-epsilon)*nu", "Counterexamples exist in dense regime"]
+    },
+    {
+      "id": "baron_kahn2016_dense_limit",
+      "name": "dense_graph_ratio_limit",
+      "source_ref": "Corollary",
+      "type": "lemma",
+      "statement": "lemma dense_graph_ratio_limit : For dense graphs, tau/nu approaches 2 as |V| → ∞",
+      "english": "Dense graphs have tau/nu ratio approaching 2",
+      "proof_status": "informal",
+      "validated": false,
+      "implications": ["Dense nu=4 graphs are GOOD for Tuza - they approach the bound"]
+    }
+  ],
+
+  "key_insight": "Dense graphs approach tau = 2*nu asymptotically. This means: if a nu=4 counterexample exists, it must be SPARSE and structured, not dense.",
+  "implications_for_nu4": [
+    "Dense nu=4 graphs satisfy Tuza (approach limit, don't exceed it)",
+    "Counterexamples must be sparse",
+    "Counterexamples must be structured (not random)"
+  ],
+  "formalization_status": "not_started",
+  "notes": "This is GOOD news - tells us where NOT to look for counterexamples"
+}

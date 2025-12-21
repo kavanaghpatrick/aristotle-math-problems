@@ -1,0 +1,105 @@
+{
+  "name": "Tuza Frontier Problems Database",
+  "created": "2025-12-21",
+  "last_updated": "2025-12-21",
+  "purpose": "Systematic research infrastructure for genuinely open problems beyond ν=4",
+
+  "submission_summary": {
+    "total_formal": 3,
+    "total_informal": 3,
+    "submission_date": "2025-12-21",
+    "expected_results": "6-24 hours per submission"
+  },
+
+  "frontiers": [
+    {
+      "id": "split_graphs",
+      "name": "Split Graphs",
+      "status": "SUBMITTED",
+      "directory": "frontiers/split_graphs/",
+      "priority": 1,
+      "summary": "General split graphs are OPEN. Only threshold subset proven.",
+      "key_question": "Does Tuza hold for all split graphs?",
+      "our_advantages": ["structural_cover applies", "tau_star for clique edges", "intersecting_triangles_structure"],
+      "submissions": {
+        "formal": {
+          "uuid": "cd3636f6-782a-423a-b33f-d1ff3301c00a",
+          "file": "submissions/frontier_split_graphs.lean",
+          "status": "running"
+        },
+        "informal": {
+          "uuid": "ee09f2e2-fc27-4168-9bbf-98791c7ceeeb",
+          "file": "submissions/frontier_split_graphs.md",
+          "status": "running"
+        }
+      }
+    },
+    {
+      "id": "counterexample_hunt",
+      "name": "Constrained Counterexample Search",
+      "status": "SUBMITTED",
+      "directory": "frontiers/counterexample_hunt/",
+      "priority": 2,
+      "summary": "Hunt for counterexamples in constrained space: ν≥4, χ≥5, tw≥7, mad≥7",
+      "key_question": "Does a counterexample to Tuza exist?",
+      "our_advantages": ["All our lemmas become CONSTRAINTS counterexample must evade", "Cayley graph search strategy"],
+      "submissions": {
+        "formal": {
+          "uuid": "1139ada9-099a-4b35-8d08-b3fbc037812c",
+          "file": "submissions/frontier_counterexample_hunt.lean",
+          "status": "running"
+        },
+        "informal": {
+          "uuid": "eafe6226-13a3-4ce0-a794-63115a78d65e",
+          "file": "submissions/frontier_counterexample_hunt.md",
+          "status": "running"
+        }
+      }
+    },
+    {
+      "id": "hypergraph_aharoni_zerbib",
+      "name": "Aharoni-Zerbib Hypergraph Generalization",
+      "status": "SUBMITTED",
+      "directory": "frontiers/hypergraph_aharoni_zerbib/",
+      "priority": 3,
+      "summary": "τ(H) ≤ ⌈(r+1)/2⌉ν(H) for r-uniform hypergraphs. Target: r=4 case (τ ≤ 2.5ν)",
+      "key_question": "Can we prove τ ≤ 2.5ν for 4-uniform hypergraphs?",
+      "our_advantages": ["5 lemmas generalize directly", "r=3 is our Tuza work - natural extension"],
+      "submissions": {
+        "formal": {
+          "uuid": "12d62b8d-84a4-4be1-b0b1-1012e0f5e061",
+          "file": "submissions/frontier_hypergraph_r4.lean",
+          "status": "running"
+        },
+        "informal": {
+          "uuid": "e6dc644d-bf54-4d89-87c5-65bf45dde87f",
+          "file": "submissions/frontier_hypergraph_r4.md",
+          "status": "running"
+        }
+      }
+    },
+    {
+      "id": "bound_improvement",
+      "name": "General Bound Improvement",
+      "status": "NOT_SUBMITTED",
+      "directory": "frontiers/bound_improvement/",
+      "priority": 4,
+      "summary": "Improve τ ≤ 2.87ν (Haxell 1999) - no progress in 26 years",
+      "key_question": "Can we prove τ ≤ 2.5ν or better?",
+      "our_advantages": ["tau_S_le_2 gives local bounds", "inductive_bound framework"],
+      "risk_assessment": "HIGH - 26 years without improvement suggests very hard",
+      "submissions": null
+    }
+  ],
+
+  "transfer_lemmas_from_tuza": {
+    "structural_cover": "Pairwise sharing → τ ≤ 2",
+    "intersecting_triangles_structure": "Pairwise sharing → star OR K4",
+    "tau_star": "Star structure → τ ≤ 1",
+    "tau_S_le_2": "τ(S_e) ≤ 2 for any packing element",
+    "inductive_bound": "τ ≤ τ(T_e) + τ(rest)",
+    "k4_cover": "Triangles on ≤4 vertices → τ ≤ 2"
+  },
+
+  "check_results_command": "ls submissions/aristotle_output/ | grep -E '(cd3636f6|1139ada9|12d62b8d|ee09f2e2|eafe6226|e6dc644d)'"
+}

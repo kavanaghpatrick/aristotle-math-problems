@@ -1,0 +1,58 @@
+{
+  "id": "puleo2015",
+  "title": "Tuza's Conjecture for Graphs with Maximum Average Degree Less Than 7",
+  "authors": ["Gregory J. Puleo"],
+  "year": 2015,
+  "arxiv": null,
+  "doi": "10.1016/j.ejc.2015.03.006",
+  "publication": "European Journal of Combinatorics 49:134-152",
+  "status": "extracted",
+  "relevance_to_nu4": "high",
+  "main_result": "Tuza holds for max average degree < 7",
+
+  "lemmas": [
+    {
+      "id": "puleo2015_mad7",
+      "name": "tuza_mad_lt_7",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_mad_lt_7 (G : SimpleGraph V) (h : maxAvgDegree G < 7) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Graphs with maximum average degree < 7 satisfy Tuza",
+      "proof_status": "axiom",
+      "proof_technique": "Reducible sets + discharging",
+      "validated": false,
+      "needs_validation": "Need to define maxAvgDegree correctly",
+      "implications": ["Generalizes planar result (mad ≤ 6)", "Any nu=4 counterexample has mad ≥ 7"]
+    },
+    {
+      "id": "puleo2015_reducible",
+      "name": "reducible_set_definition",
+      "source_ref": "Definition 2.1",
+      "type": "definition",
+      "statement": "A set S of edges is reducible if: for all graphs G, if τ(G \\ S) ≤ 2ν(G \\ S) and certain structural conditions hold, then τ(G) ≤ 2ν(G)",
+      "english": "Reducible sets cannot appear in minimal counterexamples",
+      "proof_status": "axiom",
+      "validated": false,
+      "implications": ["Core technique for proving special cases", "Enables discharging arguments"]
+    },
+    {
+      "id": "puleo2015_discharging",
+      "name": "discharging_lemma",
+      "source_ref": "Section 3",
+      "type": "lemma",
+      "statement": "If G has mad < 7 and is a minimal counterexample, then discharging argument reaches contradiction",
+      "english": "Discharging proves no minimal counterexample has mad < 7",
+      "proof_status": "axiom",
+      "validated": false
+    }
+  ],
+
+  "key_insight": "Reducible sets + discharging method. A nu=4 counterexample must have maximum average degree >= 7.",
+  "implications_for_nu4": [
+    "Any counterexample is 'dense enough' (mad >= 7)",
+    "Rules out many sparse constructions",
+    "Planar graphs definitely satisfy Tuza (mad ≤ 6)"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Reducible sets technique could be formalized for future work"
+}

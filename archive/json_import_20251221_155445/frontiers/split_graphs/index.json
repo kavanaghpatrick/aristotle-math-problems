@@ -1,0 +1,72 @@
+{
+  "frontier": "split_graphs",
+  "name": "Tuza's Conjecture for Split Graphs",
+  "status": "SUBMITTED",
+  "last_updated": "2025-12-21",
+
+  "submissions": {
+    "formal": {
+      "uuid": "cd3636f6-782a-423a-b33f-d1ff3301c00a",
+      "file": "submissions/frontier_split_graphs.lean",
+      "submitted": "2025-12-21",
+      "status": "running"
+    },
+    "informal": {
+      "uuid": "ee09f2e2-fc27-4168-9bbf-98791c7ceeeb",
+      "file": "submissions/frontier_split_graphs.md",
+      "submitted": "2025-12-21",
+      "status": "running"
+    }
+  },
+  "description": "Split graphs are graphs whose vertices can be partitioned into a clique K and an independent set I. Threshold graphs (a subclass) are proven. General split graphs remain open.",
+
+  "what_is_known": {
+    "threshold_graphs": {
+      "status": "PROVEN",
+      "reference": "Botler et al. 2021",
+      "statement": "Tuza's conjecture holds for threshold graphs (nested neighborhood structure)"
+    },
+    "split_graphs": {
+      "status": "OPEN",
+      "note": "General split graphs NOT covered by threshold result"
+    }
+  },
+
+  "key_structural_insight": "In a split graph G = (K ∪ I, E): All triangles have ≥2 vertices in K. Triangle structure is simpler than general graphs.",
+
+  "literature": [
+    {
+      "authors": "Botler, Fernandes, Gutiérrez",
+      "year": 2021,
+      "title": "Tuza's Conjecture for Threshold Graphs",
+      "arxiv": "2105.09871",
+      "key_results": [
+        "Theorem 1.1: Tuza holds for threshold graphs",
+        "Uses nested neighborhood property",
+        "Inductive proof on graph construction sequence"
+      ]
+    }
+  ],
+
+  "connection_to_our_lemmas": {
+    "tau_star_definition": "Our τ*(G) = max weighted degree naturally applies to split graphs",
+    "inductive_bound": "Split graphs have natural induction via clique-independent structure",
+    "intersecting_triangles": "Our Lemma 2.2 (triangles through edge share vertices) applies"
+  },
+
+  "attack_strategy": {
+    "approach": "Induction on clique size |K|",
+    "key_observation": "All triangles use ≥2 vertices from K, so K-edge structure controls everything",
+    "scaffold_with": [
+      "tau_star_upper_bound",
+      "inductive_covering_bound",
+      "vertex_in_clique_controls_triangles"
+    ]
+  },
+
+  "formalization_needed": [
+    "Definition of split graph in Lean",
+    "Property: all triangles use ≥2 clique vertices",
+    "Induction lemma for split graph construction"
+  ]
+}

@@ -17,3 +17,120 @@ PROVEN STATUS:
 - ν=2: PROVEN (0764be78)
 - ν=3: Pending (f7f90a6c, f9473ebd)
 
+
+=== CORRECTED SUBMISSIONS (Dec 20, 2025) ===
+
+CRITICAL FIX: Previous counterexamples were FALSE FLAGS!
+- flowerGraph: τ(T_e) = 3 for central triangle, but central is NOT in max packing
+- For actual packing elements in flowerGraph, τ(T_e) = 1 for all three!
+
+bb81e3dc-f448-4d09-8403-56cf1adca6b7 | tuza_tau_Te_packing_CORRECTED.lean | Running
+  - τ(T_e) ≤ 2 for PACKING elements (not arbitrary triangles)
+  - Minimal Boris-style submission
+
+e23a4af3-2731-44ce-afb9-8beba495b8ff | tuza_tau_Te_packing_SCAFFOLDED.lean | Running
+  - Same theorem with helper lemma structure
+  - Includes T_e \ S_e analysis framework
+
+72aaa595-fc34-48fa-994c-86fc2e9d76c9 | tuza_tau_Te_packing_INFORMAL.md | Running
+  - Informal proof strategy
+  - Explains why ν ≤ 3 constraint matters
+
+$(date '+%Y-%m-%d %H:%M') | Submitted 3 new jobs based on Gemini analysis: echo   - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach) echo   - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate) echo   - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof) echo  cat submissions/monitor_log.txt
+$(date '+%Y-%m-%d %H:%M') | Submitted 3 new jobs based on Gemini analysis: echo   - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach) echo   - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate) echo   - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof) echo  cat submissions/monitor_log.txt
+$(date '+%Y-%m-%d %H:%M') | Submitted 3 new jobs based on Gemini analysis: echo   - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach) echo   - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate) echo   - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof) echo  cat submissions/monitor_log.txt
+$(date '+%Y-%m-%d %H:%M') | Submitted 3 new jobs based on Gemini analysis: echo   - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach) echo   - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate) echo   - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof) echo  cat submissions/monitor_log.txt
+$(date '+%Y-%m-%d %H:%M') | Submitted 3 new jobs based on Gemini analysis: echo   - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach) echo   - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate) echo   - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof) echo  cat submissions/monitor_log.txt
+
+2025-12-20 | Submitted 3 new jobs based on Gemini analysis:
+  - b17bf01d: tuza_nu3_flower_exclusion.lean (Flower exclusion approach)
+  - f45bfea3: tuza_nu3_case_by_case.lean (Case ν=1,2,3 separate)
+  - 82c1041b: tuza_nu3_flower_exclusion.md (Informal proof)
+
+
+=== COMPLETION ATTEMPT (Dec 20, 2025 16:56) ===
+
+TARGET: tau_Te_le_2_of_nu_le_3 (the LAST sorry in 4736da84)
+
+6576c71c-042d-4e7e-b735-7b7cb3f36abe | tuza_tau_Te_completion.lean | Submitted
+  - Formal submission with context folder
+  - Context includes proven lemmas from 4736da84 (S_e_pairwise_share_edges, tau_S_le_2, etc.)
+
+45836e62-1263-4ea8-80cc-66b81b2d0478 | tuza_tau_Te_completion.md | Submitted
+  - Informal proof explaining the strategy
+  - Key insight: edges covering S_e also cover T_e when ν ≤ 3
+
+If either succeeds, we complete Tuza for ν ≤ 3!
+
+=== MULTI-AGENT OPTIMIZED SUBMISSIONS (Dec 20, 2025 17:15) ===
+
+Based on Grok-4 and Gemini analysis:
+
+87299718-3bf2-4aae-ad2e-b4fd9079c1ef | tuza_tau_Te_free_edge.lean | Submitted
+  - GEMINI STRATEGY: "Free edge" escape hatch
+  - Key insight: If any edge of e is unoccupied, τ ≤ 2
+  - Uses occupiedEdges definition + pigeonhole
+
+33adf0c0-e436-4ead-a41b-e8c942c50f61 | tuza_tau_Te_nu_cases.lean | Submitted
+  - GROK STRATEGY: Explicit ν=1,2,3 case split
+  - ν=1 already proven via Te_eq_Se_when_nu_1
+  - ν=2,3 use bridges_to_single_f_in_K4 structural lemma
+
+Both have context folder with proven lemmas from 4736da84.
+
+=== Parker Direct Formalization Submissions (Dec 20, 2025) ===
+Strategy: Directly encode Parker's proof structure instead of rediscovery
+
+47c776f8-a829-461a-afdb-193af48658cf | tuza_parker_nu2_complete.lean | Running
+  - Explicit ν=2 case analysis (vertex-disjoint vs shared vertex)
+  - Key lemmas: bridge_contains_shared_vertex, pairwise_sharing_covered_by_e
+
+c8e140c3-4011-438d-9a76-7628ca9a2f9e | tuza_parker_nu3_complete.lean | Running
+  - ν=3 case with matching type analysis
+  - Key lemmas: common_vertex_bridge_control, bridge_shares_with_le_2
+
+f12ec486-9777-4b7d-954e-75535f9c1387 | tuza_parker_direct.lean | Running
+  - Combined approach with Parker's key insight
+  - S_e_covered_by_edges_of_e, T_e_covered_by_edges_of_e
+
+94407c27-fca1-4848-a20e-b22c89eb9bf1 | tuza_parker_informal.md | Running (informal)
+  - Natural language proof for informal reasoning path
+
+[2025-12-21 08:40] UUID: 30c5ef0d-e321-49d2-9039-dcf368989b36 | File: ess_extensive_form_soundness.md | Mode: informal | Status: Running | Paper: Ganzfried ESS Soundness
+
+=== ν=4 Portfolio Batch - 2025-12-21 ===
+Slot 1: 78321b54-fba2-4d8f-8fbb-99418c9f466c | gap_closer (tau_union_le_4) | Running
+Slot 2: 7cd92201-27e3-4680-8d55-0d478c48ccda | base_camp_nu2 | Running
+Slot 3: d9cf0918-e169-48a8-8b45-bd8695e0de08 | fractional_hammer | Running
+Slot 4: d9a944e6-ef61-4a8c-afa0-597bb286f0b4 | bridge_saboteur | Running
+Slot 5: 8ea799df-7695-4537-baf1-03a6f18e7709 | dense_core | Running
+Slot 6: 226432ff-3797-4b78-aea9-cb824a6c2dae | parker_integration | Running
+Slot 7: 51a69672-5239-470e-9e7b-f2d3a40e42e1 | boris_random | Running
+
+=== FRONTIER SUBMISSIONS - Sun Dec 21 15:41:25 CST 2025 ===
+1. Split Graphs: cd3636f6-782a-423a-b33f-d1ff3301c00a
+   File: submissions/frontier_split_graphs.lean
+   Target: Tuza for split graphs (threshold subclass proven, general case OPEN)
+   Pattern: Boris minimal with split graph definitions
+   
+2. Counterexample Hunt: 1139ada9-099a-4b35-8d08-b3fbc037812c
+   File: submissions/frontier_counterexample_hunt.lean
+   Target: Find counterexample or prove non-existence in natural classes
+   Pattern: Constrained search with Cayley graphs
+   
+3. Hypergraph r=4: 12d62b8d-84a4-4be1-b0b1-1012e0f5e061
+   File: submissions/frontier_hypergraph_r4.lean
+   Target: Aharoni-Zerbib for 4-uniform hypergraphs (τ ≤ 2.5ν)
+   Pattern: Generalized Tuza lemmas to r=4
+
+
+=== INFORMAL SUBMISSIONS - Sun Dec 21 15:46:56 CST 2025 ===
+4. Split Graphs (informal): ee09f2e2-fc27-4168-9bbf-98791c7ceeeb
+   File: submissions/frontier_split_graphs.md
+   
+5. Counterexample Hunt (informal): eafe6226-13a3-4ce0-a794-63115a78d65e
+   File: submissions/frontier_counterexample_hunt.md
+   
+6. Hypergraph r=4 (informal): e6dc644d-bf54-4d89-87c5-65bf45dde87f
+   File: submissions/frontier_hypergraph_r4.md
+

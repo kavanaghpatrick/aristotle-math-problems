@@ -1,0 +1,33 @@
+{
+  "description": "Tuza Conjecture Lemma Database Schema",
+  "version": "1.0",
+  "last_updated": "2025-12-21",
+
+  "paper_schema": {
+    "id": "string (e.g., 'parker2024')",
+    "title": "string",
+    "authors": ["string"],
+    "year": "number",
+    "arxiv": "string or null",
+    "doi": "string or null",
+    "status": "read | partial | unread",
+    "lemmas_extracted": "number",
+    "relevance_to_nu4": "high | medium | low",
+    "notes": "string"
+  },
+
+  "lemma_schema": {
+    "id": "string (e.g., 'parker2024_lemma_2_2')",
+    "paper_id": "string",
+    "name": "string (Lean identifier)",
+    "source_ref": "string (e.g., 'Lemma 2.2')",
+    "statement": "string (Lean type signature)",
+    "proof_status": "proven | axiom | conjecture | sorry",
+    "proof_file": "string or null (path to Lean file)",
+    "proof_uuid": "string or null (Aristotle UUID)",
+    "dependencies": ["string (lemma_ids)"],
+    "used_for": ["string (what this enables)"],
+    "validated": "boolean",
+    "notes": "string"
+  }
+}

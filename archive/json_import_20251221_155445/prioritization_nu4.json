@@ -1,0 +1,107 @@
+{
+  "id": "prioritization_nu4",
+  "created": "2025-12-21",
+  "purpose": "Literature lemma prioritization for ν=4 proof",
+
+  "key_gap": {
+    "name": "tau_union_le_4",
+    "statement": "τ(T_e ∪ T_f) ≤ 4 when e ∩ f = {v}",
+    "why_needed": "Induction gives τ ≤ τ(T_e ∪ T_f) + 2(ν-2). For ν=4: τ ≤ τ(T_e ∪ T_f) + 4. Need τ(T_e ∪ T_f) ≤ 4 to get τ ≤ 8."
+  },
+
+  "proven_building_blocks": [
+    {"name": "tau_S_le_2", "desc": "τ(S_e) ≤ 2 always"},
+    {"name": "Te_eq_Se_union_bridges", "desc": "T_e = S_e ∪ bridges"},
+    {"name": "tau_X_le_2", "desc": "τ(X(e,f)) ≤ 2 when e∩f = {v}"},
+    {"name": "covering_number_le_two_of_subset_four", "desc": "Triangles on ≤4 vertices: τ ≤ 2"},
+    {"name": "tau_Te_le_2_nu_1", "desc": "For ν=1, τ(T_e) ≤ 2"}
+  ],
+
+  "counterexamples_blocking_strategies": [
+    {"name": "pairwise_sharing_covered_by_e", "desc": "K4 shows 2 edges of e don't cover all pairwise-sharing", "implication": "Cannot use pure edge-of-e covering strategy"}
+  ],
+
+  "priority_critical": [
+    {
+      "id": "krivelevich1995_fractional_duality",
+      "paper": "Krivelevich 1995",
+      "statement": "τ* = ν* by LP duality",
+      "why_critical": "Alternative attack: prove ν*(T_e ∪ T_f) ≤ 4 → get τ ≤ 8 via fractional",
+      "formalization_difficulty": "medium",
+      "needs": ["Define fractionalCoveringNumber", "Define fractionalPackingNumber", "LP duality in Lean"]
+    },
+    {
+      "id": "krivelevich1995_chain",
+      "paper": "Krivelevich 1995",
+      "statement": "τ ≥ τ* = ν* ≥ ν",
+      "why_critical": "Fundamental inequality chain - enables fractional bounds → integer bounds",
+      "formalization_difficulty": "easy once fractional defined",
+      "needs": ["Fractional definitions"]
+    }
+  ],
+
+  "priority_high": [
+    {
+      "id": "chapuy2014_fractional_improvement",
+      "paper": "Chapuy 2014",
+      "statement": "τ ≤ 2ν* - (1/√6)√ν*",
+      "why_high": "For ν*=4: τ ≤ 7.18 < 8. Direct proof IF ν* = 4 for T_e ∪ T_f",
+      "formalization_difficulty": "medium",
+      "needs": ["Fractional definitions", "Square root bounds"]
+    }
+  ],
+
+  "priority_medium": [
+    {
+      "id": "lakshmanan2012_4colorable",
+      "paper": "Lakshmanan 2012",
+      "statement": "χ(G) ≤ 4 → τ ≤ 2ν",
+      "why_medium": "If T_e ∪ T_f induces 4-colorable, done. Unlikely in general.",
+      "formalization_difficulty": "hard",
+      "needs": ["chromaticNumber from Mathlib"]
+    },
+    {
+      "id": "haxell1999_bound",
+      "paper": "Haxell 1999",
+      "statement": "τ ≤ (66/23)ν",
+      "why_medium": "Fallback bound: τ ≤ 11.5 for ν=4. Not tight but useful during development.",
+      "formalization_difficulty": "unknown"
+    }
+  ],
+
+  "priority_low": [
+    {
+      "id": "puleo2015_mad7",
+      "paper": "Puleo 2015",
+      "statement": "mad < 7 → Tuza holds",
+      "why_low": "Constraint on counterexamples, not proof technique"
+    },
+    {
+      "id": "botler2020_treewidth6",
+      "paper": "Botler 2020",
+      "statement": "treewidth ≤ 6 → Tuza holds",
+      "why_low": "Constraint, blocked on treewidth definition anyway"
+    },
+    {
+      "id": "kahn_park2022_random",
+      "paper": "Kahn-Park 2022",
+      "statement": "Random graphs satisfy Tuza a.a.s.",
+      "why_low": "Probabilistic - tells us where NOT to look, not how to prove"
+    }
+  ],
+
+  "recommended_formalization_order": [
+    "1. Krivelevich fractional_duality (τ* = ν*)",
+    "2. Krivelevich covering_packing_chain (τ ≥ τ* = ν* ≥ ν)",
+    "3. Chapuy fractional_bound_improved",
+    "4. Consider: prove ν*(T_e ∪ T_f) ≤ 4 directly"
+  ],
+
+  "alternative_structural_approach": {
+    "observation": "Aristotle proved bridge_shares_with_le_2 for ν=3",
+    "idea": "Bridges to a single f might lie in K4 structure",
+    "lemma_needed": "bridges_to_single_f_in_K4 (still sorry)",
+    "if_proven": "τ(bridges to f) ≤ 2 by covering_number_le_two_of_subset_four",
+    "combined": "τ(T_e) = τ(S_e) + τ(bridges) ≤ 2 + 2 = 4"
+  }
+}

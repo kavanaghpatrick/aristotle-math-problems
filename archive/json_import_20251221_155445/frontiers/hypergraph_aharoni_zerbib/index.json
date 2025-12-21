@@ -1,0 +1,71 @@
+{
+  "frontier": "hypergraph_aharoni_zerbib",
+  "name": "Aharoni-Zerbib Hypergraph Generalization",
+  "status": "genuinely_open",
+  "description": "Generalize Tuza from triangles (3-edges) to r-uniform hypergraphs. Conjecture: τ(H) ≤ ⌈(r+1)/2⌉ν(H) for r-uniform hypergraphs.",
+
+  "conjecture": {
+    "statement": "For r-uniform hypergraph H: τ(H) ≤ ⌈(r+1)/2⌉ · ν(H)",
+    "cases": {
+      "r=2": "τ ≤ 1.5ν (edge covering) - KNOWN",
+      "r=3": "τ ≤ 2ν (Tuza's conjecture) - OPEN",
+      "r=4": "τ ≤ 2.5ν - OPEN",
+      "r=5": "τ ≤ 3ν - OPEN"
+    },
+    "source": "Aharoni-Zerbib 2016"
+  },
+
+  "connection_to_ryser": {
+    "statement": "Ryser's Conjecture: τ(H) ≤ (r-1)ν(H) for r-partite r-uniform hypergraphs",
+    "status": "Open for r ≥ 4",
+    "note": "Aharoni-Zerbib is intermediate between Tuza and Ryser"
+  },
+
+  "literature": [
+    {
+      "authors": "Aharoni, Zerbib",
+      "year": 2020,
+      "title": "Tuza's conjecture for hypergraphs",
+      "arxiv": "2020",
+      "key_results": [
+        "Proves fractional version for all r",
+        "Integral version open for r ≥ 3"
+      ]
+    },
+    {
+      "authors": "Abu-Khazneh",
+      "year": 2022,
+      "result": "Partial results for small r",
+      "arxiv": "2110.10095"
+    }
+  ],
+
+  "connection_to_our_lemmas": {
+    "intersecting_family": "Our intersecting_family_structure lemma generalizes directly",
+    "inductive_bound": "Induction approach works for hypergraphs",
+    "tau_star": "τ*(H) definition extends naturally",
+    "key_insight": "Triangle = 3-edge, so our machinery is the r=3 special case"
+  },
+
+  "attack_strategy": {
+    "approach": "Prove r=4 case using generalized versions of our lemmas",
+    "key_lemmas_to_generalize": [
+      "intersecting_family_structure → hyperedge version",
+      "tau_star_bound → weighted hyperedge cover",
+      "inductive_bound → hypergraph induction"
+    ],
+    "scaffold_with": [
+      "Our proven r=3 lemmas as template",
+      "Hypergraph Mathlib basics"
+    ]
+  },
+
+  "formalization_needed": [
+    "Definition of r-uniform hypergraph",
+    "τ_r(H), ν_r(H) definitions",
+    "Generalized intersecting family structure",
+    "r=4 special case statement"
+  ],
+
+  "why_tractable": "Our 30 lemmas are the r=3 case. Generalizing to r=4 is natural next step. Less competition than main Tuza."
+}

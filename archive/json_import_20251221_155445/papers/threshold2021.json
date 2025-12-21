@@ -1,0 +1,36 @@
+{
+  "id": "threshold2021",
+  "title": "Tuza's Conjecture for Threshold Graphs",
+  "authors": ["Łukasz Bożyk", "Andrzej Grzesik", "Meike Hatzel", "Tomáš Masařík", "Jana Novotná", "Karolina Okrasa"],
+  "year": 2021,
+  "arxiv": "2105.09871",
+  "doi": null,
+  "publication": "Discrete Mathematics & Theoretical Computer Science",
+  "status": "extracted",
+  "relevance_to_nu4": "low",
+  "main_result": "Tuza holds for threshold graphs (split + cograph)",
+
+  "lemmas": [
+    {
+      "id": "threshold2021_main",
+      "name": "tuza_threshold",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_threshold (G : SimpleGraph V) (h : isThresholdGraph G) : triangleCoveringNumber G ≤ 2 * trianglePackingNumber G",
+      "english": "Threshold graphs satisfy Tuza's conjecture",
+      "proof_status": "axiom",
+      "proof_technique": "Structural decomposition",
+      "validated": false,
+      "needs_validation": "Need isThresholdGraph definition",
+      "implications": ["Threshold = split ∩ cograph", "Any counterexample is NOT a threshold graph"]
+    }
+  ],
+
+  "key_insight": "Threshold graphs are well-structured (split + cograph). Tuza holds for them.",
+  "implications_for_nu4": [
+    "Counterexample is NOT a threshold graph",
+    "But threshold is very restrictive class"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Split graphs still open, but this special case is solved"
+}

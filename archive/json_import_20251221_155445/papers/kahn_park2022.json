@@ -1,0 +1,55 @@
+{
+  "id": "kahn_park2022",
+  "title": "Tuza's Conjecture for Random Graphs",
+  "authors": ["Jeff Kahn", "Jinyoung Park"],
+  "year": 2022,
+  "arxiv": "2007.04351",
+  "doi": "10.1002/rsa.21057",
+  "publication": "Random Structures & Algorithms 61(2):235",
+  "status": "extracted",
+  "relevance_to_nu4": "medium",
+  "main_result": "Tuza holds asymptotically almost surely for G(n,p)",
+
+  "lemmas": [
+    {
+      "id": "kahn_park2022_random",
+      "name": "tuza_random_gnp",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_random_gnp : ∀ p : ℕ → ℝ, Probability(G(n,p(n)) satisfies Tuza) → 1 as n → ∞",
+      "english": "Random graphs G(n,p) satisfy Tuza with probability approaching 1",
+      "proof_status": "axiom",
+      "proof_technique": "Probabilistic method",
+      "validated": false,
+      "needs_validation": "Probabilistic statement - hard to formalize",
+      "implications": ["Random graphs are NOT counterexamples", "Counterexamples must be carefully constructed"]
+    },
+    {
+      "id": "kahn_park2022_all_p",
+      "name": "tuza_random_all_densities",
+      "source_ref": "Corollary",
+      "type": "lemma",
+      "statement": "Result holds for all edge probability functions p = p(n)",
+      "english": "Works for sparse, dense, and all intermediate regimes",
+      "proof_status": "axiom",
+      "validated": false
+    }
+  ],
+
+  "related_work": {
+    "bennett_cushman_dudek2021": {
+      "title": "Closing the Random Graph Gap in Tuza's Conjecture",
+      "publication": "SIAM J. Discrete Math. 35:2145-2169",
+      "result": "Same result, independent proof via online triangle packing"
+    }
+  },
+
+  "key_insight": "Random graphs satisfy Tuza a.a.s. Any counterexample must be structured/adversarial, not random.",
+  "implications_for_nu4": [
+    "Cannot find counterexample by random search",
+    "Counterexamples are rare/structured",
+    "Need adversarial construction"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Probabilistic result - may not be directly usable in Lean proof but constrains search"
+}

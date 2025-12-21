@@ -1,0 +1,178 @@
+{
+  "name": "Tuza Conjecture Lemma Database",
+  "last_updated": "2025-12-21",
+  "purpose": "Systematic extraction and validation of all lemmas for nu=4 attack",
+
+  "papers": [
+    {
+      "id": "parker2024",
+      "file": "papers/parker2024.json",
+      "status": "complete",
+      "lemmas_extracted": 10,
+      "lemmas_proven": 10,
+      "validation": "all validated"
+    },
+    {
+      "id": "aristotle_proven",
+      "file": "papers/aristotle_proven.json",
+      "status": "complete",
+      "lemmas_extracted": 20,
+      "lemmas_proven": 20,
+      "pending": 3,
+      "counterexamples": 3,
+      "validation": "all validated"
+    },
+    {
+      "id": "krivelevich1995",
+      "file": "papers/krivelevich1995.json",
+      "status": "extracted",
+      "lemmas_extracted": 3,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "haxell1999",
+      "file": "papers/haxell1999.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "haxell_kohayakawa1998",
+      "file": "papers/haxell_kohayakawa1998.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "baron_kahn2016",
+      "file": "papers/baron_kahn2016.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "botler2020",
+      "file": "papers/botler2020.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "blocked on treewidth definition"
+    },
+    {
+      "id": "dense2024",
+      "file": "papers/dense2024.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "puleo2015",
+      "file": "papers/puleo2015.json",
+      "status": "extracted",
+      "lemmas_extracted": 3,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "lakshmanan2012",
+      "file": "papers/lakshmanan2012.json",
+      "status": "extracted",
+      "lemmas_extracted": 5,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "chapuy2014",
+      "file": "papers/chapuy2014.json",
+      "status": "extracted",
+      "lemmas_extracted": 3,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "kahn_park2022",
+      "file": "papers/kahn_park2022.json",
+      "status": "extracted",
+      "lemmas_extracted": 2,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "probabilistic - hard to formalize"
+    },
+    {
+      "id": "k4free_planar",
+      "file": "papers/k4free_planar.json",
+      "status": "extracted",
+      "lemmas_extracted": 3,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "threshold2021",
+      "file": "papers/threshold2021.json",
+      "status": "extracted",
+      "lemmas_extracted": 1,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    },
+    {
+      "id": "aharoni_zerbib2020",
+      "file": "papers/aharoni_zerbib2020.json",
+      "status": "extracted",
+      "lemmas_extracted": 3,
+      "lemmas_proven": 0,
+      "type": "axioms",
+      "validation": "needs formalization"
+    }
+  ],
+
+  "summary": {
+    "total_papers": 15,
+    "papers_complete": 2,
+    "papers_extracted": 13,
+    "total_lemmas": 63,
+    "lemmas_proven": 30,
+    "lemmas_as_axioms": 30,
+    "lemmas_pending": 3,
+    "counterexamples_found": 3
+  },
+
+  "counterexample_constraints": {
+    "from_literature": [
+      "mad(G) >= 7 (Puleo 2015)",
+      "chromatic_number(G) >= 5 (Lakshmanan 2012)",
+      "NOT tripartite (Haxell-Kohayakawa 1998)",
+      "NOT 4-partite (Lakshmanan 2012)",
+      "NOT odd-wheel-free (Lakshmanan 2012)",
+      "treewidth(G) >= 7 (Botler 2020)",
+      "NOT random (Kahn-Park 2022)",
+      "NOT threshold graph (Threshold 2021)",
+      "NOT K4-free planar (K4-free planar paper)",
+      "Must be structured/adversarial construction"
+    ]
+  },
+
+  "next_steps": [
+    "1. Validate krivelevich1995 fractional definitions",
+    "2. Create Lean file with literature axioms",
+    "3. Submit tau_union_le_4 to Aristotle",
+    "4. Complete nu=4 proof"
+  ],
+
+  "key_gap": "tau_union_le_4: τ(T_e ∪ T_f) ≤ 4 when e,f share vertex"
+}

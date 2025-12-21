@@ -1,0 +1,57 @@
+{
+  "id": "chapuy2014",
+  "title": "Packing Triangles in Weighted Graphs",
+  "authors": ["Guillaume Chapuy", "Matt DeVos", "Jessica McDonald", "Bojan Mohar", "Diego Scheide"],
+  "year": 2014,
+  "arxiv": "1012.0372",
+  "doi": "10.1137/120883875",
+  "publication": "SIAM Journal on Discrete Mathematics 28(1):226-239",
+  "status": "extracted",
+  "relevance_to_nu4": "high",
+  "main_result": "τ ≤ 2ν* - (1/√6)√ν* improvement over Krivelevich",
+
+  "lemmas": [
+    {
+      "id": "chapuy2014_fractional_improvement",
+      "name": "fractional_bound_improved",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem fractional_bound_improved (G : SimpleGraph V) : (triangleCoveringNumber G : ℝ) ≤ 2 * fractionalPackingNumber G - (1/Real.sqrt 6) * Real.sqrt (fractionalPackingNumber G)",
+      "english": "τ ≤ 2ν* - (1/√6)√ν*, improving Krivelevich's τ ≤ 2ν*",
+      "proof_status": "axiom",
+      "proof_technique": "Weighted version analysis",
+      "validated": false,
+      "needs_validation": "Need fractionalPackingNumber definition",
+      "implications": ["Tighter than τ ≤ 2ν* for large ν*", "Shows gap between τ and 2ν* grows with ν*"]
+    },
+    {
+      "id": "chapuy2014_tight",
+      "name": "fractional_bound_tight",
+      "source_ref": "Section 4",
+      "type": "lemma",
+      "statement": "The bound τ ≤ 2ν* - Θ(√ν*) is essentially best possible",
+      "english": "Cannot improve the √ν* term significantly",
+      "proof_status": "informal",
+      "validated": false
+    },
+    {
+      "id": "chapuy2014_weighted",
+      "name": "weighted_tuza",
+      "source_ref": "Theorem 2",
+      "type": "theorem",
+      "statement": "Results extend to edge-weighted graphs (multigraphs)",
+      "english": "Tuza-type bounds hold in weighted setting",
+      "proof_status": "informal",
+      "validated": false
+    }
+  ],
+
+  "key_insight": "Improves Krivelevich's τ ≤ 2ν* by a term of order √ν*. For large graphs, there's guaranteed slack between τ and 2ν*.",
+  "implications_for_nu4": [
+    "For nu=4: ν* could be larger, giving more slack",
+    "If ν* = 4, improvement is ~1.63 (small but nonzero)",
+    "Suggests counterexamples need ν* close to ν"
+  ],
+  "formalization_status": "not_started",
+  "notes": "Answers Krivelevich's question about tightness of τ ≤ 2ν*"
+}

@@ -1,0 +1,68 @@
+{
+  "id": "k4free_planar",
+  "title": "Packing and Covering Triangles in K4-free Planar Graphs",
+  "authors": ["Multiple authors"],
+  "year": 2011,
+  "arxiv": null,
+  "doi": "10.1007/s00373-011-1071-9",
+  "publication": "Graphs and Combinatorics",
+  "status": "extracted",
+  "relevance_to_nu4": "medium",
+  "main_result": "τ ≤ (3/2)ν for K4-free planar graphs",
+
+  "lemmas": [
+    {
+      "id": "k4free_planar_tight",
+      "name": "tuza_k4free_planar",
+      "source_ref": "Main Theorem",
+      "type": "theorem",
+      "statement": "theorem tuza_k4free_planar (G : SimpleGraph V) (hP : isPlanar G) (hK4 : isK4Free G) : 2 * triangleCoveringNumber G ≤ 3 * trianglePackingNumber G",
+      "english": "K4-free planar graphs have τ ≤ (3/2)ν",
+      "proof_status": "axiom",
+      "proof_technique": "Structural analysis of K4-free planar",
+      "validated": false,
+      "needs_validation": "Need isPlanar and isK4Free definitions",
+      "implications": ["BETTER than Tuza for this class", "Tight: equality achieved by edge-disjoint 5-wheels"]
+    },
+    {
+      "id": "k4free_planar_characterization",
+      "name": "k4free_planar_tight_examples",
+      "source_ref": "Theorem 2",
+      "type": "lemma",
+      "statement": "Equality τ = (3/2)ν holds iff G is disjoint union of 5-wheels (plus non-triangle edges)",
+      "english": "5-wheels are the extremal examples",
+      "proof_status": "axiom",
+      "validated": false
+    },
+    {
+      "id": "k4free_edges_in_two_triangles",
+      "name": "tuza_edges_in_two_triangles",
+      "source_ref": "Corollary",
+      "type": "lemma",
+      "statement": "Same bound holds if each edge belongs to at most 2 triangles",
+      "english": "Extends to 'edge-sparse triangle' graphs",
+      "proof_status": "axiom",
+      "validated": false
+    }
+  ],
+
+  "related_bounds": {
+    "k4free_general": {
+      "statement": "τ*(G) ≤ 1.8ν(G) for K4-free graphs",
+      "notes": "Fractional covering bound"
+    },
+    "k4free_tight": {
+      "statement": "For each ε > 0, exists K4-free G with τ(G) > (2-ε)ν(G)",
+      "notes": "Integer Tuza is tight even for K4-free"
+    }
+  },
+
+  "key_insight": "K4-free planar graphs satisfy BETTER bound. But K4-free in general still approaches τ = 2ν.",
+  "implications_for_nu4": [
+    "K4-free planar nu=4: τ ≤ 6 (not counterexample)",
+    "Need K4 or K5 for counterexample",
+    "5-wheels are important structure"
+  ],
+  "formalization_status": "not_started",
+  "notes": "5-wheel structure could be relevant for understanding extremal cases"
+}

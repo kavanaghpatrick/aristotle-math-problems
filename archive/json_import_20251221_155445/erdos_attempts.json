@@ -1,0 +1,42 @@
+{
+  "description": "Tracking Erdős problem submission attempts and results",
+  "updated": "2025-12-19",
+  "problems": {
+    "128": {
+      "prize": "$250",
+      "topic": "Graph theory - triangle density",
+      "status": "TOO_HARD",
+      "attempts": 1,
+      "result": "Complete failure - no partial progress",
+      "uuid": "e3636cd1-7c5d-4d0b-9daa-843cb8d03809",
+      "notes": "Genuine open problem, not formalization gap. Deprioritize."
+    },
+    "931": {
+      "prize": "none",
+      "topic": "Prime factors of consecutive products",
+      "status": "FAILED",
+      "attempts": 1,
+      "uuid": "0221768b-78f0-46b9-aef6-304bf400b9ca",
+      "result": "Complete failure - no partial progress",
+      "notes": "primeFactors equality problem. Too hard for direct approach."
+    },
+    "939": {
+      "prize": "$3",
+      "topic": "r-powerful sums",
+      "status": "NOT_SUBMITTED",
+      "notes": "Rate limited, queued"
+    },
+    "730": {
+      "prize": "none",
+      "topic": "Central binomial prime factors",
+      "status": "NOT_SUBMITTED",
+      "notes": "Rate limited, queued"
+    },
+    "313": {
+      "prize": "none",
+      "topic": "Primary pseudoperfect numbers",
+      "status": "NOT_SUBMITTED",
+      "notes": "Rate limited, queued"
+    }
+  }
+}
