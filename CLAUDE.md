@@ -113,21 +113,31 @@ sqlite3 submissions/tracking.db ".mode column" ".headers on" "YOUR QUERY"
 
 **Rule**: No JSON files for tracking. All state in the database.
 
-### New Workflow Scripts
+### Scripts Reference
 
-```bash
-# Pre-submission: Check prior work, get scaffolding recommendations, see past failures
-./scripts/pre_submit.sh submissions/file.lean
+**Pre-Submission (run before `aristotle prove-from-file`):**
 
-# Post-result: Analyze output, document failures for learning
-./scripts/post_result.sh <uuid> <result_file>
+| Script | Purpose | When to Use |
+|--------|---------|-------------|
+| `./scripts/pre_submit.sh <file>` | Check prior work, scaffolding recommendations, past failures | Always - comprehensive check |
+| `./scripts/validate_submission.sh <file>` | Syntax check, definition audit, instance check | Always - catches Lean errors |
+| `./scripts/audit_definitions.sh <file>` | Deep check for sInf bugs, Finset.sym2 issues | Called by validate_submission.sh |
+| `./scripts/get_scaffolding.sh [--full]` | Generate scaffolding code from proven lemmas | When building scaffolded submission |
 
-# Record which lemmas you scaffolded (for effectiveness tracking)
-./scripts/record_scaffolding.sh <submission_id> <lemma_id> <usage_type>
+**Post-Result (run after `aristotle download <uuid>`):**
 
-# Generate scaffolding code from proven lemmas
-./scripts/get_scaffolding.sh [--full | --defs-only]
-```
+| Script | Purpose | When to Use |
+|--------|---------|-------------|
+| `./scripts/verify_output.sh <file>` | Sorry count, axiom check, compilation test, extract theorems | Always - validates claimed proofs |
+| `./scripts/post_result.sh <uuid> <file>` | Update DB, document failures, prompt for insights | Always - captures learnings |
+| `./scripts/record_scaffolding.sh <id> <lemma> <type>` | Track which scaffolding was used | After submission for effectiveness tracking |
+
+**Maintenance:**
+
+| Script | Purpose | When to Use |
+|--------|---------|-------------|
+| `./scripts/find_contaminated.sh <def> <pattern>` | Find files with buggy definition patterns | When hunting down systematic bugs |
+| `./scripts/track_submission.sh <file> <id> <pattern>` | Record submission in database | Part of submission workflow |
 
 ### New Query Patterns
 
@@ -230,17 +240,18 @@ aristotle prove-from-file submissions/file.lean --no-wait
 # Download output
 aristotle download <UUID>
 
-# RECOMMENDED: Run post-result analysis (updates DB, prompts for failure documentation)
+# 1. Verify the output (sorry count, axiom check, compilation, definition audit)
+./scripts/verify_output.sh output.lean
+
+# 2. Update database and document learnings
 ./scripts/post_result.sh <UUID> output.lean
 
-# Or manually check:
-grep -c "sorry" output.lean  # 0 = full proof
-
-# Record which scaffolding was used (for effectiveness tracking)
+# 3. Record scaffolding effectiveness (if scaffolding was used)
 ./scripts/record_scaffolding.sh <submission_id> <lemma_id> full_proof
 ```
 
-If partial progress: extract proven lemmas, add to database, document failure insights.
+If claimed proven: verify_output.sh will compile and re-audit definitions.
+If partial progress: post_result.sh prompts you to document what failed and why.
 
 ---
 
@@ -392,12 +403,12 @@ Prioritize genuinely open problems over re-formalization.
 
 | Task | Action |
 |------|--------|
-| Submit new problem | `./scripts/pre_submit.sh` → validate → track → submit |
-| Process results | `./scripts/post_result.sh <uuid> <file>` |
+| Submit new problem | `pre_submit.sh` → `validate_submission.sh` → `track_submission.sh` → submit |
+| Process results | `verify_output.sh` → `post_result.sh` → `record_scaffolding.sh` |
 | Check past failures | `SELECT * FROM failed_approaches WHERE frontier_id='...'` |
 | Get dependencies | Use recursive CTE on `lemma_dependencies` |
 | Find scaffolding | `SELECT * FROM literature_lemmas WHERE proof_status='proven'` |
-| Track scaffolding | `./scripts/record_scaffolding.sh` after submission |
+| Find contaminated files | `./scripts/find_contaminated.sh <def> <pattern>` |
 | Audit progress | See query below |
 
 ### Audit: Discovery vs Formalization
