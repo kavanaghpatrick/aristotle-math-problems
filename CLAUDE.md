@@ -1,5 +1,83 @@
 # CLAUDE.md - Math Project
 
+## CRITICAL: Database-First Architecture
+
+**ALL project state lives in SQLite at `submissions/tracking.db`.** No JSON files, no scattered markdown. The database is the single source of truth.
+
+### Database Schema Overview
+
+```
+submissions/tracking.db
+├── Core Tables
+│   ├── submissions        (52 rows)  - All Aristotle submissions + status
+│   ├── proven_theorems    (-)        - Extracted proven results
+│   └── audit_log          (-)        - All actions tracked
+│
+├── Research Knowledge
+│   ├── papers             (15 rows)  - Literature (Parker, Haxell, etc.)
+│   ├── literature_lemmas  (62 rows)  - Lemmas from papers
+│   └── counterexample_constraints (30 rows) - What counterexamples must evade
+│
+├── Problem Databases
+│   ├── erdos_full         (1111 rows) - All Erdős problems + Formal Conjectures
+│   ├── erdos_problems     (219 rows)  - Scored tractable problems
+│   ├── erdos_attempts     (10 rows)   - Our submission attempts
+│   └── algorithm_candidates (14 rows) - Algorithm discovery targets
+│
+├── Frontier Research
+│   ├── frontiers          (4 rows)   - Active frontier problems
+│   ├── frontier_submissions (18 rows) - Links frontiers to submissions
+│   ├── frontier_lemmas    (18 rows)  - Applicable lemmas per frontier
+│   └── frontier_needed_lemmas (9 rows) - Lemmas we need to prove
+│
+└── Validation
+    ├── definition_audits  (-)        - Formalization bug checks
+    └── definition_patterns (-)       - Known buggy patterns
+```
+
+### Essential Database Queries
+
+```bash
+# Check all running submissions
+sqlite3 submissions/tracking.db "SELECT uuid, filename, status FROM submissions WHERE status='running';"
+
+# List proven lemmas from literature
+sqlite3 submissions/tracking.db "SELECT name, paper_id, proof_status FROM literature_lemmas WHERE proof_status='proven';"
+
+# Find top tractable Erdős problems
+sqlite3 submissions/tracking.db "SELECT number, prize, tractability_score FROM erdos_full WHERE status='open' ORDER BY tractability_score DESC LIMIT 10;"
+
+# Check frontier submission status
+sqlite3 submissions/tracking.db "
+  SELECT f.name, fs.submission_type, s.status
+  FROM frontiers f
+  JOIN frontier_submissions fs ON f.id=fs.frontier_id
+  JOIN submissions s ON fs.submission_uuid=s.uuid;"
+
+# Get counterexample constraints
+sqlite3 submissions/tracking.db "SELECT constraint_text FROM counterexample_constraints;"
+
+# Find all algorithm candidates
+sqlite3 submissions/tracking.db "SELECT id, name, tractability_score, problem_type FROM algorithm_candidates ORDER BY tractability_score DESC;"
+```
+
+### Database Operations
+
+```bash
+# Track new submission (ALWAYS do this)
+./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
+
+# Import data (if needed)
+python3 scripts/import_all_to_sqlite.py
+
+# Direct SQL for custom queries
+sqlite3 submissions/tracking.db ".mode column" ".headers on" "YOUR QUERY HERE"
+```
+
+**NEVER create JSON files for tracking data.** All state goes into the database.
+
+---
+
 ## Mental Model: What Aristotle Actually Is
 
 Aristotle (by Harmonic) is a **200B+ parameter system** combining:
@@ -27,7 +105,28 @@ Boris Alexeev's success on Erdős #124 came from:
 
 ---
 
-## Problem Selection: What to Look For
+## Problem Selection: Database-Driven
+
+### Query Tractable Problems
+
+```bash
+# Top 20 open Erdős problems by tractability
+sqlite3 submissions/tracking.db "
+  SELECT number, prize, tractability_score, tags
+  FROM erdos_full
+  WHERE status='open' AND has_lean4=1
+  ORDER BY tractability_score DESC
+  LIMIT 20;"
+
+# Problems we haven't attempted yet
+sqlite3 submissions/tracking.db "
+  SELECT ef.number, ef.prize, ef.tractability_score
+  FROM erdos_full ef
+  LEFT JOIN erdos_attempts ea ON ef.number = ea.problem_num
+  WHERE ef.status='open' AND ea.id IS NULL
+  ORDER BY ef.tractability_score DESC
+  LIMIT 10;"
+```
 
 ### High-Value Signals
 
@@ -38,22 +137,6 @@ Boris Alexeev's success on Erdős #124 came from:
 | **Existing Mathlib might connect** | Unexpected applications of known results |
 | **Finite/decidable structure** | Can verify specific instances |
 | **Low prize / obscure** | Less attention = potential gaps missed |
-
-### Neutral (Not Automatic Filters)
-
-| Factor | Reality |
-|--------|---------|
-| Asymptotics | Depends on formalization - not automatic NO |
-| "Open" status | Boris solved an "open" problem |
-| Complex domain | Aristotle has deep search capability |
-
-### Low-Value Signals
-
-| Signal | Why |
-|--------|-----|
-| Already SOLVED variants | We're trying to SOLVE, not formalize |
-| Famous hard problems | Extensively studied, unlikely gaps |
-| High prize ($1000+) | Serious mathematicians have tried |
 
 ### Prize Level Heuristics (Learned Dec 2025)
 
@@ -67,73 +150,51 @@ Boris Alexeev's success on Erdős #124 came from:
 
 ---
 
-## Workflow
+## Workflow: Database-Tracked
 
 ### Phase 1: Problem Discovery
 
-**Goal**: Find problems where formalization might be accidentally tractable.
-
-1. **Check Formal Conjectures repo** for pre-formalized statements
-2. **Read the original problem** on erdosproblems.com
-3. **Compare Lean to English** - look for:
-   - Missing hypotheses in one or the other
-   - Quantifier differences
-   - Edge cases not handled
-4. **Check related Mathlib** - what theorems exist nearby?
-
-**Key Question**: Could an existing Mathlib result unexpectedly apply to this formalization?
-
-### Phase 2: Formalization Analysis
-
-**DO NOT** try to make formalization "exactly match" - that's backwards!
-
-Instead, analyze:
-- What does the Lean statement actually claim?
-- Is it potentially weaker than the mathematical problem?
-- What Mathlib lemmas are in the neighborhood?
-- Would proving this Lean statement be interesting even if weaker?
-
-### Phase 3: Submit and Wait
-
 ```bash
-aristotle prove-from-file problem.lean --no-wait
+# Find promising problems from database
+sqlite3 submissions/tracking.db "
+  SELECT number, prize, tags, tractability_score
+  FROM erdos_full
+  WHERE status='open' AND has_lean4=1
+  ORDER BY tractability_score DESC LIMIT 20;"
 ```
 
-**Expectations**:
-- Runtime: 6+ hours normal
-- Submit multiple problems in parallel
-- Don't babysit - check results next day
+### Phase 2: Check Literature
+
+```bash
+# Find relevant proven lemmas
+sqlite3 submissions/tracking.db "
+  SELECT name, statement, proof_technique
+  FROM literature_lemmas
+  WHERE proof_status='proven'
+  AND (name LIKE '%packing%' OR name LIKE '%cover%');"
+```
+
+### Phase 3: Submit and Track
+
+```bash
+# Validate first
+./scripts/validate_submission.sh submissions/file.lean
+
+# Track in database
+./scripts/track_submission.sh submissions/file.lean "problem_id" "boris_minimal"
+
+# Submit to Aristotle
+aristotle prove-from-file submissions/file.lean --no-wait
+# Returns UUID - update database with:
+sqlite3 submissions/tracking.db "UPDATE submissions SET uuid='<UUID>', status='running' WHERE filename='submissions/file.lean';"
+```
 
 ### Phase 4: Analyze Results
 
-**If SUCCESS**:
-- Verify the proven theorem matches submission
-- Check if it's the "real" problem or a weaker variant
-- Understand WHY it worked (for future selection)
-
-**If FAILURE**:
-- Did Aristotle make partial progress?
-- Was there a specific sticking point?
-- Is there a weaker variant worth trying?
-
----
-
-## Submission Strategy
-
-### Parallel Portfolio Approach
-
-| Category | Allocation | Rationale |
-|----------|------------|-----------|
-| **Formalization gap candidates** | 50% | Highest expected value |
-| **Olympiad-style problems** | 30% | Aristotle's strength |
-| **True moonshots** | 20% | Discovery potential |
-
-### Per-Problem Time Budget
-
-- **Selection**: 15-30 minutes research per problem
-- **Submission**: 5 minutes
-- **Runtime**: 6-24 hours (hands-off)
-- **Analysis**: 15 minutes per result
+```bash
+# Check submission status
+sqlite3 submissions/tracking.db "SELECT uuid, status, sorry_count, proven_count FROM submissions WHERE status='completed';"
+```
 
 ---
 
@@ -156,16 +217,17 @@ Three distinct patterns with different use cases:
 
 ### Scaffolded (For Gap-Filling)
 
+```bash
+# Find proven lemmas to scaffold with
+sqlite3 submissions/tracking.db "
+  SELECT name, statement
+  FROM literature_lemmas
+  WHERE paper_id='parker2024' AND proof_status='proven';"
+```
+
 - Include FULL PROVEN PROOFS as helper lemmas (not axioms)
 - No strategic comments
 - Feeds Aristotle verified building blocks to extend
-
-### Prescriptive (Strategy Testing)
-
-- Explicit proof strategy in structure
-- High discovery rate for FLAWED strategies
-- Often leads Aristotle to disprove your approach
-- **Counterexamples found this way are valuable** - they eliminate dead ends
 
 ### Submit BOTH Formal AND Informal
 
@@ -177,163 +239,105 @@ problem_v1.md    → Aristotle (natural language proof)
 
 **Why**: Informal sometimes proves what formal misses. Different search dynamics.
 
-### Comments Hurt Exploration
-
-From Grok analysis: strategic comments constrain search space.
-
-```lean
--- BAD: "-- Use induction on triangle count"
--- GOOD: (no comment at all, just the theorem statement)
-```
-
-Aristotle's 200B+ parameter system explores better without human hints.
-
 ---
 
-## Operational: Job Tracking
+## Operational: Database-Driven Job Tracking
 
 ### Rate Limit
 
 **5-7 concurrent Aristotle slots.** Project is bottlenecked here.
 
-Check before submitting more:
 ```bash
-aristotle list                    # Active jobs
-cat submissions/monitor_log.txt   # Full history
+# Check running submissions
+sqlite3 submissions/tracking.db "SELECT COUNT(*) FROM submissions WHERE status='running';"
+
+# List all running
+sqlite3 submissions/tracking.db "SELECT uuid, filename, submitted_at FROM submissions WHERE status='running';"
 ```
 
-### Submission Tracking
+### Submission Lifecycle
 
-Each submission gets a UUID:
-```bash
-aristotle prove-from-file problem.lean --no-wait
-# Returns: Job submitted with UUID: abc123...
-
-aristotle status abc123           # Check specific job
-```
-
-Track in `submissions/monitor_log.txt` with status (Running/Queued/Complete/Failed).
-
----
-
-## What We Learned (Dec 2024)
-
-### Wrong Assumptions We Had
-
-| Assumption | Reality |
-|------------|---------|
-| "Recombines tactics" | 200B+ param system with informal reasoning |
-| "Can't discover math" | Found counterexamples in Tao's textbook |
-| "Target SOLVED variants" | Boris succeeded on formalization gap |
-| "Iterate on near-wins" | Either solves or doesn't; iteration rarely helps |
-| "Asymptotics = impossible" | Depends on specific formalization |
-
-### What Actually Matters
-
-1. **Formalization quality** - Is the Lean statement tractable?
-2. **Mathlib coverage** - Do relevant lemmas exist?
-3. **Patience** - Let it run for hours
-4. **Volume** - Submit multiple problems in parallel
-
----
-
-## What We Learned (Dec 2025)
-
-### New Tactical Knowledge
-
-| Discovery | Implication |
-|-----------|-------------|
-| Comments hurt exploration | Submit minimal files, no strategic hints |
-| Informal proofs work | Submit .md alongside .lean |
-| Prescriptive → counterexamples | "Failures" often produce valuable negations |
-| Counterexamples = value | 3 flawed strategies eliminated via negation |
-| Parker proved ν≤3 | Pivot to ν=4 for genuinely open territory |
-| Context folders work | Feed proven lemmas back via `--context-folder` |
-| Multi-agent debate | Use Grok+Gemini+Codex to design submission portfolios |
-
-### Pattern Refinements
-
-- **Boris minimal** is the best default (35-47 lines, no comments)
-- **Scaffolded** works for gap-filling (100+ lines, include full proofs)
-- **Formal + Informal** dual submission increases success rate
-- **Rate limit awareness** - 5-7 concurrent slots, plan submissions accordingly
-- **Context folder iteration** - proven lemmas → context folder → next submission
-
-### Context Folder Pattern (NEW Dec 2025)
-
-```bash
-# Create context folder with proven lemmas
-mkdir -p submissions/parker_context
-cp aristotle_output_proven.lean submissions/parker_context/
-
-# Submit with context
-aristotle prove-from-file problem.md --informal \
-  --context-folder submissions/parker_context/ --no-wait
-
-# Or formal with context
-aristotle prove-from-file problem.lean \
-  --context-folder submissions/parker_context/ --no-wait
-```
-
-This is how we feed Aristotle's proven lemmas back for completion work.
-
-### Multi-Agent Debate Pattern (NEW Dec 2025)
-
-For strategic decisions, run parallel debates:
-
-1. **Grok-4**: Critical review, counterexample thinking
-2. **Gemini**: Architecture analysis, literature connections
-3. **Codex**: Implementation feasibility, code structure
-
-Synthesize into a 7-slot portfolio:
-| Slot | Pattern | Purpose |
-|------|---------|---------|
-| 1 | Boris Prime | Open exploration |
-| 2 | Architect | Zero-comment structures |
-| 3 | Surgeon | Attack known failure point |
-| 4 | Finite Check | dec_trivial for small n |
-| 5 | Conflict Graph | Structural analysis |
-| 6 | Pessimist | Counterexample hunt |
-| 7 | Slicer | Isolate obstructions |
-
-Mix: 67% formal, 33% informal.
-
-### Formalization Bug Lesson
-
-Erdős #128 taught us: if counterexample seems "too easy," check formalization against Formal Conjectures. Our threshold was off by +1.
-
----
-
-## Tools and Resources
-
-### Key Resources
-- [Formal Conjectures](https://github.com/google-deepmind/formal-conjectures) - Pre-formalized problems
-- [erdosproblems.com](https://erdosproblems.com) - Original problem statements
-- [Aristotle Paper](https://arxiv.org/abs/2510.01346) - System architecture
-
-### Local Database
-- `boris_scores.json` - All 261 Erdős problems scored
-- `solvable_open.json` - Open problems ranked by tractability
-- `submissions/` - Our submission files and results
-
-### Scoring Script
-```bash
-python3 scripts/extract_solvable_open.py
+```sql
+-- Draft → Validated → Submitted → Running → Completed/Failed
+UPDATE submissions SET status='validated' WHERE uuid='...';
+UPDATE submissions SET status='running', submitted_at=datetime('now') WHERE uuid='...';
+UPDATE submissions SET status='completed', completed_at=datetime('now'), sorry_count=0, proven_count=5 WHERE uuid='...';
 ```
 
 ---
 
-## Grok for Lean Code Review
-
-**Key**: Tell Grok to check CODE, not solve MATH (or it times out reasoning).
+## Current Frontiers (Database-Tracked)
 
 ```bash
-# System prompt: "Lean 4 syntax checker. DO NOT solve math. ONLY check if code compiles."
-# Settings: temperature=0, max_tokens=800, timeout=180s
+# Check frontier status
+sqlite3 submissions/tracking.db "
+  SELECT f.name, f.status, f.priority,
+         COUNT(fs.id) as submissions
+  FROM frontiers f
+  LEFT JOIN frontier_submissions fs ON f.id=fs.frontier_id
+  GROUP BY f.id
+  ORDER BY f.priority;"
 ```
 
-**Use for**: Syntax errors, missing instances, Mathlib API issues
-**Don't use for**: Theorem proving, deep math analysis (use Gemini)
+### Active Frontiers
+
+| Frontier | Status | Key Question |
+|----------|--------|--------------|
+| Split Graphs | SUBMITTED | Does Tuza hold for all split graphs? |
+| Counterexample Hunt | SUBMITTED | Does a counterexample to Tuza exist? |
+| Hypergraph r=4 | SUBMITTED | Can we prove τ ≤ 2.5ν for 4-uniform? |
+| Bound Improvement | NOT_SUBMITTED | Can we improve 2.87→2.5? |
+
+### Frontier Lemmas
+
+```bash
+# Get applicable lemmas for a frontier
+sqlite3 submissions/tracking.db "
+  SELECT lemma_name, lemma_status, applicability, how_to_use
+  FROM frontier_lemmas
+  WHERE frontier_id='split_graphs';"
+
+# Get lemmas we still need to prove
+sqlite3 submissions/tracking.db "
+  SELECT name, statement, why_needed
+  FROM frontier_needed_lemmas
+  WHERE frontier_id='split_graphs';"
+```
+
+---
+
+## Literature Knowledge (In Database)
+
+### Papers
+
+```bash
+sqlite3 submissions/tracking.db "SELECT id, title, year, main_result FROM papers ORDER BY year DESC;"
+```
+
+### Proven Lemmas
+
+```bash
+# All proven lemmas we can use as scaffolding
+sqlite3 submissions/tracking.db "
+  SELECT l.name, l.english, p.title as source
+  FROM literature_lemmas l
+  JOIN papers p ON l.paper_id = p.id
+  WHERE l.proof_status='proven';"
+```
+
+### Counterexample Constraints
+
+```bash
+# What any counterexample must satisfy
+sqlite3 submissions/tracking.db "SELECT constraint_text, source FROM counterexample_constraints;"
+```
+
+Current constraints from literature:
+- mad(G) ≥ 7 (Puleo 2015)
+- χ(G) ≥ 5 (Lakshmanan 2012)
+- NOT tripartite (Haxell-Kohayakawa 1998)
+- treewidth(G) ≥ 7 (Botler 2020)
+- NOT threshold graph (Threshold 2021)
 
 ---
 
@@ -341,63 +345,11 @@ python3 scripts/extract_solvable_open.py
 
 **Always validate formal submissions before sending to Aristotle.**
 
-The v3_surgeon submission failed because of a Lean syntax error we could have caught locally.
-
-### NEW: Comprehensive Verification Workflow (Dec 2025)
-
-**After discovering multiple formalization bugs (sInf, sym2, Erdős #128), we now have a rigorous verification system.**
-
-**Quick Start**:
 ```bash
-# Before EVERY submission:
+# Full validation workflow
 ./scripts/validate_submission.sh submissions/file.lean
 ./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
-
-# After results arrive:
-./scripts/verify_output.sh submissions/output/<UUID>.lean
-```
-
-**Full Documentation**:
-- **Reference card** (print this): `docs/VERIFICATION_REFERENCE_CARD.md`
-- **Quick start guide**: `docs/VERIFICATION_QUICKSTART.md`
-- **Complete workflow**: `docs/VERIFICATION_WORKFLOW.md`
-- **Visual diagrams**: `docs/VERIFICATION_VISUAL.md`
-
-**Database Tracking**: All submissions tracked in SQLite database at `submissions/tracking.db`.
-
-### Validation Command
-
-```bash
-# Validate a single file
-lake env lean submissions/file.lean
-
-# Expected output for valid file:
-# warning: declaration uses 'sorry'  ← This is OK, Aristotle fills these
-
-# Bad output (DO NOT SUBMIT):
-# error: unexpected token...
-# error: unknown identifier...
-```
-
-### First-Time Setup
-
-```bash
-cd /Users/patrickkavanagh/math
-lake update                  # Get Mathlib dependencies
-lake exe cache get          # Download pre-built Mathlib (~5 min)
-```
-
-### Enhanced Validation Script
-
-```bash
-# NEW: Comprehensive validation including definition audit
-./scripts/validate_submission.sh submissions/file.lean
-
-# Checks:
-# 1. Syntax and types (lake env lean)
-# 2. Definition bugs (sInf, sym2, Set/Finset)
-# 3. Missing instances
-# 4. Required imports
+aristotle prove-from-file submissions/file.lean --no-wait
 ```
 
 ### What Validation Catches
@@ -406,20 +358,11 @@ lake exe cache get          # Download pre-built Mathlib (~5 min)
 |------------|---------|---------|
 | Syntax errors | `{x | T // P}` mixed notation | ✓ |
 | Missing imports | `import Mathlib` typo | ✓ |
-| Type errors | Wrong function signature | ✓ |
-| Unknown identifiers | Typo in Mathlib name | ✓ |
-| **sInf unrestricted** | `sInf` without `E ⊆ G.edgeFinset` | ✓ **NEW** |
-| **sym2 self-loops** | `t.sym2` for triangle edges | ✓ **NEW** |
-| **Set/Finset issues** | `Set V` without `DecidablePred` | ✓ **NEW** |
-| `sorry` warnings | Expected - Aristotle fills | ✓ (OK) |
+| **sInf unrestricted** | `sInf` without `E ⊆ G.edgeFinset` | ✓ |
+| **sym2 self-loops** | `t.sym2` for triangle edges | ✓ |
+| **Set/Finset issues** | `Set V` without `DecidablePred` | ✓ |
 
-### Workflow
-
-1. Write submission file
-2. Run `./scripts/validate_submission.sh submissions/file.lean`
-3. Fix any errors (not `sorry` warnings)
-4. Run `./scripts/track_submission.sh` to record in database
-5. Only then: `aristotle prove-from-file submissions/file.lean --no-wait`
+Files using `sInf` without `E ⊆ G.edgeFinset` are **INVALID** - archived in `submissions/CORRUPTED/`.
 
 ---
 
@@ -428,14 +371,6 @@ lake exe cache get          # Download pre-built Mathlib (~5 min)
 **Set vs Finset**: `(G.induce S).edgeFinset` needs `DecidablePred (· ∈ S)` → use `Finset V` not `Set V`
 
 **Required instances**: `[Fintype V] [DecidableEq V] [DecidableRel G.Adj]`
-
-**Aristotle error?** Check: missing `DecidableRel`, Set/Finset mismatch, missing `Fintype`
-
-**Set-builder vs Subtype**: Don't mix `{x | P}` with `{x : T // P}` - use proper syntax:
-```lean
--- WRONG: {S.card | S : Finset V // P S}
--- RIGHT: {n : ℕ | ∃ S : Finset V, S.card = n ∧ P S}
-```
 
 ### CRITICAL: Finset.sym2 Includes Self-Loops!
 
@@ -456,155 +391,38 @@ def coveringNumber ... : ℕ :=
   G.edgeFinset.powerset.filter (...) |>.image Finset.card |>.min |>.getD 0
 ```
 
-Files using `sInf` without `E ⊆ G.edgeFinset` are **INVALID** - archived in `submissions/CORRUPTED/`.
+---
+
+## Formalization Verification Protocol
+
+**⚠️ Lesson from Erdős #128 (Dec 2025)**: We claimed C₅ was a counterexample. It wasn't - our formalization was WRONG.
+
+### Before claiming ANY counterexample:
+
+1. **Compare to Formal Conjectures** - If our formalization differs, WE are probably wrong
+2. **Check original problem statement** - Watch for floor/ceiling differences
+3. **Verify counterexample applies to BOTH** our formalization AND FC formalization
+4. **Test edge cases mathematically** - Different rounding conventions matter for small n
 
 ---
 
-## CRITICAL: Formalization Verification Protocol
+## Algorithm Discovery (Database-Tracked)
 
-**⚠️ Lesson from Erdős #128 (Dec 2025)**: We claimed C₅ was a counterexample to the $250 problem. It wasn't - our formalization was WRONG.
-
-### The Bug
-- **Original**: "≥ n/2 vertices" (conventionally means ⌊n/2⌋)
-- **Formal Conjectures**: `2 * |S| + 1 ≥ n` ✓
-- **Our submission**: `2 * |S| ≥ n` ✗ (missing +1)
-- **For n=5**: FC checks |S|≥2, ours only checks |S|≥3
-
-### Verification Checklist
-
-Before claiming ANY counterexample or negation:
-
-1. **Compare to Formal Conjectures**
-   - URL: https://github.com/google-deepmind/formal-conjectures
-   - 265 Erdős problems already formalized
-   - If our formalization differs, WE are probably wrong
-
-2. **Check original problem statement**
-   - Read erdosproblems.com or original paper
-   - Watch for floor/ceiling differences
-   - Watch for ≤ vs < differences
-   - Watch for strict vs non-strict inequalities
-
-3. **Verify counterexample applies to BOTH**
-   - Does it break our formalization? (Aristotle checked this)
-   - Does it break the FC formalization? (WE must check this)
-   - Does it break the original English statement? (WE must check this)
-
-4. **Test edge cases mathematically**
-   - For small n (especially odd n), calculate thresholds manually
-   - Different rounding conventions matter for small n
-
-### Red Flags
-
-| Sign | Action |
-|------|--------|
-| Counterexample only works for small n | Verify threshold conditions |
-| Our formalization differs from FC | Assume WE are wrong |
-| Floor vs ceiling ambiguity | Check original paper |
-| Counterexample is "too easy" | Probably formalization bug |
-
-See `docs/ERDOS128_ANALYSIS.md` for the full postmortem.
-
----
-
-## Success Metrics
-
-| Metric | Target | Notes |
-|--------|--------|-------|
-| Problems submitted per week | 10+ | Parallel portfolio |
-| Runtime per problem | 6-24 hours | Don't rush |
-| Success rate | Unknown | We're exploring |
-| Learning per failure | High | Analyze why |
-
-**The goal is discovery, not iteration.**
-
----
-
-## Entry Points
-
-**"Submit problems"** → Phase 1-3 (parallel batch)
-
-**"Check results"** → Phase 4 analysis
-
-**"Why did X fail?"** → Deep analysis of formalization vs. problem
-
----
-
-## Current Study: Tuza's Conjecture (τ ≤ 2ν)
-
-**The Conjecture**: For any graph G, τ(G) ≤ 2ν(G), where:
-- τ(G) = minimum edges to hit all triangles (covering number)
-- ν(G) = maximum edge-disjoint triangles (packing number)
-
-### Verified Results (Correct Definitions, No Sorry)
-
-| Result | File |
-|--------|------|
-| Parker Lemma 2.2 (S_e triangles share edges) | `aristotle_parker_proven.lean` |
-| Base case ν=0 → τ=0 | `aristotle_tuza_nu1_PROVEN.lean` |
-
-### Known Literature
-
-Parker (arXiv:2406.06501, May 2025) proved Tuza for **ν ≤ 3** using induction.
-
-### Current Work
-
-- `tuza_nu3_FIXED.lean` (UUID: 4736da84) - Correct definitions, running
-- Previous submissions with incorrect definitions archived in `submissions/CORRUPTED/`
-
-### Key Files
-
-- `submissions/aristotle_parker_proven.lean` - Verified lemmas
-- `submissions/aristotle_tuza_nu1_PROVEN.lean` - Base case
-- `submissions/tuza_nu3_FIXED.lean` - Current submission with correct definitions
-- `docs/CONTAMINATION_REPORT.md` - Details on formalization issues
-
----
-
-## Algorithm Discovery Strategy
-
-**Different from Erdős problems.** Algorithm discovery = finding that known math implies better algorithms.
-
-### Core Principle: Connection Discovery
-
-Aristotle doesn't invent - it finds that **Known Theorem T** from **Area A** implies **Better Algorithm**.
-
-This is what Boris did: formalization exposed connection to Brown's criterion.
-
-### Sweet Spot Targets (vs Ambitious Targets)
-
-| Property | BAD Target | GOOD Target |
-|----------|------------|-------------|
-| Fame | Heavily studied | Underserved |
-| Gap | Large (6+ units) | Tight (1-2 units) |
-| Instance | Large n | Small n (≤15) |
-| Competition | Many researchers | Few working on it |
-
-### Current Algorithm Targets (IMPROVEMENT-FOCUSED)
-
-| Problem | Prob | Goal | Gap |
-|---------|------|------|-----|
-| Matrix Mult ω | HIGH | Find ω < 2.371 | 0.37 to ω=2 |
-| Integer Mult | MED-HIGH | Remove log* factor → pure O(n log n) | log* factor |
-| APSP | MEDIUM | Truly subcubic O(n^{3-ε}) | polylog → constant ε |
-
-**Key**: Only target problems where IMPROVEMENT is believed possible. Never target "prove optimality".
-
-### Template Pattern
-
-```lean
--- ONLY ask for improvement, never disjunctive with optimality
-theorem problem_improvement :
-  ∃ better, property better ∧ metric better < current_best
+```bash
+# List algorithm candidates by tractability
+sqlite3 submissions/tracking.db "
+  SELECT id, name, tractability_score, gap, why_hard
+  FROM algorithm_candidates
+  ORDER BY tractability_score DESC;"
 ```
 
-**Key**: Ask ONLY for improvement. Never "improve OR prove optimal" - that wastes effort on status quo.
+### Current Targets
 
-### Iteration Protocol
-
-1. **First run**: Minimal spec, let Aristotle explore
-2. **If partial**: Extract proven lemmas → feed back as FULL PROOFS (see below)
-3. **Build on Aristotle's work**, don't prescribe proof strategy
+| Problem | Score | Goal | Gap |
+|---------|-------|------|-----|
+| Matrix Mult ω | 2 | Find ω < 2.371 | 0.37 to ω=2 |
+| Integer Mult | - | Remove log* factor | log* factor |
+| APSP | - | Truly subcubic | polylog → constant ε |
 
 ---
 
@@ -623,26 +441,63 @@ lemma my_lemma (n : ℕ) : n + 1 > n := by omega  -- Full proof included
 ```
 
 ### Pattern for Iteration:
-1. Run v1 → Aristotle proves some lemmas, fails on others
-2. Copy FULL PROVEN PROOFS from output file (not just statements)
-3. Include them in v2 as regular lemmas with `:= by <proof>`
+1. Run v1 → Aristotle proves some lemmas
+2. Query database for proven lemmas
+3. Copy FULL PROVEN PROOFS into v2
 4. Aristotle typechecks them instantly, builds on them
 
-**Example** (from Tuza success):
-```lean
--- v1 output had this PROVEN lemma
-lemma packing_one_implies_intersect ... := by
-  contrapose! h
-  refine' ne_of_gt (lt_of_lt_of_le _ ...)
-  -- [full proof from Aristotle]
-```
+---
 
-Include the entire proof. Aristotle won't re-prove, just typecheck and use.
+## Multi-Agent Debate Pattern
 
-### Key Files
+For strategic decisions, run parallel debates:
 
-- `ALGORITHM_CONNECTION_DISCOVERY.md` - Full framework
-- `submissions/` - Algorithm submissions
+1. **Grok-4**: Critical review, counterexample thinking
+2. **Gemini**: Architecture analysis, literature connections
+3. **Codex**: Implementation feasibility, code structure
+
+Synthesize into a 7-slot portfolio tracked in database.
+
+---
+
+## Quick Reference: Database Tables
+
+| Table | Purpose | Key Columns |
+|-------|---------|-------------|
+| `submissions` | Track all Aristotle jobs | uuid, filename, status, sorry_count |
+| `papers` | Literature metadata | id, title, year, main_result |
+| `literature_lemmas` | Extracted lemmas | name, statement, proof_status |
+| `frontiers` | Frontier problems | id, name, status, priority |
+| `erdos_full` | All 1111 Erdős problems | number, status, tractability_score |
+| `algorithm_candidates` | Algorithm targets | id, name, tractability_score |
+| `counterexample_constraints` | What counterexamples must satisfy | constraint_text |
+
+---
+
+## Entry Points
+
+**"Submit problems"** → Query `erdos_full` for tractable problems → validate → track → submit
+
+**"Check results"** → Query `submissions WHERE status='completed'`
+
+**"Find proven lemmas"** → Query `literature_lemmas WHERE proof_status='proven'`
+
+**"Check frontiers"** → Query `frontiers` and `frontier_submissions`
+
+**"Why did X fail?"** → Query `submissions` + `audit_log` for history
+
+---
+
+## Success Metrics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Problems submitted per week | 10+ | Parallel portfolio |
+| Runtime per problem | 6-24 hours | Don't rush |
+| Success rate | Unknown | We're exploring |
+| Learning per failure | High | Analyze why |
+
+**The goal is discovery, not iteration.**
 
 ---
 
