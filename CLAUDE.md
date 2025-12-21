@@ -74,7 +74,7 @@ submissions/tracking.db
 ├── Validation: definition_audits, definition_patterns
 ├── NEW: lemma_dependencies (11) - Dependency graph between lemmas
 ├── NEW: proof_techniques (10) - Standardized proof technique categories
-├── NEW: lemma_techniques - Many-to-many lemma↔technique mapping
+├── NEW: lemma_techniques (8) - Many-to-many lemma↔technique mapping
 ├── NEW: submission_scaffolding - Which lemmas were used in each submission
 ├── NEW: failed_approaches (2) - What we tried that didn't work
 └── NEW: axiom_confidence_history - Track confidence level changes
@@ -199,12 +199,16 @@ sqlite3 submissions/tracking.db "SELECT * FROM frontiers;"
 ### Phase 2: Check Prior Work
 
 ```bash
-# What lemmas already exist?
+# RECOMMENDED: Run comprehensive pre-submission check
+./scripts/pre_submit.sh submissions/file.lean
+
+# Or manually query lemmas:
 sqlite3 submissions/tracking.db "
   SELECT name, statement FROM literature_lemmas
   WHERE proof_status='proven' AND paper_id='parker2024';"
 ```
 
+The pre_submit.sh script checks: proven lemmas, past failures, axiom risks, and dependencies.
 Integrate relevant lemmas as scaffolding.
 
 ### Phase 3: Submit
@@ -226,11 +230,17 @@ aristotle prove-from-file submissions/file.lean --no-wait
 # Download output
 aristotle download <UUID>
 
-# Check outcome
+# RECOMMENDED: Run post-result analysis (updates DB, prompts for failure documentation)
+./scripts/post_result.sh <UUID> output.lean
+
+# Or manually check:
 grep -c "sorry" output.lean  # 0 = full proof
 
-# If partial progress: extract proven lemmas, add to database, scaffold next attempt
+# Record which scaffolding was used (for effectiveness tracking)
+./scripts/record_scaffolding.sh <submission_id> <lemma_id> full_proof
 ```
+
+If partial progress: extract proven lemmas, add to database, document failure insights.
 
 ---
 
