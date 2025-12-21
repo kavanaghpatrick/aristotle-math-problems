@@ -68,10 +68,16 @@ All project state lives in SQLite at `submissions/tracking.db`.
 ```
 submissions/tracking.db
 ├── Core: submissions, proven_theorems, audit_log
-├── Research: papers (15), literature_lemmas (62), counterexample_constraints (30)
+├── Research: papers (15), literature_lemmas (62), counterexample_constraints (10)
 ├── Problems: erdos_full (1111), erdos_problems (219), erdos_attempts
 ├── Frontiers: frontiers (4), frontier_submissions, frontier_lemmas
-└── Validation: definition_audits, definition_patterns
+├── Validation: definition_audits, definition_patterns
+├── NEW: lemma_dependencies (11) - Dependency graph between lemmas
+├── NEW: proof_techniques (10) - Standardized proof technique categories
+├── NEW: lemma_techniques - Many-to-many lemma↔technique mapping
+├── NEW: submission_scaffolding - Which lemmas were used in each submission
+├── NEW: failed_approaches (2) - What we tried that didn't work
+└── NEW: axiom_confidence_history - Track confidence level changes
 ```
 
 ### Essential Queries
@@ -106,6 +112,55 @@ sqlite3 submissions/tracking.db ".mode column" ".headers on" "YOUR QUERY"
 ```
 
 **Rule**: No JSON files for tracking. All state in the database.
+
+### New Workflow Scripts
+
+```bash
+# Pre-submission: Check prior work, get scaffolding recommendations, see past failures
+./scripts/pre_submit.sh submissions/file.lean
+
+# Post-result: Analyze output, document failures for learning
+./scripts/post_result.sh <uuid> <result_file>
+
+# Record which lemmas you scaffolded (for effectiveness tracking)
+./scripts/record_scaffolding.sh <submission_id> <lemma_id> <usage_type>
+
+# Generate scaffolding code from proven lemmas
+./scripts/get_scaffolding.sh [--full | --defs-only]
+```
+
+### New Query Patterns
+
+```bash
+# Get transitive dependencies for a lemma (what must be included)
+sqlite3 submissions/tracking.db "
+WITH RECURSIVE deps AS (
+    SELECT depends_on_id as id, 1 as depth
+    FROM lemma_dependencies WHERE lemma_id = 'parker2024_tau_S_le_2'
+    UNION ALL
+    SELECT ld.depends_on_id, d.depth + 1
+    FROM lemma_dependencies ld JOIN deps d ON ld.lemma_id = d.id
+    WHERE d.depth < 5
+)
+SELECT DISTINCT ll.name, ll.proof_status FROM deps d
+JOIN literature_lemmas ll ON d.id = ll.id;"
+
+# What proof techniques have worked?
+sqlite3 submissions/tracking.db "
+SELECT pt.name, COUNT(*) as uses FROM lemma_techniques lt
+JOIN proof_techniques pt ON lt.technique_id = pt.id
+GROUP BY pt.id ORDER BY uses DESC;"
+
+# Check past failures before re-attempting
+sqlite3 submissions/tracking.db "
+SELECT approach_name, why_failed, avoid_pattern
+FROM failed_approaches WHERE frontier_id = 'nu_4';"
+
+# Low-confidence axioms (use with caution)
+sqlite3 submissions/tracking.db "
+SELECT name, axiom_confidence FROM literature_lemmas
+WHERE axiom_confidence IN ('folklore', 'should_prove');"
+```
 
 ---
 
@@ -314,6 +369,11 @@ Prioritize genuinely open problems over re-formalization.
 |-------|---------|
 | `submissions` | All Aristotle jobs |
 | `literature_lemmas` | Proven lemmas for scaffolding |
+| `lemma_dependencies` | What lemmas depend on what (for transitive scaffolding) |
+| `proof_techniques` | Standardized proof method categories |
+| `lemma_techniques` | Which techniques each lemma uses |
+| `submission_scaffolding` | Which lemmas were used in each submission + effectiveness |
+| `failed_approaches` | What we tried that didn't work (avoid repeating) |
 | `frontiers` | Open problems we're attacking |
 | `erdos_full` | 1111 Erdős problems |
 | `counterexample_constraints` | What counterexamples must satisfy |
@@ -322,9 +382,12 @@ Prioritize genuinely open problems over re-formalization.
 
 | Task | Action |
 |------|--------|
-| Submit new problem | Verify open → validate → track → submit |
-| Check results | `SELECT * FROM submissions WHERE status='completed'` |
+| Submit new problem | `./scripts/pre_submit.sh` → validate → track → submit |
+| Process results | `./scripts/post_result.sh <uuid> <file>` |
+| Check past failures | `SELECT * FROM failed_approaches WHERE frontier_id='...'` |
+| Get dependencies | Use recursive CTE on `lemma_dependencies` |
 | Find scaffolding | `SELECT * FROM literature_lemmas WHERE proof_status='proven'` |
+| Track scaffolding | `./scripts/record_scaffolding.sh` after submission |
 | Audit progress | See query below |
 
 ### Audit: Discovery vs Formalization
