@@ -275,6 +275,8 @@ If partial progress: post_result.sh prompts you to document what failed and why.
 - Query `literature_lemmas` for available scaffolding
 - No strategic comments
 
+**CRITICAL RULE**: NEVER delete proven code and replace with `sorry` just to make local compilation faster. Aristotle has much more compute than local machines. If scaffolded files timeout locally due to heartbeats, that's OK - increase `maxHeartbeats` or accept the timeout. The proven proofs are valuable and must be preserved.
+
 ### Dual Submission
 
 For important problems, submit both:
