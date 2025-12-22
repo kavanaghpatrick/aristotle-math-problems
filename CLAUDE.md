@@ -253,6 +253,28 @@ aristotle download <UUID>
 If claimed proven: verify_output.sh will compile and re-audit definitions.
 If partial progress: post_result.sh prompts you to document what failed and why.
 
+### Phase 5: End-of-Session Verification (CRITICAL)
+
+**Before ending any work session, ALWAYS run:**
+
+```bash
+# Check for forgotten submissions
+sqlite3 submissions/tracking.db "SELECT filename FROM submissions WHERE status='pending' AND uuid IS NULL;"
+
+# This should return ZERO rows. If not, submit them!
+```
+
+**Lessons from Dec 22, 2024 incident:**
+- 6 files were created, tracked as "pending", but NEVER submitted to Aristotle
+- Root causes: context switching, high-level todos, no verification step
+- Files sat unsubmitted while we moved on to other work
+
+**Prevention rules:**
+1. **Track = Submit**: After `track_submission.sh`, IMMEDIATELY run `aristotle prove-from-file`
+2. **Individual todos**: Track EACH file submission, not "create portfolio"
+3. **End-of-session check**: Run the query above before stopping work
+4. **Naming consistency**: Use same filename in tracking DB and Aristotle
+
 ---
 
 ## Submission Patterns
