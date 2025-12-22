@@ -50,6 +50,8 @@ Thumbs.db
 *.tmp
 /tmp/
 *.bak
+*.backup.*
+tracking.db.backup.*
 .aristotle_submit.lock
 iterations/
 *-verify/
