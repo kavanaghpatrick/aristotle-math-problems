@@ -5,7 +5,7 @@ Using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) to
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-purple)](https://lean-lang.org/)
 
-**Last Updated**: December 20, 2025
+**Last Updated**: December 22, 2025
 
 ---
 
@@ -25,12 +25,30 @@ Using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) to
 - τ(G) = minimum edges to hit all triangles
 - ν(G) = maximum edge-disjoint triangles
 
+#### Key Breakthrough (December 22, 2025)
+
+**`tau_union_le_sum` PROVEN** - The critical union bound lemma:
+```lean
+theorem tau_union_le_sum (G : SimpleGraph V) [DecidableRel G.Adj]
+    (A B : Finset (Finset V)) :
+    triangleCoveringNumberOn G (A ∪ B) ≤
+    triangleCoveringNumberOn G A + triangleCoveringNumberOn G B
+```
+
+This enables the full inductive proof for Tuza ν ≤ 4.
+
 #### Proven Lemmas (No Sorry, Correct Definitions)
 
 | Lemma | Description | File |
 |-------|-------------|------|
-| **Parker Lemma 2.2** | S_e triangles pairwise share edges | `aristotle_parker_proven.lean` |
-| **Base Case ν=0** | ν=0 implies τ=0 | `aristotle_tuza_nu1_PROVEN.lean` |
+| **tau_union_le_sum** | τ(A ∪ B) ≤ τ(A) + τ(B) | `proven/tuza/lemmas/tau_union_le_sum.lean` |
+| **tau_v_decomposition** | V-decomposition corollary | `proven/tuza/lemmas/tau_union_le_sum.lean` |
+| **tuza_nu2** | ν=2 implies τ≤4 | `proven/tuza/nu2/tuza_nu2_PROVEN.lean` |
+| **Parker Lemma 2.2** | S_e triangles pairwise share edges | `proven/tuza/lemmas/parker_lemmas.lean` |
+| **Parker Lemma 2.3** | ν(G\T_e) = ν(G) - 1 | `proven/tuza/lemmas/parker_lemmas.lean` |
+| **inductive_bound** | τ(G) ≤ τ(T_e) + τ(G\T_e) | `proven/tuza/lemmas/parker_lemmas.lean` |
+| **tau_S_le_2** | τ(S_e) ≤ 2 | `proven/tuza/lemmas/parker_lemmas.lean` |
+| **Base Case ν=0** | ν=0 implies τ=0 | `proven/tuza/lemmas/parker_lemmas.lean` |
 
 #### Correct Definitions Required
 
@@ -47,13 +65,24 @@ def isTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
 ## Current Status
 
 ### What's Proven
-- Parker's structural lemmas for the inductive approach
-- Base case ν=0
+- **tau_union_le_sum** - The key union bound (December 22, 2025)
+- **tuza_nu2** - Full proof for ν=2 case
+- Parker's structural lemmas (2.2, 2.3, inductive_bound, tau_S_le_2)
+- Base cases ν=0, ν=1
 - Several Erdős problems
 
 ### What's In Progress
-- Correct formalization of τ(T_e) ≤ 2 for ν ≤ 3
-- Submission `tuza_nu3_FIXED.lean` (UUID: 4736da84) running with correct definitions
+- **tuza_nu4** - Using `tau_union_le_sum` for full inductive proof
+- Submission `slot17_tuza_nu4.lean` ready (awaiting slot availability)
+- 13 Aristotle jobs currently running
+
+### Proof Strategy for ν=4
+```
+τ(G) ≤ τ(T_e) + τ(G\T_e)     [inductive_bound]
+     ≤ 2 + τ(G\T_e)          [tau_Te_le_2]
+     where ν(G\T_e) = 3      [lemma_2_3]
+     ≤ 2 + 6 = 8             [tuza_nu3 recursively]
+```
 
 ### Known Issues
 - Earlier submissions used incorrect definitions that allowed non-graph edges
@@ -66,14 +95,22 @@ def isTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
 
 ```
 math/
+├── proven/
+│   └── tuza/
+│       ├── lemmas/
+│       │   ├── tau_union_le_sum.lean   # THE BREAKTHROUGH
+│       │   └── parker_lemmas.lean      # All Parker infrastructure
+│       ├── nu0/                        # Base case proofs
+│       ├── nu1/
+│       └── nu2/
+│           └── tuza_nu2_PROVEN.lean    # Full ν=2 proof
 ├── submissions/
-│   ├── aristotle_parker_proven.lean    # Parker Lemma 2.2 (verified)
-│   ├── aristotle_tuza_nu1_PROVEN.lean  # Base case (verified)
+│   ├── nu4_portfolio/
+│   │   ├── slot17_tuza_nu4.lean        # Main closing submission
+│   │   └── slot16_tau_union_v2.lean    # tau_union_le_sum (PROVEN)
 │   ├── erdos*_SUCCESS.lean             # Erdős successes
-│   ├── tuza_nu3_FIXED.lean             # Correct definitions (running)
 │   └── CORRUPTED/                      # Archived invalid files
-├── docs/
-│   └── CONTAMINATION_REPORT.md         # Details on formalization issues
+├── submissions/tracking.db             # SQLite database
 └── README.md
 ```
 
