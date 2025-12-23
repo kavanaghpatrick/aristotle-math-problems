@@ -297,7 +297,31 @@ sqlite3 submissions/tracking.db "SELECT filename FROM submissions WHERE status='
 - Query `literature_lemmas` for available scaffolding
 - No strategic comments
 
-**CRITICAL RULE**: NEVER delete proven code and replace with `sorry` just to make local compilation faster. Aristotle has much more compute than local machines. If scaffolded files timeout locally due to heartbeats, that's OK - increase `maxHeartbeats` or accept the timeout. The proven proofs are valuable and must be preserved.
+**CRITICAL RULES FOR SCAFFOLDING**:
+
+1. **NEVER replace proven code with `sorry`** - Even if it doesn't compile locally due to Mathlib version mismatch, Aristotle uses the SAME Mathlib version as the original proof. Include the exact Aristotle output.
+
+2. **Local compilation errors are OK** - If proven code times out or errors locally, that's a Mathlib version issue, NOT a code issue. Submit it anyway.
+
+3. **Copy exact Aristotle output** - When scaffolding with proven lemmas, copy the ENTIRE proof from the Aristotle output file (e.g., `proven/tuza/lemmas/tau_union_le_sum.lean`), not a sorry placeholder.
+
+4. **Don't waste Aristotle's time** - Making Aristotle reprove something it already proved is a waste of compute. Every sorry that could be a full proof is wasted work.
+
+**Example of WRONG approach**:
+```lean
+-- WRONG: Using sorry for proven lemma
+theorem tau_union_le_sum ... := by sorry  -- Aristotle wastes time reproving
+```
+
+**Example of CORRECT approach**:
+```lean
+-- CORRECT: Copy full proof from Aristotle output
+theorem tau_union_le_sum ... := by
+  let coversAB := ...
+  by_cases hAB : sizesAB.Nonempty
+  case pos => ...  -- Full 80+ line proof from slot16 output
+  case neg => ...
+```
 
 ### Dual Submission
 
@@ -354,11 +378,72 @@ For strategic decisions, use multiple AI models in parallel:
 3. Disagreements often reveal the interesting considerations
 4. Synthesize into a decision
 
-### Grok for Lean Review
+### Grok-4 API Usage
+
+**ALWAYS use `grok-4` model** (not grok-3-mini - permission issues).
 
 ```bash
-# System prompt: "Lean 4 syntax checker. Check if code compiles. DO NOT solve math."
-# temperature=0, max_tokens=800
+# Step 1: Create JSON request with Python (handles escaping)
+python3 << 'PYEOF'
+import json
+
+prompt = "Your question here..."
+system = "You are a mathematical proof strategist..."
+
+request = {
+    "messages": [
+        {"role": "system", "content": system},
+        {"role": "user", "content": prompt}
+    ],
+    "model": "grok-4",  # ALWAYS grok-4, never grok-3-mini
+    "temperature": 0.3,
+    "max_tokens": 2000
+}
+
+with open('/tmp/grok_request.json', 'w') as f:
+    json.dump(request, f)
+PYEOF
+
+# Step 2: Send request with curl
+curl -s -X POST https://api.x.ai/v1/chat/completions \
+  -H "Authorization: Bearer $GROK_API_KEY" \
+  -H "Content-Type: application/json" \
+  --max-time 300 \
+  -d @/tmp/grok_request.json > /tmp/grok_response.json
+
+# Step 3: Extract response
+python3 -c "import sys,json; r=json.load(open('/tmp/grok_response.json')); print(r['choices'][0]['message']['content'])"
+```
+
+**Use Grok-4 for**:
+- Lean syntax review
+- Finding code bugs
+- Strategic proof consultation (with full context)
+- Analyzing gaps in proof attempts
+
+**Timeout**: Set `--max-time 300` (5 min) for complex queries.
+
+### Gemini CLI
+
+```bash
+cat prompt.md | gemini -p "Your question" 2>&1
+# Or inline:
+gemini -p "Analyze this code: $(cat file.lean)"
+```
+
+---
+
+## Database Views for Scaffolding
+
+```bash
+# All proven lemmas with full proofs (for scaffolding):
+sqlite3 submissions/tracking.db 'SELECT name, proof_lines, source FROM v_available_scaffolding;'
+
+# Just Parker lemmas:
+sqlite3 submissions/tracking.db "SELECT name, proof_lines FROM v_available_scaffolding WHERE source='parker';"
+
+# Open gaps to fill:
+sqlite3 submissions/tracking.db 'SELECT * FROM v_open_gaps;'
 ```
 
 ---
