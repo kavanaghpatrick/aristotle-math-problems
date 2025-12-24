@@ -64,14 +64,6 @@ Sharing Graph Configurations:
 
 ## Verified Results
 
-### Erdős Problems (Fully Proven)
-
-| Problem | Result | File |
-|---------|--------|------|
-| **Erdős #153** | Sidon set sumset bounds | `erdos153_v4_SUCCESS.lean` |
-| **Erdős #190** | Divisibility result | `erdos190_SUCCESS.lean` |
-| **Erdős #593** | Partition result | `erdos593_SUCCESS.lean` |
-
 ### Tuza's Conjecture
 
 **Conjecture (Tuza, 1981)**: For any graph G, τ(G) ≤ 2ν(G)
@@ -80,11 +72,25 @@ Sharing Graph Configurations:
 
 | Case | Status | Notes |
 |------|--------|-------|
-| ν = 0 | ✅ Proven | Base case |
-| ν = 1 | ✅ Proven | K4 structure |
-| ν = 2 | ✅ Proven | Full proof |
-| ν = 3 | ✅ Proven | Parker's approach |
-| **ν = 4** | 🔄 In Progress | Active attack |
+| ν = 0 | ✅ Formalized | Base case |
+| ν = 1 | ✅ Formalized | K4 structure |
+| ν = 2 | ✅ Formalized | Full proof |
+| ν = 3 | ✅ Formalized | Parker (2024) approach |
+| **ν = 4** | 🔄 In Progress | **OPEN** - Active attack |
+
+*Note: Cases ν ≤ 3 are formalizations of Parker's 2024 proof, not new discoveries.*
+
+### Erdős Problems (Related Work)
+
+These files contain **formalized lemmas related to** Erdős problems, not solutions:
+
+| Problem | What We Formalized | Status of Original Problem |
+|---------|-------------------|---------------------------|
+| **#153** | Sidon set bounds (max ≥ n²/4) | Still OPEN |
+| **#190** | Lower bound technique for H(k) | Related lemmas only |
+| **#593** | Incidence graph bipartiteness | Still OPEN ($500 prize) |
+
+*Honest assessment: These are formalizations of known mathematics, not solutions to the open problems.*
 
 ---
 
@@ -179,7 +185,8 @@ aristotle download <UUID>
 | Completed | 38 |
 | Running | 12 |
 | Proven lemmas | 87 |
-| Erdős problems solved | 3 |
+| Tuza cases formalized | 4 (ν ≤ 3) |
+| **Genuinely open target** | ν = 4 |
 
 ---
 
