@@ -1,17 +1,70 @@
 # Solving Open Mathematical Problems with AI
 
-Using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) to solve open mathematical problems.
+Using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) to make progress on genuinely open mathematical problems.
 
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-purple)](https://lean-lang.org/)
 
-**Last Updated**: December 22, 2025
+**Last Updated**: December 23, 2024
+
+---
+
+## Mission
+
+**Goal**: Use AI-powered theorem proving to make genuine progress on open mathematical problems—not just re-formalize known results.
+
+**Primary Focus**: Tuza's Conjecture frontiers
+- **ν = 4 case** (genuinely OPEN - Parker's 2024 proof breaks here)
+- Split graphs general case
+- Counterexample search
+
+---
+
+## Current Status: ν = 4 Attack
+
+### Proven Infrastructure (87 lemmas in database)
+
+| Lemma | Description | Status |
+|-------|-------------|--------|
+| **tau_union_le_sum** | τ(A ∪ B) ≤ τ(A) + τ(B) | ✅ Proven |
+| **tau_S_le_2** | τ(S_e) ≤ 2 for any packing element | ✅ Proven |
+| **Se_pairwise_intersect** | All triangles in S_e share edges | ✅ Proven |
+| **Te_eq_Se_union_bridges** | T_e = S_e ∪ bridges partition | ✅ Proven |
+| **bridges_inter_card_eq_one** | Distinct bridges share exactly 1 vertex | ✅ Proven |
+| **bridges_contain_v** | Bridges between e,f contain shared vertex | ✅ Proven |
+
+### Running Submissions (12 active)
+
+| Slot | Target | UUID |
+|------|--------|------|
+| slot29_v2 | Triple-apex reduction | `39778d23-...` |
+| slot30_v2 | Vertex partition | `744eb623-...` |
+| slot31_v2 | Link graph VC (star) | `60a910e6-...` |
+| slot32_v2 | Path configuration (P4) | `5694d879-...` |
+| slot33_v2 | Cycle configuration (C4) | `a6038542-...` |
+
+### Attack Strategy
+
+The ν=4 case requires analyzing the **sharing graph** - which pairs of packing elements share vertices:
+
+```
+Sharing Graph Configurations:
+├── Connected (≥3 share a vertex)
+│   ├── Star (K4) → slot29, slot31
+│   ├── 3-star → slot29
+│   └── Triangle+1 → slot29
+├── Path (P4) → slot32 [NEW]
+├── Cycle (C4) → slot33 [NEW]
+└── Disconnected → slot30
+```
+
+**Key Insight**: The v2 submissions include FULL proven scaffolding (not sorry placeholders), so Aristotle focuses on the new target theorems.
 
 ---
 
 ## Verified Results
 
-### Erdős Problems (Fully Proven, No Sorry)
+### Erdős Problems (Fully Proven)
 
 | Problem | Result | File |
 |---------|--------|------|
@@ -19,75 +72,19 @@ Using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) to
 | **Erdős #190** | Divisibility result | `erdos190_SUCCESS.lean` |
 | **Erdős #593** | Partition result | `erdos593_SUCCESS.lean` |
 
-### Tuza's Conjecture Infrastructure
+### Tuza's Conjecture
 
 **Conjecture (Tuza, 1981)**: For any graph G, τ(G) ≤ 2ν(G)
 - τ(G) = minimum edges to hit all triangles
 - ν(G) = maximum edge-disjoint triangles
 
-#### Key Breakthrough (December 22, 2025)
-
-**`tau_union_le_sum` PROVEN** - The critical union bound lemma:
-```lean
-theorem tau_union_le_sum (G : SimpleGraph V) [DecidableRel G.Adj]
-    (A B : Finset (Finset V)) :
-    triangleCoveringNumberOn G (A ∪ B) ≤
-    triangleCoveringNumberOn G A + triangleCoveringNumberOn G B
-```
-
-This enables the full inductive proof for Tuza ν ≤ 4.
-
-#### Proven Lemmas (No Sorry, Correct Definitions)
-
-| Lemma | Description | File |
-|-------|-------------|------|
-| **tau_union_le_sum** | τ(A ∪ B) ≤ τ(A) + τ(B) | `proven/tuza/lemmas/tau_union_le_sum.lean` |
-| **tau_v_decomposition** | V-decomposition corollary | `proven/tuza/lemmas/tau_union_le_sum.lean` |
-| **tuza_nu2** | ν=2 implies τ≤4 | `proven/tuza/nu2/tuza_nu2_PROVEN.lean` |
-| **Parker Lemma 2.2** | S_e triangles pairwise share edges | `proven/tuza/lemmas/parker_lemmas.lean` |
-| **Parker Lemma 2.3** | ν(G\T_e) = ν(G) - 1 | `proven/tuza/lemmas/parker_lemmas.lean` |
-| **inductive_bound** | τ(G) ≤ τ(T_e) + τ(G\T_e) | `proven/tuza/lemmas/parker_lemmas.lean` |
-| **tau_S_le_2** | τ(S_e) ≤ 2 | `proven/tuza/lemmas/parker_lemmas.lean` |
-| **Base Case ν=0** | ν=0 implies τ=0 | `proven/tuza/lemmas/parker_lemmas.lean` |
-
-#### Correct Definitions Required
-
-Triangle covering must use **actual graph edges** (not arbitrary Sym2 elements):
-
-```lean
-def isTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
-  E ⊆ G.edgeFinset ∧  -- MUST be subset of graph edges
-  ∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E, e ∈ t.sym2
-```
-
----
-
-## Current Status
-
-### What's Proven
-- **tau_union_le_sum** - The key union bound (December 22, 2025)
-- **tuza_nu2** - Full proof for ν=2 case
-- Parker's structural lemmas (2.2, 2.3, inductive_bound, tau_S_le_2)
-- Base cases ν=0, ν=1
-- Several Erdős problems
-
-### What's In Progress
-- **tuza_nu4** - Using `tau_union_le_sum` for full inductive proof
-- Submission `slot17_tuza_nu4.lean` ready (awaiting slot availability)
-- 13 Aristotle jobs currently running
-
-### Proof Strategy for ν=4
-```
-τ(G) ≤ τ(T_e) + τ(G\T_e)     [inductive_bound]
-     ≤ 2 + τ(G\T_e)          [tau_Te_le_2]
-     where ν(G\T_e) = 3      [lemma_2_3]
-     ≤ 2 + 6 = 8             [tuza_nu3 recursively]
-```
-
-### Known Issues
-- Earlier submissions used incorrect definitions that allowed non-graph edges
-- These have been archived in `submissions/CORRUPTED/`
-- All new work uses `G.edgeFinset.powerset` restriction
+| Case | Status | Notes |
+|------|--------|-------|
+| ν = 0 | ✅ Proven | Base case |
+| ν = 1 | ✅ Proven | K4 structure |
+| ν = 2 | ✅ Proven | Full proof |
+| ν = 3 | ✅ Proven | Parker's approach |
+| **ν = 4** | 🔄 In Progress | Active attack |
 
 ---
 
@@ -95,42 +92,102 @@ def isTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
 
 ```
 math/
-├── proven/
+├── proven/                          # Verified Aristotle outputs
 │   └── tuza/
 │       ├── lemmas/
-│       │   ├── tau_union_le_sum.lean   # THE BREAKTHROUGH
-│       │   └── parker_lemmas.lean      # All Parker infrastructure
-│       ├── nu0/                        # Base case proofs
-│       ├── nu1/
-│       └── nu2/
-│           └── tuza_nu2_PROVEN.lean    # Full ν=2 proof
+│       │   ├── tau_union_le_sum.lean    # Key union bound
+│       │   ├── slot6_Se_lemmas.lean     # tau_S_le_2, Se structure
+│       │   └── parker_lemmas.lean       # Parker infrastructure
+│       ├── nu0/, nu1/, nu2/             # Base case proofs
+│
 ├── submissions/
-│   ├── nu4_portfolio/
-│   │   ├── slot17_tuza_nu4.lean        # Main closing submission
-│   │   └── slot16_tau_union_v2.lean    # tau_union_le_sum (PROVEN)
-│   ├── erdos*_SUCCESS.lean             # Erdős successes
-│   └── CORRUPTED/                      # Archived invalid files
-├── submissions/tracking.db             # SQLite database
-└── README.md
+│   ├── nu4_portfolio/               # Active ν=4 attack files
+│   │   ├── slot*_v2.lean            # Full scaffolding versions
+│   │   └── slot*.lean               # Original submissions
+│   ├── erdos*_SUCCESS.lean          # Erdős successes
+│   ├── CORRUPTED/                   # Archived invalid files
+│   └── tracking.db                  # SQLite tracking database
+│
+├── scripts/                         # Validation & tracking scripts
+│   ├── validate_submission.sh
+│   ├── pre_submit.sh
+│   └── verify_output.sh
+│
+├── docs/                            # Documentation
+├── tests/                           # Test files
+└── CLAUDE.md                        # AI workflow instructions
 ```
 
 ---
 
-## Quick Start
+## Database Schema
+
+All project state tracked in `submissions/tracking.db`:
+
+```sql
+-- Key tables
+submissions          -- All Aristotle jobs (86 total)
+literature_lemmas    -- 87 proven lemmas for scaffolding
+lemma_dependencies   -- Dependency graph
+frontiers           -- Open problems being attacked
+failed_approaches   -- What didn't work (avoid repeating)
+```
+
+### Quick Queries
 
 ```bash
-# Validate before submitting
-lake env lean submissions/file.lean
+# Running submissions
+sqlite3 submissions/tracking.db "SELECT filename FROM submissions WHERE status='running';"
 
-# Submit to Aristotle
-aristotle prove-from-file submissions/file.lean --no-wait
+# Proven lemmas for scaffolding
+sqlite3 submissions/tracking.db "SELECT name FROM literature_lemmas WHERE proof_status='proven';"
+
+# Submission stats
+sqlite3 submissions/tracking.db "SELECT status, COUNT(*) FROM submissions GROUP BY status;"
 ```
+
+---
+
+## Workflow
+
+### Pre-Submission
+```bash
+./scripts/pre_submit.sh submissions/file.lean    # Check prior work
+./scripts/validate_submission.sh submissions/file.lean  # Syntax check
+```
+
+### Submit to Aristotle
+```bash
+aristotle prove-from-file submissions/file.lean --no-wait
+./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
+```
+
+### Post-Result
+```bash
+aristotle download <UUID>
+./scripts/verify_output.sh output.lean           # Validate claims
+./scripts/post_result.sh <UUID> output.lean      # Update database
+```
+
+---
+
+## Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total submissions | 86 |
+| Completed | 38 |
+| Running | 12 |
+| Proven lemmas | 87 |
+| Erdős problems solved | 3 |
 
 ---
 
 ## Resources
 
 - **Aristotle**: https://aristotle.harmonic.fun
+- **Tuza's Conjecture**: Tuza (1981), "A conjecture on triangles of graphs"
+- **Parker's Proof**: Parker (2024), proves ν ≤ 3 case
 - **Erdős Problems**: https://erdosproblems.com
 - **Lean 4**: https://lean-lang.org
 

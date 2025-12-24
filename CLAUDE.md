@@ -16,6 +16,30 @@
 
 ---
 
+## CRITICAL RULE: NEVER REPLACE PROOFS WITH SORRY
+
+**ABSOLUTE PROHIBITION**: When editing Lean files, NEVER replace existing proof code with `sorry`.
+
+This applies to:
+- Proven lemmas from Aristotle outputs
+- Partial proofs with some working lines
+- ANY code that compiles or has proof structure
+
+**Why this matters**:
+- Replacing proofs with `sorry` wastes Aristotle compute (it reproves what's already proven)
+- It destroys work and loses the "tip of the spear" advantage
+- If there are validation/compilation errors, FIX THEM - don't delete the proof
+
+**Before any submission, verify**:
+```bash
+grep -n "sorry" submissions/file.lean
+```
+The ONLY `sorry` statements should be for the NEW TARGET lemmas we want Aristotle to prove.
+
+**If you see yourself about to simplify by removing proof code → STOP. That is WRONG.**
+
+---
+
 ## Progress Verification (BEFORE ANY WORK)
 
 The goal is **discovery**, not re-proving known results.
