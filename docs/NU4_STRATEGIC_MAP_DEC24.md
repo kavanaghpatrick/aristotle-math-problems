@@ -36,8 +36,16 @@
 │  τ(X_ef) ≤ 2     │ Slot 24  │ Bridges between pair │
 │  τ_union_le_sum  │ Slot 16  │ τ(A∪B) ≤ τ(A)+τ(B)   │
 │  Te = Se ∪ bridges│ Slot 6  │ Partition theorem    │
+├─────────────────────────────────────────────────────┤
+│  NEW: CASE-SPECIFIC THEOREMS (Slot 29)             │
+├─────────────────────────────────────────────────────┤
+│  τ_le_8_star     │ Slot 29  │ All 4 share apex v   │
+│  τ_le_8_three_share│Slot 29 │ 3 share apex v       │
+│  τ_avoiding_v_le_k│ Slot 29 │ Base triangles bound │
 └─────────────────────────────────────────────────────┘
 ```
+
+**NOTE:** Slot 29 proves K₄ sharing graph with COMMON APEX. This is a strict subset of the K₄ case.
 
 **Critical insight from Gemini:** τ(T_e) ≤ 3 is TRIVIAL (use 3 edges of e). Any bound > 3 per element or > 6 per pair is worthless.
 
@@ -221,14 +229,15 @@ aristotle download 1bb416d7-8490-44fa-88a4-3df9362128c6  # slot37
 ### From Sharing Graph Classification
 **Complete enumeration of 6 types for ν=4:**
 
-| Type | Structure | Leaves | Best Strategy |
-|------|-----------|--------|---------------|
-| K̄₄ | Empty (all disjoint) | N/A | Trivial (τ≤8) |
-| P₄ | Path | 2 | **Leaf removal (Slot 36)** |
-| K₁,₃ | Star | 3 | **Leaf removal (Slot 36)** |
-| C₄ | Cycle | 0 | All-bridges (hard) |
-| K₄-e | Almost complete | 0 | Pair decomposition |
-| K₄ | Complete | 0 | V-decomposition (hardest) |
+| Type | Structure | Leaves | Best Strategy | Status |
+|------|-----------|--------|---------------|--------|
+| K̄₄ | Empty (all disjoint) | N/A | Trivial (τ≤8) | ✓ TRIVIAL |
+| P₄ | Path | 2 | Leaf removal (Slot 36) | Pending |
+| K₁,₃ | Star | 3 | Leaf removal (Slot 36) | Pending |
+| C₄ | Cycle | 0 | Slot 41 (C₄ attack) | **RUNNING** |
+| K₄-e | Almost complete | 0 | Pair decomposition | Pending |
+| K₄ | Complete | 0 | V-decomposition | **Partial** |
+| K₄ (apex) | Complete + common v | 0 | Slot 29 | ✓ **PROVEN** |
 
 **KEY INSIGHT**: Path and Star have LEAVES → Slot 36 strategy applies!
 - If τ(T_leaf) ≤ 2 proven, covers 3 of 6 sharing graph types
