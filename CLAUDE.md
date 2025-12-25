@@ -1,384 +1,102 @@
 # CLAUDE.md - Math Project
 
 ## Mission
-
-**Goal**: Use Aristotle to make genuine progress on open mathematical problems.
-
-**Primary Focus**: Tuza's Conjecture frontiers
-- ν = 4 case (genuinely OPEN - Parker's proof fails here)
-- Split graphs general case (OPEN - only threshold subset proven)
-- Counterexample search (OPEN - none known)
-- Hypergraph r=4 Aharoni-Zerbib (OPEN)
-
-**Secondary**: Erdős problems (opportunistic portfolio when slots available)
-
-**Key Principle**: Discovery, not re-formalization. If someone already proved it, we build on their work—we don't re-prove it.
+Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 
 ---
 
-## CRITICAL RULE: NEVER REPLACE PROOFS WITH SORRY
+## Hard Rules
 
-**ABSOLUTE PROHIBITION**: When editing Lean files, NEVER replace existing proof code with `sorry`.
-
-This applies to:
-- Proven lemmas from Aristotle outputs
-- Partial proofs with some working lines
-- ANY code that compiles or has proof structure
-
-**Why this matters**:
-- Replacing proofs with `sorry` wastes Aristotle compute (it reproves what's already proven)
-- It destroys work and loses the "tip of the spear" advantage
-- If there are validation/compilation errors, FIX THEM - don't delete the proof
-
-**Before any submission, verify**:
-```bash
-grep -n "sorry" submissions/file.lean
-```
-The ONLY `sorry` statements should be for the NEW TARGET lemmas we want Aristotle to prove.
-
-**If you see yourself about to simplify by removing proof code → STOP. That is WRONG.**
+1. **Never run `aristotle` directly** → always `./scripts/submit.sh`
+2. **Never submit without problem_id** → track everything
+3. **Near-misses (1-2 sorry) get worked FIRST** → before new submissions
+4. **Check `failed_approaches` before submitting** → don't repeat mistakes
+5. **Include proven scaffolding** → full proofs, never sorry placeholders
+6. **Process every result** → `./scripts/process_result.sh` extracts learnings
+7. **NEVER replace existing proof code with sorry** → if it compiled before, fix it, don't delete it
 
 ---
 
-## Progress Verification (BEFORE ANY WORK)
-
-The goal is **discovery**, not re-proving known results.
-
-### Pre-Submission Checklist
-
-Before spending an Aristotle slot, answer these:
-
-**1. Is this actually open?**
-- Check the source (erdosproblems.com, original paper, arXiv)
-- If solved → STOP or pivot to genuine extension
-- Example: ν ≤ 3 is SOLVED (Parker 2024). Don't reprove it.
-
-**2. Has someone made progress?**
-- Search for partial results in literature
-- If yes → import their lemmas into our database
-- Build ON their work, don't ignore it
-
-**3. What specifically is the contribution?**
-- State it: "If this succeeds, the new knowledge is ___"
-- If you can't articulate it, reconsider the submission
-
-**4. Is prior work integrated?**
-- Check `literature_lemmas` table for relevant proven results
-- Include proven lemmas as scaffolding, not starting from scratch
-
-### Contribution Levels (Be Honest)
-
-| Level | What It Means | Worth a Slot? |
-|-------|---------------|---------------|
-| **Discovery** | Prove genuinely open conjecture | ✓ Absolutely |
-| **Extension** | New case beyond known results | ✓ Yes |
-| **New Technique** | Novel proof of known theorem | ✓ Maybe |
-| **Formalization+** | Formalize + find/fix gap | ~ Low priority |
-| **Pure Formalization** | Just translate existing proof | ✗ Not primary goal |
-| **Duplication** | Redo existing Lean proof | ✗ Never |
-
-### Honest Self-Assessment
-
-Most of our ν ≤ 3 work was **formalization** of Parker's 2024 result, not discovery. That work built valuable scaffolding, but the real targets are the genuinely open problems listed in the Mission.
-
----
-
-## Database Architecture
-
-All project state lives in SQLite at `submissions/tracking.db`.
-
-### Schema Overview
-
-```
-submissions/tracking.db
-├── Core: submissions, proven_theorems, audit_log
-├── Research: papers (15), literature_lemmas (62), counterexample_constraints (10)
-├── Problems: erdos_full (1111), erdos_problems (219), erdos_attempts
-├── Frontiers: frontiers (4), frontier_submissions, frontier_lemmas
-├── Validation: definition_audits, definition_patterns
-├── NEW: lemma_dependencies (11) - Dependency graph between lemmas
-├── NEW: proof_techniques (10) - Standardized proof technique categories
-├── NEW: lemma_techniques (8) - Many-to-many lemma↔technique mapping
-├── NEW: submission_scaffolding - Which lemmas were used in each submission
-├── NEW: failed_approaches (2) - What we tried that didn't work
-└── NEW: axiom_confidence_history - Track confidence level changes
-```
-
-### Essential Queries
+## Commands
 
 ```bash
-# What's currently running?
-sqlite3 submissions/tracking.db "SELECT uuid, filename FROM submissions WHERE status='running';"
+# Submit (validates, tracks, submits atomically)
+./scripts/submit.sh file.lean problem_id [pattern]
 
-# Proven lemmas available for scaffolding
-sqlite3 submissions/tracking.db "SELECT name, english FROM literature_lemmas WHERE proof_status='proven';"
+# Process completed result
+./scripts/process_result.sh <UUID>
 
-# Open Erdős problems we haven't tried
-sqlite3 submissions/tracking.db "
-  SELECT ef.number, ef.prize, ef.tractability_score
-  FROM erdos_full ef
-  LEFT JOIN erdos_attempts ea ON ef.number = ea.problem_num
-  WHERE ef.status='open' AND ea.id IS NULL
-  ORDER BY ef.tractability_score DESC LIMIT 10;"
+# What should I do next?
+./scripts/next_task.sh
 
-# Frontier status
-sqlite3 submissions/tracking.db "SELECT name, status, priority FROM frontiers ORDER BY priority;"
-```
+# Dashboard
+./scripts/dashboard.sh
 
-### Database Operations
-
-```bash
-# Track new submission
-./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
-
-# Direct queries
-sqlite3 submissions/tracking.db ".mode column" ".headers on" "YOUR QUERY"
-```
-
-**Rule**: No JSON files for tracking. All state in the database.
-
-### Scripts Reference
-
-**Pre-Submission (run before `aristotle prove-from-file`):**
-
-| Script | Purpose | When to Use |
-|--------|---------|-------------|
-| `./scripts/pre_submit.sh <file>` | Check prior work, scaffolding recommendations, past failures | Always - comprehensive check |
-| `./scripts/validate_submission.sh <file>` | Syntax check, definition audit, instance check | Always - catches Lean errors |
-| `./scripts/audit_definitions.sh <file>` | Deep check for sInf bugs, Finset.sym2 issues | Called by validate_submission.sh |
-| `./scripts/get_scaffolding.sh [--full]` | Generate scaffolding code from proven lemmas | When building scaffolded submission |
-
-**Post-Result (run after `aristotle download <uuid>`):**
-
-| Script | Purpose | When to Use |
-|--------|---------|-------------|
-| `./scripts/verify_output.sh <file>` | Sorry count, axiom check, compilation test, extract theorems | Always - validates claimed proofs |
-| `./scripts/post_result.sh <uuid> <file>` | Update DB, document failures, prompt for insights | Always - captures learnings |
-| `./scripts/record_scaffolding.sh <id> <lemma> <type>` | Track which scaffolding was used | After submission for effectiveness tracking |
-
-**Maintenance:**
-
-| Script | Purpose | When to Use |
-|--------|---------|-------------|
-| `./scripts/find_contaminated.sh <def> <pattern>` | Find files with buggy definition patterns | When hunting down systematic bugs |
-| `./scripts/track_submission.sh <file> <id> <pattern>` | Record submission in database | Part of submission workflow |
-
-### New Query Patterns
-
-```bash
-# Get transitive dependencies for a lemma (what must be included)
-sqlite3 submissions/tracking.db "
-WITH RECURSIVE deps AS (
-    SELECT depends_on_id as id, 1 as depth
-    FROM lemma_dependencies WHERE lemma_id = 'parker2024_tau_S_le_2'
-    UNION ALL
-    SELECT ld.depends_on_id, d.depth + 1
-    FROM lemma_dependencies ld JOIN deps d ON ld.lemma_id = d.id
-    WHERE d.depth < 5
-)
-SELECT DISTINCT ll.name, ll.proof_status FROM deps d
-JOIN literature_lemmas ll ON d.id = ll.id;"
-
-# What proof techniques have worked?
-sqlite3 submissions/tracking.db "
-SELECT pt.name, COUNT(*) as uses FROM lemma_techniques lt
-JOIN proof_techniques pt ON lt.technique_id = pt.id
-GROUP BY pt.id ORDER BY uses DESC;"
-
-# Check past failures before re-attempting
-sqlite3 submissions/tracking.db "
-SELECT approach_name, why_failed, avoid_pattern
-FROM failed_approaches WHERE frontier_id = 'nu_4';"
-
-# Low-confidence axioms (use with caution)
-sqlite3 submissions/tracking.db "
-SELECT name, axiom_confidence FROM literature_lemmas
-WHERE axiom_confidence IN ('folklore', 'should_prove');"
+# Before ending session (MANDATORY after Dec 22 incident)
+./scripts/session_check.sh
 ```
 
 ---
 
-## What Aristotle Is
+## Decision Priority
 
-Aristotle (by Harmonic) is a **200B+ parameter system** combining:
-- Monte Carlo Graph Search over Lean proof states
-- Informal reasoning (generates natural language proofs first)
-- Iterative error feedback from Lean verification
-- Massive parallel search (hundreds of millions of strategies)
+1. **Complete near-misses** (1-2 sorry with proven_count > 0)
+2. **Open cases** (nu4_cases WHERE status='open')
+3. **New exploration** (only if 1-2 are empty)
 
-**Key facts**:
-- Runtime: 6+ hours is normal
-- It CAN discover unexpected connections (found 4 counterexamples in Tao's textbook)
-- Boris Alexeev's success on Erdős #124 came from a formalization gap exposing a connection to Brown's criterion
+```sql
+-- Near-misses
+SELECT filename, sorry_count FROM submissions
+WHERE status='completed' AND sorry_count BETWEEN 1 AND 2;
+
+-- Open cases
+SELECT case_name FROM nu4_cases WHERE status='open';
+
+-- Failed approaches to AVOID
+SELECT approach_name, avoid_pattern FROM failed_approaches WHERE frontier_id='nu_4';
+```
 
 ---
 
-## Submission Workflow
+## ν=4 Cases
 
-### Phase 1: Problem Selection
-
-Check it's genuinely open (see Progress Verification above), then:
-
-```bash
-# For Erdős: find tractable open problems
-sqlite3 submissions/tracking.db "
-  SELECT number, prize, tractability_score FROM erdos_full
-  WHERE status='open' AND has_lean4=1
-  ORDER BY tractability_score DESC LIMIT 10;"
-
-# For Tuza: check frontier status
-sqlite3 submissions/tracking.db "SELECT * FROM frontiers;"
-```
-
-### Phase 2: Check Prior Work
-
-```bash
-# RECOMMENDED: Run comprehensive pre-submission check
-./scripts/pre_submit.sh submissions/file.lean
-
-# Or manually query lemmas:
-sqlite3 submissions/tracking.db "
-  SELECT name, statement FROM literature_lemmas
-  WHERE proof_status='proven' AND paper_id='parker2024';"
-```
-
-The pre_submit.sh script checks: proven lemmas, past failures, axiom risks, and dependencies.
-Integrate relevant lemmas as scaffolding.
-
-### Phase 3: Submit
-
-```bash
-# Validate
-./scripts/validate_submission.sh submissions/file.lean
-
-# Track
-./scripts/track_submission.sh submissions/file.lean "problem_id" "pattern"
-
-# Submit
-aristotle prove-from-file submissions/file.lean --no-wait
-```
-
-### Phase 4: Process Results
-
-```bash
-# Download output
-aristotle download <UUID>
-
-# 1. Verify the output (sorry count, axiom check, compilation, definition audit)
-./scripts/verify_output.sh output.lean
-
-# 2. Update database and document learnings
-./scripts/post_result.sh <UUID> output.lean
-
-# 3. Record scaffolding effectiveness (if scaffolding was used)
-./scripts/record_scaffolding.sh <submission_id> <lemma_id> full_proof
-```
-
-If claimed proven: verify_output.sh will compile and re-audit definitions.
-If partial progress: post_result.sh prompts you to document what failed and why.
-
-### Phase 5: End-of-Session Verification (CRITICAL)
-
-**Before ending any work session, ALWAYS run:**
-
-```bash
-# Check for forgotten submissions
-sqlite3 submissions/tracking.db "SELECT filename FROM submissions WHERE status='pending' AND uuid IS NULL;"
-
-# This should return ZERO rows. If not, submit them!
-```
-
-**Lessons from Dec 22, 2024 incident:**
-- 6 files were created, tracked as "pending", but NEVER submitted to Aristotle
-- Root causes: context switching, high-level todos, no verification step
-- Files sat unsubmitted while we moved on to other work
-
-**Prevention rules:**
-1. **Track = Submit**: After `track_submission.sh`, IMMEDIATELY run `aristotle prove-from-file`
-2. **Individual todos**: Track EACH file submission, not "create portfolio"
-3. **End-of-session check**: Run the query above before stopping work
-4. **Naming consistency**: Use same filename in tracking DB and Aristotle
+| Case | Status | Notes |
+|------|--------|-------|
+| star_all_4 | PROVEN | slot29 |
+| three_share_v | PROVEN | slot29 |
+| two_two_vw | OPEN | |
+| path_4 | PARTIAL | 2 sorry |
+| cycle_4 | PARTIAL | 2 sorry |
+| matching_2 | OPEN | |
+| scattered | OPEN | hardest |
 
 ---
 
-## Submission Patterns
+## Scaffolding
 
-| Pattern | Lines | When to Use | Outcome |
-|---------|-------|-------------|---------|
-| **Boris Minimal** | 35-47 | First attempt | Highest success rate |
-| **Scaffolded** | 100+ | After identifying gaps | Builds on proven lemmas |
-| **Prescriptive** | 150+ | Testing specific strategy | Often finds counterexamples |
+Key proven lemmas: `tau_S_le_2`, `tau_union_le_sum`, `tau_X_le_2`, `lemma_2_2`, `lemma_2_3`
 
-### Boris Minimal (Default)
-
-- Just definitions + theorem statement
-- **No comments** — comments constrain Aristotle's search
-- Let it explore freely
-
-### Scaffolded
-
-- Include FULL PROVEN PROOFS as helper lemmas (not axioms)
-- Query `literature_lemmas` for available scaffolding
-- No strategic comments
-
-**CRITICAL RULES FOR SCAFFOLDING**:
-
-1. **NEVER replace proven code with `sorry`** - Even if it doesn't compile locally due to Mathlib version mismatch, Aristotle uses the SAME Mathlib version as the original proof. Include the exact Aristotle output.
-
-2. **Local compilation errors are OK** - If proven code times out or errors locally, that's a Mathlib version issue, NOT a code issue. Submit it anyway.
-
-3. **Copy exact Aristotle output** - When scaffolding with proven lemmas, copy the ENTIRE proof from the Aristotle output file (e.g., `proven/tuza/lemmas/tau_union_le_sum.lean`), not a sorry placeholder.
-
-4. **Don't waste Aristotle's time** - Making Aristotle reprove something it already proved is a waste of compute. Every sorry that could be a full proof is wasted work.
-
-**Example of WRONG approach**:
-```lean
--- WRONG: Using sorry for proven lemma
-theorem tau_union_le_sum ... := by sorry  -- Aristotle wastes time reproving
+```sql
+SELECT name, statement FROM literature_lemmas WHERE proof_status='proven';
 ```
 
-**Example of CORRECT approach**:
-```lean
--- CORRECT: Copy full proof from Aristotle output
-theorem tau_union_le_sum ... := by
-  let coversAB := ...
-  by_cases hAB : sizesAB.Nonempty
-  case pos => ...  -- Full 80+ line proof from slot16 output
-  case neg => ...
-```
-
-### Dual Submission
-
-For important problems, submit both:
-```
-problem.lean  → formal
-problem.md    → informal (natural language proof)
-```
-
-Informal sometimes succeeds where formal fails.
+**Critical rules:**
+- Include FULL PROOF CODE from Aristotle outputs, not sorry
+- Local compilation errors are OK (Mathlib version mismatch) - submit anyway
+- Copy exact Aristotle output, don't modify
+- Wasting Aristotle time reproving known lemmas = bad
 
 ---
 
-## Pre-Submission Validation
+## Lean Pitfalls
 
-**Always validate before submitting.**
-
-```bash
-./scripts/validate_submission.sh submissions/file.lean
-```
-
-### Critical Pitfalls
-
-| Issue | Problem | Fix |
-|-------|---------|-----|
+| Bug | Problem | Fix |
+|-----|---------|-----|
 | `sInf` unrestricted | Allows invalid edge sets | Require `E ⊆ G.edgeFinset` |
 | `Finset.sym2` | Includes self-loops s(v,v) | Filter to actual edges |
 | `Set` vs `Finset` | Missing decidability | Use `Finset V` with `DecidableEq` |
 
-Files with these bugs → `submissions/CORRUPTED/`
-
-### Required Instances
-
+**Required instances:**
 ```lean
 variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]
 ```
@@ -387,185 +105,95 @@ variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]
 
 ## Multi-Agent Strategy
 
-For strategic decisions, use multiple AI models in parallel:
+| Agent | Use For | Avoid |
+|-------|---------|-------|
+| **Grok-4** | Lean syntax, code bugs, proof gaps | Math reasoning (times out) |
+| **Gemini** | Literature, proof strategy, architecture | Detailed code |
+| **Claude** | Long context, planning, synthesis | - |
+| **Aristotle** | Actual proving (6+ hrs) | Quick checks |
 
-| Agent | Best For | Avoid |
-|-------|----------|-------|
-| **Grok-4** | Lean syntax review, finding code bugs | Math reasoning (times out) |
-| **Gemini** | Literature connections, proof strategy, architecture | Detailed code review |
-| **Claude** | Long context synthesis, planning, writing | - |
-
-### Pattern
-
-1. Ask all three the same strategic question in parallel
-2. Look for consensus and disagreements
-3. Disagreements often reveal the interesting considerations
-4. Synthesize into a decision
-
-### Grok-4 API Usage
-
-**ALWAYS use `grok-4` model** (not grok-3-mini - permission issues).
-
+### Grok-4 API
 ```bash
-# Step 1: Create JSON request with Python (handles escaping)
 python3 << 'PYEOF'
 import json
-
-prompt = "Your question here..."
-system = "You are a mathematical proof strategist..."
-
+prompt = "Your question..."
 request = {
-    "messages": [
-        {"role": "system", "content": system},
-        {"role": "user", "content": prompt}
-    ],
+    "messages": [{"role": "user", "content": prompt}],
     "model": "grok-4",  # ALWAYS grok-4, never grok-3-mini
     "temperature": 0.3,
     "max_tokens": 2000
 }
-
-with open('/tmp/grok_request.json', 'w') as f:
-    json.dump(request, f)
+json.dump(request, open('/tmp/grok_request.json', 'w'))
 PYEOF
 
-# Step 2: Send request with curl
 curl -s -X POST https://api.x.ai/v1/chat/completions \
   -H "Authorization: Bearer $GROK_API_KEY" \
   -H "Content-Type: application/json" \
   --max-time 300 \
-  -d @/tmp/grok_request.json > /tmp/grok_response.json
-
-# Step 3: Extract response
-python3 -c "import sys,json; r=json.load(open('/tmp/grok_response.json')); print(r['choices'][0]['message']['content'])"
+  -d @/tmp/grok_request.json | python3 -c "import sys,json; print(json.load(sys.stdin)['choices'][0]['message']['content'])"
 ```
-
-**Use Grok-4 for**:
-- Lean syntax review
-- Finding code bugs
-- Strategic proof consultation (with full context)
-- Analyzing gaps in proof attempts
-
-**Timeout**: Set `--max-time 300` (5 min) for complex queries.
 
 ### Gemini CLI
-
 ```bash
-cat prompt.md | gemini -p "Your question" 2>&1
-# Or inline:
-gemini -p "Analyze this code: $(cat file.lean)"
+gemini -p "Analyze: $(cat file.lean)"
 ```
 
 ---
 
-## Database Views for Scaffolding
+## Counterexample Constraints
 
-```bash
-# All proven lemmas with full proofs (for scaffolding):
-sqlite3 submissions/tracking.db 'SELECT name, proof_lines, source FROM v_available_scaffolding;'
-
-# Just Parker lemmas:
-sqlite3 submissions/tracking.db "SELECT name, proof_lines FROM v_available_scaffolding WHERE source='parker';"
-
-# Open gaps to fill:
-sqlite3 submissions/tracking.db 'SELECT * FROM v_open_gaps;'
-```
-
----
-
-## Currently Open Targets
-
-### Tuza Frontiers (Primary)
-
-| Target | Status | Why Open |
-|--------|--------|----------|
-| ν = 4 | Active | Parker's proof breaks here |
-| Split graphs (general) | Submitted | Only threshold subset proven |
-| Counterexample | Submitted | None known to exist |
-| Hypergraph r=4 | Submitted | Aharoni-Zerbib conjecture |
-
-### Counterexample Constraints
-
-Any counterexample to Tuza must satisfy (from literature):
+Any Tuza counterexample must satisfy (from literature):
 - mad(G) ≥ 7
 - χ(G) ≥ 5
 - NOT tripartite, NOT threshold
 - treewidth ≥ 7
 
-### Erdős Problems (Secondary)
+---
 
-Query for tractable open problems:
-```bash
-sqlite3 submissions/tracking.db "
-  SELECT number, prize, tractability_score FROM erdos_full
-  WHERE status='open' ORDER BY tractability_score DESC LIMIT 10;"
-```
+## What Works
+
+- **Scaffolded** (1.7 avg sorry) beats boris_minimal (2.5)
+- **Specific sub-cases** beat generic attacks
+- **Informal (.md)** sometimes works when formal fails
+- **Concrete examples** (A4 Cayley graph) build intuition
 
 ---
 
-## Rate Limits
+## What Aristotle Does Well
 
-**5-7 concurrent Aristotle slots.** This is the bottleneck.
-
-```bash
-# Check current usage
-sqlite3 submissions/tracking.db "SELECT COUNT(*) FROM submissions WHERE status='running';"
-```
-
-Prioritize genuinely open problems over re-formalization.
+- Finds counterexamples to false lemmas (found 12!)
+- Proves sub-lemmas even when main fails
+- Works better with scaffolding
+- 6+ hour runtime is normal
 
 ---
 
-## Quick Reference
+## Database
 
-### Key Tables
+All state in `submissions/tracking.db`:
 
-| Table | Purpose |
+| Table | Content |
 |-------|---------|
 | `submissions` | All Aristotle jobs |
-| `literature_lemmas` | Proven lemmas for scaffolding |
-| `lemma_dependencies` | What lemmas depend on what (for transitive scaffolding) |
-| `proof_techniques` | Standardized proof method categories |
-| `lemma_techniques` | Which techniques each lemma uses |
-| `submission_scaffolding` | Which lemmas were used in each submission + effectiveness |
-| `failed_approaches` | What we tried that didn't work (avoid repeating) |
-| `frontiers` | Open problems we're attacking |
-| `erdos_full` | 1111 Erdős problems |
-| `counterexample_constraints` | What counterexamples must satisfy |
+| `literature_lemmas` | Proven (53) + axioms (27) |
+| `failed_approaches` | What doesn't work (12) |
+| `nu4_cases` | Case coverage |
+| `hypotheses` | Research narrative |
 
-### Entry Points
+---
 
-| Task | Action |
-|------|--------|
-| Submit new problem | `pre_submit.sh` → `validate_submission.sh` → `track_submission.sh` → submit |
-| Process results | `verify_output.sh` → `post_result.sh` → `record_scaffolding.sh` |
-| Check past failures | `SELECT * FROM failed_approaches WHERE frontier_id='...'` |
-| Get dependencies | Use recursive CTE on `lemma_dependencies` |
-| Find scaffolding | `SELECT * FROM literature_lemmas WHERE proof_status='proven'` |
-| Find contaminated files | `./scripts/find_contaminated.sh <def> <pattern>` |
-| Audit progress | See query below |
+## When Stuck
 
-### Audit: Discovery vs Formalization
+1. Check `failed_approaches` - repeating a mistake?
+2. Check near-misses - almost-win to complete?
+3. Try informal (.md) submission
+4. Parallel consult: Grok (code) + Gemini (strategy)
+5. Target different case
 
-```bash
-# How much of our work is genuine discovery?
-sqlite3 submissions/tracking.db "
-  SELECT novelty_level, COUNT(*) as count
-  FROM submissions
-  WHERE novelty_level IS NOT NULL
-  GROUP BY novelty_level
-  ORDER BY count DESC;"
+---
 
-# Submissions missing novelty assessment
-sqlite3 submissions/tracking.db "
-  SELECT uuid, filename, problem_id
-  FROM submissions
-  WHERE novelty_level IS NULL
-  LIMIT 10;"
-```
+## Metrics
 
-### Track with Novelty
+**North star:** Discovery Velocity = new proven theorems / month
 
-```bash
-# Full tracking with novelty level
-./scripts/track_submission.sh submissions/file.lean "tuza_nu4" "boris_minimal" "discovery" "First proof of Tuza for ν=4"
-```
+Current: ~0.5/month → Target: 2/month
