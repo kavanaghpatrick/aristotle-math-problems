@@ -47,6 +47,27 @@ WHY:   Edge cover needs edges IN the triangle, not just incident to vertices.
 FIX:   Use edge-based covering, not vertex-based.
 ```
 
+### Pattern 5: local_cover_le_2 (CRITICAL - Dec 26, 2025)
+```
+FALSE: "2 edges from M_edges_at suffice to cover triangles at shared vertex v"
+WHY:   Codex counterexample: 4 triangles at v_ab each use DIFFERENT M-edge,
+       but share {v_ab,x} so ν stays 4. Hitting set needs ALL 4 M-edges.
+FIX:   Use "support clusters" approach - cover edges can be OUTSIDE M_edges_at.
+SEE:   docs/FALSE_LEMMAS.md for full details
+```
+
+### Pattern 6: support_sunflower τ ≤ 2 (CRITICAL - Dec 28, 2025)
+```
+FALSE: "τ(trianglesSharingMEdgeAt G M v) ≤ 2"
+WHY:   trianglesSharingMEdgeAt INCLUDES M-elements A, B (not just externals)!
+       At v_ab: {A, B, T1, T2, T3, T4} needs 3 edges minimum.
+       {v_ab, x} covers T1-T4 but NOT A, B (x ∉ A, x ∉ B).
+FIX:   Separate M-coverage (4 edges) from external-coverage (4 edges) = 8 total.
+SEE:   docs/FALSE_LEMMAS.md, docs/STRATEGIC_SYNTHESIS_DEC28_v2.md
+```
+
+**CRITICAL: Check `docs/FALSE_LEMMAS.md` before using ANY lemma from slot73!**
+
 **Before submitting, run:**
 ```sql
 SELECT approach_name, why_failed, avoid_pattern FROM failed_approaches
@@ -81,9 +102,9 @@ FROM nu4_cases WHERE case_name = 'path_4';
 | star_all_4 | PROVEN | 4 spokes from shared vertex |
 | three_share_v | PROVEN | 3-share + isolated triangle |
 | scattered | PROVEN | Disjoint = no bridges, each independent |
-| path_4 | PARTIAL | slot61 has corrected base-edge approach |
-| cycle_4 | PARTIAL | Need corrected slot like slot61 |
-| two_two_vw | PARTIAL | Two independent T_pair decompositions |
+| path_4 | PARTIAL | Endpoints need base edges, middles use All-Middle |
+| **cycle_4** | **SUBMITTED** | **Corrected: 4 M-edges + 4 external edges = 8 (slots 131-134)** |
+| two_two_vw | PARTIAL | Two independent pairs, no inter-bridges |
 | matching_2 | PARTIAL | Same as two_two_vw |
 
 ---

@@ -1,6 +1,6 @@
 # TUZA ν=4: STRATEGIC MAP V2
 *Created: 2025-12-25 | Based on Full Audit + Gemini/Grok Consultation*
-*Updated: 2025-12-25 20:05 | **CYCLE_4 PROVEN!** (slot68_8acce6b4)*
+*Updated: 2025-12-25 21:30 | **CYCLE_4 NOT PROVEN** - Two gaps identified (C₅ + FALSE lemma)*
 
 ## MISSION
 
@@ -29,9 +29,43 @@ Prove τ ≤ 8 for all graphs with ν = 4 (maximum triangle packing of size 4).
 
 ---
 
-## ✅ CORRECT APPROACH: All-Middle + Disjoint Triples
+## ⚠️ DISJOINT TRIPLES HAS A GAP (Gemini Review - Dec 25)
 
-**Key insight**: Don't use T_pair decomposition. Use the All-Middle property instead.
+**The proposed argument**:
+```
+If τ(triangles at v) ≥ 3, then:
+1. We need 3+ edges to cover triangles at v
+2. This implies 3 edge-disjoint triangles exist at v  ← ⛔ FALSE!
+3. Swap 2 packing elements for 3 triangles
+4. Contradicts ν = 4
+∴ τ(triangles at v) ≤ 2
+```
+
+**Gemini's Counterexample**: C₅ link graph has τ=3 but matching=2.
+If the link graph of vertex v is a 5-cycle, you need 3 edges to cover but only 2 edge-disjoint triangles exist!
+
+**Can C₅ occur in cycle_4?** YES. See `docs/NU4_AI_DEBATE_SYNTHESIS.md` for analysis.
+
+---
+
+## ✅ CORRECT APPROACHES (Bypassing Both Gaps)
+
+### Approach 1: S_e Decomposition (BEST - In Queue)
+```
+S_e = triangles sharing edge e with packing element
+τ(S_e) ≤ 2 (PROVEN in slot71)
+Total edges needed ≤ 8 via absorption argument
+```
+**Status**: slot74b, slot76 testing this
+
+### Approach 2: All-Middle + Partition
+```
+1. PROVEN (slot73): Every triangle contains v_ab ∨ v_bc ∨ v_cd ∨ v_da
+2. Partition by PRIMARY shared vertex (first in ordering)
+3. Prove τ(partition at v) ≤ 2 (different argument than disjoint triples)
+4. CONCLUDE: τ ≤ 4 × 2 = 8
+```
+**Challenge**: Need new argument for step 3
 
 ### Why T_pair approach fails:
 ```
@@ -39,21 +73,6 @@ Prove τ ≤ 8 for all graphs with ν = 4 (maximum triangle packing of size 4).
           ≤ 4 + 2 = 6  (NOT 4!)
 
 τ(T_pair(A,B)) + τ(T_pair(C,D)) ≤ 6 + 6 = 12  (TOO WEAK!)
-```
-
-### The CORRECT approach (bypasses T_pair entirely):
-```
-1. PROVEN (slot73): Every triangle contains v_ab ∨ v_bc ∨ v_cd ∨ v_da
-
-2. Partition: All triangles = ⋃ trianglesContaining(v_i) for i ∈ {ab,bc,cd,da}
-
-3. TO PROVE: τ(trianglesContaining(v) at shared vertex) ≤ 2
-   - Use "disjoint triples" contradiction
-   - If need 3+ edges, have 3 edge-disjoint triangles at v
-   - Can swap 2 packing elements for 3 triangles
-   - Contradicts maximality!
-
-4. CONCLUDE: τ ≤ 4 × 2 = 8
 ```
 
 ---
@@ -325,50 +344,51 @@ lemma cycle4_same_as_path4_union : Adding X_DA doesn't change union
 
 ## CRITICAL INSIGHTS
 
-### tau_pair_le_4 is TRUE! (Previously thought FALSE)
-**Key discovery in slot68**: When e,f share exactly vertex v:
-- The avoiding set `trianglesAvoiding(T_pair, v) = ∅` (EMPTY!)
-- Therefore τ(T_pair) = τ(containing v) ≤ 4
+### tau_pair_le_4 is FALSE! (Corrected Dec 25)
+**Earlier claim was WRONG**: slot68 used FALSE lemma `avoiding_covered_by_spokes`.
 
-**Why avoiding is empty**: If t shares edge with e but avoids v, t would need to contain the "base edge" of e. But then t shares vertex with e but not an edge, which contradicts the definition of T_pair (requires ≥2 shared vertices = edge sharing).
+**Correct analysis**:
+- τ(containing v) ≤ 4 (4 spokes) ✓
+- τ(avoiding v) ≤ 2 (2 base edges) ✓
+- τ(T_pair) ≤ 6, NOT 4!
+
+**Why avoiding is NOT empty**: Triangle {a,b,x} shares base edge {a,b} with e={v,a,b} while avoiding v.
 
 ### Lemmas to AVOID
 | Lemma | Why Problematic |
 |-------|-----------|
-| `avoiding_covered_by_spokes` | Still wrong - but not needed since avoiding = ∅ |
-| `bridge_absorption` | Complex - use T_pair approach instead |
-| `cycle_opposite_disjoint` | Opposite pairs can share 1 vertex |
+| `tau_pair_le_4` | FALSE - correct bound is ≤6 |
+| `avoiding_covered_by_spokes` | IMPOSSIBLE - spokes contain v, avoiding excludes v |
+| `trianglesAvoiding_T_pair_empty` | FALSE - avoiding triangles CAN exist |
+| Disjoint triples for τ ≤ 2 | FLAWED - C₅ link graph counterexample |
 
 ---
 
 ## SUBMISSION SCHEDULE
 
 ### Slot 73: cycle_4 All-Middle ✅ PARTIAL SUCCESS (CRASHED BUT KEY THEOREM PROVEN)
-**File**: `proven/tuza/nu4/slot73_eb28d806/output.lean`
-**Status**: Aristotle crashed (error code 9) but produced:
+**File**: `archive/crashed_outputs/slot73_eb28d806/output.lean` (MOVED - crashed output)
+**Status**: Aristotle crashed (error code 9). Some lemmas valid, some FALSE:
 - ✅ `cycle4_all_triangles_contain_shared` - FULLY PROVEN
 - ✅ `cycle4_element_contains_shared` - FULLY PROVEN
 - ✅ `cycle4_no_loose_triangles` - FULLY PROVEN
 - ✅ `triangles_containing_v_covered_by_spokes` - FULLY PROVEN
-- ⚠️ `local_cover_le_2` - Partial (needs completion)
+- ❌ **`local_cover_le_2` - FALSE** (See docs/FALSE_LEMMAS.md - Codex counterexample)
 - ⚠️ `cycle4_cover_triangle_at_element` - 2 exact? statements
 
-### Slot 74: Complete cycle_4 (IMMEDIATE NEXT SUBMISSION)
-**File**: `submissions/nu4_final/slot74_cycle4_complete.lean`
-**Strategy**: Resume from slot73, complete the remaining lemmas
-**Content**:
-1. Copy ALL proven lemmas from slot73
-2. Complete `local_cover_le_2` - the 2-edge bound per vertex
-3. Complete `cycle4_cover_triangle_at_element` - fill exact? statements
-4. Final theorem: `cycle4_tau_le_8`
+> **WARNING (Dec 26, 2025)**: `local_cover_le_2` is mathematically FALSE.
+> Codex proved 4 edges may be required, not 2. See `docs/FALSE_LEMMAS.md`.
+> DO NOT use this lemma. Use "support clusters" approach instead.
 
-**Key insight for local_cover_le_2**:
-```
-At shared vertex v, triangles containing v that share edge with packing
-form a structure where 2 edges suffice (use disjoint triples contradiction).
-```
+### Slot 74+: NEW APPROACH REQUIRED
+**See**: `docs/ATTACK_PLAN_15_SLOTS.md` for corrected strategy
+**Key change**: Cover edges can be OUTSIDE `M_edges_at`, not restricted to 2 M-edges
 
-**Expected sorry**: 0
+~~### Slot 74: Complete cycle_4 (IMMEDIATE NEXT SUBMISSION)~~
+~~**Strategy**: Resume from slot73, complete the remaining lemmas~~
+~~**OBSOLETE** - relies on FALSE lemma local_cover_le_2~~
+
+**Expected sorry**: N/A - approach invalidated
 
 ### Slot 75: path_4 Hybrid (AFTER cycle_4 complete)
 **File**: `submissions/nu4_final/slot75_path4_hybrid.lean`
