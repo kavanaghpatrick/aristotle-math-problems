@@ -62,8 +62,19 @@ FALSE: "τ(trianglesSharingMEdgeAt G M v) ≤ 2"
 WHY:   trianglesSharingMEdgeAt INCLUDES M-elements A, B (not just externals)!
        At v_ab: {A, B, T1, T2, T3, T4} needs 3 edges minimum.
        {v_ab, x} covers T1-T4 but NOT A, B (x ∉ A, x ∉ B).
-FIX:   Separate M-coverage (4 edges) from external-coverage (4 edges) = 8 total.
-SEE:   docs/FALSE_LEMMAS.md, docs/STRATEGIC_SYNTHESIS_DEC28_v2.md
+FIX:   Separate M-coverage from external-coverage. But see Pattern 7!
+SEE:   docs/FALSE_LEMMAS.md
+```
+
+### Pattern 7: external_share_common_vertex (CRITICAL - Dec 29, 2025)
+```
+FALSE: "All external triangles at shared vertex v share a common external vertex x"
+WHY:   Aristotle counterexample (slot131_v2, UUID 7039b275):
+       CounterexampleG has T1={0,1,5} using edge from A, T2={0,3,6} using edge from B.
+       T1 ∩ T2 = {0} only - external vertices 5 and 6 are DIFFERENT!
+       External triangles can independently use edges from DIFFERENT M-triangles.
+FIX:   UNKNOWN - 4+4 cover approach is INVALID. Need new strategy.
+SEE:   docs/FALSE_LEMMAS.md for full counterexample
 ```
 
 **CRITICAL: Check `docs/FALSE_LEMMAS.md` before using ANY lemma from slot73!**
@@ -103,7 +114,7 @@ FROM nu4_cases WHERE case_name = 'path_4';
 | three_share_v | PROVEN | 3-share + isolated triangle |
 | scattered | PROVEN | Disjoint = no bridges, each independent |
 | path_4 | PARTIAL | Endpoints need base edges, middles use All-Middle |
-| **cycle_4** | **SUBMITTED** | **Corrected: 4 M-edges + 4 external edges = 8 (slots 131-134)** |
+| **cycle_4** | **BLOCKED** | **4+4 approach INVALID - slot131_v2 disproved external_share_common_vertex** |
 | two_two_vw | PARTIAL | Two independent pairs, no inter-bridges |
 | matching_2 | PARTIAL | Same as two_two_vw |
 

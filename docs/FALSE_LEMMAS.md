@@ -1,6 +1,6 @@
 # FALSE LEMMAS - DO NOT USE
 
-**Last updated**: December 26, 2025
+**Last updated**: December 31, 2025
 
 This document lists lemmas that have been PROVEN FALSE. Do not use these in any proof attempts.
 
@@ -112,20 +112,195 @@ At `v = v_ab`:
   - `{v_ab, x}` does NOT cover B for the same reason ✗
 - Need 3 edges minimum: one hitting A, one hitting B, one for externals
 
-**Correct approach**: Separate the cover into:
-1. Cover M with 4 edges (one per element)
-2. Cover external triangles at each shared vertex with 1 edge each
-3. Total: 4 + 4 = 8 edges
+**Correct approach**: Unknown - needs new strategy after external_share_common_vertex was disproved.
 
-**Key lemma that IS true**:
+---
+
+## external_share_common_vertex
+
+**Status**: ❌ **FALSE** (Dec 29, 2025 - slot131_v2 counterexample)
+
+**Statement** (FALSE):
 ```lean
--- External triangles (trianglesSharingMEdgeAt \ M) share a common external vertex x
+-- CLAIMED: External triangles at shared vertex v share a common external vertex x
 lemma external_share_common_vertex :
   ∀ T1 T2 ∈ (trianglesSharingMEdgeAt G M v \ M), T1 ≠ T2 →
   ∃ x, x ∈ T1 ∧ x ∈ T2 ∧ x ≠ v
 ```
 
-This is true because if two external triangles had different external vertices and were edge-disjoint, {T1, T2, C, D} or similar would form a packing of size 5 when combined with parts of {A, B, C, D}, contradicting ν = 4.
+**Why it's FALSE** (Aristotle counterexample, slot131_v2 UUID 7039b275):
+
+At shared vertex `v_ab = 0`, external triangles can use edges from DIFFERENT M-triangles:
+
+```
+CounterexampleG (10 vertices):
+  M_cex = {A, B, C, D} where:
+    A = {0, 1, 2}
+    B = {0, 3, 4}
+    C = {3, 7, 8}
+    D = {7, 1, 9}
+
+  Shared vertices: v_ab=0, v_bc=3, v_cd=7, v_da=1
+
+  External triangles at v_ab = 0:
+    T1 = {0, 1, 5}  -- uses edge {0,1} from A, external vertex 5
+    T2 = {0, 3, 6}  -- uses edge {0,3} from B, external vertex 6
+
+  T1 ∩ T2 = {0} only!  5 ≠ 6, no common external vertex!
+```
+
+**Why this works as a counterexample**:
+- T1 uses edge {0,1} from A (the edge A shares with D via v_da=1)
+- T2 uses edge {0,3} from B (the edge B shares with C via v_bc=3)
+- {T1, T2, C, D} is also a valid packing of size 4, so M_cex is maximum
+- The external triangles are "independent" - they draw from different M-triangle edges
+
+**Impact**: The 4+4 edge cover approach (4 M-edges + 4 external-vertex edges) is INVALID.
+Each shared vertex may need MULTIPLE edges to cover external triangles from different M-sources.
+
+**Avoid pattern**: Never assume external triangles share common vertex. At v_ab, externals can independently use edges from A or from B.
+
+---
+
+## sunflower_cover_at_vertex (2 edges per shared vertex)
+
+**Status**: ❌ **FALSE** (Dec 29, 2025 - Gemini + Codex audit)
+
+**Statement** (FALSE):
+```lean
+-- CLAIMED: At each shared vertex v, 2 edges suffice to cover all triangles containing v
+lemma sunflower_cover_at_vertex :
+  ∃ E_v ⊆ G.edgeFinset, E_v.card ≤ 2 ∧
+  ∀ t ∈ trianglesContaining G v, ∃ e ∈ E_v, e ∈ t.sym2
+```
+
+**Why it's FALSE** (Gemini counterexample):
+
+At shared vertex v_ab, there can be 3+ disjoint triangle clusters:
+```
+T_A = {v_ab, a_priv, x1}  -- uses M-edge {v_ab, a_priv}
+T_B = {v_ab, b_priv, x2}  -- uses M-edge {v_ab, b_priv}
+T_C = {v_ab, v_cd, c_priv} -- uses diagonal edge {v_ab, v_cd}
+```
+
+These require 3 DISTINCT edges:
+- {v_ab, a_priv} for T_A cluster
+- {v_ab, b_priv} for T_B cluster
+- {v_ab, v_cd} for T_C cluster
+
+**Why this works as counterexample** (Codex analysis):
+
+The fundamental issue: at v_ab, triangles come from TWO M-elements (A and B).
+- M-element A = {v_ab, v_da, a_priv}
+- M-element B = {v_ab, v_bc, b_priv}
+- Externals using A-edges or B-edges
+
+Even if externals share common vertex x, A and B don't contain x.
+So we need: edge for A + edge for B + edge for externals = 3+ edges minimum.
+
+**Impact**: The 4×2=8 sunflower approach is INVALID.
+Actual bound: 4×3=12 (matches proven slot113).
+
+**Avoid pattern**: Don't assume 2 edges per shared vertex suffice.
+The M-elements themselves require separate coverage from externals.
+
+---
+
+## link_graph_bipartite
+
+**Status**: ❌ **FALSE** (Dec 31, 2025 - AI Debate Rounds 1-4)
+
+**Statement** (FALSE):
+```lean
+-- CLAIMED: Link graph at shared vertex is bipartite
+lemma link_graph_bipartite (v : V) (hv : v ∈ shared_vertices) :
+  IsBipartite (linkGraph G v)
+```
+
+**Why it's FALSE** (Grok + Codex counterexamples):
+
+The checkpoint (Dec 30) incorrectly claimed "Link graphs are bipartite (external vertices isolated)".
+
+**Counterexample construction** (Grok):
+```
+In Cycle_4, add edges to G:
+  - {v_da, b_priv}
+  - {a_priv, b_priv}
+
+This creates triangle {v_da, a_priv, b_priv} IN the link graph L_{v_ab}!
+
+Triangle in L_v = 3-cycle = odd cycle → NOT bipartite
+
+Graph has 14 edges, ν still = 4 (extra triangles share edges with M).
+```
+
+**Counterexample construction** (Codex):
+```
+At v_ab, if G additionally has:
+  - Edge {a_priv, b_priv}
+  - Edge {b_priv, v_da}
+
+Then L_{v_ab} contains 3-cycle: v_da - a_priv - b_priv - v_da
+```
+
+**Why the checkpoint was wrong**:
+- Round 5 correctly proved "external vertices cannot be adjacent to each other in L_v"
+- But INCORRECTLY concluded bipartiteness
+- The M-neighbors (v_da, a_priv, v_bc, b_priv) can form additional edges creating odd cycles
+
+**Impact**: König's theorem CANNOT be applied. The proof that τ(L_v) = ν(L_v) is INVALID.
+
+**Avoid pattern**: Never assume link graphs are bipartite. The ν=4 constraint prevents external-external edges but NOT odd cycles among M-neighbors.
+
+---
+
+## fixed_8_edge_cover (any specific 8-edge subset)
+
+**Status**: ❌ **FALSE** (Dec 31, 2025 - AI Debate Round 4)
+
+**Statement** (FALSE):
+```lean
+-- CLAIMED: A specific fixed 8-edge subset of M-edges covers all triangles
+def cycle4_cover_8 (cfg : Cycle4 G M) : Finset (Sym2 V) :=
+  {s(cfg.v_ab, cfg.v_da), s(cfg.v_ab, cfg.v_bc),
+   s(cfg.v_bc, cfg.v_cd), s(cfg.v_cd, cfg.v_da),
+   s(cfg.v_ab, cfg.a_priv), s(cfg.v_bc, cfg.b_priv),
+   s(cfg.v_cd, cfg.c_priv), s(cfg.v_da, cfg.d_priv)}
+
+lemma cycle4_cover_8_covers_all :
+  ∀ t ∈ G.cliqueFinset 3, ∃ e ∈ cycle4_cover_8 cfg, e ∈ t.sym2
+```
+
+**Why it's FALSE** (Grok counterexample):
+
+The 8-edge cover above misses {v_da, a_priv} (the "other" private edge of A).
+
+**Counterexample**:
+```
+External triangle T = {a_priv, v_da, z} where z is external:
+  - T shares edge {a_priv, v_da} with A (satisfies maximality)
+  - Check each of the 8 cover edges:
+    - {v_ab, v_da}: v_ab ∉ T ❌
+    - {v_ab, v_bc}: v_ab, v_bc ∉ T ❌
+    - {v_bc, v_cd}: v_bc, v_cd ∉ T ❌
+    - {v_cd, v_da}: v_cd ∉ T ❌
+    - {v_ab, a_priv}: v_ab ∉ T ❌
+    - {v_bc, b_priv}: v_bc, b_priv ∉ T ❌
+    - {v_cd, c_priv}: v_cd, c_priv ∉ T ❌
+    - {v_da, d_priv}: d_priv ≠ z (external) ❌
+
+  NONE of the 8 edges are in T.sym2!
+```
+
+**Why this generalizes**:
+- Any 8-edge subset of the 12 M-edges must omit 4 edges
+- The omitted edges are: {v_da, a_priv}, {v_ab, b_priv}, {v_bc, c_priv}, {v_cd, d_priv}
+- If an external triangle shares one of these 4 edges, it's uncovered
+
+**Impact**: NO fixed 8-edge subset of M-edges works universally.
+τ ≤ 8 requires ADAPTIVE cover that may include non-M-edges.
+
+**Avoid pattern**: Don't pick a fixed 8-edge subset of M-edges. Either use all 12 M-edges (τ ≤ 12) or use adaptive selection.
 
 ---
 
