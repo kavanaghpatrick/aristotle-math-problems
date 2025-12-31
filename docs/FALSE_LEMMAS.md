@@ -1,14 +1,54 @@
 # FALSE LEMMAS - DO NOT USE
 
-**Last updated**: December 31, 2025
+**Last updated**: December 31, 2025 (AUDITED)
 
 This document lists lemmas that have been PROVEN FALSE. Do not use these in any proof attempts.
 
 ---
 
+## AUDIT SUMMARY (Dec 31, 2025)
+
+Each false lemma has been audited for evidence quality. Categories:
+
+| Evidence Level | Meaning | Reliability |
+|----------------|---------|-------------|
+| 🔴 **ARISTOTLE-VERIFIED** | Aristotle found explicit counterexample on concrete graph | Highest |
+| 🟠 **AI-VERIFIED** | AI agents verified counterexample is mathematically correct | High |
+| 🟡 **REASONING-BASED** | Sound mathematical reasoning, no formal verification | Medium |
+| ⚪ **TRIVIALLY FALSE** | Obvious logical/set-theoretic error | Highest |
+
+### Pattern Summary
+
+| # | Pattern | Evidence Level | Source |
+|---|---------|----------------|--------|
+| 1 | `local_cover_le_2` | 🟠 AI-VERIFIED | Codex counterexample, verified by Grok agent |
+| 2 | `avoiding_covered_by_spokes` | ⚪ TRIVIALLY FALSE | Basic set theory (v ∉ t but spokes contain v) |
+| 3 | `bridge_absorption` | 🔴 ARISTOTLE-VERIFIED | Aristotle: 5-vertex explicit counterexample |
+| 4 | `trianglesContainingVertex partition` | 🟡 REASONING-BASED | Gemini reasoning (Dec 26) |
+| 5 | `support_sunflower τ ≤ 2` | 🟡 REASONING-BASED | Definition analysis (Dec 28) |
+| 6 | `external_share_common_vertex` | 🟠 AI-VERIFIED | Codex counterexample, verified by Gemini agent |
+| 7 | `sunflower_cover_at_vertex` | 🟠 AI-VERIFIED | Same root cause as Pattern 1 |
+| 8 | `link_graph_bipartite` | 🟠 AI-VERIFIED | Grok counterexample, verified by Codex agent |
+| 9 | `fixed_8_edge_cover` | 🟡 REASONING-BASED | Grok reasoning (Dec 31) |
+
+### Key Audit Findings
+
+1. **Patterns 3 only has actual Aristotle counterexample** - Others are from AI reasoning
+2. **Patterns 1, 6, 7, 8 were AI-verified** on Dec 31 by independent agents
+3. **Pattern 6 was NOT from Aristotle** despite claiming "slot131_v2 UUID 7039b275" - no output file exists
+4. **Patterns 8-9 are from AI debate**, not Aristotle verification
+
+### Recommendation
+
+- **Trust completely**: Patterns 2 (trivial), 3 (Aristotle)
+- **High confidence**: Patterns 1, 6, 7, 8 (AI-verified counterexamples)
+- **Verify if critical**: Patterns 4, 5, 9 (reasoning-based, may have edge cases)
+
+---
+
 ## local_cover_le_2
 
-**Status**: ❌ **FALSE** (not just unproven - mathematically false)
+**Status**: ❌ **FALSE** | 🟠 **AI-VERIFIED** (counterexample verified by Grok agent Dec 31)
 
 **Statement** (FALSE):
 ```lean
@@ -58,7 +98,7 @@ All four triangles:
 
 ## avoiding_covered_by_spokes
 
-**Status**: ❌ **FALSE**
+**Status**: ❌ **FALSE** | ⚪ **TRIVIALLY FALSE** (basic set theory)
 
 **Statement** (FALSE): If t avoids v, then ∃ spoke {v,x} ∈ t.sym2
 
@@ -70,7 +110,7 @@ All four triangles:
 
 ## bridge_absorption
 
-**Status**: ❌ **FALSE**
+**Status**: ❌ **FALSE** | 🔴 **ARISTOTLE-VERIFIED** (5-vertex explicit counterexample)
 
 **Statement** (FALSE): Cover of S_e ∪ S_f covers bridges X(e,f)
 
@@ -80,7 +120,7 @@ All four triangles:
 
 ## trianglesContainingVertex partition
 
-**Status**: ❌ **WRONG PARTITION**
+**Status**: ❌ **WRONG PARTITION** | 🟡 **REASONING-BASED** (Gemini Dec 26)
 
 **Statement** (FALSE): Partition triangles by "contains vertex v"
 
@@ -94,7 +134,7 @@ So `local_cover_le_2` at v_ab cannot cover t.
 
 ## support_sunflower (τ ≤ 2 version)
 
-**Status**: ❌ **FALSE** (Dec 28, 2025)
+**Status**: ❌ **FALSE** | 🟡 **REASONING-BASED** (definition analysis Dec 28)
 
 **Statement** (FALSE):
 ```lean
@@ -118,7 +158,9 @@ At `v = v_ab`:
 
 ## external_share_common_vertex
 
-**Status**: ❌ **FALSE** (Dec 29, 2025 - slot131_v2 counterexample)
+**Status**: ❌ **FALSE** | 🟠 **AI-VERIFIED** (counterexample verified by Gemini agent Dec 31)
+
+**Note**: Originally attributed to "Aristotle slot131_v2 UUID 7039b275" but audit found NO Aristotle output file exists. The counterexample is from AI debate, not Aristotle.
 
 **Statement** (FALSE):
 ```lean
@@ -164,7 +206,7 @@ Each shared vertex may need MULTIPLE edges to cover external triangles from diff
 
 ## sunflower_cover_at_vertex (2 edges per shared vertex)
 
-**Status**: ❌ **FALSE** (Dec 29, 2025 - Gemini + Codex audit)
+**Status**: ❌ **FALSE** | 🟠 **AI-VERIFIED** (same root cause as local_cover_le_2)
 
 **Statement** (FALSE):
 ```lean
@@ -208,7 +250,9 @@ The M-elements themselves require separate coverage from externals.
 
 ## link_graph_bipartite
 
-**Status**: ❌ **FALSE** (Dec 31, 2025 - AI Debate Rounds 1-4)
+**Status**: ❌ **FALSE** | 🟠 **AI-VERIFIED** (counterexample verified by Codex agent Dec 31)
+
+**Note**: This is from AI debate, not Aristotle. The 3-cycle counterexample was rigorously verified.
 
 **Statement** (FALSE):
 ```lean
@@ -256,7 +300,9 @@ Then L_{v_ab} contains 3-cycle: v_da - a_priv - b_priv - v_da
 
 ## fixed_8_edge_cover (any specific 8-edge subset)
 
-**Status**: ❌ **FALSE** (Dec 31, 2025 - AI Debate Round 4)
+**Status**: ❌ **FALSE** | 🟡 **REASONING-BASED** (Grok reasoning Dec 31)
+
+**Note**: Sound reasoning but no formal verification. The key insight (any 8 of 12 omits 4) is combinatorially obvious.
 
 **Statement** (FALSE):
 ```lean
