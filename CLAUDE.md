@@ -17,69 +17,36 @@ Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 
 ---
 
-## FALSE LEMMA PATTERNS (Critical - Check Before Submitting!)
+## FALSE LEMMAS (Query Database Before Submitting!)
 
-### Pattern 1: Spokes Cannot Cover Avoiding Triangles
-```
-FALSE: "If t avoids v, then ∃ spoke {v,x} ∈ t.sym2"
-WHY:   If t avoids v, then v ∉ t. Spokes contain v. So spokes ∉ t.sym2.
-FIX:   Use BASE EDGES {a,b},{c,d} for avoiding triangles, not spokes.
-```
+All false lemmas are tracked in `false_lemmas` table with evidence levels:
+- 🔴 `aristotle_verified` - Actual Aristotle counterexample (highest confidence)
+- 🟠 `ai_verified` - AI agents verified the math (high confidence)
+- 🟡 `reasoning_based` - Sound reasoning, no formal verification
+- ⚪ `trivially_false` - Obvious logical error
 
-### Pattern 2: Bridge Coverage Errors
-```
-FALSE: "Cover of S_e ∪ S_f covers bridges X(e,f)"
-WHY:   Bridges share vertices with e,f but may not share edges with S_e or S_f.
-FIX:   Handle bridges separately with tau_X_le_2.
-```
+**CRITICAL: Before submitting, check for false lemmas:**
+```sql
+-- Quick summary of all false lemmas
+SELECT * FROM v_false_lemmas_summary;
 
-### Pattern 3: Intersection Assumptions
-```
-FALSE: "Non-adjacent packing elements are vertex-disjoint"
-WHY:   In a cycle, opposite elements can share a vertex.
-FIX:   Check actual intersection, don't assume disjointness.
-```
+-- Full details for a specific pattern
+SELECT lemma_name, false_statement_english, counterexample,
+       why_false, correct_approach
+FROM false_lemmas WHERE lemma_name LIKE '%cover%';
 
-### Pattern 4: Vertex vs Edge Cover Confusion
-```
-FALSE: "Hitting all vertices of e covers bridges through e"
-WHY:   Edge cover needs edges IN the triangle, not just incident to vertices.
-FIX:   Use edge-based covering, not vertex-based.
+-- Check if your lemma is false
+SELECT * FROM false_lemmas WHERE lemma_name = 'local_cover_le_2';
 ```
 
-### Pattern 5: local_cover_le_2 (CRITICAL - Dec 26, 2025)
-```
-FALSE: "2 edges from M_edges_at suffice to cover triangles at shared vertex v"
-WHY:   Codex counterexample: 4 triangles at v_ab each use DIFFERENT M-edge,
-       but share {v_ab,x} so ν stays 4. Hitting set needs ALL 4 M-edges.
-FIX:   Use "support clusters" approach - cover edges can be OUTSIDE M_edges_at.
-SEE:   docs/FALSE_LEMMAS.md for full details
-```
+**Key false lemmas to remember:**
+| # | Lemma | Evidence | Impact |
+|---|-------|----------|--------|
+| 1 | `local_cover_le_2` | 🟠 AI | 2 M-edges at v insufficient |
+| 6 | `external_share_common_vertex` | 🟠 AI | Externals don't share common x |
+| 8 | `link_graph_bipartite` | 🟠 AI | König approach INVALID |
 
-### Pattern 6: support_sunflower τ ≤ 2 (CRITICAL - Dec 28, 2025)
-```
-FALSE: "τ(trianglesSharingMEdgeAt G M v) ≤ 2"
-WHY:   trianglesSharingMEdgeAt INCLUDES M-elements A, B (not just externals)!
-       At v_ab: {A, B, T1, T2, T3, T4} needs 3 edges minimum.
-       {v_ab, x} covers T1-T4 but NOT A, B (x ∉ A, x ∉ B).
-FIX:   Separate M-coverage from external-coverage. But see Pattern 7!
-SEE:   docs/FALSE_LEMMAS.md
-```
-
-### Pattern 7: external_share_common_vertex (CRITICAL - Dec 29, 2025)
-```
-FALSE: "All external triangles at shared vertex v share a common external vertex x"
-WHY:   Aristotle counterexample (slot131_v2, UUID 7039b275):
-       CounterexampleG has T1={0,1,5} using edge from A, T2={0,3,6} using edge from B.
-       T1 ∩ T2 = {0} only - external vertices 5 and 6 are DIFFERENT!
-       External triangles can independently use edges from DIFFERENT M-triangles.
-FIX:   UNKNOWN - 4+4 cover approach is INVALID. Need new strategy.
-SEE:   docs/FALSE_LEMMAS.md for full counterexample
-```
-
-**CRITICAL: Check `docs/FALSE_LEMMAS.md` before using ANY lemma from slot73!**
-
-**Before submitting, run:**
+**Also check failed_approaches:**
 ```sql
 SELECT approach_name, why_failed, avoid_pattern FROM failed_approaches
 WHERE frontier_id='nu_4' AND failure_category='wrong_direction';
@@ -231,19 +198,36 @@ All state in `submissions/tracking.db`:
 |-------|---------|
 | `submissions` | All Aristotle jobs + notes |
 | `literature_lemmas` | Proven (70) with validated_true flag |
-| `failed_approaches` | What doesn't work (17) with falsity_proof |
+| `failed_approaches` | What doesn't work (38) with falsity_proof |
+| `false_lemmas` | **9 patterns with counterexamples, evidence levels** |
 | `nu4_cases` | Case knowledge: approach, false_lemmas, key_insight, next_action |
 | `ai_consultations` | AI recommendations and outcomes |
+
+**Key views:**
+| View | Purpose |
+|------|---------|
+| `v_false_lemmas_summary` | Quick overview of all false lemmas with evidence |
+| `v_valid_proven` | All proven theorems with valid definitions |
 
 ---
 
 ## When Stuck
 
-1. Query `failed_approaches` - repeating a mistake?
-2. Query `nu4_cases` for case-specific knowledge
-3. Check `ai_consultations` for past recommendations
-4. Parallel consult: Grok (code) + Gemini (strategy)
-5. Target different case
+1. Query `false_lemmas` - is your lemma already disproven?
+2. Query `failed_approaches` - repeating a failed approach?
+3. Query `nu4_cases` for case-specific knowledge
+4. Check `ai_consultations` for past recommendations
+5. Parallel consult: Grok (code) + Gemini (strategy)
+6. Target different case
+
+```sql
+-- Check everything at once
+SELECT 'false_lemma' as type, lemma_name as name, evidence_level as info
+FROM false_lemmas
+UNION ALL
+SELECT 'failed_approach', approach_name, failure_category
+FROM failed_approaches WHERE frontier_id='nu_4';
+```
 
 ---
 
