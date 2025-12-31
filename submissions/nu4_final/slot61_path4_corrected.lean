@@ -198,7 +198,7 @@ lemma avoiding_contains_base_edge (G : SimpleGraph V) [DecidableRel G.Adj]
     (t : Finset V) (ht : t ∈ G.cliqueFinset 3)
     (h_avoids_v : v ∉ t)
     (h_shares_edge : (t ∩ e).card ≥ 2) :
-    Sym2.mk a b ∈ t.sym2 := by
+    s(a, b) ∈ t.sym2 := by
   -- t shares ≥2 vertices with e = {v, a, b}
   -- But v ∉ t, so t ∩ e ⊆ {a, b}
   -- |t ∩ e| ≥ 2 and t ∩ e ⊆ {a, b} implies t ∩ e = {a, b}
@@ -248,9 +248,9 @@ lemma two_edges_cover_sharing_triangles (G : SimpleGraph V) [DecidableRel G.Adj]
     (x y z : V) (hT_eq : T = {x, y, z})
     (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z)
     -- Choice: use edges incident to the shared vertex y
-    (e1 : Sym2 V := Sym2.mk x y) (e2 : Sym2 V := Sym2.mk y z) :
+    (e1 : Sym2 V := s(x, y)) (e2 : Sym2 V := s(y, z)) :
     ∀ t ∈ trianglesSharingEdge G T,
-      (Sym2.mk x y ∈ t.sym2) ∨ (Sym2.mk y z ∈ t.sym2) ∨ (Sym2.mk x z ∈ t.sym2) := by
+      (s(x, y) ∈ t.sym2) ∨ (s(y, z) ∈ t.sym2) ∨ (s(x, z) ∈ t.sym2) := by
   intro t ht
   simp only [trianglesSharingEdge, Finset.mem_filter] at ht
   have h_share : (t ∩ T).card ≥ 2 := ht.2
@@ -263,8 +263,8 @@ lemma two_edges_cover_sharing_triangles (G : SimpleGraph V) [DecidableRel G.Adj]
     exact ⟨a, b, hab, ha, hb⟩
   obtain ⟨a, b, hab, ha, hb⟩ := h_two_in
   simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton] at ha hb
-  -- a, b ∈ t and a, b ∈ {x, y, z}, so Sym2.mk a b is an edge of t
-  have h_ab_in_t : Sym2.mk a b ∈ t.sym2 := by
+  -- a, b ∈ t and a, b ∈ {x, y, z}, so s(a, b) is an edge of t
+  have h_ab_in_t : s(a, b) ∈ t.sym2 := by
     simp only [Finset.mem_sym2_iff]
     exact ⟨ha.1, hb.1⟩
   -- Now case on which pair a, b equals
@@ -304,7 +304,7 @@ theorem tau_le_8_path4 (G : SimpleGraph V) [DecidableRel G.Adj]
     · use t, h_in_M
       have : t.card = 3 := by
         simp only [SimpleGraph.mem_cliqueFinset_iff] at ht; exact ht.2
-      simp [Finset.card_self_inter, this]
+      rw [Finset.inter_self]; omega
     · exact triangle_shares_edge_with_packing G M hM t ht h_in_M
   -- Construct the 8-edge cover
   -- From each packing element, pick 2 edges incident to the shared vertex
