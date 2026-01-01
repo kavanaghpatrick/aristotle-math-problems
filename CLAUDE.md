@@ -15,6 +15,13 @@ Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 6. **Process every result** → `./scripts/process_result.sh` extracts learnings
 7. **NEVER replace existing proof code with sorry** → if it compiled before, fix it, don't delete it
 
+### File & Database Integrity
+
+8. **PROVEN means 0 sorry AND 0 axiom** → `rg "sorry|^axiom" file.lean` must return nothing
+9. **`proven/` directory = verified clean files only** → incomplete work goes in `partial/`
+10. **Database follows files, not the other way around** → always verify .lean before updating status
+11. **Axioms are not proofs** → any file using `axiom` is incomplete
+
 ---
 
 ## FALSE LEMMAS (Query Database Before Submitting!)
@@ -77,13 +84,15 @@ FROM nu4_cases WHERE case_name = 'path_4';
 
 | Case | Status | Key Insight |
 |------|--------|-------------|
-| star_all_4 | PROVEN | 4 spokes from shared vertex |
-| three_share_v | PROVEN | 3-share + isolated triangle |
-| scattered | PROVEN | Disjoint = no bridges, each independent |
-| path_4 | PARTIAL | Endpoints need base edges, middles use All-Middle |
-| **cycle_4** | **BLOCKED** | **4+4 approach INVALID - slot131_v2 disproved external_share_common_vertex** |
-| two_two_vw | PARTIAL | Two independent pairs, no inter-bridges |
-| matching_2 | PARTIAL | Same as two_two_vw |
+| star_all_4 | **PROVEN** | Trivial: 4 spokes, τ ≤ 4 |
+| three_share_v | **PROVEN** | Trivial: 3 spokes + 2 edges, τ ≤ 5 |
+| scattered | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 needs 2-edge-per-owner |
+| path_4 | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 needs tighter analysis |
+| cycle_4 | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 blocked by false lemmas |
+| two_two_vw | PARTIAL | Infrastructure only. τ ≤ 12 proven |
+| matching_2 | PARTIAL | Infrastructure only. τ ≤ 12 proven |
+
+**What IS proven:** τ ≤ 12 for ALL cases (slot113, slot139 - truly 0 sorry, 0 axiom)
 
 ---
 
