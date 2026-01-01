@@ -21,38 +21,7 @@ Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 9. **`proven/` directory = verified clean files only** → incomplete work goes in `partial/`
 10. **Database follows files, not the other way around** → always verify .lean before updating status
 11. **Axioms are not proofs** → any file using `axiom` is incomplete
-12. **Check for self-loop bug** → `rg "s\(v.*,.*v\)|Sym2.mk.*v.*,.*v" file.lean` to find `s(v,v)` patterns
-
-### Self-Loop Bug (Pattern 11 - CRITICAL)
-
-**THE BUG**: Using `s(v, v)` or `Sym2.mk (v, v)` as a "covering edge"
-
-**WHY IT'S WRONG**: `s(v, v)` is NOT a valid graph edge (SimpleGraph requires `u ≠ v`).
-However, `t.sym2` for a triangle `t = {a,b,c}` INCLUDES self-loops `s(a,a), s(b,b), s(c,c)`.
-So proofs using self-loops are "technically valid" in Lean but MATHEMATICALLY WRONG.
-
-**HOW TO DETECT**:
-```bash
-# Find self-loop patterns
-rg "s\(v, v\)|Sym2.mk.*\( v, v \)|use.*s\(.*,.*\1\)" file.lean
-```
-
-**AFFECTED FILES** (known):
-- `proven/tuza/nu2/tuza_nu2_PROVEN.lean` - uses `{Sym2.mk (v, v)}` as cover
-- `Math/Slot145.lean` - `adaptiveCoverAt` uses `{s(v, v)}`
-- `slot147_v2_lp_simplified_aristotle.lean` - line 210
-
-**CORRECT PATTERN**: Cover definitions MUST include `E ⊆ G.edgeFinset`:
-```lean
--- CORRECT: constrains to actual graph edges
-def triangleCoveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
-  sInf {n : ℕ | ∃ E' : Finset (Sym2 V), E' ⊆ G.edgeFinset ∧
-    (∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E', e ∈ t.sym2) ∧ E'.card = n}
-
--- WRONG: allows self-loops
-def coveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
-  sInf {n : ℕ | ∃ E : Finset (Sym2 V), E.card = n ∧ ∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E, e ∈ t.sym2}
-```
+12. **No self-loops in covers** → `s(v,v)` is not a graph edge; cover definitions MUST have `E ⊆ G.edgeFinset`
 
 ---
 
@@ -84,6 +53,7 @@ SELECT * FROM false_lemmas WHERE lemma_name = 'local_cover_le_2';
 | 1 | `local_cover_le_2` | 🟠 AI | 2 M-edges at v insufficient |
 | 6 | `external_share_common_vertex` | 🟠 AI | Externals don't share common x |
 | 8 | `link_graph_bipartite` | 🟠 AI | König approach INVALID |
+| 11 | `self_loop_cover` | ⚪ trivial | `s(v,v)` not a valid edge |
 
 **Also check failed_approaches:**
 ```sql
@@ -116,15 +86,15 @@ FROM nu4_cases WHERE case_name = 'path_4';
 
 | Case | Status | Key Insight |
 |------|--------|-------------|
-| star_all_4 | **PROVEN** | Trivial: 4 spokes, τ ≤ 4 |
-| three_share_v | **PROVEN** | Trivial: 3 spokes + 2 edges, τ ≤ 5 |
-| scattered | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 needs 2-edge-per-owner |
-| path_4 | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 needs tighter analysis |
-| cycle_4 | PARTIAL | Infrastructure only. τ ≤ 12 proven, τ ≤ 8 blocked by false lemmas |
-| two_two_vw | PARTIAL | Infrastructure only. τ ≤ 12 proven |
-| matching_2 | PARTIAL | Infrastructure only. τ ≤ 12 proven |
+| star_all_4 | PARTIAL | 4 spokes from shared vertex; τ ≤ 4 straightforward |
+| three_share_v | PARTIAL | 3-star + isolated triangle; τ ≤ 5 straightforward |
+| scattered | PARTIAL | Each external has unique parent; τ ≤ 12 proven |
+| path_4 | PARTIAL | Endpoints need bases; τ ≤ 12 proven |
+| cycle_4 | PARTIAL | All approaches blocked; τ ≤ 12 proven, τ ≤ 8 open |
+| two_two_vw | PARTIAL | Two independent pairs; τ ≤ 12 proven |
+| matching_2 | PARTIAL | Same as two_two_vw; τ ≤ 12 proven |
 
-**What IS proven:** τ ≤ 12 for ALL cases (slot113, slot139 - truly 0 sorry, 0 axiom)
+**What IS proven:** τ ≤ 12 for ALL cases (slot139 - 0 sorry, 0 axiom, correct definitions)
 
 ---
 
