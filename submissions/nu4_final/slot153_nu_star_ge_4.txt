@@ -1,0 +1,230 @@
+/-
+Tuza ν=4 Cycle_4: Fractional Packing Lower Bound (ν* ≥ 4)
+
+GOAL: Prove that the fractional packing number is at least 4.
+      This is the EASY direction - we construct a feasible packing.
+
+APPROACH:
+1. Define fractional packing predicate
+2. Construct M_char: assign weight 1 to each M-element, 0 to externals
+3. Prove M_char is a valid fractional packing
+4. Show it achieves weight 4
+
+SCAFFOLDING:
+- M_edge_in_exactly_one (slot64c - PROVEN)
+
+ZERO SORRIES EXPECTED
+-/
+
+import Mathlib
+
+set_option maxHeartbeats 400000
+
+open Finset BigOperators Classical
+
+noncomputable section
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+-- ══════════════════════════════════════════════════════════════════════════════
+-- DEFINITIONS
+-- ══════════════════════════════════════════════════════════════════════════════
+
+def isTrianglePacking (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V)) : Prop :=
+  M ⊆ G.cliqueFinset 3 ∧
+  Set.Pairwise (M : Set (Finset V)) (fun t1 t2 => (t1 ∩ t2).card ≤ 1)
+
+def isMaxPacking (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V)) : Prop :=
+  isTrianglePacking G M ∧
+  ∀ t ∈ G.cliqueFinset 3, t ∉ M → ∃ m ∈ M, (t ∩ m).card ≥ 2
+
+/-- A fractional triangle packing assigns weights to triangles
+    such that each edge has total weight ≤ 1 -/
+def IsFractionalPacking (G : SimpleGraph V) [DecidableRel G.Adj]
+    (w : Finset V → ℝ) : Prop :=
+  (∀ t, 0 ≤ w t) ∧
+  (∀ t, t ∉ G.cliqueFinset 3 → w t = 0) ∧
+  (∀ e ∈ G.edgeFinset,
+    ((G.cliqueFinset 3).filter (fun t => e ∈ t.sym2)).sum w ≤ 1)
+
+/-- Total weight of a fractional packing -/
+def packingWeight (G : SimpleGraph V) [DecidableRel G.Adj] (w : Finset V → ℝ) : ℝ :=
+  (G.cliqueFinset 3).sum w
+
+-- ══════════════════════════════════════════════════════════════════════════════
+-- SCAFFOLDING (from slot64c - PROVEN)
+-- ══════════════════════════════════════════════════════════════════════════════
+
+/-- Each edge in a triangle packing appears in exactly one triangle. -/
+lemma M_edge_in_exactly_one (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M)
+    (e : Sym2 V) (m : Finset V) (hm : m ∈ M) (he : e ∈ m.sym2) :
+    ∀ m' ∈ M, m' ≠ m → e ∉ m'.sym2 := by
+  intro m' hm' hne he'
+  rw [Finset.mem_sym2_iff] at he he'
+  obtain ⟨u, v, huv, hu_m, hv_m, rfl⟩ := he
+  obtain ⟨u', v', _, hu'_m', hv'_m', heq⟩ := he'
+  simp only [Sym2.eq, Sym2.rel_iff] at heq
+  rcases heq with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · have h_card : (m ∩ m').card ≥ 2 := by
+      have hsub : ({u, v} : Finset V) ⊆ m ∩ m' := by
+        intro x hx
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl
+        · exact Finset.mem_inter.mpr ⟨hu_m, hu'_m'⟩
+        · exact Finset.mem_inter.mpr ⟨hv_m, hv'_m'⟩
+      calc 2 = ({u, v} : Finset V).card := (Finset.card_pair huv).symm
+        _ ≤ (m ∩ m').card := Finset.card_le_card hsub
+    have := hM.2 hm hm' hne.symm
+    omega
+  · have h_card : (m ∩ m').card ≥ 2 := by
+      have hsub : ({u, v} : Finset V) ⊆ m ∩ m' := by
+        intro x hx
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl
+        · exact Finset.mem_inter.mpr ⟨hu_m, hv'_m'⟩
+        · exact Finset.mem_inter.mpr ⟨hv_m, hu'_m'⟩
+      calc 2 = ({u, v} : Finset V).card := (Finset.card_pair huv).symm
+        _ ≤ (m ∩ m').card := Finset.card_le_card hsub
+    have := hM.2 hm hm' hne.symm
+    omega
+
+-- ══════════════════════════════════════════════════════════════════════════════
+-- M_CHAR: CHARACTERISTIC FUNCTION OF PACKING
+-- ══════════════════════════════════════════════════════════════════════════════
+
+/-- Characteristic function: 1 on M-elements, 0 elsewhere -/
+def M_char (M : Finset (Finset V)) (t : Finset V) : ℝ :=
+  if t ∈ M then 1 else 0
+
+/-- M_char is nonnegative -/
+lemma M_char_nonneg (M : Finset (Finset V)) (t : Finset V) :
+    0 ≤ M_char M t := by
+  unfold M_char
+  split_ifs <;> linarith
+
+/-- M_char is zero outside triangles (if M ⊆ cliqueFinset 3) -/
+lemma M_char_zero_outside (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M)
+    (t : Finset V) (ht : t ∉ G.cliqueFinset 3) :
+    M_char M t = 0 := by
+  unfold M_char
+  split_ifs with h
+  · exfalso; exact ht (hM.1 h)
+  · rfl
+
+/-- For M-edge e in M-element m, the sum over triangles containing e is exactly 1 -/
+lemma M_char_edge_sum_M_edge (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M)
+    (e : Sym2 V) (he : e ∈ G.edgeFinset)
+    (m : Finset V) (hm : m ∈ M) (he_m : e ∈ m.sym2) :
+    ((G.cliqueFinset 3).filter (fun t => e ∈ t.sym2)).sum (M_char M) = 1 := by
+  -- The sum is over all triangles containing e
+  -- By M_edge_in_exactly_one, only m among M-elements contains e
+  -- So the sum counts only m with weight 1, plus externals with weight 0
+  have h_m_in : m ∈ (G.cliqueFinset 3).filter (fun t => e ∈ t.sym2) := by
+    simp only [Finset.mem_filter]
+    exact ⟨hM.1 hm, he_m⟩
+  -- Split sum: m contributes 1, others contribute 0
+  rw [← Finset.add_sum_erase _ _ h_m_in]
+  simp only [M_char, if_pos hm]
+  suffices h : ((G.cliqueFinset 3).filter (fun t => e ∈ t.sym2)).erase m |>.sum (M_char M) = 0 by
+    linarith
+  apply Finset.sum_eq_zero
+  intro t ht
+  simp only [Finset.mem_erase, Finset.mem_filter] at ht
+  obtain ⟨hne, ht_clique, he_t⟩ := ht
+  unfold M_char
+  split_ifs with ht_M
+  · -- t ∈ M but t ≠ m and both contain e - contradiction
+    exfalso
+    exact M_edge_in_exactly_one G M hM e m hm he_m t ht_M hne.symm he_t
+  · rfl
+
+/-- For non-M-edge e, the sum over triangles containing e is 0 (no M-element contains e) -/
+lemma M_char_edge_sum_non_M_edge (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M)
+    (e : Sym2 V) (he : e ∈ G.edgeFinset)
+    (h_not_M : ∀ m ∈ M, e ∉ m.sym2) :
+    ((G.cliqueFinset 3).filter (fun t => e ∈ t.sym2)).sum (M_char M) = 0 := by
+  apply Finset.sum_eq_zero
+  intro t ht
+  simp only [Finset.mem_filter] at ht
+  unfold M_char
+  split_ifs with ht_M
+  · exfalso; exact h_not_M t ht_M ht.2
+  · rfl
+
+/-- Edge constraint: sum over triangles containing e is at most 1 -/
+lemma M_char_edge_sum_le_1 (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M)
+    (e : Sym2 V) (he : e ∈ G.edgeFinset) :
+    ((G.cliqueFinset 3).filter (fun t => e ∈ t.sym2)).sum (M_char M) ≤ 1 := by
+  by_cases h : ∃ m ∈ M, e ∈ m.sym2
+  · obtain ⟨m, hm, he_m⟩ := h
+    rw [M_char_edge_sum_M_edge G M hM e he m hm he_m]
+  · push_neg at h
+    rw [M_char_edge_sum_non_M_edge G M hM e he h]
+    linarith
+
+/-- M_char is a valid fractional packing -/
+theorem M_char_is_fractional_packing (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M) :
+    IsFractionalPacking G (M_char M) := by
+  refine ⟨M_char_nonneg M, M_char_zero_outside G M hM, ?_⟩
+  intro e he
+  exact M_char_edge_sum_le_1 G M hM e he
+
+-- ══════════════════════════════════════════════════════════════════════════════
+-- WEIGHT CALCULATION
+-- ══════════════════════════════════════════════════════════════════════════════
+
+/-- The weight of M_char equals |M| -/
+lemma M_char_weight_eq_card (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M) :
+    packingWeight G (M_char M) = M.card := by
+  unfold packingWeight
+  -- Split sum: M-elements contribute 1 each, non-M-elements contribute 0
+  have h_sub : M ⊆ G.cliqueFinset 3 := hM.1
+  calc (G.cliqueFinset 3).sum (M_char M)
+      = M.sum (M_char M) + ((G.cliqueFinset 3) \ M).sum (M_char M) := by
+        rw [Finset.sum_union_disjoint (Finset.disjoint_sdiff)]
+        congr 1
+        ext t
+        simp only [Finset.mem_union, Finset.mem_sdiff]
+        constructor
+        · intro ht
+          by_cases htm : t ∈ M
+          · left; exact htm
+          · right; exact ⟨ht, htm⟩
+        · intro h
+          rcases h with htm | ⟨ht, _⟩
+          · exact h_sub htm
+          · exact ht
+    _ = M.sum (fun _ => (1 : ℝ)) + ((G.cliqueFinset 3) \ M).sum (fun _ => (0 : ℝ)) := by
+        congr 1
+        · apply Finset.sum_congr rfl
+          intro t ht
+          simp only [M_char, if_pos ht]
+        · apply Finset.sum_congr rfl
+          intro t ht
+          simp only [Finset.mem_sdiff] at ht
+          simp only [M_char, if_neg ht.2]
+    _ = M.card + 0 := by
+        simp only [Finset.sum_const, smul_eq_mul, mul_one, Finset.sum_const_zero]
+    _ = M.card := by ring
+
+-- ══════════════════════════════════════════════════════════════════════════════
+-- MAIN THEOREM: ν* ≥ 4 for ν = 4
+-- ══════════════════════════════════════════════════════════════════════════════
+
+/-- For a packing of size 4, there exists a fractional packing of weight 4 -/
+theorem nu_star_ge_4 (G : SimpleGraph V) [DecidableRel G.Adj]
+    (M : Finset (Finset V)) (hM : isTrianglePacking G M) (hM4 : M.card = 4) :
+    ∃ w : Finset V → ℝ, IsFractionalPacking G w ∧ packingWeight G w = 4 := by
+  use M_char M
+  constructor
+  · exact M_char_is_fractional_packing G M hM
+  · rw [M_char_weight_eq_card G M hM, hM4]
+
+end
