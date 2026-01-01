@@ -21,6 +21,38 @@ Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 9. **`proven/` directory = verified clean files only** → incomplete work goes in `partial/`
 10. **Database follows files, not the other way around** → always verify .lean before updating status
 11. **Axioms are not proofs** → any file using `axiom` is incomplete
+12. **Check for self-loop bug** → `rg "s\(v.*,.*v\)|Sym2.mk.*v.*,.*v" file.lean` to find `s(v,v)` patterns
+
+### Self-Loop Bug (Pattern 11 - CRITICAL)
+
+**THE BUG**: Using `s(v, v)` or `Sym2.mk (v, v)` as a "covering edge"
+
+**WHY IT'S WRONG**: `s(v, v)` is NOT a valid graph edge (SimpleGraph requires `u ≠ v`).
+However, `t.sym2` for a triangle `t = {a,b,c}` INCLUDES self-loops `s(a,a), s(b,b), s(c,c)`.
+So proofs using self-loops are "technically valid" in Lean but MATHEMATICALLY WRONG.
+
+**HOW TO DETECT**:
+```bash
+# Find self-loop patterns
+rg "s\(v, v\)|Sym2.mk.*\( v, v \)|use.*s\(.*,.*\1\)" file.lean
+```
+
+**AFFECTED FILES** (known):
+- `proven/tuza/nu2/tuza_nu2_PROVEN.lean` - uses `{Sym2.mk (v, v)}` as cover
+- `Math/Slot145.lean` - `adaptiveCoverAt` uses `{s(v, v)}`
+- `slot147_v2_lp_simplified_aristotle.lean` - line 210
+
+**CORRECT PATTERN**: Cover definitions MUST include `E ⊆ G.edgeFinset`:
+```lean
+-- CORRECT: constrains to actual graph edges
+def triangleCoveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf {n : ℕ | ∃ E' : Finset (Sym2 V), E' ⊆ G.edgeFinset ∧
+    (∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E', e ∈ t.sym2) ∧ E'.card = n}
+
+-- WRONG: allows self-loops
+def coveringNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf {n : ℕ | ∃ E : Finset (Sym2 V), E.card = n ∧ ∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E, e ∈ t.sym2}
+```
 
 ---
 
