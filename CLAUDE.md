@@ -1,7 +1,39 @@
 # CLAUDE.md - Math Project
 
 ## Mission
-Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
+Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Falsify false conjectures fast. Prove true ones with scaffolding.
+
+---
+
+## Aristotle Capability Taxonomy
+
+**Aristotle is a DISCOVERY ENGINE on finite domains, not just a verifier.**
+
+| Tier | Success Rate | Capabilities | Key Tactics |
+|------|--------------|--------------|-------------|
+| **1** | 70-90% | Counterexamples (Fin 5-7), cardinality bounds, decidable predicates | `native_decide`, `fin_cases`, `decide` |
+| **2** | 30-50% | Subadditivity, simple induction, LP witnesses (needs 10+ scaffolding) | `simp_all`, `aesop`, `omega` |
+| **3** | 10-20% | Deep combinatorics (human must outline proof structure) | `grind`, `linarith` |
+| **4** | <5% | Asymptotics, optimal selection, global coordination | **AVOID** |
+
+**Falsification-first**: Submit uncertain conjectures on `Fin 6-7`. Aristotle finds counterexamples in minutes if false.
+
+---
+
+## Optimal Submission Pattern
+
+| Metric | Target | Impact |
+|--------|--------|--------|
+| **Lines** | 100-200 | Under 100 = insufficient context; over 200 = diluted signal |
+| **Lemmas** | 3-7 | Chain of dependencies, not monolith |
+| **Sorries** | 0-1 | More sorries = diffuse effort |
+| **Proven helpers** | 10+ | **4x success rate** (40% vs 10%) |
+| **Vertex type** | `Fin n` (n ≤ 7) | Enables `native_decide`, `fin_cases` |
+
+**Winning patterns** (by success rate):
+- `safe_discard`: 100% - verify already-proven work
+- `multi_agent_optimized`: 100% - parallel AI review before submit
+- `scaffolded`: 10% - **needs more helpers or smaller scope**
 
 ---
 
@@ -22,6 +54,8 @@ Prove Tuza's conjecture for ν=4 using Aristotle. Learn from every attempt.
 10. **Database follows files, not the other way around** → always verify .lean before updating status
 11. **Axioms are not proofs** → any file using `axiom` is incomplete
 12. **No self-loops in covers** → `s(v,v)` is not a graph edge; cover definitions MUST have `E ⊆ G.edgeFinset`
+13. **Falsification-first for uncertain lemmas** → submit on `Fin 6-7`; Aristotle finds counterexamples fast if false
+14. **10+ proven helpers minimum** → scaffolding increases success rate 4x
 
 ---
 
@@ -115,14 +149,15 @@ FROM nu4_cases WHERE case_name = 'path_4';
 
 ## Decision Priority
 
-1. **Complete near-misses** (1-2 sorry with proven_count > 0)
-2. **Partial cases** (nu4_cases WHERE status='partial')
-3. **New exploration** (only if 1-2 are empty)
+1. **Falsify uncertain conjectures** (submit on Fin 6-7 for fast counterexample search)
+2. **Complete near-misses** (1-2 sorry with proven_count ≥ 10) - **70% of submissions are fixable**
+3. **Partial cases** (nu4_cases WHERE status='partial')
+4. **New exploration** (only if 1-3 are empty)
 
 ```sql
--- Near-misses
+-- Find near-misses to work
 SELECT filename, sorry_count, proven_count FROM submissions
-WHERE status='completed' AND sorry_count BETWEEN 1 AND 2 ORDER BY proven_count DESC;
+WHERE status='completed' AND sorry_count = 1 AND proven_count >= 10 ORDER BY proven_count DESC;
 
 -- Case knowledge
 SELECT case_name, status, key_insight, next_action FROM nu4_cases;
@@ -133,7 +168,7 @@ SELECT approach_name, avoid_pattern FROM failed_approaches WHERE frontier_id='nu
 
 ---
 
-## Scaffolding
+## Scaffolding (10+ helpers → 4x success rate)
 
 **Validated TRUE lemmas** (mathematically verified):
 - `tau_containing_v_in_pair_le_4` - Spokes cover containing triangles
@@ -176,7 +211,7 @@ variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]
 | **Grok-4** | Lean syntax, code bugs, proof gaps | Math reasoning (times out) |
 | **Gemini** | Literature, proof strategy, architecture | Detailed code |
 | **Claude** | Long context, planning, synthesis | - |
-| **Aristotle** | Actual proving (6+ hrs) | Quick checks |
+| **Aristotle** | **Discovery**: counterexamples (Fin 5-7), proof search with 10+ scaffolding, bound verification | Tier 3-4 without human outline, files >200 lines |
 
 ### Grok-4 API
 ```bash
