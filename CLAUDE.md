@@ -37,6 +37,34 @@ Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Fals
 
 ---
 
+## Informal Proof Sketches (Paper-validated)
+
+**Per [Aristotle IMO paper](https://arxiv.org/abs/2510.01346): "Conditioning on informal proof substantially helps" formal proof search.**
+
+Before every `sorry`, add a natural language proof outline:
+
+```lean
+/-
+PROOF SKETCH:
+1. Each packing element contributes ≤2 edges to cover (by edge-disjointness)
+2. 4 elements × 2 edges = 8 edges total (arithmetic)
+3. Every triangle shares edge with some packing element (maximality)
+4. Therefore these 8 edges form a valid cover (union covers all)
+-/
+theorem tau_le_8_path4 ... := by
+  sorry
+```
+
+**Format guidelines:**
+- 3-5 numbered steps (matches Aristotle's lemma decomposition)
+- Brief justification in parentheses (guides tactic selection)
+- State the key insight explicitly (helps bottleneck-first search)
+- For Tier 2+ problems, include which helper lemmas will be used
+
+**Why this works:** Aristotle uses MCTS with learned value function. Informal sketches narrow the search space by suggesting proof structure, reducing combinatorial explosion.
+
+---
+
 ## Hard Rules
 
 1. **Never run `aristotle` directly** → always `./scripts/submit.sh`
@@ -56,6 +84,7 @@ Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Fals
 12. **No self-loops in covers** → `s(v,v)` is not a graph edge; cover definitions MUST have `E ⊆ G.edgeFinset`
 13. **Falsification-first for uncertain lemmas** → submit on `Fin 6-7`; Aristotle finds counterexamples fast if false
 14. **10+ proven helpers minimum** → scaffolding increases success rate 4x
+15. **Add informal proof sketch before every sorry** → per Aristotle paper, "conditioning substantially helps"
 
 ---
 
@@ -252,8 +281,17 @@ All state in `submissions/tracking.db`:
 **Key views:**
 | View | Purpose |
 |------|---------|
+| `v_actionable_near_misses` | **"What to work on next"** - filters out blocked submissions |
 | `v_false_lemmas_summary` | Quick overview of all false lemmas with evidence |
 | `v_valid_proven` | All proven theorems with valid definitions |
+
+**New junction table:** `submission_false_lemma_targets` links submissions to false lemmas they target.
+
+```sql
+-- Single query: What should I work on next?
+SELECT filename, sorry_count, proven_count, blocked_by, priority_score
+FROM v_actionable_near_misses WHERE blocked = 0 LIMIT 5;
+```
 
 ---
 
