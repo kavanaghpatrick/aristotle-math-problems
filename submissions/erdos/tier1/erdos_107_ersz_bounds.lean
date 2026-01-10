@@ -50,25 +50,21 @@ Let $f(n)$ be minimal such that any $f(n)$ points in $ℝ^2$, no three on a line
 contain $n$ points which form the vertices of a convex $n$-gon.
 Prove that $f(n) = 2^{n-2} + 1$.
 -/
-@[category research open, AMS 52]
-theorem erdos_107 : (∀ n ≥ 3, f n = 2^(n - 2) + 1) ↔ answer(sorry) := by
+theorem erdos_107 : (∀ n ≥ 3, f n = 2^(n - 2) + 1) := by
   sorry
 
 /-- For every $n ≥ 3$, there exists $N$ such that any $N$ points, no three on a line,
 contain a convex $n$-gon. -/
-@[category research solved, AMS 52]
 theorem nonempty_cardSet : ∀ n ≥ 3, (cardSet n).Nonempty :=
   sorry
 
 /-- Depending on details of definitions,
 the statement is false or trivial for $n < 3$. -/
-@[category test, AMS 52]
 theorem f_zero_eq : f 0 = 0 := by
   have : ∀ P, HasConvexNGon 0 P := by
     intro; use ∅; simp [ConvexIndep]
   simp [f, cardSet, this]
 
-@[category test, AMS 52]
 theorem f_three_eq : f 3 = 3 := by
   sorry
 
@@ -87,7 +83,6 @@ $$
 [ErSz35] Erdős, P. and Szekeres, G., _A combinatorial problem in geometry_.
   Compos. Math. (1935), 463-470.
 -/
-@[category research solved, AMS 52]
 /-
 FALSIFICATION SKETCH for ersz_bounds:
 Status: falsifiable - Aristotle should find a counterexample on Fin 5-7
@@ -110,7 +105,6 @@ $$
 [Su17] Suk, Andrew, _On the Erdős-Szekeres convex polygon problem_.
   J. Amer. Math. Soc. (2017), 1047-1053.
 -/
-@[category research solved, AMS 52]
 theorem su_bound :
     ∃ r : ℕ → ℝ, r =o[atTop] (fun n => (n : ℝ)) ∧
       ∀ n ≥ 3, (f n : ℝ) ≤ 2^(n + r n) := by
@@ -126,7 +120,6 @@ $$
 [HMPT20] Holmsen, Andreas F. and Mojarrad, Hossein Nassajian and Pach, János and Tardos, Gábor,
   _Two extensions of the Erdős-Szekeres problem_. J. Eur. Math. Soc. (JEMS) (2020), 3981-3995.
 -/
-@[category research solved, AMS 52]
 theorem hmpt_bound :
     ∃ r : ℕ → ℝ, r =O[atTop] (fun n => Real.sqrt (n * Real.log n)) ∧
       ∀ n ≥ 3, (f n : ℝ) ≤ 2^(n + r n) := by

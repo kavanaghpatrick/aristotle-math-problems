@@ -79,9 +79,8 @@ def HasNUnitDistanceProperty (n : ℕ) (A : Finset ℝ²) : Prop :=
 /--
 Does every convex polygon have a vertex with no other 4 vertices equidistant from it?
 -/
-@[category research open, AMS 52]
 theorem erdos_97 :
-    (∀ A : Finset ℝ², A.Nonempty → ConvexIndep A → ¬HasNEquidistantProperty 4 A) ↔ answer(sorry) := by
+    (∀ A : Finset ℝ², A.Nonempty → ConvexIndep A → ¬HasNEquidistantProperty 4 A) := by
   sorry
 
 /--
@@ -93,7 +92,6 @@ Danzer's construction is explained in [Er87b].
 [Er46b] Erdős, P., _On sets of distances of $n$ points_. Amer. Math. Monthly (1946), 248-250.
 [Er87b] Erdős, P., _Some combinatorial and metric problems in geometry_. Intuitive geometry (Siófok, 1985), 167-177.
 -/
-@[category research solved, AMS 52]
 theorem erdos_97.variants.three_equidistant :
     ∃ A : Finset ℝ², A.Nonempty ∧ ConvexIndep A ∧ HasNEquidistantProperty 3 A := by
   let A₁ : ℝ² := ![(-√3), -1]
@@ -112,7 +110,6 @@ theorem erdos_97.variants.three_equidistant :
 Erdős also conjectured that there is a $k$ for which every convex polygon has a vertex
 with no other $k$ vertices equidistant from it.
 -/
-@[category research open, AMS 52]
 /-
 FALSIFICATION SKETCH for erdos_97.variants.k_equidistant:
 Status: falsifiable - Aristotle should find a counterexample on Fin 5-7
@@ -123,7 +120,7 @@ Status: falsifiable - Aristotle should find a counterexample on Fin 5-7
 -/
 
 theorem erdos_97.variants.k_equidistant :
-    (∃ k : ℕ, ∀ A : Finset ℝ², A.Nonempty → ConvexIndep A → ¬HasNEquidistantProperty k A) ↔ answer(sorry) := by
+    (∃ k : ℕ, ∀ A : Finset ℝ², A.Nonempty → ConvexIndep A → ¬HasNEquidistantProperty k A) := by
   sorry
 
 /--
@@ -132,7 +129,6 @@ every vertex has three vertices equidistant from it (and this distance is the sa
 
 [FiRe92] Fishburn, P. C. and Reeds, J. A., _Unit distances between vertices of a convex polygon_. Comput. Geom. (1992), 81-91.
 -/
-@[category research solved, AMS 52]
 theorem erdos_97.variants.three_unit_distance :
     ∃ A : Finset ℝ², A.Nonempty ∧ ConvexIndep A ∧ HasNUnitDistanceProperty 3 A := by
   sorry
@@ -149,7 +145,6 @@ Fishburn and Reeds [FiRe92] also proved that the smallest $n$ for which there ex
 a convex $n$-gon and a cut $\{A, B\}$ of its vertices such that $|\{b \in B : d(a, b) = 1\}| ≥ 3$
 for all $a \in A$, and $|\{a \in A : d(a, b) = 1\}| ≥ 3$ for all $b \in B$, is $n = 20$.
 -/
-@[category research solved, AMS 52]
 theorem erdos_97.variants.three_unit_distance_cut_min :
     sInf {n : ℕ | ∃ (V : Finset ℝ²) (A B : Finset ℝ²),
       n = V.card ∧ ConvexIndep V ∧ A.Nonempty ∧ B.Nonempty ∧ IsCut V A B ∧

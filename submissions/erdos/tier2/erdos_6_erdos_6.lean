@@ -38,7 +38,6 @@ namespace Erdos6
 There are infinitely many $n$ such that $d_n < d_{n+1} < d_{n+2}$, where $d$
 denotes the prime gap function.
 -/
-@[category research solved, AMS 11]
 /-
 FORMALIZATION SKETCH for erdos_6:
 Status: proved - Proof exists, needs Lean formalization
@@ -59,7 +58,6 @@ where $d$ denotes the prime gap function.
 Proved by Banks, Freiberg, and Turnage-Butterbaugh [BFT15] with an application of the
 Maynard-Tao machinery concerning bounded gaps between primes [Ma15]
 -/
-@[category research solved, AMS 11]
 theorem erdos_6.variants.increasing (m : ℕ) :
     {n | ∀ i ∈ Finset.range m, primeGap (n + i) < primeGap (n + i + 1)}.Infinite := by
   sorry
@@ -72,7 +70,6 @@ where $d$ denotes the prime gap function.
 Proved by Banks, Freiberg, and Turnage-Butterbaugh [BFT15] with an application of the
 Maynard-Tao machinery concerning bounded gaps between primes [Ma15]
 -/
-@[category research solved, AMS 11]
 theorem erdos_6.variants.decreasing (m : ℕ) :
     {n | ∀ i ∈ Finset.range m, primeGap (n + i) > primeGap (n + i + 1)}.Infinite := by
   sorry

@@ -42,7 +42,6 @@ def IsUnitaryPerfect (n : ℕ) : Prop :=
 
 /--
 Are there only finitely many unitary perfect numbers? -/
-@[category research open, AMS 11]
 /-
 PROOF SKETCH for erdos_1052:
 Status: open
@@ -53,35 +52,29 @@ Status: open
 -/
 
 theorem erdos_1052 :
-    Set.Finite IsUnitaryPerfect ↔ answer(sorry) := by
+    Set.Finite IsUnitaryPerfect := by
   sorry
 
 /-- All unitary perfect numbers are even. -/
-@[category research solved, AMS 11]
 theorem even_of_isUnitaryPerfect (n : ℕ) (hn : IsUnitaryPerfect n) : Even n := by
   sorry
 
-@[category test, AMS 11]
 theorem isUnitaryPerfect_6 : IsUnitaryPerfect 6 := by
   norm_num [IsUnitaryPerfect, properUnitaryDivisors]
   decide +kernel
 
-@[category test, AMS 11]
 theorem isUnitaryPerfect_60 : IsUnitaryPerfect 60 := by
   norm_num [IsUnitaryPerfect, properUnitaryDivisors]
   decide +kernel
 
-@[category test, AMS 11]
 theorem isUnitaryPerfect_90 : IsUnitaryPerfect 90 := by
   norm_num [IsUnitaryPerfect, properUnitaryDivisors]
   decide +kernel
 
-@[category test, AMS 11]
 theorem isUnitaryPerfect_87360 : IsUnitaryPerfect 87360 := by
   norm_num [IsUnitaryPerfect, properUnitaryDivisors]
   decide +kernel
 
-@[category test, AMS 11]
 theorem isUnitaryPerfect_146361946186458562560000 : IsUnitaryPerfect 146361946186458562560000 := by
   sorry
 

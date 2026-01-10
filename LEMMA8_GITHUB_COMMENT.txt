@@ -1,0 +1,123 @@
+## Lemma 8 Review: apex_private_edge_covers_private_external
+
+Completed detailed analysis of GitHub Issue #50. Full reports available:
+- LEMMA8_EXECUTIVE_BRIEF.md (2-minute read)
+- LEMMA8_REVIEW.md (comprehensive analysis)
+- LEMMA8_LOGICAL_GAPS.md (technical details)
+
+### TL;DR: DO NOT ATTEMPT - Rating 2/5
+
+---
+
+## Key Findings
+
+### 1. Is it TRUE?
+
+**Locally: ✅ YES** - If triangle T contains both p and x_A, then s(p,x_A) ∈ T.sym2 (trivial)
+
+**Globally: ❌ NO** - Depends on Lemma 3 (`private_external_contains_apex`), which is FALSE
+
+### 2. Logical Gap: Lemma 3 Dependency
+
+The lemma assumes:
+> "All externals of A that contain private vertex p also contain fan apex x_A"
+
+**This is FALSE** (proven Dec 29 by Pattern 6 counterexample):
+
+```
+At shared vertex v_ab between adjacent M-elements A and B:
+  T_A = {v_ab, a_priv, x_A}  -- external of A
+  T_B = {v_ab, b_priv, x_B}  -- external of B
+  x_A ≠ x_B  (different fan apexes)
+  T_A ∩ T_B = {v_ab}  (only shared vertex, not a common edge)
+```
+
+Different externals at the same shared vertex have different external vertices. The "fan apex" structure fails.
+
+### 3. Can Aristotle Prove It?
+
+**Probability: 60% (unsound proof)**
+
+Aristotle might:
+- Accept Lemma 3 without verification (just `sorry` it)
+- Use proof-by-type-escape pattern (Pattern 14) to finalize
+- Output "PROVEN" while hiding critical assumptions
+
+**Risk**: High chance of unsound proof artifact.
+
+### 4. Strategic Value: ZERO
+
+Even if TRUE, the lemma:
+- Covers only specific external types
+- Doesn't reduce edge count below 12
+- Depends on universal apex (blocked by Pattern 6)
+- Ineffective for τ ≤ 8 proof
+
+The universal apex strategy is **DEAD** (Pattern 6 proven it false Dec 29).
+
+---
+
+## The Dependency Chain (All Broken)
+
+```
+Lemma 8
+  ↓ depends on
+Lemma 3 (FALSE - Pattern 6 counterexample)
+  ↓ depends on
+fan_apex_exists (unproven)
+  ↓ depends on
+universal_apex_in_cycle4 (blocked at line 127)
+  ↓ BLOCKED BY
+Pattern 6: Different externals at v have different external vertices
+```
+
+**Verdict**: Every step of this dependency chain is either false or unproven.
+
+---
+
+## Three Core Problems
+
+### Problem 1: False Prerequisite
+Lemma 3 contradicts Pattern 6 (Dec 29, 2025). The fan apex doesn't exist for all externals of a single M-element.
+
+### Problem 2: Underspecified Definition
+"Private-type external" is not formally defined. What exactly does it mean?
+- If: externals using ONLY private edges → still doesn't guarantee common apex
+- If: any external containing p → some do, some don't
+
+### Problem 3: Ineffective for Goal
+Even if TRUE, doesn't achieve τ ≤ 8 without universal apex, which is BLOCKED by Pattern 6.
+
+---
+
+## Rating: 2/5
+
+- ✅ Locally sound (trivial consequence)
+- ❌ Globally unsound (false prerequisite)
+- ❌ Strategically ineffective (doesn't advance τ ≤ 8)
+- ⚠️ Proof risk (unsound artifact likely)
+- ❌ Time investment (unproductive)
+
+---
+
+## Recommendation
+
+### DO NOT ATTEMPT this lemma.
+
+The universal apex strategy is fundamentally broken by Pattern 6. Until that's resolved (or a different approach found), this lemma is a dead end.
+
+### Instead, focus on:
+1. **Prove/disprove**: Do ALL externals of cycle_4 share a single external vertex? (slot185)
+2. **Accept τ ≤ 12** as intermediate bound
+3. **Explore alternative approaches** (not spoke-based)
+
+---
+
+## References
+
+- FALSE_LEMMAS.md: Pattern 6 (external_share_common_vertex) - **CRITICAL**
+- FALSE_LEMMAS.md: Pattern 14 (proof_by_type_escape)
+- Slot185: universal_apex_in_cycle4 (the real blocker)
+- Detailed analysis: LEMMA8_EXECUTIVE_BRIEF.md
+
+---

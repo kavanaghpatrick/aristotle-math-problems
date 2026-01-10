@@ -63,7 +63,6 @@ A sanity check to ensure the set of possible `f(n)` values is bounded above. A t
 `n-1`, since any point can have at most `n-1` other points equidistant from it.
 This ensures `sSup` is well-defined.
 -/
-@[category test, AMS 52]
 theorem possible_f_values_BddAbove (n : ℕ) : BddAbove (possible_f_values n) := by
   use n - 1
   rintro k ⟨points, h_card, h_prop⟩
@@ -80,15 +79,13 @@ noncomputable def f (n : ℕ) : ℕ := sSup <| possible_f_values n
 /--
 Is it true that $f(n)\leq n^{o(1)}$?
 -/
-@[category research open, AMS 52]
 theorem erdos_92.variants.weak : (∃ o : ℕ → ℝ,
-  o =o[atTop] (1 : ℕ → ℝ) ∧ ∀ n, (f n : ℝ) ≤ n^(o n)) ↔ answer(sorry) := by
-sorry
+  o =o[atTop] (1 : ℕ → ℝ) ∧ ∀ n, (f n : ℝ) ≤ n^(o n)) := by
+  sorry
 
 /--
 Or even $f(n) < n^{c/\log\log n}$ for some constant $c > 0$?
 -/
-@[category research open, AMS 52]
 /-
 PROOF SKETCH for erdos_92.variants.strong:
 Status: open
@@ -99,8 +96,8 @@ Status: open
 -/
 
 theorem erdos_92.variants.strong :
-  (∃ c > 0, ∀ n, (f n : ℝ) ≤ n^(c / (n : ℝ).log.log)) ↔ answer(sorry) := by
-sorry
+  (∃ c > 0, ∀ n, (f n : ℝ) ≤ n^(c / (n : ℝ).log.log)) := by
+  sorry
 
 -- TODO(firsching): formalize the rest of the remarks
 

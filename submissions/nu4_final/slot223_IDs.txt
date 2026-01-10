@@ -1,0 +1,13 @@
+# Aristotle Submission IDs - slot223 series
+# Date: January 3, 2026
+# Approach: Link Graph + König for τ ≤ 8
+
+slot223a (link_graph_small):           a90d3f54-55e4-40d9-a7d4-40f215a9d75f
+slot223b (independence_ge_2):          e2d1d210-f9f7-4554-8894-34389dabdd07
+slot223c (four_vertex_cover):          9794f0d1-6790-4025-97c8-9a31749d589a
+slot223d (triangle_contains_shared):   05121e94-88bc-4357-b57d-b7075777f166
+slot223e (vertex_to_edge_cover):       cc7eb161-38a7-4df9-b3e8-ae1bcea9a498
+slot223f (tau_le_8_main):              78e4fd7a-6829-4949-b79b-0a6bb2968b9d
+
+# All files have exactly 1 sorry each
+# Dependency chain: 223a,223b,223c,223d,223e → 223f (main theorem)

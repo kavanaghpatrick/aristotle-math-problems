@@ -55,7 +55,6 @@ always exists some number `N` large enough to guarantee a monochromatic arithmet
 In other words, the set `monoAP_guarantee_set` is non-empty. This is the fundamental existence
 result that allows for the definition of the van der Waerden numbers.
 -/
-@[category research solved, AMS 11]
 theorem monoAP_guarantee_set_nonempty (r k) : (monoAP_guarantee_set r k).Nonempty := by
   sorry
 
@@ -73,11 +72,9 @@ must contain a monochromatic arithmetic progression of length `k`.
 -/
 noncomputable abbrev W : ℕ → ℕ := monoAPNumber 2
 
-@[category test, AMS 11]
 theorem monoAPNumber_two_one : W 1 = 1 := by
   sorry
 
-@[category test, AMS 11]
 theorem monoAPNumber_two_two : W 2 = 3 := by
   sorry
 
@@ -85,22 +82,19 @@ theorem monoAPNumber_two_two : W 2 = 3 := by
 In [Er80] Erdős asks whether
 $$ \lim_{k \to \infty} (W(k))^{1/k} = \infty $$
 -/
-@[category research open, AMS 11]
-theorem erdos_138 : atTop.Tendsto (fun k => (W k : ℝ)^(1/(k : ℝ))) atTop ↔ answer(sorry) := by
+theorem erdos_138 : atTop.Tendsto (fun k => (W k : ℝ)^(1/(k : ℝ))) atTop := by
   sorry
 
 
 /--
 When $p$ is prime Berlekamp [Be68] has proved $W(p+1) ≥ p^{2^p}$.
 -/
-@[category research solved, AMS 11]
 theorem erdos_138.variants.prime (p : ℕ) (hp : p.Prime) : p * (2 ^ p) ≤ W (p + 1) := by
   sorry
 
 /--
 Gowers [Go01] has proved $$W(k) \leq 2^{2^{2^{2^{2^{k+9}}}}.$$
 -/
-@[category research solved, AMS 11]
 /-
 PROOF SKETCH for erdos_138.variants.upper:
 Status: open
@@ -116,23 +110,20 @@ theorem erdos_138.variants.upper (k : ℕ) : W k ≤ 2 ^ (2 ^ (2 ^ 2 ^ 2 ^ (k + 
 /--
 In [Er81] Erdős asks whether $\frac{W(k+1)}{W(k)} \to \infty$.
 -/
-@[category research open, AMS 11]
 theorem erdos_138.variants.quotient :
-    atTop.Tendsto (fun k => ((W (k + 1) : ℚ)/(W k))) atTop ↔ answer(sorry) := by
+    atTop.Tendsto (fun k => ((W (k + 1) : ℚ)/(W k))) atTop := by
   sorry
 
 /--
 In [Er81] Erdős asks whether $W(k+1) - W(k) \to \infty$.
 -/
-@[category research open, AMS 11]
 theorem erdos_138.variants.difference :
-    atTop.Tendsto (fun k => (W (k + 1) - W k)) atTop ↔ answer(sorry) := by
+    atTop.Tendsto (fun k => (W (k + 1) - W k)) atTop := by
   sorry
 
 /--
 In [Er80] Erdős asks whether $W(k)/2^k\to \infty$.
 -/
-@[category research open, AMS 11]
 theorem erdos_138.variants.dvd_two_pow :
-    atTop.Tendsto (fun k => ((W k : ℚ)/ (2 ^ k))) atTop ↔ answer(sorry) := by
+    atTop.Tendsto (fun k => ((W k : ℚ)/ (2 ^ k))) atTop := by
   sorry

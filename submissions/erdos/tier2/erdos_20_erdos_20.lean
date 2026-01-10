@@ -38,11 +38,9 @@ share the same intersection $S$.
 def IsSunflowerWithKernel (F : Set (Set α)) (S : Set α) : Prop :=
   F.Pairwise (fun A B => A ∩ B = S)
 
-@[category test, AMS 5]
 theorem isSunflowerWithKernel_empty (S : Set α) : IsSunflowerWithKernel {} S := by
   simp [IsSunflowerWithKernel]
 
-@[category test, AMS 5]
 theorem isSunflowerWithKernel_singleton (S : Set α) (A : Set α) :
     IsSunflowerWithKernel {A} S := by
   simp [IsSunflowerWithKernel]
@@ -53,11 +51,9 @@ same intersection.
 -/
 def IsSunflower (F : Set (Set α)) : Prop := ∃ S, IsSunflowerWithKernel F S
 
-@[category test, AMS 5]
 theorem isSunflower_empty : IsSunflower (∅ : Set (Set α)) := by
   simp [IsSunflower, isSunflowerWithKernel_empty]
 
-@[category test, AMS 5]
 theorem isSunflower_singleton (A : Set α) : IsSunflower {A} := by
   simp [IsSunflower, isSunflowerWithKernel_singleton]
 
@@ -69,7 +65,6 @@ noncomputable def f (n k : ℕ) : ℕ :=
   sInf {m | ∀ {α : Type}, ∀ (F : Set (Set α)),
     ((∀ f ∈ F, f.ncard = n) ∧ m ≤ F.ncard) → ∃ S ⊆ F, S.ncard = k ∧ IsSunflower S}
 
-@[category test, AMS 5]
 theorem f_0_1 : f 0 1 = 1 := by
   refine IsLeast.csInf_eq ⟨fun F hF ↦ ?_, fun n hn ↦ n.pos_of_ne_zero fun hn₀ ↦ ?_⟩
   · obtain ⟨A, hA⟩ := F.nonempty_of_ncard_ne_zero (by omega)
@@ -80,7 +75,6 @@ theorem f_0_1 : f 0 1 = 1 := by
 /--
 Is it true that $f(n,k) < c_k^n$ for some constant $c_k>0$ and for all $n > 0$?
 -/
-@[category research open, AMS 5]
 /-
 PROOF SKETCH for erdos_20:
 Status: open
@@ -91,7 +85,7 @@ Status: open
 -/
 
 theorem erdos_20 :
-    (∃ (c : ℕ → ℕ), ∀ n k, n > 0 → f n k < (c k) ^ n ↔ answer(sorry)) := by
+    (∃ (c : ℕ → ℕ), ∀ n k, n > 0 → f n k < (c k) ^ n ↔ sorry) := by
   sorry
 
 -- TODO(firsching): add the various known bounds as variants.

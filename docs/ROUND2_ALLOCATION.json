@@ -1,0 +1,163 @@
+{
+  "round": 2,
+  "date": "2026-01-03",
+  "agent": "Grok-4",
+  "allocation": {
+    "A_near_miss_fixes": {
+      "slots": 4,
+      "rationale": "Quick wins with high success probability. slot72 is 95% trivial.",
+      "files": [
+        {
+          "slot": 1,
+          "filename": "slot200_slot72_fix.lean",
+          "target": "bridges_BC_subset_tpair_CD exact? application",
+          "success_prob": 0.95,
+          "time_estimate": "30 min"
+        },
+        {
+          "slot": 2,
+          "filename": "slot201_tau_pair_overlap.lean",
+          "target": "Prove covers overlap at shared vertex for tau_pair <= 4",
+          "success_prob": 0.60,
+          "time_estimate": "6 hrs"
+        },
+        {
+          "slot": 3,
+          "filename": "slot202_tau_pair_le_5.lean",
+          "target": "Weaker bound tau_pair <= 5 (fallback if 4 fails)",
+          "success_prob": 0.75,
+          "time_estimate": "4 hrs"
+        },
+        {
+          "slot": 4,
+          "filename": "slot203_tau_S_union_opt.lean",
+          "target": "tau(S_e union S_f) <= 3 via shared vertex optimization",
+          "success_prob": 0.65,
+          "time_estimate": "4 hrs"
+        }
+      ]
+    },
+    "B_path4_infrastructure": {
+      "slots": 5,
+      "rationale": "Core proposal: Path_4 achieves tau <= 8 via X(A,D) = empty and linear overlaps",
+      "files": [
+        {
+          "slot": 5,
+          "filename": "slot204_path4_structure.lean",
+          "target": "Define Path4 structure with A-B-C-D adjacencies, A.D disjoint",
+          "success_prob": 0.90,
+          "time_estimate": "2 hrs"
+        },
+        {
+          "slot": 6,
+          "filename": "slot205_path4_no_AD_bridges.lean",
+          "target": "Prove X(A,D) = empty when A and D non-adjacent",
+          "success_prob": 0.95,
+          "time_estimate": "2 hrs"
+        },
+        {
+          "slot": 7,
+          "filename": "slot206_path4_decomposition.lean",
+          "target": "All triangles in T_pair(AB) union T_pair(BC) union T_pair(CD)",
+          "success_prob": 0.85,
+          "time_estimate": "4 hrs"
+        },
+        {
+          "slot": 8,
+          "filename": "slot207_path4_overlap_analysis.lean",
+          "target": "Prove B-overlap and C-overlap save 2 edges each",
+          "success_prob": 0.70,
+          "time_estimate": "6 hrs"
+        },
+        {
+          "slot": 9,
+          "filename": "slot208_path4_tau_le_8.lean",
+          "target": "Assemble final tau <= 8 for Path_4 configuration",
+          "success_prob": 0.75,
+          "time_estimate": "6 hrs"
+        }
+      ]
+    },
+    "C_two_two_vw": {
+      "slots": 3,
+      "rationale": "Independent verification: Two independent pairs with no inter-bridges",
+      "files": [
+        {
+          "slot": 10,
+          "filename": "slot209_two_two_structure.lean",
+          "target": "Define M = {e1,e2} union {e3,e4} with no cross-adjacency",
+          "success_prob": 0.90,
+          "time_estimate": "2 hrs"
+        },
+        {
+          "slot": 11,
+          "filename": "slot210_two_two_no_bridges.lean",
+          "target": "Prove X(e1,e3) = X(e1,e4) = X(e2,e3) = X(e2,e4) = empty",
+          "success_prob": 0.95,
+          "time_estimate": "2 hrs"
+        },
+        {
+          "slot": 12,
+          "filename": "slot211_two_two_tau_8.lean",
+          "target": "tau <= tau(pair1) + tau(pair2) <= 4 + 4 = 8",
+          "success_prob": 0.80,
+          "time_estimate": "4 hrs"
+        }
+      ]
+    },
+    "D_cycle4_new": {
+      "slots": 1,
+      "rationale": "Low priority: cycle_4 blocked by 3 false lemmas, minimal investment",
+      "files": [
+        {
+          "slot": 13,
+          "filename": "slot212_cycle4_weaker_externals.lean",
+          "target": "Prove tau(externals at v) <= 3 (weaker than 2)",
+          "success_prob": 0.50,
+          "time_estimate": "6 hrs"
+        }
+      ]
+    },
+    "E_lp_krivelevich": {
+      "slots": 2,
+      "rationale": "Exploratory: LP approach has theoretical appeal but blocked by false lemmas",
+      "files": [
+        {
+          "slot": 14,
+          "filename": "slot213_nu_star_bound.lean",
+          "target": "Direct construction proving nu* <= 4",
+          "success_prob": 0.40,
+          "time_estimate": "8 hrs"
+        },
+        {
+          "slot": 15,
+          "filename": "slot214_direct_cover_8.lean",
+          "target": "Direct 8-edge cover construction without LP",
+          "success_prob": 0.35,
+          "time_estimate": "8 hrs"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_slots": 15,
+    "expected_success_any": 0.65,
+    "expected_success_path4": 0.75,
+    "expected_success_two_two": 0.80,
+    "fallback": "Accept tau <= 12 (already proven in slot139)"
+  },
+  "key_insights": [
+    "slot39 uses false bridge_absorption - ABANDON",
+    "slot72 needs trivial exact? fix - DO FIRST",
+    "slot44 has 14/15 proven, gap is overlap proof",
+    "Path_4 works because X(A,D) = empty",
+    "Cycle_4 blocked by Patterns 6, 7, 16"
+  ],
+  "debate_consensus": {
+    "gemini_lp": "REJECTED - covering_selection_exists is FALSE",
+    "codex_slot72": "ACCEPTED - trivial fix",
+    "codex_slot39": "REJECTED - uses false bridge_absorption",
+    "codex_slot44": "PARTIALLY ACCEPTED - worth attempting but gap exists",
+    "grok_path4": "REFINED - confirmed tau <= 8 achievable"
+  }
+}

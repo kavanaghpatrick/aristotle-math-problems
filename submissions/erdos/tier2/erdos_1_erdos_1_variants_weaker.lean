@@ -49,7 +49,6 @@ $$
   N \gg 2 ^ n.
 $$
 -/
-@[category research open, AMS 5 11]
 theorem erdos_1 : ∃ C > (0 : ℝ), ∀ (N : ℕ) (A : Finset ℕ) (_ : IsSumDistinctSet A N),
     N ≠ 0 → C * 2 ^ A.card < N := by
   sorry
@@ -57,7 +56,6 @@ theorem erdos_1 : ∃ C > (0 : ℝ), ∀ (N : ℕ) (A : Finset ℕ) (_ : IsSumDi
 /--
 The trivial lower bound is $N \gg 2^n / n$.
 -/
-@[category undergraduate, AMS 5 11]
 /-
 PROOF SKETCH for erdos_1.variants.weaker:
 Status: open
@@ -79,7 +77,6 @@ $$
 
 [Er56] Erdős, P., _Problems and results in additive number theory_. Colloque sur la Th\'{E}orie des Nombres, Bruxelles, 1955 (1956), 127-137.
 -/
-@[category research solved, AMS 5 11]
 theorem erdos_1.variants.lb : ∃ (o : ℕ → ℝ) (_ : o =o[atTop] (1 : ℕ → ℝ)),
     ∀ (N : ℕ) (A : Finset ℕ) (h : IsSumDistinctSet A N),
       (1 / 4 - o A.card) * 2 ^ A.card / (A.card : ℝ).sqrt ≤ N := by
@@ -89,7 +86,6 @@ theorem erdos_1.variants.lb : ∃ (o : ℕ → ℝ) (_ : o =o[atTop] (1 : ℕ �
 A number of improvements of the constant $\frac{1}{4}$ have been given, with the current
 record $\sqrt{2 / \pi}$ first provied in unpublished work of Elkies and Gleason.
 -/
-@[category research solved, AMS 5 11]
 theorem erdos_1.variants.lb_strong : ∃ (o : ℕ → ℝ) (_ : o =o[atTop] (1 : ℕ → ℝ)),
     ∀ (N : ℕ) (A : Finset ℕ) (h : IsSumDistinctSet A N),
       (√(2 / π) - o A.card) * 2 ^ A.card / (A.card : ℝ).sqrt ≤ N := by
@@ -110,7 +106,6 @@ sums all differ by at least $1$ is proposed in [Er73] and [ErGr80].
 
 [ErGr80] Erdős, P. and Graham, R., _Old and new problems and results in combinatorial number theory_. Monographies de L'Enseignement Mathematique (1980).
 -/
-@[category research open, AMS 5 11]
 theorem erdos_1.variants.real : ∃ C > (0 : ℝ), ∀ (N : ℕ) (A : Finset ℝ)
     (_ : IsSumDistinctRealSet A N), N ≠ 0 → C * 2 ^ A.card < N := by
   sorry
@@ -121,7 +116,6 @@ elements is $4$.
 
 https://oeis.org/A276661
 -/
-@[category undergraduate, AMS 5 11]
 theorem erdos_1.variants.least_N_3 :
     IsLeast { N | ∃ A, IsSumDistinctSet A N ∧ A.card = 3 } 4 := by
   refine ⟨⟨{1, 2, 4}, ?_⟩, ?_⟩
@@ -152,7 +146,6 @@ elements is $13$.
 
 https://oeis.org/A276661
 -/
-@[category research solved, AMS 5 11]
 theorem erdos_1.variants.least_N_5 :
     IsLeast { N | ∃ A, IsSumDistinctSet A N ∧ A.card = 5 } 13 := by
   sorry
@@ -163,7 +156,6 @@ elements is $161$.
 
 https://oeis.org/A276661
 -/
-@[category research solved, AMS 5 11]
 theorem erdos_1.variants.least_N_9 :
     IsLeast { N | ∃ A, IsSumDistinctSet A N ∧ A.card = 9 } 161 := by
   sorry

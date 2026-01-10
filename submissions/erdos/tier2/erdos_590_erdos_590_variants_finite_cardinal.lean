@@ -43,7 +43,6 @@ universe u
 Let $α$ be the infinite ordinal $\omega^{\omega}$. It was proved by Chang [Ch72] that any red/blue
 colouring of the edges of $K_α$ there is either a red $K_α$ or a blue $K_3$.
 -/
-@[category research solved, AMS 3]
 theorem erdos_590 : OrdinalCardinalRamsey (ω ^ ω) (ω ^ ω) 3 := by
   sorry
 
@@ -51,7 +50,6 @@ theorem erdos_590 : OrdinalCardinalRamsey (ω ^ ω) (ω ^ ω) 3 := by
 Specker [Sp57] proved that when $α=ω^2$ any red/blue
 colouring of the edges of $K_α$ there is either a red $K_α$ or a blue $K_3$.
 -/
-@[category research solved, AMS 3]
 theorem erdos_590.variants.two : OrdinalCardinalRamsey (ω ^ 2) (ω ^ 2) 3 := by
   sorry
 
@@ -59,7 +57,6 @@ theorem erdos_590.variants.two : OrdinalCardinalRamsey (ω ^ 2) (ω ^ 2) 3 := by
 Specker [Sp57] proved that when $α=ω^n$ for $3≤ n < \omega$ then it is not the case that any
 red/blue colouring of the edges of $K_α$ there is either a red $K_α$ or a blue $K_3$.
 -/
-@[category research solved, AMS 3]
 theorem erdos_590.variants.ge_three_false {n : ℕ} (h : 3 ≤ n) :
     ¬ OrdinalCardinalRamsey (ω ^ n) (ω ^ n) 3 := by
   sorry
@@ -69,7 +66,6 @@ Let m be a finite cardinal $< \omega$. Let $α$ be the infinite ordinal $\omega^
 It was proved by Milnor that any red/blue colouring of the edges of $K_α$ there is either a
 red $K_α$ or a blue $K_3$. A shorter proof was found by Larson [La73]
 -/
-@[category research solved, AMS 3]
 /-
 FORMALIZATION SKETCH for erdos_590.variants.finite_cardinal:
 Status: proved - Proof exists, needs Lean formalization

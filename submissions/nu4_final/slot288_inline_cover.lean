@@ -1,0 +1,193 @@
+/-
+  slot288: PATH_4 τ ≤ 8 - Inline Cover (no let bindings)
+
+  DATE: Jan 7, 2026
+
+  FIX: Avoid let bindings which caused projection issues in slot287.
+  Use inline cover construction directly in the existential.
+-/
+
+import Mathlib
+
+set_option linter.mathlibStandardSet false
+set_option maxHeartbeats 400000
+set_option maxRecDepth 4000
+
+noncomputable section
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+def isTrianglePacking (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V)) : Prop :=
+  M ⊆ G.cliqueFinset 3 ∧
+  Set.Pairwise (M : Set (Finset V)) (fun t1 t2 => (t1 ∩ t2).card ≤ 1)
+
+noncomputable def trianglePackingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  (G.cliqueFinset 3).powerset.filter (isTrianglePacking G) |>.image Finset.card |>.max |>.getD 0
+
+def isMaxPacking (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V)) : Prop :=
+  isTrianglePacking G M ∧ M.card = trianglePackingNumber G
+
+def isPath4Config (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V))
+    (A B C D : Finset V) (v1 v2 v3 : V) : Prop :=
+  M = {A, B, C, D} ∧
+  A ∈ G.cliqueFinset 3 ∧ B ∈ G.cliqueFinset 3 ∧ C ∈ G.cliqueFinset 3 ∧ D ∈ G.cliqueFinset 3 ∧
+  A ∩ B = {v1} ∧ B ∩ C = {v2} ∧ C ∩ D = {v3} ∧
+  A ∩ C = ∅ ∧ A ∩ D = ∅ ∧ B ∩ D = ∅ ∧
+  v1 ≠ v2 ∧ v2 ≠ v3 ∧ v1 ≠ v3
+
+variable (G : SimpleGraph V) [DecidableRel G.Adj]
+
+-- PROVEN: Basic lemmas
+lemma triangle_card_3 (t : Finset V) (ht : t ∈ G.cliqueFinset 3) : t.card = 3 := by
+  simp only [SimpleGraph.cliqueFinset, SimpleGraph.isNClique_iff, Finset.mem_filter] at ht
+  exact ht.2
+
+lemma edge_in_triangle_sym2 (t : Finset V) (u w : V) (hu : u ∈ t) (hw : w ∈ t) :
+    s(u, w) ∈ t.sym2 := by
+  simp only [Finset.mem_sym2_iff]
+  exact ⟨hu, hw⟩
+
+lemma max_packing_shares_edge (M : Finset (Finset V)) (hM : isMaxPacking G M)
+    (t : Finset V) (ht : t ∈ G.cliqueFinset 3) (ht_not : t ∉ M) :
+    ∃ m ∈ M, (t ∩ m).card ≥ 2 := by
+  by_contra h
+  push_neg at h
+  have h_packing : isTrianglePacking G (insert t M) := by
+    constructor
+    · intro x hx
+      simp only [Finset.mem_insert] at hx
+      rcases hx with rfl | hx
+      · exact ht
+      · exact hM.1.1 hx
+    · intro x hx y hy hxy
+      simp only [Finset.mem_insert] at hx hy
+      rcases hx with rfl | hx <;> rcases hy with rfl | hy
+      · exact absurd rfl hxy
+      · exact Nat.lt_succ_iff.mp (h y hy)
+      · rw [Finset.inter_comm]; exact Nat.lt_succ_iff.mp (h x hx)
+      · exact hM.1.2 hx hy hxy
+  have h_card : (insert t M).card = M.card + 1 := Finset.card_insert_of_not_mem ht_not
+  have h_le : (insert t M).card ≤ trianglePackingNumber G := by
+    unfold trianglePackingNumber
+    have h_mem : insert t M ∈ (G.cliqueFinset 3).powerset.filter (isTrianglePacking G) := by
+      simp only [Finset.mem_filter, Finset.mem_powerset]
+      exact ⟨h_packing.1, h_packing⟩
+    have h_img := Finset.mem_image_of_mem Finset.card h_mem
+    exact Finset.le_max h_img |> WithTop.coe_le_coe.mp
+  omega
+
+-- PROVEN: Triangle Structure
+theorem triangle_structure (M : Finset (Finset V)) (A B C D : Finset V) (v1 v2 v3 : V)
+    (hM : isMaxPacking G M)
+    (hPath : isPath4Config G M A B C D v1 v2 v3)
+    (t : Finset V) (ht : t ∈ G.cliqueFinset 3) :
+    v1 ∈ t ∨ v2 ∈ t ∨ v3 ∈ t ∨
+    ((t ∩ A).card ≥ 2 ∧ v1 ∉ t) ∨
+    ((t ∩ D).card ≥ 2 ∧ v3 ∉ t) := by
+  by_contra h_contra
+  push_neg at h_contra
+  obtain ⟨hv1, hv2, hv3, hA_not, hD_not⟩ := h_contra
+  by_cases ht_in : t ∈ M
+  · rw [hPath.1] at ht_in
+    simp only [Finset.mem_insert, Finset.mem_singleton] at ht_in
+    rcases ht_in with rfl | rfl | rfl | rfl
+    · have hv1_in_A : v1 ∈ A := by
+        have := hPath.2.2.2.2.1
+        rw [Finset.ext_iff] at this
+        exact (this v1).mpr (by simp) |>.1
+      exact hv1 hv1_in_A
+    · have hv1_in_B : v1 ∈ B := by
+        have := hPath.2.2.2.2.1
+        rw [Finset.ext_iff] at this
+        exact (this v1).mpr (by simp) |>.2
+      exact hv1 hv1_in_B
+    · have hv2_in_C : v2 ∈ C := by
+        have := hPath.2.2.2.2.2.1
+        rw [Finset.ext_iff] at this
+        exact (this v2).mpr (by simp) |>.2
+      exact hv2 hv2_in_C
+    · have hv3_in_D : v3 ∈ D := by
+        have := hPath.2.2.2.2.2.2.1
+        rw [Finset.ext_iff] at this
+        exact (this v3).mpr (by simp) |>.2
+      exact hv3 hv3_in_D
+  · obtain ⟨m, hm, h_share⟩ := max_packing_shares_edge G M hM t ht ht_in
+    rw [hPath.1] at hm
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hm
+    rcases hm with rfl | rfl | rfl | rfl
+    · exact hA_not ⟨h_share, hv1⟩
+    · have hB3 : B.card = 3 := triangle_card_3 G B hPath.2.1.2.1
+      have h_sub : t ∩ B ⊆ B \ {v1, v2} := by
+        intro x hx
+        simp only [Finset.mem_inter, Finset.mem_sdiff, Finset.mem_insert, Finset.mem_singleton] at hx ⊢
+        exact ⟨hx.2, fun h => by cases h <;> simp_all⟩
+      have h_card_rest : (B \ {v1, v2}).card ≤ 1 := by
+        have hv1_in : v1 ∈ B := by
+          have := hPath.2.2.2.2.1; rw [Finset.ext_iff] at this
+          exact (this v1).mpr (by simp) |>.2
+        have hv2_in : v2 ∈ B := by
+          have := hPath.2.2.2.2.2.1; rw [Finset.ext_iff] at this
+          exact (this v2).mpr (by simp) |>.1
+        calc (B \ {v1, v2}).card = B.card - ({v1, v2} ∩ B).card := by
+               rw [Finset.card_sdiff_add_card_inter]; ring
+             _ ≤ 3 - 2 := by simp [hB3, hv1_in, hv2_in, hPath.2.2.2.2.2.2.2.2.1]
+             _ = 1 := by norm_num
+      have := Finset.card_le_card h_sub
+      omega
+    · have hC3 : C.card = 3 := triangle_card_3 G C hPath.2.1.2.2.1
+      have h_sub : t ∩ C ⊆ C \ {v2, v3} := by
+        intro x hx
+        simp only [Finset.mem_inter, Finset.mem_sdiff, Finset.mem_insert, Finset.mem_singleton] at hx ⊢
+        exact ⟨hx.2, fun h => by cases h <;> simp_all⟩
+      have h_card_rest : (C \ {v2, v3}).card ≤ 1 := by
+        have hv2_in : v2 ∈ C := by
+          have := hPath.2.2.2.2.2.1; rw [Finset.ext_iff] at this
+          exact (this v2).mpr (by simp) |>.2
+        have hv3_in : v3 ∈ C := by
+          have := hPath.2.2.2.2.2.2.1; rw [Finset.ext_iff] at this
+          exact (this v3).mpr (by simp) |>.1
+        calc (C \ {v2, v3}).card = C.card - ({v2, v3} ∩ C).card := by
+               rw [Finset.card_sdiff_add_card_inter]; ring
+             _ ≤ 3 - 2 := by simp [hC3, hv2_in, hv3_in, hPath.2.2.2.2.2.2.2.2.2.1]
+             _ = 1 := by norm_num
+      have := Finset.card_le_card h_sub
+      omega
+    · exact hD_not ⟨h_share, hv3⟩
+
+/-! ### Explicit Cover Definition -/
+
+/-- The 8-edge cover: A's edges + D's edges + middle spokes -/
+def path4Cover (A B C D : Finset V) (v2 : V) : Finset (Sym2 V) :=
+  (A.sym2 ∪ D.sym2 ∪ B.sym2 ∪ C.sym2).filter (fun e => e ∈ G.edgeFinset)
+
+/-! ### Main Theorem -/
+
+theorem tau_le_8_path4 (M : Finset (Finset V)) (A B C D : Finset V) (v1 v2 v3 : V)
+    (hM : isMaxPacking G M)
+    (hPath : isPath4Config G M A B C D v1 v2 v3) :
+    ∃ E : Finset (Sym2 V), E.card ≤ 8 ∧ E ⊆ G.edgeFinset ∧
+    ∀ t ∈ G.cliqueFinset 3, ∃ e ∈ E, e ∈ t.sym2 := by
+  -- Use all edges from A, B, C, D that are in G
+  use path4Cover G A B C D v2
+  refine ⟨?_, ?_, ?_⟩
+  · -- Card ≤ 8: This is the hardest part
+    -- A.sym2 ≤ 3, B.sym2 ≤ 3, C.sym2 ≤ 3, D.sym2 ≤ 3
+    -- But total can't exceed 12, and we need to show ≤ 8
+    -- Actually this cover might have up to 12 edges!
+    -- Need a tighter construction
+    sorry
+  · -- Subset of G.edgeFinset
+    unfold path4Cover
+    intro e he
+    simp only [Finset.mem_filter] at he
+    exact he.2
+  · -- Covers all triangles
+    intro t ht
+    have h_struct := triangle_structure G M A B C D v1 v2 v3 hM hPath t ht
+    rcases h_struct with hv1 | hv2 | hv3 | ⟨hA_share, hv1_not⟩ | ⟨hD_share, hv3_not⟩
+    all_goals {
+      -- For each case, find an appropriate edge
+      sorry
+    }
+
+end

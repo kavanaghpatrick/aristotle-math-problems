@@ -48,9 +48,8 @@ $$
 \liminf \frac{|A \cap [1,x]|}{x} = 0?
 $$
 -/
-@[category research open, AMS 11]
 theorem erdos_143.parts.i : (∀ (A : Set ℝ), WellSeparatedSet A →
-    liminf (fun x => (A ∩ (Set.Icc 1 x)).ncard / x) atTop = 0) ↔ answer(sorry) := by
+    liminf (fun x => (A ∩ (Set.Icc 1 x)).ncard / x) atTop = 0) := by
   sorry
 
 /--
@@ -59,7 +58,6 @@ $$
 \sum_{x \in A} \frac{1}{x \log x} < \infty,
 $$
 -/
-@[category research open, AMS 11]
 /-
 PROOF SKETCH for erdos_143.parts.ii:
 Status: open

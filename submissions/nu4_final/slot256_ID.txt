@@ -1,0 +1,6 @@
+f12c1709-6499-48f7-82a1-0d829dcf5449
+# Task: slot256: Bridge counting infrastructure - RESUB v3 (fixed obtain pattern)
+# Submitted: 2026-01-04T13:15:00
+# Previous IDs:
+#   - 8f691c60-a159-4620-8ab9-c10bb42fb61d (RESUB v2 - compile error in bridges_partition)
+# Fix: Restructured obtain pattern to avoid type mismatch where `f` was being interpreted as Prop

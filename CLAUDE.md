@@ -242,16 +242,18 @@ variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]
 | **Claude** | Long context, planning, synthesis | - |
 | **Aristotle** | **Discovery**: counterexamples (Fin 5-7), proof search with 10+ scaffolding, bound verification | Tier 3-4 without human outline, files >200 lines |
 
-### Grok-4 API
+### Grok-4 API (COPY EXACTLY - DO NOT MODIFY)
+
+⚠️ **Use this EXACT template. Do not inline JSON, do not change quotes.**
+
 ```bash
 python3 << 'PYEOF'
 import json
-prompt = "Your question..."
+prompt = "YOUR QUESTION HERE"  # <-- Only change this line
 request = {
     "messages": [{"role": "user", "content": prompt}],
     "model": "grok-4",
-    "temperature": 0.3,
-    "max_tokens": 2000
+    "temperature": 0.3
 }
 json.dump(request, open('/tmp/grok_request.json', 'w'))
 PYEOF
@@ -262,6 +264,8 @@ curl -s -X POST https://api.x.ai/v1/chat/completions \
   --max-time 300 \
   -d @/tmp/grok_request.json | python3 -c "import sys,json; print(json.load(sys.stdin)['choices'][0]['message']['content'])"
 ```
+
+**BANNED:** Inline JSON, changing quotes, adding escaping, "improving" the template.
 
 ---
 

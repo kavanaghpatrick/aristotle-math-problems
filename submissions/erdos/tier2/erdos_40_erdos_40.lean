@@ -22,7 +22,6 @@ limitations under the License.
 -/
 
 import Mathlib
-import FormalConjectures.ErdosProblems.«28»
 
 /-!
 # Erdős Problem 40
@@ -58,7 +57,6 @@ For what functions $g(N) → \infty$ is it true that
 $$\lvert A\cap \{1,\ldots,N\}\rvert \gg \frac{N^{1/2}}{g(N)}$$
 implies $\limsup 1_A\ast 1_A(n)=\infty$?
 -/
-@[category research open, AMS 11]
 /-
 PROOF SKETCH for erdos_40:
 Status: open
@@ -68,7 +66,7 @@ Status: open
 3. [Why this leads to the result]
 -/
 
-theorem erdos_40 : Erdos40ForSet answer(sorry) := by
+theorem erdos_40 : Erdos40ForSet sorry := by
   sorry
 
 /--
@@ -77,7 +75,6 @@ Erdős-Turán conjecture, see Erdõs Problem 28,
 (since establishing this for any function $g(N) → \infty$ would imply a positive solution to Erdős
 Problem 28).
 -/
-@[category undergraduate, AMS 11]
 theorem erdos_28_of_erdos_40 (h_erdos_40 : Erdos40ForSet .univ) : type_of% Erdos28.erdos_28 := by
   simp only [Erdos40ForSet, Erdos40For, sumRep, sumConv, indicatorOne, mem_univ, forall_const]
     at h_erdos_40

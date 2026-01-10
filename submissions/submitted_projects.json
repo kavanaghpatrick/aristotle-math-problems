@@ -18,5 +18,75 @@
     "project_id": "1004ad20-ca53-449f-bd64-18ef7b9efd39",
     "submitted_at": "2025-12-25T20:01:25.225739",
     "status": "submitted"
+  },
+  "submissions/nu4_final/lemma06_cycle_edge_covers_M.lean": {
+    "project_id": "9ad15fb9-8487-44d8-8140-66cc8a2f3aa7",
+    "submitted_at": "2026-01-03T01:13:08.365976",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma13_cover_hits_all_M.lean": {
+    "project_id": "e666fbd2-23ce-4fee-a1c9-dfdf9acd7657",
+    "submitted_at": "2026-01-03T01:13:12.363986",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma04_fan_apex_exists.lean": {
+    "project_id": "f7d4f6cb-39b2-4e75-a9d0-253308c72ded",
+    "submitted_at": "2026-01-03T01:13:16.233141",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma01_external_classification.lean": {
+    "project_id": "6e390e71-3ddc-416a-9d29-0d8c1938363f",
+    "submitted_at": "2026-01-03T01:13:59.699856",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma02_cycle_external_form.lean": {
+    "project_id": "a52ac53d-c4b4-4fa0-a6a8-26b6a8d5ab9f",
+    "submitted_at": "2026-01-03T01:26:37.538460",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma03_private_external_contains_apex.lean": {
+    "project_id": "6295db34-412c-42b8-a2bc-763e5f76e61d",
+    "submitted_at": "2026-01-03T01:26:41.617008",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma08_apex_private_edge_covers.lean": {
+    "project_id": "a8c67b68-2f09-4cd3-a2d8-d1c85ad17708",
+    "submitted_at": "2026-01-03T01:26:45.591877",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma09_private_externals_at_most_two.lean": {
+    "project_id": "b8cdcd6f-54a4-4771-b6db-fc5998a38df2",
+    "submitted_at": "2026-01-03T01:26:49.554688",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma10_cycle_externals_at_most_one.lean": {
+    "project_id": "e69d5c1d-e9a8-4005-a967-81786b80e7e0",
+    "submitted_at": "2026-01-03T01:26:54.082199",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma11_all_triangles_M_or_external.lean": {
+    "project_id": "296acfa5-7aa7-41f8-ab06-f0867848279b",
+    "submitted_at": "2026-01-03T01:27:14.052660",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma12_eight_edges_well_defined.lean": {
+    "project_id": "f5f73e27-e7b4-4376-8173-f2752952873b",
+    "submitted_at": "2026-01-03T01:27:18.061473",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma14_cover_hits_all_externals.lean": {
+    "project_id": "b5b37089-6099-4cb0-9ec3-8b77099721cf",
+    "submitted_at": "2026-01-03T01:27:22.126153",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/lemma15_tau_le_8_main.lean": {
+    "project_id": "12b684c1-e721-4295-be72-ccce29093359",
+    "submitted_at": "2026-01-03T01:27:27.421216",
+    "status": "submitted"
+  },
+  "submissions/nu4_final/slot319_tau_le_8_decomposed.lean": {
+    "project_id": "0eac6cc0-20a7-4a0b-b3a8-fe966bd0dec7",
+    "submitted_at": "2026-01-09T16:06:10.314705",
+    "status": "submitted"
   }
 }
