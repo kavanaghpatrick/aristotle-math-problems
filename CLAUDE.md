@@ -12,8 +12,8 @@ Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Fals
 | Tier | Success Rate | Capabilities | Key Tactics |
 |------|--------------|--------------|-------------|
 | **1** | 70-90% | Counterexamples (Fin 5-7), cardinality bounds, decidable predicates | `native_decide`, `fin_cases`, `decide` |
-| **2** | 30-50% | Subadditivity, simple induction, LP witnesses (needs 10+ scaffolding) | `simp_all`, `aesop`, `omega` |
-| **3** | 10-20% | Deep combinatorics (human must outline proof structure) | `grind`, `linarith` |
+| **2** | 30-50% | Subadditivity, simple induction, LP witnesses, **packing construction** (needs 10+ scaffolding) | `simp_all`, `aesop`, `omega`, `Disjoint.mono`, `card_union_of_disjoint` |
+| **3** | 10-20% | Deep combinatorics, **disjointness+pigeonhole** (human must outline proof structure) | `grind`, `linarith`, `push_neg` |
 | **4** | <5% | Asymptotics, optimal selection, global coordination | **AVOID** |
 
 **Falsification-first**: Submit uncertain conjectures on `Fin 6-7`. Aristotle finds counterexamples in minutes if false.
@@ -62,6 +62,20 @@ theorem tau_le_8_path4 ... := by
 - For Tier 2+ problems, include which helper lemmas will be used
 
 **Why this works:** Aristotle uses MCTS with learned value function. Informal sketches narrow the search space by suggesting proof structure, reducing combinatorial explosion.
+
+---
+
+## Proven Aristotle Patterns (slot347)
+
+| Pattern | Tactics |
+|---------|---------|
+| **Object construction** | `let M' := M.erase X ∪ {T1,T2}` → prove larger packing → contradiction |
+| **Pigeonhole via disjoint** | `Disjoint.mono` + `card_union_of_disjoint` + `omega` |
+| **Sym2 edges** | `Finset.mem_sym2_iff`, `Sym2.mem_iff`, `rcases ... with rfl \| rfl` |
+| **Card iff** | `Finset.one_lt_card.mpr/mp`, `Finset.mem_inter.mpr` |
+| **Case exhaust** | `by_cases h : ∀ Y ∈ M, ...` → `push_neg` → `obtain` |
+
+**Finset card chain:** `card_union_of_disjoint`, `card_erase_of_mem`, `card_insert_of_not_mem`, `card_singleton`
 
 ---
 
