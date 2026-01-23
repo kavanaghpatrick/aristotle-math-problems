@@ -3,7 +3,7 @@
 > **⚠️ AUTO-GENERATED FILE** - Do not edit directly!
 > Source of truth: `submissions/tracking.db` table `false_lemmas`
 
-**Last generated**: 2026-01-01 22:22:07
+**Last generated**: 2026-01-14 (auto-updated)
 
 This document lists lemmas that have been PROVEN FALSE. Do not use these in any proof attempts.
 
@@ -13,12 +13,12 @@ This document lists lemmas that have been PROVEN FALSE. Do not use these in any 
 
 | Evidence | Meaning | Count |
 |----------|---------|-------|
-| 🔴 ARISTOTLE-VERIFIED | Actual Aristotle counterexample/bug | 8 |
+| 🔴 ARISTOTLE-VERIFIED | Actual Aristotle counterexample/bug | 9 |
 | 🟠 AI-VERIFIED | AI agents verified the math | 10 |
 | 🟡 REASONING-BASED | Sound reasoning, no formal verification | 3 |
 | ⚪ TRIVIALLY FALSE | Obvious logical error | 2 |
 
-**Total**: 23 FALSE lemmas documented
+**Total**: 24 FALSE lemmas documented
 
 ---
 
@@ -51,6 +51,72 @@ This document lists lemmas that have been PROVEN FALSE. Do not use these in any 
 | 23 | `tau_le_8_scattered` | 🔴 | Propeller counterexample 2026-01-04 |
 | 24 | `same_edge_share_external_vertex` | 🟠 | Manual counterexample 2026-01-04 |
 | 25 | `all_externals_share_apex` | 🟠 | Depends on FALSE lemma #24 2026-01-04 |
+| 29 | `sym2_cover_cardinality` | 🔴 | **CRITICAL** Multi-agent debate 2026-01-14 |
+| 30 | `middle_adaptive_cover_2edges` | 🟠 | Gemini analysis 2026-01-16 |
+
+---
+
+## Pattern 30: middle_adaptive_cover_2edges (Jan 16, 2026)
+
+**Status**: ❌ FALSE | 🟠 AI-VERIFIED (Gemini detailed analysis)
+
+**Statement** (FALSE):
+```lean
+theorem middle_adaptive_cover (G : SimpleGraph V) [DecidableRel G.Adj]
+    (v₁ b v₂ : V) (A C : Finset V)
+    (hAB : A ∩ {v₁, b, v₂} = {v₁})
+    (hBC : ({v₁, b, v₂} : Finset V) ∩ C = {v₂})
+    (h_6pack : SixPackingConstraint G A {v₁, b, v₂} C v₁ b v₂) :
+    ∃ e₁ e₂ : Sym2 V,
+      (e₁ = s(v₁, v₂) ∨ e₁ = s(v₁, b) ∨ e₁ = s(b, v₂)) ∧
+      (e₂ = s(v₁, v₂) ∨ e₂ = s(v₁, b) ∨ e₂ = s(b, v₂)) ∧
+      ∀ T ∈ G.cliqueFinset 3, 2 ≤ (T ∩ {v₁, b, v₂}).card →
+        e₁ ∈ T.sym2 ∨ e₂ ∈ T.sym2
+```
+"Given 6-packing constraint on S_e externals, 2 edges from middle element B suffice to cover ALL B-interacting triangles"
+
+**Counterexample**:
+```
+PATH_4 structure: A—v₁—B—v₂—C
+B = {v₁, b, v₂}
+
+Case: h_no_left (No Left S_e Externals)
+Selected edges: {spine = s(v₁, v₂), right = s(b, v₂)}
+
+Uncovered triangle: T = {v₁, b, a} where a ∈ A (an A-B bridge)
+- T shares edge s(v₁, b) with B (the LEFT edge)
+- T is NOT an S_e external (|T ∩ A| = 2, so excluded from 6-packing)
+- T uses the dropped LEFT edge, not spine or right
+- CONCLUSION: T is not covered by {spine, right}
+```
+
+**Why False**:
+The 6-packing constraint (`SixPackingConstraint`) is defined ONLY on S_e externals:
+- S_e externals satisfy: `|T ∩ B| ≥ 2` AND `|T ∩ A| ≤ 1` AND `|T ∩ C| ≤ 1`
+- Bridges are EXCLUDED from this constraint:
+  - A-B bridges: `|T ∩ A| ≥ 2` (always contain v₁, use LEFT or SPINE edge)
+  - B-C bridges: `|T ∩ C| ≥ 2` (always contain v₂, use RIGHT or SPINE edge)
+
+When the 6-packing eliminates one external type, the dropped edge may still be used by bridges:
+| Dropped Edge Type | Can Still Be Used By |
+|-------------------|----------------------|
+| Left s(v₁, b) | A-B bridges like {v₁, b, a} |
+| Right s(b, v₂) | B-C bridges like {b, v₂, c} |
+| Spine s(v₁, v₂) | Both A-B and B-C bridges |
+
+**Impact**:
+- The "2 edges per middle element" approach is INVALID
+- τ ≤ 8 for PATH_4 requires GLOBAL coordination between adjacent elements
+- Adjacent elements' spokes must help cover each other's bridges
+
+**Correct Approach**: For τ ≤ 8, use global coordination:
+1. A-B bridges contain v₁, which is shared with A
+2. A's spokes from v₁ already cover these bridges
+3. Similarly, C's spokes from v₂ cover B-C bridges
+4. Each middle element only needs to cover its OWN S_e externals (2 edges)
+5. Total: endpoints (2+2) + middles (2+2) = 8 edges
+
+**Source**: Gemini analysis (2026-01-16) | Slot: slot436_adaptive_middle.lean
 
 ---
 
@@ -901,6 +967,140 @@ The 3 petals of each Propeller independently require 3 edges (one per petal).
 3. Prove τ ≤ 12 for scattered and accept this is tight
 
 **Source**: Aristotle (2026-01-04) | Slot: slot148_scattered_tau_le_8_aristotle.lean | UUID: e0e15ef4-4856-4b41-a55e-99c678ad5a58
+
+---
+
+## Pattern 29: sym2_cover_cardinality (CRITICAL - Jan 14, 2026)
+
+**Status**: ❌ FALSE | 🔴 ARISTOTLE-VERIFIED (Multiple negations!)
+
+**Statement** (FALSE):
+```lean
+def cover : Finset (Sym2 V) := A.sym2.filter (fun e => e ∈ G.edgeFinset)
+-- Claim: A triangle A has 3 edges, so A.sym2.filter gives card 3
+```
+"Using A.sym2 to enumerate edges of triangle A gives correct cardinality 3"
+
+**Counterexample**:
+```lean
+-- For A = {v, a, b} (a triangle):
+A.sym2 = {s(v,v), s(v,a), s(v,b), s(a,a), s(a,b), s(b,b)}
+-- Card = 6, NOT 3!
+
+-- Finset.sym2 computes ALL unordered pairs, INCLUDING SELF-LOOPS s(x,x)
+-- For |A| = n, |A.sym2| = n(n+1)/2 = binomial(n+1, 2)
+-- For n=3: |A.sym2| = 3×4/2 = 6
+```
+
+**Why False**:
+`Finset.sym2` on a vertex set computes ALL unordered pairs of elements, including self-loops `s(x,x)`. For a triangle with 3 vertices, this gives 6 elements:
+- 3 self-loops: s(v,v), s(a,a), s(b,b)
+- 3 actual edges: s(v,a), s(v,b), s(a,b)
+
+When used in cover definitions like `A.sym2.filter (· ∈ G.edgeFinset)`:
+- Self-loops s(x,x) are NOT graph edges (SimpleGraph has no self-loops)
+- Filter removes them, BUT the raw sym2 count is wrong
+- Aristotle's cardinality lemmas get NEGATED because |cover| can't be what we claim
+
+This caused slot415, slot416, slot417, slot419 to have their cardinality bounds negated by Aristotle.
+
+**Impact**:
+- **ANY cover definition using A.sym2 will have WRONG cardinality**
+- Aristotle NEGATES these lemmas (correct behavior!)
+- All τ ≤ 8 proofs using T.sym2 enumeration are INVALID
+- Must audit ALL existing submissions for this pattern
+
+**Avoid Pattern**:
+```lean
+-- ❌ WRONG: Never do this!
+def badCover : Finset (Sym2 V) := A.sym2.filter (fun e => e ∈ G.edgeFinset)
+def badCover2 : Finset (Sym2 V) := (⋃ t ∈ M, t.sym2).filter ...
+```
+
+**Correct Approach**:
+```lean
+-- ✅ CORRECT: Explicit edge enumeration with distinctness proofs
+def goodCover (v a b : V) (hvne_a : v ≠ a) (hvne_b : v ≠ b) (hane_b : a ≠ b) :
+    Finset (Sym2 V) := {s(v, a), s(v, b), s(a, b)}
+
+-- Alternative: Define edges as pairs with ne proof
+structure ProperEdge (V : Type*) where
+  u : V
+  v : V
+  hne : u ≠ v
+```
+
+**Verification**:
+```lean
+-- Check any file for this bug:
+rg "\.sym2" file.lean  -- Look for sym2 usage
+rg "sym2\.filter" file.lean  -- Especially dangerous
+```
+
+**Source**: Multi-agent debate Round 2 (CODEX identified, GROK+GEMINI verified) (2026-01-14) | Slots: slot415, slot416, slot417, slot419
+
+---
+
+## Pattern 31: bridge_auto_covered_by_pigeonhole (Jan 16, 2026)
+
+**Status**: ❌ FALSE | 🟠 AI-VERIFIED (Multi-agent debate Round 2)
+
+**Statement** (FALSE):
+```lean
+-- CLAIM: Any 2-edge selection from triangle B covers all bridges at B
+-- because 2 edges cover all 3 vertices (pigeonhole), and bridges contain
+-- the shared vertex.
+```
+"Bridges containing shared vertex v are automatically hit because 2 edges cover all 3 vertices including v"
+
+**Counterexample**:
+```
+PATH_4 structure:
+A = {v1, a1, a2}
+B = {v1, b, v2}
+
+B's selected cover: {s(v1,v2), s(b,v2)}  (spine + right leg)
+
+Bridge T = {v1, a1, b}
+T.edges = {s(v1,a1), s(v1,b), s(a1,b)}
+
+Analysis:
+- s(v1,v2) ∈ B's cover, but v2 ∉ T, so s(v1,v2) ∉ T.edges
+- s(b,v2) ∈ B's cover, but v2 ∉ T, so s(b,v2) ∉ T.edges
+
+RESULT: Bridge T is NOT covered despite v1 being "vertex-covered"!
+```
+
+**Why False**:
+The critical error is confusing two concepts:
+
+| Concept | Definition | Sufficient for Coverage? |
+|---------|------------|-------------------------|
+| **Vertex coverage** | Edge is INCIDENT to vertex v | NO |
+| **Triangle coverage** | Edge is IN the triangle's edge set | YES |
+
+A triangle T is hit only if our selected edge e is ALSO an edge of T.
+Having an edge incident to v1 does NOT guarantee hitting triangles containing v1.
+
+The pigeonhole argument proves: "2 edges cover all 3 vertices of B"
+But it does NOT prove: "2 edges hit all triangles containing any vertex of B"
+
+**Impact**:
+- Breaks the "any 2-edge selection works" claim for middle elements
+- τ ≤ 8 requires COORDINATED selection, not arbitrary selection
+- Middle elements must choose legs based on adjacent endpoint's needs
+
+**Correct Approach**: Coordinated leg selection:
+```
+For middle B = {v1, b, v2}:
+  Always: spine s(v1, v2)
+  Leg: If adjacent endpoint A uses base edge, B uses LEFT leg s(v1, b)
+       Otherwise, either leg works
+```
+
+This ensures bridges like T = {v1, a1, b} are covered by s(v1, b).
+
+**Source**: Multi-agent debate Round 2 (2026-01-16) | See: DEBATE_R2_FINAL_SYNTHESIS.md
 
 ---
 

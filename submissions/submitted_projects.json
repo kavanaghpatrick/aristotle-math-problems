@@ -88,5 +88,10 @@
     "project_id": "0eac6cc0-20a7-4a0b-b3a8-fe966bd0dec7",
     "submitted_at": "2026-01-09T16:06:10.314705",
     "status": "submitted"
+  },
+  "submissions/nu4_final/slot433_not_all_three_external_types.lean": {
+    "project_id": "d834df1e-1c23-4a47-a7cd-489474b060ae",
+    "submitted_at": "2026-01-15T17:27:55.135247",
+    "status": "submitted"
   }
 }

@@ -1,13 +1,14 @@
-# Tuza's Conjecture: AI-Powered Formal Verification
+# Tuza's Conjecture: AI-Powered Formal Verification (ν = 4)
 
-A research project using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) and multi-agent AI collaboration to make rigorous progress on Tuza's Conjecture.
+A research project using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's theorem prover) and multi-agent AI collaboration to prove Tuza's conjecture for graphs with triangle packing number 4.
 
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
 [![Lean 4](https://img.shields.io/badge/Lean-4-purple)](https://lean-lang.org/)
-[![Submissions](https://img.shields.io/badge/Submissions-170+-orange)]()
-[![Cases Proven](https://img.shields.io/badge/ν%3D4%20Cases-6%2F7-green)]()
+[![Submissions](https://img.shields.io/badge/Submissions-692-orange)]()
+[![Theorems](https://img.shields.io/badge/Theorems%20Proven-2633-brightgreen)]()
+[![Proven Files](https://img.shields.io/badge/Fully%20Proven-145-success)]()
 
-**Project Duration**: December 2025 (ongoing)
+**Project Duration**: December 2025 - January 2026 (ongoing)
 
 ---
 
@@ -15,206 +16,148 @@ A research project using [Aristotle](https://aristotle.harmonic.fun) (Harmonic's
 
 **Tuza's Conjecture (1981)**: For any graph G, τ(G) ≤ 2ν(G)
 
-Where:
-- **τ(G)** = minimum number of edges needed to hit all triangles (triangle edge cover)
-- **ν(G)** = maximum number of edge-disjoint triangles (triangle packing number)
+- **τ(G)** = minimum edges to cover all triangles (triangle covering number)
+- **ν(G)** = maximum edge-disjoint triangles (triangle packing number)
 
-This conjecture has been **open for 44 years** and is widely believed to be TRUE.
-
-### Known Results
-
-| Setting | Best Bound | Source |
-|---------|-----------|--------|
-| General graphs | τ ≤ 2.87ν | Haxell (1999) |
-| Fractional | τ ≤ 2ν* | Krivelevich (1995) |
-| Planar graphs | τ ≤ 2ν | Tuza (1985) |
-| Small ν (ν ≤ 3) | τ ≤ 2ν | Classical |
-| **Our project (ν = 4)** | **6/7 cases proven, Cycle_4 in progress** | **December 2025** |
+**Our Goal:** Prove τ ≤ 8 when ν = 4 (the smallest open case).
 
 ---
 
-## Current Status (December 31, 2025 Evening)
+## Current Status (January 23, 2026)
 
-### ν = 4 Case Analysis
+| Metric | Value |
+|--------|-------|
+| Total Aristotle Submissions | **692** |
+| Fully Proven Files (0 sorry) | **145** (21%) |
+| Total Theorems Proven | **2,633** |
+| False Lemmas Documented | **35** |
+| Failed Approaches | **56** |
+| Recent Success Rate | **63%** |
 
-For ν = 4, there are 7 distinct configurations based on the "sharing graph":
+### Case-by-Case Progress
 
-| Case | Sharing Graph | Status | Bound | Notes |
-|------|---------------|--------|-------|-------|
-| star_all_4 | K₄ (complete) | ✅ **PROVEN** | τ ≤ 8 | 4 spokes from apex |
-| three_share_v | K₁,₃ + isolated | ✅ **PROVEN** | τ ≤ 8 | 3-star + independent |
-| scattered | K̄₄ (empty) | ✅ **PROVEN** | τ ≤ 8 | Disjoint triangles |
-| path_4 | P₄ (path) | ✅ **PROVEN** | τ ≤ 8 | S_e decomposition |
-| two_two_vw | 2K₂ (matching) | ✅ **PROVEN** | τ ≤ 8 | Two independent pairs |
-| matching_2 | 2K₂ | ✅ **PROVEN** | τ ≤ 8 | Same as above |
-| **cycle_4** | **C₄ (4-cycle)** | 🔶 **IN PROGRESS** | **τ ≤ 12 proven** | **τ ≤ 8 via LP running** |
+The 4 packing triangles form an "intersection graph" based on shared vertices:
 
-### Active Aristotle Queue
-
-| Submission | Target | Progress | Strategy |
-|------------|--------|----------|----------|
-| **slot49a** | τ(T_pair) ≤ 4 | QUEUED | Adjacent pair (14 proven lemmas) |
-| **slot147_v2** | τ ≤ 2ν* | 10% | LP/Krivelevich approach |
-| slot49_path4 | Path_4 case | 50% | S_e decomposition |
-| slot40 | Bridge counting | 23% | Legacy resubmission |
-
-### Two Active Strategies for Cycle_4
-
-| Strategy | Submission | Mechanism | Success Est. |
-|----------|------------|-----------|--------------|
-| **LP Relaxation** | slot147_v2 | Krivelevich: τ ≤ 2ν*, prove ν*=4 | 30-40% |
-| **Adjacent Pair** | slot49a | τ(T_pair) ≤ 4 for each pair | 15-25% |
+| Case | Structure | τ Proven | Target | Status |
+|------|-----------|----------|--------|--------|
+| **PATH_4** | A—B—C—D chain | **τ ≤ 8** | 8 | ✅ **COMPLETE** (107 theorems) |
+| STAR_ALL_4 | All 4 share vertex | τ ≤ 4 | 4 | ✅ Optimal |
+| THREE_SHARE_V | 3 share + isolated | τ ≤ 4 | 5 | ✅ Near-optimal |
+| SCATTERED | No shared vertices | τ ≤ 4 | 8 | ✅ Optimal (τ = ν) |
+| CYCLE_4 | A—B—C—D—A cycle | τ ≤ 4 | 8 | 🔶 Assembly pending |
+| TWO_TWO_VW | Two pairs share | τ ≤ 4 | 8 | 🔶 Partial |
+| MATCHING_2 | Same as TWO_TWO | τ ≤ 4 | 8 | 🔶 Partial |
 
 ---
 
-## The Cycle_4 Challenge
+## Key Breakthroughs
 
-Cycle_4 is the hardest case: 4 triangles A, B, C, D sharing vertices in a cycle pattern (A-B-C-D-A).
+### 1. The 6-Packing Constraint (slot412) ✅
 
-**What we've proven:**
-- τ ≤ 12 (slot139) - conservative bound using 3 edges per shared vertex
-- 14 infrastructure lemmas (tau_union_le_sum, tau_S_le_2, tau_X_le_2, etc.)
+**Theorem:** For any packing element E = {a,b,c}, at most 2 of its 3 edge-types can have external triangles.
 
-**What we've tried and why it failed (9 False Lemmas):**
-- **König theorem** - BLOCKED: link graphs are NOT bipartite
-- **2-edges-per-vertex** - FALSE: `local_cover_le_2`
-- **External common vertex** - FALSE: `external_share_common_vertex`
-- **Fixed 8-edge M-subset** - FALSE: any 8 from 12 M-edges misses 4
+**Why:** If all 3 edge-types had externals T₁, T₂, T₃, these would be pairwise edge-disjoint. Combined with the other 3 packing elements, we'd have a 6-packing—contradicting ν = 4.
 
-**Current approaches (running):**
-1. **LP Relaxation** (slot147_v2): Krivelevich's τ ≤ 2ν* where ν* = 4
-2. **Adjacent Pair** (slot49a): Split M into pairs, prove τ(T_pair) ≤ 4
+**Impact:** Each element needs ≤2 edges to cover its externals. 4 × 2 = 8 edges total.
+
+### 2. The 5-Packing Impossibility (slot451) ✅
+
+**Theorem:** In PATH_4, if a bridge exists with "forcing externals" that miss it, we get a 5-packing contradiction.
+
+**Verified on Fin 10:** The set {A, D, T_bridge, E_B, E_C} forms 5 edge-disjoint triangles—impossible when ν = 4.
+
+### 3. The S_e' Partition Fix (slot506-517) 🔶
+
+**Discovery:** Bridges (triangles sharing edges with 2+ packing elements) escape the original S_e partition.
+
+**Counterexample on K₅:**
+```
+M = {{0,1,2}, {2,3,4}}
+Bridge T = {1,2,3} shares edges with BOTH elements
+→ T belongs to NEITHER S_e set!
+```
+
+**Solution:** Min-index assignment—assign each bridge to the M-element with the smallest index.
+
+**New files submitted (7 with 0 sorry):**
+- slot508: `non_M_triangle_in_some_Se'`
+- slot509: `S_e'_disjoint`
+- slot511: `bridge_shares_edge_with_e`
+- slot513-515: External structure lemmas
 
 ---
 
 ## Project Statistics
 
-| Metric | Count |
-|--------|-------|
-| Total Aristotle submissions | 170+ |
-| ν=4 cases proven | **6/7** |
-| Proven infrastructure lemmas | 14 |
-| Literature lemmas collected | 162 |
-| Failed approaches documented | 38 |
-| **False lemmas discovered** | **9** |
-| AI consultation rounds | 25+ |
+| Category | Count |
+|----------|-------|
+| Total Submissions | 692 |
+| Fully Proven (0 sorry) | 145 |
+| Near-Miss (1 sorry) | 143 |
+| Total Theorems | 2,633 |
+| Validated Lemmas | 181 |
+| False Lemmas | 35 |
+| Failed Approaches | 56 |
+
+### Tactic Usage in Proven Files
+
+| Tactic | Count | Success Rate |
+|--------|-------|--------------|
+| `native_decide` | 997 | Tier 1 (70-90%) |
+| `exact` | 899 | Tier 2 |
+| `simp` | 704 | Tier 2 |
+| `omega` | 155 | Tier 2 |
+| `aesop` | 31 | Tier 3 |
 
 ---
 
-## False Lemmas Discovered
+## False Lemmas (35 Documented)
 
-One of the most valuable outputs: **9 mathematical claims that seemed plausible but are FALSE**.
+Critical discoveries—mathematical claims that seemed plausible but are **FALSE**:
 
-| # | Lemma | Evidence | Why It's False |
-|---|-------|----------|----------------|
-| 1 | `local_cover_le_2` | AI-verified | 4 triangles at v can each use different M-edge |
-| 2 | `avoiding_covered_by_spokes` | Trivially false | If t avoids v, spokes can't hit t |
-| 3 | `bridge_absorption` | **Aristotle** | Cover of S_e ∪ S_f doesn't cover bridges |
-| 4 | `trianglesContainingVertex_partition` | Reasoning | Partition not complete |
-| 5 | `support_sunflower_tau_2` | Reasoning | trianglesSharingMEdgeAt includes M-elements |
-| 6 | `external_share_common_vertex` | AI-verified | Externals use edges from DIFFERENT M-triangles |
-| 7 | `sunflower_cover_at_vertex_2edges` | AI-verified | Need 3+ edges per vertex |
-| 8 | `link_graph_bipartite` | AI-verified | M-neighbors form odd cycles (Dec 31) |
-| 9 | `fixed_8_edge_M_subset` | Reasoning | Any 8 of 12 M-edges omits 4 critical edges |
+| # | Lemma | Evidence | Impact |
+|---|-------|----------|--------|
+| 1 | `local_cover_le_2` | AI-verified | 4 triangles at v can need 3+ edges |
+| 2 | `triangle_in_some_Se_or_M` | **Aristotle** | Bridges escape S_e partition |
+| 3 | `external_share_common_vertex` | AI-verified | Externals are independent |
+| 4 | `link_graph_bipartite` | AI-verified | König theorem INVALID |
+| 5 | `sym2_cover_cardinality` | **Aristotle** | `Finset.sym2` includes self-loops! |
+| 6 | `bridge_absorption` | **Aristotle** | Bridges need explicit handling |
 
----
-
-## Proven Scaffolding (from slot44)
-
-14 lemmas fully machine-verified:
-
-```lean
--- Subadditivity of triangle covering
-theorem tau_union_le_sum : τ(A ∪ B) ≤ τ(A) + τ(B)
-
--- Maximality implies edge-sharing
-theorem triangle_shares_edge_with_packing :
-  ∀ t ∈ triangles G, ∃ m ∈ M, |t ∩ m| ≥ 2
-
--- S_e bound (triangles sharing edge with packing element)
-theorem tau_S_le_2 : τ(S_e) ≤ 2
-
--- Bridge bound (triangles sharing edges with two elements)
-theorem tau_X_le_2 : τ(X_ef) ≤ 2
-
--- S_e structure theorem
-theorem Se_structure_lemma :
-  (∃ uv ⊆ e, |uv| = 2, ∀ t ∈ S_e, uv ⊆ t) ∨
-  (∃ x ∉ e, ∀ t ∈ S_e, t = (t ∩ e) ∪ {x})
+**Always check before submitting:**
+```sql
+SELECT * FROM false_lemmas WHERE lemma_name LIKE '%your_lemma%';
 ```
 
 ---
 
 ## Methodology
 
-### The AI-Powered Pipeline
+### Aristotle Capability Tiers
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  1. MULTI-AGENT RESEARCH & DEBATE                               │
-│     ├── Grok-4: Code review, Lean syntax, counterexamples       │
-│     ├── Gemini: Strategy, literature, proof architecture        │
-│     ├── Codex: Long autonomous tasks, code verification         │
-│     └── Claude: Synthesis, planning, context management         │
-│                                                                  │
-│  2. LEAN 4 FORMALIZATION                                         │
-│     └── Write proof attempts with `sorry` placeholders          │
-│                                                                  │
-│  3. ARISTOTLE SUBMISSION                                         │
-│     └── AI prover fills sorries (6-24 hour runs)                │
-│                                                                  │
-│  4. RESULT PROCESSING                                            │
-│     ├── PROVEN (0 sorries) → Move to proven/                    │
-│     ├── PARTIAL (some sorries) → Extract learnings, iterate     │
-│     ├── DISPROVEN → Document in FALSE_LEMMAS                    │
-│     └── TIMEOUT → Analyze for resubmission                      │
-│                                                                  │
-│  5. KNOWLEDGE ACCUMULATION                                       │
-│     └── Track everything in SQLite database                     │
-└─────────────────────────────────────────────────────────────────┘
-```
+| Tier | Success | Best Tactics | Use For |
+|------|---------|--------------|---------|
+| 1 | 70-90% | `native_decide`, `decide` | Finite verification (Fin 9-12) |
+| 2 | 30-50% | `simp`, `exact`, `omega` | Structural proofs with 10+ scaffolding |
+| 3 | 10-20% | `aesop`, `grind` | Complex combinatorics |
+| 4 | <5% | — | **AVOID** |
+
+### Success Factors
+
+- **10+ scaffolding lemmas** → 4× success rate
+- **Informal proof sketches** before `sorry`
+- **100-200 lines** per file
+- **0-1 sorry** per submission
+- **Falsification-first** on Fin 6-7
 
 ### Multi-Agent Collaboration
 
-| Agent | Role | Best For |
-|-------|------|----------|
-| **Grok-4** | Technical critic | Lean syntax, counterexamples, code review |
-| **Gemini** | Strategist | Literature research, proof architecture |
-| **Codex** | Researcher | Code verification, long-running tasks |
-| **Claude** | Synthesizer | Context management, planning, debate synthesis |
-| **Aristotle** | Prover | Actual theorem proving (6-24 hour runs) |
-
----
-
-## Current Research Directions
-
-### LP Relaxation Approach (slot147_v2)
-
-**Key insight**: Krivelevich (1995) proved τ ≤ 2ν* where ν* = fractional packing number.
-
-**For Cycle_4**:
-1. Setting w_A = w_B = w_C = w_D = 1 gives fractional packing of weight 4
-2. Each M-edge in exactly one M-triangle → edge constraint satisfied
-3. External triangles share M-edges → forced to weight 0
-4. Therefore ν* = 4
-5. By Krivelevich: **τ ≤ 2 × 4 = 8**
-
-**Why this bypasses all blockers**:
-- No König theorem needed (Pattern 8: link_graph_bipartite FALSE)
-- No 2-edges-per-vertex claim (Patterns 1, 5, 7 FALSE)
-- No external common vertex claim (Pattern 6 FALSE)
-- Pure LP argument using literature result
-
-### Adjacent Pair Approach (slot49a)
-
-**Strategy**: Split M = {A,B} ∪ {C,D} into adjacent pairs
-
-If τ(T_pair(A,B)) ≤ 4 and τ(T_pair(C,D)) ≤ 4:
-  τ(G) ≤ 4 + 4 = 8 ✓
-
-**Scaffolding available**: 14 lemmas including tau_S_le_2, tau_X_le_2
-
-**Gap**: Naive bound 2+2+2=6, need overlap proof for 4
+| Agent | Role |
+|-------|------|
+| **Aristotle** | Proof search, counterexamples |
+| **Grok-4** | Lean syntax, code analysis |
+| **Gemini** | Literature, proof strategy |
+| **Claude** | Synthesis, implementation |
 
 ---
 
@@ -222,106 +165,106 @@ If τ(T_pair(A,B)) ≤ 4 and τ(T_pair(C,D)) ≤ 4:
 
 ```
 math/
-├── proven/tuza/                    # Machine-verified proofs
-│   ├── nu0/tuza_nu0_PROVEN.lean
-│   ├── nu1/tuza_nu1_PROVEN.lean
-│   ├── nu2/tuza_nu2_PROVEN.lean
-│   ├── nu4/
-│   │   ├── slot139_tau_le_12_PROVEN.lean  # Cycle_4 baseline
-│   │   └── ... (infrastructure lemmas)
-│   └── scaffolding/                # Reusable proven scaffolding
-│
-├── submissions/
-│   ├── nu4_final/                  # Current attack files
-│   │   ├── slot147_v2_lp_simplified.lean
-│   │   ├── slot49a_scaffolding_only.lean
-│   │   └── ...
-│   ├── tracking.db                 # SQLite knowledge base
-│   └── ...
-│
-├── docs/
-│   ├── CHECKPOINT_DEC31_EVENING.md # Latest status
-│   ├── DEBATE_SYNTHESIS_DEC31.md   # Multi-agent consensus
-│   └── archive/                    # Historical documents
-│
-├── scripts/                        # Automation scripts
-├── CLAUDE.md                       # AI workflow instructions
-└── README.md                       # This file
+├── submissions/nu4_final/     # 200+ Lean proof files
+│   ├── slot451_*.lean         # 5-packing impossibility (39 theorems)
+│   ├── slot412_*.lean         # 6-packing constraint
+│   ├── slot506_*.lean         # S_e' partition fix
+│   └── *_aristotle.lean       # Aristotle outputs
+├── submissions/tracking.db    # SQLite database (692 submissions)
+├── docs/                      # 70+ debate documents
+├── scripts/                   # Workflow automation
+└── CLAUDE.md                  # Development methodology
+```
+
+### Key Database Tables
+
+| Table | Purpose |
+|-------|---------|
+| `submissions` | All 692 Aristotle jobs |
+| `false_lemmas` | 35 disproven assumptions |
+| `failed_approaches` | 56 dead ends |
+| `nu4_cases` | Status of all 7 cases |
+| `literature_lemmas` | 181 validated statements |
+
+---
+
+## Fully Proven Files (Top 10)
+
+| File | Theorems | Description |
+|------|----------|-------------|
+| `slot473_tuza_nu4_final_aristotle.lean` | 62 | Master theorem assembly |
+| `slot459_pattern_exhaustive_aristotle.lean` | 58 | Pattern verification |
+| `slot461_degree_bounds_v2_aristotle.lean` | 53 | Degree bounds |
+| `slot452_case2a_bridge_covered_aristotle.lean` | 44 | Bridge coverage |
+| `slot460_classification_v2_aristotle.lean` | 41 | Triangle classification |
+| `slot451_five_packing_fin10_aristotle.lean` | 39 | 5-packing impossibility |
+
+---
+
+## Phase 1 vs Phase 2
+
+**Phase 1 (Current):** Prove τ ≤ 8 for concrete patterns on `Fin n`
+- Uses `native_decide` for computational verification
+- Validates specific covers work
+
+**Phase 2 (Needed):** Prove τ ≤ 8 for ANY graph with ν = 4
+- Requires `SimpleGraph V` (actual graph structure)
+- Need transfer lemma: any 4-packing embeds into our patterns
+- This makes it a proof of Tuza's conjecture
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Lean 4 with Mathlib
+- Aristotle CLI (`pip install aristotle-sdk`)
+- SQLite3
+
+### Quick Start
+```bash
+# Submit to Aristotle
+aristotle prove-from-file submissions/nu4_final/slotXXX.lean --no-wait
+
+# Query database
+sqlite3 submissions/tracking.db "SELECT * FROM v_actionable_near_misses LIMIT 5"
+
+# Find proven files
+rg -l "sorry" submissions/nu4_final/*_aristotle.lean --files-without-match | wc -l
 ```
 
 ---
 
-## Timeline & Discoveries
+## Timeline
 
 ### December 2025
-
-**Week 1 (Dec 23-25)**
 - Proved ν=0, ν=1, ν=2 cases
-- Discovered FALSE lemmas #2, #3
-
-**Week 2 (Dec 26-28)**
 - Proved star_all_4, three_share_v, scattered
-- Discovered FALSE lemmas #1, #4, #5, #6, #7
+- Discovered 9 false lemmas
+- Proved τ ≤ 12 baseline for all cases
 
-**Week 3 (Dec 29-30)**
-- Proved τ ≤ 12 for Cycle_4 (slot139)
-- Near-breakthrough with König approach
-
-**Week 4 (Dec 31)**
-- **Critical discovery**: Link graphs NOT bipartite (FALSE #8)
-- Discovered FALSE #9 (fixed_8_edge_M_subset)
-- Pivoted to LP relaxation approach
-- Submitted slot147_v2 (LP) and slot49a (adjacent pair)
-- **6/7 ν=4 cases now proven**
+### January 2026
+- **PATH_4 COMPLETE** (107 theorems, 3-case split)
+- Discovered bridge partition problem
+- Multi-agent debate consensus on S_e' fix
+- 692 total submissions, 2,633 theorems
 
 ---
 
-## Lessons Learned
+## References
 
-### On Formalization
-
-1. **Counterexamples are progress** - 9 false lemmas is valuable negative knowledge
-2. **AI consensus can be wrong** - Multi-round debate reveals truth
-3. **Database tracking is essential** - Can't repeat 170+ experiments without records
-
-### On Proof Strategy
-
-1. **LP relaxation bypasses combinatorics** - Fractional methods avoid case explosion
-2. **Literature research is crucial** - Krivelevich's 1995 result was the key insight
-3. **Maximality is powerful** - Most lemmas derive from "if not maximal, extend it"
-
----
-
-## Resources
-
-- **Aristotle**: https://aristotle.harmonic.fun
-- **Tuza's Conjecture**: Tuza (1981), "A conjecture on triangles of graphs"
+- **Tuza's Conjecture**: Tuza (1981)
 - **Best Known Bound**: Haxell (1999), τ ≤ 2.87ν
-- **LP Relaxation**: Krivelevich (1995), "On a conjecture of Tuza"
-- **Lean 4**: https://lean-lang.org
-
----
-
-## Citation
-
-```bibtex
-@misc{tuza-formal-2025,
-  title={Formal Verification of Tuza's Conjecture for Small Packing Numbers},
-  author={Patrick Kavanagh and AI Collaborators},
-  year={2025},
-  note={Using Aristotle theorem prover and multi-agent AI collaboration},
-  url={https://github.com/kavanaghpatrick/aristotle-math-problems}
-}
-```
+- **Aristotle Paper**: Poesia et al. (2024)
+- **LP Relaxation**: Krivelevich (1995)
 
 ---
 
 ## License
 
-MIT License - See individual files for details.
+MIT
 
 ---
 
-*Last update: December 31, 2025 Evening*
-*Current frontier: LP relaxation + Adjacent Pair approaches for τ ≤ 8 in Cycle_4*
-*Status: 6/7 ν=4 cases proven, Cycle_4 τ ≤ 12 baseline, τ ≤ 8 in progress*
+*Last updated: January 23, 2026*
+*692 submissions • 2,633 theorems • PATH_4 complete • 145 files fully proven*

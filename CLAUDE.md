@@ -28,7 +28,7 @@ Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Fals
 | **Lemmas** | 3-7 | Chain of dependencies, not monolith |
 | **Sorries** | 0-1 | More sorries = diffuse effort |
 | **Proven helpers** | 10+ | **4x success rate** (40% vs 10%) |
-| **Vertex type** | `Fin n` (n ≤ 7) | Enables `native_decide`, `fin_cases` |
+| **Vertex type** | `Fin n` (n ≤ 12) for Phase 1; `SimpleGraph V` for Phase 2 | Phase 1: `native_decide`; Phase 2: general theorem |
 
 **Winning patterns** (by success rate):
 - `safe_discard`: 100% - verify already-proven work
@@ -79,6 +79,74 @@ theorem tau_le_8_path4 ... := by
 
 ---
 
+## CRITICAL: SimpleGraph Requirement (Multi-Agent Consensus Jan 22, 2026)
+
+**Grok, Codex, and Claude all agree: Our current proofs do NOT prove Tuza's conjecture.**
+
+### The Problem
+
+Our 108 Lean files use **set-theoretic representations**:
+- Triangles as `Finset (Fin n)` with `.card = 3`
+- Edges as `Sym2 (Fin n)` or pairs
+- No actual graph structure
+
+This proves: "For these specific 11 concrete packings on Fin 12, τ ≤ 8"
+
+**NOT**: "For any graph G with ν(G) = 4, τ(G) ≤ 8"
+
+### What a Valid Proof Requires
+
+```lean
+-- WRONG: Set-theoretic (what we have)
+def Triangle (V : Type*) := { s : Finset V // s.card = 3 }
+
+-- RIGHT: Graph-theoretic (what we need)
+import Mathlib.Combinatorics.SimpleGraph.Triangle
+
+variable {V : Type*} [DecidableEq V] [Fintype V]
+variable (G : SimpleGraph V) [DecidableRel G.Adj]
+
+-- Triangles must be cliques IN THE GRAPH
+def IsTriangle (G : SimpleGraph V) (s : Finset V) : Prop :=
+  s.card = 3 ∧ (G.induce s).IsClique
+
+-- Cover edges must be GRAPH edges
+def IsTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
+  E ⊆ G.edgeFinset ∧ ∀ T, IsTriangle G T → ∃ e ∈ E, e ⊆ T
+```
+
+### The General Theorem We Need
+
+```lean
+theorem tuza_nu4 {V : Type*} [DecidableEq V] [Fintype V]
+    (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hnu : trianglePackingNumber G = 4) :
+    triangleCoveringNumber G ≤ 8 := by
+  sorry -- This is what we actually need to prove
+```
+
+### Strategy: Two-Phase Approach
+
+1. **Phase 1 (current)**: Prove τ ≤ 8 for concrete patterns on Fin n using `native_decide`
+   - Validates cover constructions
+   - Good for discovery and falsification
+
+2. **Phase 2 (needed)**: Lift to general theorem
+   - Prove transfer lemma: any 4-packing embeds into one of 11 patterns
+   - Prove remainder handling: non-packing triangles are "bridges" covered by packing edges
+   - Use `SimpleGraph V` for arbitrary V
+
+### Key Mathlib Imports for Phase 2
+
+```lean
+import Mathlib.Combinatorics.SimpleGraph.Basic
+import Mathlib.Combinatorics.SimpleGraph.Triangle
+import Mathlib.Combinatorics.SimpleGraph.Clique
+import Mathlib.Combinatorics.SimpleGraph.Subgraph
+```
+
+---
+
 ## Hard Rules
 
 1. **Never run `aristotle` directly** → always `./scripts/submit.sh`
@@ -99,6 +167,7 @@ theorem tau_le_8_path4 ... := by
 13. **Falsification-first for uncertain lemmas** → submit on `Fin 6-7`; Aristotle finds counterexamples fast if false
 14. **10+ proven helpers minimum** → scaffolding increases success rate 4x
 15. **Add informal proof sketch before every sorry** → per Aristotle paper, "conditioning substantially helps"
+16. **NEVER use A.sym2 for edge enumeration** → `Finset.sym2` includes self-loops! Use explicit enumeration `{s(a,b), s(b,c), s(a,c)}`
 
 ---
 
@@ -131,6 +200,7 @@ SELECT * FROM false_lemmas WHERE lemma_name = 'local_cover_le_2';
 | 6 | `external_share_common_vertex` | 🟠 AI | Externals don't share common x |
 | 8 | `link_graph_bipartite` | 🟠 AI | König approach INVALID |
 | 11 | `self_loop_cover` | ⚪ trivial | `s(v,v)` not a valid edge |
+| 29 | `sym2_cover_cardinality` | 🔴 ARISTOTLE | **NEVER use A.sym2 for edge enumeration!** |
 
 **Also check failed_approaches:**
 ```sql
