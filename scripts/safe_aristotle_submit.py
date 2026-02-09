@@ -83,7 +83,7 @@ async def check_recent_submissions(task_hash: str, window_minutes: int = 10) -> 
         with open(TRANSACTION_LOG) as f:
             for line in f:
                 entry = json.loads(line)
-                timestamp = datetime.fromisoformat(entry['timestamp'])
+                timestamp = datetime.fromisoformat(entry['timestamp']).replace(tzinfo=None)
                 if timestamp > recent_cutoff:
                     if entry['details'].get('task_hash') == task_hash:
                         return [entry]
@@ -122,7 +122,9 @@ async def safe_submit(
     input_file: Path,
     project_id_file: Path,
     description: str,
-    force: bool = False
+    force: bool = False,
+    context_files: list[Path] | None = None,
+    input_type: str = "formal",
 ) -> str:
     """
     Safely submit to Aristotle with multiple safety checks.
@@ -132,6 +134,8 @@ async def safe_submit(
         project_id_file: Where to save the project ID
         description: Human-readable description for logging
         force: Skip safety checks (use with caution!)
+        context_files: Optional list of additional context files (.lean, .md, .txt, .tex)
+        input_type: "formal" (default, FORMAL_LEAN) or "informal" (INFORMAL)
 
     Returns:
         Project ID string
@@ -206,12 +210,21 @@ async def safe_submit(
             "file_size": file_size
         })
 
+        # Determine input type
+        pit = ProjectInputType.FORMAL_LEAN if input_type == "formal" else ProjectInputType.INFORMAL
+
+        # Build submission kwargs
+        submit_kwargs = {
+            "input_file_path": str(input_file),
+            "project_input_type": pit,
+            "wait_for_completion": False,
+        }
+        if context_files:
+            submit_kwargs["context_file_paths"] = [str(p) for p in context_files]
+            print(f"   📎 {len(context_files)} context file(s) attached")
+
         # Submit (with immediate ID extraction)
-        result = await Project.prove_from_file(
-            input_file_path=str(input_file),
-            project_input_type=ProjectInputType.INFORMAL,
-            wait_for_completion=False
-        )
+        result = await Project.prove_from_file(**submit_kwargs)
 
         # Extract project ID immediately
         project_id = result if isinstance(result, str) else getattr(result, 'project_id', str(result))
@@ -249,7 +262,10 @@ async def submit_with_retry(
     project_id_file: Path,
     description: str,
     max_retries: int = 3,
-    retry_delay: int = 30
+    retry_delay: int = 30,
+    context_files: list[Path] | None = None,
+    input_type: str = "formal",
+    force: bool = False,
 ) -> str:
     """
     Submit with exponential backoff retry on transient failures.
@@ -266,7 +282,10 @@ async def submit_with_retry(
 
     for attempt in range(max_retries):
         try:
-            return await safe_submit(input_file, project_id_file, description)
+            return await safe_submit(
+                input_file, project_id_file, description,
+                force=force, context_files=context_files, input_type=input_type,
+            )
 
         except SubmissionError as e:
             # Don't retry on safety check failures
@@ -290,22 +309,41 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) < 4:
-        print("Usage: python3 safe_aristotle_submit.py <input_file> <id_file> <description> [--force]")
+        print("Usage: python3 safe_aristotle_submit.py <input_file> <id_file> <description> [options]")
+        print()
+        print("Options:")
+        print("  --force              Skip safety checks")
+        print("  --informal           Use INFORMAL input type (default: FORMAL_LEAN)")
+        print("  --context <file>     Add context file (can repeat)")
         print()
         print("Example:")
         print("  python3 safe_aristotle_submit.py \\")
-        print("    unknotting/batch1.txt \\")
-        print("    BATCH1_ID.txt \\")
-        print("    'First batch of 10 knots'")
+        print("    submissions/nu4_final/slot542.lean \\")
+        print("    submissions/nu4_final/slot542_ID.txt \\")
+        print("    'Bridge apex constraint' \\")
+        print("    --context docs/strategy.md")
         sys.exit(1)
 
     input_file = Path(sys.argv[1])
     id_file = Path(sys.argv[2])
     description = sys.argv[3]
     force = '--force' in sys.argv
+    input_type = "informal" if '--informal' in sys.argv else "formal"
+
+    # Collect --context files
+    context_files = []
+    args = sys.argv[4:]
+    for i, arg in enumerate(args):
+        if arg == '--context' and i + 1 < len(args):
+            context_files.append(Path(args[i + 1]))
 
     try:
-        project_id = asyncio.run(submit_with_retry(input_file, id_file, description))
+        project_id = asyncio.run(submit_with_retry(
+            input_file, id_file, description,
+            context_files=context_files or None,
+            input_type=input_type,
+            force=force,
+        ))
         print(f"✅ Success! Project ID: {project_id}")
     except SubmissionError as e:
         print(f"❌ {e}")

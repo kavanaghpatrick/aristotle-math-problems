@@ -1,0 +1,52 @@
+Leinster Groups: Cyclic groups of perfect order are Leinster groups
+
+THEOREM STATEMENT (Lean 4):
+def IsLeinster (G : Type*) [Group G] [Fintype G] : Prop :=
+  ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+theorem cyclic_of_perfect_is_leinster (G : Type*) [Group G] [Fintype G]
+    [IsCyclic G] (h_perfect : Nat.Perfect (Fintype.card G)) :
+    IsLeinster G
+
+MATHEMATICAL STATEMENT:
+If G is a finite cyclic group whose order is a perfect number, then G is a Leinster group
+(the sum of the orders of all its normal subgroups equals twice the group's order).
+
+PROOF:
+Let G be a cyclic group of order n, where n is a perfect number.
+
+Step 1: All subgroups of G are normal.
+Since G is cyclic, G is abelian (commutative). In an abelian group, every subgroup
+is normal because for any subgroup H, any g in G, and any h in H:
+  g * h * g⁻¹ = h * g * g⁻¹ = h ∈ H.
+Therefore {H : Subgroup G // H.Normal} is the same as the set of all subgroups of G.
+
+Step 2: Subgroups of cyclic groups correspond to divisors.
+By the fundamental theorem of cyclic groups, for each divisor d of n = |G|,
+there is exactly one subgroup of G with order d. Moreover, every subgroup of G
+arises this way. So the subgroups of G are in bijection with the divisors of n.
+
+Step 3: The sum of orders equals σ(n).
+Since each divisor d of n corresponds to exactly one subgroup of order d:
+  ∑_{H normal in G} |H| = ∑_{H subgroup of G} |H| = ∑_{d | n} d = σ(n)
+where σ(n) denotes the sum-of-divisors function.
+
+Step 4: Perfect numbers satisfy σ(n) = 2n.
+By definition, n is a perfect number if and only if σ(n) = 2n.
+(Equivalently, the sum of the proper divisors of n equals n.)
+
+Step 5: Conclude.
+Combining steps 3 and 4:
+  ∑_{H normal in G} |H| = σ(n) = 2n = 2 * |G|
+This is exactly the Leinster condition. Therefore G is a Leinster group. QED.
+
+MATHLIB LEMMAS TO USE:
+- IsCyclic implies CommGroup (all elements commute)
+- In CommGroup, Subgroup.Normal holds for all subgroups
+- Nat.Perfect is defined as: n.Perfect ↔ ∑ i in n.divisors, i = 2 * n
+- Subgroups of a cyclic group are in bijection with divisors (may need to construct this)
+- Fintype.card for the cardinality of G
+- Nat.card for the cardinality of each subgroup
+
+REFERENCE:
+Leinster, Tom (2001). "Perfect numbers and groups". arXiv:math/0104012. Theorem 2.1.

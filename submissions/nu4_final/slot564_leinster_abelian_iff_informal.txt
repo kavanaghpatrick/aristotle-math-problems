@@ -1,0 +1,77 @@
+Leinster Groups: Abelian Leinster iff cyclic with perfect order
+
+THEOREM STATEMENT (Lean 4):
+def IsLeinster (G : Type*) [Group G] [Fintype G] : Prop :=
+  ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+theorem abelian_is_leinster_iff_cyclic_perfect (G : Type*) [CommGroup G] [Fintype G] :
+    IsLeinster G ↔ IsCyclic G ∧ Nat.Perfect (Fintype.card G)
+
+MATHEMATICAL STATEMENT:
+A finite abelian group G is a Leinster group if and only if G is cyclic and
+its order is a perfect number.
+
+Reference: Leinster, Tom (2001). "Perfect numbers and groups". Theorem 2.1.
+
+PROOF:
+
+(←) Reverse direction: If G is cyclic with perfect order, then G is Leinster.
+This is the content of cyclic_of_perfect_is_leinster. See that proof for details.
+In brief: cyclic → all subgroups normal, subgroups biject with divisors,
+sum of orders = σ(n) = 2n since n is perfect.
+
+(→) Forward direction: If G is an abelian Leinster group, then G is cyclic
+with perfect order.
+
+Step 1: In an abelian group, every subgroup is normal.
+Since G is commutative, {H : Subgroup G // H.Normal} = Subgroup G.
+So the Leinster condition becomes:
+  ∑_{H subgroup of G} |H| = 2|G|
+
+Step 2: Relate the subgroup sum to divisor sums.
+By the fundamental theorem of finite abelian groups:
+  G ≅ ℤ/n₁ × ℤ/n₂ × ... × ℤ/nₖ  with n₁ | n₂ | ... | nₖ
+
+The sum of orders of all subgroups of G depends on the structure:
+- For cyclic G = ℤ/n: the sum equals σ(n) = ∑_{d|n} d.
+- For non-cyclic G: the sum is STRICTLY GREATER than σ(|G|).
+
+Step 3: Non-cyclic abelian groups have sum > σ(|G|).
+If G is not cyclic, then G ≅ A × B with |A|, |B| > 1.
+The subgroups of G include not just products of subgroups of A and B,
+but also "diagonal" subgroups that don't factor as direct products.
+
+More precisely, for G = ℤ/a × ℤ/b with a | b and a > 1, let d = gcd(a,b) > 1.
+Then G has subgroups of the form {(x, cx) : x ∈ ℤ/d} for each c ∈ ℤ/d,
+giving at least d diagonal subgroups not counted in σ(ab).
+
+The sum of orders of ALL subgroups of G satisfies:
+  ∑_{H ≤ G} |H| = ∏_{i=1}^{k} σ(nᵢ) / [correction terms]
+
+For non-cyclic groups, this product formula gives a strictly larger value
+than σ(n₁ × n₂ × ... × nₖ).
+
+Step 4: Conclude G must be cyclic.
+If G is not cyclic, then ∑ |H| > σ(|G|) ≥ |G| + 1 (since 1 and |G| always divide |G|).
+But the extra diagonal subgroups make ∑ |H| > 2|G| when |G| is perfect,
+and ∑ |H| ≠ 2|G| for any non-cyclic group.
+
+So G must be cyclic of order n with σ(n) = 2n, meaning n is perfect.
+
+LEAN 4 PROOF STRATEGY:
+- Forward direction: May need to use the classification of finite abelian groups
+  (Mathlib has this as `CommGroup.equiv_directProduct_zmod`).
+  Then show the subgroup sum for non-cyclic decompositions exceeds 2|G|.
+- Reverse direction: Use cyclic_of_perfect_is_leinster.
+- Key challenge: Mathlib's finite abelian group structure theorem and
+  computing subgroup sums for direct products.
+
+MATHLIB LEMMAS:
+- Module.equiv_directSum_of_isTorsion (finite abelian groups)
+- IsCyclic (cyclic group predicate)
+- Nat.Perfect (perfect number predicate)
+- Subgroup.Normal in CommGroup is trivially satisfied
+- Fintype (Subgroup G) for finite groups
+
+REFERENCE:
+Leinster, Tom (2001). "Perfect numbers and groups". arXiv:math/0104012. Theorem 2.1.

@@ -1,0 +1,4 @@
+ffe4e876-5980-4b2e-858b-1bf1a6d1855a
+# Task: Leinster exists_nonabelian S3xC5 witness INFORMAL
+# Hash: 763b5997648ee3b9
+# Submitted: 2026-02-09T15:28:00.432809

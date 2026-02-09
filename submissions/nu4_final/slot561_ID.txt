@@ -1,0 +1,4 @@
+7e626f64-fa01-45b0-a9ec-94688ecd883f
+# Task: Leinster cyclic_of_perfect_is_leinster FORMAL sorry=1
+# Hash: 19cc807cb71c334c
+# Submitted: 2026-02-09T15:27:50.790069

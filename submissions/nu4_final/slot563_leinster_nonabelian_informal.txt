@@ -1,0 +1,65 @@
+Leinster Groups: There exists a nonabelian Leinster group
+
+THEOREM STATEMENT (Lean 4):
+def IsLeinster (G : Type*) [Group G] [Fintype G] : Prop :=
+  ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+theorem exists_nonabelian_leinster_group :
+    ∃ G : Type, ∃ (_ : Group G) (_ : Fintype G),
+      IsLeinster G ∧ ¬ ∀ (a b : G), a * b = b * a
+
+MATHEMATICAL STATEMENT:
+There exists a finite nonabelian group that is a Leinster group.
+
+PROOF:
+The witness is G = S₃ × C₅, the direct product of the symmetric group on 3
+elements with the cyclic group of order 5. This group has order 6 × 5 = 30.
+
+In Lean 4, we can represent this as:
+  G := Equiv.Perm (Fin 3) × ZMod 5
+
+Step 1: G is nonabelian.
+S₃ is nonabelian. For example, let σ = (1 2) and τ = (1 3) in S₃.
+Then σ ∘ τ = (1 3 2) ≠ (1 2 3) = τ ∘ σ.
+Since S₃ embeds into G via the first factor, G is also nonabelian.
+
+Step 2: Enumerate normal subgroups of G = S₃ × C₅.
+Since gcd(|S₃|, |C₅|) = gcd(6, 5) = 1, by Goursat's lemma for groups of
+coprime order, every normal subgroup of S₃ × C₅ is of the form N × M where
+N is a normal subgroup of S₃ and M is a normal subgroup of C₅.
+
+Normal subgroups of S₃: {e} (order 1), A₃ (order 3), S₃ (order 6)
+Normal subgroups of C₅: {0} (order 1), C₅ (order 5)
+
+All products N × M:
+  {e} × {0}:  order 1 × 1  = 1
+  {e} × C₅:   order 1 × 5  = 5
+  A₃ × {0}:   order 3 × 1  = 3
+  A₃ × C₅:    order 3 × 5  = 15
+  S₃ × {0}:   order 6 × 1  = 6
+  S₃ × C₅:    order 6 × 5  = 30
+
+Step 3: Verify the Leinster condition.
+Sum of orders of normal subgroups:
+  1 + 5 + 3 + 15 + 6 + 30 = 60
+
+Twice the group order:
+  2 × 30 = 60
+
+Since 60 = 60, G = S₃ × C₅ is a Leinster group.
+
+Step 4: Conclude.
+G = S₃ × C₅ is a nonabelian Leinster group, proving existence. QED.
+
+LEAN 4 PROOF STRATEGY:
+- Use `⟨Equiv.Perm (Fin 3) × ZMod 5, inferInstance, inferInstance, ⟨_, _⟩⟩` as the witness.
+- For IsLeinster: enumerate normal subgroups and compute the sum. This may require
+  establishing the Fintype instance for {H : Subgroup G // H.Normal} and then
+  computing via native_decide or a chain of norm_num/decide lemmas.
+- For nonabelian: provide specific elements that don't commute.
+  Use Equiv.swap 0 1 and Equiv.swap 0 2 in Equiv.Perm (Fin 3).
+  Show (Equiv.swap 0 1 * Equiv.swap 0 2) ≠ (Equiv.swap 0 2 * Equiv.swap 0 1).
+
+REFERENCE:
+Leinster, Tom (2001). "Perfect numbers and groups". arXiv:math/0104012.
+Wikipedia: https://en.wikipedia.org/wiki/Leinster_group

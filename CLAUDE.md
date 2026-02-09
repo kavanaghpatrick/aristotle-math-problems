@@ -1,355 +1,83 @@
 # CLAUDE.md - Math Project
 
 ## Mission
-Prove Tuza's conjecture for ν=4 using Aristotle as a **discovery engine**. Falsify false conjectures fast. Prove true ones with scaffolding.
+Solve open mathematical problems using Aristotle as a **formalization engine**. Primary: Formal Conjectures sweep (NT/algebra). Secondary: Tuza ν=4 (6/7 done, gated). Falsify false conjectures fast. Prove true ones with scaffolding or Boris workflow.
 
 ---
 
-## Aristotle Capability Taxonomy
+## How Aristotle Works
 
-**Aristotle is a DISCOVERY ENGINE on finite domains, not just a verifier.**
+**Always aim for sorry=0 before submitting.** This is by far the most reliable path. sorry=1 in a short, focused file sometimes works. sorry=2+ essentially never works — split or use INFORMAL mode instead.
 
-| Tier | Success Rate | Capabilities | Key Tactics |
-|------|--------------|--------------|-------------|
-| **1** | 70-90% | Counterexamples (Fin 5-7), cardinality bounds, decidable predicates | `native_decide`, `fin_cases`, `decide` |
-| **2** | 30-50% | Subadditivity, simple induction, LP witnesses, **packing construction** (needs 10+ scaffolding) | `simp_all`, `aesop`, `omega`, `Disjoint.mono`, `card_union_of_disjoint` |
-| **3** | 10-20% | Deep combinatorics, **disjointness+pigeonhole** (human must outline proof structure) | `grind`, `linarith`, `push_neg` |
-| **4** | <5% | Asymptotics, optimal selection, global coordination | **AVOID** |
+**What works:**
+- `native_decide` on `Fin n` — the dominant proof-closing tactic in successful files
+- Thematic batches — same template adapted per case
+- Falsification on `Fin 6-7` — submit the negation before investing in a new lemma
+- Scaffolding helps YOU reach sorry=0 (it doesn't independently help Aristotle)
 
-**Falsification-first**: Submit uncertain conjectures on `Fin 6-7`. Aristotle finds counterexamples in minutes if false.
+**Submission modes:**
+- **FORMAL_LEAN** (.lean) — default for verification of complete proofs
+- **INFORMAL** (.txt) — Aristotle rewrites from scratch. Use for Boris workflow or discovery
+- Use `admit` (not `sorry`) for goals you don't want Aristotle to attempt
+- **PROVIDED SOLUTION**: Natural language proof sketch in header comments guides MCTS search
 
----
+**Three workflows (choose based on /project:screen results):**
+- **Track 1 — native_decide**: sorry=0 scaffold tower, Fin n, 77% success rate
+- **Track 2 — Boris INFORMAL**: Claude generates proof sketch → INFORMAL mode → Aristotle formalizes (~45% external success rate, untested by us)
+- **Track 3 — Falsification**: Submit negation on Fin 5-7, ~40% of conjectures are false
 
-## Optimal Submission Pattern
-
-| Metric | Target | Impact |
-|--------|--------|--------|
-| **Lines** | 100-200 | Under 100 = insufficient context; over 200 = diluted signal |
-| **Lemmas** | 3-7 | Chain of dependencies, not monolith |
-| **Sorries** | 0-1 | More sorries = diffuse effort |
-| **Proven helpers** | 10+ | **4x success rate** (40% vs 10%) |
-| **Vertex type** | `Fin n` (n ≤ 12) for Phase 1; `SimpleGraph V` for Phase 2 | Phase 1: `native_decide`; Phase 2: general theorem |
-
-**Winning patterns** (by success rate):
-- `safe_discard`: 100% - verify already-proven work
-- `multi_agent_optimized`: 100% - parallel AI review before submit
-- `scaffolded`: 10% - **needs more helpers or smaller scope**
-
----
-
-## Informal Proof Sketches (Paper-validated)
-
-**Per [Aristotle IMO paper](https://arxiv.org/abs/2510.01346): "Conditioning on informal proof substantially helps" formal proof search.**
-
-Before every `sorry`, add a natural language proof outline:
-
-```lean
-/-
-PROOF SKETCH:
-1. Each packing element contributes ≤2 edges to cover (by edge-disjointness)
-2. 4 elements × 2 edges = 8 edges total (arithmetic)
-3. Every triangle shares edge with some packing element (maximality)
-4. Therefore these 8 edges form a valid cover (union covers all)
--/
-theorem tau_le_8_path4 ... := by
-  sorry
-```
-
-**Format guidelines:**
-- 3-5 numbered steps (matches Aristotle's lemma decomposition)
-- Brief justification in parentheses (guides tactic selection)
-- State the key insight explicitly (helps bottleneck-first search)
-- For Tier 2+ problems, include which helper lemmas will be used
-
-**Why this works:** Aristotle uses MCTS with learned value function. Informal sketches narrow the search space by suggesting proof structure, reducing combinatorial explosion.
-
----
-
-## Proven Aristotle Patterns (slot347)
-
-| Pattern | Tactics |
-|---------|---------|
-| **Object construction** | `let M' := M.erase X ∪ {T1,T2}` → prove larger packing → contradiction |
-| **Pigeonhole via disjoint** | `Disjoint.mono` + `card_union_of_disjoint` + `omega` |
-| **Sym2 edges** | `Finset.mem_sym2_iff`, `Sym2.mem_iff`, `rcases ... with rfl \| rfl` |
-| **Card iff** | `Finset.one_lt_card.mpr/mp`, `Finset.mem_inter.mpr` |
-| **Case exhaust** | `by_cases h : ∀ Y ∈ M, ...` → `push_neg` → `obtain` |
-
-**Finset card chain:** `card_union_of_disjoint`, `card_erase_of_mem`, `card_insert_of_not_mem`, `card_singleton`
-
----
-
-## CRITICAL: SimpleGraph Requirement (Multi-Agent Consensus Jan 22, 2026)
-
-**Grok, Codex, and Claude all agree: Our current proofs do NOT prove Tuza's conjecture.**
-
-### The Problem
-
-Our 108 Lean files use **set-theoretic representations**:
-- Triangles as `Finset (Fin n)` with `.card = 3`
-- Edges as `Sym2 (Fin n)` or pairs
-- No actual graph structure
-
-This proves: "For these specific 11 concrete packings on Fin 12, τ ≤ 8"
-
-**NOT**: "For any graph G with ν(G) = 4, τ(G) ≤ 8"
-
-### What a Valid Proof Requires
-
-```lean
--- WRONG: Set-theoretic (what we have)
-def Triangle (V : Type*) := { s : Finset V // s.card = 3 }
-
--- RIGHT: Graph-theoretic (what we need)
-import Mathlib.Combinatorics.SimpleGraph.Triangle
-
-variable {V : Type*} [DecidableEq V] [Fintype V]
-variable (G : SimpleGraph V) [DecidableRel G.Adj]
-
--- Triangles must be cliques IN THE GRAPH
-def IsTriangle (G : SimpleGraph V) (s : Finset V) : Prop :=
-  s.card = 3 ∧ (G.induce s).IsClique
-
--- Cover edges must be GRAPH edges
-def IsTriangleCover (G : SimpleGraph V) (E : Finset (Sym2 V)) : Prop :=
-  E ⊆ G.edgeFinset ∧ ∀ T, IsTriangle G T → ∃ e ∈ E, e ⊆ T
-```
-
-### The General Theorem We Need
-
-```lean
-theorem tuza_nu4 {V : Type*} [DecidableEq V] [Fintype V]
-    (G : SimpleGraph V) [DecidableRel G.Adj]
-    (hnu : trianglePackingNumber G = 4) :
-    triangleCoveringNumber G ≤ 8 := by
-  sorry -- This is what we actually need to prove
-```
-
-### Strategy: Two-Phase Approach
-
-1. **Phase 1 (current)**: Prove τ ≤ 8 for concrete patterns on Fin n using `native_decide`
-   - Validates cover constructions
-   - Good for discovery and falsification
-
-2. **Phase 2 (needed)**: Lift to general theorem
-   - Prove transfer lemma: any 4-packing embeds into one of 11 patterns
-   - Prove remainder handling: non-packing triangles are "bridges" covered by packing edges
-   - Use `SimpleGraph V` for arbitrary V
-
-### Key Mathlib Imports for Phase 2
-
-```lean
-import Mathlib.Combinatorics.SimpleGraph.Basic
-import Mathlib.Combinatorics.SimpleGraph.Triangle
-import Mathlib.Combinatorics.SimpleGraph.Clique
-import Mathlib.Combinatorics.SimpleGraph.Subgraph
-```
-
----
-
-## Hard Rules
-
-1. **Never run `aristotle` directly** → always `./scripts/submit.sh`
-2. **Never submit without problem_id** → track everything
-3. **Near-misses (1-2 sorry) get worked FIRST** → before new submissions
-4. **Check `failed_approaches` before submitting** → don't repeat mistakes
-5. **Include proven scaffolding** → full proofs, never sorry placeholders
-6. **Process every result** → `./scripts/process_result.sh` extracts learnings
-7. **NEVER replace existing proof code with sorry** → if it compiled before, fix it, don't delete it
-
-### File & Database Integrity
-
-8. **PROVEN means 0 sorry AND 0 axiom** → `rg "sorry|^axiom" file.lean` must return nothing
-9. **`proven/` directory = verified clean files only** → incomplete work goes in `partial/`
-10. **Database follows files, not the other way around** → always verify .lean before updating status
-11. **Axioms are not proofs** → any file using `axiom` is incomplete
-12. **No self-loops in covers** → `s(v,v)` is not a graph edge; cover definitions MUST have `E ⊆ G.edgeFinset`
-13. **Falsification-first for uncertain lemmas** → submit on `Fin 6-7`; Aristotle finds counterexamples fast if false
-14. **10+ proven helpers minimum** → scaffolding increases success rate 4x
-15. **Add informal proof sketch before every sorry** → per Aristotle paper, "conditioning substantially helps"
-16. **NEVER use A.sym2 for edge enumeration** → `Finset.sym2` includes self-loops! Use explicit enumeration `{s(a,b), s(b,c), s(a,c)}`
-
----
-
-## FALSE LEMMAS (Query Database Before Submitting!)
-
-All false lemmas are tracked in `false_lemmas` table with evidence levels:
-- 🔴 `aristotle_verified` - Actual Aristotle counterexample (highest confidence)
-- 🟠 `ai_verified` - AI agents verified the math (high confidence)
-- 🟡 `reasoning_based` - Sound reasoning, no formal verification
-- ⚪ `trivially_false` - Obvious logical error
-
-**CRITICAL: Before submitting, check for false lemmas:**
-```sql
--- Quick summary of all false lemmas
-SELECT * FROM v_false_lemmas_summary;
-
--- Full details for a specific pattern
-SELECT lemma_name, false_statement_english, counterexample,
-       why_false, correct_approach
-FROM false_lemmas WHERE lemma_name LIKE '%cover%';
-
--- Check if your lemma is false
-SELECT * FROM false_lemmas WHERE lemma_name = 'local_cover_le_2';
-```
-
-**Key false lemmas to remember:**
-| # | Lemma | Evidence | Impact |
-|---|-------|----------|--------|
-| 1 | `local_cover_le_2` | 🟠 AI | 2 M-edges at v insufficient |
-| 6 | `external_share_common_vertex` | 🟠 AI | Externals don't share common x |
-| 8 | `link_graph_bipartite` | 🟠 AI | König approach INVALID |
-| 11 | `self_loop_cover` | ⚪ trivial | `s(v,v)` not a valid edge |
-| 29 | `sym2_cover_cardinality` | 🔴 ARISTOTLE | **NEVER use A.sym2 for edge enumeration!** |
-
-**Also check failed_approaches:**
-```sql
-SELECT approach_name, why_failed, avoid_pattern FROM failed_approaches
-WHERE frontier_id='nu_4' AND failure_category='wrong_direction';
-```
-
----
-
-## The Correct T_pair Approach
-
-For e = {v,a,b} and f = {v,c,d} sharing exactly vertex v:
-
-| Set | Cover | Bound | Why |
-|-----|-------|-------|-----|
-| trianglesContaining(v) | Spokes {va,vb,vc,vd} | ≤ 4 | All contain v, so all contain a spoke |
-| trianglesAvoiding(v) | Base edges {ab,cd} | ≤ 2 | If t avoids v but shares edge with e, t MUST share base {a,b} |
-| **Total T_pair** | Spokes + Bases | **≤ 6** | NOT 4! The 4-bound is FALSE. |
-
----
-
-## ν=4 Cases (Query database for full details)
-
-```sql
--- Get ALL knowledge for a case in one query
-SELECT case_name, status, notes, correct_approach, false_lemmas,
-       proven_lemmas, key_insight, next_action
-FROM nu4_cases WHERE case_name = 'path_4';
-```
-
-| Case | Status | Key Insight |
-|------|--------|-------------|
-| star_all_4 | PARTIAL | 4 spokes from shared vertex; τ ≤ 4 straightforward |
-| three_share_v | PARTIAL | 3-star + isolated triangle; τ ≤ 5 straightforward |
-| scattered | PARTIAL | Each external has unique parent; τ ≤ 12 proven |
-| path_4 | PARTIAL | Endpoints need bases; τ ≤ 12 proven |
-| cycle_4 | PARTIAL | All approaches blocked; τ ≤ 12 proven, τ ≤ 8 open |
-| two_two_vw | PARTIAL | Two independent pairs; τ ≤ 12 proven |
-| matching_2 | PARTIAL | Same as two_two_vw; τ ≤ 12 proven |
-
-**What IS proven:** τ ≤ 12 for ALL cases (slot139 - 0 sorry, 0 axiom, correct definitions)
+**What Aristotle cannot reliably do:**
+- Fill sorry gaps in combinatorics — 0/183 in our domain (but works for NT/algebra)
+- Handle files that don't compile — pre-check syntax before submitting
+- Max 2 resubmissions per formulation without a major rewrite
 
 ---
 
 ## Commands
 
-```bash
-# Submit (validates, tracks, submits atomically)
-./scripts/submit.sh file.lean problem_id [pattern]
-
-# Process completed result
-./scripts/process_result.sh <UUID>
-
-# Dashboard
-./scripts/dashboard.sh
 ```
+/project:submit <file.lean> [slot]   # Pre-flight audit → submit → track
+/project:optimize <file.lean>        # Analyze file, recommend restructuring
+/project:fetch <uuid-or-slot>        # Download completed result → audit → DB
+/project:status [uuid-or-slot]       # Check Aristotle queue & job status
+/project:process-result <file>       # Audit local file → DB update
+/project:audit <file.lean>           # Full 7-point audit (no submission)
+/project:screen <problem-or-url>     # Screen problem for AI amenability (6 gates + 7 scores)
+/project:screen-batch <directory>    # Batch screen Lean files for sweep targeting
+/project:debate "topic" --context f  # Multi-AI debate with full context accumulation
+```
+
+Scripts: `scripts/safe_aristotle_submit.py`, `scripts/aristotle_monitor.py`
+
+---
+
+## Hard Rules
+
+1. **Never run `aristotle` directly** → always `/project:submit`
+2. **Never submit without tracking** → every submission gets a DB entry
+3. **Near-misses get worked IF the gap is solvable** → check if blocked by falsified approach first, then prove locally, resubmit sorry=0
+4. **Check DB before submitting** → `false_lemmas` and `failed_approaches` tables
+5. **Include proven scaffolding** → full proofs, never sorry placeholders
+6. **Process every result** → `/project:fetch` or `/project:process-result`
+7. **NEVER replace existing proof code with sorry** → fix it, don't delete it
+8. **PROVEN means 0 sorry AND 0 axiom**
+9. **No self-loops** → `s(v,v)` is not a graph edge
+10. **NEVER use `A.sym2` for edge enumeration** → `Finset.sym2` includes self-loops! Use explicit edges
+11. **Default to `FORMAL_LEAN` mode** → use INFORMAL (.txt) only for discovery submissions with sorry≥2
 
 ---
 
 ## Decision Priority
 
-1. **Falsify uncertain conjectures** (submit on Fin 6-7 for fast counterexample search)
-2. **Complete near-misses** (1-2 sorry with proven_count ≥ 10) - **70% of submissions are fixable**
-3. **Partial cases** (nu4_cases WHERE status='partial')
-4. **New exploration** (only if 1-3 are empty)
+1. **Screen before attacking** — run `/project:screen` on ANY new problem. Gates must pass.
+2. **Formal Conjectures sweep (75%)** — clone google-deepmind/formal-conjectures, filter for NT/algebra + finite structure, falsify then prove
+3. **Gated Tuza (25%)** — INFORMAL mode only for 50 slots. Formalize only if sketch emerges.
+4. **Falsify uncertain conjectures** — submit negation on Fin 5-7 BEFORE investing in proof
+5. **0% on infinite-domain problems** — Erdos-Straus, Seymour n≥15, Brocard (gates fail)
 
-```sql
--- Find near-misses to work
-SELECT filename, sorry_count, proven_count FROM submissions
-WHERE status='completed' AND sorry_count = 1 AND proven_count >= 10 ORDER BY proven_count DESC;
-
--- Case knowledge
-SELECT case_name, status, key_insight, next_action FROM nu4_cases;
-
--- Failed approaches to AVOID
-SELECT approach_name, avoid_pattern FROM failed_approaches WHERE frontier_id='nu_4';
-```
-
----
-
-## Scaffolding (10+ helpers → 4x success rate)
-
-**Validated TRUE lemmas** (mathematically verified):
-- `tau_containing_v_in_pair_le_4` - Spokes cover containing triangles
-- `tau_avoiding_v_in_pair_le_2` - Base edges cover avoiding triangles
-- `avoiding_contains_base_edge` - Avoiding must share base edge
-- `tau_union_le_sum` - Subadditivity
-- `tau_S_le_2`, `tau_X_le_2` - S and X bounds
-- `triangle_shares_edge_with_packing` - Maximality
-
-```sql
-SELECT name, english FROM literature_lemmas WHERE validated_true = 1;
-```
-
-**Critical rules:**
-- Include FULL PROOF CODE from Aristotle outputs, not sorry
-- Local compilation errors are OK (Mathlib version mismatch) - submit anyway
-- Copy exact Aristotle output, don't modify
-
----
-
-## Lean Pitfalls
-
-| Bug | Problem | Fix |
-|-----|---------|-----|
-| `sInf` unrestricted | Allows invalid edge sets | Require `E ⊆ G.edgeFinset` |
-| `Finset.sym2` | Includes self-loops s(v,v) | Filter to actual edges |
-| `Set` vs `Finset` | Missing decidability | Use `Finset V` with `DecidableEq` |
-
-**Required instances:**
-```lean
-variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]
-```
-
----
-
-## Multi-Agent Strategy
-
-| Agent | Use For | Avoid |
-|-------|---------|-------|
-| **Grok-4** | Lean syntax, code bugs, proof gaps | Math reasoning (times out) |
-| **Gemini** | Literature, proof strategy, architecture | Detailed code |
-| **Claude** | Long context, planning, synthesis | - |
-| **Aristotle** | **Discovery**: counterexamples (Fin 5-7), proof search with 10+ scaffolding, bound verification | Tier 3-4 without human outline, files >200 lines |
-
-### Grok-4 API (COPY EXACTLY - DO NOT MODIFY)
-
-⚠️ **Use this EXACT template. Do not inline JSON, do not change quotes.**
-
-```bash
-python3 << 'PYEOF'
-import json
-prompt = "YOUR QUESTION HERE"  # <-- Only change this line
-request = {
-    "messages": [{"role": "user", "content": prompt}],
-    "model": "grok-4",
-    "temperature": 0.3
-}
-json.dump(request, open('/tmp/grok_request.json', 'w'))
-PYEOF
-
-curl -s -X POST https://api.x.ai/v1/chat/completions \
-  -H "Authorization: Bearer $GROK_API_KEY" \
-  -H "Content-Type: application/json" \
-  --max-time 300 \
-  -d @/tmp/grok_request.json | python3 -c "import sys,json; print(json.load(sys.stdin)['choices'][0]['message']['content'])"
-```
-
-**BANNED:** Inline JSON, changing quotes, adding escaping, "improving" the template.
+**Problem selection thesis**: `docs/PROBLEM_SELECTION_THESIS.md`
+**Kill list:** Never resubmit problems with 3+ failed attempts without a fundamentally new approach. Check `failed_approaches` first.
+**Domain rule:** Prefer NT/algebra (AI 75-100%) over combinatorics (AI 7-50%). Domain is THE predictor of success.
 
 ---
 
@@ -357,54 +85,60 @@ curl -s -X POST https://api.x.ai/v1/chat/completions \
 
 All state in `submissions/tracking.db`:
 
-| Table | Content |
+| Table | What's In It |
+|-------|-------------|
+| `submissions` | All Aristotle jobs, status, sorry/proven counts |
+| `false_lemmas` | Disproven claims — **always check before submitting** |
+| `failed_approaches` | What doesn't work and why |
+| `nu4_cases` | Case-specific knowledge, approaches, next actions |
+| `literature_lemmas` | Validated scaffolding lemmas |
+| `candidate_problems` | Scored problem candidates across all frontiers |
+
+Key views: `v_actionable_near_misses`, `v_false_lemmas_summary`, `v_candidate_ranking`
+
+---
+
+## Proof State
+
+Most proven files already use abstract `SimpleGraph V`. The formalization infrastructure exists — the gap is mathematical.
+
+| Case | Status | τ bound |
+|------|--------|---------|
+| STAR_ALL_4 | Concrete proven, general needs formalization | ≤ 4 |
+| THREE_SHARE_V | Concrete proven, general needs formalization | ≤ 4 |
+| DISCONNECTED (incl. cycle_4) | Proof chain exists, 1 sorry in slot546 | ≤ 8 |
+| **PATH_4** | **OPEN: both-endpoint base-edge externals** | **≤ 9 (need ≤ 8)** |
+
+**Assembly:** `slot549_tuza_nu4_assembly.lean` — only PATH_4 both-endpoints is genuinely unresolved.
+
+**Frontier approach:** Modified partition — group S_A∪S_B, apply Parker (nu≤3 → τ≤6), then τ(S_C)+τ(S_D)≤2 each = total 8.
+
+---
+
+## Lean Pitfalls
+
+- `Finset.sym2` includes self-loops `s(v,v)` — filter to actual edges or enumerate explicitly
+- `Set` vs `Finset` — use `Finset V` with `DecidableEq` for decidability
+- Always: `variable [Fintype V] [DecidableEq V] [DecidableRel G.Adj]`
+
+---
+
+## Multi-Agent Strategy
+
+| Agent | Use For |
 |-------|---------|
-| `submissions` | All Aristotle jobs + notes |
-| `literature_lemmas` | Proven (70) with validated_true flag |
-| `failed_approaches` | What doesn't work (38) with falsity_proof |
-| `false_lemmas` | **9 patterns with counterexamples, evidence levels** |
-| `nu4_cases` | Case knowledge: approach, false_lemmas, key_insight, next_action |
-| `ai_consultations` | AI recommendations and outcomes |
+| **Codex** | Challenge claims BEFORE submitting — best at falsification and finding counterexamples |
+| **Gemini** | Audit proof completeness, find missing patterns, literature connections |
+| **Grok-4** | Fix specific Lean errors, variable mismatches, tactic selection |
+| **Aristotle** | Verify sorry=0 files. Falsify uncertain claims on Fin 6-7 |
 
-**Key views:**
-| View | Purpose |
-|------|---------|
-| `v_actionable_near_misses` | **"What to work on next"** - filters out blocked submissions |
-| `v_false_lemmas_summary` | Quick overview of all false lemmas with evidence |
-| `v_valid_proven` | All proven theorems with valid definitions |
-
-**New junction table:** `submission_false_lemma_targets` links submissions to false lemmas they target.
-
-```sql
--- Single query: What should I work on next?
-SELECT filename, sorry_count, proven_count, blocked_by, priority_score
-FROM v_actionable_near_misses WHERE blocked = 0 LIMIT 5;
-```
+**Debates:** Use 4 rounds with full context accumulation. Round 2 is where insights emerge. 2-round debates are too shallow.
 
 ---
 
 ## When Stuck
 
-1. Query `false_lemmas` - is your lemma already disproven?
-2. Query `failed_approaches` - repeating a failed approach?
-3. Query `nu4_cases` for case-specific knowledge
-4. Check `ai_consultations` for past recommendations
-5. Parallel consult: Grok (code) + Gemini (strategy)
-6. Target different case
-
-```sql
--- Check everything at once
-SELECT 'false_lemma' as type, lemma_name as name, evidence_level as info
-FROM false_lemmas
-UNION ALL
-SELECT 'failed_approach', approach_name, failure_category
-FROM failed_approaches WHERE frontier_id='nu_4';
-```
-
----
-
-## Metrics
-
-**North star:** Discovery Velocity = new proven theorems / month
-
-Current: ~0.5/month → Target: 2/month
+1. Query `false_lemmas` — is the claim already disproven?
+2. Query `failed_approaches` — repeating a known failure?
+3. Query `nu4_cases` — what's the current approach for this case?
+4. Parallel consult: Grok (code) + Gemini (strategy)

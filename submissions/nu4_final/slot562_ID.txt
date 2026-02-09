@@ -1,0 +1,4 @@
+9f94f48e-edf2-4362-a687-f19c6b9d07cb
+# Task: Leinster cyclic_of_perfect_is_leinster INFORMAL proof
+# Hash: 17fe409d741881c3
+# Submitted: 2026-02-09T15:27:56.554780
