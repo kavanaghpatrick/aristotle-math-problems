@@ -30,7 +30,7 @@
   - **Verify**: `test -x math-forge/scripts/bootstrap.sh && grep -q 'knowledge.db' math-forge/.gitignore`
   - **Commit**: `feat(devops): add .gitignore and bootstrap script`
 
-- [ ] 1.5 [VERIFY] Verify database schema creates valid DB with working FTS5
+- [x] 1.5 [VERIFY] Verify database schema creates valid DB with working FTS5
   - **Do**: Create knowledge.db from schema, insert test finding, verify FTS5 MATCH works, verify UPDATE trigger syncs, verify DELETE cleans up
   - **Files**: `math-forge/data/schema.sql` (read-only)
   - **Done when**: FTS5 CRUD cycle passes
@@ -53,14 +53,14 @@
   - **Verify**: `chmod +x math-forge/scripts/mk && math-forge/scripts/mk help 2>&1 | grep -q 'search'`
   - **Commit**: `feat(cli): add mk CLI tool framework`
 
-- [ ] 2.3 Implement mk search with FTS5
+- [x] 2.3 Implement mk search with FTS5
   - **Do**: Add `search` subcommand to mk. Must: accept `mk search <query> [--limit N] [--domain D]`, use FTS5 MATCH with BM25 ranking (weights: title=10, description=5, theorem_statement=5, proof_technique=3, tags=2, why_failed=3), default limit 5, display badges [PROVEN]/[FAILED]/[FALSE], format as `#ID [BADGE] title (problem, slot:N)` with indented description, truncation footer, no-results message.
   - **Files**: `math-forge/scripts/mk`
   - **Done when**: `mk search "test"` returns results or no-results message
   - **Verify**: `math-forge/scripts/mk search "test" 2>&1`
   - **Commit**: `feat(cli): implement mk search with FTS5 BM25`
 
-- [ ] 2.4 Implement mk find, strategies, failed, stats
+- [x] 2.4 Implement mk find, strategies, failed, stats
   - **Do**: Add remaining subcommands: `find <problem-id>` (fuzzy match, cross-DB with ATTACH if tracking.db exists, show findings grouped by type + strategies by outcome), `strategies [domain]` (GROUP BY proof_technique, ORDER BY count DESC), `failed [keyword]` (findings where type IN failure/false_lemma, WARNING footer), `stats` (counts by type, by domain, total, newest date).
   - **Files**: `math-forge/scripts/mk`
   - **Done when**: All 4 subcommands produce output
