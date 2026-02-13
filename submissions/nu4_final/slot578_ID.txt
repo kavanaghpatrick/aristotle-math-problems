@@ -1,0 +1,4 @@
+920031ba-d30a-42c5-96ab-dab9e6a6c02c
+# Task: slot578_oeis_a67720_prime
+# Hash: daaee159ac781345
+# Submitted: 2026-02-09T21:43:24.966445

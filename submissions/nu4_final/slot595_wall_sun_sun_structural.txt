@@ -1,0 +1,118 @@
+OPEN PROBLEM (with structural lemmas): Wall-Sun-Sun Primes and Fibonacci Congruences
+
+A Wall-Sun-Sun prime is a prime p such that F_{p - (p/5)} ≡ 0 (mod p²),
+where F_n is the Fibonacci sequence and (p/5) is the Legendre symbol.
+Equivalently: L_p ≡ 1 (mod p²), where L_n is the Lucas sequence.
+
+NO Wall-Sun-Sun prime is currently known. The existence is OPEN.
+None below 9.7 × 10^14.
+
+We aim to prove STRUCTURAL LEMMAS about Fibonacci and Lucas sequences
+modulo primes — building the formal infrastructure for this open problem
+and proving deep congruence results in the style of slot560 (Feit-Thompson).
+
+--- DEFINITIONS ---
+
+-- Fibonacci sequence (already in Mathlib as Nat.fib)
+-- Lucas sequence: L_0 = 2, L_1 = 1, L_{n+2} = L_{n+1} + L_n
+-- Relation: L_n = F_{n-1} + F_{n+1}
+
+-- Legendre symbol (p/5):
+--   (p/5) = 1 if p ≡ ±1 mod 5
+--   (p/5) = -1 if p ≡ ±2 mod 5
+--   (p/5) = 0 if p = 5
+
+--- THEOREM 1: Fibonacci mod p (the key congruence) ---
+-- For prime p ≠ 2, 5: F_p ≡ (p/5) (mod p)
+-- where (p/5) is the Legendre symbol of 5 over p.
+--
+-- Proof strategy: Use the Binet formula over the algebraic closure.
+-- F_n = (α^n - β^n)/√5 where α = (1+√5)/2, β = (1-√5)/2.
+-- Working in ZMod p (with √5 existing or not):
+-- If 5 is a QR mod p (i.e., (5/p) = 1), then √5 ∈ ZMod p,
+--   α^p ≡ α (mod p), β^p ≡ β (mod p) by Fermat,
+--   so F_p ≡ (α-β)/√5 = 1 ≡ (5/p) (mod p).
+-- If 5 is not a QR mod p (i.e., (5/p) = -1), then
+--   we work in F_{p²} = ZMod p[√5].
+--   Frobenius: (a+b√5)^p = a - b√5 in F_{p²}.
+--   So α^p = β and β^p = α.
+--   F_p = (α^p - β^p)/√5 = (β - α)/√5 = -1 ≡ (5/p) (mod p).
+--
+-- This is a beautiful application of Frobenius endomorphism + quadratic fields.
+-- Very FT-like in character.
+theorem fib_mod_prime (p : ℕ) (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
+  (Nat.fib p : ZMod p) = legendreSym 5 p
+
+--- THEOREM 2: Lucas congruence ---
+-- For prime p: L_p ≡ 1 (mod p)
+-- Proof: L_n = F_{n-1} + F_{n+1} = F_{n-1} + F_n + F_{n-1} (from Fibonacci recurrence)
+-- Actually L_p = F_{p-1} + F_{p+1}.
+-- F_{p+1} = F_p + F_{p-1}, so L_p = F_p + 2*F_{p-1}.
+-- From Fibonacci periodicity: F_{p-1} ≡ (p/5 - 1)/2...
+-- Actually, the cleaner route: from F_p ≡ (p/5) mod p,
+-- and the identity F_{p-1}·F_{p+1} - F_p² = (-1)^p:
+-- F_{p-1} ≡ ((p/5) - 1)/... let me use a different approach.
+--
+-- By Cassini's identity and known results:
+-- F_{p-1} ≡ (1 - (5/p))/2 + (5/p) ... this is getting complicated.
+--
+-- Cleaner: Use the matrix formulation.
+-- [F_{n+1} F_n; F_n F_{n-1}] = [1 1; 1 0]^n.
+-- Working mod p: the matrix M = [1 1; 1 0] has det = -1, tr = 1.
+-- Its eigenvalues are α, β (roots of x² - x - 1 = 0).
+-- M^p mod p depends on (5/p).
+-- If (5/p) = 1: M^p ≡ M (mod p) (Fermat for diagonal matrices)
+-- If (5/p) = -1: M^p has Frobenius structure.
+-- In either case: L_p = tr(M^p) ≡ 1 (mod p).
+theorem lucas_mod_prime (p : ℕ) (hp : p.Prime) (hp2 : p ≠ 2) :
+  (Nat.fib (p - 1) + Nat.fib (p + 1) : ZMod p) = 1
+
+--- THEOREM 3: Fibonacci periodicity (Pisano period) ---
+-- The Fibonacci sequence mod m is periodic. The period π(m) satisfies:
+-- For prime p ≠ 5: π(p) | p - (5/p) (where (5/p) is the Legendre symbol)
+-- More precisely: π(p) | p - 1 if (5/p) = 1, and π(p) | 2(p+1) if (5/p) = -1.
+--
+-- The Wall-Sun-Sun condition is: π(p²) = p·π(p), equivalently F_{p-(5/p)} ≢ 0 (mod p²).
+-- If p is NOT Wall-Sun-Sun, then π(p²) = p·π(p) (this is true for all known primes).
+theorem fib_period_divides (p : ℕ) (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
+  ∃ k, Nat.fib (k * (p - 1)) ≡ 0 [MOD p] -- when (5/p) = 1
+
+--- THEOREM 4: Cassini's identity ---
+-- F_{n-1} · F_{n+1} - F_n² = (-1)^n
+-- This is already in Mathlib (Nat.fib_coprime_fib_succ or similar).
+-- Including for completeness as it's fundamental infrastructure.
+theorem cassini_identity (n : ℕ) (hn : 0 < n) :
+  (Nat.fib (n - 1) : ℤ) * Nat.fib (n + 1) - (Nat.fib n)^2 = (-1)^n
+
+--- THEOREM 5: Fibonacci GCD property ---
+-- gcd(F_m, F_n) = F_{gcd(m,n)}
+-- This is a well-known and beautiful result.
+-- It follows from the strong divisibility property: F_m | F_{km} for all k.
+theorem fib_gcd (m n : ℕ) : Nat.gcd (Nat.fib m) (Nat.fib n) = Nat.fib (Nat.gcd m n)
+
+--- THEOREM 6: Entry point / rank of apparition ---
+-- For prime p > 5: the smallest k > 0 with F_k ≡ 0 (mod p) divides p - (5/p).
+-- This is the "rank of apparition" α(p). It equals π(p) or π(p)/2 or π(p)/4.
+-- Key property: α(p) | (p - (5/p)).
+
+--- PROOF STRATEGY ---
+
+Priority order (most valuable and FT-like first):
+1. fib_mod_prime — THE central congruence, uses Frobenius/Binet, very deep
+2. cassini_identity — fundamental identity, likely already in Mathlib
+3. lucas_mod_prime — follows from fib_mod_prime
+4. fib_gcd — strong divisibility sequence property
+5. fib_period_divides — connects to Pisano period theory
+
+Key Mathlib APIs:
+- Nat.fib, Nat.fib_add_two (recurrence)
+- legendreSym (Legendre symbol)
+- ZMod.pow_card_sub_one_eq_one (FLT)
+- Matrix.det_fin_two, Matrix.mul_fin_two (matrix formulation)
+- Nat.Coprime, Nat.gcd
+
+This sketch targets the STRUCTURAL FOUNDATIONS of Wall-Sun-Sun theory.
+The Fibonacci mod p congruence (Theorem 1) is the jewel — it combines
+Frobenius endomorphism, quadratic residues, and algebraic number theory
+in exactly the way that made slot560 (Feit-Thompson) so successful.
+All techniques are pure NT — highly AI-amenable.

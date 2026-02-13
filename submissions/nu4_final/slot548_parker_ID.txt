@@ -1,0 +1,4 @@
+d144d8fa-deaa-40f4-8635-03739f20adbf
+# Task: PATH_4 tau<=8 when endpoint has no base-edge external (0 sorry, 1 axiom)
+# Hash: 5a251d86c6a2dae4
+# Submitted: 2026-02-08T16:35:05.797947

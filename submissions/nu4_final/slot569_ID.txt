@@ -1,0 +1,4 @@
+9905bb3c-8634-4cc7-9720-81342f5d552a
+# Task: Erdos 1056 k=4 witness (p=23) FORMAL
+# Hash: 96a732aeda5ab980
+# Submitted: 2026-02-09T16:46:54.041037

@@ -1,0 +1,157 @@
+Feit-Thompson p=3: Direct Cubic Non-Residuacity (Removing CR Assumption)
+
+This is a CONTINUATION of slot590 (Feit-Thompson p=3 case). All lemmas from
+slot560 and slot590 are proven (0 sorry, 0 axiom).
+
+GOAL: Make the q ≡ 3 (mod 4), q ≢ 8 (mod 9) case UNCONDITIONAL by proving
+the cubic non-residuacity of 3 mod A(q) directly, without assuming the
+Cubic Reciprocity Law as a black box.
+
+=== Already proven (slot560 + slot590) ===
+
+def A (q : ℕ) : ℕ := q^2 + q + 1
+
+Proven unconditionally:
+- feit_thompson_p_eq_3_A_prime: A | (3^q-1)/2 → A is prime
+- feit_thompson_q_mod_3: A | (3^q-1)/2 → q ≡ 2 (mod 3)
+- three_pow_q_ne_one_mod_A_of_q_mod_4_eq_1: q ≡ 1 (mod 4) → 3^q ≢ 1 (mod A)
+  [Uses Jacobi(3,A) = -1 and Euler's criterion]
+- feit_thompson_p_eq_3_bounded_20000: Verified for all q < 20,000
+
+Proven conditional on CubicReciprocityLaw:
+- feit_thompson_p_eq_3_case_not_mod9_8: q ≡ 3 (mod 4), q ≢ 8 (mod 9) → contradiction
+
+=== Key structural fact (NEW — use this!) ===
+
+LEMMA (q is a primitive cube root of unity mod A):
+Since A = q² + q + 1, in ZMod A we have q² + q + 1 = 0, hence:
+  q² ≡ -q - 1 (mod A)
+  q³ = q · q² = q(-q-1) = -q² - q = (q+1) - q = 1 (mod A)
+So q³ ≡ 1 (mod A) and q ≢ 1 (mod A) (since q < A).
+Therefore q is a primitive cube root of unity in (Z/AZ)*.
+
+theorem q_cubed_eq_one (q : ℕ) (hA : (A q).Prime) :
+    (q : ZMod (A q)) ^ 3 = 1
+
+theorem q_is_primitive_cube_root (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hA : (A q).Prime) : (q : ZMod (A q)) ≠ 1 ∧ (q : ZMod (A q)) ^ 3 = 1
+
+=== The argument to make unconditional ===
+
+GIVEN: A | (3^q - 1)/2, so 3^q ≡ 1 (mod A). A is prime. q ≡ 2 (mod 3).
+       q ≡ 3 (mod 4). So q ≡ 11 (mod 12).
+
+STEP 1: Show 3 is a cube mod A (UNCONDITIONAL — no CR needed).
+Since q ≡ 2 (mod 3), we have 3 | (q+1), so (q+1)/3 is a positive integer.
+The group (Z/AZ)* has order A-1 = q(q+1). Then (A-1)/3 = q(q+1)/3.
+If 3^q ≡ 1 (mod A):
+  3^{(A-1)/3} = 3^{q · (q+1)/3} = (3^q)^{(q+1)/3} = 1^{(q+1)/3} = 1
+
+By Euler's cubic criterion, 3^{(A-1)/3} ≡ 1 (mod A) iff 3 is a cube mod A.
+Therefore: if 3^q ≡ 1 (mod A), then 3 IS a cube mod A.
+
+theorem three_is_cube_if_pow_q_eq_one (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hmod3 : q ≡ 2 [MOD 3]) (hA : (A q).Prime)
+    (hpow : (3 : ZMod (A q)) ^ q = 1) :
+    ∃ y : ZMod (A q), y ^ 3 = 3
+
+[This is essentially three_is_cube_of_three_pow_q_eq_one from slot590.]
+
+STEP 2: Show 3 is NOT a cube mod A when 9 ∤ (q+1) — WITHOUT CR.
+
+This is the key new result. The approach:
+
+Since q is a primitive cube root of 1 in ZMod A, the cube roots of 1 are
+{1, q, q²} = {1, q, -q-1}. For x ∈ (Z/AZ)*, x is a cube iff x^{(A-1)/3} = 1.
+
+The cubic residue character χ₃ : (Z/AZ)* → {1, q, q²} is defined by:
+  χ₃(x) = x^{(A-1)/3} mod A
+
+χ₃(x) ∈ {1, q, q²} because (x^{(A-1)/3})³ = x^{A-1} = 1.
+x is a cube iff χ₃(x) = 1.
+
+COMPUTING χ₃(3):
+χ₃(3) = 3^{(A-1)/3} = 3^{q(q+1)/3}
+
+Now the key: we need to compute 3^{q(q+1)/3} mod A directly.
+
+Approach A — Via Euler's criterion and Jacobi-like computation:
+Since A ≡ 1 (mod 3), there exists a Legendre-like symbol for cubes.
+For the specific prime 3: 3^{(A-1)/3} can be computed using the fact
+that A = q² + q + 1 and the relationship between 3 and q in ZMod A.
+
+Approach B — Via the norm in the Eisenstein structure:
+In Z[ω] where ω = e^{2πi/3}, the prime A = q²+q+1 splits as A = ππ̄
+where π = q - ω (this follows from N(q-ω) = q²+q+1 = A).
+Then Z[ω]/(π) ≅ Z/AZ with ω ↦ q.
+
+By Euler's supplementary law for cubic residues:
+3 is a cube mod A iff 3 is a cube in Z[ω]/(π) iff... the cubic
+residue symbol (3/π)₃ = 1.
+
+Since 3 = -ω²(1-ω)² in Z[ω] (because (1-ω)(1-ω²) = 3), and
+(1-ω) is the unique ramified prime over 3 in Z[ω]:
+
+The cubic character of 3 mod π depends on the residue of
+(1-ω)^{(N(π)-1)/3} = (1-ω)^{q(q+1)/3} modulo π.
+
+In Z[ω]/(π), 1-ω ↦ 1-q. So we need (1-q)^{q(q+1)/3} mod A.
+
+Now, q ≡ 2 (mod 3) and q ≡ 3 (mod 4). Let's write q = 3m+2.
+Then q+1 = 3m+3 = 3(m+1), so (q+1)/3 = m+1.
+
+(1-q)^{q(m+1)} mod A. Since q ≡ -1+2 = ... hmm, 1-q ≡ 1-q (mod A).
+
+Actually, in ZMod A: 1 - q is just the element 1-q. Its q-th power:
+(1-q)^q mod A. This can be expanded using the binomial theorem,
+but since q is large, we use Fermat/structure.
+
+ALTERNATE DIRECT COMPUTATION:
+The cubic residue symbol [3/π]₃ for π = q - ω depends on:
+  π ≡ q - ω, and 3 = -ω²(1-ω)².
+  [3/π]₃ = [-ω²/π]₃ · [(1-ω)²/π]₃
+           = [ω/π]₃^{-2} · [(1-ω)/π]₃^2
+
+By the supplementary laws for cubic residues:
+[ω/π]₃ = ω^{(N(π)-1)/3} = ω^{q(q+1)/3}
+
+Since ω has order 3: ω^{q(q+1)/3} = ω^{q(m+1)} where q = 3m+2.
+q(m+1) = (3m+2)(m+1) = 3m²+5m+2. Modulo 3: ≡ 2m+2 ≡ 2(m+1).
+So [ω/π]₃ = ω^{2(m+1) mod 3}.
+
+And [(1-ω)/π]₃ involves the decomposition of (1-ω) in Z[ω]/(π).
+Since (1-ω) is the prime of Z[ω] lying over 3, and π lies over A:
+if 3 ∤ A (true since A ≡ 1 mod 3 and A > 3), then (1-ω) and π
+are coprime, and the cubic residue symbol is well-defined.
+
+The exact computation of [(1-ω)/π]₃ requires the cubic reciprocity
+law or direct computation.
+
+RECOMMENDATION FOR ARISTOTLE:
+1. Prove q_cubed_eq_one and q_is_primitive_cube_root.
+2. Define the cubic residue character χ₃(x) = x^{(A-1)/3} in ZMod A.
+3. Show χ₃(3) ∈ {1, q, q²} (the three cube roots of unity).
+4. Try to compute χ₃(3) directly:
+   - χ₃(3) = 3^{q(q+1)/3}
+   - Use native_decide for small q to verify χ₃(3) ≠ 1 when 9 ∤ (q+1)
+   - Try to prove the general case using the Eisenstein structure
+5. Bounded verification: verify χ₃(3) ≠ 1 for all primes q < 50,000
+   with q ≡ 11 (mod 12) and 9 ∤ (q+1).
+
+def check_cubic_nonresidue (q : ℕ) : Bool :=
+  if q.Prime ∧ 3 < q ∧ q % 3 == 2 ∧ (q + 1) % 9 ≠ 0 then
+    let a := A q
+    if a.Prime then
+      (3 : ZMod a) ^ (a / 3) ≠ 1
+    else true
+  else true
+
+theorem cubic_nonresidue_bounded :
+    (List.range 50000).all check_cubic_nonresidue = true := by native_decide
+
+Mathlib references:
+- ZMod.pow_card_sub_one_eq_one (Fermat's little theorem)
+- orderOf in ZMod, ZMod.unitOfCoprime
+- jacobiSym, legendreSym (for the quadratic case — analogous for cubic)
+- Nat.Prime.eq_one_or_self_of_dvd
+- native_decide for bounded verification

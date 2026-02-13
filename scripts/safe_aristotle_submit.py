@@ -307,35 +307,66 @@ async def submit_with_retry(
 # CLI interface
 if __name__ == "__main__":
     import sys
+    import re as re_mod
 
-    if len(sys.argv) < 4:
-        print("Usage: python3 safe_aristotle_submit.py <input_file> <id_file> <description> [options]")
+    # Filter out flags from positional args
+    positional = [a for a in sys.argv[1:] if not a.startswith('--')]
+    flags = [a for a in sys.argv[1:] if a.startswith('--')]
+
+    if len(positional) < 1:
+        print("Usage: python3 safe_aristotle_submit.py <input_file> [slot_number] [options]")
         print()
         print("Options:")
         print("  --force              Skip safety checks")
         print("  --informal           Use INFORMAL input type (default: FORMAL_LEAN)")
         print("  --context <file>     Add context file (can repeat)")
         print()
-        print("Example:")
-        print("  python3 safe_aristotle_submit.py \\")
-        print("    submissions/nu4_final/slot542.lean \\")
-        print("    submissions/nu4_final/slot542_ID.txt \\")
-        print("    'Bridge apex constraint' \\")
-        print("    --context docs/strategy.md")
+        print("Examples:")
+        print("  # Auto-detect slot number and ID file path:")
+        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean --force")
+        print()
+        print("  # Explicit slot number:")
+        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean 565 --force")
         sys.exit(1)
 
-    input_file = Path(sys.argv[1])
-    id_file = Path(sys.argv[2])
-    description = sys.argv[3]
-    force = '--force' in sys.argv
-    input_type = "informal" if '--informal' in sys.argv else "formal"
+    input_file = Path(positional[0])
+
+    # Determine slot number and ID file path
+    if len(positional) >= 2 and positional[1].isdigit():
+        slot_num = positional[1]
+    else:
+        # Auto-detect from input filename: slot<N>_...
+        m = re_mod.match(r'slot(\d+)', input_file.stem)
+        slot_num = m.group(1) if m else None
+
+    if slot_num:
+        id_file = input_file.parent / f"slot{slot_num}_ID.txt"
+        description = input_file.stem  # Use filename as description
+    elif len(positional) >= 3:
+        # Legacy: <input_file> <id_file> <description>
+        id_file = Path(positional[1])
+        description = positional[2]
+    else:
+        # Fallback: ID file next to input
+        id_file = input_file.with_suffix('.ID.txt')
+        description = input_file.stem
+
+    force = '--force' in flags
+    input_type = "informal" if '--informal' in flags else "formal"
 
     # Collect --context files
     context_files = []
-    args = sys.argv[4:]
-    for i, arg in enumerate(args):
-        if arg == '--context' and i + 1 < len(args):
-            context_files.append(Path(args[i + 1]))
+    all_args = sys.argv[1:]
+    for i, arg in enumerate(all_args):
+        if arg == '--context' and i + 1 < len(all_args):
+            context_files.append(Path(all_args[i + 1]))
+
+    print(f"📁 Input: {input_file}")
+    print(f"📋 ID file: {id_file}")
+    print(f"📝 Description: {description}")
+    if input_type == "informal":
+        print(f"🔤 Mode: INFORMAL")
+    print()
 
     try:
         project_id = asyncio.run(submit_with_retry(

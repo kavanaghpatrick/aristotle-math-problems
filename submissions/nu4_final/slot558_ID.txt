@@ -1,0 +1,4 @@
+cbd70eda-7ac1-415a-9d9b-b066b4a3c5cf
+# Task: Both-endpoints all-six (fixed DecidableRel)
+# Hash: 7ef7950fbfbd9ef0
+# Submitted: 2026-02-09T12:26:08

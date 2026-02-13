@@ -1,0 +1,133 @@
+FEIT-THOMPSON p=3: WIEFERICH-LIKE A² ANALYSIS AND SIZE BOUNDS
+
+OPEN PROBLEM CONTEXT: This contributes to the Feit-Thompson conjecture for p=3.
+For primes q > 3 with q ≡ 2 (mod 3), A = q²+q+1 prime, we study the behavior of
+3^q modulo A². This is the "Wieferich-like" analysis — if 3^q ≡ 1 (mod A), what
+happens mod A²?
+
+PROVEN INFRASTRUCTURE WE BUILD ON:
+- slot590 (437 lines): FT p=3 comprehensive, q ≡ 1 mod 4 resolved
+- slot598: Eisenstein infrastructure, χ₃ analysis
+- slot599: k-congruence tower, k ≡ 2 (mod 6q), k ≡ 8 (mod 9)
+- slot603 (721 lines): k ≡ 2 (mod 12q), k ≡ 12q+2 (mod 36q), k mod 324/243/972,
+  bounded to q < 200,000, Fermat quotient, 3^{jq} ≡ 1+jkA (mod A²)
+
+KEY IDENTITY FROM slot603:
+  3^q = 1 + kA where k = (3^q - 1)/A.
+  Then 3^{jq} = (1+kA)^j ≡ 1 + jkA (mod A²) for all j.
+  In particular: 3^{q²} = 3^{q·q} ≡ 1 + qkA (mod A²).
+  But also: 3^{A-1} = 3^{q(q+1)} ≡ 1 (mod A) (Fermat). What about mod A²?
+
+MAIN RESULTS TO PROVE:
+
+THEOREM 1 (Fermat quotient): Define the Fermat quotient of 3 base A as:
+  Q_A(3) = (3^{A-1} - 1) / A.
+  From 3^q = 1 + kA: 3^{A-1} = 3^{q(q+1)} = (1+kA)^{q+1} (under assumption).
+  Expanding: (1+kA)^{q+1} = 1 + (q+1)kA + C(q+1,2)(kA)² + ...
+  Mod A²: 3^{A-1} ≡ 1 + (q+1)kA (mod A²).
+  So Q_A(3) = (q+1)k mod A.
+  This is the Wieferich condition: 3 is a "Wieferich base" mod A iff Q_A(3) ≡ 0 (mod A),
+  i.e., iff A | (q+1)k. Since gcd(A, q+1) = gcd(q²+q+1, q+1) = gcd(q, q+1) = 1...
+  wait: q²+q+1 = q(q+1)+1, so gcd(A, q+1) = gcd(1, q+1) = 1. So A ∤ (q+1).
+  Thus Q_A(3) ≡ 0 (mod A) iff A | k.
+
+THEOREM 2 (Size bound on k): k = (3^q - 1)/A.
+  3^q ≈ 3^q, A = q²+q+1 ≈ q². So k ≈ 3^q/q².
+  k is HUGE compared to A: k/A ≈ 3^q/q⁴ → ∞.
+  So A | k is not ruled out by size alone.
+
+  However: k ≡ 2 (mod 12q). If A | k, then k ≥ A = q²+q+1 > 12q for q > 12.
+  And k ≡ 2 mod A would force k to be A·m + r where r satisfies r ≡ 2 (mod 12q).
+  Since gcd(A, 12q) = gcd(q²+q+1, 12q). Now gcd(A, q) = gcd(q²+q+1, q) = gcd(1, q) = 1.
+  And gcd(A, 12) depends on A mod 12 = 1 (proved). So gcd(A, 12q) = 1.
+  By CRT: k mod A·12q is determined. This doesn't help directly.
+
+THEOREM 3 (Power sums lifting): From slot603's identity:
+  For 1 ≤ j < q: Σ_{i=0}^{q-1} 3^{ji} = (3^{jq}-1)/(3^j-1) ≡ 0 (mod A).
+  Lift to mod A²: Let S_j = Σ 3^{ji}. Then S_j · (3^j - 1) = 3^{jq} - 1 = jkA + ... (mod A²).
+  So S_j ≡ jkA / (3^j - 1) (mod A²), assuming 3^j - 1 is invertible mod A².
+  Since gcd(3^j - 1, A) = 1 for 1 ≤ j < q (as ord_A(3) = q):
+  S_j ≡ jk · (3^j - 1)^{-1} · A (mod A²/A) is well-defined mod A.
+
+  Taking j = 1: S_1 = (3^q - 1)/2 = kA/2. So S_1/A = k/2 (which is an integer since k even).
+  Taking j = 2: S_2 = (3^{2q} - 1)/(3² - 1) = (3^{2q} - 1)/8.
+  Under assumption: 3^{2q} = (1+kA)² = 1 + 2kA + k²A².
+  So S_2 = (2kA + k²A²)/8 = kA/4 + k²A²/8. Thus S_2/A = k/4 + k²A/8.
+  S_2 ≡ k/4 (mod A) (well-defined since 4 | k from k ≡ 0 mod 4?
+  Wait: k ≡ 2 mod 4 from slot599. So k/2 is odd. k = 2m where m is odd.)
+
+THEOREM 4 (Differential quotient): Consider the "derivative" of the q-th power map.
+  d/dx(x^q) at x=3: q·3^{q-1}. This lives in F_A*.
+  Under assumption: 3^q = 1, so 3^{q-1} = 3^{-1} = (A+1)/3...
+  wait, 3 · 3^{-1} = 1 in F_A, so 3^{-1} = (A+1)/3 if 3|A+1.
+  A + 1 = q²+q+2. For q ≡ 2 mod 3: q² ≡ 1, q²+q+2 ≡ 1+2+2 = 5 ≡ 2 mod 3.
+  So 3 ∤ (A+1). We compute 3^{-1} mod A directly: 3 · x ≡ 1 (mod A).
+  Then q · 3^{q-1} = q · 3^{-1} mod A. This element controls the local behavior.
+
+THEOREM 5 (Cyclotomic polynomial): The q-th roots of unity in F_A* are the roots of
+  Φ_q(X) = X^{q-1} + X^{q-2} + ... + X + 1 in F_A.
+  Under assumption: 3 is a root of Φ_q(X) mod A.
+  So A | Φ_q(3) = (3^q - 1)/(3 - 1) = (3^q - 1)/2 = kA/2.
+  This gives: A | kA/2, i.e., 1 | k/2, which is trivially true (k even).
+
+  But Φ_q(3) = kA/2. And |Φ_q(3)| = ∏_{j=1}^{q-1} |3 - ζ_q^j| where ζ_q = e^{2πi/q}.
+  Each |3 - ζ_q^j| = √(9 - 6cos(2πj/q) + 1) = √(10 - 6cos(2πj/q)).
+  For j far from 0: |3 - ζ_q^j| ≈ √10 ≈ 3.16.
+  Product ≈ 10^{(q-1)/2} ≈ 3.16^{q-1}.
+  So Φ_q(3) ≈ 3.16^{q-1} and A = q²+q+1.
+  k/2 = Φ_q(3)/A ≈ 3.16^{q-1}/q².
+
+THEOREM 6 (Congruence constraints on k): Combining all known:
+  - k ≡ 2 (mod 12q)
+  - k ≡ 12q + 2 (mod 36q)
+  - k ≡ 71 (mod 81)
+  - k ≡ 314 (mod 324) (or q-dependent formula)
+  - k mod 972 (from slot603)
+  - Odd prime factors p of k satisfy p ≡ 1 (mod q)
+  - k/2 is odd (i.e., v₂(k) = 1 exactly)
+
+  The last two combined: k = 2 · p₁^{a₁} · ... · p_r^{a_r} where each p_i ≡ 1 (mod q).
+  The smallest odd prime ≡ 1 mod q is at least q+1 (but must be prime).
+  So the smallest possible odd factor of k/2 is the smallest prime ≡ 1 mod q.
+  By Dirichlet: there exist infinitely many such primes. The smallest is typically O(q log q).
+
+  This means: k ≥ 2 · (q+1) = 2q+2 at minimum (if k/2 is prime ≡ 1 mod q).
+  But we also know k ≡ 2 mod 12q, so k = 12qm + 2 for some m ≥ 0.
+  If m = 0: k = 2. Then k/2 = 1, which has no odd prime factors. ✓ consistent.
+  But k = 2 means 3^q = 1 + 2A = 2q²+2q+3. For q = 71: 3^71 ≈ 7.7 × 10^33,
+  but 2·5113 + 1 = 10227. So k = 2 is impossible for q > 5.
+
+  Actually k ≈ 3^q/q², so k is ASTRONOMICALLY large. The constraint that all odd
+  prime factors of k are ≡ 1 mod q is EXTREMELY restrictive. Primes ≡ 1 mod q
+  have density 1/(q-1) among all primes. For k to be composed ENTIRELY of such
+  primes (plus 2¹) is a very strong constraint.
+
+THEOREM 7 (Heuristic impossibility): By prime number theorem, the number of primes
+  ≡ 1 (mod q) up to X is ≈ X/((q-1)·log X). For k ≈ 3^q/q², the number of prime
+  factors of k is ≈ log(k)/log(log(k)) ≈ q log 3 / log(q). Each must independently
+  be ≡ 1 mod q, probability ≈ 1/(q-1) each. The probability that ALL are ≡ 1 mod q
+  is ≈ (1/(q-1))^{q/log q}, which is doubly exponentially small.
+
+  This doesn't constitute a proof, but motivates:
+
+THEOREM 8 (Bounded verification of factor constraint): For q < 200,000 with
+  q ≡ 71 mod 72 and A prime: verify that 3^q ≢ 1 (mod A).
+  (This is already in slot603 but we strengthen the structural analysis.)
+
+THEOREM 9 (p-adic valuation tower):
+  v_p(k) for various primes p gives a "tower" of constraints.
+  v₂(k) = 1 (proved: k ≡ 2 mod 4).
+  v₃(k): From k ≡ 8 mod 9, v₃(k) = 0.
+  v_p(k) for p | q: gcd(k, q) divides gcd(k, A-1) = gcd(k, q(q+1)).
+  Since k ≡ 2 mod q (from k ≡ 2 mod 6q): gcd(k, q) = gcd(2, q) = 1 (q odd prime > 3).
+  So gcd(k, q) = 1. q ∤ k.
+
+  Summary: k is coprime to 6q. All odd prime factors of k are ≡ 1 (mod q).
+  k ≡ 2 (mod 12q). k is huge (≈ 3^q/q²).
+
+OVERALL VALUE: This sketch establishes multiple constraints on k = (3^q-1)/A under
+the FT assumption, showing that the structure is extremely rigid. The combination of:
+(a) k ≡ 2 mod 12q, (b) all odd prime factors ≡ 1 mod q, (c) v₂(k) = 1,
+(d) k huge (≈ 3^q/q²), creates a tension that we conjecture is impossible to satisfy.
+The Wieferich analysis (Q_A(3) = (q+1)k mod A) and power sum lifts provide
+additional arithmetic structure that may be exploitable in future work.

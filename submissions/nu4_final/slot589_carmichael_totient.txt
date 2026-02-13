@@ -1,0 +1,93 @@
+Theorem (Carmichael's Totient Conjecture): For every positive integer n,
+there exists m ≠ n such that φ(m) = φ(n), where φ is Euler's totient function.
+
+The full conjecture is OPEN. The odd case is KNOWN (already proven in formal-conjectures).
+We aim to prove the EVEN case or provide bounded verification.
+
+=== Background ===
+
+Carmichael conjectured in 1907 that the equation φ(x) = n never has a unique solution.
+Equivalently: for every n, if φ(n) = k, then there exists m ≠ n with φ(m) = k.
+
+The odd case (n odd → ∃ m ≠ n, φ(m) = φ(n)) is simple: if n is odd, then
+φ(2n) = φ(n) (since φ(2) = 1 and gcd(2, n) = 1), and 2n ≠ n.
+
+The even case is what's interesting and where the conjecture lives.
+
+=== Formal Statements ===
+
+-- Full conjecture (OPEN):
+theorem carmichael_totient (n : ℕ) (hn : 0 < n) :
+    ∃ m, m ≠ n ∧ φ(m) = φ(n)
+
+-- Even case (the hard part):
+theorem carmichael_totient_even (n : ℕ) (hn : 0 < n) (heven : Even n) :
+    ∃ m, m ≠ n ∧ φ(m) = φ(n)
+
+-- Bounded verification:
+theorem carmichael_totient_bounded (n : ℕ) (hn : 0 < n) (h : n < 10^7) :
+    ∃ m, m ≠ n ∧ φ(m) = φ(n)
+
+=== Proof Strategy for Bounded Case ===
+
+For bounded n, this is decidable:
+1. Compute φ(n) for each n ≤ B
+2. For each value k in the range of φ, check that |{n : φ(n) = k}| ≥ 2
+3. This can be verified by native_decide for B up to ~10^4
+
+=== Proof Strategy for Even n ===
+
+For even n = 2^a * m where m is odd and a ≥ 1:
+
+**Case a = 1 (n = 2m, m odd):**
+φ(2m) = φ(m) since gcd(2, m) = 1.
+So we need another integer k ≠ 2m with φ(k) = φ(m).
+If m > 1, then φ(m) = φ(2m) and m ≠ 2m. Done!
+If m = 1, n = 2. φ(2) = 1. φ(1) = 1. So m=1 works.
+
+Wait — this proves the case n = 2m (m odd): just use m as the witness!
+φ(m) = φ(2m) and m ≠ 2m. ✓
+
+**Case a = 2 (n = 4m, m odd):**
+φ(4m) = φ(4)φ(m) = 2φ(m) when gcd(4, m) = 1.
+Need another k with φ(k) = 2φ(m).
+Candidate: k = 2m. Then φ(2m) = φ(m) ≠ 2φ(m) unless φ(m) = 0. Doesn't work.
+Candidate: k = p where p is prime and p-1 = 2φ(m). This might not exist.
+This case is harder. We need φ(k) = φ(4m) = 2φ(m) for some k ≠ 4m.
+
+**General even case**: The difficulty grows with the power of 2.
+
+=== What Aristotle should prove ===
+
+**Priority 1**: Bounded verification via native_decide.
+For n < 1000 (or n < 10000), verify computationally that every n has a
+"Carmichael partner" m ≠ n with φ(m) = φ(n).
+
+**Priority 2**: The structural result for n = 2m (m odd, m > 1):
+φ(2m) = φ(m) when m is odd (Euler's product formula + gcd(2,m) = 1).
+Combined with the already-proven odd case, this gives Carmichael's conjecture
+for all n that are 2 times an odd number > 1.
+
+**Priority 3**: Show φ(2m) = φ(m) for odd m ≥ 1. This is the key identity:
+  φ(2m) = φ(2) * φ(m) = 1 * φ(m) = φ(m)  when gcd(2, m) = 1.
+This uses the multiplicativity of φ.
+
+=== Key Mathlib ingredients ===
+
+- `Nat.totient`: Euler's totient function φ
+- `Nat.totient_mul`: φ(mn) = φ(m)φ(n) when gcd(m,n) = 1
+- `Nat.totient_two`: φ(2) = 1
+- `Nat.Coprime.totient_mul`: multiplicativity with coprimality
+- `native_decide` for bounded verification
+
+=== Alternative: just prove the key identity ===
+
+Even just proving:
+  theorem totient_double_odd (m : ℕ) (hm : Odd m) : Nat.totient (2 * m) = Nat.totient m
+
+would be valuable infrastructure. This follows from:
+  φ(2m) = φ(2) · φ(m) = 1 · φ(m) = φ(m)
+using that gcd(2, m) = 1 when m is odd.
+
+Combined with the odd case already proven in formal-conjectures, this gives
+Carmichael for n = 2m with m odd: φ(n) = φ(2m) = φ(m), and m ≠ 2m for m ≥ 1.

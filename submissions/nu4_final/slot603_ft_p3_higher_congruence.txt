@@ -1,0 +1,135 @@
+FEIT-THOMPSON CONJECTURE p=3: HIGHER CONGRUENCE TOWER AND SYNTHESIS
+
+This is a CONTINUATION of extensively proven infrastructure for the Feit-Thompson
+conjecture at p=3. We have THREE proven files (slot590, slot598, slot599) totaling
+~1600 lines of verified Lean. Goal: push the k-congruence tower higher and combine
+with multiplicative constraints to get stronger structural results.
+
+CONTEXT: For distinct primes p=3, q>3 with q prime, q ≡ 2 (mod 3), define
+A = A(q) = q^2 + q + 1. Assume A is prime and 3^q ≡ 1 (mod A). Write 3^q = 1 + k*A.
+
+PROVEN RESULTS WE BUILD ON:
+From slot590: q ≡ 1 (mod 4) case is FULLY RESOLVED (3^q ≢ 1 mod A).
+From slot598: Eisenstein integer infrastructure, cubic residue character χ₃,
+  χ₃(3) = χ₃(q)² · χ₃(1-q)², identities (1-q)² = -3q, 3 = -q²(1-q)² in ZMod A.
+  q, -1, -3, 3, q+1 are all squares mod A. Bounded verification to q < 50,000.
+From slot599: k ≡ 2 (mod 6q), k ≡ 8 (mod 9), k ≡ 26 (mod 36), k ≡ 8q+34 (mod 108).
+  n_val = (k - 8q - 34)/108 > 0 with 27*n_val ≡ -8 (mod q).
+  m_val = k/2 is odd, m_val ≡ 1 (mod q), m_val ≡ 4q+17 (mod 54).
+  Odd prime factors of k are ≡ 1 (mod q). 3 is cubic, 9th, 36th power residue mod A.
+  Fermat quotient defined. Bounded to q < 50,000.
+
+GOAL: Prove new structural results by combining these. Multiple strategies:
+
+STRATEGY 1: HIGHER CONGRUENCE TOWER
+Push k mod N for larger N. We have k mod 108. Try to prove:
+- k mod 324 (= 108*3): Use 3^q = 1 + k*A and work mod 3^4 = 81.
+  Since A = q²+q+1 and q ≡ 8 (mod 9), A ≡ 73 ≡ 1 (mod 9). More precisely,
+  A mod 81: if q = 9t+8, then A = (9t+8)²+(9t+8)+1 = 81t²+153t+73.
+  So A ≡ 73 (mod 81). Since 73 is invertible mod 81, k mod 81 is determined.
+  From 3^q ≡ 1 + k*73 (mod 81), and we know 3^q mod 81 (it's 0 for q≥4).
+  So 0 ≡ 1 + 73k (mod 81), i.e., 73k ≡ -1 ≡ 80 (mod 81).
+  73^(-1) mod 81: 73*10 = 730 ≡ 730 - 9*81 = 730-729 = 1 (mod 81). So 73^(-1) = 10.
+  k ≡ 80*10 = 800 ≡ 800 - 9*81 = 800-729 = 71 (mod 81).
+  Check: k ≡ 8 (mod 9) and 71 mod 9 = 8. ✓. So k ≡ 71 (mod 81).
+  Combined with k ≡ 26 (mod 36) by CRT: k mod lcm(81,36) = k mod 324.
+  81 = 3^4, 36 = 4*9 = 4*3^2. lcm = 4*81 = 324.
+  k ≡ 71 (mod 81) and k ≡ 26 (mod 36 = 4*9).
+  k ≡ 26 (mod 4), i.e., k ≡ 2 (mod 4). And k ≡ 71 (mod 81).
+  By CRT on 4 and 81 (coprime): k mod 324.
+  k = 81a + 71. Need 81a+71 ≡ 2 (mod 4). 81a ≡ a (mod 4). a+71 ≡ 2 (mod 4).
+  a ≡ 2-71 = -69 ≡ -69+72 = 3 (mod 4). So a = 4b+3, k = 81(4b+3)+71 = 324b+314.
+  So k ≡ 314 (mod 324). Can verify: 314 mod 108 = 314-2*108 = 98. But slot599 says
+  k ≡ 8q+34 (mod 108). For q=17: 8*17+34 = 170 mod 108 = 62. Hmm, need to check
+  whether the mod-108 result is q-dependent or not.
+
+  Actually k mod 108 = (8q+34) mod 108, which DEPENDS ON q. So k mod 324 will also
+  depend on q. The key insight: prove k ≡ f(q) (mod 324) for an explicit polynomial f.
+
+- k mod 972 (= 324*3 or 108*9): Even higher.
+- k mod 12q: From k ≡ 2 (mod 6q) and k ≡ 2 (mod 4), by CRT k ≡ 2 (mod 12q).
+  Wait — slot599 already proved k ≡ 2 (mod 4q). So k ≡ 2 (mod lcm(4q, 6q)).
+  lcm(4q,6q) = 12q. So k ≡ 2 (mod 12q). NEW RESULT.
+- k mod 36q: From k ≡ 2 (mod 12q) and k ≡ 26 (mod 36). By CRT: since gcd(12q,36)=12
+  (for q coprime to 3), need 2 ≡ 26 (mod 12), i.e., 26 mod 12 = 2. ✓ Compatible.
+  k mod lcm(12q,36) = k mod 36q. k = 12qm + 2. Need 12qm+2 ≡ 26 (mod 36).
+  12qm ≡ 24 (mod 36). Since gcd(12q,36) = 12, need 24 divisible by 12. ✓.
+  qm ≡ 2 (mod 3). Since q ≡ 2 (mod 3), m ≡ 1 (mod 3). m = 3n+1.
+  k = 12q(3n+1)+2 = 36qn+12q+2. So k ≡ 12q+2 (mod 36q). NEW RESULT.
+- k mod 108q: From k ≡ 12q+2 (mod 36q) and k ≡ 8q+34 (mod 108).
+  Need: gcd(36q, 108) and compatibility. For q coprime to 3: gcd(36q, 108) = 36.
+  Check: (12q+2) mod 36 vs (8q+34) mod 36. 12q+2 mod 36 depends on q mod 3.
+  q ≡ 2 (mod 3): 12*2+2 = 26 mod 36 = 26. (8*2+34) mod 36 = 50 mod 36 = 14. WAIT.
+  That's 26 ≠ 14, contradiction?? Let me recheck.
+
+  Hmm, k ≡ 8q+34 (mod 108). k mod 36: (8q+34) mod 36 depends on q mod 9.
+  For q ≡ 8 (mod 9): 8*8+34 = 98. 98 mod 36 = 98-2*36 = 26. ✓ matches k ≡ 26 (mod 36).
+  For q ≡ 2 (mod 9): 8*2+34 = 50. 50 mod 36 = 14. But we need k ≡ 26 (mod 36).
+  So the k mod 108 result is SPECIFIC to q ≡ 8 (mod 9). ✓ That's consistent.
+
+  So for q ≡ 8 (mod 9): k ≡ 12q+2 (mod 36q) and k ≡ 8q+34 (mod 108).
+  CRT on 36q and 108 where gcd = 36: (12q+2) ≡ (8q+34) (mod 36)?
+  12q+2 - 8q - 34 = 4q-32 = 4(q-8). For q ≡ 8 (mod 9): q-8 ≡ 0 (mod 9).
+  So 4(q-8) mod 36: 4*9m/36 = m (if q-8 = 9m). Actually 4*(9m) = 36m ≡ 0 (mod 36). ✓
+  So they're compatible. k mod lcm(36q, 108) = k mod 108q.
+  Working through CRT to get explicit formula.
+
+STRATEGY 2: COMBINING EISENSTEIN AND k-ANALYSIS
+From slot598: In Z[ω], norm(q-ω) = A. The assumption 3^q ≡ 1 (mod A) means
+3^q ≡ 1 (mod π)(mod π̄) where π = q-ω, π̄ = q-ω².
+In Z[ω]/πZ[ω] ≅ F_A: ord(3) | q. Since q is prime, ord(3) = 1 or q.
+If ord(3) = 1, then 3 ≡ 1 (mod π), so π | 2, so Norm(π) | Norm(2) = 4.
+But Norm(π) = A ≥ 7. Contradiction. So ord(3) = q in Z[ω]/πZ[ω].
+
+Now in the residue field: 3 generates a cyclic subgroup of order q in F_A*.
+Since |F_A*| = A-1 = q(q+1), 3 generates the unique subgroup of order q.
+This subgroup is {3^0, 3^1, ..., 3^{q-1}} = {1, 3, 9, ..., 3^{q-1}}.
+
+Key: The SUM of elements in this subgroup. Sum = Σ_{i=0}^{q-1} 3^i = (3^q - 1)/2.
+Since 3^q = 1 + kA: Sum = kA/2 ≡ 0 (mod A) in Z (assuming 2|k, which is proven).
+So in ZMod A: Sum of the q-th roots through 3 is 0.
+
+But we can also compute: these q elements are roots of X^q - 1 in F_A.
+The polynomial X^q - 1 has q roots in F_A (since q | A-1). By Vieta: sum of all
+q-th roots of unity = 0 (coefficient of X^{q-1} in X^q - 1). So sum = 0 in F_A.
+This is consistent but gives us: {3^i} IS the set of q-th roots of unity in F_A.
+
+Power sums: Σ 3^{ki} for various k. When k is not divisible by q: Σ_{i=0}^{q-1} 3^{ki} = 0.
+For k = 1: Σ 3^i = 0. For k = 2: Σ 9^i = 0. etc.
+These give: for j = 1,...,q-1: Σ_{i=0}^{q-1} 3^{ji} ≡ 0 (mod A).
+
+Lifting to Z: Σ_{i=0}^{q-1} 3^{ji} = (3^{jq} - 1)/(3^j - 1). This should be 0 mod A.
+For j < q: 3^j is not 1 mod A (since ord = q), so 3^j - 1 is invertible mod A.
+Thus: A | (3^{jq} - 1) for all j. Specifically: 3^{jq} ≡ 1 (mod A) for all j.
+Writing 3^{jq} = (3^q)^j = (1+kA)^j. So (1+kA)^j ≡ 1 (mod A). This is automatic
+since kA ≡ 0 (mod A). So we need mod A²: (1+kA)^j ≡ 1 + jkA (mod A²).
+So A² | ((1+kA)^j - 1 - jkA) for "interesting" structure.
+
+STRATEGY 3: BOUNDED VERIFICATION EXTENSION
+Push bounded verification further. slot599 verified to q < 50,000.
+Target: q < 100,000 or even q < 200,000 via native_decide.
+Each doubling provides stronger evidence and may be combinable with
+structural results to prove larger ranges by induction.
+
+STRATEGY 4: FERMAT QUOTIENT ANALYSIS
+From slot599: fermatQuotient defined. The Fermat quotient of 3 base q has
+known properties. For q ≡ 8 (mod 9), if 3^q ≡ 1 (mod A), then the
+Fermat quotient q_3 = (3^{q-1} - 1)/q satisfies specific congruences.
+Since 3^q = 3 * 3^{q-1} = 3(1 + q * q_3) = 3 + 3q*q_3.
+And 3^q = 1 + kA = 1 + k(q²+q+1).
+So 3 + 3q*q_3 = 1 + kq² + kq + k.
+2 + 3q*q_3 = kq² + kq + k.
+2 + q(3*q_3 - k) = kq² + k.
+This gives: k ≡ 2 (mod q) (already known) and deeper structure.
+
+WHAT TO PROVE: Any subset of the following would be valuable:
+1. k ≡ f(q) (mod 324) for explicit f (extending mod 108)
+2. k ≡ 2 (mod 12q) and k ≡ 12q+2 (mod 36q)
+3. Power sum identities Σ 3^{ji} in F_A and their lifts to Z
+4. Extended bounded verification to q < 100,000
+5. Fermat quotient congruences linking q_3 to k and A
+6. Any structural obstruction proving 3^q ≢ 1 (mod A) for infinitely many q
+7. n_val prime factorization constraints (all odd prime factors ≡ 1 mod q)
+
+This extends the deepest number-theoretic analysis of the Feit-Thompson conjecture
+ever formalized. Each new constraint narrows the possibilities.

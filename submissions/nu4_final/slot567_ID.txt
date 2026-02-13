@@ -1,0 +1,4 @@
+b945fcee-dc5a-46c3-bfb7-c3f0f4b4bf90
+# Task: Erdos 1052 even_unitary_perfect INFORMAL
+# Hash: 594652212cdcaebc
+# Submitted: 2026-02-09T16:45:55.085108

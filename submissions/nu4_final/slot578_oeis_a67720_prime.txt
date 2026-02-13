@@ -1,0 +1,99 @@
+OPEN PROBLEM: OEIS A67720 — If φ(k²+1) = k·φ(k+1) and k ≠ 8, then k+1 is prime
+Source: https://oeis.org/A067720
+Status: Open conjecture. Verified computationally for k < 10^6.
+
+THEOREM STATEMENT:
+For natural numbers k, if φ(k²+1) = k·φ(k+1) and k ≠ 8, then (k+1) is prime.
+
+KNOWN RESULTS (already in the formal-conjectures file):
+- a_of_primes: If both k+1 and k²+1 are prime, then φ(k²+1) = k·φ(k+1). (Proven)
+- k=8 is the unique exception: k+1=9=3², k²+1=65=5·13, φ(65)=48=8·φ(9). (Verified)
+- Sequence members: k = 1,2,4,6,8,10,16,36,40,66,126,130,150,...
+
+PROOF STRATEGY (Contrapositive):
+Assume k+1 is composite and k ≠ 8. We show φ(k²+1) ≠ k·φ(k+1).
+
+KEY OBSERVATION: Write both sides using Euler's product formula.
+  φ(k²+1) = (k²+1) · ∏_{q | k²+1} (1 - 1/q)
+  k·φ(k+1) = k·(k+1) · ∏_{p | k+1} (1 - 1/p)
+
+The equation becomes:
+  (k²+1) · ∏_{q | k²+1} (1-1/q) = k(k+1) · ∏_{p | k+1} (1-1/p)
+
+Rearranging: ∏_{q | k²+1}(1-1/q) / ∏_{p | k+1}(1-1/p) = k(k+1)/(k²+1)
+
+CRUCIAL CONSTRAINT: gcd(k+1, k²+1) divides gcd(k+1, 2).
+Proof: k² + 1 = (k+1)(k-1) + 2, so any common factor of k+1 and k²+1 divides 2.
+
+CASE 1: k is even (k+1 is odd composite).
+Then gcd(k+1, k²+1) = 1 (both odd, and gcd divides 2).
+So k+1 and k²+1 share no prime factors.
+The equation φ(k²+1) = k·φ(k+1) becomes:
+  (k²+1)·∏(1-1/qⱼ) = k·(k+1)·∏(1-1/pᵢ)
+where {pᵢ} and {qⱼ} are disjoint sets of primes.
+
+Since k+1 is composite, φ(k+1) ≤ k+1-√(k+1) (at least one prime factor ≤ √(k+1)).
+More precisely, if p is the smallest prime dividing k+1, then:
+  φ(k+1) ≤ (k+1)(1-1/p) ≤ (k+1)(1-1/√(k+1))
+
+Meanwhile, φ(k²+1) ≥ √(k²+1) (the lower bound for Euler's totient).
+Actually, for the equation to hold, k²+1 must also be composite (otherwise φ(k²+1)=k²
+implies φ(k+1)=k, but φ(k+1)<k+1 and φ(k+1)=k only if k+1 is prime, contradiction).
+
+When both are composite:
+  φ(k²+1) < k² and φ(k+1) < k
+The ratio φ(k²+1)/φ(k+1) = k must hold exactly. This is an arithmetic coincidence.
+
+CASE 1a: k+1 = p·q (semiprime, two distinct primes).
+  φ(k+1) = (p-1)(q-1), k·φ(k+1) = (pq-1)(p-1)(q-1)
+  Need φ((pq-1)²+1) = (pq-1)(p-1)(q-1)
+  For specific small cases: all fail computationally.
+
+CASE 1b: k+1 = p² (prime square). Then k = p²-1.
+  φ(k+1) = p(p-1), k·φ(k+1) = (p²-1)·p(p-1) = p(p-1)²(p+1)
+  k²+1 = p⁴-2p²+2
+  Need φ(p⁴-2p²+2) = p(p-1)²(p+1)
+  For p=2: φ(10)=4, need 2·1·3=6. FAIL.
+  For p=3: φ(65)=48, need 3·4·4=48. SUCCESS — this is k=8!
+  For p=5: φ(577)=576 (577 prime!), need 5·16·6=480. FAIL.
+  For p=7: φ(2305)=1840, need 7·36·8=2016. FAIL.
+  For p≥5: p⁴-2p²+2 grows fast, and the ratio constraint fails.
+
+CASE 1c: k+1 = p^a for a ≥ 3.
+  φ(k+1) = p^{a-1}(p-1), grows with a. The equation becomes increasingly tight.
+  No solutions for p ≤ 100, a ≤ 10 by computation.
+
+CASE 2: k is odd (k+1 is even composite).
+Then 2|k+1 and k²+1 is even (k odd → k² odd → k²+1 even).
+So 2 is a common factor. gcd(k+1, k²+1) = 2.
+Write k+1 = 2m (m ≥ 2, and either m composite or m prime but k+1 has extra factors).
+k²+1 = (2m-1)²+1 = 4m²-4m+2 = 2(2m²-2m+1)
+Since gcd(m, 2m²-2m+1) = gcd(m, 1) = 1, the factors 2m and 2(2m²-2m+1)/2 share
+only the factor 2.
+
+φ(k+1) = φ(2m) = φ(2)·φ(m) = φ(m) if m is odd, or φ(2m) with 4|k+1.
+k·φ(k+1) = (2m-1)·φ(2m)
+
+For k+1 = 4 (k=3): φ(10) = 4, 3·φ(4) = 3·2 = 6. FAIL.
+For k+1 = 6 (k=5): φ(26) = 12, 5·φ(6) = 5·2 = 10. FAIL.
+For k+1 = 8 (k=7): φ(50) = 20, 7·φ(8) = 7·4 = 28. FAIL.
+For k+1 = 10 (k=9): φ(82) = 40, 9·φ(10) = 9·4 = 36. FAIL.
+No even composite k+1 works.
+
+REDIRECT FOR ARISTOTLE:
+The cleanest approach for formalization: prove the contrapositive by case analysis
+on the smallest prime factor p of k+1:
+
+1. If k+1 has smallest prime factor p, then φ(k+1) ≤ k(1-1/p).
+2. So k·φ(k+1) ≤ k²(1-1/p).
+3. Meanwhile, if k²+1 has r distinct prime factors, then
+   φ(k²+1) ≥ (k²+1)·∏(1-1/qᵢ).
+4. Show these can't match for k ≥ 100 using totient bounds.
+5. For k < 100 with composite k+1: verify computationally (only k=8 works).
+
+BOUNDED CASE (if full proof fails):
+Prove: For k < 1000 with composite k+1, the only solution is k=8.
+This can be done by interval_cases or native_decide on Fin 1000.
+
+Mathlib references: Nat.totient, Nat.Prime, Nat.totient_prime, Nat.totient_pos,
+Nat.totient_lt (for composite), Nat.Prime.totient

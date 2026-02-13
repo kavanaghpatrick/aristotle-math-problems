@@ -1,0 +1,74 @@
+GRIMM'S CONJECTURE: STRUCTURAL LEMMAS AND BOUNDED VERIFICATION
+
+OPEN PROBLEM (1969): If n+1, n+2, ..., n+k are all composite, then there exist
+distinct primes p_1, p_2, ..., p_k such that p_i | (n+i) for each i.
+
+Equivalently: in any maximal gap between consecutive primes, the composite numbers
+can be assigned distinct prime divisors.
+
+This has been verified for all n up to 10^10. It is implied by (but weaker than)
+the Cramér conjecture on prime gaps.
+
+GOAL: Prove structural lemmas, bounded cases, and reductions.
+
+STRATEGY 1: SMALL CASES
+For k = 1: trivial. One composite number n+1 has a prime factor.
+For k = 2: n+1, n+2 both composite. Need distinct primes p₁|(n+1), p₂|(n+2).
+  If they share all prime factors, then gcd(n+1,n+2) > 1. But gcd(n+1,n+2) = 1. ✓
+  So n+1 and n+2 always have distinct prime factors. Done for k=2.
+
+For k = 3: n+1, n+2, n+3 all composite.
+  By pigeonhole, need at least 3 primes dividing n+1, n+2, n+3.
+  Since gcd(n+i, n+j) | (j-i), consecutive numbers share limited prime factors.
+  Can prove by case analysis on parities and mod 3 residues.
+
+STRATEGY 2: HALL'S MARRIAGE THEOREM CONNECTION
+The conjecture is equivalent to: the bipartite graph G with
+- Left vertices: {n+1, ..., n+k} (composite numbers)
+- Right vertices: {primes}
+- Edge (n+i, p) iff p | (n+i)
+satisfies Hall's condition: for every subset S of left vertices,
+|N(S)| ≥ |S| where N(S) = union of neighbors.
+
+This is a matching theory problem! Hall's marriage theorem is in Mathlib.
+The Grimm conjecture reduces to: for every set of k consecutive composites,
+the set of their prime divisors has size ≥ k.
+
+STRATEGY 3: PRIME COUNTING BOUND
+If n+1,...,n+k are all composite, then π(n+k) - π(n) = 0 (no primes in range).
+The number of distinct primes dividing ∏(n+1,...,n+k) is at least k
+iff Grimm holds. By the fundamental theorem of arithmetic, each n+i has
+at least one prime factor ≤ √(n+k). The number of primes ≤ √(n+k)
+is about √(n+k)/ln(√(n+k)) by PNT.
+
+For Grimm to fail, we'd need k > number of primes ≤ n+k dividing any of the composites.
+Since k ≤ prime gap at n, and prime gaps are O(n^0.525), while the number of
+primes ≤ n is ~n/ln(n), Grimm follows from strong enough prime gap bounds.
+
+STRATEGY 4: BOUNDED VERIFICATION
+Define check_grimm(n, k) that verifies distinct prime assignment exists for n+1,...,n+k.
+Use Hall's condition or direct greedy assignment.
+
+For native_decide: verify Grimm for all prime gaps up to some bound.
+  def primes_up_to (N : ℕ) : List ℕ := (List.range (N+1)).filter Nat.Prime
+  -- For each consecutive prime pair (p, q), verify Grimm for composites p+1,...,q-1.
+
+STRATEGY 5: STRUCTURAL LEMMAS
+1. grimm_k_eq_1: Trivially true (any composite has a prime factor)
+2. grimm_k_eq_2: True by coprimality of consecutive integers
+3. grimm_k_eq_3: True by case analysis on mod 6 residues
+4. grimm_coprime: gcd(n+i, n+j) | |i-j| for distinct i, j
+5. grimm_distinct_factors: k consecutive composites have ≥ k distinct prime factors
+   (THIS is the key lemma equivalent to the full conjecture)
+6. grimm_bounded: Verify for all prime gaps ≤ 1000 (or as high as native_decide allows)
+7. grimm_from_bertrand: If Bertrand's postulate holds (prime in (n, 2n)), then
+   prime gaps < n, so composites have plenty of distinct prime divisors
+
+WHAT TO PROVE (any subset):
+1. grimm_k1, grimm_k2, grimm_k3: Small cases
+2. grimm_coprime_lemma: gcd(n+i, n+j) divides |i-j|
+3. grimm_hall_reduction: Grimm ↔ Hall's condition on bipartite prime divisor graph
+4. grimm_bounded_500: Grimm holds for all prime gaps below 500 via computation
+5. grimm_from_gap_bound: If maximal prime gap below N is < f(N), then Grimm holds below N
+
+This would be the first formalization of Grimm's conjecture structural results.

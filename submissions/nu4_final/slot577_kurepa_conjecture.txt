@@ -1,0 +1,45 @@
+Prove Kurepa's conjecture: for all primes p > 2, the left factorial !p is not divisible by p.
+
+The left factorial is defined as !n = 0! + 1! + 2! + ... + (n-1)!.
+
+This is an open conjecture (Kurepa, 1971). It has been verified computationally for all primes up to very large bounds.
+
+KEY FACTS ALREADY PROVEN IN LEAN:
+1. The conjecture reduces to primes only (proven: kurepa_conjecture.prime_reduction).
+2. The conjecture is equivalent to gcd(n!, !n) = 2 for all n > 2 (proven: kurepa_conjecture.gcd_reduction).
+3. The conjecture holds for all n < 50 by direct computation (proven: kurepa_conjecture.variant.first_cases using interval_cases + decide).
+
+PROOF STRATEGY:
+For a prime p, consider !p = Σ_{k=0}^{p-1} k! modulo p.
+
+By Wilson's theorem: (p-1)! ≡ -1 (mod p).
+So !p = 0! + 1! + 2! + ... + (p-1)!.
+For k ≥ p, k! ≡ 0 (mod p), but we only sum up to (p-1)!.
+
+Key observation: For k < p, k! is not divisible by p (since p is prime and k < p means no factor of k! equals p).
+
+The sum !p mod p can be analyzed using the theory of factorial residues modulo primes.
+
+By a result of Barsky and Benzaghou (2004, retracted but with correct computational verification), and extensive computation (verified for p up to 10^9), the conjecture is believed true but no proof is known.
+
+APPROACH FOR ARISTOTLE:
+Since the full conjecture over all primes is genuinely open, focus on what CAN be done:
+- Extend the first_cases result: verify for all primes p < 200 using decide/native_decide
+- Or: prove the reduction to primes (already done) and the gcd equivalence (already done)
+- Or: prove structural lemmas about !p mod p using Wilson's theorem and properties of factorial residues
+
+The most tractable path: prove kurepa_conjecture for a bounded range using the existing infrastructure.
+
+import Mathlib
+
+open BigOperators Nat Finset
+
+namespace Kurepa
+
+def left_factorial (n : ℕ) := ∑ m ∈ Finset.range n, m !
+
+/-- Kurepa's conjecture: !p is not divisible by p for any prime p > 2. -/
+theorem kurepa_conjecture (n : ℕ) (h_n : 2 < n) : (left_factorial n) % n ≠ 0 := by
+  sorry
+
+end Kurepa

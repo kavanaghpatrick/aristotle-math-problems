@@ -1,0 +1,82 @@
+Theorem: No symmetric group S_n is a Leinster group (for any n ≥ 1).
+Corollary: No alternating group A_n is a Leinster group (for any n ≥ 1).
+
+These are KNOWN results mentioned in the Wikipedia article on Leinster groups,
+following from Leinster (2001). NOT yet formalized in Lean 4. FIRST-EVER formalization.
+
+=== Definition ===
+
+IsLeinster G ↔ ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+=== Theorem Statements ===
+
+theorem symmetric_not_leinster (n : ℕ) (hn : 1 ≤ n) :
+    ¬ IsLeinster (Equiv.Perm (Fin n))
+
+theorem alternating_not_leinster (n : ℕ) (hn : 1 ≤ n) :
+    ¬ IsLeinster (alternatingGroup (Fin n))
+
+=== Proof of symmetric_not_leinster ===
+
+Split into cases based on n:
+
+**Case n = 1:** |S₁| = 1. Only normal subgroup is {e} with |{e}| = 1.
+  Sum = 1. Need 2 * 1 = 2. 1 ≠ 2.
+
+**Case n = 2:** S₂ ≅ Z₂, |S₂| = 2. Normal subgroups: {e}, S₂.
+  Sum = 1 + 2 = 3. Need 2 * 2 = 4. 3 ≠ 4.
+
+**Case n = 3:** |S₃| = 6. Normal subgroups: {e}, A₃ (order 3), S₃ (order 6).
+  Sum = 1 + 3 + 6 = 10. Need 2 * 6 = 12. 10 ≠ 12.
+
+**Case n = 4:** |S₄| = 24. Normal subgroups: {e}, V₄ (Klein four, order 4), A₄ (order 12), S₄.
+  Sum = 1 + 4 + 12 + 24 = 41. Need 2 * 24 = 48. 41 ≠ 48.
+
+**Case n ≥ 5:** The only normal subgroups of S_n are {e}, A_n, and S_n.
+  (This is a classical result: S_n for n ≥ 5 has A_n as its only proper nontrivial
+   normal subgroup, because A_n is simple for n ≥ 5.)
+  Sum = 1 + n!/2 + n!. Need 2 * n!.
+  So: 1 + n!/2 + n! = 2n!  →  1 + n!/2 = n!  →  1 = n!/2  →  n! = 2  →  n ≤ 2.
+  Contradiction with n ≥ 5.
+
+=== Proof of alternating_not_leinster ===
+
+**Case n ≤ 2:** |A_n| = 1. Sum = 1. Need 2. 1 ≠ 2.
+
+**Case n = 3:** A₃ ≅ Z₃, order 3. Normal subgroups: {e}, A₃.
+  Sum = 1 + 3 = 4. Need 6. 4 ≠ 6.
+
+**Case n = 4:** A₄, order 12. Normal subgroups: {e}, V₄ (order 4), A₄.
+  Sum = 1 + 4 + 12 = 17. Need 24. 17 ≠ 24.
+
+**Case n ≥ 5:** A_n is simple (classical result, in Mathlib).
+  Normal subgroups: just {e} and A_n itself.
+  Sum = 1 + |A_n| = 1 + n!/2. Need 2 * n!/2 = n!.
+  1 + n!/2 = n!  →  n!/2 = 1  →  n! = 2  →  n ≤ 2. Contradiction.
+
+=== Key Mathlib ingredients ===
+
+For S_n (Equiv.Perm):
+- `Equiv.Perm.instFintype`: S_n is a fintype
+- `Fintype.card_perm`: |S_n| = n!
+- `alternatingGroup`: A_n exists in Mathlib
+- `Subgroup.Normal` instances
+- For n ≥ 5: `alternatingGroup.isSimple` or equivalent in Mathlib
+
+The hardest part is the NORMAL SUBGROUP CLASSIFICATION for S_n:
+- For n ≥ 5: only {e}, A_n, S_n are normal
+- This requires knowing A_n is simple (n ≥ 5) AND that the only normal subgroup
+  of S_n containing A_n is S_n itself.
+
+Mathlib has `AlternatingGroup.isSimpleGroup` for n ≥ 5 (or similar).
+
+For S₃ and S₄, the normal subgroup enumeration might need case analysis or decide.
+
+=== Recommended scope ===
+
+If the full case analysis is too complex, the n ≥ 5 case alone is the most
+valuable, since it covers all but finitely many cases. The small cases (n ≤ 4)
+can potentially use native_decide on the actual groups.
+
+Priority: prove at least the n ≥ 5 case for both S_n and A_n.
+The A_n case for n ≥ 5 is simpler (A_n simple → only 2 normal subgroups → easy arithmetic).

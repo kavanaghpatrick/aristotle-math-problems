@@ -1,0 +1,137 @@
+FEIT-THOMPSON p=3: PROVE 3^q ≢ 1 (mod A) FOR q ≡ 2 (mod 9)
+
+This is an attempt to SOLVE an open subcase of Feit-Thompson for p=3.
+
+SETUP: q prime, q > 3, q ≡ 2 (mod 3), A = q²+q+1 prime.
+TARGET: Prove 3^q ≢ 1 (mod A) when q ≡ 2 (mod 9).
+
+Combined with our proven q ≡ 1 (mod 4) result, this would resolve FT p=3 for
+ALL primes q with q ≡ 2 (mod 9) — an infinite family.
+
+ASSUME FOR CONTRADICTION: 3^q ≡ 1 (mod A).
+
+PROVEN CONSEQUENCES (from slot590, 598, 599, 601):
+1. ord_A(3) = q (since q is prime and 3 ≢ 1 mod A)
+2. q^3 ≡ 1 (mod A), q is primitive cube root of unity
+3. (1-q)² ≡ -3q (mod A)
+4. 3 ≡ -q²(1-q)² (mod A)
+5. χ₃(q) = q² (from slot601, for q ≡ 2 mod 9)
+6. χ₃(-1) = 1 (exponent (A-1)/3 is even)
+7. χ₃(3) = χ₃(q)²·χ₃(1-q)²
+8. Under 3^q = 1: χ₃(3) = 3^{(A-1)/3} = (3^q)^{(q+1)/3} = 1
+9. So 1 = (q²)²·χ₃(1-q)² = q·χ₃(1-q)², giving χ₃(1-q)² = q⁻¹ = q²
+10. χ₃(1-q) = q (the unique cube root with square = q²)
+11. k = (3^q - 1)/A, k > 0, k ≡ 2 (mod 6q), k ≡ 8 (mod 9)... wait, k ≡ 8 mod 9
+    is for q ≡ 8 mod 9. For q ≡ 2 mod 9: k ≡ 2 (mod 3) (from slot599 general).
+
+APPROACH 1: ORDER-THEORETIC CONTRADICTION
+From (10): (1-q)^{(A-1)/3} = q. So (1-q)^{(A-1)} = q^3 = 1 (automatically).
+The order of (1-q) divides A-1 = q(q+1) but does NOT divide (A-1)/3 = q(q+1)/3.
+So 3 | ord(1-q) and ord(1-q) | q(q+1).
+
+From (1-q)² = -3q: if we let d = ord(1-q), then (-3q)^{d/2} = 1 when d even,
+or (-3q)^d = 1 always.
+
+Also: ord(-3q) | d (since (-3q) = (1-q)²).
+
+Key: ord(3) = q. What is ord(1-q)?
+(1-q)^q: by Fermat-like analysis with q prime, expand (1-q)^q in ZMod A.
+Since char(ZMod A) = A ≠ q, we can't use freshman's dream directly.
+
+But: (1-q)^q = Σ C(q,k)(-q)^k = 1 + Σ_{k=1}^{q-1} C(q,k)(-q)^k + (-q)^q.
+For prime q: q | C(q,k) for 0 < k < q. So Σ_{k=1}^{q-1} C(q,k)(-q)^k ≡ 0 (mod q).
+And (-q)^q = -q^q (q odd) = -q·q^{q-1} = -q·q (since q^3=1 and q-1 ≡ 1 mod 3) = -q².
+In ZMod A: q² = -(q+1), so -q² = q+1.
+So (1-q)^q ≡ 1 + (q+1) + q·S = q + 2 + q·S (mod A) for some S.
+
+The sum S = Σ_{k=1}^{q-1} C(q,k)/q · (-q)^k. This is an integer in Z.
+For k=1: C(q,1)/q · (-q) = -q. In ZMod A: -q.
+For k=2: C(q,2)/q · q² = (q-1)/2 · q². In ZMod A: (q-1)/2 · (-(q+1)) = -(q-1)(q+1)/2 = -(q²-1)/2.
+  Since q² = -(q+1): -(-(q+1)-1)/2 = (q+2)/2.
+
+So S ≡ -q + (q+2)/2 + higher terms (mod A). Getting complicated.
+
+BETTER: compute (1-q)^q numerically for small q ≡ 2 (mod 9) and look for patterns.
+q = 11: A = 133. (1-11)^11 = (-10)^11 mod 133. 10^11 mod 133.
+q = 29: A = 871. etc.
+Then check: does (1-q)^q have a nice closed form in terms of q?
+
+APPROACH 2: CONTRADICTION VIA 3^q = 1 + kA
+Write 3^q = 1 + k·A. Then k ≡ 2 (mod 3) (from slot599).
+For q ≡ 2 (mod 9): k ≡ 2 (mod 3), k even (slot599), k ≡ 2 (mod 6q).
+
+Also: 3^q ≡ 1 (mod A) means (in Z): 3^q - 1 = k·(q²+q+1).
+3^q - 1 = (3-1)(3^{q-1} + 3^{q-2} + ... + 1) = 2 · Σ_{i=0}^{q-1} 3^i.
+So k·(q²+q+1) = 2 · Σ_{i=0}^{q-1} 3^i.
+
+The sum S = Σ 3^i = (3^q-1)/2 = k·A/2.
+S is the sum of elements in the subgroup <3> of (Z/AZ)*.
+
+By Gauss-type considerations: S ≡ 0 (mod A) (sum of q-th roots of unity).
+But as an integer: S = k·A/2 exactly. No extra info.
+
+APPROACH 3: VALUATION AT q
+Since k ≡ 2 (mod q) (proven), write k = q·m + 2 for some m.
+Then 3^q = 1 + (q·m+2)·A = 1 + q·m·A + 2A = 1 + 2(q²+q+1) + q·m·A = 2q²+2q+3 + qmA.
+3^q = 2q² + 2q + 3 + qmA.
+
+Now 3^q mod q²: by Fermat, 3^{q-1} ≡ 1 (mod q), so 3^q ≡ 3 (mod q).
+And 3^q = 3·(1 + q·Q) where Q = (3^{q-1}-1)/q is the Fermat quotient of 3 base q.
+So 3^q = 3 + 3qQ.
+And 3^q mod q²: 3 + 3qQ (mod q²), where Q is determined mod q.
+
+From the other side: 2q²+2q+3 + qmA = 2q² + 2q + 3 + qm(q²+q+1).
+Mod q²: 2q + 3 + qm (since q²≡0, q³≡0, and qm·q² ≡ 0 mod q², qm·q ≡ 0 mod q² only if q|m).
+Wait: qmA = qm(q²+q+1) = q³m + q²m + qm. Mod q²: qm. So:
+3^q ≡ 2q + 3 + qm (mod q²).
+And from Fermat: 3^q ≡ 3 + 3qQ (mod q²).
+So: 3 + 3qQ ≡ 2q + 3 + qm (mod q²).
+3qQ ≡ 2q + qm (mod q²).
+3Q ≡ 2 + m (mod q).
+m ≡ 3Q - 2 (mod q).
+
+And k = qm + 2, so k ≡ q(3Q-2) + 2 (mod q²). Since k ≡ 2 (mod q), this is consistent.
+
+Now: 3Q - 2 = (3(3^{q-1}-1)/q) - 2.
+Fermat quotient Q_3(q) = (3^{q-1}-1)/q. This is an integer.
+For q = 11: 3^10 = 59049. Q = (59049-1)/11 = 5368.
+m ≡ 3·5368 - 2 = 16102 ≡ 16102 mod 11 = 16102 - 1463·11 = 16102-16093 = 9.
+
+Check: 3^11 = 177147. A(11) = 133. k = (177147-1)/133 = 177146/133 = 1332.
+k = 11·m + 2, so m = (1332-2)/11 = 1330/11 = 120.909... Hmm, that's not integer.
+Wait: 1332/11 = 121.09... Let me recompute. 133·1332 = 133·1300+133·32 = 172900+4256 = 177156. But 3^11 = 177147. So 177147/133 = 1331.93... Not an integer!
+
+This means 133 ∤ (3^11 - 1). So 3^11 ≢ 1 (mod 133). Good — this CONFIRMS
+the conjecture for q=11. The assumption 3^q ≡ 1 is FALSE here.
+
+TARGET: Prove 3^q ≢ 1 (mod A) for ALL q ≡ 2 (mod 9) prime, or derive enough
+structural constraints to reach contradiction.
+
+APPROACH 4: BOUNDED + STRUCTURAL
+Prove for q < 100,000 via native_decide (extending slot601's bound).
+Then prove: for q > 100,000 with q ≡ 2 (mod 9), the constraints on k
+(mod q, mod 3, mod 4, prime factors ≡ 1 mod q) become incompatible.
+
+Specifically: k ≡ 2 (mod 6q) and all odd prime factors of k are ≡ 1 (mod q).
+For q > 100,000: the smallest prime ≡ 1 (mod q) is ≥ q+1, so k ≥ q+1 or k = 2.
+But k = (3^q-1)/A ≈ 3^q/q² which is HUGE. So k >> q, and k has odd prime factors,
+all ≡ 1 (mod q). Can we show this forces k to be too large?
+
+Actually: k/2 is odd (from slot599), and k/2 has all odd prime factors ≡ 1 (mod q).
+Also k/2 ≡ 1 (mod q) (from slot599).
+The smallest positive integer with all prime factors ≡ 1 (mod q) and itself ≡ 1 (mod q)
+is... well, (q+1) works if q+1 is prime. Otherwise it's more complex.
+
+For the size: k = (3^q-1)/(q²+q+1). For q = 2 mod 9:
+3^q grows as exp(q·ln3) ≈ 3^q. A = q²+q+1 ≈ q². So k ≈ 3^q/q².
+This is MUCH larger than any polynomial in q. So k having all prime factors ≡ 1 mod q
+is not a real constraint for exponentially large k.
+
+WHAT TO PROVE:
+1. ft_p3_mod9_2_bounded_100k: 3^q ≢ 1 (mod A) for q ≡ 2 (mod 9), q < 100,000
+2. Structural: χ₃(1-q) = q when q ≡ 2 (mod 9) (under assumption)
+3. (1-q)^q computation in closed form modulo A
+4. ANY contradiction derivable from the assumption 3^q ≡ 1 (mod A) for q ≡ 2 (mod 9)
+5. Connection to Fermat quotient: k relates to Q_3(q) via m ≡ 3Q-2 (mod q)
+
+This would be a GENUINE SOLUTION for an infinite family within the Feit-Thompson conjecture.

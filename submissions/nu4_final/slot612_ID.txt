@@ -1,0 +1,4 @@
+43dee8fe-e154-46e0-a3a9-f18d3bfa2238
+# Task: slot612_ft_p3_quartic_residue
+# Hash: 2589797267d84e59
+# Submitted: 2026-02-11T08:29:05.179862

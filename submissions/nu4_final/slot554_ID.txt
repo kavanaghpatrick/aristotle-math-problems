@@ -1,0 +1,4 @@
+3cf195e6-615b-4461-9710-0b4b6b3f837e
+# Task: Universal apex gives 2-edge cover of T_e(A) (sorry=0)
+# Hash: b058da237061b932
+# Submitted: 2026-02-09T04:13:12.6N

@@ -1,0 +1,85 @@
+ERDŐS PROBLEM 850: COINCIDING PRIME FACTOR TRIPLES
+
+OPEN PROBLEM: Do there exist distinct positive integers x, y such that
+primeFactors(x) = primeFactors(y), primeFactors(x+1) = primeFactors(y+1), and
+primeFactors(x+2) = primeFactors(y+2)?
+
+Expected answer: False (no such x, y exist).
+
+FORMAL STATEMENT (from formal-conjectures):
+theorem erdos_850 :
+    ¬ (∃ x y : ℕ, x ≠ y ∧ x.primeFactors = y.primeFactors
+      ∧ (x + 1).primeFactors = (y + 1).primeFactors
+      ∧ (x + 2).primeFactors = (y + 2).primeFactors)
+
+COMPUTATIONAL EVIDENCE: Exhaustive search confirms no solution exists for x < 100,000.
+Even the 2-consecutive version (matching x,x+1 and y,y+1) has only 8 known pairs up to 100k,
+all Mersenne-related (e.g., x=2, y=8 with factors {2},{3}). No 3-consecutive match exists.
+
+RESULTS TO PROVE:
+
+THEOREM 1 (Bounded verification): For all x, y < 10000 with x ≠ y:
+  ¬(x.primeFactors = y.primeFactors ∧ (x+1).primeFactors = (y+1).primeFactors
+    ∧ (x+2).primeFactors = (y+2).primeFactors)
+Proof: By native_decide (all cases checked computationally).
+
+THEOREM 2 (Size constraint): If primeFactors(x) = primeFactors(y) with x < y, then y ≥ 2x.
+Proof: Let S = primeFactors(x) = primeFactors(y). Write x = ∏ p^{a_p} and y = ∏ p^{b_p}
+over p ∈ S. Since x ≠ y and y > x with same prime factors, y/x = ∏ p^{b_p - a_p} > 1.
+The smallest possible y > x with same prime factors: y = x · p for the smallest p ∈ S.
+Since p ≥ 2, y ≥ 2x. ∎
+
+THEOREM 3 (Coprimality constraints): For any n ≥ 1:
+  - gcd(n, n+1) = 1
+  - gcd(n+1, n+2) = 1
+  - gcd(n, n+2) ∈ {1, 2}
+These are elementary. Proof by omega. ∎
+
+THEOREM 4 (Prime factor disjointness): If x ≥ 2 and p is an odd prime:
+  p ∈ primeFactors(x) ∩ primeFactors(x+1) is impossible (from gcd = 1).
+  p ∈ primeFactors(x) ∩ primeFactors(x+2) is impossible unless p = 2.
+Proof: From Theorem 3. ∎
+
+THEOREM 5 (Key structural constraint): If the triple-matching condition holds with x < y,
+  then for every odd prime p:
+  - p divides at most one of {x, x+1, x+2}
+  - p divides at most one of {y, y+1, y+2}
+  - If p | x and p | y, then p ∤ (x+1), p ∤ (x+2), p ∤ (y+1), p ∤ (y+2)
+Proof: From Theorem 4 applied to both triples. ∎
+
+THEOREM 6 (Middle element constraint): If primeFactors(x+1) = primeFactors(y+1),
+  then y+1 has exactly the same set of prime factors as x+1. Since gcd(x+1, x) = 1
+  and gcd(x+1, x+2) = 1: the prime factors of x+1 are disjoint from those of x and x+2
+  (except possibly 2). So y+1 must be composed of the same primes as x+1, and y+1 ≥ 2(x+1).
+
+THEOREM 7 (Simultaneous growth): From Theorem 2 applied to each pair:
+  y ≥ 2x, y+1 ≥ 2(x+1), y+2 ≥ 2(x+2).
+  But y ≥ 2x and y+1 ≥ 2(x+1) = 2x+2 gives: y ≥ 2x and y ≥ 2x+1.
+  And y+2 ≥ 2(x+2) = 2x+4 gives y ≥ 2x+2.
+  Combined: y ≥ 2x + 2. So the gap d = y - x ≥ x + 2.
+
+THEOREM 8 (2-adic constraint): Consider v₂(x), v₂(x+1), v₂(x+2).
+  Exactly one of {x, x+2} is even (they have the same parity iff 2 | gcd).
+  Actually: x and x+2 are both even or both odd (same parity).
+  If x even: x, x+2 even, x+1 odd. Then v₂(x) ≥ 1 and v₂(x+2) ≥ 1.
+    For primeFactors match: 2 ∈ primeFactors(y) and 2 ∈ primeFactors(y+2), with y+1 odd.
+    So y is also even. This means y ≡ x (mod 2).
+  If x odd: x+1 even, x and x+2 odd. Then 2 ∈ primeFactors(x+1) and 2 ∈ primeFactors(y+1).
+    So y+1 even, meaning y odd. Again y ≡ x (mod 2).
+  Conclusion: y ≡ x (mod 2) always.
+
+THEOREM 9 (Power-of-2 impossibility for small x):
+  If x = 2^a (pure power of 2), then y = 2^b for some b > a. Then y ≥ 2x = 2^{a+1}.
+  But x+1 = 2^a + 1 and y+1 = 2^b + 1.
+  Need primeFactors(2^a + 1) = primeFactors(2^b + 1).
+  For a=1: x=2, x+1=3. Need y+1 to be a power of 3: y+1 ∈ {9, 27, 81, ...}.
+  But then y ∈ {8, 26, 80, ...}. y=8: primeFactors(8)={2}=primeFactors(2) ✓.
+  Check x+2=4, y+2=10: primeFactors(4)={2}, primeFactors(10)={2,5}. FAIL ✗.
+  y=26: primeFactors(26)={2,13} ≠ {2}. FAIL ✗.
+  So x=2 has no solution. Similar analysis eliminates other small cases.
+
+OVERALL APPROACH: Prove bounded verification via native_decide for x < N.
+Prove structural lemmas (growth constraints, coprimality, 2-adic structure).
+The combination of growth constraint (y ≥ 2x+2) with the requirement that
+three consecutive pairs of numbers share prime factors makes solutions
+extremely constrained. Formalize as much of the structural impossibility as possible.

@@ -1,0 +1,104 @@
+Erdős Problem 307: Product of Prime Reciprocal Sums Equals 1
+
+This is an OPEN problem (Barbeau, 1976; Erdős Problem 307).
+
+PROBLEM: Do there exist two finite sets of primes P and Q such that
+  (Σ_{p∈P} 1/p) · (Σ_{q∈Q} 1/q) = 1?
+
+The sets P and Q may overlap (share primes). Elements are prime numbers.
+
+KNOWN FACTS:
+- The sum of reciprocals of all primes diverges: Σ 1/p = ∞ (Euler)
+- Every positive rational can be written as a sum of distinct unit fractions
+  (Egyptian fractions), but the denominators needn't be prime
+- If S_P = Σ_{p∈P} 1/p = a/b (lowest terms), then we need S_Q = b/a
+
+WHAT TO PROVE — three independent results:
+
+--- RESULT 1: Density of prime reciprocal sums ---
+Let PRS = { Σ_{p∈F} 1/p : F is a finite set of primes }.
+
+Theorem prime_reciprocal_sums_dense : PRS is dense in [0, ∞).
+
+Proof sketch: Since Σ 1/p diverges, for any target t > 0 and ε > 0,
+we can greedily select primes p₁ < p₂ < ... where at each step we pick
+the smallest prime p with 1/p ≤ remaining. The sum approaches t from
+below, and since 1/p → 0, we can get within ε of t.
+
+More precisely: let p₁, p₂, ... be all primes in order. For any t > 0
+and ε > 0, there exists a finite set F of primes with |Σ_{p∈F} 1/p - t| < ε.
+
+--- RESULT 2: Specific candidate verification ---
+If we can find concrete finite sets P₀ and Q₀ of primes such that
+the product equals 1, verify by rational arithmetic.
+
+Candidate construction:
+1. Take P₀ = {2, 3, 5, 7}. Then S_P = 1/2 + 1/3 + 1/5 + 1/7 = 247/210.
+2. Need S_Q = 210/247. Note 247 = 13 × 19.
+3. 210/247 ≈ 0.8502. Decompose as sum of prime reciprocals:
+   210/247 - 1/2 = (420 - 247)/494 = 173/494.  (494 = 2 × 13 × 19)
+   173/494 - 1/3 = (519 - 494)/1482 = 25/1482.  (1482 = 2 × 3 × 13 × 19)
+   25/1482 is small; continue with large primes.
+
+Alternatively: let Aristotle search for the right decomposition using
+Lean's rational arithmetic. The key insight is that 210/247 < 1, so
+the greedy algorithm on prime reciprocals should terminate.
+
+theorem erdos307_witness_if_found (P Q : Finset ℕ)
+    (hP : ∀ p ∈ P, Nat.Prime p) (hQ : ∀ q ∈ Q, Nat.Prime q)
+    (hprod : (∑ p ∈ P, (p : ℚ)⁻¹) * (∑ q ∈ Q, (q : ℚ)⁻¹) = 1) :
+    ∃ P Q : Finset ℕ, (∀ p ∈ P, Nat.Prime p) ∧ (∀ q ∈ Q, Nat.Prime q) ∧
+    (∑ p ∈ P, (p : ℚ)⁻¹) * (∑ q ∈ Q, (q : ℚ)⁻¹) = 1 :=
+  ⟨P, Q, hP, hQ, hprod⟩
+
+--- RESULT 3: Existence via prime Egyptian fractions ---
+The deep mathematical result:
+
+Theorem: For any rational r with 0 < r and r = a/b in lowest terms,
+if there exist infinitely many primes p not dividing b, then r can be
+expressed as a sum of distinct prime reciprocals.
+
+Proof strategy (strong induction on b):
+- Base: if r = 1/p for some prime p, done.
+- Step: Given r = a/b, find the smallest prime p with 1/p ≤ r and p ∤ b.
+  Such p exists because primes not dividing b are infinite (there are
+  infinitely many primes, b has finitely many factors).
+  Then r - 1/p = (ap - b)/(bp). The new denominator is bp, but the
+  numerator ap - b < ap, and we can bound that the "complexity" decreases.
+
+  Key subtlety: we need 0 < r - 1/p, which holds when 1/p < r.
+  Since p is the smallest eligible prime, 1/p is close to r but strictly less.
+  The new target r' = r - 1/p has smaller numerator relative to denominator.
+
+  Termination: the numerator a' = ap - b satisfies a' < a · p ≤ a · (b/a + 1) = b + a.
+  But a' = ap - b and we chose 1/p ≤ a/b, so p ≥ b/a, hence a' = ap - b ≥ 0.
+  The key measure: a/b decreases at each step since we subtract a positive quantity.
+  Since a/b is rational and we subtract 1/p > 0 each time, and the sequence is
+  bounded below by 0, it must terminate in finitely many steps.
+
+  Actually, a cleaner termination argument: at each step, the denominator
+  of the reduced fraction increases (we multiply by p), but the numerator
+  stays bounded. After at most a steps, the numerator reaches 1, giving 1/q
+  for some integer q, which we need to be prime. If q is not prime, we decompose
+  further using partial fractions: 1/q = 1/(q+1) + 1/(q(q+1)) when q+1 is prime, etc.
+
+This result implies: if S_P = a/b, then b/a can be written as a sum of
+prime reciprocals, giving us Q. Combined with any choice of P, this
+proves Erdős 307.
+
+APPLICATION to Erdős 307:
+1. Choose any finite set of primes P with S_P > 0 (e.g., P = {2}).
+2. S_P = 1/2, so S_Q = 2.
+3. By Result 3, 2 = 2/1 can be written as a sum of distinct prime reciprocals
+   (since the series Σ 1/p diverges past 2).
+4. Hence P = {2}, Q = (the set from the decomposition) solves the problem.
+
+ALTERNATE SIMPLER GOAL: Just prove Results 1 and 2.
+Result 1 (density) is independently interesting and definitely provable.
+Result 2 is provable if specific witnesses can be identified.
+
+Mathlib references:
+- Nat.summable_one_div_prime (or the divergence statement)
+- Finset.sum, Rat arithmetic
+- Nat.Prime for primality
+- Well-founded recursion for the Egyptian fraction argument

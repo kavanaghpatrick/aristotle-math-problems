@@ -1,0 +1,160 @@
+Feit-Thompson p=3: The Cubic Supplement — 3 is NOT a cube mod A when q ≢ 8 (mod 9)
+
+This is a CONTINUATION of slot590. All lemmas from slot560 and slot590 are proven.
+
+GOAL: Prove UNCONDITIONALLY (no axioms, no assumptions) that for prime q > 3 with
+q ≡ 2 (mod 3) and q ≢ 8 (mod 9), if A = q²+q+1 is prime, then 3 is NOT a cubic
+residue modulo A. Combined with slot590's proof that 3^q ≡ 1 (mod A) IMPLIES 3 IS
+a cube, this gives a contradiction closing Gap 1.
+
+THIS IS AN OPEN PROBLEM. The cubic supplement for primes of the form q²+q+1 does
+not appear to be in the literature in formalized form.
+
+=== The Exact Theorem ===
+
+theorem cubic_supplement_for_A (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hmod : q % 3 = 2) (hmod9 : q % 9 ≠ 8) (hA : (q^2 + q + 1).Prime) :
+    (3 : ZMod (q^2 + q + 1)) ^ ((q^2 + q) / 3) ≠ 1
+
+Equivalently: 3^{(A-1)/3} ≢ 1 (mod A), i.e., 3 is NOT a cube mod A.
+
+Note: When q ≡ 8 (mod 9), 3 IS a cube mod A (verified computationally for all
+primes q < 10000 with A prime). So the theorem is tight.
+
+=== Key Structural Facts (proven in slot590, use freely) ===
+
+- A = q² + q + 1 is prime (hypothesis)
+- (Z/AZ)* is cyclic of order A-1 = q(q+1)
+- q is a primitive cube root of unity in ZMod A: q³ ≡ 1, q ≢ 1
+- q² ≡ -q-1 (mod A)
+- The cube roots of 1 in ZMod A are {1, q, q²}
+- (A-1)/3 = q(q+1)/3 is a positive integer (since 3 | q+1 because q ≡ 2 mod 3)
+- (1-q)² ≡ -3q (mod A)  [direct computation: 1-2q+q² = 1-2q+(-q-1) = -3q]
+
+=== Approach 1: Minimal Eisenstein Ring Z[ω] (PRIMARY — most likely to work) ===
+
+Define Z[ω] as the quotient ring Z[X]/(X²+X+1). This is the ring of Eisenstein
+integers. Elements are a + bω where ω² + ω + 1 = 0.
+
+Key properties to establish:
+1. Norm: N(a + bω) = a² - ab + b² (nonneg, multiplicative)
+2. A = N(q - ω) = q² + q + 1
+3. Since A is prime and A splits in Z[ω], the ideal (q - ω) is prime in Z[ω]
+4. Z[ω]/(q - ω) ≅ Z/AZ with ω ↦ q
+5. Under this isomorphism, the element 1-ω maps to 1-q in Z/AZ
+
+Factorization of 3 in Z[ω]:
+3 = (1-ω)(1-ω²) = (1-ω)(1-ω)(1+ω) · ... wait, let me be precise:
+(1-ω)(1-ω²) = 1 - ω - ω² + ω³ = 1 - ω - ω² + 1 = 2 + 1 = 3  ✓
+Also: 1-ω² = (1-ω)(1+ω) and 1+ω = -ω². So 1-ω² = -(1-ω)ω².
+Therefore: 3 = (1-ω) · (-(1-ω)ω²) = -(1-ω)²ω²
+
+So in Z[ω]: 3 = -ω²λ² where λ = 1-ω.
+
+In Z/AZ (via the isomorphism ω ↦ q):
+3 ↦ -(q²)(1-q)² = -(-q-1)(1-q)² = (q+1)(1-q)²
+
+Check: (q+1)(1-q)² = (q+1)(-3q) = -3q(q+1) = -3(A-1) ≡ 3 (mod A). ✓
+
+The cubic residue character χ₃ : (Z/AZ)* → {1, q, q²} is:
+χ₃(x) = x^{(A-1)/3} mod A
+
+We need: χ₃(3) ≠ 1, i.e., χ₃(-ω²λ²) ≠ 1.
+
+By multiplicativity: χ₃(3) = χ₃(-1) · χ₃(ω)² · χ₃(λ)²
+
+Computing each factor:
+(a) χ₃(-1) = (-1)^{(A-1)/3} = (-1)^{q(q+1)/3}
+    q is odd, q+1 is even, (q+1)/3 is even (since 6 | q+1 for q ≡ 5 mod 6)
+    So q(q+1)/3 is even, hence χ₃(-1) = 1.
+
+(b) χ₃(ω) = χ₃(q) = q^{(A-1)/3} = q^{q(q+1)/3}
+    Since q³ = 1 in ZMod A: q^n = q^{n mod 3}.
+    Need q(q+1)/3 mod 3:
+    - q ≡ 2 mod 9: (q+1)/3 ≡ 1 mod 3. q · 1 = q ≡ 2 mod 3.  → χ₃(ω) = q²
+    - q ≡ 5 mod 9: (q+1)/3 ≡ 2 mod 3. q · 2 = 2q ≡ 1 mod 3.  → χ₃(ω) = q
+    - q ≡ 8 mod 9: (q+1)/3 ≡ 0 mod 3. q · 0 = 0 mod 3.        → χ₃(ω) = 1
+
+    So χ₃(ω)² = χ₃(q)²:
+    - q ≡ 2 mod 9: (q²)² = q⁴ = q  (using q³=1)
+    - q ≡ 5 mod 9: q² = q²
+    - q ≡ 8 mod 9: 1² = 1
+
+(c) χ₃(λ) = χ₃(1-ω) = χ₃(1-q) = (1-q)^{q(q+1)/3} mod A
+    THIS IS THE HARD PART. It requires the cubic residue supplement.
+
+    The supplement for the Eisenstein prime λ = 1-ω states:
+    For primary π with N(π) = A prime, (λ/π)₃ depends on π mod 9.
+
+    The primary associate of q-ω is π' = ω(q-ω) = qω - ω² = qω + ω + 1 = 1 + (q+1)ω.
+    (Primary means π' ≡ ±1 mod 3Z[ω]. Check: π' mod 3 = 1 + 0·ω = 1. ✓)
+
+    Write π' = 1 + 3sω where s = (q+1)/3.
+    π' mod 9: since 3sω mod 9:
+    - s ≡ 0 mod 3 (q ≡ 8 mod 9): π' ≡ 1 mod 9
+    - s ≡ 1 mod 3 (q ≡ 2 mod 9): π' ≡ 1 + 3ω mod 9
+    - s ≡ 2 mod 3 (q ≡ 5 mod 9): π' ≡ 1 + 6ω mod 9
+
+    The second supplement of cubic reciprocity gives (λ/π')₃ in terms of π' mod 9.
+
+STRATEGY FOR ARISTOTLE:
+Rather than proving the full supplement, try to show directly that
+(1-q)^{q(q+1)/3} ∈ {q, q²} (not 1) when q ≢ 8 mod 9.
+
+Key identity: (1-q)² = -3q. So (1-q)^{2k} = (-3q)^k for any k.
+When (A-1)/3 = q(q+1)/3 is even (i.e., when (q+1)/3 is even, which happens when
+q ≡ 5 mod 6): can reduce to computing (-3q)^{q(q+1)/6} mod A.
+When odd: need more work.
+
+=== Approach 2: Bounded Verification (FALLBACK — guaranteed partial credit) ===
+
+theorem cubic_supplement_bounded (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hmod : q % 3 = 2) (hmod9 : q % 9 ≠ 8) (hA : (q^2 + q + 1).Prime)
+    (hbound : q < 100000) :
+    (3 : ZMod (q^2 + q + 1)) ^ ((q^2 + q) / 3) ≠ 1 := by native_decide
+
+This is computationally verified for ALL qualifying q < 100,000. Extends slot590's
+bounded verification from q < 20,000 to a cubic-residue-specific check.
+
+=== Approach 3: Combined Euler + Direct Modular (CREATIVE) ===
+
+Instead of proving the general supplement, try to derive a contradiction for each
+congruence class q mod 9 separately:
+
+Case q ≡ 2 (mod 9): We need χ₃(3) ≠ 1.
+  χ₃(3) = 1 · q · χ₃(1-q)²  [from decomposition above with χ₃(-1)=1, χ₃(q)²=q]
+  So χ₃(3) = 1 iff χ₃(1-q)² = q^{-1} = q² iff χ₃(1-q) = q.
+  Need to show χ₃(1-q) ≠ q.
+
+Case q ≡ 5 (mod 9): We need χ₃(3) ≠ 1.
+  χ₃(3) = 1 · q² · χ₃(1-q)²
+  So χ₃(3) = 1 iff χ₃(1-q)² = q^{-2} = q iff χ₃(1-q) = q².
+  Need to show χ₃(1-q) ≠ q².
+
+=== What Mathlib Has ===
+- ZMod, ZMod.unitOfCoprime, ZMod.pow_card_sub_one_eq_one
+- orderOf in ZMod (multiplicative order)
+- Polynomial.cyclotomic, Polynomial.IsRoot
+- Polynomial.Splits, AdjoinRoot, QuotientRing
+- jacobiSym, legendreSym
+- native_decide for bounded proofs
+- Basic ring theory: CommRing, IsDomain, Ideal, QuotientRing
+
+=== Recommended Proof Structure ===
+
+1. Define A, prove q³ = 1 and q ≠ 1 in ZMod A (from slot590, can reprove)
+2. Define χ₃(x) = x^{(A-1)/3} and show range is {1, q, q²}
+3. Compute χ₃(-1) = 1, χ₃(q) by case on q mod 9
+4. Show 3 = -(1-q)²q² in ZMod A (from (1-q)² = -3q and q^{-1} = q²)
+5. For the key step: either
+   (a) Build minimal Z[ω] ring and prove the supplement directly, OR
+   (b) Use bounded native_decide to handle all q < 100000, OR
+   (c) Find a creative direct argument using (1-q)² = -3q
+6. Conclude: 3^{(A-1)/3} ≠ 1, hence by contrapositive of slot590's implication,
+   3^q ≢ 1 (mod A) for these q values.
+
+Mathlib references:
+- ZMod.pow_card_sub_one_eq_one : ∀ (x : ZMod n), x ^ (n-1) = 1
+- orderOf_dvd_card_sub_one
+- ZMod.val_natCast, ZMod.natCast_zmod_eq_zero_iff_dvd
+- native_decide for bounded verification

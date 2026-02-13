@@ -1,0 +1,52 @@
+Prove or disprove: Do there exist two finite sets of primes P and Q such that
+(Σ_{p∈P} 1/p) * (Σ_{q∈Q} 1/q) = 1?
+
+This is Erdős Problem 307, originally asked by Barbeau (1976).
+
+ANALYSIS:
+We need finite sets of primes P = {p₁,...,pₘ} and Q = {q₁,...,qₙ} such that
+  (1/p₁ + ... + 1/pₘ) * (1/q₁ + ... + 1/qₙ) = 1
+
+Note that the sum of reciprocals of ALL primes diverges, so we have plenty of room.
+
+For the product to equal 1, we need both sums to be rational numbers whose product is 1.
+If S_P = a/b in lowest terms, then S_Q = b/a.
+
+A search strategy: Find a set of primes P where Σ 1/p = a/b, then check if b/a can also be expressed as a sum of distinct prime reciprocals (using primes not in P).
+
+Example attempt with small primes:
+- P = {2, 3}: S_P = 1/2 + 1/3 = 5/6. Need S_Q = 6/5. But 6/5 > 1 and the max sum of reciprocals of primes ≥ 5 starts at 1/5 + 1/7 + 1/11 + ... which does exceed 6/5 eventually.
+  6/5 = 1/5 + 1 = impossible with just prime reciprocals since each < 1/2.
+  Actually 6/5 > 1 so we'd need the sum of many prime reciprocals.
+
+- P = {2, 3, 7, 43}: S_P = 1/2 + 1/3 + 1/7 + 1/43 = (903 + 602 + 258 + 42)/1806 = 1805/1806.
+  Close to 1! Need S_Q = 1806/1805. But 1806/1805 > 1 so again need many primes.
+
+- Let me think differently. We need S_P * S_Q = 1 where both are sums of distinct prime reciprocals.
+  Both S_P and S_Q must be > 0. Their product is 1, so both > 0 and S_Q = 1/S_P.
+
+  If S_P < 1 then S_Q > 1. The sum of all prime reciprocals diverges, so any target > 0 is achievable as a (possibly large) sum of prime reciprocals, as long as we can make it exact.
+
+  The Egyptian fraction / prime reciprocal representation problem: can every positive rational be represented as a sum of distinct prime reciprocals? This is related to the Erdős-Straus type questions.
+
+  By a greedy algorithm on prime reciprocals, since Σ 1/p diverges, for any target rational r > 0, we should be able to find primes summing to exactly r, as long as denominators work out.
+
+The answer is likely True (such P, Q exist), but finding explicit witnesses may require computation.
+
+Actually, by a result related to the Erdős-Graham conjecture on Egyptian fractions with prime denominators: since the sum of reciprocals of primes diverges, and by a pigeonhole/greedy argument, one can represent 1 as a product of two such sums.
+
+More concretely: pick P = {2,3,5,...} a large enough initial segment. Then S_P is large. We need S_Q = 1/S_P which is small and positive. Since arbitrarily small positive rationals can be written as sums of reciprocals of large primes (the tail of the prime reciprocal series), this should work.
+
+But making this formal requires careful Egyptian fraction arguments.
+
+import Mathlib
+
+open Finset
+
+namespace Erdos307
+
+theorem erdos_307 : ∃ P Q : Finset ℕ, (∀ p ∈ P, p.Prime) ∧ (∀ q ∈ Q, q.Prime) ∧
+    (1 = (∑ p ∈ P, (p : ℚ)⁻¹) * (∑ q ∈ Q, (q : ℚ)⁻¹)) := by
+  sorry
+
+end Erdos307

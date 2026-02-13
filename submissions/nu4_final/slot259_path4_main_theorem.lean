@@ -822,7 +822,8 @@ lemma tau_le_2_or_packing_of_triangles_on_edges_v3 (G : SimpleGraph V) [Decidabl
     triangleCoveringNumberOn G {t1, t2, t3} ≤ 2 ∨ isTrianglePacking G {t1, t2, t3} := by
       convert tau_le_2_or_packing_of_triangles_on_edges_v2 G e he u v w hue huv hvw huw t1 t2 t3 ht1 ht2 ht3 h_cov1 h_cov2 h_cov3 using 1
 
-/-
+/--
+PROVIDED SOLUTION:
 MAIN THEOREM: For a PATH_4 configuration A—B—C—D, τ(G) ≤ 8.
 
 Proof structure:

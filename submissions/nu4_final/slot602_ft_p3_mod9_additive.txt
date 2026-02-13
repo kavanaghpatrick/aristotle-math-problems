@@ -1,0 +1,177 @@
+Feit-Thompson p=3: The q ≡ 8 (mod 9) Case via Additive-Multiplicative Structure
+
+This is a CONTINUATION of slot590. All lemmas from slot560 and slot590 are proven.
+
+GOAL: Show that for prime q ≡ 35 (mod 36) with A = q²+q+1 prime,
+the divisibility A | (3^q-1)/2 leads to a contradiction.
+
+THIS IS AN OPEN PROBLEM. The q ≡ 8 (mod 9) case is the HARDEST remaining gap
+in the Feit-Thompson conjecture for p=3. All standard approaches (power residue
+characters, Jacobi symbols, pure group theory) have been exhausted.
+
+=== What's Already Proven (slot590, unconditional) ===
+
+Assume A | (3^q-1)/2 where q is prime, q ≡ 2 (mod 3), q ≡ 8 (mod 9). Then:
+1. A is prime
+2. ord_A(3) = q (order of 3 in (Z/AZ)*)
+3. 3 IS a cubic residue mod A (from 3^{(A-1)/3} = (3^q)^{(q+1)/3} = 1)
+4. 3 IS a 9th power residue (from 3^{(A-1)/9} = (3^q)^{(q+1)/9} = 1 since 9|(q+1))
+5. q is a primitive cube root of 1 in ZMod A
+6. (1-q)² ≡ -3q (mod A)
+7. 3 = (1-q)^{2(q+1)} under the assumption (derived from (-3q)^{q+1} = 3^{q+1} = 3)
+8. FT verified for all q < 20,000
+
+=== Why Standard Approaches Fail ===
+
+Under the assumption 3^q ≡ 1 (mod A), for ANY d dividing q+1:
+  3^{(A-1)/d} = (3^q)^{(q+1)/d} = 1
+
+So 3 is a d-th power for EVERY divisor d of q+1. Since q+1 ≡ 0 (mod 36),
+this includes d = 2,3,4,6,9,12,18,36 and all their divisors.
+
+Pure multiplicative group arguments also fail: in any cyclic group of order q(q+1),
+the constraints "ord(3)=q" and "q³=1" are perfectly compatible.
+
+THE CONTRADICTION MUST COME FROM ADDITIVE-MULTIPLICATIVE COUPLING.
+
+=== The Key Additive-Multiplicative Relations ===
+
+In ZMod A, we have both additive and multiplicative constraints:
+ADDITIVE: q² + q + 1 ≡ 0 (mod A)  [definition of A]
+          (1-q)² ≡ -3q (mod A)
+          (1+q)² ≡ q² + 2q + 1 = (A - q² - q - 1) + q² + 2q + 1 = q (mod A)...
+          wait: q²+2q+1 = (q+1)². And q² ≡ -q-1 mod A. So (q+1)² = q²+2q+1 ≡ -q-1+2q+1 = q.
+          So (q+1)² ≡ q (mod A)!
+
+MULTIPLICATIVE: 3^q ≡ 1 (mod A)  [assumption]
+                q³ ≡ 1 (mod A)
+                3 = (1-q)^{2(q+1)} (derived under assumption)
+
+Combined relations:
+- (q+1)² = q in ZMod A
+- (1-q)² = -3q in ZMod A
+- 3^q = 1 in ZMod A
+- q³ = 1 in ZMod A
+
+=== Strategy 1: The Frobenius Endomorphism on Extensions ===
+
+Consider F_{A³} as an extension of F_A. The Frobenius φ(x) = x^A has order 3.
+The norm N_{F_{A³}/F_A}(x) = x · x^A · x^{A²} and trace similarly.
+
+If we can find an element α ∈ F_{A³} related to both q and 3 whose
+Frobenius behavior is contradictory, we get a proof.
+
+Candidate: α = ∛(q). Since q is a cube root of 1, ∛(q) satisfies X^9 = 1.
+More precisely, α³ = q and q³ = 1, so α^9 = 1.
+
+In F_A, the 9th roots of unity exist since 9 | A-1 = q(q+1) (we have 9 | q+1).
+So ∛(q) exists in F_A itself (since 3 | A-1).
+Let β ∈ F_A with β³ = q. Then β^9 = 1.
+
+Also, 3 = (q+1)^2 · q^{-1} ... wait: (q+1)² = q, so (q+1)² · q^{-1} = q · q² = q³ = 1 ≠ 3.
+Hmm. Let me reconsider: (1-q)² = -3q, so 3 = -(1-q)² · q^{-1} = -(1-q)² · q².
+
+Now 3^q = (-(1-q)²q²)^q = (-1)^q · (1-q)^{2q} · q^{2q}.
+(-1)^q = -1. q^{2q} = q^{2q mod 3} = q^{(2·2) mod 3} = q^{4 mod 3} = q.
+(since q ≡ 2 mod 3, 2q ≡ 1 mod 3). So q^{2q} = q.
+
+3^q = -(1-q)^{2q} · q.
+
+If 3^q = 1: -(1-q)^{2q} · q = 1, so (1-q)^{2q} = -q^{-1} = -q².
+Since (1-q)² = -3q: (1-q)^{2q} = (-3q)^q = (-3)^q · q^q.
+(-3)^q = (-1)^q · 3^q = (-1) · 1 = -1.
+q^q = q^{q mod 3} = q^2.
+So (1-q)^{2q} = -q^2. ✓ Consistent.
+
+=== Strategy 2: Polynomial Equations for 3 ===
+
+3 has order q in F_A*. The minimal polynomial of 3 over ... well, F_A is a prime
+field, so 3 is just an element. But we can ask: what polynomial in q equals 3?
+
+We know 3 ∈ F_A and q ∈ F_A with q²+q+1=0. Is there a polynomial P(X) such that
+P(q) = 3 in F_A? Since F_A = Z/AZ, every element is some integer mod A.
+3 is already an integer. But is there a LOW-DEGREE polynomial relation?
+
+Computationally: for ALL tested primes q ≡ 8 (mod 9) with A prime (q < 10000),
+NO polynomial relation of degree ≤ 5 with coefficients ≤ 50 was found between q and 3.
+
+However: under the assumption 3^q = 1, 3 satisfies X^q - 1 = 0 in F_A.
+Also q satisfies X² + X + 1 = 0. The RESULTANT of X^q - 1 and X² + X + 1 is
+Res(X^q-1, X²+X+1) = (-1)^{2q} · ∏_{ζ³=1} (ζ^q - 1) = (1^q-1)(ω^q-1)(ω^{2q}-1).
+Since q ≡ 2 mod 3: ω^q = ω², ω^{2q} = ω.
+So Res = 0 · (ω²-1)(ω-1) = 0. The root 1 is common.
+
+But 3 ≠ 1 and q ≠ 1 in F_A. So the shared root of X^q-1 and X²+X+1 is X=1,
+which is neither 3 nor q. The polynomials share a root but NOT the relevant ones.
+
+=== Strategy 3: Norm/Trace in Z[ω] ===
+
+Z[ω]/(q-ω) ≅ F_A. The norm map N : Z[ω]* → Z* restricts to:
+for x ∈ F_A via the isomorphism, N(x) = x · x̄ where x̄ is obtained by ω ↦ ω² (i.e., q ↦ q²).
+
+So for x ∈ F_A: N(x) = x · σ(x) where σ is the automorphism q ↦ q² = -q-1.
+
+Under assumption 3^q = 1:
+σ(3) = ? Since σ acts on ZMod A as the identity (it's a prime field!), σ(3) = 3.
+So N(3) = 3 · 3 = 9 = 3².
+
+The trace: Tr(3) = 3 + σ(3) = 3 + 3 = 6 = 2·3.
+
+These are just 9 and 6, which are uninteresting.
+
+But what about N and Tr applied to more complex expressions?
+
+=== Strategy 4: The (q+1)-th Power Map ===
+
+Key identity proved above: (q+1)² = q in ZMod A.
+
+So if β = q+1, then β² = q, β^4 = q² = -q-1 = -(β²+1) = -β²-1.
+β^4 + β² + 1 = 0. So β satisfies X^4 + X² + 1 = (X²+X+1)(X²-X+1).
+Since β² = q satisfies X²+X+1 = 0, β satisfies X^4+X²+1 = 0.
+But X²-X+1: β²-β+1 = q-(q+1)+1 = 0. So β satisfies X²-X+1 = 0.
+
+So q+1 satisfies (q+1)²-(q+1)+1 = q²+q+1 = A ≡ 0. ✓ Tautological.
+
+But (q+1) has order 6 in F_A* (since (q+1)^6 = ((q+1)²)^3 = q^3 = 1, and
+(q+1)^3 = (q+1)·q = q²+q = A-1 ≡ -1, so ord = 6).
+
+Now: 3 = (1-q)^{2(q+1)} and (q+1)^6 = 1.
+Let's write (q+1) = g^{m} where g generates (Z/AZ)*.
+Then q = (q+1)² = g^{2m}, so 2m ≡ ... and ord(q+1)=6 means 6m ≡ 0 mod q(q+1).
+
+=== Strategy 5: Bounded + Structural (FALLBACK) ===
+
+theorem ft_p3_mod9_8_bounded (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hmod : q % 36 = 35) (hA : (q^2 + q + 1).Prime) (hbound : q < 100000) :
+    ¬ ((q^2 + q + 1) ∣ (3^q - 1) / 2) := by native_decide
+
+Plus structural lemmas that DON'T require the assumption to hold:
+
+theorem q_plus_one_sq_eq_q (q : ℕ) (hA : (q^2 + q + 1).Prime) :
+    ((q + 1 : ZMod (q^2+q+1)))^2 = q
+
+theorem order_q_plus_one_eq_six (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hA : (q^2+q+1).Prime) :
+    orderOf (q + 1 : ZMod (q^2+q+1))ˣ = 6
+
+theorem three_eq_neg_one_minus_q_sq_times_q_sq (q : ℕ) (hA : (q^2+q+1).Prime) :
+    (3 : ZMod (q^2+q+1)) = -((1 - q : ZMod (q^2+q+1))^2) * q^2
+
+theorem assuming_divisibility_three_pow_2q_plus_2 (q : ℕ) (hq : q.Prime) (hq3 : 3 < q)
+    (hmod3 : q % 3 = 2) (hA : (q^2+q+1).Prime)
+    (hdiv : (3 : ZMod (q^2+q+1))^q = 1) :
+    (1 - (q : ZMod (q^2+q+1)))^(2*(q+1)) = 3
+
+=== INSTRUCTIONS FOR ARISTOTLE ===
+
+This is genuinely hard. Multiple approaches are provided — try whichever seems
+most tractable. Even PARTIAL success is valuable:
+- Bounded verification alone would be a great contribution
+- Any novel structural lemma about the q ≡ 8 mod 9 case helps
+- Proving the contradiction for a specific infinite subfamily (e.g., q ≡ 35 mod 72)
+  would be a partial breakthrough
+
+Mathlib references:
+- ZMod, orderOf, ZMod.pow_card_sub_one_eq_one
+- native_decide for bounded proofs
+- Polynomial.cyclotomic

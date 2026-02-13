@@ -1,0 +1,105 @@
+OPEN PROBLEM (partially): Agoh-Giuga Conjecture and Giuga Number Theory
+
+The Agoh-Giuga Conjecture states: an integer p ≥ 2 is prime if and only if
+∑_{i=1}^{p-1} i^{p-1} ≡ -1 (mod p).
+
+The forward direction (prime → sum ≡ -1) follows from Fermat's Little Theorem.
+The reverse direction is OPEN and equivalent to: there are no "strong Giuga numbers."
+
+We aim to prove a CASCADE of structural results, similar to our Feit-Thompson work (slot560).
+
+--- DEFINITIONS ---
+
+-- A weak Giuga number is composite n with n | (1 + ∑_{i=1}^{n-1} i^{φ(n)})
+def IsWeakGiuga (n : ℕ) : Prop :=
+  n.Composite ∧ n ∣ 1 + ∑ i ∈ Finset.Ioo 0 n, i ^ n.totient
+
+-- A strong Giuga number is composite n with n | (1 + ∑_{i=1}^{n-1} i^{n-1})
+def IsStrongGiuga (n : ℕ) : Prop :=
+  n.Composite ∧ n ∣ 1 + ∑ i ∈ Finset.Ioo 0 n, i ^ (n - 1)
+
+-- Carmichael number: composite n with b^n ≡ b (mod n) for all b coprime to n
+def IsCarmichael (n : ℕ) : Prop :=
+  ∀ b ≥ 1, n.Coprime b → n.FermatPsp b
+
+--- THEOREM 1: Forward direction of Agoh-Giuga (PROVABLE) ---
+-- If p is prime, then ∑_{i=1}^{p-1} i^{p-1} ≡ -1 (mod p).
+-- Proof: By Fermat's Little Theorem, for 1 ≤ i ≤ p-1, i^{p-1} ≡ 1 (mod p).
+-- So the sum ≡ (p-1) · 1 = p-1 ≡ -1 (mod p).
+-- This is a clean application of FLT + sum of constants.
+theorem agoh_giuga_forward (p : ℕ) (hp : p.Prime) :
+  p ∣ 1 + ∑ i ∈ Finset.Ioo 0 p, i ^ (p - 1)
+
+--- THEOREM 2: Weak Giuga characterization via prime divisors (KNOWN) ---
+-- n is weak Giuga ↔ for all prime p | n, p | (n/p - 1).
+-- Proof sketch: Uses the fact that for squarefree n = p₁...pₖ,
+-- ∑ i^{φ(n)} mod n decomposes via CRT into conditions at each prime.
+-- At prime p: the sum mod p equals ∑_{i=1}^{p-1} i^{φ(n)} ≡ (p-1) · 1 = -1 (mod p)
+-- if φ(n)/(p-1) is an integer (which it is since (p-1) | φ(n) for p | n squarefree).
+-- Wait, more carefully: need n/p ≡ 1 (mod p), i.e., p | (n/p - 1).
+-- This is a known equivalence from Giuga's original paper.
+theorem isWeakGiuga_iff_prime_dvd (n : ℕ) (hn : n.Composite) :
+  IsWeakGiuga n ↔ ∀ p ∈ n.primeFactors, p ∣ (n / p - 1)
+
+--- THEOREM 3: Weak Giuga numbers are squarefree ---
+-- If n is weak Giuga, then n is squarefree.
+-- Proof: Suppose p^2 | n. Then n/p ≡ 0 (mod p), so n/p - 1 ≡ -1 (mod p).
+-- But the characterization requires p | (n/p - 1), so p | (n/p - 1).
+-- n/p - 1 ≡ -1 mod p, so p | (-1), meaning p = 1. Contradiction with p prime.
+-- Wait, that means p | (0 - 1) = p | (-1), contradiction. So n must be squarefree.
+theorem weak_giuga_squarefree (n : ℕ) (h : IsWeakGiuga n) : Squarefree n
+
+--- THEOREM 4: Weak Giuga reciprocal sum characterization ---
+-- n is weak Giuga ↔ ∑_{p|n} 1/p - 1/n ∈ ℕ.
+-- Proof: The condition p | (n/p - 1) for all p | n can be rewritten.
+-- n/p - 1 ≡ 0 (mod p) means n/p ≡ 1 (mod p), i.e., n ≡ p (mod p²).
+-- Summing 1/p over prime factors and subtracting 1/n yields an integer
+-- by the divisibility conditions. This is a classical equivalence.
+theorem isWeakGiuga_iff_sum (n : ℕ) (hn : n.Composite) :
+  IsWeakGiuga n ↔ ∃ m : ℕ, ∑ p ∈ n.primeFactors, (1 / p : ℚ) - 1 / n = m
+
+--- THEOREM 5: Strong Giuga implies Carmichael ---
+-- Every strong Giuga number is a Carmichael number.
+-- Proof: A strong Giuga number satisfies n | (1 + ∑ i^{n-1}).
+-- By character sum analysis, this implies b^n ≡ b (mod n) for all b.
+-- Key: the sum ∑ i^{n-1} mod n encodes precisely the Carmichael condition
+-- when combined with the binomial theorem structure.
+theorem strong_giuga_is_carmichael (n : ℕ) (h : IsStrongGiuga n) : IsCarmichael n
+
+--- THEOREM 6: Strong Giuga numbers have at least 9 prime factors ---
+-- From Giuga's original paper. Uses the reciprocal sum constraint:
+-- if n = p₁...pₖ with p₁ < ... < pₖ, then ∑ 1/pᵢ > 1 (from weak Giuga + squarefree).
+-- But ∑_{i=1}^k 1/pᵢ where pᵢ are the first k odd primes converges slowly.
+-- For k = 8: 1/3 + 1/5 + 1/7 + 1/11 + 1/13 + 1/17 + 1/19 + 1/23 ≈ 0.83 < 1.
+-- So we need at least 9 primes. (A more careful argument gives exactly 9.)
+-- Weaker bound: prove at least 3 prime factors (easier, same technique as Lehmer).
+theorem strong_giuga_at_least_three_primes (n : ℕ) (h : IsStrongGiuga n) :
+  3 ≤ n.primeFactors.card
+
+--- THEOREM 7: Equivalence of Agoh and Giuga formulations ---
+-- AgohGiugaCongr ↔ AgohGiugaSum
+-- The Agoh formulation uses Bernoulli numbers: p*B_{p-1} ≡ -1 (mod p).
+-- The Giuga formulation uses power sums: ∑ i^{p-1} ≡ -1 (mod p).
+-- These are equivalent via the Bernoulli number formula for power sums:
+-- ∑_{i=0}^{n-1} i^k = (1/(k+1)) ∑_{j=0}^{k} C(k+1,j) B_j n^{k+1-j}
+-- Specialized to our setting, the equivalence reduces to modular arithmetic.
+-- This is a known classical result.
+
+--- PROOF STRATEGY ---
+
+Priority order:
+1. agoh_giuga_forward — clean FLT application, most FT-like
+2. weak_giuga_squarefree — contradiction argument
+3. isWeakGiuga_iff_prime_dvd — CRT decomposition
+4. strong_giuga_at_least_three_primes — counting argument
+5. strong_giuga_is_carmichael — deepest, uses character sums
+
+Key Mathlib APIs:
+- ZMod.pow_card_sub_one_eq_one (Fermat's Little Theorem)
+- Finset.sum_congr for rewriting sums
+- Nat.Composite, Squarefree, primeFactors
+- Nat.totient_prime, Nat.totient_mul_of_coprime
+- ZMod.chineseRemainder for CRT decomposition
+
+All techniques are pure number theory — order theory, modular arithmetic,
+multiplicative functions, divisibility. Highly AI-amenable domain.

@@ -1,0 +1,4 @@
+f21fa40e-38a4-43e8-a1fe-9e2f377f38a5
+# Task: Parker: endpoint tau_le_2 when no base-edge external (0 sorry)
+# Hash: a6dccc65927c1edd
+# Submitted: 2026-02-08T16:34:42.862358

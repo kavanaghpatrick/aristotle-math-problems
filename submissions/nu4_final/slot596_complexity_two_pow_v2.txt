@@ -1,0 +1,90 @@
+Integer Complexity of Powers of 2: ‖2^n‖ = 2n
+
+This is an OPEN problem (MathOverflow 75792, OEIS A005245).
+
+The Mahler-Popken complexity ‖n‖ is the minimum number of 1s needed to
+express n using addition and multiplication.
+
+KNOWN FACTS:
+- ‖2^n‖ ≤ 2n (just chain n multiplications of (1+1))
+- ‖3^n‖ = 3n (Selfridge, proven)
+- ‖5^n‖ < 5n for n = 6 (Iraids et al. found ‖5^6‖ ≤ 29 < 30)
+
+CONJECTURE: ‖2^n‖ = 2n for all n ≥ 1.
+
+Previous attempt (slot574) built all the infrastructure:
+- Reachable inductive predicate (expression trees with + and ×)
+- complexity definition as Nat.find
+- Decidability instance for Reachable
+- Reachable.pow upper bound
+
+WHAT TO PROVE — three independent results:
+
+--- RESULT 1: Bounded verification ---
+Using the Decidable instance from slot574, verify by native_decide:
+  complexity (2^n) = 2*n for n = 1, 2, 3, ..., up to as high as feasible.
+
+The decidability instance allows: Reachable m n is decidable, so
+complexity m = n is decidable. Concretely:
+
+theorem complexity_two_pow_bounded :
+  complexity 2 = 2 ∧ complexity 4 = 4 ∧ complexity 8 = 6 ∧
+  complexity 16 = 8 ∧ complexity 32 = 10 ∧ complexity 64 = 12 := by
+    native_decide
+
+This gives a concrete verification for small cases.
+
+--- RESULT 2: Multiplicative lower bound ---
+Key structural lemma: if 2^n = a * b with a > 1 and b > 1, then
+a = 2^i and b = 2^j for some i, j ≥ 1 with i + j = n.
+
+Proof: 2 is prime, so 2^n has no odd factors > 1. Any factorization
+a * b = 2^n with a, b > 1 forces a = 2^i, b = 2^j.
+
+This is the key lemma: pow_two_mul_decomposition.
+
+Then by strong induction on n:
+If the optimal expression for 2^n has multiplication at the root,
+2^n = a * b with a = 2^i, b = 2^j, i+j = n, i,j ≥ 1.
+By induction: ‖a‖ ≥ 2i and ‖b‖ ≥ 2j.
+So ‖2^n‖ ≥ ‖a‖ + ‖b‖ ≥ 2i + 2j = 2n. ✓
+
+theorem mul_case_lower_bound (n : ℕ) (hn : 0 < n) :
+  ∀ a b : ℕ, a > 1 → b > 1 → a * b = 2^n →
+  complexity a + complexity b ≥ 2 * n
+
+--- RESULT 3: Additive lower bound (the hard case) ---
+If 2^n = a + b and complexity(a) + complexity(b) < 2n, we derive
+a contradiction.
+
+Key observations for the addition case:
+- 2^n is even, so a + b is even. Either both a, b are even, or both odd.
+- If both odd: a, b are odd and a + b = 2^n. Write a = 2^0 · (odd part),
+  b = 2^0 · (odd part). Then ‖a‖ ≥ ‖odd part of a‖ and
+  ‖b‖ ≥ ‖odd part of b‖.
+- If both even: a = 2^α · a', b = 2^β · b' with a', b' odd.
+  WLOG α ≤ β. Then 2^α(a' + 2^(β-α) · b') = 2^n, so
+  a' + 2^(β-α) · b' = 2^(n-α). Since a' is odd, β = α, and
+  a' + b' = 2^(n-α). So both summands have the same 2-adic valuation.
+  Then ‖a‖ = ‖2^α‖ + ‖a'‖ ≥ 2α + ‖a'‖ (by mult. case) and similarly
+  for b. This reduces to bounding ‖a'‖ + ‖b'‖ where a' + b' = 2^(n-α)
+  and a', b' are odd.
+
+The odd+odd case: if a, b are odd and a + b = 2^n, then
+by the "both odd" analysis, at least one of a, b equals 1 (otherwise
+both ≥ 3 and we can show ‖a‖ + ‖b‖ ≥ 2n by structural arguments on
+odd representations). When a = 1: ‖1‖ + ‖2^n - 1‖ ≥ 1 + (2n - 1) = 2n,
+since ‖2^n - 1‖ ≥ 2n - 1 (Mersenne numbers require many 1s because
+they are odd and have no small factors for small n).
+
+This is the deepest part of the argument and may need additional lemmas
+about the complexity of Mersenne numbers.
+
+ALTERNATE APPROACH: Just prove Results 1 and 2, which are independently
+valuable and definitely provable. Result 3 may exceed current knowledge.
+
+Mathlib references:
+- Nat.eq_one_of_prime_pow for prime power factorizations
+- Nat.Prime.eq_of_dvd_of_prime for 2 being prime
+- native_decide for bounded verification
+- strong induction via Nat.strong_rec_on

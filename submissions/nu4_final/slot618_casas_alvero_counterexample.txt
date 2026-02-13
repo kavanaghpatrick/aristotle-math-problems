@@ -1,0 +1,111 @@
+CASAS-ALVERO CONJECTURE: POSITIVE CHARACTERISTIC COUNTEREXAMPLE
+
+The Casas-Alvero conjecture states: if a monic polynomial P of degree d over a field
+of characteristic zero shares a non-trivial common factor with each Hasse derivative
+P^{(i)} for 0 ≤ i < d, then P = (X - α)^d.
+
+This is TRUE in characteristic zero (open, recently claimed by Ghosh 2025).
+This is FALSE in positive characteristic p for degree p+1.
+
+FORMAL STATEMENT (from formal-conjectures):
+theorem casas_alvero.positive_char_counterexample {p : ℕ} (hp : p.Prime) :
+    ∃ (K : Type*) (_ : Field K) (_ : CharP K p),
+      let P := X ^ (p + 1) - X ^ p
+      Monic P ∧ HasCasasAlveroProp P ∧
+      ¬∃ α : K, P = (X - C α) ^ P.natDegree
+
+where HasCasasAlveroProp P := ∀ i ∈ Finset.range P.natDegree, ¬ IsCoprime P (P.hasseDeriv i)
+
+RESULTS TO PROVE:
+
+THEOREM 1 (The counterexample): For any prime p, in the field K = ZMod p (or GF(p)):
+  P = X^{p+1} - X^p = X^p(X - 1)
+  is a counterexample to Casas-Alvero in characteristic p.
+
+PROOF:
+
+Step 1: P is monic of degree p+1.
+  P = X^{p+1} - X^p. Leading coefficient = 1 (from X^{p+1}). ✓
+  natDegree(P) = p + 1 (since leading terms don't cancel: coeff of X^{p+1} is 1). ✓
+
+Step 2: P has the Casas-Alvero property.
+  We need: for each i ∈ {0, 1, ..., p}, gcd(P, hasseDeriv i P) ≠ 1.
+  Equivalently: P and hasseDeriv i P share a common root.
+
+  Key fact in characteristic p: the Frobenius endomorphism gives X^p = X in GF(p)[X]/(X^p - X).
+  But more directly: X^p(X-1) = X^p · (X-1).
+
+  Roots of P in the algebraic closure: X = 0 (multiplicity p) and X = 1 (multiplicity 1).
+
+  The i-th Hasse derivative of X^n is C(n,i) · X^{n-i}.
+  hasseDeriv i (X^{p+1}) = C(p+1, i) · X^{p+1-i}
+  hasseDeriv i (X^p) = C(p, i) · X^{p-i}
+
+  For i = 0: hasseDeriv 0 P = P. gcd(P, P) = P ≠ 1. ✓
+
+  For 1 ≤ i ≤ p-1:
+    C(p, i) ≡ 0 (mod p) by Lucas' theorem (since p is prime and 0 < i < p).
+    So hasseDeriv i (X^p) = 0 in characteristic p.
+    hasseDeriv i P = C(p+1, i) · X^{p+1-i}.
+
+    Now C(p+1, i) = C(p, i) + C(p, i-1).
+    C(p, i) ≡ 0 mod p for 0 < i < p. ✓
+    C(p, i-1): for 1 ≤ i-1 ≤ p-2 (i.e., 2 ≤ i ≤ p-1): C(p, i-1) ≡ 0 mod p. ✓
+    For i = 1: C(p+1, 1) = p+1 ≡ 1 mod p. hasseDeriv 1 P = X^p ≡ X^p.
+      Check: gcd(X^p(X-1), X^p) = X^p ≠ 1. ✓ (share root 0)
+
+    For 2 ≤ i ≤ p-1: C(p+1, i) = C(p,i) + C(p,i-1) ≡ 0 + 0 = 0 mod p.
+      So hasseDeriv i P = 0 in GF(p)[X].
+      The zero polynomial has gcd with P equal to P itself. ¬ IsCoprime P 0
+      holds since P is not a unit (deg ≥ 1). ✓
+
+  For i = p:
+    hasseDeriv p (X^{p+1}) = C(p+1, p) · X = (p+1) · X ≡ X mod p.
+    hasseDeriv p (X^p) = C(p, p) · X^0 = 1.
+    hasseDeriv p P = X - 1.
+    gcd(X^p(X-1), X-1) = X-1 ≠ 1. ✓ (share root 1)
+
+  Summary of gcd analysis:
+    i = 0: trivial (P itself)
+    i = 1: hasseDeriv = X^p, shared root 0
+    2 ≤ i ≤ p-1: hasseDeriv = 0, automatically non-coprime
+    i = p: hasseDeriv = X-1, shared root 1
+
+Step 3: P is NOT of the form (X - α)^{p+1}.
+  If P = (X - α)^{p+1} for some α ∈ K_bar, then P has a single root α with
+  multiplicity p+1. But P = X^p(X-1) has two distinct roots: 0 and 1.
+  Contradiction. ✓
+
+  More formally: (X - α)^{p+1} evaluated at both 0 and 1 gives 0 only if α = 0 AND α = 1,
+  which is impossible since 0 ≠ 1 (in any field of characteristic p ≥ 2).
+
+Step 4: Witness the field.
+  Take K = ZMod p. This is a field since p is prime (ZMod.instField).
+  CharP (ZMod p) p holds (ZMod.charP). ✓
+
+THEOREM 2 (Concrete verification for p = 2):
+  In GF(2): P = X^3 - X^2 = X^3 + X^2 (since -1 = 1 in char 2) = X^2(X+1).
+  natDegree = 3. Need i ∈ {0, 1, 2}:
+    i=0: gcd(P, P) = P ≠ 1. ✓
+    i=1: hasseDeriv 1 (X^3+X^2) = 3X^2 + 2X = X^2 + 0 = X^2 (in char 2). gcd(X^2(X+1), X^2) = X^2 ≠ 1. ✓
+    i=2: hasseDeriv 2 (X^3+X^2) = C(3,2)X + C(2,2) = 3X + 1 = X + 1 (char 2). gcd(X^2(X+1), X+1) = X+1 ≠ 1. ✓
+  Not (X-α)^3: roots are 0 (mult 2) and 1 (mult 1), distinct. ✓
+  Proof: by native_decide or decide (all in GF(2)). ∎
+
+THEOREM 3 (Concrete verification for p = 3):
+  In GF(3): P = X^4 - X^3 = X^3(X-1).
+  Similar analysis. Proof by native_decide. ∎
+
+OVERALL: This proves the positive characteristic counterexample to Casas-Alvero.
+The key mathematical insight is that in characteristic p, the binomial coefficients
+C(p, i) vanish for 0 < i < p (Lucas' theorem), causing most Hasse derivatives
+of X^p(X-1) to vanish, which vacuously satisfies the coprimality condition.
+The remaining derivatives (i=1 and i=p) share roots 0 and 1 respectively.
+
+Mathlib references:
+- Polynomial.hasseDeriv, Polynomial.Monic
+- IsCoprime, Polynomial.gcd
+- ZMod.instField, ZMod.charP
+- Nat.choose_prime_pow_mul_pow (Lucas' theorem in Mathlib)
+- CharP.cast_eq_zero (p ≡ 0 in char p)
+- Polynomial.natDegree_sub, Polynomial.leadingCoeff

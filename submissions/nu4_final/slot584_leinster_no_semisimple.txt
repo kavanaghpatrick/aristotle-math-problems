@@ -1,0 +1,86 @@
+Theorem: No finite semi-simple group is a Leinster group.
+
+This is a KNOWN result from Leinster (2001), mentioned in the Wikipedia article on
+Leinster groups, but NOT yet formalized in Lean 4 / Mathlib. FIRST-EVER formalization.
+
+=== Definition ===
+
+IsLeinster G ↔ ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+A finite group is semi-simple if it is a direct product of non-abelian simple groups.
+
+=== Theorem Statement ===
+
+-- For a single non-abelian simple group:
+theorem simple_not_leinster (G : Type*) [Group G] [Fintype G]
+    [IsSimpleGroup G] (hG : 1 < Fintype.card G) :
+    ¬ IsLeinster G
+
+-- Extension: product of non-abelian simple groups is not Leinster
+
+=== Proof Strategy ===
+
+**Case 1: G is a non-abelian simple group.**
+
+A simple group has exactly two normal subgroups: {e} and G itself.
+Sum of normal subgroup orders = 1 + |G|.
+For IsLeinster we need 1 + |G| = 2|G|, i.e., |G| = 1.
+But |G| > 1 (non-trivial). Contradiction.
+
+Actually: the smallest non-abelian simple group is A_5 with |A_5| = 60.
+So |G| ≥ 60, and 1 + |G| < 2|G| trivially.
+
+Formalization: IsSimpleGroup means the only normal subgroups are ⊥ and ⊤.
+  ∑ H normal, |H| = |⊥| + |⊤| = 1 + |G|
+  1 + |G| ≠ 2|G| when |G| > 1
+  (since 1 + |G| < 2|G| ↔ 1 < |G|)
+
+**Case 2: G = S₁ × S₂ where both are non-abelian simple.**
+
+Normal subgroups of S₁ × S₂ (where S₁, S₂ are non-abelian simple):
+  {e} × {e}, S₁ × {e}, {e} × S₂, S₁ × S₂
+(This uses the fact that for non-abelian simple groups S₁, S₂ with S₁ ≇ S₂,
+ the normal subgroups of S₁ × S₂ are exactly these four. When S₁ ≅ S₂ there
+ could be diagonal subgroups, but they are NOT normal in the product.)
+
+Sum = 1 + |S₁| + |S₂| + |S₁||S₂|
+Need: 1 + |S₁| + |S₂| + |S₁||S₂| = 2|S₁||S₂|
+So: 1 + |S₁| + |S₂| = |S₁||S₂|
+Rearranging: (|S₁| - 1)(|S₂| - 1) = 2
+
+Since |S₁|, |S₂| ≥ 60 (smallest non-abelian simple group is A₅):
+(|S₁| - 1)(|S₂| - 1) ≥ 59 × 59 = 3481 >> 2
+
+Contradiction.
+
+**Case 3 (general): G = S₁ × ... × Sₖ, k ≥ 1.**
+
+Similar counting argument. The sum of normal subgroup orders equals:
+  ∏ᵢ (1 + |Sᵢ|)
+(each factor contributes either {e} or Sᵢ to each normal subgroup).
+
+Need: ∏ᵢ (1 + |Sᵢ|) = 2 ∏ᵢ |Sᵢ|
+i.e.: ∏ᵢ (1 + 1/|Sᵢ|) = 2
+
+Since each |Sᵢ| ≥ 60, each factor ≤ 1 + 1/60 = 61/60.
+For k = 1: 1 + 1/|S₁| ≤ 61/60 < 2. Contradiction.
+For k ≥ 1: ∏ᵢ (1 + 1/|Sᵢ|) ≤ (61/60)^k.
+Even for k = 42: (61/60)^42 ≈ 2.006, barely reaches 2.
+But we need EQUALITY, which requires |Sᵢ| to be very small.
+
+The cleanest approach for Aristotle: just prove the simple case (Case 1), which
+is the core result. The product extension can be a separate submission.
+
+=== Recommended formalization scope ===
+
+Focus on: simple_not_leinster — a non-abelian simple group is not Leinster.
+
+Key Mathlib ingredients:
+- `IsSimpleGroup`: only normal subgroups are ⊥ and ⊤
+- `Subgroup.Normal` for the two subgroups
+- The sum over the two-element set {⊥, ⊤}
+- `Nat.card_bot`: |⊥| = 1
+- `Subgroup.card_top`: |⊤| = |G|
+- Basic arithmetic: 1 + n ≠ 2n when n > 1
+
+This is one of the cleanest Leinster results — pure structure + arithmetic.

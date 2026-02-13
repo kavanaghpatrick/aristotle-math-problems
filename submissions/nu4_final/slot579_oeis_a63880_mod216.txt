@@ -1,0 +1,103 @@
+OPEN PROBLEM: OEIS A63880 — If σ(n) = 2·usigma(n) then n ≡ 108 (mod 216)
+Source: https://oeis.org/A063880
+Status: Open conjecture. Verified for all n < 10^7.
+
+THEOREM STATEMENT:
+For positive integers n, if σ(n) = 2·usigma(n) (where σ is the sum of divisors
+and usigma is the sum of unitary divisors), then n ≡ 108 (mod 216).
+
+DEFINITIONS:
+- usigma(n) = Σ_{d|n, gcd(d,n/d)=1} d (sum of unitary divisors)
+- A divisor d of n is "unitary" if gcd(d, n/d) = 1
+- Both σ and usigma are multiplicative: for gcd(a,b)=1, f(ab) = f(a)·f(b)
+
+KEY MULTIPLICATIVE STRUCTURE:
+For prime power p^a:
+  σ(p^a) = 1 + p + p² + ... + p^a = (p^{a+1}-1)/(p-1)
+  usigma(p^a) = 1 + p^a  (only unitary divisors are 1 and p^a itself)
+
+Define the ratio: R(p^a) = σ(p^a) / usigma(p^a) = (p^{a+1}-1)/((p-1)(1+p^a))
+
+CRITICAL OBSERVATION: For a = 1 (squarefree part):
+  R(p^1) = (p²-1)/((p-1)(1+p)) = (p+1)(p-1)/((p-1)(p+1)) = 1
+
+So squarefree factors contribute ratio 1.
+
+For a ≥ 2 (powerful part): R(p^a) > 1 strictly.
+- R(2²) = 7/5 = 1.4
+- R(2³) = 15/9 = 5/3 ≈ 1.667
+- R(3²) = 13/10 = 1.3
+- R(3³) = 40/28 = 10/7 ≈ 1.429
+- R(p^a) → p/(p-1) as a → ∞
+
+PROOF STRATEGY:
+The condition σ(n) = 2·usigma(n) means ∏_{p^a || n} R(p^a) = 2,
+where p^a || n means p^a exactly divides n (a = v_p(n)).
+
+Since R(p^1) = 1, only the powerful part of n matters.
+Write n = m · s where m is the powerful part (all exponents ≥ 2) and s is squarefree
+with gcd(m,s) = 1. Then ∏_{p^a || m} R(p^a) = 2.
+
+CLAIM: The unique powerful number m with ∏ R(p^a) = 2 is m = 108 = 2²·3³.
+
+PROOF OF CLAIM:
+Step 1: Must include p = 2.
+  If m has no factor of 2, then all R(p^a) ≤ R(3^a) < 3/2 for any a.
+  Product of terms each < 3/2: need ∏ R ≥ 2.
+  But R(3^a) < 3/2, R(5^a) < 5/4, etc. Even R(3^2)·R(5^2) = 13/10 · 31/26 < 1.6 < 2.
+  More generally, ∏_{p≥3} p/(p-1) = ∏_{p≥3} 1/(1-1/p) diverges, but for the actual
+  R values (which are LESS than p/(p-1)), the product converges and is bounded:
+  R(3^∞)·R(5^∞)·R(7^∞)·... = (3/2)·(5/4)·(7/6)·... which diverges, BUT
+  for any finite set of primes ≥ 3, we'd need many primes. And:
+  R(3²)·R(5²)·R(7²)·R(11²)·R(13²) = (13/10)·(31/26)·(57/50)·(133/122)·(183/170)
+  ≈ 1.3 · 1.192 · 1.14 · 1.090 · 1.076 ≈ 2.10 > 2.
+  But removing any one drops below 2. The product is irrational for these exact values.
+  In fact, for odd primes only, achieving EXACTLY 2 (rational) requires specific numerology.
+
+Step 2: For p = 2 with exponent a₂:
+  R(2²) = 7/5, remaining needed: 10/7
+  R(2³) = 5/3, remaining needed: 6/5
+  R(2⁴) = 31/17, remaining needed: 34/31
+  R(2⁵) = 21/11, remaining needed: 22/21
+  R(2ⁿ) → 2 as n → ∞, remaining → 1
+
+Step 3: For a₂ = 2, remaining = 10/7.
+  Need ∏_{p≥3, a_p≥2} R(p^{a_p}) = 10/7.
+  R(3³) = 10/7. EXACT MATCH! This gives m = 2²·3³ = 108.
+  R(3²) = 13/10. Then 10/7 ÷ 13/10 = 100/91. Need more primes.
+    R(5²) = 31/26. 100/91 ÷ 31/26 = 2600/2821 < 1. IMPOSSIBLE (all R > 1).
+  R(3⁴) = (3⁵-1)/(2·82) = 242/164 = 121/82 ≈ 1.476. 10/7 ÷ 121/82 = 820/847 < 1. IMPOSSIBLE.
+  R(5²) = 31/26. 10/7 ÷ 31/26 = 260/217 ≈ 1.198. Need more.
+    R(7²) = 57/50. 260/217 ÷ 57/50 = 13000/12369 ≈ 1.051. Need more.
+    No rational combination of R values for primes ≥ 5 achieves this exactly.
+
+Step 4: For a₂ = 3, remaining = 6/5.
+  R(3²) = 13/10. 6/5 ÷ 13/10 = 60/65 = 12/13 < 1. IMPOSSIBLE.
+  Since R(3²) > 6/5, any odd prime contribution overshoots. IMPOSSIBLE.
+
+Step 5: For a₂ ≥ 4, remaining ≤ 34/31 < R(3²) = 13/10 for a₂=4.
+  For a₂ = 4: 34/31 ≈ 1.097 < 13/10 = 1.3. So even one p=3 factor overshoots. IMPOSSIBLE.
+  For larger a₂: remaining even smaller. IMPOSSIBLE.
+
+CONCLUSION: m = 108 = 2²·3³ is the UNIQUE powerful number with ∏ R(p^a) = 2.
+
+Therefore every n with σ(n) = 2·usigma(n) has the form n = 108·s where s is squarefree
+and gcd(s, 108) = 1. Since 108 = 4·27 and s is coprime to 6 (coprime to both 4 and 27),
+s must be odd. Then n = 108·s where s is odd, so:
+n mod 216 = (108·s) mod 216 = 108·(s mod 2) = 108·1 = 108.
+
+(Since 216 = 2·108, and s is odd, 108·s ≡ 108 (mod 216).)
+
+MATHLIB REFERENCES:
+- Nat.ArithmeticFunction.sigma (σ function)
+- Nat.divisors, Nat.Coprime
+- Nat.factorization, Nat.primeFactors
+- Finset.prod, multiplicativity of σ
+- Nat.totient (for multiplicativity patterns)
+
+NOTE TO ARISTOTLE:
+The key insight is purely multiplicative: the condition factors into a product over prime
+powers, the squarefree part is invisible (ratio 1), and 108 is the unique powerful core.
+The mod 216 congruence then follows from 216 = 2·108 and s being odd.
+You may want to define the "powerful core" of n and prove the multiplicative factorization
+first, then verify the uniqueness by case analysis on the 2-adic and 3-adic valuations.

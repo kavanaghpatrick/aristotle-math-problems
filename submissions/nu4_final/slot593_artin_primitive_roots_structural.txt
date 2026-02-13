@@ -1,0 +1,106 @@
+OPEN PROBLEM (partially): Artin's Conjecture on Primitive Roots — Structural Lemmas
+
+Artin's conjecture (1927): For any integer a that is not -1 and not a perfect square,
+the set S(a) = {p prime : a is a primitive root mod p} has positive density in the primes.
+
+The full conjecture is OPEN (proved conditionally under GRH by Hooley 1967).
+
+We aim to prove STRUCTURAL LEMMAS about primitive roots and the set S(a),
+building toward partial results. Similar to our Feit-Thompson structural lemmas (slot560).
+
+--- KEY DEFINITIONS ---
+
+-- S(a) = set of primes where a is a primitive root
+abbrev S (a : ℤ) : Set ℕ := {p : ℕ | p.Prime ∧ orderOf (a : ZMod p) = (p - 1 : ℕ)}
+
+--- THEOREM 1: Perfect squares have no primitive root primes (solved, density 0) ---
+-- If a is a perfect square, then a is NOT a primitive root modulo any odd prime p.
+-- Proof: Let a = b². Then a^{(p-1)/2} = b^{p-1} ≡ 1 (mod p) by FLT.
+-- So orderOf(a) | (p-1)/2 < p-1, hence a is not a primitive root.
+-- This means S(a) contains no odd primes, so it has density 0 in the primes.
+theorem square_not_primitive_root (a : ℤ) (ha : IsSquare a) (p : ℕ) (hp : p.Prime) (hp2 : p ≠ 2) :
+  orderOf (a : ZMod p) ≠ p - 1
+
+-- Corollary: S(a²) ⊆ {2} for any a
+theorem S_of_square_subset (a : ℤ) (ha : IsSquare a) :
+  S a ⊆ {p | p = 2}
+
+--- THEOREM 2: -1 is not a primitive root for p ≡ 1 (mod 4) ---
+-- If p ≡ 1 (mod 4), then (-1)^{(p-1)/2} = 1 since (p-1)/2 is even.
+-- So orderOf(-1 : ZMod p) | (p-1)/2 < p-1.
+-- Combined with: -1 IS a primitive root mod 2 (vacuously/trivially).
+-- And: (-1)^2 = 1, so orderOf(-1) | 2, meaning orderOf(-1) ∈ {1, 2}.
+-- For p > 2: (-1) ≠ 1 in ZMod p, so orderOf(-1) = 2.
+-- But p-1 ≥ 2, and orderOf(-1) = 2 < p-1 for p ≥ 5.
+-- Special case p=3: orderOf(-1) = 2 = p-1 ✓ (-1 IS a primitive root mod 3).
+-- So S(-1) = {3} (finite), hence density 0.
+theorem neg_one_order (p : ℕ) (hp : p.Prime) (hp2 : 2 < p) :
+  orderOf (-1 : ZMod p) = 2
+
+theorem neg_one_not_primitive_root (p : ℕ) (hp : p.Prime) (hp5 : 5 ≤ p) :
+  orderOf (-1 : ZMod p) ≠ p - 1
+
+--- THEOREM 3: 2 is a primitive root mod p for specific primes ---
+-- This is the historically first case of Artin's conjecture.
+-- Known: 2 is a primitive root mod 3, 5, 11, 13, 19, 29, 37, 53, 59, 61, 67, 83, ...
+-- (OEIS A001122)
+-- We can verify small cases computationally (native_decide on ZMod p).
+theorem two_primitive_root_3 : orderOf (2 : ZMod 3) = 2 := by native_decide
+theorem two_primitive_root_5 : orderOf (2 : ZMod 5) = 4 := by native_decide
+theorem two_primitive_root_11 : orderOf (2 : ZMod 11) = 10 := by native_decide
+theorem two_primitive_root_13 : orderOf (2 : ZMod 13) = 12 := by native_decide
+-- These witness that S(2) is non-empty (and likely infinite).
+
+--- THEOREM 4: Primitive root criterion via order ---
+-- a is a primitive root mod p ↔ orderOf(a : ZMod p) = p-1
+-- ↔ a generates (ZMod p)ˣ
+-- ↔ for every prime q | (p-1), a^{(p-1)/q} ≢ 1 (mod p)
+-- This "criterion" is the standard characterization and should be in Mathlib
+-- (or close to it via IsCyclic + orderOf).
+theorem primitive_root_criterion (a : ℤ) (p : ℕ) (hp : p.Prime) (hp2 : 2 < p) :
+  orderOf (a : ZMod p) = p - 1 ↔
+  ∀ q ∈ (p-1 : ℕ).primeFactors, (a : ZMod p) ^ ((p-1) / q) ≠ 1
+
+--- THEOREM 5: Order divides p-1 (Lagrange/FLT) ---
+-- For any a coprime to p, orderOf(a : ZMod p) | (p-1).
+-- This is Lagrange's theorem applied to (ZMod p)ˣ.
+theorem order_dvd_card (a : ℤ) (p : ℕ) (hp : p.Prime) (ha : (a : ZMod p) ≠ 0) :
+  orderOf (a : ZMod p) ∣ (p - 1)
+
+--- THEOREM 6: Number of primitive roots mod p ---
+-- The number of primitive roots mod p equals φ(p-1).
+-- Proof: (ZMod p)ˣ is cyclic of order p-1. A cyclic group of order n has exactly
+-- φ(n) generators. The generators are exactly the primitive roots.
+theorem count_primitive_roots (p : ℕ) (hp : p.Prime) (hp2 : 2 < p) :
+  Finset.card (Finset.filter (fun a : ZMod p => orderOf a = p - 1) Finset.univ) =
+  Nat.totient (p - 1)
+
+--- THEOREM 7: If a is not a perfect power and not -1, then S(a) is non-empty ---
+-- This is MUCH weaker than Artin's conjecture but still nontrivial.
+-- We could try to prove this for specific a (like a = 2, 3, 5, 6, 7)
+-- using native_decide witnesses.
+-- For a = 2: S(2) contains 3 (proved above).
+-- For a = 3: S(3) contains 2 (3^1 ≡ 1 mod 2... wait, ZMod 2 is special).
+--            S(3) contains 5 (order of 3 mod 5 = 4). But let's check: 3^1=3, 3^2=9≡4, 3^3=12≡2, 3^4=6≡1.
+--            So orderOf(3 : ZMod 5) = 4 = 5-1. ✓
+-- For a = 10: S(10) contains 7 (10 ≡ 3 mod 7, 3^1=3,3^2=2,3^3=6,3^4=4,3^5=5,3^6=1, order 6 = 7-1). ✓
+
+--- PROOF STRATEGY ---
+
+Priority order (most valuable first):
+1. square_not_primitive_root — clean FLT application, quadratic residue theory
+2. neg_one_order — order theory in ZMod p
+3. primitive_root_criterion — standard characterization
+4. order_dvd_card — Lagrange's theorem
+5. count_primitive_roots — cyclic group theory
+6. Computational witnesses for small primes
+
+Key Mathlib APIs:
+- ZMod.pow_card_sub_one_eq_one (FLT)
+- orderOf_dvd_of_pow_eq_one, pow_orderOf_eq_one
+- ZMod.instField, ZMod.isCyclic (for p prime)
+- IsCyclic.exists_generator, orderOf_eq_card_of_forall_mem_zpowers
+- Nat.totient, Finset.filter
+
+All techniques are pure number theory / finite group theory — highly AI-amenable.
+The structural lemmas build toward understanding primitive root distribution.

@@ -1,0 +1,4 @@
+f2bad2a7-b80e-4c5c-b1bc-291eeafcb2e8
+# Task: Parker Lemma 2.4: disconnected matching tau<=8 (1 sorry)
+# Hash: 4058b6ccd99b00db
+# Submitted: 2026-02-08T16:34:56.822391

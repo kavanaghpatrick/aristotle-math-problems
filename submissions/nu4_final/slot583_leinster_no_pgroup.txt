@@ -1,0 +1,66 @@
+Theorem: No p-group is a Leinster group.
+
+This is a KNOWN result from Leinster (2001), "Perfect numbers and groups", but has
+NOT been formalized in Lean 4 / Mathlib. This would be a FIRST-EVER formalization.
+
+=== Definition ===
+
+A finite group G is a Leinster group if the sum of the orders of all its normal
+subgroups equals twice the group's order:
+
+  ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+This is the same definition used in FormalConjectures/Wikipedia/LeinsterGroup.lean.
+
+=== Theorem Statement ===
+
+theorem no_pgroup_is_leinster (G : Type*) [Group G] [Fintype G] [IsPGroup p G]
+    (hp : Nat.Prime p) (hG : 1 < Fintype.card G) :
+    ¬ IsLeinster G
+
+=== Proof Strategy (modular arithmetic) ===
+
+The proof is elegant and uses modular arithmetic:
+
+1. In any finite group G, {e} is always a normal subgroup with |{e}| = 1.
+
+2. Every OTHER normal subgroup H of G (with H ≠ {e}) has order divisible by p,
+   because G is a p-group: if H is a subgroup of a p-group, then |H| is a power
+   of p, so p | |H| when |H| > 1.
+
+3. Therefore: sum of all normal subgroup orders ≡ 1 (mod p).
+   - The trivial subgroup contributes 1
+   - Every nontrivial normal subgroup contributes 0 (mod p)
+   - Total: 1 + 0 + 0 + ... ≡ 1 (mod p)
+
+4. But 2 * |G| ≡ 0 (mod p), since |G| is a power of p (with exponent ≥ 1).
+
+5. Since 1 ≢ 0 (mod p) for any prime p ≥ 2, we have:
+   ∑ |H| ≠ 2 * |G|
+
+=== Key Mathlib ingredients ===
+
+- `IsPGroup`: exists in Mathlib, characterizes p-groups
+- `Subgroup.card_dvd_of_le`: subgroup order divides group order
+- `IsPGroup.card_eq_or_dvd`: in a p-group, subgroup orders are powers of p
+- `Nat.Prime.one_lt`: p ≥ 2
+- `Finset.sum_congr` and modular arithmetic
+- The key modular step: if all terms except one are ≡ 0 (mod p), and one term is 1,
+  then the sum ≡ 1 (mod p)
+
+=== Alternative approach via Finset.sum ===
+
+Can also prove by showing:
+  Let S = ∑_{H normal} |H|
+  S = 1 + ∑_{H normal, H ≠ {e}} |H|
+  Each term in the second sum is ≡ 0 (mod p)
+  So S ≡ 1 (mod p)
+  But 2|G| ≡ 0 (mod p)
+  So S ≠ 2|G|
+
+The formalization should:
+1. Split the sum into the trivial subgroup and the rest
+2. Show each nontrivial normal subgroup of a p-group has order divisible by p
+3. Conclude by modular arithmetic contradiction
+
+This is a clean, self-contained proof with no dependencies on other Leinster results.

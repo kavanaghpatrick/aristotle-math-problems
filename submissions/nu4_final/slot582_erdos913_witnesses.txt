@@ -1,0 +1,74 @@
+OPEN PROBLEM: Erdős 913 — Bounded witnesses for distinct exponents in n(n+1)
+Source: https://www.erdosproblems.com/913
+Status: Open. Conditional proof exists: if infinitely many p with 8p²-1 prime, then true.
+
+THEOREM STATEMENT (bounded version):
+There exist at least 10 natural numbers n such that the prime factorization of n(n+1)
+has all distinct exponents (i.e., the factorization function is injective on prime factors).
+
+Formally: 10 ≤ Set.ncard { n | Set.InjOn (n * (n + 1)).factorization (n * (n + 1)).primeFactors }
+
+KNOWN RESULTS (from the formal-conjectures file):
+- The CONDITIONAL theorem erdos_913.variants.conditional is FULLY PROVEN:
+  If { p | p.Prime ∧ (8 * p ^ 2 - 1).Prime }.Infinite, then the main result holds.
+- The reduction shows: if p is prime and 8p²-1 is prime, then n = 8p²-1 works,
+  because n(n+1) = (8p²-1)·8p² has factorization {8p²-1 ↦ 1, p ↦ 2, 2 ↦ 3},
+  which has all distinct exponents (1, 2, 3).
+
+COMPUTATIONAL WITNESSES:
+The following primes p satisfy: 8p²-1 is also prime.
+  p = 2:  8·4-1 = 31 (prime). n = 31, n(n+1) = 31·32 = 31·2⁵. Exponents: {31↦1, 2↦5}. Distinct ✓
+  p = 3:  8·9-1 = 71 (prime). n = 71, n(n+1) = 71·72 = 71·8·9 = 71·2³·3². Exponents: {71↦1, 2↦3, 3↦2}. Distinct ✓
+  p = 5:  8·25-1 = 199 (prime). n = 199. Exponents in 199·200 = 199·8·25 = {199↦1, 2↦3, 5↦2}. Distinct ✓
+  p = 11: 8·121-1 = 967 (prime). n = 967. Exponents in 967·968 = 967·8·121 = {967↦1, 2↦3, 11↦2}. Distinct ✓
+  p = 17: 8·289-1 = 2311 (prime). n = 2311. Exponents: {2311↦1, 2↦3, 17↦2}. Distinct ✓
+  p = 19: 8·361-1 = 2887 (prime). n = 2887. {2887↦1, 2↦3, 19↦2}. Distinct ✓
+  p = 23: 8·529-1 = 4231 (prime). n = 4231. {4231↦1, 2↦3, 23↦2}. Distinct ✓
+  p = 31: 8·961-1 = 7687 (prime). n = 7687. {7687↦1, 2↦3, 31↦2}. Distinct ✓
+  p = 59: 8·3481-1 = 27847 (prime). n = 27847. {27847↦1, 2↦3, 59↦2}. Distinct ✓
+  p = 67: 8·4489-1 = 35911 (prime). n = 35911. {35911↦1, 2↦3, 67↦2}. Distinct ✓
+
+PROOF STRATEGY:
+1. For each witness p, verify:
+   a) p is prime (by Nat.Prime or decide)
+   b) 8p²-1 is prime
+   c) n(n+1) = (8p²-1)·8p² has factorization with distinct exponents
+
+2. The factorization structure for n = 8p²-1 (with p odd prime):
+   n = 8p²-1 (prime by hypothesis)
+   n+1 = 8p² = 2³·p²
+   n(n+1) = (8p²-1)·2³·p²
+   Prime factors: {8p²-1, 2, p} (three distinct primes since 8p²-1 is prime, odd, ≠ p)
+   Exponents: {8p²-1 ↦ 1, 2 ↦ 3, p ↦ 2}
+   All distinct: 1 ≠ 3 ≠ 2 ≠ 1. ✓
+
+3. For p = 2 (special case):
+   n = 31, n+1 = 32 = 2⁵
+   n(n+1) = 31·2⁵
+   Exponents: {31 ↦ 1, 2 ↦ 5}. Distinct ✓
+
+4. Collect 10 distinct n values, prove they're all in the set, conclude ncard ≥ 10.
+
+ALTERNATIVE: Prove the full unconditional result using the conditional theorem.
+The intermediate conjecture (infinitely many p with 8p²-1 prime) is a special case
+of Bunyakovsky's conjecture, which is open. So the full result likely requires
+a different approach or accepting the conditional.
+
+FOR ARISTOTLE:
+Target the bounded witness approach. This is a clean computational proof:
+- 10 specific primes p (verified above)
+- For each: primality of p and 8p²-1, plus factorization structure
+- Standard Lean tactics: decide, norm_num, Nat.Prime
+
+The factorization argument is uniform: for any odd prime p with 8p²-1 prime,
+the exponents are always {1, 3, 2}, which are distinct.
+So proving the general lemma "if p is an odd prime and 8p²-1 is prime, then
+Set.InjOn ((8p²-1)·(8p²)).factorization ((8p²-1)·(8p²)).primeFactors"
+plus 10 primality witnesses suffices.
+
+MATHLIB REFERENCES:
+- Nat.factorization, Nat.primeFactors
+- Set.InjOn
+- Nat.Prime, Nat.factorization_mul, Nat.Prime.factorization
+- Finsupp.single, Finsupp.support
+- Set.ncard_le_ncard, Set.Finite.ncard

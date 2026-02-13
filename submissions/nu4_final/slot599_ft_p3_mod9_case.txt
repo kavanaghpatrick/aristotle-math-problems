@@ -1,0 +1,194 @@
+Feit-Thompson p=3: The q ≡ 8 (mod 9) Case
+
+This is a CONTINUATION of slot590 (Feit-Thompson p=3 case).
+
+The q ≡ 8 (mod 9) subcase is the HARDEST remaining gap. When q ≡ 8 (mod 9),
+3 IS a cubic residue mod A = q²+q+1, so the cubic reciprocity argument
+from slot590 gives no contradiction. A fundamentally different approach is needed.
+
+=== Setting ===
+
+q is prime, q > 3, q ≡ 2 (mod 3), q ≡ 3 (mod 4), q ≡ 8 (mod 9).
+By CRT: q ≡ 35 (mod 36). First examples: q = 71, 107, 179, 251, 359, ...
+
+A = q² + q + 1 is prime (proven in slot590 if divisibility holds).
+A - 1 = q(q+1). Since q ≡ 8 (mod 9): 9 | (q+1), so 9q | (A-1).
+
+Assumption (for contradiction): A | (3^q - 1)/2, so 3^q ≡ 1 (mod A).
+Then ord_A(3) | q. Since q is prime and 3 ≢ 1 (mod A): ord_A(3) = q.
+
+WHAT TO PROVE: Three independent approaches, each attempting to derive
+a contradiction from ord_A(3) = q.
+
+=== APPROACH 1: Sixth-power residue character ===
+
+Since 6 | A-1 (as 3 | (q+1) and 2 | q(q+1)), the 6th power residue
+character is well-defined.
+
+The 6th power character: χ₆(3) = 3^{(A-1)/6} mod A.
+3^{(A-1)/6} = 3^{q(q+1)/6} = (3^q)^{(q+1)/6}
+
+Since q ≡ 3 (mod 4): q+1 ≡ 0 (mod 4), so (q+1)/2 is even.
+Since q ≡ 8 (mod 9): q+1 ≡ 0 (mod 9), so (q+1)/3 is integer.
+Hence (q+1)/6 is a positive integer.
+
+If 3^q = 1: χ₆(3) = 1^{(q+1)/6} = 1. So 3 is a 6th power residue.
+
+The Legendre symbol (3/A): Since q ≡ 3 (mod 4), A = q²+q+1 ≡ 1 (mod 4).
+By QR: (3/A) = (A/3)·(-1)^{(3-1)(A-1)/4} = 1·(-1)^{(A-1)/2}.
+(A-1)/2 = q(q+1)/2. Since q is odd and (q+1)/2 is even, (A-1)/2 is even.
+So (3/A) = 1. 3 is a QR. Consistent with being a 6th power.
+
+The quartic character: χ₄(3) = 3^{(A-1)/4} = (3^q)^{(q+1)/4}.
+Since 4 | (q+1): (q+1)/4 is integer. If 3^q = 1: χ₄(3) = 1.
+So 3 is a 4th power residue. Also consistent.
+
+CONCLUSION: Residuacity at levels 2, 3, 4, 6 all give χ(3) = 1
+under the assumption 3^q = 1. No contradiction from standard
+power residue characters.
+
+HOWEVER: Try (q+1)-th power character.
+χ_{q+1}(3) = 3^{(A-1)/(q+1)} = 3^{q·(q+1)/(q+1)} = 3^q = 1.
+Still consistent.
+
+And: χ_q(3) = 3^{(A-1)/q} = 3^{q+1}.
+This is NOT necessarily 1! If 3^{q+1} ≢ 1 (mod A), then 3 is NOT
+a q-th power residue. This could give constraints.
+
+3^{q+1} = 3^q · 3 = 1 · 3 = 3 (mod A). So χ_q(3) = 3.
+Thus 3 is a q-th power residue iff 3 = 1, which is false.
+So 3 is NOT a q-th power residue mod A.
+
+This means: the discrete log of 3 is NOT divisible by (q+1).
+Write 3 = g^e where g generates (Z/AZ)*. Then ord(3) = q means
+q(q+1)/gcd(e, q(q+1)) = q, so gcd(e, q(q+1)) = q+1, hence (q+1) | e.
+But then 3 = g^e with (q+1) | e, so χ_q(3) = g^{e·(q+1)} = g^{e(q+1)}.
+Hmm, this gives χ_q(3) = 3^{q+1} = 3. And g^{(A-1)/q} = g^{q+1} is
+a primitive q-th root of unity in the group. So 3 is congruent to a
+specific power of this root.
+
+THIS IS A REAL CONSTRAINT: 3^{q+1} ≡ 3 (mod A), which is consistent
+with ord(3) = q (since 3^q = 1 → 3^{q+1} = 3). But it tells us that
+the discrete log of 3 satisfies: e ≡ 0 (mod (q+1)) [from ord = q]
+and ... hmm, actually e = (q+1)·m with gcd(m, q) = 1, and
+3 = g^{(q+1)m}. Then 3 is a q-th power iff q | e = (q+1)m, i.e.,
+q | m (since gcd(q, q+1) = 1). But gcd(m, q) = 1, so q ∤ m.
+Hence 3 is NOT a q-th power. This is correct and consistent.
+
+=== APPROACH 2: Cyclotomic polynomial divisibility ===
+
+Φ_q(3) = (3^q - 1)/(3 - 1) = (3^q - 1)/2.
+Φ_3(q) = q² + q + 1 = A.
+
+We need: A ∤ Φ_q(3).
+
+KEY FACT: For primes p with p ≡ 1 (mod n) and ord_p(a) = n:
+  v_p(Φ_n(a)) = 1 (p divides Φ_n(a) exactly once)
+
+This is because v_p(a^n - 1) = v_p(Φ_n(a)) (since p ∤ Φ_d(a) for d | n, d < n),
+and v_p(a^n - 1) = v_p(a^{p-1} - 1) + v_p(???)... Actually the precise
+statement requires care.
+
+ALTERNATIVE: If A | Φ_q(3), then by LTE considerations:
+3^q ≡ 1 (mod A) but 3^q ≢ 1 (mod A²)?
+
+If we could show that A | Φ_q(3) implies A² | Φ_q(3), AND also show
+A² ∤ Φ_q(3) (e.g., by size bounds), we'd get a contradiction.
+
+Or: show A | Φ_q(3) implies some specific value of v_A(Φ_q(3))
+that leads to a contradiction via size bounds.
+
+Size bound: Φ_q(3) = (3^q - 1)/2 < 3^q. And A = q²+q+1 ≈ q².
+If A | Φ_q(3), then A ≤ Φ_q(3), which gives q² ≤ 3^q. This is
+true for all q ≥ 1, so no contradiction from size alone.
+
+=== APPROACH 3: Direct computation in ZMod A ===
+
+The most promising approach for Aristotle: COMPUTE 3^q mod A directly
+using the structure of ZMod A.
+
+In ZMod A: q² = -q - 1, q³ = 1. So every polynomial in q reduces to
+a linear polynomial aq + b.
+
+3^q mod A: we need to express 3^q as aq + b (mod A) for some a, b,
+and then show (a, b) ≠ (0, 1) (which would mean 3^q = 1).
+
+For concrete q: this is computable. For general q: we'd need a formula
+for 3^q mod (q²+q+1) as a function of q.
+
+By Fermat's little theorem for integers: 3^q ≡ 3 (mod q).
+So 3^q = 3 + kq for some integer k. Then 3^q mod A = 3 + kq mod A.
+For this to equal 1: kq ≡ -2 (mod A), i.e., kq ≡ -2 (mod q²+q+1).
+
+Since q has an inverse mod A (gcd(q, A) = 1): k ≡ -2/q ≡ -2q^{-1} (mod A/gcd(q,A)).
+But A = q²+q+1, so q·q + q + 1 = A, hence q(q+1) = A - 1, so
+q^{-1} ≡ -(q+1) (mod A) [since q · (-(q+1)) = -q²-q = -(A-1) = 1-A ≡ 1 mod A].
+
+Wait: q · (-(q+1)) = -q² - q = -(q² + q) = -(A - 1) = 1 - A ≡ 1 (mod A).
+So q^{-1} = -(q+1) = -q - 1 in ZMod A.
+
+Then the condition 3^q = 1 becomes: kq = -2 (mod A), so k = -2·(-q-1) = 2q+2 (mod A).
+
+So 3^q = 3 + (2q+2)q = 3 + 2q² + 2q = 3 + 2(-q-1) + 2q = 3 - 2 = 1 (mod A).
+
+WAIT — this says 3^q ≡ 1 (mod A) ALWAYS?? That can't be right.
+
+The error: 3^q ≡ 3 (mod q) does NOT mean 3^q = 3 + kq as integers
+with small k. It means 3^q = 3 + kq for some LARGE integer k.
+The value k depends on q and can be enormous (k ≈ 3^q/q).
+So the reduction mod A = q²+q+1 of kq is NOT determined by q alone.
+
+CORRECT APPROACH: We need to compute 3^q in ZMod (q²+q+1) directly.
+This requires modular exponentiation, not simple Fermat reduction.
+
+For BOUNDED verification: this is decidable and can be checked by native_decide.
+
+def check_ft_mod9_case (q : ℕ) : Bool :=
+  if q.Prime ∧ 3 < q ∧ q % 9 == 8 then
+    let a := A q
+    if a.Prime then
+      (3 : ZMod a) ^ q ≠ 1
+    else true
+  else true
+
+theorem ft_mod9_bounded_50000 :
+    (List.range 50000).all check_ft_mod9_case = true := by native_decide
+
+=== APPROACH 4: The q ≡ 35 (mod 36) constraint ===
+
+q must satisfy: q prime, q ≡ 2 (mod 3), q ≡ 3 (mod 4), q ≡ 8 (mod 9).
+By CRT: q ≡ 35 (mod 36).
+
+Additionally: A = q²+q+1 must be prime. For q ≡ 35 (mod 36):
+A = q²+q+1 ≡ 35²+35+1 = 1225+35+1 = 1261 ≡ 1261 mod 36 = 1 (mod 36).
+
+So A ≡ 1 (mod 36). This means (Z/AZ)* has subgroups of orders
+2, 3, 4, 6, 9, 12, 18, 36 and their products with q.
+
+Show that the simultaneous conditions:
+(a) ord_A(3) = q
+(b) A ≡ 1 (mod 36)
+(c) A = q² + q + 1
+are contradictory, by analyzing the discrete logarithm of 3 more carefully.
+
+=== WHAT ARISTOTLE SHOULD DO ===
+
+1. Prove the structural lemmas:
+   - q_cubed_eq_one: q³ ≡ 1 (mod A)
+   - q_inverse: q^{-1} ≡ -(q+1) (mod A)
+
+2. Prove bounded verification for the q ≡ 8 (mod 9) case up to 50,000.
+
+3. Try Approach 1 (show some power residue character gives contradiction)
+   or Approach 4 (derive new mod constraints on q beyond mod 36).
+
+4. If general proof too hard, prove structural lemmas that constrain the problem:
+   - 3^{q+1} ≡ 3 (mod A) [consequence of 3^q = 1]
+   - 3^{q²} ≡ 3^{-q} ≡ 3^{q(q+1)-q} ... need to compute
+   - The discrete log of 3 is divisible by (q+1) but not by q
+
+Mathlib references:
+- ZMod arithmetic, ZMod.pow_card_sub_one_eq_one
+- orderOf, Nat.Prime.eq_one_or_self_of_dvd
+- native_decide for bounded verification
+- Finset.sum for group-theoretic computations

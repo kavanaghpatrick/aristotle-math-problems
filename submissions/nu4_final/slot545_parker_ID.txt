@@ -1,0 +1,4 @@
+57b34df4-5d93-4a4d-bdc6-d613dd1e1f1b
+# Task: Parker Lemma 2.3: tau(T_e)<=2 implies tau<=8 (0 sorry, 1 axiom)
+# Hash: c66fd32d66fec778
+# Submitted: 2026-02-08T16:34:51.701817

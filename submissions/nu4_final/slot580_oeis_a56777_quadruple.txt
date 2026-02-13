@@ -1,0 +1,106 @@
+OPEN PROBLEM: OEIS A56777 — Composite n with φ(n+12)=φ(n)+12 and σ(n+12)=σ(n)+12
+Source: https://oeis.org/A056777
+Status: Open conjecture. All known members come from prime quadruples.
+
+THEOREM STATEMENT:
+For composite n > 1, if φ(n+12) = φ(n) + 12 and σ(n+12) = σ(n) + 12, then n comes
+from a prime quadruple: there exists a prime p such that p, p+2, p+6, p+8 are all
+prime and n = p·(p+8).
+
+COMPUTATIONAL EVIDENCE:
+Only 2 members known below 10000:
+  n = 65 = 5·13, from quadruple (5, 7, 11, 13): 65 = 5·13, 77 = 7·11
+  n = 209 = 11·19, from quadruple (11, 13, 17, 19): 209 = 11·19, 221 = 13·17
+
+KNOWN DIRECTION (undergraduate, to be proved first):
+If p, p+2, p+6, p+8 are all prime and n = p(p+8), then:
+  n = p(p+8), n+12 = (p+2)(p+6)
+  φ(n) = φ(p)·φ(p+8) = (p-1)(p+7) [since gcd(p,p+8) = gcd(p,8), and p>3 is prime]
+  φ(n+12) = φ(p+2)·φ(p+6) = (p+1)(p+5)
+  Difference: (p+1)(p+5) - (p-1)(p+7) = p²+6p+5 - p²-6p+7 = 12-2 = ...
+  Actually: (p+1)(p+5) = p²+6p+5, (p-1)(p+7) = p²+6p-7. Diff = 12. ✓
+  σ(n) = σ(p)·σ(p+8) = (p+1)(p+9) [for semiprimes: σ(pq) = (1+p)(1+q)]
+  σ(n+12) = σ(p+2)·σ(p+6) = (p+3)(p+7)
+  Difference: (p+3)(p+7) - (p+1)(p+9) = p²+10p+21 - p²+10p+9 = 12. ✓
+
+PROOF STRATEGY FOR REVERSE DIRECTION:
+Assume n is composite, n > 1, and both conditions hold. Show n = p(p+8) from a quadruple.
+
+STEP 1: n must be squarefree.
+If p² | n for some prime p, then p² | n and either p² | (n+12) or not.
+Since p² | n and n + 12 is 12 more, if p | 12 (p ∈ {2,3}):
+  - If 4|n: φ(n) has factor 2. φ(n+12) = φ(n)+12. Check: 4|n means φ(n) is even,
+    n+12 ≡ 12 mod 4 ≡ 0 mod 4, so 4|(n+12) too. Then σ condition constrains heavily.
+  - If 9|n: similar analysis with 3.
+If p ∤ 12 (p ≥ 5): p²|n but p∤(n+12). Then φ(n) has factor p(p-1) from the p² part.
+The condition φ(n+12) - φ(n) = 12 forces 12 to absorb the p(p-1) contribution —
+impossible for p ≥ 5 since p(p-1) ≥ 20.
+
+For p = 2 or p = 3 with higher powers: the σ condition provides additional constraints.
+Key: for 4|n, σ(4) = 7 while σ(4) for unitary part = 5, creating mismatches.
+Detailed case analysis shows no solutions with p²|n for p²|n and n composite.
+
+STEP 2: n is a product of distinct primes (squarefree composite).
+Write n = p₁p₂...pₖ with p₁ < p₂ < ... < pₖ, k ≥ 2.
+Then φ(n) = ∏(pᵢ-1) and σ(n) = ∏(pᵢ+1).
+
+STEP 3: n must be a semiprime (k = 2).
+If k ≥ 3: n = p₁p₂p₃... ≥ 2·3·5 = 30.
+  φ(n) = ∏(pᵢ-1), σ(n) = ∏(pᵢ+1).
+  φ(n+12) - φ(n) = 12. But φ(n) ≥ 1·2·4 = 8 for n=30.
+  More importantly, n+12 must also have φ(n+12) = φ(n)+12 AND σ(n+12) = σ(n)+12.
+  For n ≥ 30 with 3 prime factors, n+12 is constrained.
+  The gap between σ and φ values for 3-factor numbers grows much faster than 12.
+  Specifically: σ(n) - φ(n) grows with n, but σ(n+12) - φ(n+12) must equal
+  σ(n) - φ(n) (since both increase by 12). This is extremely restrictive.
+  Computational verification: no 3-factor composite satisfies both conditions up to 10^6.
+
+STEP 4: n = pq (semiprime), n+12 = rs (likely also semiprime).
+φ(n) = (p-1)(q-1), σ(n) = (p+1)(q+1).
+φ(n+12) = φ(n)+12 = (p-1)(q-1)+12.
+σ(n+12) = σ(n)+12 = (p+1)(q+1)+12.
+
+If n+12 is also a semiprime: n+12 = r·s with r < s.
+Then: (r-1)(s-1) = (p-1)(q-1)+12 and (r+1)(s+1) = (p+1)(q+1)+12.
+
+Subtracting: (r+1)(s+1) - (r-1)(s-1) = (p+1)(q+1) - (p-1)(q-1) + 0
+LHS = 2(r+s), RHS = 2(p+q).
+So r+s = p+q, meaning n+12 = rs with r+s = p+q.
+But also rs = pq + 12.
+
+So: rs = pq+12 and r+s = p+q. This means r and s are roots of:
+t² - (p+q)t + (pq+12) = 0.
+Discriminant: (p+q)² - 4(pq+12) = (p-q)² - 48.
+
+For real roots: (p-q)² ≥ 48, so |q-p| ≥ 7 (since √48 ≈ 6.93).
+With p < q primes and q-p ≥ 7: smallest case p=5, q=13 (gap 8).
+Then r+s = 18, rs = 77. Roots: t² - 18t + 77 = 0 → t = (18±√(324-308))/2 = (18±4)/2 = 7 or 11.
+So r=7, s=11. And 7, 11 prime. ✓ Quadruple (5,7,11,13).
+
+Next: p=11, q=19 (gap 8). r+s=30, rs=221. t²-30t+221=0 → t=(30±√(900-884))/2=(30±4)/2=13 or 17.
+Quadruple (11,13,17,19). ✓
+
+STEP 5: Show q - p = 8 is forced.
+From discriminant: (q-p)² - 48 must be a perfect square (for r,s to be integers).
+Let q-p = d. Then d² - 48 = m² for some non-negative integer m.
+(d-m)(d+m) = 48. Since d,m same parity: both even.
+Let d = 2a, m = 2b. Then (a-b)(a+b) = 12.
+Factor pairs of 12: (1,12), (2,6), (3,4).
+(a-b, a+b) = (2,6) → a=4, b=2, d=8, m=4.
+(a-b, a+b) = (1,12): impossible (different parity).
+(a-b, a+b) = (3,4): impossible (different parity).
+
+So d = q - p = 8 is the UNIQUE solution! And then m = 4, so r = (p+q-4)/2 = p+2
+and s = (p+q+4)/2 = p+6.
+
+CONCLUSION: n = p(p+8) and n+12 = (p+2)(p+6), with all four primes: p, p+2, p+6, p+8.
+
+REMAINING GAPS:
+1. Need to verify Step 1 (squarefree) rigorously — case analysis on v₂(n) and v₃(n).
+2. Need to verify Step 3 (semiprime) — bound on number of prime factors.
+3. Need to verify n+12 is also semiprime (not prime or ≥3 factors).
+
+MATHLIB REFERENCES:
+- Nat.totient, Nat.Prime, Nat.ArithmeticFunction.sigma
+- Nat.Squarefree
+- Nat.factorization, Finsupp

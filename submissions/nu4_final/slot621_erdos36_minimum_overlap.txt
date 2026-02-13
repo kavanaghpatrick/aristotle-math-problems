@@ -1,0 +1,114 @@
+ERDŐS PROBLEM 36: MINIMUM OVERLAP — UPPER BOUND 1/2
+
+SOLVED RESULTS from the minimum overlap problem. We prove:
+(1) M(n) values for small n (test cases)
+(2) The upper bound: limsup M(n)/n ≤ 1/2
+
+FORMAL STATEMENTS (from formal-conjectures):
+
+-- Definitions (from the file):
+def Overlap (A B : Finset ℤ) (k : ℤ) : ℕ := ((A.product B).filter (fun (a, b) => a - b = k)).card
+noncomputable def MaxOverlap (A B : Finset ℤ) : ℕ := iSup (Overlap A B)
+noncomputable def M (n : ℕ) : ℕ := sInf {MaxOverlap A B | (A B : Finset ℤ)
+    (_disjoint : Disjoint A B) (_union : A ∪ B = Finset.Icc 1 (2*n)) (_same_card : A.card = B.card)}
+noncomputable def MinOverlapQuotient (N : ℕ) := (M N : ℝ) / N
+
+-- Test cases:
+theorem M_one : M 1 = 1
+theorem M_two : M 2 = 1
+
+-- Main result:
+@[category research solved]
+theorem minimum_overlap.variants.upper.erdos_1955 :
+  atTop.limsup MinOverlapQuotient ≤ (1 : ℝ) / 2
+
+RESULTS TO PROVE:
+
+THEOREM 1 (M(1) = 1):
+  The set is {1, 2}. The only equal-size partition is A = {1}, B = {2} (or vice versa).
+  For A = {1}, B = {2}: Overlap for k = 1-2 = -1: count of (a,b) with a-b = -1 is 1 (just (1,2)).
+  MaxOverlap = 1. Since this is the only partition, M(1) = 1.
+  Proof: by norm_num / decide on the finite computation. ∎
+
+THEOREM 2 (M(2) = 1):
+  The set is {1, 2, 3, 4}. Partitions into two sets of size 2:
+  {1,4},{2,3}: MaxOverlap = max over k of |{(a,b) : a∈A, b∈B, a-b=k}|.
+    k=-2: (1,3)=1, k=-1: (1,2)=1, k=1: (4,3)=1, k=2: (4,2)=1. Max=1.
+  {1,3},{2,4}: k=-3: (1,4)=1, k=-1: (1,2) and (3,4)=2. Max=2.
+  {1,2},{3,4}: k=-2: (1,3) and (2,4)=2. Max=2.
+  So M(2) = min(1, 2, 2) = 1, achieved by {1,4},{2,3}.
+  Proof: by exhaustive check / decide. ∎
+
+THEOREM 3 (Upper bound 1/2):
+  For any n, take A = {n+1, n+2, ..., 2n} and B = {1, 2, ..., n}.
+  This is a valid partition of {1,...,2n} with |A| = |B| = n.
+
+  For any k: Overlap(A, B, k) = |{(a,b) : a ∈ A, b ∈ B, a - b = k}|.
+  Since a ∈ {n+1,...,2n} and b ∈ {1,...,n}, we have a - b ∈ {1,...,2n-1}.
+
+  For a fixed k ∈ {1,...,2n-1}:
+    a - b = k means a = b + k.
+    b ∈ {1,...,n} and a = b+k ∈ {n+1,...,2n}.
+    So b+k ≥ n+1 and b+k ≤ 2n, i.e., n+1-k ≤ b ≤ 2n-k.
+    Combined with 1 ≤ b ≤ n: b ∈ {max(1, n+1-k),...,min(n, 2n-k)}.
+
+  Case k ≤ n: b ranges from n+1-k to n, giving k values. But k ≤ n, so Overlap = k.
+    MaxOverlap ≥ Overlap for k=n, which gives n values: b ∈ {1,...,n}, a = b+n ∈ {n+1,...,2n}. All valid.
+    So Overlap(A,B,n) = n. Hence MaxOverlap(A,B) ≥ n.
+
+  Wait, that gives MaxOverlap = n, so M(n) ≤ n, i.e., M(n)/n ≤ 1.
+  But the claim is 1/2, not 1. Let me reconsider.
+
+  The midpoint partition A = {n+1,...,2n}, B = {1,...,n} gives MaxOverlap = n
+  (at k=n, all n pairs (b+n, b) contribute). That's too much.
+
+  Better partition: alternate. A = {1, 4, 5, 8, 9, 12, ...}, B = {2, 3, 6, 7, 10, 11, ...}.
+  I.e., A gets pairs {4m+1, 4m+4} and B gets {4m+2, 4m+3}.
+
+  Actually, the Erdős 1/2 upper bound uses a smarter construction.
+  For N = 2n, partition {1,...,2n} as follows:
+  A = {1, 4, 5, 8, 9, 12, 13, ...} — take alternating consecutive pairs.
+  This achieves MaxOverlap ≤ n/2 approximately.
+
+  The SIMPLEST proof of limsup ≤ 1/2 is:
+  For n even, say n = 2m, partition {1,...,4m} as:
+    A = {2m+1, 2m+2, ..., 3m} ∪ {1, 2, ..., m}  — NO, that's not balanced overlap.
+
+  Actually, Erdős's original proof: take A to be the "middle" portion.
+  Partition {1,...,2n} into A = {⌊n/2⌋+1,..., ⌊n/2⌋+n} and B = rest.
+  Then MaxOverlap ≤ ⌊n/2⌋ + 1.
+
+  Hmm, the key insight for the 1/2 upper bound is:
+  For the partition A = {m+1,...,m+n}, B = {1,...,m} ∪ {m+n+1,...,2n} where m = ⌊n/2⌋:
+  This is a "centered" partition. The MaxOverlap is at most ⌊n/2⌋ + 1.
+
+  More directly: by the Motzkin-Ralston-Selfridge (1956) result,
+  limsup M(n)/n ≤ 2/5. And Erdős's 1955 result was even weaker (1/2).
+
+  THE SIMPLEST 1/2 UPPER BOUND:
+  Take n = 2m. Partition {1,...,4m} as:
+    A = {1, 2, ..., m} ∪ {3m+1, 3m+2, ..., 4m}
+    B = {m+1, m+2, ..., 3m}
+
+  For difference k: need (a,b) with a-b = k, a ∈ A, b ∈ B.
+  If a ∈ {1,...,m}: a-b = k with b ∈ {m+1,...,3m} → k ∈ {1-3m,...,m-m-1} = {1-3m,...,-1}.
+    For fixed k < 0: |k| ∈ {1,...,3m-1}. Count = |{a : a ∈ {1,...,m}, a-k ∈ {m+1,...,3m}}| = min(m, ...).
+    Each negative k has at most m solutions.
+  If a ∈ {3m+1,...,4m}: a-b = k with b ∈ {m+1,...,3m} → k ∈ {3m+1-3m,...,4m-m-1} = {1,...,3m-1}.
+    Each positive k has at most m solutions.
+  So MaxOverlap ≤ m = n/2. Hence M(n)/n ≤ 1/2 for even n.
+
+  For general n, a similar construction gives M(n) ≤ ⌈n/2⌉,
+  so limsup M(n)/n ≤ 1/2. ✓
+
+  Formal proof: exhibit the partition, compute the max overlap, take the limit.
+
+OVERALL: The main contribution is the constructive upper bound limsup ≤ 1/2.
+The key insight is the "split" partition: put the bottom quarter and top quarter
+in A, and the middle half in B. This limits overlaps to at most n/2.
+
+Mathlib references:
+- Filter.limsup, Filter.atTop
+- Finset.Icc, Finset.disjUnion
+- Finset.card, Finset.filter
+- iSup, sInf (for MaxOverlap, M definitions)

@@ -1,0 +1,99 @@
+KNOWN RESULT: Wolstenholme's Theorem (1862)
+
+Wolstenholme's theorem states: for any prime p > 3,
+  C(2p-1, p-1) ≡ 1 (mod p³)
+
+This is a KNOWN theorem (1862), tagged "undergraduate" in formal-conjectures,
+but NOT YET FORMALIZED in Lean/Mathlib. A first-ever formalization.
+
+The proof uses deep binomial coefficient congruences and properties of
+harmonic numbers modulo prime powers — exactly the kind of modular arithmetic
+and p-adic analysis that worked so well for Feit-Thompson (slot560).
+
+--- THEOREM STATEMENT ---
+
+theorem wolstenholme_theorem (p : ℕ) (h : p > 3) (hp : Nat.Prime p) :
+    (2 * p - 1).choose (p - 1) ≡ 1 [MOD p ^ 3]
+
+--- PROOF STRATEGY ---
+
+The classical proof proceeds through two key intermediate results about
+harmonic numbers and their generalizations.
+
+STEP 1: Wolstenholme's first result — harmonic sum mod p²
+For prime p ≥ 5: ∑_{k=1}^{p-1} 1/k ≡ 0 (mod p²)
+
+More precisely, if we write H_{p-1} = a/b in lowest terms where
+H_n = ∑_{k=1}^n 1/k, then p² | a.
+
+Proof: Pair terms k and p-k in the sum:
+  1/k + 1/(p-k) = p/(k(p-k))
+So H_{p-1} = (p/2) ∑_{k=1}^{(p-1)/2} 1/(k(p-k))
+
+The sum ∑ 1/(k(p-k)) can be analyzed mod p:
+  1/(k(p-k)) ≡ -1/k² (mod p)
+So H_{p-1} ≡ -(p/2) ∑_{k=1}^{(p-1)/2} 1/k² (mod p²)
+
+Now we need ∑ 1/k² ≡ 0 (mod p) for p ≥ 5.
+
+STEP 2: Sum of inverse squares vanishes mod p
+For prime p ≥ 5: ∑_{k=1}^{p-1} 1/k² ≡ 0 (mod p)
+
+Proof: Consider the sum ∑_{k=1}^{p-1} k² in ZMod p.
+By the formula for power sums: ∑_{k=1}^{n} k² = n(n+1)(2n+1)/6.
+Setting n = p-1: ∑_{k=1}^{p-1} k² = (p-1)p(2p-1)/6 ≡ 0 (mod p).
+Now ∑ 1/k² = ∑ (k^{-1})² in (ZMod p)ˣ. Since k ↦ k^{-1} is a bijection
+on {1,...,p-1}, we have ∑ 1/k² = ∑ k² ≡ 0 (mod p).
+
+STEP 3: Connect to binomial coefficient
+The binomial coefficient C(2p-1, p-1) can be written as:
+  C(2p-1, p-1) = (2p-1)! / ((p-1)!)²
+              = ∏_{k=1}^{p-1} (p+k)/k
+              = ∏_{k=1}^{p-1} (1 + p/k)
+
+Taking the product modulo p³:
+  C(2p-1, p-1) ≡ ∏_{k=1}^{p-1} (1 + p/k) (mod p³)
+
+Expanding the product using logarithm-like expansion mod p³:
+  log(∏(1 + p/k)) = ∑ log(1 + p/k)
+                   ≈ ∑ (p/k - p²/(2k²) + ...)
+                   = p · H_{p-1} - (p²/2) · ∑ 1/k² + O(p³)
+
+Since p² | p·H_{p-1} (by Step 1) and p | ∑ 1/k² (by Step 2),
+we get p³ | (exponent - 0), hence C(2p-1,p-1) ≡ 1 (mod p³).
+
+More rigorously: we expand the product directly.
+  ∏_{k=1}^{p-1} (1 + p·k⁻¹) = 1 + p·σ₁ + p²·σ₂ + p³·(...)
+where σ₁ = ∑ k⁻¹ = H_{p-1} and σ₂ = ∑_{i<j} (ij)⁻¹.
+
+We know p² | σ₁ (Step 1), so p³ | p·σ₁.
+For σ₂: σ₂ = (H_{p-1}² - ∑ k⁻²)/2. Since p | ∑ k⁻² (Step 2)
+and p² | H_{p-1} (Step 1), we get p | σ₂. So p³ | p²·σ₂.
+Hence C(2p-1, p-1) ≡ 1 (mod p³). □
+
+--- ADDITIONAL STRUCTURAL LEMMAS ---
+
+-- Auxiliary: sum of inverse squares vanishes
+lemma sum_inv_sq_eq_zero (p : ℕ) (hp : p.Prime) (h : p > 3) :
+  ∑ k ∈ Finset.Icc 1 (p-1), (k : ZMod p)⁻¹ ^ 2 = 0
+
+-- Auxiliary: harmonic number numerator divisible by p²
+lemma harmonic_num_dvd (p : ℕ) (hp : p.Prime) (h : p > 3) :
+  (p : ℤ) ^ 2 ∣ (harmonic (p - 1)).num
+
+-- The Wolstenholme-Bernoulli equivalence (for Wolstenholme primes)
+-- IsWolstenholmePrime p ↔ p > 7 ∧ p.Prime ∧ p ∣ num(B_{p-3})
+-- This connects the C(2p-1,p-1) ≡ 1 mod p⁴ condition to Bernoulli numbers.
+
+--- KEY MATHLIB APIs ---
+
+- Nat.choose, Nat.choose_symm_diff
+- ZMod.pow_card_sub_one_eq_one (FLT for inverses)
+- Finset.sum_Icc, Finset.prod_Icc
+- Nat.ModEq, Int.ModEq
+- bernoulli' (if needed for Bernoulli connection)
+- harmonic (Mathlib has harmonic numbers)
+
+This is pure modular arithmetic — highly AI-amenable. The proof structure
+(pair terms, use bijection k ↦ k⁻¹, expand products) is exactly the kind
+of algebraic manipulation Aristotle excels at, as demonstrated in slot560.

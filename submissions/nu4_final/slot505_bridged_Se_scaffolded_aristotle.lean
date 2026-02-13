@@ -3,7 +3,7 @@ This file was edited by Aristotle.
 
 Lean version: leanprover/lean4:v4.24.0
 Mathlib version: f897ebcf72cd16f89ab4577d0c826cd14afaafc7
-This project request had uuid: 17dfa818-81b9-4925-ad6f-2d6981e047a7
+This project request had uuid: ae3c94b4-83a0-4d5b-a24e-e7719c0e1199
 
 To cite Aristotle, tag @Aristotle-Harmonic on GitHub PRs/issues, and add as co-author to commits:
 Co-authored-by: Aristotle (Harmonic) <aristotle-harmonic@harmonic.fun>
@@ -120,7 +120,7 @@ def S_e_edge (G : SimpleGraph V) [DecidableRel G.Adj] (M : Finset (Finset V))
 
 /- Aristotle failed to load this code into its environment. Double check that the syntax is correct.
 
-Unexpected axioms were added during verification: ['harmonicSorry484382', 'not_all_three_edge_types']-/
+Unexpected axioms were added during verification: ['harmonicSorry567808', 'not_all_three_edge_types']-/
 -- ══════════════════════════════════════════════════════════════════════════════
 -- AXIOM: not_all_three_edge_types from slot412 (PROVEN - 0 sorry)
 -- ══════════════════════════════════════════════════════════════════════════════
@@ -188,10 +188,10 @@ lemma empty_type_forces_other_two (G : SimpleGraph V) [DecidableRel G.Adj]
   2. Since {a,c}-edge type is empty (h_ac_empty), T cannot be in S_e_edge(a,c,b)
   3. But T can still contain both a and c (with b too) - that's not the {a,c}-edge TYPE
   -/
-  -- By definition of $S_e$, since $T \in S_e G M {a, b, c}$, $T$ shares at least two vertices with ${a, b, c}$.
-  have h_SHARES : (a ∈ T ∧ b ∈ T) ∨ (b ∈ T ∧ c ∈ T) ∨ (a ∈ T ∧ c ∈ T) := by
+  -- By definition of S_e, T must share at least two vertices with {a, b, c}.
+  have h_shared : (a ∈ T ∧ b ∈ T) ∨ (b ∈ T ∧ c ∈ T) ∨ (a ∈ T ∧ c ∈ T) := by
     exact?;
-  grind
+  contrapose! h_ac_empty; aesop;
 
 -- Aristotle: case analysis
 
@@ -596,49 +596,44 @@ theorem tau_Se_le_2 (G : SimpleGraph V) [DecidableRel G.Adj]
 noncomputable section AristotleLemmas
 
 /-
-Counterexample showing that a triangle can be a bridge between two packing elements, thus not in M and not in any S_e.
+Counterexample showing a bridge triangle in a maximal packing on K5.
 -/
-abbrev V_ex := Fin 5
-def G_ex : SimpleGraph V_ex := ⊤
-instance : DecidableRel G_ex.Adj := inferInstance
+abbrev CE_V := Fin 5
+def CE_G : SimpleGraph CE_V := SimpleGraph.completeGraph CE_V
+def CE_M : Finset (Finset CE_V) := {({0, 1, 2} : Finset CE_V), ({2, 3, 4} : Finset CE_V)}
+def CE_T : Finset CE_V := ({1, 2, 3} : Finset CE_V)
 
-def t1 : Finset V_ex := {0, 1, 2}
-def t2 : Finset V_ex := {2, 3, 4}
-def M_ex : Finset (Finset V_ex) := {t1, t2}
-def T_bridge : Finset V_ex := {1, 2, 3}
+lemma CE_works :
+  isTrianglePacking CE_G CE_M ∧
+  (∀ T ∈ CE_G.cliqueFinset 3, T ∉ CE_M → ∃ e ∈ CE_M, (T ∩ e).card ≥ 2) ∧
+  CE_T ∈ CE_G.cliqueFinset 3 ∧
+  ¬ (CE_T ∈ CE_M ∨ ∃ e ∈ CE_M, CE_T ∈ S_e CE_G CE_M e) := by
+    refine' ⟨ _, _, _, _ ⟩;
+    · constructor <;> simp +decide [ CE_M, CE_G ];
+      simp +decide [ Finset.subset_iff, SimpleGraph.cliqueFinset ];
+    · simp +decide [ CE_G, CE_M ];
+    · simp +decide [ CE_G, CE_T ];
+    · simp +decide [ CE_T, CE_M, S_e ]
 
-lemma t1_mem : t1 ∈ M_ex := by
-  exact Finset.mem_insert_self _ _
-lemma t2_mem : t2 ∈ M_ex := by
-  exact?
-lemma t1_ne_t2 : t1 ≠ t2 := by
-  simp +decide [ Finset.ext_iff ]
-
-lemma M_ex_packing : isTrianglePacking G_ex M_ex := by
-  constructor <;> simp +decide [ G_ex, M_ex ];
-  simp +decide [ Finset.insert_subset_iff ]
-
-lemma M_ex_max : ∀ T ∈ G_ex.cliqueFinset 3, T ∉ M_ex → ∃ e ∈ M_ex, (T ∩ e).card ≥ 2 := by
-  unfold G_ex M_ex; simp +decide ;
-
-lemma bridge_not_in_Se : ∀ e ∈ M_ex, T_bridge ∉ S_e G_ex M_ex e := by
-  unfold T_bridge S_e; simp +decide ;
-  unfold M_ex; simp +decide ;
-
-lemma counterexample_to_triangle_in_some_Se_or_M :
-  ∃ (G : SimpleGraph V_ex) (M : Finset (Finset V_ex)),
-    isTrianglePacking G M ∧
-    (∀ T ∈ G.cliqueFinset 3, T ∉ M → ∃ e ∈ M, (T ∩ e).card ≥ 2) ∧
-    ∃ T ∈ G.cliqueFinset 3,
-      ¬ (T ∈ M ∨ ∃ e ∈ M, T ∈ S_e G M e) := by
-        by_contra! h_contra;
-        convert h_contra ⊤ { { 0, 1, 2 }, { 3, 4, 5 } } ?_ ?_ ?_ using 1;
-        rotate_right;
-        exact { 0, 1, 4 };
-        · simp +decide [ S_e ];
-        · constructor <;> simp +decide [ isTrianglePacking ];
-          simp +decide [ Finset.subset_iff, SimpleGraph.cliqueFinset ];
-        · simp +decide [ SimpleGraph.cliqueFinset ]
+/-
+Explicit disproof of the conjecture for the specific counterexample case.
+-/
+lemma triangle_in_some_Se_or_M_counterexample : ¬ (∀ (G : SimpleGraph CE_V) [DecidableRel G.Adj] (M : Finset (Finset CE_V)),
+    isTrianglePacking G M →
+    (∀ T ∈ G.cliqueFinset 3, T ∉ M → ∃ e ∈ M, (T ∩ e).card ≥ 2) →
+    ∀ T ∈ G.cliqueFinset 3,
+    T ∈ M ∨ ∃ e ∈ M, T ∈ S_e G M e) := by
+      norm_num +zetaDelta at *;
+      refine' ⟨ _, _, _, _, _, _ ⟩;
+      exact CE_G;
+      all_goals try infer_instance;
+      exact CE_M;
+      · unfold isTrianglePacking;
+        simp +decide [ CE_M, CE_G ];
+        simp +decide [ Finset.subset_iff, SimpleGraph.isNClique_iff ];
+      · simp +decide [ CE_G, CE_M ];
+      · exists CE_T;
+        simp +decide [ CE_G, CE_M, CE_T, S_e ]
 
 end AristotleLemmas
 
@@ -671,11 +666,13 @@ lemma triangle_in_some_Se_or_M (G : SimpleGraph V) [DecidableRel G.Adj]
     -- Wait, there's a mistake. We can actually prove the opposite.
     negate_state;
     -- Proof starts here:
-    use ULift ( Fin 5 );
-    refine' ⟨ inferInstance, inferInstance, _, _, _ ⟩;
-    exact ⊤;
-    infer_instance;
-    refine' ⟨ { { ⟨ 0 ⟩, ⟨ 1 ⟩, ⟨ 2 ⟩ }, { ⟨ 2 ⟩, ⟨ 3 ⟩, ⟨ 4 ⟩ } }, _, _, _ ⟩ <;> simp +decide [ isTrianglePacking ]
+    -- Let's choose the specific counterexample from the provided solution.
+    use ULift CE_V, inferInstance, inferInstance, SimpleGraph.comap (fun x => x.down) CE_G, inferInstance, CE_M.image (fun s => s.image (fun x => ULift.up x));
+    refine' ⟨ _, _, _ ⟩ <;> simp +decide [ isTrianglePacking ] at *;
+    · simp +decide [ Finset.subset_iff, SimpleGraph.isClique_iff ];
+      simp +decide [ Set.Pairwise, CE_G ];
+    · unfold CE_G CE_M; simp +decide [ SimpleGraph.isNClique_iff ] ;
+    · simp +decide [ CE_G ]
 
 -/
 /-- Every triangle is in M or in some S_e -/

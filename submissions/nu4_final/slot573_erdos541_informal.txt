@@ -1,0 +1,69 @@
+/-
+Erdős Problem 541 (General Moduli): Graham's Zero-Sum Conjecture
+
+Theorem (Gao-Hamidoune-Wang, 2010): For any positive integer p and any
+sequence a₁, ..., aₚ of residues modulo p, if there exists a unique
+cardinality r such that every non-empty subsequence summing to 0 (mod p)
+has exactly r elements, then there are at most 2 distinct residues among
+the aᵢ.
+
+This was originally conjectured by Erdős-Ginzburg for prime p and proved
+by Erdős-Szemerédi for sufficiently large primes. The full conjecture was
+proved by Gao, Hamidoune, and Wang for all moduli.
+
+Reference: Gao, Weidong and Hamidoune, Yahya Ould and Wang, Guoqing,
+"Distinct length modular zero-sum subsequences: a proof of Graham's conjecture."
+J. Number Theory 130 (2010), 1425-1431.
+
+PROVIDED SOLUTION:
+
+Proof sketch (following Gao-Hamidoune-Wang):
+
+We prove the contrapositive: if there are 3+ distinct residues, then
+there exist non-empty zero-sum subsequences of different lengths.
+
+Step 1: Set up notation.
+Let a : Fin p → ZMod p be our sequence. Assume (Set.range a).ncard ≥ 3,
+meaning there exist three distinct residues x, y, z among the aᵢ.
+
+Step 2: Key lemma (Davenport constant).
+For a finite abelian group G, the Davenport constant D(G) is the smallest d
+such that every sequence of d elements contains a non-empty zero-sum subsequence.
+For ZMod p, D(ZMod p) = p.
+
+Step 3: Apply the Erdős-Ginzburg-Ziv theorem.
+Any sequence of 2p-1 elements in ZMod p contains a zero-sum subsequence of
+length exactly p. Since our sequence has p elements and 3+ distinct residues,
+we can find zero-sum subsequences of different lengths using the following argument:
+
+Consider the multiset of residues. If all zero-sum subsequences have the same
+cardinality r, then:
+- If r < p, the sequence must be a translate of {0, 0, ..., 0} (all equal) or
+  {a, -a, ...} (two-valued with a + (-a) = 0).
+- If r = p, then the whole sequence sums to 0, and by the structure theorem for
+  unique-length zero-sum sequences over cyclic groups, at most 2 distinct values
+  can appear.
+
+The core argument uses:
+(a) If the sequence contains ≥ 3 distinct values, partition it into sets by value.
+(b) Using the pigeonhole principle and properties of ZMod p being cyclic, construct
+    two zero-sum subsequences of different lengths.
+(c) The detailed case analysis considers:
+    - Whether any value appears ≥ p/2 times
+    - The structure of the "short" zero-sum subsequences via Cauchy-Davenport
+
+This gives a contradiction with the unique-length hypothesis when ncard ≥ 3. □
+-/
+
+import Mathlib
+
+open Filter
+
+namespace Erdos541
+
+theorem erdos_541_general_moduli (p : ℕ) (a : Fin p → ZMod p)
+    (ha₀ : ∃ r, ∀ (S : Finset (Fin p)), S ≠ ∅ → ∑ i ∈ S, a i = 0 → S.card = r) :
+      (Set.range a).ncard ≤ 2 := by
+  sorry
+
+end Erdos541

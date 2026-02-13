@@ -1,0 +1,89 @@
+SIERPIŃSKI AND RIESEL NUMBERS: COVERING SET PROOFS
+
+KNOWN RESULT (Sierpiński 1960): There exist infinitely many odd positive integers k
+such that k · 2^n + 1 is composite for ALL n ≥ 1. Such k are called Sierpiński numbers.
+
+The smallest known Sierpiński number is k = 78557 (proven by Selfridge).
+The Sierpiński problem asks: is 78557 the smallest? Currently 5 candidates remain.
+
+KNOWN RESULT (Riesel 1956): There exist infinitely many odd positive integers k
+such that k · 2^n - 1 is composite for ALL n ≥ 1. Such k are called Riesel numbers.
+
+GOAL: Formalize the PROOF that specific k are Sierpiński/Riesel numbers using
+covering sets. This is a KNOWN result, not an open problem — but it has never
+been formalized in a proof assistant.
+
+THE COVERING SET METHOD:
+A covering set for k (Sierpiński) is a finite set of primes {p₁,...,pₘ} such that
+for every n ≥ 1, at least one pᵢ divides k·2^n + 1.
+
+For k = 78557, the covering set is {3, 5, 7, 13, 19, 37, 73}:
+- n ≡ 1 (mod 2): 3 | 78557·2^n + 1 (since 78557·2 + 1 = 157115 = 3 · 52371.67...
+  Actually need to verify: 78557 ≡ 2 (mod 3), 2^1 ≡ 2 (mod 3), so 78557·2 ≡ 4 ≡ 1 (mod 3),
+  78557·2+1 ≡ 2 (mod 3). Hmm that's not 0. Let me reconsider.
+
+  The covering works with RESIDUES of n modulo the orders of 2:
+  ord_3(2) = 2, ord_5(2) = 4, ord_7(2) = 3, ord_13(2) = 12, ord_19(2) = 18,
+  ord_37(2) = 36, ord_73(2) = 4.
+
+  For each prime p, k·2^n + 1 ≡ 0 (mod p) ↔ 2^n ≡ -1/k (mod p) ↔ n is in a specific
+  residue class modulo ord_p(2).
+
+  The covering: {(p, residue class of n)} covers all n ≥ 1.
+
+STRATEGY 1: FORMALIZE FOR A SIMPLER SIERPIŃSKI NUMBER
+Rather than k = 78557, start with a smaller Sierpiński number with a simpler covering.
+
+k = 271129 is Sierpiński with covering {3, 5, 7, 13, 17, 241}:
+- If n ≡ 1 (mod 2): 3 | k·2^n + 1 (since k ≡ 0 (mod 3), so k·2^n + 1 ≡ 1 (mod 3)...
+  Hmm, need k not divisible by covering primes. Let me use a known verified example.
+
+STRATEGY 2: PROVE SIERPIŃSKI PROPERTY FOR k = 78557
+The standard covering set proof:
+Define the primes and their residue conditions, then verify:
+1. For each prime p in {3, 5, 7, 13, 19, 37, 73}: compute k mod p and ord_p(2)
+2. For each p: determine the set of n (mod ord_p(2)) where p | k·2^n + 1
+3. Verify these residue classes cover all of ℤ (covering system)
+
+The verification of each divisibility is: k·2^n + 1 ≡ 0 (mod p)
+↔ k·2^n ≡ -1 (mod p) ↔ 2^n ≡ -k⁻¹ (mod p).
+
+For p = 3: ord_3(2) = 2. 78557 mod 3 = 78557 - 26185*3 = 78557-78555 = 2.
+  k⁻¹ mod 3 = 2⁻¹ = 2. -k⁻¹ = -2 ≡ 1 (mod 3). 2^n ≡ 1 (mod 3) ↔ n ≡ 0 (mod 2).
+  So 3 | k·2^n + 1 when n is even.
+
+For p = 5: ord_5(2) = 4. 78557 mod 5 = 2. k⁻¹ = 3. -k⁻¹ = 2.
+  2^n ≡ 2 (mod 5) ↔ n ≡ 1 (mod 4). So 5 | k·2^n + 1 when n ≡ 1 (mod 4).
+
+For p = 7: ord_7(2) = 3. 78557 mod 7 = 78557 - 11222*7 = 78557-78554 = 3.
+  k⁻¹ = 5. -k⁻¹ = 2. 2^n ≡ 2 (mod 7) ↔ n ≡ 1 (mod 3).
+  So 7 | k·2^n + 1 when n ≡ 1 (mod 3).
+
+Wait, n even is covered by p=3. n ≡ 1 (mod 4) is covered by p=5 (but only odd n).
+n ≡ 1 (mod 3) covers n=1,4,7,10,... The odd ones not ≡ 1 (mod 4): n=3,7,11,15,...
+n ≡ 3 (mod 4) and n ≡ 0 (mod 3): n = 3, 15, 27, ... ↔ n ≡ 3 (mod 12).
+Need to continue with p = 13, 19, 37, 73 to cover remaining classes.
+
+This CRT verification is entirely computational and can be done by native_decide!
+
+WHAT TO PROVE:
+1. Define IsSierpinskiNumber (k : ℕ) : Prop := ∀ n ≥ 1, ¬ (k * 2^n + 1).Prime
+   (or equivalently: ∃ p > 1, p ∣ k * 2^n + 1 ∧ p < k * 2^n + 1)
+
+2. Define CoveringSet: a finite collection of (prime, residue, modulus) triples
+   such that for every n, at least one triple (p, r, m) has n ≡ r (mod m) and p | k·2^n+1.
+
+3. covering_implies_sierpinski: If a valid covering set exists, then k is Sierpiński.
+
+4. sierpinski_78557: 78557 is a Sierpiński number (via covering set verification).
+   The covering set is: {(3, 0, 2), (5, 1, 4), (7, 1, 3), (13, r₁, 12), (19, r₂, 18),
+   (37, r₃, 36), (73, r₄, 4)} — need to compute exact residues.
+   Total covering: lcm(2,4,3,12,18,36,4) = 36. So verify 36 residue classes.
+   This is a FINITE computation — native_decide can handle it.
+
+5. IsRieselNumber analog: k · 2^n - 1 composite for all n.
+
+6. riesel_509203: 509203 is a Riesel number (smallest known).
+
+These are KNOWN RESULTS but have NEVER been formalized. First formalization
+of Sierpiński/Riesel number proofs via covering sets.

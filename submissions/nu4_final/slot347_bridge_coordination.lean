@@ -324,8 +324,8 @@ lemma middle_seam_covered (G : SimpleGraph V) [DecidableRel G.Adj]
 -- MAIN THEOREM: τ ≤ 8
 -- ══════════════════════════════════════════════════════════════════════════════
 
-/-
-PROOF SKETCH for tau_le_8:
+/--
+PROVIDED SOLUTION for tau_le_8:
 
 1. PATH_4 structure: A—B—C—D with spine vertices v1 = A∩B, v2 = B∩C, v3 = C∩D
 

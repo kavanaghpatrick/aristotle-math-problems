@@ -1,0 +1,97 @@
+OPEN PROBLEM: Lehmer's Totient Problem (1932)
+
+Lehmer asked: does there exist a composite number n such that φ(n) | (n-1)?
+This is OPEN since 1932. No counterexample is known; none has been found below 10^22.
+
+We do NOT attempt to resolve the conjecture. Instead, we prove structural constraints
+that any hypothetical counterexample must satisfy. This mirrors the approach in our
+Feit-Thompson structural lemmas (slot560), where we proved 14 properties of any
+hypothetical shared prime divisor.
+
+GOAL: Prove as many structural lemmas as possible about a composite n with φ(n) | (n-1).
+
+--- THEOREM STATEMENTS ---
+
+-- Main definition
+def IsLehmerCounterexample (n : ℕ) : Prop :=
+  1 < n ∧ ¬ n.Prime ∧ n.totient ∣ (n - 1)
+
+-- Lemma 1: n must be odd
+-- Proof: If n is even and composite, then 2 | φ(n) (since φ preserves factor of 2
+-- for n > 2). But φ(n) | (n-1) and n-1 is odd, contradiction.
+-- More precisely: if n = 2^a * m with m odd and a ≥ 1, then φ(n) = 2^(a-1) * φ(m).
+-- If a ≥ 2, then 2 | φ(n) but n-1 is odd. If a = 1, n = 2m, φ(n) = φ(2m) = φ(m)
+-- (since gcd(2,m)=1). Then φ(m) | (2m-1). But also m | n and Lehmer ⟹ n squarefree
+-- (see below), so m is odd squarefree, and we need φ(m) | (2m-1).
+-- Actually for n even composite: φ(n) is even (for n > 2), and n-1 is odd. Done.
+theorem lehmer_counterexample_odd (n : ℕ) (h : IsLehmerCounterexample n) : ¬ 2 ∣ n
+
+-- Lemma 2: n must be squarefree
+-- Proof: Suppose p^2 | n for some prime p. Then p | φ(n) (since φ(p^a) = p^(a-1)(p-1)).
+-- Also φ(n) | (n-1). So p | (n-1). But p | n, so p | 1, contradiction.
+theorem lehmer_counterexample_squarefree (n : ℕ) (h : IsLehmerCounterexample n) : Squarefree n
+
+-- Lemma 3: n is a product of distinct odd primes
+-- Follows from odd + squarefree.
+theorem lehmer_counterexample_odd_squarefree (n : ℕ) (h : IsLehmerCounterexample n) :
+  ∀ p ∈ n.primeFactors, Odd p
+
+-- Lemma 4: For each prime p | n, we have (p-1) | (n-1)
+-- Proof: Since n is squarefree, n = p₁p₂...pₖ and φ(n) = ∏(pᵢ-1).
+-- φ(n) | (n-1) implies each (pᵢ-1) | (n-1).
+-- Actually this needs: φ(n) | (n-1) and (pᵢ-1) | φ(n), so (pᵢ-1) | (n-1).
+theorem lehmer_each_prime_factor (n : ℕ) (h : IsLehmerCounterexample n) :
+  ∀ p ∈ n.primeFactors, (p - 1) ∣ (n - 1)
+
+-- Lemma 5: For each prime p | n, we have p ≡ 1 [MOD (p-1)] ... wait, better:
+-- n ≡ 1 [MOD p-1] for each prime p | n.
+-- This follows from (p-1) | (n-1), i.e., n ≡ 1 mod (p-1).
+theorem lehmer_congruence (n : ℕ) (h : IsLehmerCounterexample n) :
+  ∀ p ∈ n.primeFactors, n ≡ 1 [MOD (p - 1)]
+
+-- Lemma 6: n must have at least 3 distinct prime factors
+-- Proof: If n = p (one prime), it's prime, contradiction.
+-- If n = pq (two primes), φ(n) = (p-1)(q-1). Need (p-1)(q-1) | pq-1.
+-- But pq - 1 = (p-1)(q-1) + (p-1) + (q-1). So (p-1)(q-1) | (p-1) + (q-1).
+-- Since p,q ≥ 3 (odd primes), (p-1)(q-1) ≥ 4 but (p-1)+(q-1) < (p-1)(q-1)
+-- for p,q ≥ 3. Contradiction.
+theorem lehmer_at_least_three_primes (n : ℕ) (h : IsLehmerCounterexample n) :
+  3 ≤ n.primeFactors.card
+
+-- Lemma 7: n must have at least 7 distinct prime factors (Cohen-Hagis 1980)
+-- The proof uses the structural constraints above plus careful analysis of
+-- the divisibility condition. Products of ≤ 6 odd primes with the congruence
+-- constraints cannot satisfy φ(n) | (n-1). This requires case analysis on
+-- small prime products.
+-- Strategy: For k prime factors p₁ < p₂ < ... < pₖ, we need
+-- ∏(pᵢ-1) | ∏pᵢ - 1. The ratio ∏pᵢ/∏(pᵢ-1) must be close to an integer.
+-- For 3 ≤ k ≤ 6, exhaustive analysis of feasible prime tuples shows no solution.
+-- We prove the weaker k ≥ 3 rigorously and state k ≥ 7 as a target.
+-- Actually let's be conservative and target what Aristotle can prove.
+
+-- Lemma 8: gcd(n, φ(n)) = φ(n), i.e., φ(n) | n (since φ(n) | n-1 and we need more)
+-- Wait, that's not right. φ(n) | (n-1) does NOT imply φ(n) | n.
+-- Instead: gcd(n, n-1) = 1, so gcd(n, φ(n)) = gcd(n, φ(n)).
+-- Since n is squarefree = p₁...pₖ and φ(n) = ∏(pᵢ-1), and gcd(pᵢ, pⱼ-1) could
+-- be nontrivial... This is where it gets deep.
+
+-- Lemma 9: 2 | φ(n) (since each pᵢ is odd, pᵢ-1 is even, and φ(n) = ∏(pᵢ-1))
+-- Combined with φ(n) | (n-1) and n odd, we get 2 | (n-1), i.e., n is odd. (Consistent.)
+-- More: 2^k | φ(n) where k = number of prime factors, since each (pᵢ-1) contributes ≥ one factor of 2.
+-- So 2^k | (n-1). This constrains n mod 2^k.
+theorem lehmer_two_power_divides (n : ℕ) (h : IsLehmerCounterexample n) :
+  2 ^ n.primeFactors.card ∣ (n - 1)
+
+--- PROOF STRATEGY ---
+
+The key techniques are:
+1. Properties of Euler's totient for squarefree numbers: φ(p₁...pₖ) = ∏(pᵢ-1)
+2. Basic divisibility: if a | b and a | c then a | (b - c)
+3. Modular arithmetic: congruence conditions from (pᵢ-1) | (n-1)
+4. Contradiction arguments: p | n and p | (n-1) implies p | 1
+
+These are all within Mathlib's API for Nat.totient, primeFactors, Squarefree, and modular arithmetic.
+This is pure number theory — highly AI-amenable.
+
+Please prove as many of these structural lemmas as possible.
+The most important are: odd, squarefree, each (p-1) | (n-1), at least 3 primes, 2^k | (n-1).

@@ -1,0 +1,77 @@
+Theorem: Every odd integer n with 1 < n < 10^7 can be written as the sum of a
+squarefree number and a power of 2.
+
+This is a KNOWN bounded verification result for Erdős Problem 11.
+The full conjecture (all odd n > 1) is OPEN.
+This bounded case is marked as solved in the formal-conjectures repository.
+
+=== Formal Statement ===
+
+theorem erdos_11_bounded (n : ℕ) (hn : Odd n) (h : n < 10^7) (hn' : 1 < n) :
+    ∃ k l : ℕ, Squarefree k ∧ n = k + 2^l
+
+=== What "squarefree" means ===
+
+A natural number k is squarefree if no perfect square > 1 divides it.
+Equivalently, for every prime p, v_p(k) ≤ 1.
+In Mathlib: `Squarefree k` means ∀ d, d^2 ∣ k → IsUnit d.
+
+=== Proof Strategy ===
+
+The approach is algorithmic: for each odd n in (1, 10^7), find some power
+2^l ≤ n such that n - 2^l is squarefree.
+
+**Why this works**: For any n, the powers of 2 less than n are 1, 2, 4, 8, ...,
+up to about log₂(n) ≈ 23 values. For each, n - 2^l is a candidate. The density
+of squarefree numbers is 6/π² ≈ 0.608, so with ~23 candidates, the probability
+that ALL of them are non-squarefree is roughly (1 - 6/π²)^23 ≈ 10^{-9}.
+So it's overwhelmingly likely that at least one works, and verified computationally.
+
+**Formalization approach**: This is a decidable property. For bounded n, we can use
+a decision procedure:
+
+1. Define a decidable predicate: hasSquarefreeDecomp(n) = ∃ l ≤ log₂(n), Squarefree(n - 2^l)
+2. Prove this predicate is decidable (Squarefree is decidable for naturals)
+3. Use native_decide to verify for all odd n in (1, 10^7)
+
+Note: 10^7 might be too large for native_decide. If so, Aristotle should prove
+a smaller bound (e.g., n < 10^4 or n < 10^5) that is still mathematically
+meaningful.
+
+=== Alternative: smaller bound ===
+
+If 10^7 is too large, prove:
+
+theorem erdos_11_bounded_small (n : ℕ) (hn : Odd n) (h : n < 10000) (hn' : 1 < n) :
+    ∃ k l : ℕ, Squarefree k ∧ n = k + 2^l
+
+This would still be a first-ever formalization of even a bounded Erdős 11 result.
+
+=== Key Mathlib ingredients ===
+
+- `Squarefree`: defined in Mathlib, decidable for ℕ
+- `Nat.Squarefree_iff_prime_squarefree`: squarefree iff no prime squared divides
+- `Odd`: decidable
+- `native_decide` or `decide` for bounded verification
+- `Nat.log`: for bounding the search range
+
+=== Proof sketch for decision procedure ===
+
+def hasDecomp (n : ℕ) : Bool :=
+  -- Check if n - 2^l is squarefree for some l
+  let max_l := Nat.log 2 n
+  (List.range (max_l + 1)).any fun l =>
+    let k := n - 2^l
+    k > 0 && isSquarefree k
+
+where isSquarefree checks that no p² divides k for primes p ≤ √k.
+
+Then prove: hasDecomp n = true ↔ ∃ k l, Squarefree k ∧ n = k + 2^l
+And use native_decide on: ∀ n ∈ Finset.range 10000, Odd n → 1 < n → hasDecomp n
+
+=== Value ===
+
+Even a bounded result is meaningful because:
+1. First-ever formalization of ANY case of Erdős 11
+2. Demonstrates the computational approach for the full conjecture
+3. The bound 10^7 or 10^4 is a concrete verified range

@@ -1,0 +1,55 @@
+/-
+Leinster Groups: Dihedral ↔ Odd Perfect
+
+Theorem: The dihedral group DihedralGroup n (of order 2n) is a Leinster group
+if and only if n is an odd perfect number.
+
+Reference: Leinster, Tom (2001). "Perfect numbers and groups". Theorem 2.3.
+  arXiv:math/0104012
+
+PROVIDED SOLUTION:
+
+A finite group G is Leinster if the sum of orders of all its normal subgroups
+equals 2|G|.
+
+For DihedralGroup n with n odd:
+
+Step 1: Classify normal subgroups.
+The dihedral group D_{2n} = ⟨r, s | r^n = s^2 = 1, srs^{-1} = r^{-1}⟩ has
+order 2n. When n is odd, the normal subgroups are exactly:
+  - The cyclic subgroups ⟨r^{n/d}⟩ of order d, for each divisor d of n
+  - The whole group D_{2n} of order 2n
+
+Key fact: For odd n, conjugation by s sends r^k to r^{-k}, so ⟨r^{n/d}⟩ is
+invariant under conjugation (since if r^{n/d} generates, so does r^{-n/d}).
+No other subgroups are normal when n is odd, because the reflection cosets
+don't form normal subgroups (they would need n to be even for that).
+
+Step 2: Compute the sum.
+Sum of orders of normal subgroups = (∑_{d | n} d) + 2n = σ(n) + 2n
+
+Step 3: Apply the Leinster condition.
+IsLeinster requires: sum = 2 * |D_{2n}| = 2 * 2n = 4n
+So: σ(n) + 2n = 4n ⟺ σ(n) = 2n ⟺ n is perfect.
+
+Combined with n being odd, this gives: DihedralGroup n is Leinster ↔ n is an
+odd perfect number. QED.
+
+The backward direction is immediate: if n is odd and perfect, then σ(n) = 2n,
+so the sum of normal subgroup orders = 2n + 2n = 4n = 2|G|.
+-/
+
+import Mathlib
+
+namespace LeinsterGroup
+
+open scoped Classical
+
+def IsLeinster (G : Type*) [Group G] [Fintype G] : Prop :=
+  ∑ H : {H : Subgroup G // H.Normal}, Nat.card H = 2 * Fintype.card G
+
+theorem dihedral_is_leinster_iff_odd_perfect (n : ℕ) [NeZero n] :
+    IsLeinster (DihedralGroup n) ↔ Nat.Perfect n ∧ Odd n := by
+  sorry
+
+end LeinsterGroup

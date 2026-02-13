@@ -1,0 +1,79 @@
+Theorem (Erdős-Selfridge 1975): The product of k ≥ 2 consecutive positive integers
+is never a perfect power.
+
+This is a FAMOUS known result, published in Illinois J. Math. 19(2): 292-301, 1975.
+NOT yet formalized in Lean 4 / Mathlib. Would be a FIRST-EVER formalization of a
+classic number theory theorem.
+
+=== Formal Statement ===
+
+theorem erdos_selfridge (k : ℕ) (hk : k ≥ 2) (n : ℕ) (hn : 0 < n) (x l : ℕ) (hl : 2 ≤ l) :
+    (∏ i ∈ Finset.Ioc n (n + k), i) ≠ x ^ l
+
+Equivalently: n(n+1)(n+2)...(n+k-1) ≠ x^l for any n ≥ 1, k ≥ 2, l ≥ 2.
+
+=== Proof Strategy ===
+
+The proof proceeds by contradiction. Assume ∏_{i=n+1}^{n+k} i = x^l.
+
+**Key idea**: Since consecutive integers have controlled gcd structure, each factor
+(n+i) in the product must "almost" be an l-th power. The proof analyzes the prime
+factorization to derive a contradiction.
+
+**Step 1: Factor decomposition**
+For each 1 ≤ i ≤ k, write n+i = a_i * b_i^l where a_i is l-th-power-free
+(i.e., for every prime p, v_p(a_i) < l). Then ∏ a_i * (∏ b_i)^l = x^l,
+so ∏ a_i must itself be an l-th power.
+
+**Step 2: The a_i are small**
+Each a_i divides the product of primes ≤ k (since if p > k, then p divides
+at most one of n+1, ..., n+k, and if p | n+i then p^l | n+i from the l-th
+power structure). So a_i | k! (roughly).
+
+**Step 3: Coprimality constraints**
+For i ≠ j, gcd(n+i, n+j) | (j-i) ≤ k-1. This constrains the a_i values
+and forces many a_i to be coprime.
+
+**Step 4: Contradiction via descent**
+The product ∏ a_i is an l-th power, but each a_i is l-th-power-free and
+bounded by k!. For l ≥ 2 and k ≥ 2, this forces all a_i = 1 (or leads to
+impossible constraints), which means each n+i is an l-th power. But l-th
+powers grow too fast — there can't be k ≥ 2 consecutive l-th powers among
+consecutive integers (for n ≥ 1).
+
+=== Simpler special cases (Aristotle should prove at least these) ===
+
+**Case k = 2**: n(n+1) = x^l.
+Since gcd(n, n+1) = 1, both n and n+1 must be l-th powers.
+Say n = a^l, n+1 = b^l. Then b^l - a^l = 1.
+For l = 2: (b-a)(b+a) = 1, so b = 1, a = 0, n = 0. Contradicts n ≥ 1.
+For l ≥ 3: b^l - a^l ≥ (a+1)^l - a^l ≥ l*a^{l-1} + 1 > 1 for a ≥ 1.
+So a = 0, n = 0. Contradicts n ≥ 1.
+
+**Case l = 2 (product of k consecutive integers never a perfect square)**:
+This uses the argument that among k ≥ 2 consecutive integers, at most one
+can be divisible by a given prime p to high power. Standard approach uses
+Bertrand's postulate: there exists a prime p with k/2 < p ≤ k. This prime
+p divides exactly one of n+1, ..., n+k (since consecutive integers, gap < 2p).
+So v_p of the product is exactly v_p(n+i) for some i, which is odd if not
+a square. This prime contributes an odd exponent, contradicting perfect square.
+(This argument needs care for small k but the core idea works.)
+
+=== Recommended scope for Aristotle ===
+
+Priority 1: Prove the k=2 case (product of two consecutive integers never a
+perfect power). This is clean and elementary.
+
+Priority 2: Prove the l=2 case (product of k ≥ 2 consecutive integers never
+a perfect square). Uses Bertrand's postulate from Mathlib.
+
+Priority 3: Full theorem if possible.
+
+=== Key Mathlib ingredients ===
+
+- `Nat.Coprime.of_succ_right`: gcd(n, n+1) = 1
+- `Nat.eq_one_of_pos_of_self_mul_self_eq`: for perfect square arguments
+- `Nat.exists_prime_and_dvd`: prime factorization
+- Bertrand's postulate: exists in Mathlib as `Nat.bertrand`
+- `Finset.prod_Ioc`: product over interval
+- `Nat.Prime.dvd_mul`: prime divides product iff divides factor
