@@ -127,7 +127,7 @@
   - **Verify**: `ls math-forge/commands/*.md | wc -l`
   - **Commit**: `feat(commands): add search, knowledge, stats, failed slash commands`
 
-- [ ] 4.3 [P] Write agent configurations
+- [x] 4.3 [P] Write agent configurations
   - **Do**: Create 2 agents in `math-forge/agents/`: investigate.md (sonnet, tools: Read/Grep/Glob/Bash, KB-first progressive disclosure), problem-researcher.md (sonnet, tools: Read/Grep/Glob/Bash/WebSearch, formal-conjectures integration). Both must include "OPEN problems only" directive.
   - **Files**: `math-forge/agents/investigate.md`, `math-forge/agents/problem-researcher.md`
   - **Done when**: Both agents have valid frontmatter with model and tools
