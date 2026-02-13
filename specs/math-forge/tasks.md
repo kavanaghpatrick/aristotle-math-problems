@@ -16,7 +16,7 @@
   - **Verify**: `python3 -c "import json; json.load(open('math-forge/.claude-plugin/plugin.json'))"`
   - **Commit**: `feat(devops): add plugin.json manifest`
 
-- [ ] 1.3 Write database schema with FTS5
+- [x] 1.3 Write database schema with FTS5
   - **Do**: Create `math-forge/data/schema.sql` with the complete knowledge.db schema. Read TECH.md at `/Users/patrickkavanagh/math/ai/tasks/spec/TECH.md` for the full SQL. Must include: PRAGMAs (WAL, foreign_keys), `domains` table (4 seed rows: nt, algebra, combinatorics, analysis), `findings` table (CHECK constraints on finding_type: theorem/technique/failure/false_lemma/computation/mathlib_api/insight; confidence: verified/high/medium/low/disproven; columns for provenance, proof details, failure details), `strategies` table (outcome CHECK: proven/partial/failed/in_flight/untried), `problems` table (status CHECK: open/partial/proven/disproven/abandoned), `queue_cache` table, FTS5 virtual table `findings_fts` (content=findings, content_rowid=id, tokenize='porter unicode61', columns: title, description, problem_id UNINDEXED, theorem_name, theorem_statement, proof_technique, tags, why_failed), 3 FTS5 sync triggers, 11 indexes, 4 views (v_proven_techniques, v_failed_approaches, v_problem_dashboard, v_near_miss_findings).
   - **Files**: `math-forge/data/schema.sql`
   - **Done when**: `sqlite3 :memory: < math-forge/data/schema.sql` succeeds
