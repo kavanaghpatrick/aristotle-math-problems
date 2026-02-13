@@ -83,7 +83,7 @@
   - **Verify**: `python3 -c "import json; d=json.load(open('math-forge/hooks/hooks.json')); assert 'SessionStart' in d['hooks']"`
   - **Commit**: `feat(hooks): add hooks.json configuration`
 
-- [ ] 3.2 Write SessionStart context-loader hook
+- [x] 3.2 Write SessionStart context-loader hook
   - **Do**: Create `math-forge/hooks/scripts/context-loader.sh`. Read TECH.md "Hook Implementations". Must: resolve DB paths, auto-init knowledge.db if missing, query tracking.db (in-flight count, completed-unfetched, recent proven), query knowledge.db (total findings, recent finding), build ACTION ITEMS, format as plain text with [math-forge] header, output JSON with hookSpecificOutput.additionalContext, inject scripts/ into PATH via CLAUDE_ENV_FILE, complete in <5s, handle missing DBs gracefully.
   - **Files**: `math-forge/hooks/scripts/context-loader.sh`
   - **Done when**: Script exits 0 and outputs valid JSON
