@@ -104,7 +104,7 @@
   - **Verify**: `python3 math-forge/scripts/extract_findings.py submissions/nu4_final/slot612_ft_p3_quartic_residue_result.lean --db /tmp/test_ext.db 2>&1 | grep -q 'Extracted' && rm -f /tmp/test_ext.db`
   - **Commit**: `feat(extraction): add .lean result extraction pipeline`
 
-- [ ] 3.5 [VERIFY] Verify hooks and extraction work correctly
+- [x] 3.5 [VERIFY] Verify hooks and extraction work correctly
   - **Do**: Test context-loader JSON output, lean-validator sorry blocking, extraction from slot612 (8 theorems, 0 sorry)
   - **Files**: (read-only)
   - **Done when**: All 3 produce correct output
@@ -113,14 +113,14 @@
 
 ## Phase 4: Skills + Commands + Agents
 
-- [ ] 4.1 [P] Write skills (number-theory, open-problems, proof-strategies)
+- [x] 4.1 [P] Write skills (number-theory, open-problems, proof-strategies)
   - **Do**: Create 3 skill files in `math-forge/skills/` with YAML frontmatter (name, description with trigger keywords) and body with domain-specific KB query guidance and mk command examples. number-theory.md: NT findings, FT/Erdos/Wolstenholme areas. open-problems.md: KB-informed workflow, PRIME DIRECTIVE, prior knowledge section. proof-strategies.md: technique comparison, cross-domain transfer.
   - **Files**: `math-forge/skills/number-theory.md`, `math-forge/skills/open-problems.md`, `math-forge/skills/proof-strategies.md`
   - **Done when**: All 3 skills have valid frontmatter and mk examples
   - **Verify**: `ls math-forge/skills/*.md | wc -l`
   - **Commit**: `feat(skills): add number-theory, open-problems, proof-strategies skills`
 
-- [ ] 4.2 [P] Write slash commands (search, knowledge, stats, failed)
+- [x] 4.2 [P] Write slash commands (search, knowledge, stats, failed)
   - **Do**: Create 4 command files in `math-forge/commands/` with YAML frontmatter and step-by-step instructions. search.md: runs mk search, synthesizes. knowledge.md: runs mk find, comprehensive report. stats.md: runs mk stats, dashboard. failed.md: runs mk failed, warns against repeating.
   - **Files**: `math-forge/commands/search.md`, `math-forge/commands/knowledge.md`, `math-forge/commands/stats.md`, `math-forge/commands/failed.md`
   - **Done when**: All 4 commands have valid frontmatter
