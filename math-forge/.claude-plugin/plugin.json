@@ -1,0 +1,6 @@
+{
+  "name": "math-forge",
+  "version": "0.1.0",
+  "description": "Mathematical knowledge infrastructure for theorem proving. Compounds Aristotle proof results into searchable, structured knowledge to inform future proof sketches. FTS5-powered search across proven theorems, proof strategies, and open problem state.",
+  "author": "Patrick Kavanagh"
+}

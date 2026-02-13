@@ -9,7 +9,7 @@
   - **Verify**: `test -d math-forge/.claude-plugin && test -d math-forge/data && test -d math-forge/hooks/scripts && test -d math-forge/scripts && test -d math-forge/tests/fixtures && echo PASS`
   - **Commit**: `feat(devops): create math-forge plugin directory structure`
 
-- [ ] 1.2 Write plugin.json manifest
+- [x] 1.2 Write plugin.json manifest
   - **Do**: Create `math-forge/.claude-plugin/plugin.json` with name "math-forge", version "0.1.0", description about mathematical knowledge infrastructure, author "Patrick Kavanagh".
   - **Files**: `math-forge/.claude-plugin/plugin.json`
   - **Done when**: Valid JSON with name, version, description, author
