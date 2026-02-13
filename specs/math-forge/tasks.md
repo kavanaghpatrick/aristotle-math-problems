@@ -39,7 +39,7 @@
 
 ## Phase 2: Core Tools (migration + CLI)
 
-- [ ] 2.1 Write migration script
+- [x] 2.1 Write migration script
   - **Do**: Create `math-forge/scripts/migrate_tracking.py` that migrates from `submissions/tracking.db` to knowledge.db. Read TECH.md "Migration & Bootstrap" section. Must: accept --tracking-db and --knowledge-db args, migrate proven_theorems→findings (type=theorem, confidence=verified), false_lemmas→findings (type=false_lemma, confidence=disproven), failed_approaches→findings (type=failure, confidence=high), candidate_problems→problems table. Use INSERT OR IGNORE. Map domains by keywords. Extract slot numbers from filenames. Print summary. Handle missing tables gracefully.
   - **Files**: `math-forge/scripts/migrate_tracking.py`
   - **Done when**: Script runs on real tracking.db and reports counts
