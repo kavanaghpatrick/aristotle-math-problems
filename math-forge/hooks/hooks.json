@@ -1,0 +1,30 @@
+{
+  "description": "Math-forge lifecycle hooks: session briefing, Lean file validation",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/context-loader.sh",
+            "timeout": 5,
+            "statusMessage": "Loading math-forge knowledge context..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lean-validator.sh",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

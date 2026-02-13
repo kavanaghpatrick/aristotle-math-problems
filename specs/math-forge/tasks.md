@@ -67,7 +67,7 @@
   - **Verify**: `math-forge/scripts/mk stats 2>&1`
   - **Commit**: `feat(cli): implement mk find, strategies, failed, stats`
 
-- [ ] 2.5 [VERIFY] Verify migration + CLI end-to-end
+- [x] 2.5 [VERIFY] Verify migration + CLI end-to-end
   - **Do**: Full pipeline: init DB → migrate real tracking.db → mk search "erdos" → mk stats → mk find "ft_p3"
   - **Files**: (read-only)
   - **Done when**: mk search finds migrated data, mk stats shows non-zero
@@ -76,7 +76,7 @@
 
 ## Phase 3: Hooks + Extraction
 
-- [ ] 3.1 Write hooks.json configuration
+- [x] 3.1 Write hooks.json configuration
   - **Do**: Create `math-forge/hooks/hooks.json` with SessionStart hook (matcher: startup|resume, timeout: 5, command: context-loader.sh) and PostToolUse hook (matcher: Write|Edit, timeout: 3, command: lean-validator.sh). Use ${CLAUDE_PLUGIN_ROOT} paths.
   - **Files**: `math-forge/hooks/hooks.json`
   - **Done when**: Valid JSON matching Claude Code hooks schema
