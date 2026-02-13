@@ -90,14 +90,14 @@
   - **Verify**: `chmod +x math-forge/hooks/scripts/context-loader.sh && math-forge/hooks/scripts/context-loader.sh 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); print('OK' if 'hookSpecificOutput' in d else 'FAIL')"`
   - **Commit**: `feat(hooks): add SessionStart context-loader hook`
 
-- [ ] 3.3 Write PostToolUse lean-validator hook
+- [x] 3.3 Write PostToolUse lean-validator hook
   - **Do**: Create `math-forge/hooks/scripts/lean-validator.sh`. Must: read JSON from stdin, exit 0 for non-.lean files, detect sorry replacement (old has proof tactics, new has sorry → block with decision:block), detect false lemma references (advisory warning), handle missing jq (grep fallback), complete in <3s, always exit 0 unless blocking.
   - **Files**: `math-forge/hooks/scripts/lean-validator.sh`
   - **Done when**: Blocks sorry replacement, allows non-.lean, warns on false lemmas
   - **Verify**: `chmod +x math-forge/hooks/scripts/lean-validator.sh && echo '{"tool_input":{"file_path":"x.py"}}' | math-forge/hooks/scripts/lean-validator.sh; echo "exit:$?"`
   - **Commit**: `feat(hooks): add PostToolUse lean-validator hook`
 
-- [ ] 3.4 Write result extraction pipeline
+- [x] 3.4 Write result extraction pipeline
   - **Do**: Create `math-forge/scripts/extract_findings.py`. Read TECH.md "Result Extraction Pipeline". Must: CLI with `<file.lean> [--slot N] [--problem-id ID] [--db PATH]`, auto-detect slot and problem_id from filename, regex parse declarations/imports/sorry/axioms/tactics, infer domain from imports, generate findings (one per proven theorem, one technique finding for 0-sorry files, one failure for high-sorry), INSERT OR IGNORE into knowledge.db, update problems table, print summary.
   - **Files**: `math-forge/scripts/extract_findings.py`
   - **Done when**: Script extracts findings from a real .lean file
