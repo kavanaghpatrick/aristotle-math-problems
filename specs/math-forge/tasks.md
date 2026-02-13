@@ -23,7 +23,7 @@
   - **Verify**: `sqlite3 /tmp/test_mf.db < math-forge/data/schema.sql && sqlite3 /tmp/test_mf.db "PRAGMA integrity_check; SELECT COUNT(*) FROM domains;" && rm /tmp/test_mf.db`
   - **Commit**: `feat(database): add knowledge.db schema with FTS5`
 
-- [ ] 1.4 Create .gitignore and bootstrap script
+- [x] 1.4 Create .gitignore and bootstrap script
   - **Do**: Create `math-forge/.gitignore` (exclude data/*.db, *.pyc, __pycache__/). Create `math-forge/scripts/bootstrap.sh` that creates knowledge.db from schema.sql, runs migration, runs mk stats. chmod +x.
   - **Files**: `math-forge/.gitignore`, `math-forge/scripts/bootstrap.sh`
   - **Done when**: .gitignore excludes DB files, bootstrap.sh is executable
