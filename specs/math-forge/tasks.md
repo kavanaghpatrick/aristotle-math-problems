@@ -46,7 +46,7 @@
   - **Verify**: `python3 math-forge/scripts/migrate_tracking.py --tracking-db submissions/tracking.db --knowledge-db /tmp/test_migrate.db 2>&1 | grep -q 'Migrated' && rm -f /tmp/test_migrate.db`
   - **Commit**: `feat(migration): add tracking.db to knowledge.db migration script`
 
-- [ ] 2.2 Write mk CLI tool — core framework
+- [x] 2.2 Write mk CLI tool — core framework
   - **Do**: Create `math-forge/scripts/mk` as executable bash script. Read TECH.md "KB CLI Tool" and UX.md "Command Design". Reference gpu-forge `kb` at `/tmp/gpu-forge/scripts/kb`. Must have: shebang, set -uo pipefail, 3-level DB resolution (MATH_FORGE_DB > CLAUDE_PLUGIN_ROOT > script-relative), escape_sql(), run_sql(), TTY color detection ([ -t 1 ] && [ -z "${NO_COLOR:-}" ]), error formatting ([math-forge] ERROR: ...), case dispatcher for: search, find, strategies, failed, stats, init, help. mk with no args shows help.
   - **Files**: `math-forge/scripts/mk`
   - **Done when**: `mk help` shows usage, all subcommand stubs exist
