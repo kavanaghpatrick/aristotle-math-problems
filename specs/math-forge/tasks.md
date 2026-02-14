@@ -171,7 +171,7 @@
   - **Verify**: `grep -l 'math-forge\|extract_findings\|mk search' .claude/commands/*.md CLAUDE.md 2>/dev/null | wc -l`
   - **Commit**: `feat(integration): integrate math-forge with existing commands`
 
-- [ ] 5.5 Run bootstrap and verify full system
+- [x] 5.5 Run bootstrap and verify full system
   - **Do**: Full bootstrap: create knowledge.db, migrate, verify mk commands, verify hooks, run BATS tests
   - **Files**: (system verification)
   - **Done when**: KB seeded, all mk commands work, tests pass
