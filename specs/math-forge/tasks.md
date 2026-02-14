@@ -134,7 +134,7 @@
   - **Verify**: `ls math-forge/agents/*.md | wc -l`
   - **Commit**: `feat(agents): add investigate and problem-researcher agents`
 
-- [ ] 4.4 [VERIFY] Verify all plugin components present
+- [x] 4.4 [VERIFY] Verify all plugin components present
   - **Do**: Check: plugin.json, schema.sql, mk executable, hooks.json, both hook scripts, 3 skills, 4 commands, 2 agents
   - **Files**: (read-only)
   - **Done when**: All components exist
@@ -143,7 +143,7 @@
 
 ## Phase 5: Testing + Integration
 
-- [ ] 5.1 Write test helper and fixtures
+- [x] 5.1 Write test helper and fixtures
   - **Do**: Create test infrastructure: `math-forge/tests/test_helper.bash` (PLUGIN_ROOT/MK exports, setup_test_db/teardown_test_db with sample data), `tests/fixtures/sample_proven.lean` (minimal 0-sorry file), `tests/fixtures/sample_failed.lean` (file with 3 sorry).
   - **Files**: `math-forge/tests/test_helper.bash`, `math-forge/tests/fixtures/sample_proven.lean`, `math-forge/tests/fixtures/sample_failed.lean`
   - **Done when**: test_helper sources without errors, fixtures exist
