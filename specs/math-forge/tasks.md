@@ -150,7 +150,7 @@
   - **Verify**: `bash -c 'source math-forge/tests/test_helper.bash && echo OK'`
   - **Commit**: `feat(testing): add test helper and fixtures`
 
-- [ ] 5.2 Write BATS tests for mk CLI
+- [x] 5.2 Write BATS tests for mk CLI
   - **Do**: Create 4 BATS test files: test_mk_search.bats (6 cases), test_mk_find.bats (4 cases), test_mk_stats.bats (3 cases), test_mk_utils.bats (3 cases). Each loads test_helper and uses setup/teardown.
   - **Files**: `math-forge/tests/test_mk_search.bats`, `math-forge/tests/test_mk_find.bats`, `math-forge/tests/test_mk_stats.bats`, `math-forge/tests/test_mk_utils.bats`
   - **Done when**: `bats math-forge/tests/test_mk_*.bats` runs
