@@ -164,7 +164,7 @@
   - **Verify**: `cd math-forge && bats tests/test_golden_queries.bats 2>&1 | tail -3`
   - **Commit**: `feat(testing): add hook tests and golden queries`
 
-- [ ] 5.4 Integrate with existing commands
+- [x] 5.4 Integrate with existing commands
   - **Do**: Modify existing project commands: add extraction step to /project:fetch and /project:process-result (after audit, call extract_findings.py), add KB query step to /project:sketch (mk search + mk failed before writing), add math-forge section to CLAUDE.md.
   - **Files**: `.claude/commands/fetch.md`, `.claude/commands/sketch.md`, `.claude/commands/process-result.md`, `CLAUDE.md`
   - **Done when**: Commands reference math-forge

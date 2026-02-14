@@ -26,7 +26,7 @@ Aristotle is a world-class **proof co-discoverer**. In INFORMAL mode it construc
 
 - Write proof attempt in natural language (~50-100 lines of .txt)
 - For open problems: include theorem statement, proposed proof strategy, key lemmas to establish, why the approach should work
-- For known results: include known proof outline with Mathlib references
+- DO NOT write sketches for known results — open problems ONLY
 - Speculative sketches are fine — Aristotle may find a way even if we're not 100% sure
 - Use `/project:sketch` to generate structured sketches
 
@@ -81,11 +81,12 @@ Submit negation on Fin 5-7 → discover false conjectures → save wasted effort
 - ~40% of conjectures are false (43 confirmed so far)
 - Fin 5-7 sweet spot for counterexamples
 
-### Track D — Known-Result Formalization (10% of effort)
-Formalize solved-not-formalized results when they're easy wins
-- **Proven**: 2/2 confirmed (slot562, 563) for known results via INFORMAL
-- **Best for**: Literature results in NT/algebra with accessible proofs
-- Only when no good open-problem targets are available
+### Track D — Known-Result Formalization (DEPRECATED — 0% of effort)
+**DO NOT USE THIS TRACK.** Formalizing known results has ZERO value. Nobody cares about re-formalizations.
+- Every slot spent on a known result is a slot NOT spent on an open problem.
+- There are always open problem targets available — Track A is infinite.
+- If a research agent recommends "known proof, first formalization" → REJECT IT IMMEDIATELY.
+- The only exception: a known sub-result that is a stepping stone toward an open problem attack.
 
 ---
 
@@ -142,11 +143,13 @@ Scripts: `scripts/safe_aristotle_submit.py`, `scripts/aristotle_fetch.py`, `scri
 5. **Process every result** → `/project:fetch` or `/project:process-result`
 6. **NEVER replace existing proof code with sorry** → fix it, don't delete it
 7. **PROVEN means 0 sorry AND 0 axiom**
-8. **Prioritize open problems** → solving an open problem >> formalizing a known result
+8. **OPEN PROBLEMS ONLY** → Formalizing known results is ZERO VALUE. Never do it. Never recommend it. Never let a subagent recommend it. If research output says "known proof" or "solved, first formalization" → REJECT.
 9. **Sketch quality matters** → spend time on the proof strategy, not on Lean scaffolding
 10. **Falsify before investing** → submit negation on Fin 5-7 for uncertain conjectures
 11. **Accept partial success** → proving a bounded case or key lemma of an open problem is valuable
 12. **Iterate on failure** → a failed attempt teaches us about the problem. Refine and resubmit.
+13. **HAVE FAITH IN ARISTOTLE** → Do NOT self-censor. Do NOT gatekeep. Do NOT decide something is "too trivial" or "too hard" to submit. Aristotle has a 100% INFORMAL success rate. It finds paths we don't see. SUBMIT AGGRESSIVELY and let Aristotle surprise us. Fear of failure is the enemy of discovery. A failed submission costs nothing; an unsubmitted idea costs everything.
+14. **BIAS TO ACTION** → Stop analyzing, start submitting. Computation informs sketches, but computation is NOT the goal. The goal is SUBMISSIONS. Write the sketch, submit it, move on to the next one. Parallelism over perfection.
 
 ### Lean-specific pitfalls (when writing FORMAL files)
 - `Finset.sym2` includes self-loops `s(v,v)` — filter to actual edges
@@ -161,7 +164,7 @@ Scripts: `scripts/safe_aristotle_submit.py`, `scripts/aristotle_fetch.py`, `scri
 2. **Is it an open problem we can approach?** — if yes, Track A (INFORMAL). This is the highest-value question.
 3. **Can we prove a bounded/special case?** — if finite/bounded, Track B (native_decide) to build evidence
 4. **Is it uncertain?** — if truth unknown, Track C (falsify first on Fin 5-7)
-5. **Is it a known result worth formalizing?** — Track D, only if no good open targets exist
+5. ~~Is it a known result worth formalizing?~~ — **NO. NEVER. Track D is dead. Move on to the next open problem.**
 
 **Problem selection criteria**:
 - Is it an OPEN problem? → Highest priority. Novel contribution to mathematics.
@@ -169,9 +172,16 @@ Scripts: `scripts/safe_aristotle_submit.py`, `scripts/aristotle_fetch.py`, `scri
 - Is it NT/algebra? → 75-100% AI success. Combinatorics? → 7-50%. Domain matters.
 - Is there partial progress? → Bounded cases, reductions, related results all help
 - Can computation inform the proof? → Witnesses, patterns, exhaustive checks build confidence
-- Already in Mathlib? → Skip (re-proof has near-zero value)
+- Already in Mathlib? → Skip (re-proof has zero value)
+- Is it a known/solved result? → **SKIP. ZERO VALUE. NO EXCEPTIONS.** Don't dress it up as "novel formalization" — it's still a known result.
 
 **Kill list:** Never resubmit problems with 5+ failed attempts without fundamentally new approach.
+
+**Subagent prompt rules** (MANDATORY for all research/explore agents):
+- Every research agent prompt MUST include: "We ONLY target OPEN/UNSOLVED problems. Known-result formalizations have ZERO value — do NOT recommend them."
+- Filter all agent output: if a recommendation says "solved", "known proof", "classical result", "first formalization", "novel formalization of known result" → DISCARD IT.
+- Agents optimize for "easiest to prove" which gravitates toward known results. Actively counteract this bias.
+- The only solved results worth mentioning are those that inform an approach to an OPEN problem.
 
 ---
 
@@ -217,6 +227,36 @@ Assembly: `slot549_tuza_nu4_assembly.lean`. Paused — pursuing higher-amenabili
 | **Rust/Python** | Compute: witnesses, patterns, OEIS extensions, bounded verification |
 
 **Debates:** 4 rounds with full context accumulation. Use for proof strategy development on open problems.
+
+---
+
+## math-forge Plugin
+
+**math-forge** provides a persistent knowledge base, lifecycle hooks, and CLI for the math pipeline.
+
+### Knowledge Base (knowledge.db)
+- Stores findings (theorems, techniques, failures, false lemmas, computations, insights)
+- FTS5 full-text search with BM25 ranking across all finding fields
+- Migrated from tracking.db; updated automatically on result processing
+
+### CLI: `mk` commands
+```
+mk search "<query>"          # FTS5 search findings (BM25 ranked)
+mk find "<problem_id>"       # All findings + strategies for a problem
+mk failed [keyword]          # Failed approaches — check BEFORE sketching
+mk strategies [domain]       # Proven techniques grouped by frequency
+mk stats                     # Knowledge base summary dashboard
+mk init                      # Initialize/reset knowledge.db from schema
+```
+
+### Hooks
+- **SessionStart** (`context-loader.sh`): Injects briefing with in-flight submissions, action items, and recent findings into session context
+- **PostToolUse** (`lean-validator.sh`): Blocks sorry replacement in .lean files, warns on false lemma references
+
+### Integration with Pipeline
+- `/project:fetch` and `/project:process-result` auto-extract findings via `extract_findings.py`
+- `/project:sketch` queries `mk search` and `mk failed` before writing to avoid repeating failed approaches
+- Use `mk failed "<keywords>"` before any new proof attempt to check for known dead ends
 
 ---
 
