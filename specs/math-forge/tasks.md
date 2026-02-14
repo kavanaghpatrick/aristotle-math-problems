@@ -157,7 +157,7 @@
   - **Verify**: `cd math-forge && bats tests/test_mk_search.bats 2>&1 | tail -3`
   - **Commit**: `feat(testing): add mk CLI BATS tests`
 
-- [ ] 5.3 Write hook and golden query tests
+- [x] 5.3 Write hook and golden query tests
   - **Do**: Create: test_session_start_hook.bats (4 cases), test_lean_validator_hook.bats (4 cases), test_golden_queries.bats (8 golden queries for FTS5 relevance regression).
   - **Files**: `math-forge/tests/test_session_start_hook.bats`, `math-forge/tests/test_lean_validator_hook.bats`, `math-forge/tests/test_golden_queries.bats`
   - **Done when**: All test files run
