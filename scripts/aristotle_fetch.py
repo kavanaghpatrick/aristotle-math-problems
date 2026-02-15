@@ -330,7 +330,7 @@ async def cmd_fetch(target: str | None = None):
         return
 
     fetched = 0
-    proven = 0
+    clean_count = 0
 
     for slot_num in sorted(target_slots.keys()):
         info = target_slots[slot_num]
@@ -380,13 +380,13 @@ async def cmd_fetch(target: str | None = None):
 
             fetched += 1
             if verdict == "COMPILED_CLEAN":
-                proven += 1
+                clean_count += 1
         else:
             print(f"  ❌ Download failed")
 
         print()
 
-    print(f"Done: {fetched} fetched, {proven} compiled clean.")
+    print(f"Done: {fetched} fetched, {clean_count} compiled clean.")
 
 
 def cmd_track(slot: int, uuid: str, task: str = ""):

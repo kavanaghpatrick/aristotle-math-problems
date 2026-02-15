@@ -182,7 +182,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
 
 After POC validated, clean up code.
 
-- [ ] 2.1 Clean up variable naming in aristotle_fetch.py
+- [x] 2.1 Clean up variable naming in aristotle_fetch.py
   - **Do**:
     1. Rename `proven` counter variable in `cmd_fetch()` (line 331, 380-381) to `clean_count` for clarity
     2. Ensure all comments reference "compiled clean" not "proven" where they describe submission status
