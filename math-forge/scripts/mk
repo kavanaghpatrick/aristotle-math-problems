@@ -288,16 +288,113 @@ case "${1:-help}" in
         fi
         ;;
 
+    submit)
+        shift
+        if [ $# -eq 0 ]; then
+            echo "Usage: mk submit <file> [args...]"
+            echo "  Delegates to safe_aristotle_submit.py with all args passed through."
+            exit 1
+        fi
+        SUBMIT_SCRIPT="$(dirname "$0")/../../scripts/safe_aristotle_submit.py"
+        if [ ! -f "$SUBMIT_SCRIPT" ]; then
+            echo "[math-forge] ERROR: safe_aristotle_submit.py not found at $SUBMIT_SCRIPT" >&2
+            exit 1
+        fi
+        python3 "$SUBMIT_SCRIPT" "$@"
+        ;;
+
+    status)
+        shift
+        FETCH_SCRIPT="$(dirname "$0")/../../scripts/aristotle_fetch.py"
+        if [ ! -f "$FETCH_SCRIPT" ]; then
+            echo "[math-forge] ERROR: aristotle_fetch.py not found at $FETCH_SCRIPT" >&2
+            exit 1
+        fi
+        python3 "$FETCH_SCRIPT" status "$@"
+        ;;
+
+    partials)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
+            exit 1
+        fi
+        echo "[math-forge] Near-miss submissions (sorry=1)"
+        echo "---"
+        run_sql "$TRACKING_DB" -header -column "
+            SELECT filename, sorry_count, proven_count, notes, completed_at
+            FROM submissions
+            WHERE sorry_count = 1 AND status IN ('near_miss', 'completed')
+            ORDER BY completed_at DESC;
+        "
+        ;;
+
+    resubmittable)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
+            exit 1
+        fi
+        echo "[math-forge] Resubmittable submissions"
+        echo "---"
+        run_sql "$TRACKING_DB" -header -column "
+            SELECT filename, status, sorry_count, proven_count,
+                   COALESCE(output_file, '') as output,
+                   COALESCE(SUBSTR(notes, 1, 80), '') as notes
+            FROM submissions
+            WHERE status IN ('near_miss', 'completed', 'failed')
+              AND sorry_count >= 1
+              AND sorry_count <= 3
+              AND output_file IS NOT NULL
+            ORDER BY sorry_count ASC, completed_at DESC;
+        "
+        ;;
+
+    query)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
+            exit 1
+        fi
+        if [ $# -eq 0 ]; then
+            echo "Usage: mk query <sql>"
+            echo "  Runs read-only SQL against tracking.db."
+            echo "  Example: mk query \"SELECT COUNT(*) FROM submissions WHERE status='compiled_clean'\""
+            exit 1
+        fi
+        SQL="$1"
+        # Safety: reject non-SELECT statements
+        UPPER_SQL=$(echo "$SQL" | tr '[:lower:]' '[:upper:]' | sed 's/^[[:space:]]*//')
+        case "$UPPER_SQL" in
+            SELECT*|WITH*|EXPLAIN*|PRAGMA*)
+                run_sql "$TRACKING_DB" -header -column "$SQL"
+                ;;
+            *)
+                echo "[math-forge] ERROR: mk query only allows SELECT/WITH/EXPLAIN/PRAGMA statements." >&2
+                echo "  For writes, use sqlite3 directly." >&2
+                exit 1
+                ;;
+        esac
+        ;;
+
     help|*)
         echo "mk — Math-forge Knowledge Base CLI"
         echo ""
-        echo "Commands:"
+        echo "Knowledge commands:"
         echo "  search <query> [--limit N] [--domain D]  Search findings (FTS5 + BM25)"
         echo "  find <problem-id>                         Problem-level knowledge report"
         echo "  strategies [domain]                       Proven techniques by frequency"
         echo "  failed [keyword]                          Failed approaches (don't repeat these!)"
         echo "  stats                                     KB dashboard"
         echo "  init                                      Initialize/bootstrap knowledge.db"
+        echo ""
+        echo "Pipeline commands:"
+        echo "  submit <file> [args...]                   Submit sketch to Aristotle"
+        echo "  status [uuid-or-slot]                     Aristotle queue status"
+        echo "  partials                                   Near-miss submissions (sorry=1)"
+        echo "  resubmittable                              Resubmission candidates"
+        echo "  query <sql>                                Read-only SQL on tracking.db"
+        echo ""
         echo "  help                                      Show this help"
         echo ""
         echo "Examples:"
@@ -305,5 +402,9 @@ case "${1:-help}" in
         echo "  mk find ft_p3                             Everything we know about FT p=3"
         echo "  mk failed tuza                            Failed approaches for Tuza"
         echo "  mk strategies nt                          NT proof techniques"
+        echo "  mk submit sketch.txt --informal           Submit a sketch"
+        echo "  mk status                                 Check Aristotle queue"
+        echo "  mk partials                               List near-miss results"
+        echo "  mk query \"SELECT * FROM submissions WHERE target_resolved=1\""
         ;;
 esac

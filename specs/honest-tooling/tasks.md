@@ -149,7 +149,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-6, FR-7, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-4.5_
   - _Design: Step 7_
 
-- [ ] 1.12 Add 5 new mk CLI commands
+- [x] 1.12 Add 5 new mk CLI commands
   - **Do**:
     1. Add `submit)` case branch before `help|*)` in mk (delegates to safe_aristotle_submit.py) per Change 8.1
     2. Add `status)` case branch (delegates to aristotle_fetch.py status) per Change 8.2
