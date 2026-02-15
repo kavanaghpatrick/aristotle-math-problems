@@ -1,0 +1,97 @@
+Erdős Problem 1094: Minimum Prime Factor of Binomial Coefficients
+
+THEOREM STATEMENT (Lean):
+theorem erdos_1094 :
+    {(n, k) : ℕ × ℕ | 0 < k ∧ 2 * k ≤ n ∧ (n.choose k).minFac > max (n / k) k}.Finite
+
+INFORMAL PROOF SKETCH:
+
+We prove that the set of pairs (n,k) with k > 0, n ≥ 2k, and minFac(C(n,k)) > max(n/k, k)
+is finite.
+
+The core strategy is to show that for all sufficiently large values of k and n, the
+binomial coefficient C(n,k) = n!/(k!(n-k)!) must contain a prime factor in the range
+(k, max(n/k, k)], with only finitely many exceptions for small values.
+
+CASE 1: k = 1
+When k = 1, we have C(n,1) = n, so minFac(n) is the smallest prime factor of n.
+For n ≥ 2, we have minFac(n) ≤ n = max(n/1, 1), so there are no exceptions.
+This case contributes no elements to the exceptional set.
+
+CASE 2: k = 2
+When k = 2, we have C(n,2) = n(n-1)/2.
+For n ≥ 4, at least one of n or n-1 has a prime factor ≤ √n.
+Since √n ≤ n/2 for n ≥ 4, and max(n/2, 2) = n/2 for n ≥ 4, we have minFac(C(n,2)) ≤ n/2.
+The only potential exceptions are n ∈ {4, 5, 6, ...} where we need to verify explicitly.
+For n = 4: C(4,2) = 6 = 2·3, minFac = 2 = max(2,2) ✓
+For n = 5: C(5,2) = 10 = 2·5, minFac = 2 ≤ max(2,2) ✓
+For n ≥ 6: Either n or n-1 has a prime factor ≤ n/3 ≤ n/2, so minFac(C(n,2)) ≤ n/2.
+This case contributes finitely many elements (at most {(4,2), (5,2)}) to check.
+
+CASE 3: k ≥ 3 and k² ≥ n (i.e., k ≥ √n, so max(n/k, k) = k)
+By Bertrand's postulate, there exists a prime p with k < p ≤ 2k.
+Since n ≥ 2k, we have p ≤ n.
+The prime p divides n! (the numerator of C(n,k)).
+The prime p does NOT divide k! (since p > k, so p doesn't appear in 1, 2, ..., k).
+The prime p does NOT divide (n-k)! if n-k < p.
+Since n ≥ 2k, we have n-k ≥ k, so we need n-k < p, i.e., n-k < 2k, i.e., n < 3k.
+For 2k ≤ n < 3k, the prime p ∈ (k, 2k] satisfies p > n-k, so p does not divide (n-k)!.
+Therefore p divides C(n,k), and since p ≤ 2k and k² ≥ n implies 2k ≤ 2k² ≤ 2n,
+we have p ≤ k when k is the relevant bound.
+Actually, we need p ≤ max(n/k, k) = k. Since p ≤ 2k, this isn't immediate.
+
+Let me reconsider: For k ≥ 3 with 2k ≤ n ≤ 3k-1, Bertrand gives p ∈ (k, 2k].
+This p divides n! but not k! and not (n-k)! (since n-k < p).
+So p divides C(n,k). We need p ≤ max(n/k, k).
+Since n ≤ 3k-1, we have n/k ≤ 3 - 1/k < 3, and max(n/k, k) = k for k ≥ 3.
+But p can be as large as 2k, which is > k. So this approach needs refinement.
+
+CASE 4: k ≥ 3 and n ≥ 3k (so we have more room)
+For n ≥ 3k, consider the product of k consecutive integers: n, n-1, ..., n-k+1.
+By the Sylvester-Schur theorem, this product (times k!) equals C(n,k)·(k!)² which contains
+a prime factor > k when k ≥ 1 and the integers are all > k.
+
+Alternative approach using n/k large:
+When n/k is large (say n ≥ k²), the interval [n-k+1, n] has length k.
+If k is sufficiently large, this interval contains a prime by the prime number theorem.
+Actually, for k ≥ 3 and n-k+1 > k, Bertrand's postulate applied to the interval gives
+a prime in (n/2, n], which divides C(n,k) and is ≤ n ≤ n/k · k.
+
+REFINED STRATEGY:
+The key is to partition the problem:
+1. For each fixed k, as n → ∞ with n ≥ 2k, the binomial C(n,k) grows without bound
+   and accumulates more prime factors. The interval [n-k+1, n] eventually contains
+   primes, and these primes are ≤ n ≤ n/k · k ≤ n/k · (n/2) when k ≤ n/2.
+
+2. For k ≤ K₀ (some constant), analyze each k separately. For k=1,2 we handled above.
+   For k = 3,4,...,K₀, for each fixed k, as n increases, C(n,k) accumulates prime factors,
+   and the constraint minFac(C(n,k)) > max(n/k, k) can only hold for finitely many n.
+
+3. For k > K₀ large, use Bertrand and refined prime gap estimates to show that
+   [n-k+1, n] contains a prime p ≤ n that doesn't divide k! or (n-k)!, hence divides C(n,k).
+   This prime satisfies p ≤ n. When n/k ≥ k (i.e., n ≥ k²), we have max(n/k, k) = n/k,
+   and we need p ≤ n/k. Since we can find p in the interval [n-k+1, n], if k is small
+   relative to n (say n ≥ k² or n ≥ Ck for large C), then the interval contains a prime
+   ≤ n, and we need that prime ≤ n/k. For n ≥ 2k², any prime in [n/2, n] works since
+   n/2 < n/k when k > 2.
+
+CONCLUSION:
+The exceptional set is contained in:
+- {(n,k) : k = 1} contributes nothing
+- {(n,k) : k = 2, 2 ≤ n ≤ N₂} for some bound N₂ (finite)
+- {(n,k) : 3 ≤ k ≤ K₀, 2k ≤ n ≤ N_k} for some bounds K₀, N₃, ..., N_{K₀} (finite union)
+- {(n,k) : k > K₀, n < n₀(k)} where n₀(k) is bounded (finite for each k, and finitely many k's)
+
+Since the exceptional set is a finite union of finite sets, it is finite.
+
+FORMALIZATION ROADMAP FOR ARISTOTLE:
+1. Define the exceptional set E := {(n,k) : 0 < k ∧ 2k ≤ n ∧ minFac(C(n,k)) > max(n/k, k)}
+2. Prove E ∩ {(n,1)} = ∅ by showing minFac(n) ≤ n for all n ≥ 2
+3. Prove E ∩ {(n,2)} is finite by explicit bound on n
+4. For k ≥ 3, use Bertrand's postulate and prime distribution to show:
+   - For each fixed k, only finitely many n can satisfy the exceptional condition
+   - Alternatively, show that beyond a computable threshold N(k), no n ≥ N(k) is exceptional
+5. Conclude E ⊆ ⋃_{k=1}^{K₀} {(n,k) : n ∈ finite set} for some K₀, hence E is finite
+
+This is an OPEN problem from Erdős. The challenge is making the prime-finding arguments
+constructive and tight enough to show the bounds exist and are computable.

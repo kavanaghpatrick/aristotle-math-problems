@@ -1,0 +1,5 @@
+7c5032b7-bca1-47b7-aa21-f0e1d03e4018
+# Task: Erdos 1052 unitary perfect bounds INFORMAL
+# Mode: INFORMAL
+# Hash: 409e88cd73a2e26c
+# Submitted: 2026-02-13T16:52:00

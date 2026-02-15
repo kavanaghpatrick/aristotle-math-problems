@@ -1,0 +1,5 @@
+3d41cf7a-83c4-4baf-8827-e6e8b02f8e14
+# Task: Sierpinski 5/n parametric reduction INFORMAL
+# Mode: INFORMAL
+# Hash: aa7c343e3f56acde
+# Submitted: 2026-02-14T02:33:44

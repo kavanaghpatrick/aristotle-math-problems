@@ -1,0 +1,4 @@
+5b23ce45-3f90-432e-8104-ce9cd77be21f
+# Task: Singmaster conjecture bounded multiplicity
+# Mode: INFORMAL
+# Submitted: 2026-02-13T18:40:28

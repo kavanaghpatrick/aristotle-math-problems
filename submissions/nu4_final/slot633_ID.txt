@@ -1,0 +1,4 @@
+2f455f85-638e-4bd9-8e76-9f23ecbb68c2
+# Task: FT p=3 synthesis contradiction q≡71mod72
+# Mode: INFORMAL
+# Submitted: 2026-02-13T18:57:20

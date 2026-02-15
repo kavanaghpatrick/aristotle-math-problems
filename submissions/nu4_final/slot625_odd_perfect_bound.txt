@@ -1,0 +1,77 @@
+Odd Perfect Numbers — Euler's Form and Non-Existence for Small omega
+
+PROBLEM STATUS: OPEN. No odd perfect number has ever been found. We prove KNOWN
+structural constraints that have NEVER been formalized in Lean 4 / Mathlib.
+
+DEFINITIONS:
+- Perfect n := sigma(n) = 2*n, where sigma is the sum-of-divisors function.
+- sigma(n) = sum of all positive divisors of n.
+- sigma is multiplicative: sigma(m*n) = sigma(m)*sigma(n) when gcd(m,n)=1.
+- For prime power: sigma(p^a) = 1 + p + p^2 + ... + p^a = (p^{a+1}-1)/(p-1).
+
+KNOWN RESULTS:
+- Euler's form: odd perfect n = p^alpha * m^2 with p prime, p=alpha=1 (mod 4), gcd(p,m)=1.
+- omega(n) >= 9 (at least 9 distinct prime factors). Nielsen 2015.
+- n > 10^{1500}. Ochem & Rao 2012.
+
+TARGET: Prove n = p*q^2 (two distinct primes) cannot be odd perfect. Clean elementary proof.
+
+RESULT 1 — No Odd Perfect of Form p*q^2:
+Theorem: There is no odd perfect number with exactly two distinct prime factors.
+  forall p q : Nat, p.Prime -> q.Prime -> p != q -> Odd (p*q^2) -> ~Perfect (p*q^2)
+
+Proof strategy (complete derivation):
+- Assume sigma(p*q^2) = 2*p*q^2 with p,q distinct odd primes.
+- By multiplicativity: sigma(p)*sigma(q^2) = 2*p*q^2.
+- sigma(p) = p+1, sigma(q^2) = q^2+q+1.
+- Equation: (p+1)(q^2+q+1) = 2*p*q^2.
+- Reduce mod q: (p+1)*1 = 0 (mod q), since q^2+q+1 = 1 mod q and 2pq^2 = 0 mod q.
+- So q | (p+1). Write p+1 = q*r for some positive integer r. Then p = qr-1.
+- Substitute: qr*(q^2+q+1) = 2*(qr-1)*q^2.
+- Divide by q: r*(q^2+q+1) = 2*(qr-1)*q = 2q^2*r - 2q.
+- Rearrange: r*q^2 + r*q + r - 2*q^2*r + 2*q = 0.
+- Factor: r*(q^2 + q + 1 - 2*q^2) + 2*q = 0, i.e., r*(q + 1 - q^2) + 2*q = 0.
+- So r*(q^2 - q - 1) = 2*q.
+- Hence r = 2*q / (q^2-q-1).
+- For q >= 3: q^2-q-1 >= 9-3-1 = 5 > 2q/r... check: q=3: r=6/5, not integer.
+  q=5: r=10/19, not integer. q=7: r=14/41, not integer.
+- In general: for q >= 3, q^2-q-1 > 2 (since q^2-q-1 >= 5). And q^2-q-1 > q for q >= 3
+  (since q^2-2q-1 = (q-1)^2-2 >= 2 for q >= 3). So 2q/(q^2-q-1) < 2. And r >= 1
+  (since p+1 = qr and p >= 2). So r = 1, giving q^2-q-1 = 2q, i.e., q^2-3q-1 = 0.
+  Discriminant = 9+4 = 13, sqrt(13) irrational. No integer solution. CONTRADICTION.
+
+RESULT 2 — sigma of Prime Power:
+Theorem: sigma(p^a) = sum_{i=0}^{a} p^i for prime p.
+  forall p : Nat, p.Prime -> forall a : Nat, Nat.sigma 1 (p^a) = sum (Finset.range (a+1)) (p^.)
+
+Proof strategy: The divisors of p^a are exactly {1, p, p^2, ..., p^a}. By definition
+sigma_1(n) = sum of divisors. Use Nat.divisors_prime_pow from Mathlib which gives
+(p^a).divisors = (Finset.range (a+1)).image (p^.). Then sigma is the sum.
+
+RESULT 3 — sigma Multiplicativity:
+Theorem: For coprime m, n: sigma(m*n) = sigma(m)*sigma(n).
+  forall m n : Nat, Nat.Coprime m n -> Nat.sigma 1 (m*n) = Nat.sigma 1 m * Nat.sigma 1 n
+
+Proof strategy: This is a standard result. Nat.ArithmeticFunction.IsMultiplicative
+should provide this. sigma = ArithmeticFunction.sigma 1, and sigma is multiplicative.
+Mathlib: ArithmeticFunction.IsMultiplicative.sigma.
+
+RESULT 4 — No Perfect Number of Form p^a (prime power):
+Theorem: No prime power is perfect.
+  forall p a : Nat, p.Prime -> 1 <= a -> ~Perfect (p^a)
+
+Proof strategy: sigma(p^a)/p^a = (p^{a+1}-1)/(p^a*(p-1)) = (p-p^{-a})/(p-1) < p/(p-1).
+For p >= 2: p/(p-1) <= 2. Equality iff p=2, but then sigma(2^a) = 2^{a+1}-1 != 2^{a+1}.
+So sigma(p^a) < 2*p^a for all prime p and a >= 1. Actually sigma(p^a) = (p^{a+1}-1)/(p-1).
+For p >= 3: sigma(p^a) <= (p^{a+1})/(p-1) = p^a * p/(p-1) <= p^a * 3/2 < 2*p^a.
+For p = 2: sigma(2^a) = 2^{a+1}-1 < 2^{a+1} = 2*2^a. So sigma(p^a) < 2*p^a always.
+
+Please prove as many of these results as possible. Priority: Result 1 (the main theorem),
+then Results 2-4 as supporting lemmas. Result 1 has a COMPLETE elementary proof above
+using only modular arithmetic and divisibility — no deep theory needed.
+
+MATHLIB REFERENCES:
+- Nat.Perfect or define as sigma(n) = 2*n
+- Nat.ArithmeticFunction.sigma, IsMultiplicative
+- Nat.divisors_prime_pow, Finset.sum
+- Nat.Prime, Nat.Coprime, Nat.dvd_of_mul_dvd_mul

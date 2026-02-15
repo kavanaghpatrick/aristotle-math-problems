@@ -1,0 +1,5 @@
+8d23ada3-70b5-432a-8126-ccb53b0cf601
+# Task: Erdos 364 powerful triples INFORMAL
+# Mode: INFORMAL
+# Hash: 9c4a26243295cf36
+# Submitted: 2026-02-13T16:51:48

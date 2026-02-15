@@ -1,0 +1,5 @@
+892f5f61-abfc-48a8-b06d-24cc26d380e1
+# Task: Erdos 364 ABC-conditional finiteness INFORMAL
+# Mode: INFORMAL
+# Hash: 7165421c201a04c1
+# Submitted: 2026-02-14T02:33:44

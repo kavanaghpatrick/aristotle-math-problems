@@ -1,0 +1,5 @@
+3641622a-a83c-478f-b4e4-098b0f224ce3
+# Task: FT p=3 q≡71mod72 Eisenstein approach INFORMAL
+# Mode: INFORMAL
+# Hash: afd4ddb0bfa43597
+# Submitted: 2026-02-13T16:53:31

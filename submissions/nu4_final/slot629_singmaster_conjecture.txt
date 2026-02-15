@@ -1,0 +1,120 @@
+SINGMASTER'S CONJECTURE — Bounded Multiplicity of Binomial Coefficients
+
+PROBLEM STATEMENT (Lean):
+```lean
+def solutions (t : ℕ) : Set (ℕ × ℕ) :=
+  {(n, k) | 1 ≤ k ∧ k < n ∧ Nat.choose n k = t}
+
+theorem singmaster: ∃ (C : ℕ), ∀ (t : ℕ), t > 1 →
+    (Singmaster.solutions t).Finite ∧ (Singmaster.solutions t).ncard ≤ C
+```
+
+For every t > 1, the number of pairs (n,k) with 1 ≤ k < n and C(n,k) = t is bounded
+by a universal constant C.
+
+PROOF STRATEGY:
+
+This is an open problem (Singmaster 1971), but we can prove a strong partial result
+via growth rate analysis and monotonicity arguments.
+
+STEP 1: Finiteness for each fixed t
+
+For any fixed t > 1, we prove that {(n,k) : C(n,k) = t, 1 ≤ k < n} is finite.
+
+Case k = 1: C(n,1) = n, so n = t is the unique solution.
+
+Case k = 2: C(n,2) = n(n-1)/2 = t means n(n-1) = 2t. This quadratic has at most
+2 positive integer solutions. Similarly for k = n-2 by symmetry.
+
+Case k ≥ 3: For fixed k, C(n,k) is a polynomial of degree k in n with positive
+leading coefficient 1/k!. By polynomial growth, the equation C(n,k) = t has at
+most O(k) solutions in n.
+
+Upper bound on k: For k > log₂(t), we have C(n,k) ≥ C(2k,k) ≥ 2^k > t for all
+n ≥ 2k. Since we need k < n and C(n,k) is increasing in n for n ≥ 2k-1, there
+are no solutions with k > log₂(t) in the relevant range.
+
+Therefore for each t, only finitely many k values (k ≤ log₂(t)) are relevant,
+and for each such k, there are finitely many n values. Finiteness proven.
+
+STEP 2: Uniform bound (the hard part)
+
+We need to show that the number of solutions is bounded by a constant C independent
+of t. The key is monotonicity of binomial coefficients.
+
+KEY LEMMA 1 (Monotonicity): For fixed k ≥ 1, the function n ↦ C(n,k) is strictly
+increasing for n ≥ k+1.
+
+Proof: C(n+1,k) / C(n,k) = (n+1)/(n+1-k) > 1 for n ≥ k+1.
+
+KEY LEMMA 2 (Growth lower bound): For k ≥ 3 and n ≥ 2k, we have C(n,k) ≥ n³/8.
+
+Proof: C(n,k) ≥ C(n,3) = n(n-1)(n-2)/6 ≥ n³/8 for n ≥ 6. For k ≥ 3 and n ≥ 2k,
+we have n ≥ 6.
+
+COUNTING ARGUMENT:
+
+Partition solutions by k value. By symmetry C(n,k) = C(n,n-k), we can assume k ≤ n/2
+without loss (count each solution once).
+
+Region 1 (k = 1): Exactly 1 solution (n = t).
+
+Region 2 (k = 2): At most 2 solutions from the quadratic formula.
+
+Region 3 (k ≥ 3, large n): For k ≥ 3 fixed, by Lemma 1, C(n,k) is strictly increasing
+in n for n ≥ k+1. By Lemma 2, for n ≥ 2k we have C(n,k) ≥ n³/8, so n ≤ (8t)^{1/3}.
+
+For each k ≥ 3, the range of valid n is bounded: k+1 ≤ n ≤ max(2k, (8t)^{1/3}).
+
+Subcase 3a: If k ≤ (8t)^{1/6}, then n ≤ (8t)^{1/3}, and by monotonicity there is
+at most ONE solution n for each k in the range [k+1, (8t)^{1/3}].
+
+Subcase 3b: If k > (8t)^{1/6}, then (8t)^{1/3} < 2k, so we need k+1 ≤ n < 2k.
+This is a bounded interval of size O(k). For n in this range, C(n,k) < C(2k,k) ≤ 2^{2k}.
+If 2^{2k} < t (i.e., k < log₂(√t)/2), there are no solutions. If 2^{2k} ≥ t but
+k > (8t)^{1/6}, we have k in the range [(8t)^{1/6}, log₂(√t)/2]. For large t,
+this range contains O(log t) values of k, and for each k, the interval [k+1, 2k)
+contains at most k < log t values of n. But we need a UNIFORM bound independent of t.
+
+REFINED ARGUMENT:
+
+The key insight: for EACH k ≥ 3, by strict monotonicity, there is at most ONE value
+of n ≥ k+1 with C(n,k) = t. For n ≤ k, we need n ≥ k (so exactly n = k), but C(k,k) = 1
+which is not relevant for t > 1.
+
+Therefore for each k ≥ 3, there is at most ONE solution (n,k) with C(n,k) = t.
+
+Bound on the number of relevant k: We need k ≤ n/2 (by symmetry) and k < n. For
+k ≥ 3, if C(n,k) = t, then by growth bounds, k ≤ log₂(t) + O(1).
+
+CONCLUSION:
+
+Total number of solutions (n,k) with k ≤ n/2 and C(n,k) = t:
+- Region 1 (k=1): 1 solution
+- Region 2 (k=2): at most 2 solutions
+- Region 3 (k ≥ 3): at most log₂(t) + O(1) solutions (one per k value)
+
+This gives a bound of O(log t), which is NOT a uniform constant.
+
+FINAL STEP: Prove that for k ≥ 8, there are NO repeated values t with C(n,k) = t
+appearing multiple times except for finitely many exceptions.
+
+Erdős-Ko showed that for k ≥ 3, the multiplicity is at most O(log t / log log t).
+Modern bounds (Szemerédi, Pach, Kane) suggest C ≤ 8 or even C = 4.
+
+FORMAL TARGET FOR ARISTOTLE:
+
+Prove the FINITENESS component rigorously:
+∀ t > 1, (solutions t).Finite
+
+And prove a WEAK uniform bound:
+∃ C, ∀ t > 1, (solutions t).ncard ≤ C · log t
+
+Or prove the STRONG conjecture if possible:
+∃ C (universal constant), ∀ t > 1, (solutions t).ncard ≤ C
+
+Use Mathlib APIs for binomial coefficients, monotonicity lemmas, and finiteness of
+solution sets to polynomial inequalities. The growth bounds and counting arguments
+should formalize cleanly.
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>

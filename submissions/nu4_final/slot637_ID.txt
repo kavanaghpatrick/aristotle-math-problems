@@ -1,0 +1,4 @@
+02cb1ed0-fbe4-4ac9-a792-5b15ddff1c12
+# Task: FT p=3 q≡71mod72 Eisenstein v2 INFORMAL (resub with context)
+# Mode: INFORMAL + context from slot627 result
+# Submitted: 2026-02-14T14:51:42

@@ -1,0 +1,82 @@
+Egyptian Fraction Decomposition of 5/n — Residue Class Coverage
+
+PROBLEM STATUS: OPEN. Whether 5/n = 1/x + 1/y + 1/z always has a solution in positive
+integers is open (generalization of Erdos-Straus). We prove it for specific residue
+classes, covering all n divisible by 2, 3, or 5. NOT formalized in Lean 4 / Mathlib.
+
+DEFINITIONS:
+- Egyptian fraction: a/b = 1/x1 + 1/x2 + ... + 1/xk with positive integer xi.
+- We seek: 5/n = 1/x + 1/y + 1/z, equivalently 5*x*y*z = n*(y*z + x*z + x*y).
+- This avoids rational arithmetic: pure Nat equation.
+
+KNOWN RESULTS:
+- 4/n decomposition verified for n <= 10^17 (Erdos-Straus conjecture).
+- 5/n believed solvable for all n >= 2.
+- Residue class methods cover most n; difficult cases are primes in certain classes.
+
+TARGET: Prove explicit constructions for n divisible by 2, 3, or 5. Together these
+cover all n not coprime to 30, leaving only n coprime to 30 uncovered.
+
+RESULT 1 — 5/n for 3|n:
+Theorem: For all n with 3|n and n >= 3, there exist positive x,y,z with 5/n = 1/x+1/y+1/z.
+  forall m : Nat, 1 <= m -> ∃ x y z : Nat, 0 < x ∧ 0 < y ∧ 0 < z ∧
+    5*x*y*z = 3*m*(y*z + x*z + x*y)
+
+Proof strategy: Set n = 3m. Take x = m, y = 2m, z = 6m.
+Check: 1/m + 1/(2m) + 1/(6m) = 6/(6m) + 3/(6m) + 1/(6m) = 10/(6m) = 5/(3m). Correct!
+Cross-multiply form: 5*m*(2m)*(6m) = 3m*(2m*6m + m*6m + m*2m)
+  LHS = 60m^3. RHS = 3m*(12m^2 + 6m^2 + 2m^2) = 3m*20m^2 = 60m^3. Verified!
+All denominators positive and distinct for m >= 1.
+
+RESULT 2 — 5/n for 5|n:
+Theorem: For all n with 5|n and n >= 5, there exist positive x,y,z with 5/n = 1/x+1/y+1/z.
+  forall m : Nat, 1 <= m -> ∃ x y z : Nat, 0 < x ∧ 0 < y ∧ 0 < z ∧
+    5*x*y*z = 5*m*(y*z + x*z + x*y)
+
+Proof strategy: Set n = 5m. Then 5/(5m) = 1/m. Take x = 2m, y = 2m+1, z = 2m*(2m+1).
+Check: 1/(2m) + 1/(2m+1) + 1/(2m(2m+1)) = [(2m+1) + 2m + 1] / [2m(2m+1)]
+  = (4m+2)/(2m(2m+1)) = 2(2m+1)/(2m(2m+1)) = 1/m = 5/(5m). Correct!
+Cross-multiply verification: 5*(2m)*(2m+1)*(2m(2m+1)) should equal 5m*(...).
+Simpler: just verify 1/(2m) + 1/(2m+1) + 1/(2m(2m+1)) = 1/m via algebra.
+
+RESULT 3 — 5/n for 2|n:
+Theorem: For all even n >= 2, there exist positive x,y,z with 5/n = 1/x+1/y+1/z.
+  forall m : Nat, 1 <= m -> ∃ x y z : Nat, 0 < x ∧ 0 < y ∧ 0 < z ∧
+    5*x*y*z = 2*m*(y*z + x*z + x*y)
+
+Proof strategy: Set n = 2m. Take x = m, y = m, z = 2m.
+Check: 1/m + 1/m + 1/(2m) = 2/m + 1/(2m) = 4/(2m) + 1/(2m) = 5/(2m). Correct!
+Cross-multiply: 5*m*m*(2m) = 2m*(m*2m + m*2m + m*m) = 2m*(2m^2+2m^2+m^2) = 2m*5m^2.
+LHS = 10m^3, RHS = 10m^3. Verified!
+Note: x = y = m (repeated denominator is allowed).
+
+RESULT 4 — 5/n for small n:
+Theorem: For all n with 2 <= n <= 30, 5/n = 1/x + 1/y + 1/z is solvable.
+Proof strategy: Results 1-3 cover all n divisible by 2, 3, or 5, which handles all
+n <= 30 except n = 1, 7, 11, 13, 17, 19, 23, 29. Explicit witnesses:
+  5/7 = 1/2 + 1/5 + 1/70 (check: 35/70+14/70+1/70=50/70=5/7)
+  5/11 = 1/3 + 1/9 + 1/99 (check: 33/99+11/99+1/99=45/99=5/11)
+  5/13 = 1/3 + 1/12 + 1/156 (check: 52+13+1=66, 66/156=5/12... let me recheck)
+  Actually 5/13: try 1/3+1/17+1/663 = 221/663+39/663+1/663=261/663... no.
+  5/13 = 1/4 + 1/18 + 1/468: check 117/468+26/468+1/468=144/468=... messy.
+  Better: use native_decide or decide for small n verification.
+
+RESULT 5 — Egyptian Fraction Existence (any a/b with a < b):
+Theorem: For any positive a, b with a < b, there exist distinct positive x1,...,xk with
+a/b = sum 1/xi. (This is a known result — the greedy algorithm terminates.)
+This is more general but may be too ambitious. Include as stretch goal.
+
+Please prove as many of these results as possible. Priority order:
+1. Result 1 (5/n for 3|n — cleanest construction, complete proof above)
+2. Result 2 (5/n for 5|n — clean construction)
+3. Result 3 (5/n for 2|n — simplest, allows repeated denominators)
+4. Result 4 (bounded verification — native_decide)
+
+The cross-multiply formulation 5*x*y*z = n*(yz+xz+xy) avoids Rat entirely.
+Each construction gives EXPLICIT witnesses (x,y,z) as functions of n.
+
+MATHLIB REFERENCES:
+- Nat.mul_comm, Nat.mul_assoc, Nat.add_mul
+- Use existsi tactic with explicit witness terms
+- ring or omega for algebraic verification
+- native_decide for Result 4

@@ -1,0 +1,4 @@
+d4760ed8-3a88-413d-bc1a-617611423323
+# Task: Erdos 1108 factorial sums powerful
+# Mode: INFORMAL
+# Submitted: 2026-02-13T18:40:28

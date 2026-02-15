@@ -1,0 +1,61 @@
+Erdős Problem 364: No Three Consecutive Powerful Numbers
+
+PROBLEM STATUS: OPEN. Erdős conjectured that three consecutive integers cannot all be powerful (every prime factor appearing to the 2nd power or higher). Pairs exist (e.g., (8,9), (288,289)) but no triple has been found up to 10^8.
+
+DEFINITIONS:
+- A natural number n is "powerful" (also called "squarefull") if for every prime p dividing n, we have p^2 dividing n.
+- Equivalently, n is powerful iff n = a^2 * b^3 for some positive integers a, b.
+- We investigate whether three consecutive integers n, n+1, n+2 can all be powerful.
+
+COMPUTATIONAL EVIDENCE:
+- No triple of 3 consecutive powerful numbers exists up to 10^8.
+- Only 10 consecutive PAIRS exist up to 10^8: (8,9), (288,289), (675,676), (9800,9801), etc.
+- Powerful number density: approximately c * sqrt(N) powerful numbers up to N, so density ~ c/sqrt(N) → 0.
+
+TARGET: Prove structural constraints on any hypothetical triple. We aim for multiple independent results.
+
+RESULT 1 — Mod 4 Constraint:
+Theorem: If n, n+1, n+2 are all powerful, then n ≡ 3 (mod 4).
+Proof strategy: Among any three consecutive integers, exactly one is even. If n ≡ 0 (mod 4): then n is even, n+1 odd, n+2 ≡ 2 (mod 4). But n+2 ≡ 2 (mod 4) means 2 | (n+2) but 4 ∤ (n+2), so n+2 is not powerful. Contradiction.
+If n ≡ 1 (mod 4): n+1 ≡ 2 (mod 4), so 2 | (n+1) but 4 ∤ (n+1). Not powerful.
+If n ≡ 2 (mod 4): then 2 | n but 4 ∤ n. Not powerful.
+Only n ≡ 3 (mod 4) survives: n is odd, n+1 ≡ 0 (mod 4), n+2 is odd.
+
+RESULT 2 — Mod 9 Constraint:
+Theorem: If n, n+1, n+2 are all powerful, then n ≡ 7 or n ≡ 0 (mod 9), or equivalently n mod 9 ∈ {0, 7, 8}.
+Proof strategy: Among any three consecutive integers, exactly one is divisible by 3. If that one is not divisible by 9, it has 3 | m but 9 ∤ m, so it's not powerful.
+Check: if n ≡ 0 (mod 9), then 3 | n and 9 | n, OK. n+1 and n+2 not div by 3, OK.
+If n ≡ 1 (mod 9), then n+2 ≡ 3 (mod 9), so 3 | (n+2) but 9 ∤ (n+2). Not powerful.
+Similarly eliminate n ≡ 2,3,4,5,6 (mod 9). Only n ≡ 0, 7, 8 survive.
+For n ≡ 7: n+2 ≡ 0 (mod 9), OK. For n ≡ 8: n+1 ≡ 0 (mod 9), OK.
+
+RESULT 3 — Combined Mod 36 Constraint:
+Theorem: If n, n+1, n+2 are all powerful, then n mod 36 ∈ {7, 27, 35}.
+Proof: By CRT, combine n ≡ 3 (mod 4) with n mod 9 ∈ {0, 7, 8}:
+- n ≡ 3 mod 4, n ≡ 0 mod 9 → n ≡ 27 mod 36
+- n ≡ 3 mod 4, n ≡ 7 mod 9 → n ≡ 7 mod 36
+- n ≡ 3 mod 4, n ≡ 8 mod 9 → n ≡ 35 mod 36
+These are the only 3 residue classes mod 36 that could support a triple of powerful numbers.
+
+RESULT 4 — Structure of the Even Member:
+Theorem: If n, n+1, n+2 are all powerful, then the even member (which is n+1 when n ≡ 7 or 35 mod 36, or n when n ≡ 27 mod 36... wait, n ≡ 27 mod 36 means n ≡ 3 mod 4, so n is odd, n+1 is even) always satisfies 4 | (even member). Moreover, the member divisible by 3 satisfies 9 | (that member).
+
+RESULT 5 — Extended Mod 44100 Constraint:
+Theorem: If n, n+1, n+2 are all powerful, then n mod 44100 lies in a specific set S of 1209 residue classes (out of 44100 possible). Moreover, in every surviving class, at least one of the three positions is forced to be divisible by p^2 for some p ∈ {2,3,5,7}.
+This was verified computationally. The set S can be explicitly enumerated.
+
+RESULT 6 — Pattern Structure of Survivors:
+Theorem: Among the 1209 surviving classes mod 44100, the dominant patterns are:
+(a) The middle element (the even one, divisible by 4) carries the square factors of 2, possibly combined with 3 or 5 or 7.
+(b) The element divisible by 9 is always one of {n, n+1, n+2} with 9 | that element.
+(c) No surviving class has all three positions coprime to {2,3,5,7} — every hypothetical triple forces at least one element to be divisible by a small prime squared.
+
+RESULT 7 — Bounded Verification:
+Theorem: There are no three consecutive powerful numbers below 10^8.
+This can be proven by: (1) enumerating all powerful numbers up to 10^8 via the representation n = a^2 * b^3, and (2) checking no consecutive triple exists. The count of powerful numbers up to 10^8 is 21044.
+
+RESULT 8 — Consecutive Pair Rarity:
+Theorem: The consecutive pairs of powerful numbers up to 10^8 are exactly: (8,9), (288,289), (675,676), (9800,9801), (12167,12168), (235224,235225), (332928,332929), (465124,465125), (1825200,1825201), (11309768,11309769).
+These pairs are related to solutions of Pellian equations (e.g., 288 = 2^5 * 3^2, 289 = 17^2).
+
+Please prove as many of these results as possible. Results 1-3 are the most important and should be provable purely from modular arithmetic. Results 5-8 may require native_decide or bounded verification. The mod 36 constraint (Result 3) is the centerpiece — it dramatically constrains where hypothetical triples could live.

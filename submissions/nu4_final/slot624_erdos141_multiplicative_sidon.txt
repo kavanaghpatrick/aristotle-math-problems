@@ -1,0 +1,53 @@
+Sidon Sets — Upper Bound and Structural Properties
+
+PROBLEM STATUS: OPEN (Erdos Problem 44). Related known results NOT yet formalized.
+
+DEFINITIONS:
+IsSidon A := for all i1, j1, i2, j2 in A, i1+i2 = j1+j2 implies {i1,i2} = {j1,j2}.
+Already defined in FormalConjecturesForMathlib/Combinatorics/Basic.lean.
+
+KNOWN RESULTS:
+- Upper bound: |A| <= sqrt(N) + N^{1/4} + 1 for A Sidon in {1,...,N} (Lindstrom 1969).
+- Weaker counting bound: |A|(|A|-1)/2 <= N-1 (all pairwise differences distinct in {1,...,N-1}).
+- No 3-AP: Sidon sets avoid 3-term APs (partially proven in formal-conjectures).
+- Singer (1938): Sidon sets of size p+1 in Z/(p^2+p+1)Z for prime p.
+
+TARGET: Prove the counting upper bound, small Sidon verification, and no-3-AP property.
+
+RESULT 1 — Sidon Counting Upper Bound:
+Theorem: If A is a Sidon subset of Finset.Icc 1 N, then A.card * (A.card - 1) <= 2*(N-1).
+Proof strategy: The pairwise difference map f(a,b) = a - b for a > b in A is injective
+by the Sidon property. There are C(|A|,2) = |A|(|A|-1)/2 such pairs. Each difference
+lies in {1,...,N-1}. Injectivity gives |A|(|A|-1)/2 <= N-1. Multiply both sides by 2.
+
+RESULT 2 — Sidon Set Verification:
+Theorem: IsSidon ({1, 2, 4, 8, 13} : Finset Nat)
+Proof strategy: The pairwise sums {a+b : a<=b, a,b in A} = {2,3,5,6,9,10,12,14,15,17,
+21,26,4,8,16} — all distinct. Verify by decide or native_decide on finite Finset.
+
+RESULT 3 — Sidon Implies No 3-AP:
+Theorem: If A is Sidon and a, a+d, a+2d all in A with d > 0, then False.
+Proof strategy: a + (a+2d) = (a+d) + (a+d). By IsSidon: {a, a+2d} = {a+d, a+d},
+forcing a = a+d, contradicting d > 0. (Partially done in formal-conjectures.)
+
+RESULT 4 — Sidon Subset Monotonicity:
+Theorem: If B is Sidon and A subset B, then A is Sidon.
+Proof strategy: Direct from definition — if all sums in B are distinct, restricting
+to A preserves this. (Already proven as IsSidon.subset in formal-conjectures.)
+
+RESULT 5 — Sidon Cardinality Bound (sqrt form):
+Theorem: If A is Sidon in Finset.Icc 1 N and A.card > 0, then A.card <= Nat.sqrt(2*N) + 1.
+Proof strategy: From Result 1, A.card^2 - A.card <= 2N-2, so A.card^2 <= 2N-2+A.card <= 2N+A.card.
+For A.card >= 2: A.card^2 - A.card <= 2N-2, A.card(A.card-1) <= 2(N-1).
+Use Nat.sqrt properties: if k^2 <= 2N then k <= Nat.sqrt(2*N).
+
+Please prove as many of these results as possible. Results 2-4 should be quick wins.
+Result 1 is the main mathematical content — the counting argument. Result 5 follows
+from Result 1 and basic Nat.sqrt reasoning.
+
+MATHLIB REFERENCES:
+- IsSidon (FormalConjecturesForMathlib/Combinatorics/Basic.lean)
+- Finset.card, Finset.Icc, Finset.image
+- Function.Injective for the injectivity argument
+- Nat.sqrt, Nat.sqrt_le_sqrt
+- native_decide / decide for Result 2

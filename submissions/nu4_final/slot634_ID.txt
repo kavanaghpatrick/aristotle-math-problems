@@ -1,0 +1,5 @@
+8d138551-1b24-46cb-88e3-c88820364ea8
+# Task: Erdos 364 cube-center exclusion INFORMAL
+# Mode: INFORMAL
+# Hash: 8caf6aeed844a65b
+# Submitted: 2026-02-14T02:33:22

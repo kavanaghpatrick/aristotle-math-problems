@@ -1,0 +1,142 @@
+INFORMAL PROOF SKETCH: Erdős 364 — ABC Conditional Finiteness of Powerful Triples
+
+THEOREM: Assuming the ABC conjecture, there exist at most finitely many positive integers n
+such that n, n+1, n+2 are all powerful (squarefull) numbers.
+
+BACKGROUND:
+- Erdős Problem 364 (Erdős-Mollin-Walsh conjecture): no three consecutive powerful numbers exist.
+- Computationally verified to 10^22 (OEIS A060355).
+- The ABC conjecture: for coprime a+b=c, rad(abc)^{1+ε} > c for all ε > 0 and sufficiently large c.
+- A number n is powerful iff p|n implies p²|n, equivalently n = a²b³.
+
+PROOF STRATEGY:
+
+Step 1: Key identity.
+  If n, n+1, n+2 are consecutive, then:
+    n(n+2) = (n+1)² - 1
+  So n(n+2) + 1 = (n+1)².
+
+  This gives us the ABC triple: a = n(n+2), b = 1, c = (n+1)².
+  These are coprime: gcd(n(n+2), (n+1)²) = 1 since consecutive integers are coprime.
+
+Step 2: Radical bound for powerful numbers.
+  For any powerful number m, rad(m) ≤ √m.
+  Proof: m = ∏ pᵢ^{eᵢ} with eᵢ ≥ 2. Then rad(m) = ∏ pᵢ ≤ ∏ pᵢ^{eᵢ/2} = √m.
+
+  More precisely: if m = s²t³ (canonical powerful form), then rad(m) | st, so rad(m) ≤ st.
+  Since m = s²t³ ≥ s²t², we get st ≤ √m.
+
+Step 3: Bounding rad(abc).
+  With a = n(n+2), b = 1, c = (n+1)²:
+
+  rad(a) = rad(n(n+2)) = rad(n) · rad(n+2) / rad(gcd(n, n+2)).
+  Since gcd(n, n+2) | 2:
+    If n is odd: gcd(n, n+2) = 1, so rad(a) = rad(n) · rad(n+2).
+    If n is even: gcd(n, n+2) = 2, so rad(a) = rad(n) · rad(n+2) / 2.
+
+  From slot622: n ≡ 3 mod 4, so n is ODD. Thus gcd(n, n+2) = 1.
+
+  With n and n+2 both powerful:
+    rad(n) ≤ √n
+    rad(n+2) ≤ √(n+2)
+  So rad(a) = rad(n) · rad(n+2) ≤ √n · √(n+2) ≤ √(n(n+2)) < n+1.
+
+  rad(b) = rad(1) = 1.
+
+  rad(c) = rad((n+1)²) = rad(n+1).
+  If n+1 is also powerful: rad(n+1) ≤ √(n+1).
+
+  Therefore: rad(abc) = rad(a) · rad(b) · rad(c) < (n+1) · 1 · √(n+1) = (n+1)^{3/2}.
+
+Step 4: Apply ABC.
+  ABC conjecture with ε: for coprime a + b = c with c sufficiently large,
+    c < K_ε · rad(abc)^{1+ε}
+
+  Here c = (n+1)² and rad(abc) < (n+1)^{3/2}.
+
+  So: (n+1)² < K_ε · ((n+1)^{3/2})^{1+ε} = K_ε · (n+1)^{3(1+ε)/2}.
+
+  This requires: 2 < 3(1+ε)/2, i.e., 4/3 < 1+ε, i.e., ε > 1/3.
+
+  For ε > 1/3: the inequality (n+1)² < K_ε · (n+1)^{3(1+ε)/2} holds for all
+  sufficiently large n+1 ONLY IF 2 ≤ 3(1+ε)/2, which requires ε ≥ 1/3.
+
+  Wait — we need the REVERSE: the ABC bound says c < K_ε · rad(abc)^{1+ε}.
+  For this to give a contradiction for large n:
+    (n+1)² < K_ε · (n+1)^{3(1+ε)/2}
+  This is ALWAYS true for large n when 3(1+ε)/2 > 2, i.e., ε > 1/3.
+
+  So ABC does NOT immediately give a contradiction! We need to be more careful.
+
+Step 5: Refined radical bound.
+  The issue is that n+1 might NOT be powerful. We assumed n, n+1, n+2 ALL powerful.
+
+  If all three are powerful, then:
+    rad(n) ≤ √n < √(n+1)
+    rad(n+1) ≤ √(n+1)
+    rad(n+2) ≤ √(n+2) < √(n+3)
+
+  Better ABC triple: use a = n, b = 2, c = n+2 (if gcd(n, n+2, 2) allows).
+  But n is odd (from mod 4), so gcd(n, 2) = 1 and gcd(n+2, 2) = 1. Good.
+  But n + 2 = c and a + b ≠ c here... we need a+b = c.
+
+  Alternative ABC triple: a = 1, b = n(n+2), c = (n+1)².
+  We already used this. The bound gives no contradiction for any ε.
+
+  Better approach: use the PRODUCT form of ABC.
+  Consider the three numbers n, n+1, n+2. Take ABC with:
+    a = n, b = 1, c = n+1  (giving n + 1 = n+1, trivial)
+
+  Actually, the strongest application:
+  Consider n · (n+2) = (n+1)² - 1, i.e., (n+1)² - n(n+2) = 1.
+  ABC triple: (n(n+2), 1, (n+1)²) with c = (n+1)².
+
+  rad(n(n+2) · 1 · (n+1)²) = rad(n) · rad(n+2) · rad(n+1)
+                              ≤ √n · √(n+2) · √(n+1)
+                              < (n+1)^{3/2}
+
+  ABC: (n+1)² < K_ε · ((n+1)^{3/2})^{1+ε} for all ε > 0 and large n+1.
+
+  Contradiction when 2 > 3(1+ε)/2 for some ε > 0, i.e., 4/3 > 1+ε, i.e., ε < 1/3.
+
+  YES! For any ε < 1/3, ABC says:
+    (n+1)² < K_ε · (n+1)^{3(1+ε)/2}
+  Since 3(1+ε)/2 < 3(4/3)/2 = 2, this means (n+1)^{2-3(1+ε)/2} < K_ε.
+  The exponent 2 - 3(1+ε)/2 = (4-3-3ε)/2 = (1-3ε)/2 > 0 when ε < 1/3.
+
+  So (n+1)^{(1-3ε)/2} < K_ε, giving n+1 < K_ε^{2/(1-3ε)}.
+
+  This bounds n+1 by a CONSTANT depending on ε. Taking any ε ∈ (0, 1/3):
+  there are at most finitely many n with n, n+1, n+2 all powerful.
+
+Step 6: Effective version.
+  Under the effective ABC conjecture (Baker's explicit version):
+    c < rad(abc)^{1.63} (unconjectured but plausible for specific families)
+
+  With c = (n+1)² and rad ≤ (n+1)^{3/2}:
+    (n+1)² < (n+1)^{3·1.63/2} = (n+1)^{2.445}
+
+  This gives no bound (2 < 2.445 always holds). Need ε < 1/3 specifically.
+
+  With the Masser-Oesterlé form: for any ε > 0, c < K_ε · rad(abc)^{1+ε}.
+  Take ε = 0.01. Then (n+1)^{(1-0.03)/2} = (n+1)^{0.485} < K_{0.01}.
+  So n < K_{0.01}^{1/0.485} - 1. This is an explicit (though astronomically large) bound.
+
+CONCLUSION:
+  Under the ABC conjecture with any ε < 1/3:
+  - There are at most finitely many powerful triples.
+  - The bound on n is explicitly computable given the ABC constant K_ε.
+  - Combined with computational verification to 10^22, this would prove
+    the full Erdős-Mollin-Walsh conjecture if K_ε is small enough.
+
+UNCONDITIONAL PARTIAL RESULT:
+  Even without ABC, the radical bound rad(n·(n+1)·(n+2)) < (n+1)^{3/2} for
+  powerful triples is a structural constraint. Combined with the mod 36 sieve (slot622),
+  this gives: any powerful triple satisfies both n ≡ 3 mod 4 AND
+  rad(n·(n+1)·(n+2)) < n^{3/2}, a very thin set.
+
+REFERENCES:
+- ABC conjecture: Masser (1985), Oesterlé (1988)
+- Powerful numbers and ABC: Granville, "ABC allows us to count squarefrees" (1998)
+- Computational: no triple below 10^22 (OEIS A060355, Donovan Johnson)
+- Our slot622: mod 36 constraints on powerful triples

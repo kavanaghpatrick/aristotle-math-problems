@@ -3,10 +3,13 @@
 Aristotle Fetch & Status Tool
 
 Usage:
-    python3 scripts/aristotle_fetch.py status          # Show all active/complete/queued jobs
-    python3 scripts/aristotle_fetch.py fetch            # Fetch ALL completed, unfetched results
-    python3 scripts/aristotle_fetch.py fetch 565        # Fetch specific slot
-    python3 scripts/aristotle_fetch.py fetch <uuid>     # Fetch specific UUID
+    python3 scripts/aristotle_fetch.py status              # Show all active/complete/queued jobs
+    python3 scripts/aristotle_fetch.py fetch                # Fetch ALL completed, unfetched results
+    python3 scripts/aristotle_fetch.py fetch 565            # Fetch specific slot
+    python3 scripts/aristotle_fetch.py fetch <uuid>         # Fetch specific UUID
+    python3 scripts/aristotle_fetch.py track <slot> <uuid>  # Create ID file for a slot
+    python3 scripts/aristotle_fetch.py resub <slot> <sketch> [context_slot]
+                                                            # Resubmit with context from prior result
 
 Reads UUIDs from:
   1. submissions/nu4_final/slot*_ID.txt files (primary)
@@ -88,6 +91,11 @@ def load_submission_files() -> dict[int, str]:
 
 def result_exists(slot_num: int) -> Path | None:
     """Check if a result file already exists for this slot."""
+    # Check exact match first (e.g., slot638_result.lean)
+    exact = RESULTS_DIR / f"slot{slot_num}_result.lean"
+    if exact.exists():
+        return exact
+    # Then check with descriptive name (e.g., slot638_erdos364_cube_v2_result.lean)
     for f in RESULTS_DIR.glob(f"slot{slot_num}_*_result.lean"):
         return f
     for f in RESULTS_DIR.glob(f"slot{slot_num}_*_result.*"):
@@ -379,6 +387,64 @@ async def cmd_fetch(target: str | None = None):
     print(f"Done: {fetched} fetched, {proven} proven.")
 
 
+def cmd_track(slot: int, uuid: str, task: str = ""):
+    """Create a properly formatted slot ID file. Prevents filename mangling."""
+    id_file = RESULTS_DIR / f"slot{slot}_ID.txt"
+    from datetime import datetime, timezone
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
+    id_file.write_text(f"{uuid}\n# Task: {task}\n# Submitted: {timestamp}\n")
+    print(f"Tracked slot {slot}: {uuid}")
+    print(f"  File: {id_file}")
+
+
+async def cmd_resub(slot: int, sketch_path: str, context_slot: int | None = None):
+    """Resubmit a sketch with optional context from a previous result. Creates proper ID file."""
+    aristotlelib.set_api_key(get_api_key())
+
+    sketch = Path(sketch_path)
+    if not sketch.exists():
+        print(f"ERROR: Sketch not found: {sketch}")
+        return
+
+    kwargs = {
+        "input_file_path": str(sketch),
+        "project_input_type": aristotlelib.ProjectInputType.INFORMAL,
+        "wait_for_completion": False,
+    }
+
+    # Find context file from previous slot result
+    if context_slot:
+        context_file = result_exists(context_slot)
+        if context_file:
+            kwargs["context_file_paths"] = [str(context_file)]
+            print(f"Using context from slot {context_slot}: {context_file}")
+        else:
+            print(f"WARNING: No result file found for context slot {context_slot}")
+
+    uuid = await aristotlelib.Project.prove_from_file(**kwargs)
+    print(f"Submitted as slot {slot}: {uuid}")
+
+    # Track it properly
+    task_desc = f"Resub of {sketch.stem}"
+    if context_slot:
+        task_desc += f" with context from slot{context_slot}"
+    cmd_track(slot, uuid, task_desc)
+
+    # Update DB
+    try:
+        conn = sqlite3.connect(str(DB_PATH))
+        conn.execute(
+            "INSERT OR REPLACE INTO submissions (filename, uuid, problem_id, status, frontier_id, notes, submitted_at) "
+            "VALUES (?, ?, ?, 'submitted', 'discovery', ?, datetime('now'))",
+            (f"slot{slot}_resub.txt", uuid, f"slot{slot}", task_desc),
+        )
+        conn.commit()
+        conn.close()
+        print(f"DB updated.")
+    except Exception as e:
+        print(f"DB update failed: {e}")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -391,9 +457,22 @@ def main():
     elif cmd == "fetch":
         target = sys.argv[2] if len(sys.argv) > 2 else None
         asyncio.run(cmd_fetch(target))
+    elif cmd == "track":
+        if len(sys.argv) < 4:
+            print("Usage: track <slot> <uuid> [task description]")
+            sys.exit(1)
+        task = " ".join(sys.argv[4:]) if len(sys.argv) > 4 else ""
+        cmd_track(int(sys.argv[2]), sys.argv[3], task)
+    elif cmd == "resub":
+        if len(sys.argv) < 4:
+            print("Usage: resub <new_slot> <sketch_path> [context_slot]")
+            print("Example: resub 642 submissions/nu4_final/slot634_erdos364_cube_center_exclusion.txt 638")
+            sys.exit(1)
+        context = int(sys.argv[4]) if len(sys.argv) > 4 else None
+        asyncio.run(cmd_resub(int(sys.argv[2]), sys.argv[3], context))
     else:
         print(f"Unknown command: {cmd}")
-        print("Use: status | fetch [slot|uuid]")
+        print("Use: status | fetch [slot|uuid] | track <slot> <uuid> [task] | resub <slot> <sketch> [context_slot]")
         sys.exit(1)
 
 

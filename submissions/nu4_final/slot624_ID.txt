@@ -1,0 +1,4 @@
+f6967df4-eee2-41a6-a6a0-76dd966119bf
+# Task: Sidon set counting bound + Singer INFORMAL
+# Mode: INFORMAL
+# Submitted: 2026-02-13T16:56:16

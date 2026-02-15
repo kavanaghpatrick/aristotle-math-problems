@@ -1,0 +1,4 @@
+09573ca3-2012-40e5-9468-dc2a6ec7885e
+# Task: Erdos 825 sigma divisors C>2
+# Mode: INFORMAL
+# Submitted: 2026-02-13T18:40:28

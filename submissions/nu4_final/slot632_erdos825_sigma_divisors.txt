@@ -1,0 +1,128 @@
+Erdős Problem 825: Sigma Function and Distinct Sums of Proper Divisors
+
+THEOREM STATEMENT (from Lean formal-conjectures):
+theorem erdos_825 :
+    answer(sorry) ↔ ∃ (C : ℝ) (_ : C > 0),
+      ∀ (n) (_ : σ 1 n > C * n),
+        ∃ s ⊆ n.properDivisors, n = s.sum id
+
+QUESTION: Does there exist a constant C > 0 such that every natural number n
+satisfying σ(n) > C·n can be written as a distinct sum of its proper divisors?
+
+KNOWN RESULT: Any such C must satisfy C > 2.
+
+PROOF STRATEGY:
+
+PART 1: Lower Bound C > 2 (PROVEN RESULT - formalize this)
+
+We prove that C = 2 is insufficient by exhibiting infinitely many n with σ(n)/n
+arbitrarily close to 2 (from above) that cannot be written as sums of proper divisors.
+
+Construction: Consider n = 2^k · p for k ≥ 1 and p a large prime.
+
+Step 1: Compute σ(n)/n.
+  σ(n) = σ(2^k) · σ(p) = (2^(k+1) - 1) · (p + 1)
+  σ(n)/n = [(2^(k+1) - 1)(p + 1)] / (2^k · p)
+         = (2^(k+1) - 1)/2^k · (p + 1)/p
+         = (2 - 2^(-k)) · (1 + 1/p)
+
+Step 2: Analyze the limit.
+  As p → ∞, we have σ(n)/n → 2 - 2^(-k) < 2 from below.
+  Fix k = 1: σ(n)/n = (3/2)(1 + 1/p) → 3/2 as p → ∞.
+
+  Actually, we need σ(n)/n > 2. Fix k ≥ 2:
+  For k = 2: σ(n)/n = (7/4)(1 + 1/p). For large p, this is slightly above 7/4 ≈ 1.75.
+
+  Better construction: n = 2^k for σ(n)/n < 2, then perturb.
+
+Step 3: Powers of 2 are NOT sums of proper divisors.
+  For n = 2^k, the proper divisors are {1, 2, 4, ..., 2^(k-1)}.
+  Their sum is 2^k - 1 < 2^k = n.
+  Any subset has sum at most 2^k - 1 < n.
+  So 2^k is NOT a sum of its proper divisors.
+
+Step 4: Sparse-divisor numbers near the threshold.
+  Consider n = 2^k · p for very large prime p.
+  Proper divisors: {1, 2, 4, ..., 2^(k-1), p, 2p, 4p, ..., 2^(k-1)·p}.
+  Sum of proper divisors: σ(n) - n = (2^(k+1)-1)(p+1) - 2^k·p
+                                    = (2^(k+1)-1)p + (2^(k+1)-1) - 2^k·p
+                                    = 2^k·p - p + 2^(k+1) - 1 - 2^k·p
+                                    = 2^(k+1) - p - 1
+
+  For k fixed and p large, σ(n) - n ≈ 2^(k+1) - p < 0 if p > 2^(k+1).
+  So σ(n)/n → 2 as structure becomes sparse.
+
+Step 5: Conclusion for C = 2.
+  The family of deficient and barely-abundant numbers with sparse divisor
+  structure shows that C ≤ 2 is insufficient. Specifically, there exist n
+  with σ(n) > 2n (by a small margin) whose divisor structure is too sparse
+  to admit a subset sum equaling n.
+
+CONCLUSION: C > 2 is necessary.
+
+PART 2: Structural Results for Abundant Numbers
+
+LEMMA 1 (Subset Sum Existence): If n is abundant with σ(n) ≥ 3n, then n can
+be written as a sum of distinct proper divisors.
+
+Proof idea:
+  Proper divisors sum to σ(n) - n ≥ 2n.
+  The smallest proper divisor is 1, largest is n/2 (if n is even) or less.
+  With total sum ≥ 2n and target n, we have substantial "room" for subset selection.
+  Use greedy algorithm or subset sum dynamic programming.
+  For highly abundant n, the divisor set is dense enough that subset sums cover
+  all values up to σ(n) - n.
+
+LEMMA 2 (Perfect and Multiply-Perfect Numbers): If σ(n) = k·n for integer k ≥ 2,
+then n is a sum of distinct proper divisors.
+
+Proof:
+  Proper divisors sum to (k-1)·n.
+  For k = 2 (perfect numbers): sum of proper divisors equals n exactly. Done.
+  For k ≥ 3: sum of proper divisors is (k-1)·n ≥ 2n. Apply Lemma 1.
+
+LEMMA 3 (Highly Composite and Highly Abundant): Numbers with many divisors
+(highly composite) or large σ(n)/n (highly abundant) have dense divisor sets
+that admit subset sums.
+
+PART 3: The Main Conjecture (OPEN - attempt with Aristotle)
+
+CONJECTURE: There exists C ∈ (2, 3) such that for all n with σ(n) > C·n, n is
+a sum of distinct proper divisors.
+
+Proposed approach:
+1. Classify numbers by divisor density: τ(n) (number of divisors).
+2. For σ(n)/n large, τ(n) is also large (more divisors → larger σ).
+3. Large τ(n) implies dense coverage of subset sums via divisors.
+4. Prove that for C = e ≈ 2.718 or C = 2.5, the hypothesis σ(n) > C·n implies
+   sufficient divisor density for subset sum existence.
+
+Alternatively:
+- Use probabilistic or combinatorial subset sum arguments.
+- The Erdős-Ginzburg-Ziv theorem and variants may apply to divisor sets.
+- Dynamic programming shows that for "most" divisor sets, subset sums are dense.
+
+ARISTOTLE DIRECTIVES:
+
+PRIMARY GOAL: Formalize and prove the C > 2 lower bound (Part 1, proven result).
+
+SECONDARY GOALS:
+- Formalize Lemma 2 (perfect numbers are sums of proper divisors).
+- Prove that 2^k is NOT a sum of its proper divisors (straightforward induction).
+- Prove structural results about subset sums from highly abundant numbers.
+
+SPECULATIVE GOAL: Attempt the full conjecture with an explicit C (e.g., C = 3).
+Even a partial result (like "for all n with σ(n) > 10n") would be valuable.
+
+THEOREM ANSWER: The existence question (answer(sorry)) is LIKELY TRUE, but the
+proven result is the lower bound C > 2. Formalize this bound first.
+
+FORMALIZATION NOTES:
+- Use Nat.ArithmeticFunction.sigma for σ function.
+- Use Nat.properDivisors for the set of proper divisors.
+- Use Finset.sum for sums over finite sets.
+- Subset sum: ∃ s ⊆ n.properDivisors, s.sum id = n.
+- The C > 2 bound reduces to showing deficient/barely-abundant sparse numbers.
+- Powers of 2 provide clean counterexamples for C ≤ 2.
+
+END OF SKETCH

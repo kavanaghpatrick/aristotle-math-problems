@@ -1,0 +1,4 @@
+0673b4d7-4840-4cf2-940e-c37c10c7354c
+# Task: Erdos 1094 binomial minFac finiteness
+# Mode: INFORMAL
+# Submitted: 2026-02-13T18:40:28

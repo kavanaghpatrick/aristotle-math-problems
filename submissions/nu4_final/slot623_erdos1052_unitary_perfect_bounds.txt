@@ -1,0 +1,63 @@
+Erdős Problem 1052: Structural Bounds on Unitary Perfect Numbers
+
+PROBLEM STATUS: OPEN. It is conjectured that there are only finitely many unitary perfect numbers. The 5 known examples are: 6, 60, 90, 87360, 146361946186458562560000.
+
+DEFINITIONS:
+- For a positive integer n, a unitary divisor d of n satisfies d | n and gcd(d, n/d) = 1.
+- The unitary divisor function σ*(n) = ∑ d where d ranges over unitary divisors of n.
+- If n = p1^a1 * p2^a2 * ... * pk^ak, then σ*(n) = ∏(1 + pi^ai).
+- n is unitary perfect if σ*(n) = 2n.
+
+KNOWN RESULTS:
+- All unitary perfect numbers are even (proven, Wall 1972; also formalized by us in slot567).
+- No odd unitary perfect number exists.
+- The 5 known examples have ω(n) = 2, 3, 3, 6, 24 distinct prime factors.
+- The largest known example was found by Wall in 1988.
+
+TARGET: Prove new structural constraints on unitary perfect numbers that go beyond what's in the literature. We target Tier 2 novelty.
+
+RESULT 1 — Power of Two Divisor Lemma:
+Theorem: If n is a unitary perfect number with n = 2^k * m where m is odd, then (1 + 2^k) | m.
+Proof strategy: Since n is unitary perfect, σ*(n) = 2n.
+σ*(n) = σ*(2^k) * σ*(m) = (1 + 2^k) * σ*(m) (because σ* is multiplicative for coprime arguments).
+Also 2n = 2^{k+1} * m.
+So (1 + 2^k) * σ*(m) = 2^{k+1} * m.
+Since gcd(1 + 2^k, 2^{k+1}) = 1 (because 1+2^k is odd), we need (1 + 2^k) | m.
+
+RESULT 2 — Lower bound on k:
+Theorem: If n = 2^k * m is unitary perfect with m odd, then k ≥ 1.
+Proof: If k = 0, then n is odd, contradicting evenness.
+Moreover, for k = 1: 1 + 2 = 3, so 3 | m. Then σ*(m) = 4m/3.
+For k = 2: 1 + 4 = 5, so 5 | m. Then σ*(m) = 8m/5.
+For k = 3: 1 + 8 = 9, so 9 | m. But 9 = 3^2 and m is squarefree-at-3 only if gcd(9, m/9) = 1...
+
+RESULT 3 — Constraint from σ*(m) = 2^{k+1} * m / (1 + 2^k):
+Theorem: If n = 2^k * m is unitary perfect, then σ*(m)/m = 2^{k+1}/(1 + 2^k).
+This ratio approaches 2 as k → ∞ but is always < 2. For k=1: ratio = 4/3. For k=2: 8/5. For k=3: 16/9.
+Since σ*(m)/m = ∏(1 + 1/p_i^{a_i}) where p_i^{a_i} || m, the product must equal exactly 2^{k+1}/(1+2^k).
+This is a strong Diophantine constraint.
+
+RESULT 4 — Bound on number of prime factors:
+Theorem: If n = 2^k * m is unitary perfect with ω(m) = t (number of distinct odd prime factors of m), then:
+σ*(m)/m = ∏_{i=1}^{t} (1 + 1/p_i^{a_i}) ≤ ∏_{i=1}^{t} (1 + 1/3) = (4/3)^t.
+Also σ*(m)/m = 2^{k+1}/(1+2^k) < 2.
+So (4/3)^t ≥ 2^{k+1}/(1+2^k), giving a lower bound on t in terms of k.
+For example, if k = 1: (4/3)^t ≥ 4/3, so t ≥ 1.
+If k = 10: (4/3)^t ≥ 2048/1025 ≈ 2.0, so t ≥ 3.
+In general, t ≥ ⌈log(2^{k+1}/(1+2^k)) / log(4/3)⌉.
+
+RESULT 5 — Small cases verification:
+Theorem: The unitary perfect numbers with k ≤ 5 (i.e., 2^k || n with k ≤ 5) are exactly {6, 60, 90, 87360}.
+This can be verified computationally by searching all possibilities given the constraints.
+For k=1: n=2m, 3|m, σ*(m)=4m/3. If m=3: σ*(3)=4, 4m/3=4. YES: n=6.
+For k=2: n=4m, 5|m. Search yields n=60 and n=90.
+
+RESULT 6 — Upper bound on prime powers:
+Theorem: If p^a || n (p odd) and n is unitary perfect, then p^a < 2n.
+More usefully: if σ*(n) = 2n and p^a || n, then (1 + p^a) | 2n, so p^a | (2n - σ*(n/p^a) * (1 + p^a - (1+p^a)) ...
+Actually: σ*(n) = (1+p^a) * σ*(n/p^a) = 2n = 2p^a * (n/p^a), so σ*(n/p^a)/(n/p^a) = 2p^a/(1+p^a).
+Since σ*(n/p^a)/(n/p^a) > 1 (as n/p^a > 1 for composite n/p^a), we need 2p^a/(1+p^a) > 1, which gives p^a > 1 (always true).
+The useful direction: σ*(n/p^a)/(n/p^a) < 2 (since it's a product of (1+1/q^b) terms each < 2), so 2p^a/(1+p^a) < 2, giving p^a > 0 (trivial).
+Better: bound using the other prime factors.
+
+Please prove as many of these results as possible, focusing on Results 1, 3, and 4 which give the strongest structural constraints. Result 1 (the power of two divisor lemma) is the most important — it's a clean, provable constraint that directly relates the 2-adic valuation to the odd part's factorization.

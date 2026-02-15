@@ -1,0 +1,272 @@
+Feit-Thompson p=3 Synthesis: Deriving Contradiction for q ≡ 71 (mod 72) via Combined Constraints
+
+PROBLEM STATUS: OPEN. This is the hardest remaining case of Feit-Thompson for p=3.
+The goal is to prove: for all primes q ≡ 71 mod 72, 3^q ≢ 1 (mod A) where A = q² + q + 1.
+
+We ASSUME 3^q ≡ 1 (mod A) and derive a contradiction.
+
+NOTATION: A = q² + q + 1, k = (3^q - 1)/A (the quotient, NOT the multiplicative order).
+Since 3^q ≡ 1 mod A, A | 3^q - 1 and k is a positive integer.
+Note: k is EXPONENTIALLY large in q (roughly 3^q / q²).
+
+PROVEN CONSTRAINTS (all verified in Lean, 0 sorry):
+
+From slot613 (Wieferich-like analysis, 381 lines):
+(C1) k ≡ 2 (mod 12q) — extremely strong congruence
+(C2) v₂(k) = 1 — exactly one factor of 2
+(C3) v₃(k) = 0 — not divisible by 3 (when q ≡ 8 mod 9)
+(C4) k ≥ 4q + 2 — lower bound (actually k ≡ 2 mod 12q and k > 2 forces this)
+(C5) All odd prime factors p of k satisfy p ≡ 1 (mod q)
+(C6) gcd(k, q) = 1
+(C7) Fermat quotient: Q_A(3) ≡ (q+1)·k (mod A)
+(C8) Power sum relation: S₂·(3²-1) ≡ 2·k·A (mod A²), equivalently 4·(S₂/A) ≡ k (mod A)
+(C9) Cyclotomic value: Φ_q(3) = k·A/2
+(C10) Derivative: q·3^{q-1} ≡ q·3^{-1} (mod A)
+
+From slot612 (quartic residue, 160 lines):
+(C11) A ≡ 1 (mod 12)
+(C12) Legendre(3, A) = 1 — 3 is a QR mod A
+(C13) A = x² + 9y² for some positive integers x, y (via Fermat two-squares + 3|b argument)
+(C14) q^{(A-1)/3} ≡ 1 (mod A) — q is a cubic residue mod A
+(C15) 3 = -q²(1-q)² in Z/AZ — algebraic identity
+
+From slot603 (bounded verification):
+(C16) For all primes q < 200,000 with q ≡ 71 mod 72, 3^q ≢ 1 mod A (verified computationally)
+
+WHAT WE NEED: A new constraint (C_new) that contradicts (C1)-(C16).
+
+APPROACH 1 — HIGHER POWER SUMS (S₃, S₄):
+
+The power sum lifting formula (Theorem 3 in slot613) states:
+  S_j · (3^j - 1) ≡ j · k · A (mod A²)
+where S_j = Σ_{i=0}^{q-1} 3^{ij}.
+
+We used j=2 to get (C8): 4·(S₂/A) ≡ k (mod A).
+
+Now apply j=3: S₃·(3³-1) ≡ 3·k·A (mod A²), so 26·(S₃/A) ≡ 3k (mod A).
+And j=4: S₄·(3⁴-1) ≡ 4·k·A (mod A²), so 80·(S₄/A) ≡ 4k (mod A).
+
+Key point: S₃ and S₄ can be independently computed mod A²:
+  S₃ = Σ 3^{3i} = (3^{3q}-1)/(3³-1) = ((3^q)³-1)/26 = (kA+1)³-1)/26
+     = (k³A³ + 3k²A² + 3kA)/26
+
+So S₃/A = (k³A² + 3k²A + 3k)/26.
+Reducing mod A: S₃/A ≡ 3k/26 (mod A).
+Check: 26·(S₃/A) ≡ 26·(3k/26) = 3k ≡ 3k (mod A). Consistent.
+
+This means the j=3 power sum gives the SAME information as the formula predicts.
+
+Try j=5: S₅·(3⁵-1) ≡ 5·k·A (mod A²), so 242·(S₅/A) ≡ 5k (mod A).
+  S₅ = ((3^q)⁵-1)/(3⁵-1) = ((kA+1)⁵-1)/242
+  S₅/A = (binomial expansion...)/242
+  Mod A: S₅/A ≡ 5k/242 (mod A). Again just the formula.
+
+Observation: The power sum formula at level mod A² gives linear constraints in k mod A, which are all consistent. We need to go to mod A³ (or higher) to get QUADRATIC constraints on k.
+
+APPROACH 2 — POWER SUMS MOD A³:
+
+Theorem (to prove): S_j · (3^j - 1) ≡ j·k·A + C(j,2)·k²·A² (mod A³)
+where the j·k·A term is the known one and the k² term is new.
+
+From the binomial expansion of (kA+1)^j:
+  (kA+1)^j = 1 + j·kA + C(j,2)·k²A² + C(j,3)·k³A³ + ...
+
+So (kA+1)^j - 1 = j·kA + C(j,2)·k²A² (mod A³).
+
+For S_j·(3^j-1): We need (3^{jq}-1)/(3^j-1) more carefully.
+  3^{jq} = (kA+1)^j, so 3^{jq}-1 = j·kA + C(j,2)·k²A² (mod A³)
+  3^j - 1: this is just a constant (8, 26, 80, 242, ...).
+
+So S_j = (j·kA + C(j,2)·k²A²)/(A·(3^j-1)) = (j·k + C(j,2)·k²·A)/(3^j-1) mod A.
+
+The S₂/A value mod A gives us: S₂/A ≡ (2k + k²A)/(8) ≡ k/4 (mod A) — same as (C8).
+
+But S₂/A mod A² gives: S₂/A ≡ (2k + k²A)/8 (mod A²).
+This means: S₂/A ≡ k/4 + k²A/8 (mod A²).
+
+And we can compute S₂/A independently:
+  S₂ = Σ 9^i = (9^q - 1)/8 = ((kA+1)² - 1)/8 = (2kA + k²A²)/8
+  S₂/A = (2k + k²A)/8
+
+So S₂/A mod A = 2k/8 = k/4, consistent with (C8).
+And S₂/A mod A² = (2k + k²A)/8.
+
+Now the CROSS-RELATION between S₂ and S₃:
+  S₂² vs S₄: Note (Σ 9^i)² = Σ_{i,j} 9^{i+j}. This is NOT directly S₄.
+
+But there's a Newton identity connecting power sums to symmetric functions.
+
+APPROACH 3 — NORM EQUATIONS IN Z[ω]:
+
+Since A = (q-ω)(q-ω²) in Z[ω], and 3^q ≡ 1 mod A means:
+  3^q ≡ 1 (mod q-ω) in Z[ω]  AND  3^q ≡ 1 (mod q-ω²) in Z[ω]
+
+The quotient k = (3^q - 1)/A in Z can be lifted:
+  3^q - 1 = (q - ω)·α for some α ∈ Z[ω]  (since q-ω | 3^q - 1 in Z[ω])
+  3^q - 1 = (q - ω²)·β for some β ∈ Z[ω]
+
+And k·A = 3^q - 1 means k·(q-ω)·(q-ω²) = (q-ω)·α, so α = k·(q-ω²).
+
+Now 3 = -ω²(1-ω)² in Z[ω]. So:
+  3^q = (-1)^q · ω^{2q} · (1-ω)^{2q}
+
+Since q is odd: 3^q = -ω^{2q} · (1-ω)^{2q}.
+
+The condition 3^q ≡ 1 (mod q-ω) becomes:
+  -ω^{2q} · (1-ω)^{2q} ≡ 1 (mod q-ω)
+
+Now ω ≡ q (mod q-ω) in Z[ω] (since q - ω ≡ 0), so:
+  -q^{2q} · (1-q)^{2q} ≡ 1 (mod q-ω)
+
+This gives us a norm equation: |q^{2q} · (1-q)^{2q} + 1|² ≡ 0 (mod A).
+Wait — more precisely, the element q^{2q}·(1-q)^{2q} + 1 has (q-ω) as a factor in Z[ω].
+
+The NORM of this element is N(q^{2q}·(1-q)^{2q} + 1) = the product of its value and conjugate.
+Since both π = q-ω and π̄ = q-ω² divide it, A | N(q^{2q}·(1-q)^{2q} + 1)/A.
+
+Actually, compute in Z/AZ directly using (C15): 3 = -q²(1-q)² mod A.
+So 3^q = (-1)^q · q^{2q} · (1-q)^{2q} = -q^{2q}·(1-q)^{2q} mod A.
+And 3^q ≡ 1 mod A gives: q^{2q}·(1-q)^{2q} ≡ -1 (mod A).
+
+Combined with (C14): q^{(A-1)/3} ≡ 1 mod A.
+
+So q has order dividing (A-1)/3 in (Z/AZ)*, and q^{2q} · (1-q)^{2q} ≡ -1.
+
+Now (1-q) has some order mod A too. Since (1-q)² ≡ -3/q² mod A (from C15), we get:
+  (1-q)^{2q} = ((1-q)²)^q = (-3/q²)^q = (-1)^q · 3^q / q^{2q} = -1·1/q^{2q} = -1/q^{2q} mod A.
+
+So: q^{2q} · (-1/q^{2q}) ≡ -1 mod A, i.e., -1 ≡ -1 mod A. TAUTOLOGY.
+
+This confirms the algebraic identity is circular at this level. The Eisenstein approach needs to go BEYOND mod A to mod π (working in Z[ω]/πZ[ω]).
+
+APPROACH 4 — MULTIPLICATIVE ORDER PARITY ARGUMENT:
+
+Let d = ord_A(3). Under 3^q ≡ 1 mod A: d | q. Since q is prime: d = 1 or d = q.
+If d = 1: 3 ≡ 1 mod A, but A = q²+q+1 > 3 for q > 1, contradiction.
+So d = q. The multiplicative order of 3 mod A is exactly q.
+
+Now 3^{(A-1)/2} = 3^{q(q+1)/2}. Since d = q:
+  3^{q(q+1)/2} = (3^q)^{(q+1)/2} ≡ 1^{(q+1)/2} = 1 (mod A).
+
+So 3 IS a quadratic residue mod A. Consistent with (C12). No contradiction yet.
+
+What about the Euler criterion at the CUBIC level?
+  3^{(A-1)/3} = 3^{q(q+1)/3}. Since q ≡ 8 mod 9: q+1 ≡ 0 mod 9, so 3 | (q+1)/3.
+  Actually (A-1)/3 = q(q+1)/3 and q ≡ 8 mod 9 means 9 | q+1, so 3 | (q+1)/3.
+  Then 3^{(A-1)/3} = (3^q)^{(q+1)/3} = 1^{(q+1)/3} = 1 mod A.
+
+So 3 is a cubic residue mod A. Consistent. No contradiction.
+
+APPROACH 5 — USING k²A mod A² (Second-order Wieferich):
+
+From Approach 2: S₂/A = (2k + k²A)/8 exactly.
+Also 4·(S₂/A) ≡ k mod A (proven in C8).
+
+But S₂/A is also computable as:
+  S₂/A = (Σ_{i=0}^{q-1} 9^i) / A
+
+And S₂ can be related to the NORM in Z[ω]:
+  S₂ = Σ 9^i = (9^q - 1)/8.
+
+Now 9 = 3², so 9^q = (3^q)² = (kA+1)² = k²A² + 2kA + 1.
+  9^q - 1 = k²A² + 2kA = A(k²A + 2k).
+  S₂ = A(k²A + 2k)/8.
+  S₂/A = (k²A + 2k)/8.
+
+Now from (C1): k = 12qm + 2 for some m ≥ 1.
+  k² = (12qm+2)² = 144q²m² + 48qm + 4.
+  k²A = (144q²m² + 48qm + 4)(q²+q+1).
+
+The value (k²A + 2k)/8 = ((144q²m² + 48qm + 4)(q²+q+1) + 2(12qm+2))/8
+  = ((144q²m² + 48qm + 4)(q²+q+1) + 24qm + 4)/8.
+
+Modulo A = q²+q+1:
+  k²A + 2k ≡ 0 + 2k = 2k (mod A).
+  So S₂/A ≡ 2k/8 = k/4 (mod A). This is (C8) again.
+
+Modulo A²:
+  k²A + 2k ≡ k²A + 2k (mod A²). This IS the full value, no further reduction.
+
+We need a SECOND independent relation involving S₂/A mod A².
+
+APPROACH 6 — p-ADIC VALUATION ON k·A/2 = Φ_q(3):
+
+From (C9): Φ_q(3) = k·A/2. Since A is prime (or assumed prime when checking):
+  v_p(Φ_q(3)) = v_p(k) + v_p(A) + v_p(1/2) for each prime p.
+
+But Φ_q(3) = 1 + 3 + 3² + ... + 3^{q-1} (since q is prime).
+  Φ_q(3) ≡ q (mod 3) since each term 3^i ≡ 0 mod 3 for i ≥ 1, and 3^0 = 1.
+Wait: Φ_q(3) = (3^q - 1)/(3 - 1) = (3^q - 1)/2. And k·A = 3^q - 1.
+So Φ_q(3) = kA/2.
+
+v₃(Φ_q(3)): Φ_q(3) = 1 + 3 + 9 + ... + 3^{q-1}. Mod 3: Φ_q(3) ≡ 1.
+So v₃(Φ_q(3)) = 0. And v₃(kA/2) = v₃(k) + v₃(A) (since v₃(2) = 0).
+From (C3): v₃(k) = 0. And v₃(A): A = q²+q+1, q ≡ 2 mod 3, so A ≡ 4+2+1 = 7 ≡ 1 mod 3, v₃(A) = 0.
+Consistent: 0 = 0 + 0.
+
+v₂(Φ_q(3)) = v₂(kA/2) = v₂(k) + v₂(A) - 1 = 1 + 0 - 1 = 0.
+Check: Φ_q(3) = 1 + 3 + 9 + ... = sum of odd numbers = odd if q odd. Yes, Φ_q(3) is odd. Consistent.
+
+APPROACH 7 — CONTRADICTION VIA FACTORIZATION STRUCTURE:
+
+k = (3^q - 1)/A = (3^q - 1)/(q²+q+1). From (C5), all odd prime factors of k are ≡ 1 mod q.
+From (C1), k ≡ 2 mod 12q, so k = 2·(odd number with all prime factors ≡ 1 mod q).
+The smallest odd prime ≡ 1 mod q is at least q+1 (but must be prime, so ≥ 2q+1 if q > 2).
+
+So k/2 is either 1 or has all prime factors ≥ 2q+1.
+If k/2 = 1, then k = 2, but k ≡ 2 mod 12q and k = 2 means 12q | 0, so q can be anything. But k = 2 means 3^q - 1 = 2A = 2(q²+q+1). For q = 71: 3^71 ≫ 2·(71²+71+1), so k ≫ 2.
+If k/2 ≥ 2q+1, then k ≥ 4q+2, consistent with (C4).
+
+What if we could show k/2 must be prime? Then k/2 ≡ 1 mod q, and k/2 ≡ 1 mod 6 (from k ≡ 2 mod 12), so k/2 ≡ 1 mod 6q. Then k = 2(6qn+1) = 12qn + 2, matching (C1). No contradiction.
+
+What about BOUNDING k modulo A? We have k = (3^q-1)/A. Can we show k ≡ something specific mod A that contradicts k ≡ 2 mod 12q?
+
+From (C8): 4·(S₂/A) ≡ k (mod A) and S₂/A = (k²A + 2k)/8.
+So k ≡ 4·(k²A+2k)/8 = (k²A+2k)/2 mod A.
+  k ≡ k²A/2 + k (mod A).
+  0 ≡ k²A/2 (mod A).
+  0 ≡ k²/2 (mod 1). Tautology.
+
+PROPOSED THEOREM FOR ARISTOTLE:
+
+Given all the above, the most promising avenue is the SECOND-ORDER power sum analysis. Specifically:
+
+Theorem (to prove): Let q be prime with q ≡ 71 mod 72, A = q²+q+1 prime, and 3^q ≡ 1 mod A.
+Define k = (3^q-1)/A. Then:
+
+The element k mod A satisfies k ≡ 2·3^{-1}·q^{-1} (mod A), where the inverses are mod A.
+
+Proof idea: From the explicit computation
+  k = (3^q - 1)/A = (3^q - 1)/(q²+q+1)
+and using 3 ≡ -q²(1-q)² mod A (identity C15):
+  3^q ≡ (-q²(1-q)²)^q = -q^{2q}(1-q)^{2q} mod A.
+So k ≡ (-q^{2q}(1-q)^{2q} - 1)/A mod ... — but this is a lift, not simple mod A.
+
+Alternative: From Fermat's little theorem, 3^{A-1} ≡ 1 mod A. And 3^q ≡ 1 mod A.
+So ord_A(3) = q. Then:
+  3^{q} ≡ 1 mod A
+  3^{2q} ≡ 1 mod A
+  ...
+  3^{q·(q+1)/2} = 3^{(A-1)/2} ≡ 1 mod A (QR, matches C12)
+
+The formal derivative of x^q - 1 at x=3: q·3^{q-1} ≡ q/3 mod A (this is C10).
+Combined with Hensel lifting: the root 3 of x^q ≡ 1 mod A lifts uniquely mod A².
+The "speed" of lifting is measured by k.
+
+From Hensel: if f(x) = x^q - 1, f(3) = 3^q - 1 = kA, f'(3) = q·3^{q-1}.
+Then the lift of the root from mod A to mod A² adjusts by -f(3)/f'(3) = -kA/(q·3^{q-1}).
+This adjustment mod A² is -kA·3/q mod A² (using 3^{q-1} ≡ 3^{-1} mod A).
+
+This means: k ≡ some expression involving q, 3, A mod A.
+Specifically: the adjustment is -k·A·3·q^{-1} mod A², and for it to land on an integer root mod A², we need:
+  k ≡ -kA·3·q^{-1} · (something) mod A.
+
+This is where Aristotle might find the path — the interplay between Hensel lifting at different primes p of k and the constraint (C5) that those primes are ≡ 1 mod q.
+
+PLEASE PROVE: Starting from the hypotheses (q prime, q > 3, q ≡ 71 mod 72, A = q²+q+1 prime, 3^q ≡ 1 mod A), derive as many additional structural constraints on k = (3^q-1)/A as possible, especially:
+
+1. The value of k mod A (using Hensel lifting / power series expansion)
+2. Higher power sum relations S₃/A mod A and S₃/A mod A²
+3. Any constraint from the factorization 3 = -ω²(1-ω)² in Z[ω] combined with A = (q-ω)(q-ω²)
+4. A second-order Wieferich criterion: Q_A(3) mod A, relating to k²
+5. If possible, a CONTRADICTION showing these constraints are incompatible
