@@ -108,7 +108,7 @@ def determine_status(sorry_count, proven_count, has_uuid, lean_content):
             # Check for axiom
             if re.search(r'^axiom\s', lean_content, re.MULTILINE):
                 return 'completed'
-            return 'proven'
+            return 'compiled_clean'
         elif has_uuid:
             return 'completed'
         else:
@@ -164,7 +164,7 @@ def main():
 
             # Check for axioms - mark as incomplete
             has_axiom = bool(re.search(r'^axiom\s', content, re.MULTILINE))
-            if has_axiom and status == 'proven':
+            if has_axiom and status == 'compiled_clean':
                 status = 'completed'
                 if notes:
                     notes = f"HAS AXIOMS. {notes}"
@@ -173,7 +173,7 @@ def main():
 
             # Determine verified status
             verified = None
-            if status == 'proven' and sorry_count == 0:
+            if status == 'compiled_clean' and sorry_count == 0:
                 verified = 1
             elif has_axiom:
                 verified = 0

@@ -80,7 +80,7 @@ def main():
 
         # Determine status
         if sorry_count == 0 and proven_count and proven_count > 0 and not has_axiom:
-            status = 'proven'
+            status = 'compiled_clean'
             verified = 1
         else:
             status = 'completed'

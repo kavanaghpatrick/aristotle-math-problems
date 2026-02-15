@@ -50,7 +50,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-1, AC-1.2_
   - _Design: Step 1 (Changes 1.4-1.7)_
 
-- [ ] 1.4 Update backfill_slots.py status strings
+- [x] 1.4 Update backfill_slots.py status strings
   - **Do**:
     1. Line 111: change `return 'proven'` to `return 'compiled_clean'` (Change 2.1)
     2. Line 167: change `status == 'proven'` to `status == 'compiled_clean'` (Change 2.2)
@@ -62,7 +62,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-5, AC-1.8, AC-6.1_
   - _Design: Step 2_
 
-- [ ] 1.5 Update backfill_all_files.py status string
+- [x] 1.5 Update backfill_all_files.py status string
   - **Do**:
     1. Line 83: change `status = 'proven'` to `status = 'compiled_clean'` (Change 3.1)
   - **Files**: `scripts/backfill_all_files.py`
