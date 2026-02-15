@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Strict audit of all 'proven' files in tracking.db.
+Strict audit of all 'compiled_clean' files in tracking.db.
 
-PROVEN means: 0 sorry, 0 axiom, file exists, no self-loops, no banned Finset.sym2.
+COMPILED CLEAN means: 0 sorry, 0 axiom, file exists, no self-loops, no banned Finset.sym2.
 Anything else gets downgraded.
 """
 
@@ -92,10 +92,10 @@ def main():
     rows = conn.execute("""
         SELECT id, filename, sorry_count, proven_count, status, verified, notes
         FROM submissions
-        WHERE status IN ('proven', 'PROVEN')
+        WHERE status IN ('proven', 'PROVEN', 'compiled_clean')
     """).fetchall()
 
-    print(f"Auditing {len(rows)} files marked as proven...\n")
+    print(f"Auditing {len(rows)} files marked as compiled clean...\n")
 
     stats = {
         "clean": 0,
@@ -177,7 +177,7 @@ def main():
             problematic_files.append((filename, new_status, issue_strs))
 
         elif high_issues:
-            # Flag but keep proven (sym2 usage doesn't necessarily invalidate)
+            # Flag but keep compiled_clean (sym2 usage doesn't necessarily invalidate)
             issue_strs = "; ".join(f"{sev}: {desc}" for sev, desc in high_issues)
             flag_note = f"[AUDIT WARNING: {issue_strs}]"
             print(f"  WARNING: {filename} ({issue_strs})")
@@ -189,7 +189,7 @@ def main():
                 WHERE id=?
             """, (flag_note, flag_note, actual_sorry, actual_proven, row_id))
             stats["flagged_sym2"] += 1
-            # Still considered "proven" but flagged
+            # Still considered "compiled_clean" but flagged
             clean_files.append((filename, f"FLAGGED: {issue_strs}"))
 
         else:
@@ -213,14 +213,14 @@ def main():
     print("AUDIT SUMMARY")
     print(f"{'='*60}")
     print(f"Total files audited:        {len(rows)}")
-    print(f"Truly CLEAN (proven):       {stats['clean']}")
+    print(f"Truly CLEAN (compiled):     {stats['clean']}")
     print(f"Flagged (sym2 warning):     {stats['flagged_sym2']}")
     print(f"Downgraded (has sorry):     {stats['downgraded_sorry']}")
     print(f"Downgraded (has axiom):     {stats['downgraded_axiom']}")
     print(f"Downgraded (self-loops):    {stats['downgraded_self_loop']}")
     print(f"Downgraded (file missing):  {stats['downgraded_missing']}")
     print(f"\n{'='*60}")
-    print("TRULY PROVEN FILES (verified=1, 0 sorry, 0 axiom, no self-loops):")
+    print("COMPILED CLEAN FILES (verified=1, 0 sorry, 0 axiom, no self-loops):")
     print(f"{'='*60}")
     for fname, note in sorted(clean_files):
         marker = "  " if note == "CLEAN" else "⚠ "
@@ -234,12 +234,12 @@ def main():
 
     # Final count
     final_proven = conn.execute(
-        "SELECT COUNT(*) FROM submissions WHERE status IN ('proven', 'PROVEN') AND verified = 1"
+        "SELECT COUNT(*) FROM submissions WHERE status IN ('proven', 'PROVEN', 'compiled_clean') AND verified = 1"
     ).fetchone()[0]
     final_flagged = conn.execute(
-        "SELECT COUNT(*) FROM submissions WHERE status IN ('proven', 'PROVEN') AND (notes LIKE '%AUDIT WARNING%')"
+        "SELECT COUNT(*) FROM submissions WHERE status IN ('proven', 'PROVEN', 'compiled_clean') AND (notes LIKE '%AUDIT WARNING%')"
     ).fetchone()[0]
-    print(f"\nFinal count: {final_proven} verified proven + {final_flagged} proven-but-flagged")
+    print(f"\nFinal count: {final_proven} verified compiled clean + {final_flagged} compiled-but-flagged")
 
     conn.close()
 

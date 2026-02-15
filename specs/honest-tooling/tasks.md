@@ -78,7 +78,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - **Done when**: All BATS tests pass
   - **Commit**: `chore(honest-tooling): pass quality checkpoint` (only if fixes needed)
 
-- [ ] 1.7 Update audit_proven.py SQL and display strings
+- [x] 1.7 Update audit_proven.py SQL and display strings
   - **Do**:
     1. Lines 3-5: update docstring from "proven" to "compiled_clean" (Change 4.3)
     2. Line 95: add `'compiled_clean'` to IN clause (Change 4.1)
