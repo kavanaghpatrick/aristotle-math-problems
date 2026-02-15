@@ -20,7 +20,7 @@ SORRY_COUNT=$(grep -c "sorry" "$FILE" 2>/dev/null || echo "0")
 echo "   Found: $SORRY_COUNT"
 
 if [[ $SORRY_COUNT -eq 0 ]]; then
-    echo "   ✅ No sorry found - claimed PROVEN"
+    echo "   ✅ No sorry found - COMPILED CLEAN"
     CLAIMED_PROVEN=true
 elif [[ $SORRY_COUNT -eq 1 ]]; then
     echo "   ⚠️  One sorry found - likely main theorem unsolved"
@@ -44,7 +44,7 @@ else
     echo "   ✅ No axioms found"
 fi
 
-# 3. Compilation check (if claimed proven)
+# 3. Compilation check (if compiled clean)
 if [[ "$CLAIMED_PROVEN" = true ]]; then
     echo
     echo "3. Compiling claimed proof..."
@@ -73,12 +73,12 @@ if [[ "$CLAIMED_PROVEN" = true ]]; then
     rm "$TEST_FILE"
 else
     echo
-    echo "Skipping compilation (not claimed as proven)"
+    echo "Skipping compilation (not compiled clean)"
 fi
 
 # 5. Extract theorem claims
 echo
-echo "5. Extracting proven theorems..."
+echo "5. Extracting compiled theorems..."
 THEOREMS=$(grep "^theorem " "$FILE" | cut -d' ' -f2 | cut -d'(' -f1 || true)
 if [[ -n "$THEOREMS" ]]; then
     echo "   Theorems found:"
@@ -93,7 +93,7 @@ echo
 echo "=== Verification Complete ==="
 
 if [[ "$CLAIMED_PROVEN" = true ]]; then
-    echo "✅ Output claims to be proven and passes basic verification"
+    echo "✅ Output compiled clean and passes basic verification"
     echo "   Recommend: Manual review + high-value problems should get multi-agent verification"
 else
     echo "⚠️  Output is partial (contains sorry)"

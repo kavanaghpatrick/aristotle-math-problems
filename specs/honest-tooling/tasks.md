@@ -97,7 +97,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-3, AC-1.5, AC-1.6_
   - _Design: Step 4_
 
-- [ ] 1.8 Update verify_output.sh display strings
+- [x] 1.8 Update verify_output.sh display strings
   - **Do**:
     1. Line 23: change "claimed PROVEN" to "COMPILED CLEAN" (Change 5.1)
     2. Line 47: change comment from "proven" to "compiled clean" (Change 5.2)
@@ -111,7 +111,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-4, AC-1.7_
   - _Design: Step 5_
 
-- [ ] 1.9 Update post_result.sh display strings
+- [x] 1.9 Update post_result.sh display strings
   - **Do**:
     1. Line 42: change "Full proof achieved" to "COMPILED CLEAN -- 0 sorry, 0 axiom." (Change 6.1)
     2. Line 44: change "EXTRACTING NEW PROVEN LEMMAS" to "EXTRACTING COMPILED LEMMAS" (Change 6.2)

@@ -39,9 +39,9 @@ WHERE uuid = '$UUID';
 
 if [ "$SORRY_COUNT" -eq 0 ]; then
     echo ""
-    echo "🎉 SUCCESS! Full proof achieved."
+    echo "🎉 COMPILED CLEAN — 0 sorry, 0 axiom."
     echo ""
-    echo "▶ EXTRACTING NEW PROVEN LEMMAS"
+    echo "▶ EXTRACTING COMPILED LEMMAS"
     echo "────────────────────────────────────"
     
     # Extract theorem names from successful proof
