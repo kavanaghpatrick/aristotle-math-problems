@@ -10,7 +10,7 @@ created: 2026-02-15
 
 Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean`, split submit functions, add batch mode, extend mk CLI. All changes are mechanical string replacements and function restructuring per design.md.
 
-- [ ] 1.1 Create migration script and run it against tracking.db
+- [x] 1.1 Create migration script and run it against tracking.db
   - **Do**:
     1. Create `scripts/migrate_honest_labels.py` using the design Step 0 template
     2. Script does: `ALTER TABLE submissions ADD COLUMN target_resolved INTEGER DEFAULT 0` (idempotent)
