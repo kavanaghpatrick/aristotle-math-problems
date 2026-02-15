@@ -133,7 +133,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - **Done when**: All tests pass, no script writes `proven` to tracking.db
   - **Commit**: `chore(honest-tooling): pass quality checkpoint` (only if fixes needed)
 
-- [ ] 1.11 Split check_recent_submissions() and add batch mode to safe_aristotle_submit.py
+- [x] 1.11 Split check_recent_submissions() and add batch mode to safe_aristotle_submit.py
   - **Do**:
     1. Replace `check_recent_submissions()` (lines 76-103) with `check_duplicate()` (sync, local log only) and `check_rate_limit_and_capacity()` (async, single API call merging rate-limit + capacity) per design Change 7.1
     2. Delete `check_queue_capacity()` (lines 106-118) per Change 7.2

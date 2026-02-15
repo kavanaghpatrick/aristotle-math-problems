@@ -73,48 +73,58 @@ def release_lock():
         LOCKFILE.unlink()
 
 
-async def check_recent_submissions(task_hash: str, window_minutes: int = 10) -> list:
-    """Check if we've submitted this task recently."""
-    set_api_key(ARISTOTLE_API_KEY)
-
-    # Check transaction log first (faster)
-    if TRANSACTION_LOG.exists():
-        recent_cutoff = datetime.now() - timedelta(minutes=window_minutes)
-        with open(TRANSACTION_LOG) as f:
-            for line in f:
+def check_duplicate(task_hash: str, window_minutes: int = 10) -> bool:
+    """Check local transaction log for duplicate submission. No API call."""
+    if not TRANSACTION_LOG.exists():
+        return False
+    recent_cutoff = datetime.now() - timedelta(minutes=window_minutes)
+    with open(TRANSACTION_LOG) as f:
+        for line in f:
+            try:
                 entry = json.loads(line)
-                timestamp = datetime.fromisoformat(entry['timestamp']).replace(tzinfo=None)
-                if timestamp > recent_cutoff:
-                    if entry['details'].get('task_hash') == task_hash:
-                        return [entry]
+            except json.JSONDecodeError:
+                continue
+            timestamp = datetime.fromisoformat(entry['timestamp']).replace(tzinfo=None)
+            if timestamp > recent_cutoff:
+                if entry['details'].get('task_hash') == task_hash:
+                    return True
+    return False
 
-    # Double-check via API
+
+async def check_rate_limit_and_capacity(window_minutes: int = 10) -> dict:
+    """Single API call to check both rate limit and queue capacity.
+
+    Returns:
+        {
+            'recent_count': int,     # submissions in last window_minutes
+            'in_progress': int,      # queued + in_progress count
+            'has_capacity': bool,    # in_progress < 5
+            'slots_available': int,  # max(0, 5 - in_progress)
+        }
+    """
+    set_api_key(ARISTOTLE_API_KEY)
     projects, _ = await Project.list_projects(limit=20)
     now = datetime.now()
-    recent = []
+
+    recent_count = 0
+    in_progress = 0
 
     for p in projects:
+        # Rate limit: count recent submissions
         created = datetime.fromisoformat(str(p.created_at).replace('Z', '+00:00'))
         age_minutes = (now - created.replace(tzinfo=None)).total_seconds() / 60
-
         if age_minutes < window_minutes:
-            recent.append(p)
+            recent_count += 1
 
-    return recent
-
-
-async def check_queue_capacity() -> dict:
-    """Check if queue has capacity for new submission."""
-    set_api_key(ARISTOTLE_API_KEY)
-
-    projects, _ = await Project.list_projects(limit=10)
-
-    in_progress = sum(1 for p in projects if str(p.status) in ['ProjectStatus.QUEUED', 'ProjectStatus.IN_PROGRESS'])
+        # Capacity: count active jobs
+        if str(p.status) in ['ProjectStatus.QUEUED', 'ProjectStatus.IN_PROGRESS']:
+            in_progress += 1
 
     return {
+        'recent_count': recent_count,
         'in_progress': in_progress,
         'has_capacity': in_progress < 5,
-        'slots_available': max(0, 5 - in_progress)
+        'slots_available': max(0, 5 - in_progress),
     }
 
 
@@ -125,6 +135,7 @@ async def safe_submit(
     force: bool = False,
     context_files: list[Path] | None = None,
     input_type: str = "formal",
+    batch: bool = False,
 ) -> str:
     """
     Safely submit to Aristotle with multiple safety checks.
@@ -162,27 +173,28 @@ async def safe_submit(
         print("   ✅ Lock acquired")
 
     try:
-        # SAFETY CHECK 2: Check recent submissions
+        # SAFETY CHECK 2: Check for duplicate (local log only, no API call)
         if not force:
             print("2️⃣  Checking for recent duplicates...")
-            recent = await check_recent_submissions(task_hash, window_minutes=10)
-            if recent:
+            if check_duplicate(task_hash, window_minutes=10):
                 raise SubmissionError(
-                    f"Task already submitted in last 10 minutes! "
-                    f"Found {len(recent)} matching submission(s)"
+                    "Task already submitted in last 10 minutes! "
+                    "Found matching hash in transaction log."
                 )
             print("   ✅ No recent duplicates found")
 
-        # SAFETY CHECK 3: Check queue capacity
-        if not force:
-            print("3️⃣  Checking queue capacity...")
-            queue = await check_queue_capacity()
+        # SAFETY CHECK 3: Check rate limit + queue capacity (single API call)
+        if not force and not batch:
+            print("3️⃣  Checking rate limit and queue capacity...")
+            queue = await check_rate_limit_and_capacity(window_minutes=10)
             if not queue['has_capacity']:
                 raise SubmissionError(
                     f"Queue is full ({queue['in_progress']}/5 slots used). "
                     "Wait for a slot to free up."
                 )
             print(f"   ✅ Queue has capacity ({queue['slots_available']} slots available)")
+        elif batch:
+            print("3️⃣  Batch mode: skipping interactive rate-limit check")
 
         # SAFETY CHECK 4: Confirm file exists and is readable
         print("4️⃣  Validating input file...")
@@ -266,6 +278,7 @@ async def submit_with_retry(
     context_files: list[Path] | None = None,
     input_type: str = "formal",
     force: bool = False,
+    batch: bool = False,
 ) -> str:
     """
     Submit with exponential backoff retry on transient failures.
@@ -285,6 +298,7 @@ async def submit_with_retry(
             return await safe_submit(
                 input_file, project_id_file, description,
                 force=force, context_files=context_files, input_type=input_type,
+                batch=batch,
             )
 
         except SubmissionError as e:
@@ -309,78 +323,139 @@ if __name__ == "__main__":
     import sys
     import re as re_mod
 
-    # Filter out flags from positional args
-    positional = [a for a in sys.argv[1:] if not a.startswith('--')]
-    flags = [a for a in sys.argv[1:] if a.startswith('--')]
+    # Separate flags (--xyz) and flag-arguments (--context <file>) from positional args
+    all_args = sys.argv[1:]
+    positional = []
+    flags = set()
+    context_files = []
+    i = 0
+    while i < len(all_args):
+        arg = all_args[i]
+        if arg == '--context' and i + 1 < len(all_args):
+            context_files.append(Path(all_args[i + 1]))
+            i += 2
+        elif arg.startswith('--'):
+            flags.add(arg)
+            i += 1
+        else:
+            positional.append(arg)
+            i += 1
+
+    batch_mode = '--batch' in flags
+    force = '--force' in flags
+    input_type = "informal" if '--informal' in flags else "formal"
 
     if len(positional) < 1:
         print("Usage: python3 safe_aristotle_submit.py <input_file> [slot_number] [options]")
+        print("       python3 safe_aristotle_submit.py --batch <file1> <file2> ... [options]")
         print()
         print("Options:")
         print("  --force              Skip safety checks")
         print("  --informal           Use INFORMAL input type (default: FORMAL_LEAN)")
         print("  --context <file>     Add context file (can repeat)")
+        print("  --batch              Submit multiple files (skips interactive prompts)")
         print()
         print("Examples:")
-        print("  # Auto-detect slot number and ID file path:")
-        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean --force")
+        print("  # Single file (auto-detect slot):")
+        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean")
         print()
-        print("  # Explicit slot number:")
-        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean 565 --force")
+        print("  # Batch submit:")
+        print("  python3 safe_aristotle_submit.py --batch sketch1.txt sketch2.txt --informal")
         sys.exit(1)
 
-    input_file = Path(positional[0])
-
-    # Determine slot number and ID file path
-    if len(positional) >= 2 and positional[1].isdigit():
-        slot_num = positional[1]
-    else:
-        # Auto-detect from input filename: slot<N>_...
-        m = re_mod.match(r'slot(\d+)', input_file.stem)
+    def resolve_file(filepath_str: str) -> tuple[Path, Path, str]:
+        """Resolve input file -> (input_path, id_file, description)."""
+        input_path = Path(filepath_str)
+        m = re_mod.match(r'slot(\d+)', input_path.stem)
         slot_num = m.group(1) if m else None
+        if slot_num:
+            id_path = input_path.parent / f"slot{slot_num}_ID.txt"
+            desc = input_path.stem
+        else:
+            id_path = input_path.with_suffix('.ID.txt')
+            desc = input_path.stem
+        return input_path, id_path, desc
 
-    if slot_num:
-        id_file = input_file.parent / f"slot{slot_num}_ID.txt"
-        description = input_file.stem  # Use filename as description
-    elif len(positional) >= 3:
-        # Legacy: <input_file> <id_file> <description>
-        id_file = Path(positional[1])
-        description = positional[2]
+    if batch_mode:
+        # Batch: all positional args are input files
+        input_files = positional
+        print(f"📦 BATCH MODE: {len(input_files)} file(s)")
+        print()
+
+        succeeded = 0
+        failed = 0
+        for filepath_str in input_files:
+            input_file, id_file, description = resolve_file(filepath_str)
+            print(f"{'─' * 70}")
+            print(f"📁 Input: {input_file}")
+            print(f"📋 ID file: {id_file}")
+            print(f"📝 Description: {description}")
+            if input_type == "informal":
+                print(f"🔤 Mode: INFORMAL")
+            print()
+
+            try:
+                project_id = asyncio.run(submit_with_retry(
+                    input_file, id_file, description,
+                    context_files=context_files or None,
+                    input_type=input_type,
+                    force=force,
+                    batch=True,
+                ))
+                print(f"✅ Success! Project ID: {project_id}")
+                succeeded += 1
+            except SubmissionError as e:
+                print(f"❌ {e}")
+                failed += 1
+            except Exception as e:
+                print(f"❌ Unexpected error: {e}")
+                failed += 1
+            print()
+
+        print(f"{'═' * 70}")
+        print(f"Batch complete: {succeeded} succeeded, {failed} failed")
+
     else:
-        # Fallback: ID file next to input
-        id_file = input_file.with_suffix('.ID.txt')
-        description = input_file.stem
+        # Single file mode (original behavior)
+        input_file = Path(positional[0])
 
-    force = '--force' in flags
-    input_type = "informal" if '--informal' in flags else "formal"
+        if len(positional) >= 2 and positional[1].isdigit():
+            slot_num = positional[1]
+        else:
+            m = re_mod.match(r'slot(\d+)', input_file.stem)
+            slot_num = m.group(1) if m else None
 
-    # Collect --context files
-    context_files = []
-    all_args = sys.argv[1:]
-    for i, arg in enumerate(all_args):
-        if arg == '--context' and i + 1 < len(all_args):
-            context_files.append(Path(all_args[i + 1]))
+        if slot_num:
+            id_file = input_file.parent / f"slot{slot_num}_ID.txt"
+            description = input_file.stem
+        elif len(positional) >= 3:
+            id_file = Path(positional[1])
+            description = positional[2]
+        else:
+            id_file = input_file.with_suffix('.ID.txt')
+            description = input_file.stem
 
-    print(f"📁 Input: {input_file}")
-    print(f"📋 ID file: {id_file}")
-    print(f"📝 Description: {description}")
-    if input_type == "informal":
-        print(f"🔤 Mode: INFORMAL")
-    print()
+        print(f"📁 Input: {input_file}")
+        print(f"📋 ID file: {id_file}")
+        print(f"📝 Description: {description}")
+        if input_type == "informal":
+            print(f"🔤 Mode: INFORMAL")
+        print()
 
-    try:
-        project_id = asyncio.run(submit_with_retry(
-            input_file, id_file, description,
-            context_files=context_files or None,
-            input_type=input_type,
-            force=force,
-        ))
-        print(f"✅ Success! Project ID: {project_id}")
-    except SubmissionError as e:
-        print(f"❌ {e}")
-        sys.exit(1)
-    except Exception as e:
-        print(f"❌ Unexpected error: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(2)
+        try:
+            project_id = asyncio.run(submit_with_retry(
+                input_file, id_file, description,
+                context_files=context_files or None,
+                input_type=input_type,
+                force=force,
+                batch=False,
+            ))
+            print(f"✅ Success! Project ID: {project_id}")
+        except SubmissionError as e:
+            print(f"❌ {e}")
+            sys.exit(1)
+        except Exception as e:
+            print(f"❌ Unexpected error: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(2)
