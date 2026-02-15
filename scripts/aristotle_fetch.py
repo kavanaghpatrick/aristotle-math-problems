@@ -132,7 +132,7 @@ def audit_file(path: Path) -> dict:
     if has_load_error and sorry_count > 0:
         verdict = "failed"
     elif sorry_count == 0 and axiom_count == 0 and not has_negation:
-        verdict = "proven"
+        verdict = "compiled_clean"
     elif has_negation:
         verdict = "disproven"
     elif sorry_count == 1:
@@ -164,6 +164,7 @@ def update_db(slot_num: int, uuid: str, audit: dict, output_file: str, task: str
                 sorry_count = ?,
                 proven_count = ?,
                 verified = ?,
+                target_resolved = ?,
                 completed_at = datetime('now'),
                 output_file = ?,
                 notes = ?
@@ -172,7 +173,8 @@ def update_db(slot_num: int, uuid: str, audit: dict, output_file: str, task: str
             audit["verdict"],
             audit["sorry"],
             audit["declarations"],
-            1 if audit["verdict"] == "proven" else 0,
+            1 if audit["verdict"] == "compiled_clean" else 0,
+            0,  # target_resolved: set manually when an open problem is actually resolved
             output_file,
             f"Auto-fetched. {audit['lines']} lines, {audit['sorry']} sorry, {audit['axioms']} axiom.",
             uuid,
@@ -181,15 +183,15 @@ def update_db(slot_num: int, uuid: str, audit: dict, output_file: str, task: str
         filename = f"slot{slot_num}"
         db.execute("""
             INSERT INTO submissions (filename, uuid, status, sorry_count, proven_count, verified,
-                completed_at, output_file, frontier_id, notes, submitted_at)
-            VALUES (?, ?, ?, ?, ?, ?, datetime('now'), ?, 'formal_conjectures', ?, datetime('now'))
+                target_resolved, completed_at, output_file, frontier_id, notes, submitted_at)
+            VALUES (?, ?, ?, ?, ?, ?, 0, datetime('now'), ?, 'formal_conjectures', ?, datetime('now'))
         """, (
             filename,
             uuid,
             audit["verdict"],
             audit["sorry"],
             audit["declarations"],
-            1 if audit["verdict"] == "proven" else 0,
+            1 if audit["verdict"] == "compiled_clean" else 0,
             output_file,
             f"{task}. {audit['lines']} lines.",
         ))
@@ -261,7 +263,7 @@ async def cmd_status():
             audit = audit_file(existing_result)
             verdict = audit["verdict"].upper()
             sorry = audit["sorry"]
-            emoji = "✅" if verdict == "PROVEN" else "📝" if verdict == "NEAR_MISS" else "❌"
+            emoji = "✅" if verdict == "COMPILED_CLEAN" else "📝" if verdict == "NEAR_MISS" else "❌"
             print(f"{slot_num:<6} {emoji} {verdict:<11} {sorry:>5} {task:<50} {uuid[:12]}...")
             complete_fetched.append(slot_num)
             continue
@@ -369,7 +371,7 @@ async def cmd_fetch(target: str | None = None):
             # Audit
             audit = audit_file(output_path)
             verdict = audit["verdict"].upper()
-            emoji = "✅" if verdict == "PROVEN" else "📝" if verdict == "NEAR_MISS" else "⚠️"
+            emoji = "✅" if verdict == "COMPILED_CLEAN" else "📝" if verdict == "NEAR_MISS" else "⚠️"
             print(f"  {emoji} {verdict}: {audit['sorry']} sorry, {audit['axioms']} axiom, {audit['lines']} lines")
 
             # Update DB
@@ -377,14 +379,14 @@ async def cmd_fetch(target: str | None = None):
             print(f"  DB updated.")
 
             fetched += 1
-            if verdict == "PROVEN":
+            if verdict == "COMPILED_CLEAN":
                 proven += 1
         else:
             print(f"  ❌ Download failed")
 
         print()
 
-    print(f"Done: {fetched} fetched, {proven} proven.")
+    print(f"Done: {fetched} fetched, {proven} compiled clean.")
 
 
 def cmd_track(slot: int, uuid: str, task: str = ""):

@@ -23,7 +23,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-2, AC-1.4, AC-2.1, AC-2.2, AC-2.3_
   - _Design: Step 0_
 
-- [ ] 1.2 Update aristotle_fetch.py verdict and DB writes
+- [x] 1.2 Update aristotle_fetch.py verdict and DB writes
   - **Do**:
     1. Line 135: change `verdict = "proven"` to `verdict = "compiled_clean"` (Change 1.1)
     2. Line 175: change `"proven"` to `"compiled_clean"` in verified check (Change 1.2)
@@ -37,7 +37,7 @@ Focus: Migrate DB, replace all `proven` status writes/reads with `compiled_clean
   - _Requirements: FR-1, FR-14, AC-1.1, AC-1.3, AC-2.4_
   - _Design: Step 1 (Changes 1.1-1.3, 1.8-1.9)_
 
-- [ ] 1.3 Update aristotle_fetch.py display strings
+- [x] 1.3 Update aristotle_fetch.py display strings
   - **Do**:
     1. Line 264: change `verdict == "PROVEN"` to `verdict == "COMPILED_CLEAN"` (Change 1.4)
     2. Line 372: change `verdict == "PROVEN"` to `verdict == "COMPILED_CLEAN"` (Change 1.5)
