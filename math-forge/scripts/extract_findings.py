@@ -251,8 +251,9 @@ def insert_findings(db_path: str, findings: list[dict]) -> int:
                     source_slot, source_file, theorem_name, theorem_statement,
                     proof_technique, mathlib_imports, proof_lines,
                     counterexample, why_failed, avoid_pattern,
-                    confidence, tags, notes
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    confidence, tags, notes,
+                    targets_open_gap, gap_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 f.get('finding_type'), f.get('domain_id'), f.get('title'),
                 f.get('description'), f.get('problem_id'), f.get('source_slot'),
@@ -260,6 +261,7 @@ def insert_findings(db_path: str, findings: list[dict]) -> int:
                 f.get('proof_technique'), f.get('mathlib_imports'), f.get('proof_lines'),
                 f.get('counterexample'), f.get('why_failed'), f.get('avoid_pattern'),
                 f.get('confidence'), f.get('tags'), f.get('notes'),
+                f.get('targets_open_gap', 0), f.get('gap_id'),
             ))
             inserted += 1
         except sqlite3.IntegrityError as e:

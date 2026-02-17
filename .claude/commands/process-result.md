@@ -101,6 +101,13 @@ If NEAR_MISS (1 sorry), also identify:
 - What the sorry is trying to prove
 - Suggest: try `exact?`, `simp?`, `omega`, `native_decide` (Fin n) to close it locally, then resubmit with sorry=0
 
+## Gap Resolution Assessment
+
+Assess: did this result resolve the stated open gap?
+- Check the gap_statement in tracking.db
+- Compare the proven theorems in the result against the open conjecture
+- target_resolved=1 ONLY if the open problem itself was resolved (not sub-lemmas)
+
 ## Step 7: Extract Knowledge (math-forge)
 
 After audit and DB update, extract findings into the math-forge knowledge base:

@@ -374,6 +374,17 @@ async def cmd_fetch(target: str | None = None):
             emoji = "✅" if verdict == "COMPILED_CLEAN" else "📝" if verdict == "NEAR_MISS" else "⚠️"
             print(f"  {emoji} {verdict}: {audit['sorry']} sorry, {audit['axioms']} axiom, {audit['lines']} lines")
 
+            # Gap-resolution prompt
+            if verdict == 'COMPILED_CLEAN':
+                print(f"  ╔══════════════════════════════════════════════════╗")
+                print(f"  ║  GAP RESOLUTION: Did this resolve the OPEN GAP? ║")
+                print(f"  ║  (Not just compile infrastructure/known math)   ║")
+                print(f"  ╠══════════════════════════════════════════════════╣")
+                print(f"  ║  If YES: sqlite3 submissions/tracking.db        ║")
+                print(f"  ║  \"UPDATE submissions SET target_resolved=1       ║")
+                print(f"  ║   WHERE uuid='{uuid}'\"                          ║")
+                print(f"  ╚══════════════════════════════════════════════════╝")
+
             # Update DB
             update_db(slot_num, uuid, audit, str(output_path), task)
             print(f"  DB updated.")

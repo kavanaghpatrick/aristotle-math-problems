@@ -377,6 +377,89 @@ case "${1:-help}" in
         esac
         ;;
 
+    context)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
+            exit 1
+        fi
+        if [ $# -eq 0 ]; then
+            echo "Usage: mk context <problem-id>"
+            echo "  Lists prior Aristotle result files for passing as context."
+            exit 1
+        fi
+        PROBLEM=$(escape_sql "$1")
+
+        echo "[math-forge] Context files for '${1}':"
+        echo "---"
+
+        RESULTS=$(run_sql "$TRACKING_DB" "
+            SELECT output_file, status, proven_count
+            FROM submissions
+            WHERE (problem_id LIKE '%${PROBLEM}%'
+                   OR filename LIKE '%${PROBLEM}%')
+              AND output_file IS NOT NULL
+              AND status IN ('compiled_clean', 'near_miss', 'completed', 'disproven')
+            ORDER BY submitted_at DESC;
+        ")
+
+        if [ -z "$RESULTS" ]; then
+            echo "  (No prior results found)"
+            echo ""
+            echo "This is the first submission for this problem."
+        else
+            CONTEXT_ARGS=""
+            while IFS='|' read -r filepath status proven; do
+                if [ -f "$filepath" ]; then
+                    LINES=$(wc -l < "$filepath" | tr -d ' ')
+                    printf "  %s (%s, %s lines)\n" "$filepath" "$status" "$LINES"
+                    CONTEXT_ARGS="${CONTEXT_ARGS} --context ${filepath}"
+                else
+                    printf "  %s (MISSING — file not found)\n" "$filepath"
+                fi
+            done <<< "$RESULTS"
+            echo "---"
+            echo "Submit with:${CONTEXT_ARGS}"
+        fi
+        ;;
+
+    gaps)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
+            exit 1
+        fi
+
+        echo "[math-forge] Open Gaps Being Targeted"
+        echo "==="
+
+        run_sql "$TRACKING_DB" -header -column "
+            SELECT
+                COALESCE(problem_id, filename) as problem,
+                COALESCE(gap_statement, SUBSTR(notes, 1, 60)) as gap,
+                COUNT(*) as subs,
+                MAX(CASE WHEN status = 'compiled_clean' THEN 'compiled_clean'
+                         WHEN status = 'near_miss' THEN 'near_miss'
+                         WHEN status = 'completed' THEN 'completed'
+                         ELSE status END) as best_status,
+                MAX(CASE WHEN target_resolved = 1 THEN 'YES' ELSE '' END) as resolved
+            FROM submissions
+            WHERE submission_type = 'gap_targeting'
+               OR submission_type IS NULL
+            GROUP BY COALESCE(problem_id, filename)
+            HAVING COUNT(*) > 0
+            ORDER BY subs DESC
+            LIMIT 30;
+        "
+
+        RESOLVED=$(run_sql "$TRACKING_DB" "
+            SELECT COUNT(DISTINCT COALESCE(problem_id, filename))
+            FROM submissions WHERE target_resolved = 1;
+        ")
+        echo ""
+        echo "Gaps resolved: ${RESOLVED:-0}"
+        ;;
+
     help|*)
         echo "mk — Math-forge Knowledge Base CLI"
         echo ""
@@ -391,6 +474,8 @@ case "${1:-help}" in
         echo "Pipeline commands:"
         echo "  submit <file> [args...]                   Submit sketch to Aristotle"
         echo "  status [uuid-or-slot]                     Aristotle queue status"
+        echo "  context <problem-id>                      Prior Aristotle results for auto-context"
+        echo "  gaps                                       Open gaps being targeted + status"
         echo "  partials                                   Near-miss submissions (sorry=1)"
         echo "  resubmittable                              Resubmission candidates"
         echo "  query <sql>                                Read-only SQL on tracking.db"

@@ -265,7 +265,10 @@ def extract_problem_id(input_file: Path) -> str | None:
 
 
 def gather_context(problem_id: str) -> list[Path]:
-    """Find all prior _result.lean files for this problem from tracking.db."""
+    """Find all prior _result.lean files for this problem from tracking.db.
+
+    Returns empty list on any error (missing DB, schema mismatch, sqlite errors).
+    """
     import sqlite3
 
     tracking_db = MATH_DIR / "submissions" / "tracking.db"
@@ -274,17 +277,30 @@ def gather_context(problem_id: str) -> list[Path]:
 
     try:
         conn = sqlite3.connect(str(tracking_db))
-        cursor = conn.execute(
-            "SELECT output_file FROM submissions "
-            "WHERE (problem_id LIKE ? OR filename LIKE ?) "
-            "AND output_file IS NOT NULL "
-            "AND status IN ('compiled_clean', 'near_miss', 'completed') "
-            "ORDER BY submitted_at DESC",
-            (f'%{problem_id}%', f'%{problem_id}%')
-        )
-        rows = cursor.fetchall()
-        conn.close()
-    except Exception:
+        try:
+            # Verify the submissions table has expected columns before querying
+            cursor = conn.execute("PRAGMA table_info(submissions)")
+            columns = {row[1] for row in cursor.fetchall()}
+            required = {'problem_id', 'filename', 'output_file', 'status', 'submitted_at'}
+            if not required.issubset(columns):
+                conn.close()
+                return []
+
+            cursor = conn.execute(
+                "SELECT output_file FROM submissions "
+                "WHERE (problem_id LIKE ? OR filename LIKE ?) "
+                "AND output_file IS NOT NULL "
+                "AND status IN ('compiled_clean', 'near_miss', 'completed') "
+                "ORDER BY submitted_at DESC",
+                (f'%{problem_id}%', f'%{problem_id}%')
+            )
+            rows = cursor.fetchall()
+        finally:
+            conn.close()
+    except (sqlite3.Error, OSError):
+        return []
+
+    if not rows:
         return []
 
     context_paths = []

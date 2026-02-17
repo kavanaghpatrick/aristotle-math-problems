@@ -1,0 +1,14 @@
+{
+  "source": "spec",
+  "name": "gap-targeting-pivot",
+  "basePath": "specs/gap-targeting-pivot",
+  "phase": "tasks",
+  "taskIndex": 0,
+  "totalTasks": 30,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": true,
+  "awaitingApproval": true
+}

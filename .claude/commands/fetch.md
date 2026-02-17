@@ -59,6 +59,17 @@ This populates knowledge.db with proven theorems, techniques, and failure record
 
 If extraction fails, log a warning but do not block the fetch result.
 
+## Gap Resolution Assessment
+
+After audit, if result is compiled_clean:
+- Did this result resolve the OPEN GAP stated in the submission?
+- Or did it just compile infrastructure/known math?
+- Set target_resolved=1 only if the actual open conjecture was proved.
+
+```bash
+sqlite3 submissions/tracking.db "UPDATE submissions SET target_resolved=1 WHERE uuid='<uuid>'"
+```
+
 ## Step 3: Handle special cases
 
 **NEAR_MISS (1 sorry):**

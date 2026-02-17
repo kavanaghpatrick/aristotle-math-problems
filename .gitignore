@@ -64,3 +64,5 @@ problem-databases/formal-conjectures/
 **/.lake/build/
 formal-conjectures/
 .claude/
+specs/.current-spec
+**/.progress.md

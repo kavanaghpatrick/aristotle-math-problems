@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS findings (
     created_at TEXT DEFAULT (datetime('now')),
     updated_at TEXT DEFAULT (datetime('now')),
     tags TEXT,
-    notes TEXT
+    notes TEXT,
+    targets_open_gap INTEGER DEFAULT 0,
+    gap_id TEXT
 );
 
 -- ============================================================

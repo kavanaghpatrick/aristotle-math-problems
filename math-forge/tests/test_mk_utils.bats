@@ -8,6 +8,8 @@ load test_helper
     assert_output_contains "search"
     assert_output_contains "find"
     assert_output_contains "stats"
+    assert_output_contains "context"
+    assert_output_contains "gaps"
 }
 
 @test "no args: shows help" {

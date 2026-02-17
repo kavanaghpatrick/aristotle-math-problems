@@ -18,6 +18,27 @@ else
     NEW_STRING=""
 fi
 
+# Gap-targeting: validate .txt sketch files
+if [[ "$FILE_PATH" == *.txt ]] && [[ "$FILE_PATH" == *sketch* || "$FILE_PATH" == *slot* ]]; then
+    SKETCH_WARNINGS=()
+    if grep -qiE '(Proof Strategy|Key Lemma|APPROACH [0-9]|Main Proof|Proof Assembly|Proof Outline|Proposed (Strategy|Approach|proof)|FALLBACK [0-9]|(PRIMARY|SECONDARY):|^###?\s+Lemma [0-9]|WHAT TO PROVE)' "$FILE_PATH" 2>/dev/null; then
+        SKETCH_WARNINGS+=("[math-forge] WARNING: Sketch contains proof guidance. Gap-targeting: state only the bare conjecture.")
+    fi
+    LINE_COUNT=$(grep -cv '^\s*$' "$FILE_PATH" 2>/dev/null || echo 0)
+    if [ "$LINE_COUNT" -gt 30 ]; then
+        SKETCH_WARNINGS+=("[math-forge] WARNING: Sketch has ${LINE_COUNT} lines (max 30 for gap-targeting).")
+    fi
+    if [ ${#SKETCH_WARNINGS[@]} -gt 0 ]; then
+        COMBINED=""
+        for w in "${SKETCH_WARNINGS[@]}"; do
+            COMBINED="${COMBINED:+$COMBINED | }${w}"
+        done
+        ESCAPED_REASON=$(printf '%s' "$COMBINED" | sed 's/"/\\"/g')
+        echo "{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"${ESCAPED_REASON}\"}}"
+    fi
+    exit 0
+fi
+
 # Only act on .lean files
 if [[ -z "$FILE_PATH" ]] || [[ "$FILE_PATH" != *.lean ]]; then
     exit 0

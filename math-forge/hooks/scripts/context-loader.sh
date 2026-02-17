@@ -50,6 +50,8 @@ KB_RECENT=$(q "$KNOWLEDGE_DB" \
 # ---- Build briefing ----
 BRIEFING="[math-forge] Session briefing ($(date -u +%Y-%m-%dT%H:%M:%SZ))
 
+GAP-TARGETING: Bare conjecture only. No proof guidance. <=30 lines. Let Aristotle find the path.
+
 QUEUE: ${IN_FLIGHT:-0} in-flight, ${SLOTS_OPEN} slots open"
 
 if [[ -n "$COMPLETED_UNFETCHED" && "$COMPLETED_UNFETCHED" != "" ]]; then
