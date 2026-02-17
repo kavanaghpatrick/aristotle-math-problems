@@ -13,6 +13,7 @@ import asyncio
 import json
 import hashlib
 import os
+import re
 import time
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -31,6 +32,11 @@ LOCKFILE = MATH_DIR / ".aristotle_submit.lock"
 
 class SubmissionError(Exception):
     """Raised when submission should be aborted."""
+    pass
+
+
+class GapTargetingError(SubmissionError):
+    """Raised when a submission fails gap-targeting validation."""
     pass
 
 
@@ -128,6 +134,170 @@ async def check_rate_limit_and_capacity(window_minutes: int = 10) -> dict:
     }
 
 
+STRATEGY_PATTERNS = [
+    re.compile(r'(?i)^#+\s*(proof\s+strategy|proposed\s+(strategy|approach)|key\s+lemma)'),
+    re.compile(r'(?i)^#+\s*(main\s+proof|proof\s+assembly|proof\s+outline)'),
+    re.compile(r'(?i)^APPROACH\s+\d'),
+    re.compile(r'(?i)^FALLBACK\s+\d'),
+    re.compile(r'(?i)^(PRIMARY|SECONDARY):\s'),
+    re.compile(r'(?i)^###?\s+Lemma\s+\d'),
+    re.compile(r'(?i)^\s*Proposed\s+proof:'),
+    re.compile(r'(?i)^=+\s*(PROOF|WHAT TO PROVE|APPROACH)'),
+]
+
+FALSIFICATION_PATTERNS = [
+    re.compile(r'(?i)\b(falsif|disprove|counterexample|negat)'),
+    re.compile(r'(?i)\bis\s+this\s+(true|false|real)'),
+    re.compile(r'(?i)\btest\s+(whether|if)'),
+]
+
+MAX_SKETCH_LINES = 30
+MAX_LEAN_LINES_IN_SKETCH = 5
+
+
+def check_gap_targeting(input_file: Path) -> dict:
+    """Validate that input_file targets an open gap. Hard block, no override.
+
+    Returns:
+        {"pass": True, "submission_type": "gap_targeting"|"falsification",
+         "gap_statement": str, "line_count": int}
+
+    Raises:
+        GapTargetingError with actionable fix message.
+    """
+    suffix = input_file.suffix.lower()
+
+    # C1: Reject .lean files
+    if suffix == '.lean':
+        raise GapTargetingError(
+            "Gap-targeting requires INFORMAL (.txt). Convert to bare conjecture sketch.\n"
+            "  Sketch format: OPEN GAP / English statement / Lean statement / Status\n"
+            "  Max 30 lines. No proof strategy."
+        )
+
+    # C2: Empty file
+    content = input_file.read_text()
+    if not content.strip():
+        raise GapTargetingError("Sketch is empty. Write the bare conjecture statement.")
+
+    lines = content.splitlines()
+    non_blank = [l for l in lines if l.strip() and not l.strip().startswith('---')]
+
+    # C3: Line count
+    if len(non_blank) > MAX_SKETCH_LINES:
+        raise GapTargetingError(
+            f"Sketch has {len(non_blank)} non-blank lines (max {MAX_SKETCH_LINES}).\n"
+            "  Strip proof strategy — state only the open gap.\n"
+            "  Format: OPEN GAP / English / Lean / Status"
+        )
+
+    # Check falsification BEFORE strategy (falsification may look strategy-like)
+    is_falsification = any(
+        p.search(line) for line in lines for p in FALSIFICATION_PATTERNS
+    )
+
+    # C4: Strategy keywords (skip if falsification)
+    if not is_falsification:
+        for line in lines:
+            for pattern in STRATEGY_PATTERNS:
+                if pattern.search(line):
+                    matched = line.strip()[:60]
+                    raise GapTargetingError(
+                        f"Sketch contains proof guidance: '{matched}'\n"
+                        "  Remove all strategy — let Aristotle find the path.\n"
+                        "  Keep only: OPEN GAP / English statement / Lean statement / Status"
+                    )
+
+    # C5: Extended Lean code blocks
+    lean_indicators = [
+        'theorem ', 'def ', 'lemma ', 'import ', ':= by', 'where', '  sorry',
+        '| ', 'instance ', 'class ', 'structure '
+    ]
+    lean_lines = sum(1 for l in lines if any(ind in l for ind in lean_indicators))
+    if lean_lines > MAX_LEAN_LINES_IN_SKETCH:
+        raise GapTargetingError(
+            f"Sketch contains {lean_lines} lines of Lean code (max {MAX_LEAN_LINES_IN_SKETCH}).\n"
+            "  Use only 1-3 lines for the formal theorem statement."
+        )
+
+    # Extract gap statement (first non-blank, non-comment line)
+    gap_statement = ""
+    for line in lines:
+        stripped = line.strip().lstrip('#').lstrip('-').strip()
+        if stripped:
+            gap_statement = stripped[:200]
+            break
+
+    submission_type = "falsification" if is_falsification else "gap_targeting"
+
+    return {
+        "pass": True,
+        "submission_type": submission_type,
+        "gap_statement": gap_statement,
+        "line_count": len(non_blank),
+    }
+
+
+def extract_problem_id(input_file: Path) -> str | None:
+    """Extract problem ID from sketch filename or content."""
+    import re as re_mod
+
+    # From filename: strip slot prefix and extension
+    stem = input_file.stem
+    m = re_mod.match(r'slot\d+_(.+?)(?:_v\d+)?$', stem)
+    if m:
+        problem_id = m.group(1).lower().replace(' ', '_')
+        return problem_id[:50] if problem_id else None
+
+    # From content: look for OPEN GAP: line
+    try:
+        content = input_file.read_text()
+        for line in content.splitlines()[:5]:
+            m2 = re_mod.match(r'(?i)OPEN\s+GAP:\s*(.+)', line)
+            if m2:
+                problem_id = m2.group(1).strip().lower()
+                problem_id = re_mod.sub(r'[^a-z0-9]+', '_', problem_id)
+                return problem_id[:50] if problem_id else None
+    except Exception:
+        pass
+
+    return None
+
+
+def gather_context(problem_id: str) -> list[Path]:
+    """Find all prior _result.lean files for this problem from tracking.db."""
+    import sqlite3
+
+    tracking_db = MATH_DIR / "submissions" / "tracking.db"
+    if not tracking_db.exists():
+        return []
+
+    try:
+        conn = sqlite3.connect(str(tracking_db))
+        cursor = conn.execute(
+            "SELECT output_file FROM submissions "
+            "WHERE (problem_id LIKE ? OR filename LIKE ?) "
+            "AND output_file IS NOT NULL "
+            "AND status IN ('compiled_clean', 'near_miss', 'completed') "
+            "ORDER BY submitted_at DESC",
+            (f'%{problem_id}%', f'%{problem_id}%')
+        )
+        rows = cursor.fetchall()
+        conn.close()
+    except Exception:
+        return []
+
+    context_paths = []
+    for (filepath,) in rows:
+        p = Path(filepath)
+        if not p.is_absolute():
+            p = MATH_DIR / p
+        if p.exists():
+            context_paths.append(p)
+
+    return context_paths
+
+
 async def safe_submit(
     input_file: Path,
     project_id_file: Path,
@@ -164,6 +334,27 @@ async def safe_submit(
     print(f"Input: {input_file.name}")
     print(f"Hash: {task_hash}")
     print()
+
+    # GAP-TARGETING GATE (runs before all other checks)
+    gap_info = check_gap_targeting(input_file)
+    print(f"   Gap: {gap_info['gap_statement'][:60]}")
+    print(f"   Type: {gap_info['submission_type']}")
+    print(f"   Lines: {gap_info['line_count']}")
+    print()
+
+    # Auto-context: gather prior results
+    problem_id = extract_problem_id(input_file)
+    if problem_id:
+        auto_context = gather_context(problem_id)
+        if auto_context:
+            if context_files is None:
+                context_files = []
+            # Merge auto-context with explicit context (no duplicates)
+            existing = set(str(p) for p in context_files)
+            for ctx in auto_context:
+                if str(ctx) not in existing:
+                    context_files.append(ctx)
+            print(f"   Auto-context: {len(auto_context)} prior result(s) for '{problem_id}'")
 
     # SAFETY CHECK 1: Acquire lockfile
     if not force:
