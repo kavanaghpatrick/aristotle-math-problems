@@ -1,0 +1,10 @@
+OPEN GAP: Gilbreath's Conjecture
+Source: formal-conjectures
+Domain: nt
+
+The first element of every row of iterated absolute differences of the prime sequence equals 1. That is, if d^0(n) = p_{n+1} (the (n+1)-th prime) and d^{k+1}(n) = |d^k(n+1) - d^k(n)|, then d^k(0) = 1 for all k >= 1.
+
+theorem gilbreath_conjecture (k : ℕ) (hk : 1 ≤ k) :
+  iteratedAbsDiffPrimes k 0 = 1 := by sorry
+
+Status: OPEN. Verified computationally for k up to ~10^13. No proof known. Prior slot verified k≤10 in Lean.

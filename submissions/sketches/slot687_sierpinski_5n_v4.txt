@@ -1,0 +1,12 @@
+OPEN GAP: Sierpinski Conjecture (Erdos-Straus for 5/n)
+Source: formal-conjectures, Erdos-Straus variant
+Domain: nt
+
+For every integer n >= 2, the equation 5/n = 1/a + 1/b + 1/c has a solution in positive integers a, b, c.
+
+The remaining open case is n ≡ 1 (mod 60) where every prime factor of n is ≡ 1 (mod 4).
+
+theorem sierpinski_conjecture (n : ℕ) (hn : 2 ≤ n) :
+  ∃ a b c : ℕ, 0 < a ∧ 0 < b ∧ 0 < c ∧ 5 * a * b * c = n * (b * c + a * c + a * b) := by sorry
+
+Status: OPEN. Verified computationally for large n. Prior slots reduced to n≡1 mod 60 and proved density-0 exceptions.

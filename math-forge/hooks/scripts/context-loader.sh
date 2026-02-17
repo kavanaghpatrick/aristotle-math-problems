@@ -98,6 +98,7 @@ fi
 
 BRIEFING="${BRIEFING}
 
+SKILLS: Use /project:submit, /project:fetch, /project:status, /project:sketch, /project:sweep, /project:screen, /project:audit, /project:process-result (NOT raw python scripts).
 Use \`mk search <query>\` for KB queries. Use \`mk find <problem>\` for problem-level view."
 
 # ---- Inject PATH via CLAUDE_ENV_FILE ----

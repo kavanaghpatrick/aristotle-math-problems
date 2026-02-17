@@ -1,0 +1,10 @@
+OPEN GAP: Integer Complexity of Powers of 2
+Source: formal-conjectures, Guy's Unsolved Problems F26
+Domain: nt
+
+The integer complexity of 2^n equals 2n. Here complexity(n) is the minimum number of 1's needed to represent n using addition and multiplication.
+
+theorem complexity_two_pow (n : ℕ) (hn : 1 ≤ n) :
+  integerComplexity (2 ^ n) = 2 * n := by sorry
+
+Status: OPEN. Known: complexity(2^n) ≤ 2n (trivial). Lower bound is open. Prior slot reduced to weight subadditivity conjectures.

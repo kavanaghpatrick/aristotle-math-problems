@@ -1,0 +1,10 @@
+OPEN GAP: Lemoine's Conjecture (Levy's Conjecture)
+Source: formal-conjectures
+Domain: nt
+
+Every odd integer n >= 7 can be written as the sum of a prime and twice a prime: n = p + 2q where p, q are prime.
+
+theorem lemoine_conjecture (n : ℕ) (hn : 7 ≤ n) (hodd : n % 2 = 1) :
+  ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ n = p + 2 * q := by sorry
+
+Status: OPEN. Verified for n ≤ 10^9. Implies Goldbach for even numbers ≤ 2n. Prior slot verified n≤1000 in Lean.
