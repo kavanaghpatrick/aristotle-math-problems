@@ -1,0 +1,113 @@
+Erdős 249: Irrationality of ∑ φ(n)/2^n — FINAL CONNECTION (v3)
+
+The attached 694-line context has ALL the pieces. Just connect them.
+
+PIECES ALREADY PROVED:
+1. erdos_249_bounds: 1 < S < 2
+2. erdos_249_not_integer: S ∉ ℤ
+3. tail_sum_recurrence: T(N+1) = 2·T(N) - φ(N+1)
+4. tail_sum_bounds: 1/2 < T(N) < N+2
+5. v2_tail_sum_eq_one_of_even_pred: at primes p≡3 mod 4 with T(p-1) even, T(p) has 2-adic val = 1
+6. exists_prime_mod_4_3: infinitely many primes p≡3 mod 4
+7. exp_growth_bounded_by_linear: if u_{n+1} ≥ 2·u_n and u_n ≤ A·n + B then u_n ≤ 0 for all n
+8. seq_exp_growth: u_{n+1} ≥ 2·u_n and u_0 > 0 → u_n ≥ 2^n · u_0
+
+=== THE FINAL ARGUMENT (connect these pieces) ===
+
+Assume for contradiction: S = p/q with q > 0, p, q ∈ ℤ.
+
+Step 1: q · T(N) is an integer for all N.
+  Proof: q · T(N) = q · 2^N · S - q · ∑_{n=1}^N φ(n) · 2^{N-n}
+       = p · 2^N - q · ∑_{n=1}^N φ(n) · 2^{N-n} ∈ ℤ.
+
+Step 2: Define X(N) := q · T(N) ∈ ℤ. Then:
+  X(N+1) = q · T(N+1) = q · (2·T(N) - φ(N+1)) = 2·X(N) - q·φ(N+1)
+  Also: q/2 < X(N) < q·(N+2) (from tail_sum_bounds).
+
+Step 3: At primes p ≡ 3 mod 4, v₂(T(p)) = 1 (from v2_tail_sum_eq_one_of_even_pred, assuming T(p-1) is even — which follows from the recurrence since T(N+1) = 2·T(N) - φ(N+1) and for even N, T(N) = 2·T(N-1) - φ(N) where φ(even) is even).
+
+Actually, the chain is: if T(N) is an integer, then T(N+1) = 2·T(N) - φ(N+1). So T(N+1) is even iff φ(N+1) is even, which is true for all N+1 ≥ 3. So from any integer T(N₀), all subsequent T(N) for N > N₀ are even.
+
+More precisely: X(N+1) = 2·X(N) - q·φ(N+1). Since X is integer-valued and q·φ(N+1) is even for N+1 ≥ 3, X(N+1) ≡ 0 mod 2 for N ≥ some N₀. So T(N) is an even multiple of 1/q for large N.
+
+Step 4: v₂(X(p)) = v₂(q) + v₂(T(p)) = v₂(q) + 1 for primes p ≡ 3 mod 4.
+  But X(p) = 2·X(p-1) - q·φ(p) = 2·X(p-1) - q·(p-1).
+  Since p ≡ 3 mod 4, p-1 ≡ 2 mod 4, so v₂(p-1) = 1.
+  v₂(q·(p-1)) = v₂(q) + 1.
+  v₂(2·X(p-1)) = 1 + v₂(X(p-1)).
+
+  If v₂(X(p-1)) > v₂(q) + 1, then v₂(X(p)) = v₂(q) + 1. ✓
+  If v₂(X(p-1)) = v₂(q) + 1, then we need more careful analysis.
+  If v₂(X(p-1)) ≥ v₂(q) + 2, then v₂(2·X(p-1)) ≥ v₂(q) + 3 > v₂(q) + 1 = v₂(q·(p-1)),
+  so v₂(X(p)) = v₂(q) + 1. ✓
+
+Step 5: THE CONTRADICTION.
+  The recurrence X(N+1) = 2·X(N) - q·φ(N+1) means X doubles (roughly) at each step.
+  From exp_growth_bounded_by_linear: if the error terms don't cancel, X grows exponentially.
+  But X(N) < q·(N+2) (linear bound).
+
+  Key: between consecutive primes p₁ < p₂ both ≡ 3 mod 4:
+  X doubles at each step, and subtracts q·φ(N) (which is at most q·N).
+  After k steps: X(p₁ + k) ≈ 2^k · X(p₁) - accumulated subtractions.
+
+  Since v₂(X(pᵢ)) = v₂(q) + 1 at EVERY prime pᵢ ≡ 3 mod 4,
+  and X doubles between primes, X must "reset" its 2-adic valuation
+  from a high value back down to v₂(q) + 1 at each such prime.
+
+  But doubling increases v₂ by 1, so between primes the 2-adic valuation grows.
+  At prime pᵢ: v₂(X(pᵢ)) = v₂(q) + 1.
+  After pᵢ: v₂(X(pᵢ + 1)) ≥ v₂(q) + 2 (since X(pᵢ+1) = 2·X(pᵢ) - q·φ(pᵢ+1)).
+  ...continuing: v₂(X(pᵢ + k)) ≥ v₂(q) + 1 + k (if subtractions don't interfere).
+  At next prime p_{i+1}: v₂ must drop back to v₂(q) + 1.
+  This requires the subtraction q·φ(p_{i+1}) to have v₂ exactly v₂(q) + 1.
+  This IS what happens (φ(p_{i+1}) = p_{i+1}-1 ≡ 2 mod 4 for p_{i+1} ≡ 3 mod 4).
+
+  The real contradiction is subtler: X(N) is bounded by q·(N+2) but the exponential
+  doubling forces |X(N)| to grow. The only way X stays bounded is if X alternates
+  sign, but X = q·T(N) > q/2 > 0 (from tail_sum_bounds). Contradiction!
+
+Wait — re-read tail_sum_bounds: 1/2 < T(N) < N+2. So T(N) > 1/2 > 0 for all N.
+Therefore X(N) = q·T(N) > q/2 > 0 for all N.
+Also X(N) < q·(N+2).
+
+So X is a POSITIVE integer sequence satisfying X(N+1) = 2·X(N) - q·φ(N+1).
+It's positive but linearly bounded. But 2·X(N) grows exponentially...
+unless q·φ(N+1) is approximately X(N) at each step.
+
+Actually X(N+1) = 2·X(N) - q·φ(N+1), and X(N) ≈ q·T(N) ≈ q·(∑_{n>N} φ(n)/2^n).
+The sum ∑_{n>N} φ(n)/2^n ≈ φ(N+1)/2 + φ(N+2)/4 + ... ≈ N/2 (roughly).
+So X ≈ qN/2, and 2·X(N) - q·φ(N+1) ≈ qN - q·N = 0 + lower order.
+The sequence hovers near zero (in the tails), preventing exponential blowup.
+
+OK so the exp_growth_bounded_by_linear argument doesn't apply directly because the
+subtraction terms are large. The real argument must use 2-ADIC VALUATION.
+
+CORRECT ARGUMENT:
+X(N) is a positive integer < q(N+2) with v₂(X(p)) = v₂(q)+1 for inf many p.
+Between prime p and next prime p' (both ≡3 mod 4), X undergoes ~(p'-p) doubling+subtraction steps.
+The 2-adic valuation of X at step N is determined by the recurrence.
+Show: the sequence of v₂(X(N)) cannot be bounded (because ∑1/p diverges), contradicting v₂(X(p))=v₂(q)+1.
+
+Alternatively: use no_integer_seq_bounded (PROVED in the context!) which says:
+  ¬ ∃ (X : ℕ → ℤ), (∀ n, X(n+1) = 2·X(n) - φ(n+1)) ∧ (∀ n, 1/2 < X(n) < n+2)
+
+This is EXACTLY the contradiction! If S = p/q, then X(N) = q·T(N) satisfies:
+  X(N+1) = 2·X(N) - q·φ(N+1) ... but this has factor q, not matching.
+
+If q = 1 (S is an integer), we get X = T and apply no_integer_seq_bounded.
+But S is not integer (erdos_249_not_integer). So q ≥ 2.
+
+For general q: define Y(N) = q·T(N). Then Y(N+1) = 2·Y(N) - q·φ(N+1).
+And q/2 < Y(N) < q(N+2).
+This is NOT the same recurrence as X(n+1) = 2X(n) - φ(n+1).
+
+ACTUAL PROOF: Need to generalize no_integer_seq_bounded to:
+  For any positive integer q, ¬∃ (X:ℕ→ℤ), (∀n, X(n+1)=2X(n)-q·φ(n+1)) ∧ (∀n, q/2 < X(n) < q(n+2))
+
+This follows from the 2-adic analysis with the observation that at primes p≡3 mod 4,
+  v₂(q·φ(p)) = v₂(q) + 1 (since φ(p)=p-1≡2 mod 4)
+So the mod-4 obstruction persists regardless of q.
+
+=== PROOF TARGETS ===
+1. erdos_249_irrational : Irrational erdos_sum  (THE MAIN THEOREM)
+   Connect: if S = p/q → q·T(N) integer satisfying recurrence → 2-adic contradiction at primes ≡ 3 mod 4

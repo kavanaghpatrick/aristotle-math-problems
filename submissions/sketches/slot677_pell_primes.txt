@@ -1,0 +1,11 @@
+OPEN GAP: Infinitely many prime Pell numbers
+Source: formal-conjectures/FormalConjectures/Wikipedia/Pell.lean
+Domain: NT
+
+The Pell numbers P_n are defined by P_0=0, P_1=1, P_{n+2}=2P_{n+1}+P_n.
+Conjecture: there are infinitely many n such that P_n is prime.
+Known primes at indices: 2, 3, 5, 11, 13, 29, 41, 53, 59, 89, 97, ...
+
+theorem infinite_pellNumber_primes : Infinite {n : ℕ | Prime (pellNumber n)} := by sorry
+
+Status: OPEN. Analogous to the open Fibonacci prime conjecture. No proof or disproof known.

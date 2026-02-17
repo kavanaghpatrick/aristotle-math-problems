@@ -1,0 +1,55 @@
+Sierpinski Conjecture (Erdős-Straus for 5/n): Attack on n ≡ 1 (mod 5)
+
+CONTEXT: We have already proved (slot646) that 5/n = 1/x + 1/y + 1/z has positive integer solutions for ALL n ≥ 4 with n ≢ 1 (mod 5). The full conjecture is now reduced to n ≡ 1 (mod 5). We need to resolve this remaining case.
+
+DEFINITION:
+  SierpinskiSolvable (n : ℕ) : Prop := ∃ x y z : ℕ, x > 0 ∧ y > 0 ∧ z > 0 ∧ 5 / (n : ℚ) = 1 / x + 1 / y + 1 / z
+
+WHAT WE ALREADY HAVE (from slot646 — do NOT re-prove these):
+  - sierpinski_div_2: 2 ∣ n → SierpinskiSolvable n
+  - sierpinski_div_3: 3 ∣ n → SierpinskiSolvable n
+  - sierpinski_div_5: 5 ∣ n → SierpinskiSolvable n
+  - sierpinski_mod_5_2, sierpinski_mod_5_3, sierpinski_mod_5_4: all non-1 residues mod 5
+  - sierpinski_except_1_mod_5: n ≥ 4, n % 5 ≠ 1 → SierpinskiSolvable n
+
+GOAL: Prove SierpinskiSolvable for n ≡ 1 (mod 5), i.e., n = 5q + 1.
+
+APPROACH — Sub-case analysis on q mod small moduli:
+
+For n = 5q + 1, the identity 5/(5q+1) = 1/x + 1/y + 1/z requires finding parametric families.
+
+Key technique: For each sub-case, find explicit (x, y, z) as polynomial functions of q, then verify the identity algebraically.
+
+Sub-cases to try (by divisibility of q or q mod small primes):
+
+1. q even (q = 2k): Then n = 10k + 1. Try x = (2k+1), or exploit that 5/(10k+1) has structure.
+   Possible: x = 2k+1, then 5/(10k+1) - 1/(2k+1) = (10k+5-10k-1)/((10k+1)(2k+1)) = 4/((10k+1)(2k+1)).
+   So need 4/((10k+1)(2k+1)) = 1/y + 1/z. This is an Erdős-Straus type sub-problem for 4/m.
+   Since 4/m = 1/y + 1/z is solvable when m is not ≡ 1 mod 4 (by standard results), check when (10k+1)(2k+1) ≡ 1 mod 4.
+
+2. q ≡ 0 (mod 3): Then n = 5(3m) + 1 = 15m + 1. Use sierpinski_div_3 won't work (3 ∤ n), but try:
+   x = 3m+1, then 5/(15m+1) - 1/(3m+1) = (15m+5-15m-1)/((15m+1)(3m+1)) = 4/((15m+1)(3m+1)).
+
+3. q ≡ 1 (mod 4): Direct parametric decomposition.
+
+4. For remaining hardest cases, try the "greedy algorithm" approach:
+   Choose x = ⌈n/5⌉, then reduce to 2-fraction Egyptian fraction problem.
+
+ALTERNATIVE GLOBAL APPROACH:
+The key identity: 5/n = 1/n + 4/n. So 5/n = 1/n + 1/y + 1/z where 4/n = 1/y + 1/z.
+The Erdős-Straus conjecture (4/n) is verified to very large bounds and known to hold for all n not ≡ 1 mod 4.
+If n ≡ 1 mod 5 and n ≡ 0 mod 4, then 4/n has a trivial decomposition → done.
+If n ≡ 1 mod 5 and n ≡ 2 mod 4, use 4/n = 1/(n) + ... (Erdős-Straus parametric).
+If n ≡ 1 mod 5 and n ≡ 1 mod 4, this is the hard case (n ≡ 1 mod 20).
+
+Actually, more directly: 5/n = 1/n + 1/n + 3/n. If 3 | n, done.
+Or: 5/n = 2/n + 3/n. If 2|n: 2/n = 1/(n/2), and 3/n needs decomposition.
+
+Try to cover n ≡ 1 mod 5 by secondary modular conditions (mod 2, mod 3, mod 4, mod 7, mod 8) to systematically eliminate sub-cases, leaving only a finite or empty residue.
+
+BOUNDED VERIFICATION TARGET: Also verify n ≡ 1 mod 5 for all n ≤ 10000 via native_decide as independent evidence.
+
+DELIVERABLES:
+1. As many sub-cases of n ≡ 1 mod 5 proved as possible via parametric families
+2. A reduction theorem: what residue classes (if any) remain open
+3. Bounded verification via native_decide for n ≤ 10000

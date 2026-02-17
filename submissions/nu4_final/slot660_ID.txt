@@ -1,0 +1,3 @@
+b4d580e8-2301-489a-bc99-7836cd53e22c
+# Task: IATA Rule 3015 v3 — remaining gaps (codeshare, premium economy, booking codes, sales restrictions, penalties, group travel, complete city lists)
+# Submitted: 2026-02-17T00:09:35

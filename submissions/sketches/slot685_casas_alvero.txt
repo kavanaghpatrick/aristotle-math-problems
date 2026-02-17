@@ -1,0 +1,11 @@
+OPEN GAP: Casas-Alvero conjecture
+Source: formal-conjectures/FormalConjectures/Paper/CasasAlvero.lean
+Domain: algebra
+
+In characteristic 0, if monic polynomial P shares a common factor with each of its
+Hasse derivatives up to order deg(P)-1, then P = (X - α)^d for some α.
+
+theorem casas_alvero_conjecture (P : K[X]) (hP : Monic P) (hP' : HasCasasAlveroProp P) :
+    ∃ α : K, P = (X - C α) ^ P.natDegree := by sorry
+
+Status: OPEN. Known for degrees p^k and 2p^k (p prime). False in positive characteristic.

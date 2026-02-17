@@ -1,0 +1,92 @@
+Erdős 376: Infinitely many n with C(2n,n) coprime to 105
+
+OPEN CONJECTURE. Are there infinitely many n such that gcd(C(2n,n), 105) = 1?
+Here 105 = 3 · 5 · 7.
+
+=== FORMAL STATEMENT (from formal-conjectures) ===
+-- The problem asks whether the set {n : gcd(C(2n,n), 105) = 1} is infinite.
+
+=== KNOWN RESULTS ===
+- For any TWO odd primes p,q: infinitely many n with gcd(C(2n,n), pq) = 1 (Erdős-Graham-Ruzsa-Straus 1975)
+- The THREE-prime case (p=3,q=5,r=7) remains open
+- Kummer's theorem: v_p(C(2n,n)) = (number of carries when adding n+n in base p)
+  So gcd(C(2n,n), p) = 1 iff n has no carry in base p, i.e., all base-p digits ≤ (p-1)/2
+
+=== KEY REDUCTION VIA KUMMER'S THEOREM ===
+
+By Kummer's theorem:
+- 3 ∤ C(2n,n) iff all base-3 digits of n are in {0, 1} (i.e., ≤ 1)
+- 5 ∤ C(2n,n) iff all base-5 digits of n are in {0, 1, 2} (i.e., ≤ 2)
+- 7 ∤ C(2n,n) iff all base-7 digits of n are in {0, 1, 2, 3} (i.e., ≤ 3)
+
+So we need infinitely many n whose base-3, base-5, and base-7 representations simultaneously have restricted digits.
+
+=== PROOF STRATEGY ===
+
+APPROACH A: Explicit construction
+
+Find n that works. For example:
+- n must have base-3 digits in {0,1}: these are numbers whose base-3 representation uses only 0s and 1s.
+  Set A₃ = {n : all base-3 digits ∈ {0,1}} = {0, 1, 3, 4, 9, 10, 12, 13, 27, 28, ...}
+  These are numbers of the form ∑ aᵢ · 3^i with aᵢ ∈ {0,1}, i.e., "binary numbers in base 3".
+  |A₃ ∩ [0, 3^k)| = 2^k.
+
+- Similarly: A₅ = {n : all base-5 digits ∈ {0,1,2}}, |A₅ ∩ [0, 5^k)| = 3^k.
+- Similarly: A₇ = {n : all base-7 digits ∈ {0,1,2,3}}, |A₇ ∩ [0, 7^k)| = 4^k.
+
+We need A₃ ∩ A₅ ∩ A₇ to be infinite.
+
+APPROACH B: Density argument
+
+The natural density of A₃ is 0 (it's like a Cantor set). But A₃ has positive "logarithmic" density: |A₃ ∩ [0,N)| ~ N^{log 2 / log 3} ≈ N^{0.631}.
+
+Similarly: |A₅ ∩ [0,N)| ~ N^{log 3 / log 5} ≈ N^{0.682}, |A₇ ∩ [0,N)| ~ N^{log 4 / log 7} ≈ N^{0.712}.
+
+If the digit conditions in different bases are "independent" (which they should be since 3, 5, 7 are coprime), then:
+|A₃ ∩ A₅ ∩ A₇ ∩ [0,N)| ~ N^{log2/log3 + log3/log5 + log4/log7 - 2}?
+
+Actually independence is not straightforward. A better approach:
+
+APPROACH C: Chinese Remainder Theorem / Base conversion
+
+For M = 3^a · 5^b · 7^c, the CRT gives a bijection between [0, M) and [0, 3^a) × [0, 5^b) × [0, 7^c).
+
+The number of n ∈ [0, M) in A₃ ∩ A₅ ∩ A₇:
+- In A₃ ∩ [0, 3^a): 2^a choices
+- In A₅ ∩ [0, 5^b): 3^b choices
+- In A₇ ∩ [0, 7^c): 4^c choices
+- By CRT (since 3,5,7 coprime): |A₃ ∩ A₅ ∩ A₇ ∩ [0, M)| ≥ ... but CRT maps residues, not digit conditions.
+
+CRT doesn't directly give digit independence. The issue is that knowing n mod 3^a determines the base-3 digits of n mod 3^a, but knowing n mod 5^b doesn't constrain the base-3 digits.
+
+APPROACH D: Direct computation + Heuristic argument
+
+Compute: find specific n values in A₃ ∩ A₅ ∩ A₇.
+
+n=1: base3=1 ✓, base5=1 ✓, base7=1 ✓ → n=1 works!
+n=3: base3=10 ✓, base5=3 ✗ (digit 3 > 2) → no
+n=4: base3=11 ✓, base5=4 ✗ → no
+n=9: base3=100 ✓, base5=14 ✓, base7=12 ✓ → n=9 works!
+n=10: base3=101 ✓, base5=20 ✓, base7=13 ✓ → n=10 works!
+
+Great, multiple small examples exist. The question is whether infinitely many exist.
+
+APPROACH E: Furstenberg-type argument (ambitious)
+
+The set A₃ is a "self-similar" set (Cantor-like). The intersection A₃ ∩ A₅ ∩ A₇ should be studied via the theory of multiplicatively independent bases and normal numbers. By a result related to Furstenberg's ×2, ×3 conjecture, the simultaneous digit restrictions in coprime bases should not "conspire" to make the intersection finite.
+
+More concretely: define the IFS (iterated function system) for each base restriction. The Hausdorff dimension of A_p (in base p, digits ≤ (p-1)/2) is log((p+1)/2)/log(p). For the intersection, if the bases are multiplicatively independent (which 3,5,7 are), the dimensions should "add independently" in a suitable sense.
+
+=== WHAT TO PROVE ===
+
+PRIMARY: Find 100+ explicit n in A₃ ∩ A₅ ∩ A₇ by computation, establishing that gcd(C(2n,n), 105) = 1 for many specific n.
+
+theorem erdos_376_examples : ∃ (S : Finset ℕ), S.card ≥ 100 ∧ ∀ n ∈ S, Nat.gcd (Nat.centralBinom n) 105 = 1
+
+AMBITIOUS: Prove the intersection is infinite using the CRT / density / Furstenberg approach.
+
+FALLBACK: Prove the two-prime case (known result, infrastructure):
+theorem erdos_376_two_primes (p q : ℕ) (hp : p.Prime) (hq : q.Prime) (hpq : p ≠ q) :
+  Set.Infinite {n | Nat.gcd (Nat.centralBinom n) (p * q) = 1}
+
+Mathlib: Nat.centralBinom, Nat.digits, Nat.gcd, Kummer's theorem (if available)

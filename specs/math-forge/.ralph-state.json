@@ -1,0 +1,14 @@
+{
+  "source": "spec",
+  "name": "math-forge",
+  "basePath": "specs/math-forge",
+  "phase": "research",
+  "taskIndex": 0,
+  "totalTasks": 0,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": false,
+  "awaitingApproval": true
+}

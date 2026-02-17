@@ -1,0 +1,42 @@
+Erdos Problem 364: Are there infinitely many consecutive powerful number triples?
+
+Context: The attached .lean file contains infrastructure from a previous Aristotle run:
+- Definition of Powerful (squarefull) and radical
+- ABC conjecture statement
+- powerful_implies_factorization_ge_2: p|n powerful => p^2|n
+- radical_sq_le_self_of_powerful: rad(n)^2 <= n for powerful n
+- radical_le_sqrt: rad(n) <= sqrt(n) for powerful n
+- odd_of_powerful_n_n_plus_2: n,n+2 powerful => n odd
+- radical_bound_triple: rad(n(n+2)(n+1)^2) bound
+- coprime structure of n(n+2) and (n+1)^2
+
+TARGET THEOREMS (prove ANY of these):
+
+1. CONDITIONAL on ABC: Only finitely many powerful triples (n, n+1, n+2).
+   Proof sketch: If n, n+1, n+2 are all powerful, consider n(n+2) = (n+1)^2 - 1.
+   Then a + b = c where a=1, b=n(n+2), c=(n+1)^2.
+   rad(abc) = rad(n(n+2)(n+1)^2) <= rad(n)*rad(n+2)*rad(n+1) (coprime factors).
+   Each radical <= sqrt of the number (powerful), so rad(abc) <= sqrt(n)*sqrt(n+2)*(n+1)
+   ~ n^{3/2}. But c = (n+1)^2 ~ n^2. ABC says c < K * rad(abc)^{1+eps} ~ K * n^{3/2(1+eps)}.
+   For eps < 1/3 this gives n^2 < K * n^{3/2+eps'} which fails for large n.
+   So only finitely many exceptions.
+
+2. UNCONDITIONAL: Powerful triples must satisfy n ≡ 7, 27, or 35 mod 36.
+   (Already proved in slot642_result.lean — use as context if needed.)
+
+3. If n, n+1, n+2 are all powerful with n+1 = m^3, then specific constraints on m:
+   - m even (proved in context)
+   - m^2 - m + 1 or m^2 + m + 1 is powerful
+   - All prime factors of m^2 ± m + 1 are ≡ 1 mod 3 (proved in slot642)
+
+4. NEW TARGET: Prove there is no powerful triple with n+1 a perfect square.
+   If n+1 = m^2, then n = m^2-1 = (m-1)(m+1) and n+2 = m^2+1.
+   For n powerful: (m-1)(m+1) powerful. Since gcd(m-1,m+1) | 2:
+   - If m odd: gcd=2, so both (m-1)/2 and (m+1)/2 must be powerful (after extracting 2s)
+   - If m even: gcd=1, so m-1 and m+1 both powerful — consecutive powerful pair
+   For n+2 = m^2+1 powerful: m^2+1 squarefull. But m^2 ≡ -1 mod p^2 for some prime p
+   means the order of m mod p^2 divides 4 but not 2, so 4 | phi(p^2) = p(p-1), giving p ≡ 1 mod 4.
+   Combined constraints are very restrictive.
+
+Please use the infrastructure from the attached context file and prove as many of these
+results as possible. The ABC-conditional finiteness is the highest-value target.

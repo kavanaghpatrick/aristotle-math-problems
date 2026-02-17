@@ -1,0 +1,14 @@
+{
+  "source": "spec",
+  "name": "honest-tooling",
+  "basePath": "specs/honest-tooling",
+  "phase": "execution",
+  "taskIndex": 0,
+  "totalTasks": 21,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": true,
+  "awaitingApproval": false
+}

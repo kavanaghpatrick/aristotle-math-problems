@@ -1,0 +1,3 @@
+f70f28c9-0114-409b-9592-b92eeed54a36
+# Task: ArithmeticSumS Conj 1.1 — S(k)>0 for odd primes, bounded verification + analytic
+# Submitted: 2026-02-17T07:10:39

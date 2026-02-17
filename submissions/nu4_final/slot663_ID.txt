@@ -1,0 +1,3 @@
+20082f90-c088-48e5-b1cc-1c24b1fe33c7
+# Task: Erdős 249: irrationality of sum phi(n)/2^n — Lambert series + Nesterenko method
+# Submitted: 2026-02-17T00:15:27

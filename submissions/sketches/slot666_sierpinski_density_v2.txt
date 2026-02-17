@@ -1,0 +1,62 @@
+Sierpinski 5/n density argument — FINAL CONNECTION
+
+The attached 1723-line context has everything EXCEPT the final connection:
+
+DONE:
+- All reductions to n ≡ 1 mod 60 (the "hard case")
+- 30+ primes ≡ 3 mod 4 used for modular coverage
+- IsCoveredByKnownReductionsExtended2 with primes up to 283
+- density_avoiding_finite_primes: density of uncovered ≤ ∏(1-2/p)
+- product_limit: if ∑ 1/p diverges (over primes ≡ 3 mod 4), then ∏(1-2/p) → 0
+- chi4 Dirichlet character mod 4 defined and proved nontrivial
+- crt_coverage theorem
+- Bounded verification to n < 1,000,000
+
+MISSING (the ONE thing left):
+- Prove ∑_{p ≡ 3 mod 4} 1/p = ∞ (divergence of reciprocal sum over primes in AP)
+- Then conclude: density(UncoveredByAllPrimes) = 0
+- Then conclude: "almost all" n satisfy Sierpinski conjecture
+
+=== HOW TO PROVE THE DIVERGENCE ===
+
+APPROACH A: Use Dirichlet L-function nonvanishing (already in Mathlib)
+
+The context already has:
+  #check DirichletCharacter.LFunction_ne_zero_of_one_le_re
+  def chi4 : DirichletCharacter ℂ 4 := MulChar.ofUnitHom chi4_unit_hom
+  theorem chi4_nontrivial : chi4 ≠ 1
+
+The key chain:
+1. L(1, χ₄) ≠ 0 (from Mathlib: DirichletCharacter.LFunction_ne_zero_of_one_le_re)
+2. log L(s, 1_{mod 4}) + log L(s, χ₄) = 2 ∑_{p ≡ 1 mod 4} p^{-s} + ... (Euler product factorization)
+3. As s → 1+: log L(s, 1_{mod 4}) → +∞ (pole of ζ at s=1)
+4. Since L(1, χ₄) ≠ 0: log L(s, χ₄) → finite value
+5. Therefore: ∑_{p ≡ 1 mod 4} p^{-s} → ∞ and ∑_{p ≡ 3 mod 4} p^{-s} → ∞
+
+Actually more directly: by symmetry of the Euler product:
+  ∑_{p prime} 1/p diverges (Mathlib: Nat.Primes.not_summable_one_div)
+  The primes split into p=2, p≡1 mod 4, p≡3 mod 4.
+  If ∑_{p≡3} 1/p converged, then ∑_{p≡1} 1/p must diverge.
+  But by Dirichlet's theorem, both APs have the same natural density.
+  So their reciprocal sums must have the same divergence behavior.
+  Formally: L(1, χ₄) ≠ 0 implies equal distribution.
+
+APPROACH B: Elementary (avoid L-functions)
+
+∑_p 1/p diverges (Mathlib). If we could show ∑_{p≡1 mod 4} 1/p and ∑_{p≡3 mod 4} 1/p differ by a convergent series, both must diverge.
+
+The identity: ∑_{p≡1} 1/p - ∑_{p≡3} 1/p = ∑_p χ₄(p)/p where χ₄ is the Legendre symbol mod 4.
+This latter sum converges (since L(1,χ₄) = π/4 ≠ 0, the sum converges).
+Therefore both partial sums diverge.
+
+State and prove:
+```
+theorem sum_reciprocal_primes_3_mod_4_diverges :
+  Tendsto (fun n => ∑ p ∈ Primes3Mod4_below n, (1 / p : ℝ)) atTop atTop
+```
+
+=== PROOF TARGETS ===
+
+1. sum_reciprocal_primes_3_mod_4_diverges (the missing link)
+2. density_uncovered_zero : naturalDensity UncoveredByAllPrimes 0
+3. sierpinski_almost_all : naturalDensity {n | n ≥ 4 ∧ ¬SierpinskiSolvable n} 0

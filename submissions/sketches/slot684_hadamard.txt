@@ -1,0 +1,10 @@
+OPEN GAP: Hadamard conjecture
+Source: formal-conjectures/FormalConjectures/Wikipedia/Hadamard.lean
+Domain: algebra
+
+For every k ≥ 0, there exists a Hadamard matrix of size 4k — a matrix with ±1 entries
+satisfying M^T M = 4k·I.
+
+theorem HadamardConjecture (k : ℕ) : ∃ M, IsHadamard (n := 4 * k) M := by sorry
+
+Status: OPEN. Known for all k ≤ 166. Smallest unknown case: 4×167 = 668.

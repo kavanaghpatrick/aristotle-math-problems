@@ -1,0 +1,54 @@
+Lemoine's Conjecture: Every odd integer n >= 7 can be written as p + 2q
+where p and q are both prime.
+
+FORMAL STATEMENT:
+  theorem lemoine_conjecture (n : ℕ) (hn : 6 < n) (odd : Odd n) :
+    ∃ (p q : ℕ), p.Prime ∧ q.Prime ∧ p + 2 * q = n
+
+This is OPEN. Verified computationally to 10^9.
+
+PROOF STRATEGY — Multiple targets:
+
+TARGET 1 (BOUNDED CASE): Prove for all odd n with 7 ≤ n ≤ N for some explicit N.
+Use interval_cases or native_decide on bounded ranges. For small n:
+- n=7: 3 + 2*2 = 7 (p=3, q=2)
+- n=9: 3 + 2*3 = 9 or 7 + 2*1... 1 not prime. 5 + 2*2 = 9 (p=5, q=2)
+- n=11: 7 + 2*2 = 11 (p=7, q=2) or 5 + 2*3 = 11 (p=5, q=3)
+- n=13: 7 + 2*3 = 13 (p=7, q=3)
+
+For bounded verification, construct explicit witnesses for each odd n in range.
+
+TARGET 2 (STRUCTURAL): Prove Lemoine for n ≡ 1 mod 4.
+If n is odd and n ≡ 1 mod 4, write n = 4k+1. Take q=2, then p = n-4 = 4k-3.
+Need 4k-3 prime — not guaranteed. But: take q = (n-3)/2 if that's prime,
+giving p = 3. Need (n-3)/2 prime — also not guaranteed for all n.
+
+Actually, the issue is this is essentially equivalent to Goldbach for even numbers:
+n = p + 2q, n odd ⟹ n - p = 2q ⟹ (n-p)/2 = q prime.
+So for each odd n, we need a prime p < n such that (n-p)/2 is also prime.
+This is related to but distinct from Goldbach.
+
+TARGET 3 (DENSITY/COUNTING): Prove that the number of representations
+r(n) = |{(p,q) : p + 2q = n, p,q prime}| satisfies r(n) → ∞ as n → ∞
+among odd n. This follows from the Hardy-Littlewood circle method applied to
+the specific form p + 2q = n. The singular series is positive for odd n.
+
+TARGET 4 (SMALL CASES via decide): Prove for n ≤ 100 or n ≤ 200.
+For each odd n in range, provide explicit (p, q) witnesses.
+7 = 3 + 2*2, 9 = 5 + 2*2, 11 = 7 + 2*2, 13 = 7 + 2*3, 15 = 11 + 2*2,
+17 = 13 + 2*2, 19 = 13 + 2*3, 21 = 17 + 2*2, 23 = 17 + 2*3, 25 = 19 + 2*3,
+27 = 23 + 2*2, 29 = 23 + 2*3, ...
+
+Each witness can be verified by: Nat.Prime p ∧ Nat.Prime q ∧ p + 2*q = n.
+Use native_decide or decide for the primality checks.
+
+TARGET 5 (MODULAR STRUCTURE): Prove that for n ≡ 0 mod 3 with n > 6 and n odd
+(i.e., n ≡ 3 mod 6 with n ≥ 9), Lemoine holds by taking q = 3:
+n = (n-6) + 2*3, need n-6 prime. Not always true, but:
+take q = (n-3)/2 if odd, giving p = 3, need (n-3)/2 prime.
+When n ≡ 3 mod 6: (n-3)/2 ≡ 0 mod 3, so (n-3)/2 = 3 only when n=9.
+So this sub-case needs more work.
+
+Please attempt Target 4 (bounded verification with explicit witnesses) as the most
+achievable, then Target 2/5 for structural partial results. Target 1 (full conjecture)
+is welcome if Aristotle sees a path.

@@ -1,0 +1,3 @@
+a67cc5ff-0c92-497c-aea9-e3146fcd1e52
+# Task: Pell number primes infinitude — bare gap
+# Submitted: 2026-02-17T18:38:31

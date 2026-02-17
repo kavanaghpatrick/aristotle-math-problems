@@ -1,0 +1,3 @@
+d94555c4-f79e-4416-97a2-c3cdf5251251
+# Task: Sierpinski 5/n n≡1mod5 subcases with context from slot646
+# Submitted: 2026-02-15T17:20:39

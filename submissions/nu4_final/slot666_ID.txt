@@ -1,0 +1,3 @@
+38d45f19-6c33-4d4a-8bb1-1ccc5835e193
+# Task: Sierpinski density v2 — connect Dirichlet to sum divergence, prove almost-all
+# Submitted: 2026-02-17T07:10:38

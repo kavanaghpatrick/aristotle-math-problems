@@ -1,0 +1,11 @@
+OPEN GAP: Artin's conjecture on primitive roots (part i)
+Source: formal-conjectures/FormalConjectures/Wikipedia/ArtinPrimitiveRootsConjecture.lean
+Domain: NT
+
+If a is not a perfect square and a ≠ -1, then the set of primes p for which a is a
+primitive root mod p has positive density inside the primes. In particular, S(a) is infinite.
+
+theorem artin_primitive_roots.parts.i (a : ℤ) (ha : ¬IsSquare a) (ha' : a ≠ -1) :
+    ∃ x > 0, (S a).HasDensity x {p | p.Prime} := by sorry
+
+Status: OPEN. Proved conditionally on GRH by Hooley (1967). Unconditional proof unknown.

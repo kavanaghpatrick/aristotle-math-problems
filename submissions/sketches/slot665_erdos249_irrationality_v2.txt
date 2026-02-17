@@ -1,0 +1,85 @@
+Erdős 249: Irrationality of ∑ φ(n)/2^n — CONTINUATION
+
+The attached 607-line context file has MAJOR infrastructure:
+1. totient_lambert_series: ∑ φ(n)/(2^n-1) = 2 (PROVED)
+2. erdos_249_bounds: 1 < S < 2 where S = ∑ φ(n)/2^n (PROVED)
+3. erdos_249_not_integer: S is not an integer (PROVED)
+4. tail_sum_recurrence: T(N+1) = 2·T(N) - φ(N+1)
+5. tail_sum_bounds: 1/2 < T(N) < N+2
+6. tail_sum_integer_of_dyadic: if S = a/2^k then T(N) is eventually integer
+7. tail_sum_not_div_4_of_even_and_phi_mod_4_2: divisibility obstruction
+8. tail_sum_mod_4_at_prime: at primes p≡3 mod 4, T(p) ≢ 0 mod 4
+9. exists_prime_mod_4_3: infinitely many p≡3 mod 4
+10. gap_seq and K_seq analysis infrastructure
+
+=== WHAT REMAINS ===
+
+The irrationality proof is 80% done. The key gap:
+
+CLAIM: S = ∑ φ(n)/2^n is irrational.
+
+PROOF STRATEGY (complete the argument from the context):
+
+Suppose S = p/q for integers p, q > 0. Then S = a/2^m for some a, m (clear denominators with 2-adic valuation of q). Then:
+
+  T(N) := 2^N · S - ∑_{n=1}^{N} φ(n) · 2^{N-n}
+
+satisfies T(N+1) = 2·T(N) - φ(N+1) (PROVED in context as tail_sum_recurrence).
+
+If S = a/2^m, then for N ≥ m: T(N) = a·2^{N-m} - (integer) ∈ ℤ.
+
+KEY OBSERVATION (from context infrastructure):
+- For prime p ≡ 3 mod 4: φ(p) = p-1 ≡ 2 mod 4 (since p ≡ 3 mod 4)
+- If T(p-1) = 2k (even), then T(p) = 2(2k) - (p-1) = 4k - (p-1)
+- Since p-1 ≡ 2 mod 4: T(p) ≡ 0 - 2 ≡ 2 mod 4, so T(p) is NOT divisible by 4.
+- But T(p) must eventually be divisible by arbitrarily high powers of 2 (if S = a/2^m, then for large N, T(N) = a·2^{N-m} - integer, and the 2-adic growth forces higher divisibility).
+
+THE CONTRADICTION:
+If S = a/2^m, then for N > m:
+  T(N) = a·2^{N-m} - ∑_{n=1}^N φ(n)·2^{N-n}
+
+The first term has 2-adic valuation ≥ N-m. So v_2(T(N)) ≥ min(N-m, v_2(∑...)).
+
+More precisely: for N >> m, T(N) ≡ -∑_{n=N-m+1}^N φ(n)·2^{N-n} mod 2^{N-m}.
+
+But the tail_sum_mod_4 result says that at infinitely many primes p ≡ 3 mod 4, we have T(p) ≡ 2 mod 4. This means v_2(T(p)) = 1 for infinitely many p.
+
+However, if S is rational with denominator 2^m, then for p > m + 10 (say):
+  v_2(T(p)) ≥ p - m - C for some constant C (from the 2-adic structure).
+
+For p large enough, p - m - C > 1, contradicting v_2(T(p)) = 1.
+
+FORMALIZE THIS:
+
+theorem erdos_249_irrational : Irrational erdos_sum := by
+  -- Assume erdos_sum = p/q. Clear 2-adic denominator to get erdos_sum = a/2^m.
+  -- Show T(N) is integer for N ≥ m.
+  -- Use tail_sum_mod_4_at_prime to get v_2(T(p)) = 1 for large prime p ≡ 3 mod 4.
+  -- Show v_2(T(N)) ≥ N - m for N ≥ m (from the 2^{N-m} factor).
+  -- Contradiction for p > m + 1.
+
+Actually the key subtlety: S might be p/q where q is not a power of 2. We need:
+- If S = p/q, write q = 2^m · r with r odd.
+- Then q · T(N) = q · 2^N · S - ∑ q · φ(n) · 2^{N-n}
+- For N ≥ m: q · T(N) = p · 2^{N-m} · r^{-1}... this doesn't work directly.
+
+CLEANER APPROACH: Assume S rational. Then ∃ integers a, b with b > 0 and S = a/b.
+Then b · 2^N · S = a · 2^N, and b · T(N) = a · 2^N - b · ∑_{n=1}^N φ(n) · 2^{N-n} ∈ ℤ.
+So b · T(N) is always an integer.
+
+Now b · T(N+1) = 2 · b · T(N) - b · φ(N+1).
+
+At primes p ≡ 3 mod 4 with p > some bound:
+  b · T(p) ≡ 2 · b · T(p-1) - b · (p-1) mod 4b
+
+The tail_sum analysis shows T(p) ≢ 0 mod 4, so b · T(p) ≢ 0 mod 4b (if b is odd).
+But from the recurrence, eventually b · T(N) grows like b · 2^N · S = a · 2^N, which is divisible by arbitrarily high powers of 2. Contradiction.
+
+If b is even, write b = 2^j · c with c odd. Then c · T(N) is eventually an integer (for N ≥ j), and the same argument applies with c replacing b.
+
+=== PROOF TARGETS ===
+
+1. erdos_249_irrational : Irrational erdos_sum  (THE MAIN THEOREM)
+2. erdos_249_not_dyadic : ∀ a m, erdos_sum ≠ a / 2^m  (intermediate)
+3. v2_tail_sum_at_prime : for prime p ≡ 3 mod 4, v₂(T(p)) = 1  (from context infrastructure)
+4. v2_tail_sum_growth : if S rational, v₂(T(N)) → ∞  (the contradiction engine)

@@ -1,0 +1,67 @@
+Erdős 375 / Grimm's Conjecture: Distinct prime divisors for consecutive composites
+
+OPEN CONJECTURE. If n+1, n+2, ..., n+k are all composite, then there exist distinct primes p₁,...,pₖ such that pᵢ | (n+i) for all i.
+
+=== FORMAL STATEMENT ===
+def Erdos375Prop : Prop := ∀ n ≥ 1, ∀ k, (∀ i < k, ¬ (n + i + 1).Prime) →
+    ∃ p : Fin k → ℕ, p.Injective ∧ ∀ i, (p i).Prime ∧ p i ∣ n + i + 1
+
+=== KNOWN RESULTS ===
+- k ≤ 2 case is PROVED (in formal-conjectures repo)
+- Ramachandra-Shorey-Tijdeman (1975): holds for k < c·(log n / log log n)³
+- Verified computationally for n ≤ 1.9 × 10¹⁰ (Laishram-Shorey)
+- If Grimm's conjecture holds → Legendre's conjecture asymptotically
+
+=== PROOF STRATEGY ===
+
+APPROACH: Extend from k=2 to k=3 (and k=4 if possible)
+
+For k=3: We have three consecutive composites n+1, n+2, n+3.
+Need: three DISTINCT primes p₁|n+1, p₂|n+2, p₃|n+3.
+
+Each composite number has at least one prime factor ≤ its square root.
+Hall's marriage theorem: construct bipartite graph G = (composites, primes) with edges (n+i, p) iff p | (n+i). Hall's condition: every subset S of composites has |N(S)| ≥ |S| where N(S) = primes dividing some element of S.
+
+For k=3, check Hall's condition for subsets of size 1, 2, 3:
+- Size 1: Each composite has a prime factor. ✓
+- Size 2: Any two consecutive composites {n+i, n+j} have at least 2 distinct prime factors.
+  If n+i and n+j shared ALL prime factors, their difference |i-j| ≤ 2 would be divisible by their common prime factors. Since |i-j| ∈ {1,2}, the only primes that could divide both are 2 (if |i-j|=2) or none (if |i-j|=1 and they share a prime p, then p | 1, impossible).
+  Wait: they don't need to share ALL primes, just enough. Hall's condition says: the primes dividing n+i UNION primes dividing n+j has ≥ 2 elements. Since n+i ≠ n+j and they're both composite, they each have a prime factor. If these are the same prime p, then p | gcd(n+i, n+j) | (j-i). For |j-i| ≤ 2: p ∈ {2} (if j-i=2) or impossible (if j-i=1). So unless both n+i and n+j are even and their only shared prime is 2, they have distinct prime factors. Even if both are even, each has at least one other prime factor (since they're composite and > 2), giving ≥ 2 primes total. ✓
+- Size 3: {n+1, n+2, n+3}. Among three consecutive integers, at most one is even. The primes dividing them must include at least 3 distinct primes. Among n+1, n+2, n+3: one is even (call it 2m), and the other two are odd. The even one contributes prime 2 plus at least one other prime. Each odd one contributes at least one odd prime. These odd primes must be ≥ 3 and divide numbers differing by at most 2. Case analysis on whether these odd primes coincide...
+
+KEY LEMMA for k=3: If n+1, n+2, n+3 are all composite, they collectively have ≥ 3 distinct prime factors.
+
+Proof: Let's say n+2 is even (one of three consecutive integers must be even).
+- n+2 = 2m where m ≥ 2 (since n+2 is composite and > 2). m has a prime factor q.
+  - If q = 2: n+2 = 4, so n=2, but n+1=3 is prime. Contradiction (n+1 must be composite).
+  - If q > 2: primes include {2, q}.
+- n+1 is odd composite: has a prime factor r ≥ 3.
+- n+3 is odd composite: has a prime factor s ≥ 3.
+- If r = s: then r | gcd(n+1, n+3) | 2, but r ≥ 3. Contradiction.
+- So r ≠ s. If r = q or s = q, we still have {2, q, (r or s)} with 3 distinct primes.
+  Actually: {2, r, s} are all distinct (r,s ≥ 3, r ≠ s), so ≥ 3 primes.
+
+Wait, we need more: not just 3 distinct primes total, but Hall's condition specifically.
+Actually for k=3, 3 distinct primes total + Hall's condition for subsets suffices.
+
+APPROACH B: Direct construction for small k
+
+For k=3, directly construct the injective assignment:
+- Assign to n+2 (the even one): prime 2
+- Assign to n+1: its smallest odd prime factor r
+- Assign to n+3: its smallest odd prime factor s ≠ r (guaranteed since r | n+1, s | n+3, gcd(n+1,n+3) | 2, so r ≠ s)
+
+This gives an explicit injective p with p(1)=2, p(0)=r, p(2)=s.
+
+For k=4: similar but need to handle two even numbers among n+1,...,n+4.
+Among 4 consecutive composites, two are even: {n+i, n+i+2} for some i.
+These contribute at least 3 primes (2 plus two more from their odd parts).
+The two odd composites contribute ≥ 2 odd primes (which may overlap with the above).
+
+=== PROOF TARGETS ===
+1. erdos_375_k3: Grimm's conjecture for k=3 (main target, novel)
+2. erdos_375_k4: Grimm's conjecture for k=4 (ambitious extension)
+3. erdos_375_bounded: verified for n < 10000, all k (computation)
+4. hall_condition_consecutive_composites: Hall's condition for bipartite graph
+
+Mathlib: Nat.Prime, Nat.minFac, Finset, Function.Injective, Hall's marriage theorem

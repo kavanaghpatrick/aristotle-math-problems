@@ -1,0 +1,11 @@
+OPEN GAP: Infinitely many regular primes
+Source: formal-conjectures/FormalConjectures/Wikipedia/RegularPrimes.lean
+Domain: NT
+
+A prime p is regular if p does not divide the class number of Q(zeta_p).
+Equivalently, p does not divide any numerator of Bernoulli numbers B_2,...,B_{p-3}.
+Conjecture: the set of regular primes is infinite.
+
+theorem regularprime_conjecture : RegularPrimeConjecture := by sorry
+
+Status: OPEN. Heuristically ~61% of primes are regular (e^{-1/2}). Verified computationally to large bounds. No proof known.

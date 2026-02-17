@@ -1,0 +1,3 @@
+2b949192-0fdf-4b2d-b6cf-93ebc664e71a
+# Task: Selfridge/PSW primality — bare gap
+# Submitted: 2026-02-17T18:43:03

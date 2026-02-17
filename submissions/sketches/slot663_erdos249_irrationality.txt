@@ -1,0 +1,127 @@
+Erdős Problem 249: Is ∑_{n≥1} φ(n)/2^n irrational?
+
+OPEN PROBLEM. φ is Euler's totient function.
+
+=== FORMAL STATEMENT ===
+theorem erdos_249_positive : Irrational (∑' n : ℕ, (φ n : ℝ) / (2 ^ n : ℝ))
+
+Note: The formal-conjectures version uses answer(sorry) because the truth value is unknown.
+We conjecture YES (irrational) and attempt to prove it.
+
+=== BACKGROUND ===
+
+The series ∑ φ(n)/2^n converges absolutely since φ(n) ≤ n and ∑ n/2^n = 2.
+The exact value: using ∑ φ(n) x^n = x/(1-x)² for |x| < 1 evaluated at x = 1/2 gives value 2.
+Wait — that's ∑ φ(n)/2^n = (1/2)/(1-1/2)² = (1/2)/(1/4) = 2.
+
+Actually: the identity is ∑_{n=1}^∞ φ(n) x^n = x/(1-x)² for |x| < 1.
+At x = 1/2: ∑ φ(n)/2^n = (1/2)/(1/2)² = (1/2)/(1/4) = 2.
+
+So the sum equals 2, which is RATIONAL, not irrational!
+
+This means the answer to Erdős 249 is NO — the sum is rational (equals 2).
+
+=== PROOF ===
+
+The key identity from multiplicative number theory:
+  ∑_{n=1}^∞ φ(n) x^n = x/(1-x)²     for |x| < 1
+
+This follows from Möbius inversion: φ = μ * id (Dirichlet convolution), so
+  ∑ φ(n) x^n = (∑ μ(n) x^n)(∑ n x^n) = (x/(1-x)²) · (1/(1-x))^{-1} ...
+
+Actually, let me be more careful. The Lambert series / Dirichlet series approach:
+  ∑_{n=1}^∞ φ(n) x^n = ∑_{n=1}^∞ (∑_{d|n} μ(d) · (n/d)) x^n
+
+Using the convolution identity for power series:
+  (∑_{n=1}^∞ μ(n) x^n)(∑_{n=1}^∞ n x^n) = ∑_{n=1}^∞ (μ * id)(n) x^n = ∑_{n=1}^∞ φ(n) x^n
+
+We know:
+  ∑_{n=1}^∞ n x^n = x/(1-x)²
+  ∑_{d|n} μ(d) = [n=1] (Möbius function identity)
+
+Actually, the correct approach uses the fact that for |x| < 1:
+  ∑_{n=1}^∞ φ(n)/n · x^n/(1-x^n) = x/(1-x)    ... no this isn't right either.
+
+Let me use a cleaner approach. The well-known identity:
+  ∑_{d|n} φ(d) = n
+
+This gives: ∑_{n=1}^∞ x^n = ∑_{n=1}^∞ ∑_{d|n} φ(d) x^n / n ... no.
+
+CLEANER: Direct computation.
+  S = ∑_{n=1}^∞ φ(n)/2^n
+
+Group by: ∑_{n=1}^∞ x^n = x/(1-x), and use ∑_{d|n} φ(d) = n.
+
+  ∑_{n=1}^∞ n·x^n = x/(1-x)²
+
+  ∑_{n=1}^∞ n·x^n = ∑_{n=1}^∞ (∑_{d|n} φ(d)) x^n = ∑_{d=1}^∞ φ(d) ∑_{k=1}^∞ x^{dk} = ∑_{d=1}^∞ φ(d) · x^d/(1-x^d)
+
+So: ∑_{d=1}^∞ φ(d) x^d/(1-x^d) = x/(1-x)²
+
+At x = 1/2:
+  ∑_{d=1}^∞ φ(d) (1/2)^d/(1-(1/2)^d) = (1/2)/(1/2)² = 2
+
+But ∑ φ(d)/2^d ≠ ∑ φ(d) (1/2)^d/(1-(1/2)^d) unless we can relate them.
+
+Note: (1/2)^d / (1-(1/2)^d) = 1/(2^d - 1)
+
+So: ∑ φ(d)/(2^d - 1) = 2
+
+But the original question is about ∑ φ(n)/2^n, not ∑ φ(n)/(2^n - 1).
+
+The difference: ∑ φ(n)/2^n = ∑ φ(n)/(2^n - 1) · (2^n - 1)/2^n = ∑ φ(n)/(2^n - 1) · (1 - 1/2^n)
+This is NOT simply 2.
+
+So ∑ φ(n)/2^n is not obviously 2. The question of irrationality remains open.
+
+=== REVISED PROOF STRATEGY ===
+
+APPROACH 1: Partial fractions and irrationality criterion
+
+Write S = ∑_{n≥1} φ(n)/2^n. We can compute:
+  S = 1/2 + 1/4 + 2/8 + 2/16 + 4/32 + 2/64 + 6/128 + 4/256 + ...
+  S = 0.5 + 0.25 + 0.25 + 0.125 + 0.125 + 0.03125 + 0.046875 + ...
+
+Numerical: φ(1)=1, φ(2)=1, φ(3)=2, φ(4)=2, φ(5)=4, φ(6)=2, φ(7)=6, φ(8)=4, ...
+S ≈ 1/2 + 1/4 + 1/4 + 1/8 + 1/8 + 1/32 + 3/64 + 1/64 + 3/256 + ...
+S ≈ 1.328...
+
+If S = p/q for integers p, q, then q·2^N · S = q·2^N · ∑ φ(n)/2^n, and the tail
+∑_{n>N} φ(n)/2^n should satisfy a particular divisibility pattern.
+
+APPROACH 2: Use the identity ∑ φ(n)/(2^n - 1) = 2 and relate.
+
+We have the EXACT identity: ∑_{n=1}^∞ φ(n)/(2^n - 1) = 2.
+
+Now: 1/(2^n - 1) = 1/2^n · 1/(1 - 2^{-n}) = ∑_{k=1}^∞ 1/2^{nk}
+
+So: ∑_n φ(n)/(2^n - 1) = ∑_n φ(n) ∑_{k=1}^∞ 1/2^{nk} = ∑_{m=1}^∞ (1/2^m) ∑_{d|m} φ(d) = ∑_{m=1}^∞ m/2^m = 2 ✓
+
+This confirms the identity but S = ∑ φ(n)/2^n is the first "layer" of ∑ φ(n)/(2^n-1):
+  ∑ φ(n)/(2^n - 1) = ∑ φ(n)/2^n + ∑ φ(n)/2^{2n} + ∑ φ(n)/2^{3n} + ... = ∑_{k=1}^∞ S_k
+where S_k = ∑_n φ(n)/2^{kn}.
+
+So S = S₁ = 2 - S₂ - S₃ - ... where ∑ S_k = 2.
+
+APPROACH 3: Direct irrationality proof via Nesterenko-type method
+
+To prove ∑ f(n)/2^n irrational for multiplicative f, use:
+- Padé approximation to the generating function
+- Show that denominators of partial sums grow too fast for rationality
+- Key: the generating function F(x) = ∑ φ(n)x^n is not algebraic over Q(x)
+
+=== WHAT TO PROVE ===
+
+PRIMARY: Prove Irrational (∑' n, (φ n : ℝ) / 2^n) if the answer is YES
+
+FALLBACK 1: Prove the identity ∑ φ(n)/(2^n - 1) = 2 (as infrastructure)
+  theorem totient_lambert_series : HasSum (fun n => (φ (n+1) : ℝ) / (2^(n+1) - 1)) 2
+
+FALLBACK 2: Prove S is NOT an integer (weaker than irrational)
+  theorem erdos_249_not_integer : ¬ ∃ m : ℤ, (∑' n, (φ n : ℝ) / 2^n) = m
+
+FALLBACK 3: Compute S to high precision and verify it doesn't match p/q for small q
+  Numerical computation: S ≈ 1.3284... — verify this is not p/q for q ≤ 10^6
+
+Mathlib tools: ArithmeticFunction.totient, hasSum_geometric, Nat.totient_eq_card_coprimes,
+  Irrational, tsum_eq_zero_add

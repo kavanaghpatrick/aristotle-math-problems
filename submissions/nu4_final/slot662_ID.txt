@@ -1,0 +1,3 @@
+43d74efd-fcc7-41e9-8172-f25933931c1b
+# Task: Erdős 11: odd n = squarefree + 2^l — sieve density approach + bounded verification
+# Submitted: 2026-02-17T00:15:27

@@ -1,0 +1,10 @@
+OPEN GAP: Selfridge/PSW primality conjecture
+Source: formal-conjectures/FormalConjectures/Wikipedia/Selfridge.lean
+Domain: NT
+
+If p is odd, p ≡ ±2 (mod 5), 2^(p-1) ≡ 1 (mod p), and F_{p+1} ≡ 0 (mod p), then p is prime.
+No composite number satisfying all four conditions has ever been found.
+
+theorem selfridge_conjecture (p : ℕ) (hp : IsSelfridge p) : p.Prime := by sorry
+
+Status: OPEN since 1980. $620 bounty offered. Verified computationally to 2^64. No counterexample known.

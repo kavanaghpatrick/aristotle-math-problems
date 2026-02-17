@@ -1,0 +1,68 @@
+Agoh-Giuga Conjecture — CONTINUATION
+
+The attached 492-line context has:
+1. agoh_giuga_easy: ∑ i^{p-1} ≡ -1 mod p for prime p (PROVED via FLT)
+2. isWeakGiuga_iff: weak Giuga ↔ ∀ p|n, p|(n/p - 1)
+3. isStrongGiuga_iff: strong Giuga ↔ Carmichael ∧ weak Giuga
+4. strong_giuga_implies_squarefree (PROVED)
+5. strong_giuga_implies_carmichael_condition
+6. agoh_giuga_congr_false_of_even: no even counterexamples ≥ 4
+7. sum_pow_totient_mod_prime: Fermat structure lemma
+
+=== WHAT TO ADD ===
+
+GOAL 1: Prove Agoh-Giuga equivalence.
+
+theorem agoh_giuga_equiv : AgohGiugaCongr ↔ AgohGiugaSum
+
+The Agoh form uses Bernoulli numbers: p·B_{p-1} ≡ -1 mod p.
+The Giuga form uses power sums: ∑_{i=1}^{p-1} i^{p-1} ≡ -1 mod p.
+
+Connection: Von Staudt-Clausen theorem gives the fractional part of B_{p-1}.
+The sum ∑ i^{p-1} relates to B_{p-1} via the Faulhaber formula:
+  ∑_{i=1}^{n-1} i^k = (1/(k+1)) ∑_{j=0}^k C(k+1,j) B_j n^{k+1-j}
+
+At n = p, k = p-1: the sum relates to p·B_{p-1} modulo p.
+
+Mathlib: `bernoulli`, `sum_range_id_mul_two`, power sum identities.
+
+GOAL 2: Prove minimum prime factor count for Giuga numbers.
+
+theorem giuga_min_9_factors (n : ℕ) (hn : IsStrongGiuga n) : 9 ≤ n.primeFactors.card
+
+Proof sketch: Let n = p₁·...·pₖ (squarefree, from context).
+Weak Giuga condition: ∑ 1/pᵢ - 1/n ∈ ℕ.
+Since n is composite: ∑ 1/pᵢ > 1 + 1/n (the ℕ value is ≥ 1).
+Also ∑ 1/pᵢ ≤ 1/2 + 1/3 + 1/5 + 1/7 + ... (primes are distinct and ≥ 2).
+
+With k primes: ∑_{i=1}^k 1/p_i ≤ ∑ of first k prime reciprocals.
+- k=8: 1/2+1/3+1/5+1/7+1/11+1/13+1/17+1/19 = 0.9936... < 1. Not enough.
+- k=9: add 1/23 → 1.0371 > 1. Possible.
+
+So if k ≤ 8, ∑ 1/pᵢ < 1, but we need ∑ 1/pᵢ > 1 + 1/n > 1. Contradiction.
+
+Formalize:
+  have h_sum_bound : ∑ p ∈ n.primeFactors, (1 / p : ℚ) > 1 := ...
+  have h_max_8 : ∑ p ∈ ({2,3,5,7,11,13,17,19} : Finset ℕ), (1/p : ℚ) < 1 := by norm_num
+  -- Any 8 distinct primes have reciprocal sum ≤ that of the first 8 primes
+  -- Therefore k ≥ 9
+
+GOAL 3: Prove no Giuga number below 10^6 (bounded falsification).
+
+Check computationally: for all composite n < 10^6, ∑_{i=1}^{n-1} i^{n-1} ≢ -1 mod n.
+This is too slow for native_decide on the full power sum, but we can use the characterization:
+n is strong Giuga iff it is Carmichael AND ∑ 1/p_i - 1/n ∈ ℕ.
+
+Check: for all squarefree composite n < 10^6, the sum condition fails.
+This is feasible computationally.
+
+GOAL 4: Prove at most finitely many Giuga numbers with k prime factors for small k.
+
+For fixed k, the conditions p_i | (∏_{j≠i} p_j - 1) give very restrictive equations.
+For k = 9: there are finitely many solutions (Giuga proved none exist below 10^1000).
+
+PROOF TARGETS:
+1. agoh_giuga_equiv — the equivalence theorem
+2. giuga_min_9_factors — lower bound on prime factor count
+3. Bounded verification: no Giuga numbers < 10^6
+4. Giuga number ∑1/p > 1 + 1/n structure lemma

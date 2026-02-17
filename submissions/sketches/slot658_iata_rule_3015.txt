@@ -1,0 +1,101 @@
+Autoformalization of IATA Rule 3015 — oneworld Explorer Round-the-World fare rules.
+
+Formalize the following airline fare rule as a Lean 4 specification with types, constraints, and validity predicates. Define all concepts (continents, routing, stopovers, segments) as inductive types or structures. Then prove properties about valid itineraries — e.g., that any valid RTW itinerary crosses both the Atlantic and Pacific exactly once.
+
+=== BEGIN RULE 3015 ===
+
+0. APPLICATION AND OTHER CONDITIONS
+First / Business / Economy RTW / Open Jaw travel via AA/AY/BA/CX/IB/JJ/JL/KA/LA/MH/NU/QF/QR/RJ/S7/UL/XL/4M operated services worldwide.
+
+The fare to be charged is determined by the highest class travelled and the number of geographic continents in the itinerary including the continent of origin and continents transited.
+
+Continents are defined as:
+• Europe-Middle East
+• Africa
+• Asia
+• South West Pacific
+• North America
+• South America
+
+These group into traffic conference areas:
+TC1 = North America + South America
+TC2 = Europe-Middle East + Africa
+TC3 = Asia + South West Pacific
+
+Fare Basis by continent count:
+  3 continents: Economy LONE3, Business IONE3/DONE3, First AONE3
+  4 continents: Economy LONE4, Business DONE4, First AONE4
+  5 continents: Economy LONE5, Business DONE5, First AONE5
+  6 continents: Economy LONE6, Business DONE6, First AONE6
+
+Travel between South West Pacific and Europe/Middle East on a single flight number is considered travelling via Asia.
+Continents South West Pacific, Asia and Europe/Middle East must each be counted.
+
+4. FLIGHT APPLICATION / ROUTINGS
+
+(a) Travel must be via the Atlantic and Pacific Oceans and only one crossing of each ocean is permitted.
+
+(b) Travel must be in a continuous forward direction between TC1 - TC2 - TC3. Backtracking within a continent is permitted except:
+  Backtracking between Hawaii and other points in North America is not permitted.
+
+(c) Travel may originate at any point for which fares are published and must terminate at the same point, except that origin-destination surface segments are permitted:
+  a. within the country of origin
+  b. within the Middle East
+  c. between the United States and Canada
+  d. between HKG and China
+  e. between Malaysia and SIN
+  f. within Africa
+  g. between Maldives and Sri Lanka/India
+
+(d) Travel may not be via the point of origin.
+
+(e) Only one intercontinental departure and one intercontinental arrival permitted in each continent except:
+  1. Two permitted in North America.
+  2. Two permitted in Asia when one is for travel between the Southwest Pacific and Europe/Middle East.
+  3. Two permitted in Europe/Middle East for travel to/from/via Africa.
+  If travel is to/from Europe in both directions, itinerary may not include Mauritius/South Africa.
+
+(f) Only one international departure and one international arrival from/to the country of origin permitted.
+  EXCEPTION: Two permitted for origin USA when one arrival-departure is a transfer without stopover.
+  Travel between USA and Canada is not counted as international.
+  No more than 4 international transfers from the one country permitted.
+
+(g) Intermediate surface sectors are permitted at the passenger's expense.
+  Transoceanic surface sectors between TC1-TC2 and TC1-TC3 are not permitted.
+  EXCEPTION: For travel originating in the South West Pacific, one transoceanic surface sector between TC1-TC2 or TC1-TC3 is permitted.
+  The first crossing between TC areas must be flown, not surfaced.
+
+(h) A minimum of 3 and maximum of 16 segments, including surface segments between any 2 airports, are permitted for the entire journey. Free flight segments within each continent are limited:
+  Africa 4, Asia 4, Europe/Middle East 4, North America 6, South America 4, South West Pacific 4.
+
+(i) The same city pairs/sectors cannot be flown more than once in the same direction.
+
+(k) Within USA/Canada only one nonstop transcontinental flight permitted (between west coast cities and east coast cities as defined in the rule).
+
+(l) Within Australia only one nonstop flight permitted between east coast and PER/DRW/BME/KTA.
+
+6. MINIMUM STAY
+No minimum stay except: All fares originating in TC1 — travel on the last international sector must commence no earlier than 10 days after commencement of the first international sector.
+
+7. MAXIMUM STAY
+Return travel from the last stopover point must commence no later than 12 months after departure.
+
+8. STOPOVERS
+Permitted.
+Minimum 2 stopovers required.
+Maximum 2 stopovers permitted in the continent of origin.
+
+19. CHILDREN DISCOUNTS
+Accompanied child 2-11: charge 75 percent of the fare.
+Infant under 2 without a seat: charge 10 percent of fare.
+
+=== END RULE 3015 ===
+
+FORMALIZATION TARGETS:
+1. Define inductive types: Continent, TCArea, CabinClass, FareBasis, City, Segment, Itinerary
+2. Define ValidRTW (itin : Itinerary) : Prop encoding all routing constraints
+3. Define continent_count and fare_basis functions
+4. Prove: any ValidRTW itinerary has exactly one Atlantic crossing and one Pacific crossing
+5. Prove: any ValidRTW itinerary has between 3 and 16 segments
+6. Prove: continent_count is between 3 and 6 for any valid itinerary
+7. Prove: the fare for a valid itinerary is determined by highest cabin class and continent count

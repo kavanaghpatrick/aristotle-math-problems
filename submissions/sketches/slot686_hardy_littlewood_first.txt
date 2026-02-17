@@ -1,0 +1,12 @@
+OPEN GAP: First Hardy-Littlewood conjecture (prime k-tuples)
+Source: formal-conjectures/FormalConjectures/Wikipedia/HardyLittlewood.lean
+Domain: NT
+
+For admissible prime constellations (p, p+2m_1, ..., p+2m_k), the counting function
+π_P(n) is asymptotic to C_P · ∫_2^n dt/log^{k+1}(t), where C_P is an explicit constant
+involving residue class counts modulo each prime.
+
+theorem first_hardy_littlewood_conjecture {k : ℕ} (m : Fin k.succ → ℕ) :
+    FirstHardyLittlewoodConjectureFor m := by sorry
+
+Status: OPEN. Implies twin prime conjecture (k=1). Incompatible with second HL conjecture (Richards 1974).

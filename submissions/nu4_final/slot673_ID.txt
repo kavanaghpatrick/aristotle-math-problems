@@ -1,0 +1,3 @@
+234f2d7a-f977-4bce-8ac0-784a9e1a574e
+# Task: Sierpinski density v3 — FINAL: ∑1/p diverges via chi4, then almost-all theorem
+# Submitted: 2026-02-17T16:03:56

@@ -1,0 +1,87 @@
+IATA Rule 3015 autoformalization — COMPLETE VERSION
+
+The attached context file has the basic framework: Continent, TCArea, CabinClass, FareBasis, City, Segment, Itinerary, ValidRTW, and 4 proved theorems. Now formalize ALL remaining constraints from Rule 3015.
+
+WHAT'S MISSING — formalize ALL of these:
+
+1. BACKTRACKING CONSTRAINT (Rule 4b):
+   Travel must be in continuous forward direction between TC1-TC2-TC3.
+   Define a function that checks the TC area sequence is monotonically forward (TC1→TC2→TC3 or TC2→TC3→TC1 or TC3→TC1→TC2 depending on origin).
+   Backtracking WITHIN a continent is permitted.
+   EXCEPTION: Backtracking between Hawaii and other North America points is NOT permitted.
+   - Add a `isHawaii : Bool` field to City or define Hawaii as a specific city.
+
+2. NO TRANSIT VIA ORIGIN (Rule 4d):
+   Travel may not pass through the point of origin (except at start and end).
+
+3. INTERCONTINENTAL DEPARTURE/ARRIVAL LIMITS (Rule 4e):
+   Only one intercontinental departure and one intercontinental arrival per continent, EXCEPT:
+   - Two permitted in North America
+   - Two permitted in Asia when one is SWP↔EME travel
+   - Two permitted in Europe/Middle East for travel to/from/via Africa
+   - If travel to/from Europe in both directions, may not include Mauritius/South Africa
+   Define `intercontinental_departures` and `intercontinental_arrivals` counting functions per continent.
+
+4. INTERNATIONAL DEPARTURE/ARRIVAL FROM COUNTRY OF ORIGIN (Rule 4f):
+   Only one international departure and one international arrival from/to country of origin.
+   EXCEPTION: Two for USA origin when one is transfer without stopover.
+   USA-Canada travel not counted as international.
+   Max 4 international transfers from any one country.
+
+5. SURFACE SECTOR CONSTRAINTS (Rule 4g):
+   Intermediate surface sectors permitted.
+   Transoceanic surface sectors between TC1-TC2 and TC1-TC3 NOT permitted.
+   EXCEPTION: SWP origin gets one transoceanic surface sector.
+   First TC-area crossing must be flown, not surfaced.
+
+6. SEGMENT LIMITS PER CONTINENT (Rule 4h):
+   Africa 4, Asia 4, Europe/Middle East 4, North America 6, South America 4, South West Pacific 4.
+   Define `segments_in_continent` and add constraint to ValidRTW.
+
+7. NO DUPLICATE SECTORS (Rule 4i):
+   Same city pair cannot be flown more than once in the same direction.
+
+8. US/CANADA TRANSCONTINENTAL LIMIT (Rule 4k):
+   Only one nonstop transcontinental flight between west coast and east coast cities.
+   Define WestCoast and EastCoast city sets.
+
+9. AUSTRALIA TRANSCONTINENTAL LIMIT (Rule 4l):
+   Only one nonstop flight between east coast Australia and PER/DRW/BME/KTA.
+
+10. STOPOVER CONSTRAINTS (Rule 8):
+    Minimum 2 stopovers required.
+    Maximum 2 stopovers in continent of origin.
+    Define `stopover_count` and `stopovers_in_continent`.
+
+11. MINIMUM STAY (Rule 6):
+    For TC1 origins: last international sector must commence ≥ 10 days after first international sector.
+    Add date/time fields to Segment structure.
+
+12. MAXIMUM STAY (Rule 7):
+    Return from last stopover ≤ 12 months after departure.
+
+13. OPEN JAW (Rule 4c):
+    Origin-destination surface segments permitted only:
+    a. within country of origin
+    b. within Middle East
+    c. between US and Canada
+    d. between HKG and China
+    e. between Malaysia and SIN
+    f. within Africa
+    g. between Maldives and Sri Lanka/India
+
+14. CHILDREN PRICING (Rule 19):
+    Child 2-11: 75% of fare
+    Infant under 2 without seat: 10% of fare
+
+PROOF TARGETS:
+- Prove: segment count per continent ≤ continent limit → total segments ≤ 4+4+4+6+4+4 = 26 (but also ≤ 16 from ValidRTW, so at most 16)
+- Prove: minimum 2 stopovers + continuous + loop → minimum 3 segments
+- Prove: no duplicate same-direction sectors + finite city set → bounded segment count
+- Prove: exactly 1 Atlantic + 1 Pacific + continuous forward → visits exactly 3 TC areas
+- Prove: if origin is in TC1, the TC sequence must be TC1→TC2→TC3→TC1
+- Prove: open jaw rules preserve the return-to-origin property (generalized loop)
+- Prove: child fare is strictly less than adult fare
+- Prove: any valid itinerary has a determined fare basis (strengthen existing theorem)
+
+Please extend the context file with all missing constraints and prove as many of the above properties as possible.

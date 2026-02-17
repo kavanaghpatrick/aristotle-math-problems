@@ -1,0 +1,51 @@
+Gilbreath's Conjecture: For the iterated absolute difference sequence of primes,
+d^k(0) = 1 for all k > 0.
+
+Define: d^0(n) = p_n (the nth prime, 0-indexed: p_0=2, p_1=3, p_2=5, ...)
+       d^{k+1}(n) = |d^k(n+1) - d^k(n)|
+
+The conjecture states d^k(0) = 1 for all k >= 1.
+
+This has been verified computationally up to k ~ 10^13 but remains unproved.
+
+FORMAL STATEMENT (from formal-conjectures repo):
+  noncomputable def d : ℕ → (ℕ → ℕ)
+    | 0 => fun n ↦ n.nth Nat.Prime
+    | k + 1 => fun n ↦ Int.natAbs (d k (n + 1) - d k n)
+
+  theorem gilbreath_conjecture (k : ℕ+) : d k 0 = 1
+
+PROOF STRATEGY — Multiple targets of decreasing ambition:
+
+TARGET 1 (AMBITIOUS): Prove the full conjecture.
+Approach: The key insight is that d^1(n) is the sequence of prime gaps, which starts
+with 1 (|3-2|=1) and all subsequent terms are even (since p_{n+1}-p_n is even for n≥1).
+At each subsequent level, taking absolute differences of a sequence starting with an odd
+number followed by even numbers produces a sequence starting with an odd number.
+By induction, d^k(0) is always odd. Combined with d^k(0) ≤ d^{k-1}(0) + d^{k-1}(1)
+and monotonicity-type bounds, one can try to show d^k(0) = 1.
+
+More precisely: d^1 = (1, 2, 2, 4, 2, 4, 2, 4, 6, ...). The leading 1 followed by
+even numbers means d^2(0) = |d^1(1) - d^1(0)| = |2-1| = 1. And this pattern propagates.
+
+TARGET 2 (MODERATE): Prove d^k(0) is always odd for k >= 1.
+Proof: d^1(0) = |p_1 - p_0| = 1 (odd). For k >= 1, d^k starts with an odd value
+followed by even values (since prime gaps are even for p_n >= 3). The absolute
+difference of an odd and even number is odd. So d^{k+1}(0) = |d^k(1) - d^k(0)|
+where d^k(0) is odd and d^k(1) is even (by a sub-induction on the parity pattern).
+
+TARGET 3 (ACHIEVABLE): Prove d^k(0) = 1 for specific small k values.
+- d^1(0) = |p_1 - p_0| = |3-2| = 1
+- d^2(0) = |d^1(1) - d^1(0)| = ||p_2-p_1| - |p_1-p_0|| = ||5-3| - |3-2|| = |2-1| = 1
+- Similarly for k = 3,4,5,...
+
+These can be proved by unfolding the definition and computing with specific prime values.
+Use Nat.nth_prime facts: Nat.nth Nat.Prime 0 = 2, Nat.nth Nat.Prime 1 = 3, etc.
+
+TARGET 4: Prove structural lemmas about the difference operator:
+- d^k is always non-negative (it's defined via natAbs)
+- If d^k starts with 1 followed by even numbers, then d^{k+1}(0) = 1
+- The parity pattern: d^k(0) is odd for k >= 1
+
+Please prove as many of these targets as possible, prioritizing Target 2 (odd parity)
+and Target 3 (specific small cases), then attempt Target 1 if time permits.

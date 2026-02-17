@@ -1,0 +1,100 @@
+ArithmeticSumS Conjecture 1.1: S(k) > 0 for odd primes k
+
+OPEN CONJECTURE from Berndt, Bhat, Meyer, Xie, Zaharescu (arXiv 2501.03234, 2025).
+
+Associated with the classical theta function θ₃.
+
+=== DEFINITIONS ===
+
+S'(h, k) := ∑_{j=1}^{k-1} (-1)^{j + 1 + ⌊hj/k⌋}
+
+S(k) := ∑_{h=1}^{k-1} S'(h, k)
+
+First values: S(0)=0, S(1)=0, S(2)=1, S(3)=2, S(4)=5, S(5)=4, S(6)=7, S(7)=10, S(8)=11, S(9)=8.
+
+=== CONJECTURES ===
+
+Conjecture 1.1: For any odd prime k, S(k) > 0.
+Conjecture 4.1: For any prime k > 5, S(k) > k.
+Conjecture 4.2: For any prime k > 233, S(k) > 2k.
+Conjecture 4.3: For any prime k > 3119, S(k) > 3k.
+Conjecture 4.4: For any n ∈ ℕ, for all large enough odd primes k, S(k) > nk.
+
+=== PROOF STRATEGIES ===
+
+APPROACH A: Bounded verification (HIGH CONFIDENCE)
+
+The definitions are fully computable. Verify:
+- conjecture_1_1 for all odd primes k < 10000 (or as high as native_decide allows)
+- conjecture_4_1 for all odd primes k with 5 < k < 10000
+- conjecture_4_2 for all odd primes k with 233 < k < 10000
+
+This uses the existing definitions of S' and S directly.
+
+def verify_conj_1_1 (N : ℕ) : Bool :=
+  (List.range N).all fun k => if k.Prime ∧ Odd k then decide (0 < S k) else true
+
+theorem conj_1_1_upto_N (N : ℕ) (h : verify_conj_1_1 N) :
+  ∀ k < N, k.Prime → Odd k → 0 < S k
+
+APPROACH B: Analytic approach for general case
+
+S'(h, k) counts the parity of j + 1 + ⌊hj/k⌋ over j = 1,...,k-1.
+
+Write ⌊hj/k⌋ = (hj - (hj mod k))/k. So:
+  j + 1 + ⌊hj/k⌋ = j + 1 + (hj - r_{h,j})/k
+where r_{h,j} = hj mod k.
+
+The sign (-1)^{j+1+⌊hj/k⌋} depends on the parity of ⌊hj/k⌋ relative to j.
+
+For prime k and gcd(h,k) = 1 (which holds for all 1 ≤ h ≤ k-1 when k is prime):
+the map j ↦ hj mod k is a permutation of {1,...,k-1}.
+
+Key insight: S'(h,k) = S'(h mod k, k) and the sum over h is symmetric.
+
+For odd prime k:
+  S(k) = ∑_{h=1}^{k-1} S'(h,k)
+
+The inner sum S'(h,k) can be related to Dedekind sums and the Jacobi theta function.
+
+APPROACH C: Connection to Dedekind sums
+
+The classical Dedekind sum: s(h,k) = ∑_{j=1}^{k-1} ((j/k))((hj/k))
+where ((x)) = x - ⌊x⌋ - 1/2 for x ∉ ℤ, 0 for x ∈ ℤ.
+
+The sum S'(h,k) has a similar structure but with (-1)^{...} instead of the sawtooth function.
+This connects to the theta function θ₃ via modular transformations.
+
+APPROACH D: Gauss sum / character sum approach
+
+For prime k, decompose S(k) using multiplicative characters mod k:
+  S(k) = ∑_χ ĉ(χ) · L(1, χ) · (something)
+where the sum is over Dirichlet characters mod k.
+
+The positivity of S(k) would follow from showing the main term (from the principal character) dominates the error terms.
+
+=== FORMAL STATEMENTS ===
+
+-- Definitions (from formal-conjectures repo):
+def S' (h k : ℕ) : ℤ := ∑ j ∈ Finset.Ico 1 k, (-1 : ℤ) ^ (j + 1 + ⌊(h * j : ℚ) / k⌋₊)
+def S (k : ℕ) : ℤ := ∑ h ∈ Finset.Ico 1 k, S' h k
+
+-- Target theorems:
+theorem conjecture_1_1 (k : ℕ) (hprim : k.Prime) (hodd : Odd k) : 0 < S k
+theorem conjecture_4_1 (k : ℕ) (hprim : k.Prime) (hodd : Odd k) (hgt : k > 5) : k < S k
+
+=== WHAT TO PROVE ===
+
+PRIMARY: Bounded verification of Conjecture 1.1 for all odd primes < 1000
+  theorem conj_1_1_verified_1000 : ∀ k < 1000, k.Prime → Odd k → 0 < S k
+
+AMBITIOUS: Full proof of Conjecture 1.1 using analytic methods
+
+FALLBACK: Bounded verification of Conjecture 4.1 for primes in (5, 1000]
+  theorem conj_4_1_verified_1000 : ∀ k, 5 < k → k < 1000 → k.Prime → Odd k → k < S k
+
+Also prove basic properties:
+- S(2) = 1 (the only even prime case)
+- S(k) is always non-negative for k ≤ 100
+- S'(h,k) = -S'(k-h, k) (symmetry relation, if it holds)
+- ∑_{h=1}^{k-1} S'(h,k) has a closed form involving floor function sums

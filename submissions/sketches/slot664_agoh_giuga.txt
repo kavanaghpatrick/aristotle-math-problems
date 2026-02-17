@@ -1,0 +1,82 @@
+Agoh-Giuga Conjecture: p ≥ 2 is prime iff p·B_{p-1} ≡ -1 (mod p)
+
+OPEN CONJECTURE. Equivalently (Giuga's formulation): p ≥ 2 is prime iff ∑_{i=1}^{p-1} i^{p-1} ≡ -1 (mod p).
+
+The "if" direction follows from Fermat's Little Theorem. The open direction is: if n is composite and satisfies the congruence, then we reach a contradiction.
+
+A counterexample would be a "strong Giuga number": composite n with ∑_{i=1}^{n-1} i^{n-1} ≡ -1 (mod n). Known: no such number exists below 10^13000.
+
+=== FORMAL STATEMENTS ===
+
+-- The "only if" direction (KNOWN, from Fermat's Little Theorem):
+theorem agoh_giuga_easy (p : ℕ) (hp : p.Prime) :
+    p ∣ 1 + ∑ i ∈ Finset.Ioo 0 p, i^(p - 1)
+
+-- The equivalence of Agoh and Giuga formulations (KNOWN):
+theorem agoh_giuga_equiv : AgohGiugaCongr ↔ AgohGiugaSum
+
+-- The characterization of Giuga numbers (KNOWN):
+theorem isWeakGiuga_iff (n : ℕ) (hn : n.Composite) :
+    IsWeakGiuga n ↔ ∀ p ∈ n.primeFactors, p ∣ (n / p - 1)
+
+-- Strong Giuga = Carmichael + weak Giuga (KNOWN, Giuga 1950):
+theorem isStrongGiuga_iff (a : ℕ) (ha : a.Composite) :
+    IsStrongGiuga a ↔ IsCarmichael a ∧ IsWeakGiuga a
+
+-- Giuga numbers have ≥ 9 prime factors (KNOWN):
+theorem giuga_min_factors (a : ℕ) (ha : IsStrongGiuga a) : 9 ≤ a.primeFactors.card
+
+=== PROOF STRATEGIES ===
+
+STRATEGY A: Prove the "only if" direction + equivalence (infrastructure)
+
+The easy direction: For prime p, by Fermat's Little Theorem, i^{p-1} ≡ 1 (mod p) for 1 ≤ i ≤ p-1.
+So ∑_{i=1}^{p-1} i^{p-1} ≡ p-1 ≡ -1 (mod p). ✓
+
+Proof:
+1. For each i ∈ {1, ..., p-1}, since gcd(i,p) = 1 (as p is prime), Fermat: i^{p-1} ≡ 1 (mod p)
+2. Sum: ∑ i^{p-1} ≡ (p-1)·1 = p - 1 ≡ -1 (mod p) ✓
+
+For the Agoh formulation using Bernoulli numbers:
+- Von Staudt-Clausen: p·B_{p-1} ≡ -1 (mod p) for prime p
+- This is essentially equivalent to Fermat's Little Theorem via Bernoulli number theory
+
+STRATEGY B: Prove the weak Giuga characterization
+
+A composite n is weak Giuga iff for all primes p | n, p | (n/p - 1).
+
+Proof: Use the fact that ∑_{i=1}^{n-1} i^φ(n) can be decomposed via CRT when n is squarefree.
+For squarefree n = p₁·p₂·...·pₖ, by CRT:
+  ∑_{i=1}^{n-1} i^φ(n) ≡ n/pⱼ · ∑_{i=1}^{pⱼ-1} i^φ(n) (mod pⱼ)
+Since φ(n) is divisible by pⱼ-1 (for Carmichael numbers):
+  i^φ(n) ≡ 1 (mod pⱼ) for gcd(i,pⱼ)=1
+So ∑ ≡ (pⱼ-1) · n/pⱼ (mod pⱼ)
+We need this ≡ -1 (mod pⱼ), which gives pⱼ | (n/pⱼ - 1).
+
+STRATEGY C: Prove minimum prime factor count
+
+A strong Giuga number n must satisfy: for each prime p | n, p | (n/p - 1).
+Since n = p₁...pₖ (squarefree by Carmichael), we need pᵢ | (∏_{j≠i} pⱼ - 1) for each i.
+
+This gives: pᵢ ≤ ∏_{j≠i} pⱼ - 1 < ∏_{j≠i} pⱼ.
+Also: ∑ 1/pᵢ - 1/n ∈ ℕ (weak Giuga condition).
+Since pᵢ ≥ 2 and ∑ 1/pᵢ < k/2, we need k ≥ 3.
+Tighter analysis using ∑ 1/pᵢ ≥ 1 + 1/n and prime bounds gives k ≥ 9.
+
+=== WHAT TO PROVE ===
+
+PRIMARY: Prove the easy direction (agoh_giuga_easy) + equivalence + Giuga characterizations
+These are all KNOWN results but provide infrastructure toward the open conjecture.
+
+AMBITIOUS: Prove no strong Giuga number exists with exactly 9 prime factors
+This would push the bound from "≥ 9 factors" to "≥ 10 factors" — potentially novel.
+
+PROOF TARGETS:
+1. agoh_giuga_easy — Fermat's Little Theorem application (quick win)
+2. agoh_giuga_equiv — equivalence of two formulations
+3. isWeakGiuga_iff — characterization via prime factors
+4. isStrongGiuga_iff — Carmichael + weak Giuga
+5. giuga_min_factors — lower bound on prime factor count
+
+Mathlib: Nat.Prime, ZMod.pow_card_sub_one_eq_one (Fermat's Little Theorem), bernoulli,
+  Nat.primeFactors, Nat.Squarefree, Finset.sum, ArithmeticFunction.totient

@@ -1,0 +1,78 @@
+IATA Rule 3015 autoformalization — REMAINING GAPS
+
+The attached 1357-line context file has core routing rules ~85% complete. Formalize the MISSING pieces listed below. Do NOT re-prove anything from the context file.
+
+=== MISSING ITEMS TO ADD ===
+
+1. COMPLETE CITY LISTS for Rule 4k (US/Canada transcontinental):
+Current is_west_coast_na only has LAX, SFO, SEA, YVR. MUST ADD:
+  LAS (Las Vegas), LGB (Long Beach), OAK (Oakland), PHX (Phoenix), PDX (Portland),
+  SAN (San Diego), SJC (San Jose), SNA (Santa Ana)
+
+Current is_east_coast_na only has NYC, JFK, EWR, IAD, BOS, YYZ, YUL. MUST ADD:
+  ATL (Atlanta), BWI (Baltimore), CLT (Charlotte), CLE (Cleveland), FLL (Ft Lauderdale),
+  BDL (Hartford), MIA (Miami), ORD (Newark already as EWR), MCO (Orlando),
+  PHL (Philadelphia), PIT (Pittsburgh), RDU (Raleigh-Durham), SJU (San Juan),
+  TPA (Tampa), DCA (Washington DC), PBI (West Palm Beach), YYZ (Toronto already included)
+
+Also add: ANC (Anchorage) — only one flight to and one from ANC permitted (separate rule).
+
+2. AUSTRALIA EXCEPTIONS for Rule 4l:
+Add exceptions:
+  A. No restriction SYD/MEL-PER for passengers originating in PER when connecting to/from JNB or SHA
+  B. No restriction SYD/MEL-PER for passengers originating in New Zealand when connecting to/from JNB
+Define `is_au_exception_a` and `is_au_exception_b` and update rule_4l.
+
+3. OPEN JAW — Middle East scoping fix:
+Current rule_4c allows open jaw "within EuropeMiddleEast continent" but Rule 3015 says "within the Middle East" only.
+Add `is_middle_east : City → Bool` (checking country codes: AE, BH, IL, IQ, IR, JO, KW, LB, OM, PS, QA, SA, SY, YE, EG, LY, SD)
+Update rule_4c to check Middle East specifically, not the full EME continent.
+
+4. CODESHARE RULES (Rule 4j):
+Define OneWorldCarrier enumeration: AA, AY, BA, CX, IB, JJ, JL, KA, LA, MH, NU, QF, QR, RJ, S7, UL, XL, 4M
+Define AffiliatedCarrier for each (e.g., AA → American Eagle operators, BA → CityFlyer, etc.)
+Add `is_permitted_carrier` checking marketing/operating carrier validity.
+QF codeshare on JQ (Jetstar) permitted.
+QF domestic USA not permitted unless connecting to QF international at LAX.
+Ground transport by BA/QF not permitted.
+
+5. PREMIUM ECONOMY SURCHARGES (Rule 12):
+Add PremiumEconomy cabin class.
+Define surcharge tiers:
+  SWP ↔ Africa/EME/NA/SA: USD 1450
+  SE Asia ↔ S Asian Subcontinent / Japan-Korea: USD 350
+  Within SE Asia / Within Australia / Within Middle East: USD 250
+  All other: USD 950
+Prove: premium economy surcharge is always positive.
+
+6. BOOKING CODES (Rule 5b):
+Define booking_code : OneWorldCarrier → CabinClass → Char mapping.
+  AA/BA/CX/KA/MH/QF/QR: First=A, Business=D, Economy=I, LONE=L
+  IB/RJ/UL: First=D, Business=D, Economy=I, LONE=L
+  S7: all=D except LONE=L
+  etc.
+
+7. SALES RESTRICTIONS (Rule 15):
+Tickets must be on stock of listed carriers.
+If JQ included → IB/S7 stock cannot be used.
+If Cuba in itinerary → no AA flights permitted.
+Define `valid_ticketing_stock` and `cuba_restriction`.
+
+8. VOLUNTARY CHANGES / PENALTIES (Rule 16):
+Define change fee: USD 125 per transaction for point changes.
+Define cancellation penalty: 10% Economy, 5% Business/First.
+Prove: Business/First cancellation penalty ≤ Economy penalty (for same fare).
+
+9. GROUP TRAVEL (Rule 26):
+Define GroupBooking structure.
+Economy: 10-30 passengers. Business: 10-15 passengers.
+Group must travel together entire itinerary.
+Group booking codes: Business=I (S7=D), Economy=G.
+
+PROOF TARGETS:
+- Prove: premium economy surcharge > 0 for all tier combinations
+- Prove: cancellation penalty for Business ≤ Economy (same base fare)
+- Prove: child fare + any surcharge < adult fare + same surcharge
+- Prove: Cuba restriction ∧ AA segment → invalid itinerary
+- Prove: group size bounds (Economy 10-30, Business 10-15)
+- Prove: complete city lists make transcontinental restriction well-defined for all Column A × Column B pairs

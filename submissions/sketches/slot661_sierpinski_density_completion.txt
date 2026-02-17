@@ -1,0 +1,76 @@
+Sierpinski Conjecture (5/n = 1/x + 1/y + 1/z for all n >= 4) — DENSITY ARGUMENT COMPLETION
+
+The attached 1587-line context file has:
+1. Core reductions: n even, n div 3, n mod 4 = 3, reducing to n ≡ 1 mod 60
+2. For n = 60q+1: sierpinski_linear_reduction using primes p ≡ 3 mod 4
+   - Each such p covers exactly 2 residue classes of q mod p
+   - Proved for primes: 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127, 131, 139, 151, 163, 167, 179, 191, 199
+3. Bounded verification: native_decide to n < 1,000,000
+4. Density infrastructure: distinct_solutions_mod_p, density_periodic, card_avoiding_in_period, density_avoiding_finite_primes, product_limit
+
+=== WHAT TO PROVE (building on context) ===
+
+GOAL 1: Complete the density-zero theorem for uncovered set.
+
+The key chain is:
+  (a) Sum of 1/p over primes p ≡ 3 mod 4 diverges (Dirichlet's theorem on primes in AP)
+  (b) product_limit (DONE in context): ∏(1-2/p) → 0 when sum diverges
+  (c) density of uncovered q ≤ ∏(1-2/p) for first k primes (essentially DONE: density_avoiding_finite_primes)
+  (d) Therefore: natural density of uncovered q = 0
+
+For step (a): Use Mathlib's `Nat.Primes.not_summable_one_div` which says ∑ 1/p over ALL primes diverges. Then by the prime number theorem in arithmetic progressions (or Dirichlet's theorem), primes ≡ 3 mod 4 have positive density ~1/2 among all primes, so their reciprocal sum also diverges.
+
+Mathlib references:
+- `Nat.Primes.not_summable_one_div` (reciprocal sum of primes diverges)
+- `DirichletCharacter.LFunction_ne_zero_of_one_le_re` (Dirichlet L-functions nonvanishing)
+- These are in Mathlib as of late 2025.
+
+Alternatively, a more elementary approach: It's well-known that ∑_{p ≡ 3 mod 4} 1/p diverges. If Mathlib doesn't have this directly, use the Euler product for ζ(s)L(s,χ₄) where χ₄ is the non-principal character mod 4.
+
+State the theorem:
+```
+theorem density_uncovered_zero :
+  naturalDensity UncoveredByAllPrimes 0
+```
+
+GOAL 2: CRT enumeration — compute exact uncovered residues.
+
+Using Chinese Remainder Theorem, compute the set of residue classes mod M = ∏{p₁,...,pₖ} that are NOT covered by any of the k primes. The number of such residues is ∏(pᵢ - 2).
+
+For primes {7, 11, 19, 23, 31}: M = 7·11·19·23·31 = 1,062,347
+Uncovered residues: 5·9·17·21·29 = 46,665 classes out of 1,062,347
+
+Since we've verified all n < 1,000,000 (i.e., q < 16,666), any uncovered residue class r mod M with r < 16,666 is verified. Classes with r ≥ 16,666 need additional prime coverage.
+
+Add more primes to cover remaining: {43, 47, 59, 67, 71} gives M ≈ 10^12, making the uncovered residues have minimum value much larger.
+
+The key CRT theorem:
+```
+theorem crt_coverage {S : Finset ℕ} (hS : ∀ p ∈ S, p ∈ Primes3Mod4) :
+  ∀ q, q < (∏ p ∈ S, p) / 60 → q ∉ UncoveredByAllPrimes → SierpinskiSolvable (60 * q + 1)
+```
+
+GOAL 3: Push bounded verification and modular coverage further.
+
+Continue the pattern from the context file — add more primes ≡ 3 mod 4:
+- p = 211, 223, 227, 239, 251, 263, 271, 283 (all ≡ 3 mod 4)
+- For each, state sierpinski_mod_p_a_b theorem using sierpinski_general_modular_reduction
+
+Extend IsCoveredByKnownReductionsExtended to include all primes up to 283.
+
+GOAL 4: Formal statement of the "almost all" result.
+
+```
+theorem sierpinski_almost_all :
+  naturalDensity {n : ℕ | n ≥ 4 ∧ ¬SierpinskiSolvable n} 0
+```
+
+This combines:
+- n not ≡ 1 mod 60 → solvable (from reductions)
+- n ≡ 1 mod 60 with n = 60q+1, q uncovered → density 0 (from density argument)
+
+PROOF TARGETS (prioritized):
+1. density_uncovered_zero — the main density result
+2. sierpinski_almost_all — the final "almost all" theorem
+3. Additional prime coverage theorems (p = 211 through 283)
+4. CRT enumeration lemma for finite verification

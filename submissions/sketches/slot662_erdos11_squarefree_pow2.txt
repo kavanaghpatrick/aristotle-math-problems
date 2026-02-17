@@ -1,0 +1,65 @@
+Erdős Problem 11: Every odd n > 1 is the sum of a squarefree number and a power of 2.
+
+OPEN CONJECTURE. Stated by Erdős, still unresolved. Known to hold computationally for n < 2^50.
+Granville-Soundararajan (1998) proved: if the conjecture holds, then Wieferich primes are infinite.
+
+=== FORMAL STATEMENT ===
+theorem erdos_11 (n : ℕ) (hn : Odd n) (hn' : 1 < n) :
+    ∃ k l : ℕ, Squarefree k ∧ n = k + 2 ^ l
+
+=== PROOF STRATEGY ===
+
+APPROACH 1: Sieve-theoretic density argument
+
+For odd n > 1, consider the candidates: n - 1, n - 2, n - 4, ..., n - 2^⌊log₂(n)⌋.
+There are about log₂(n) candidates. A candidate n - 2^l is NOT squarefree iff p² | (n - 2^l) for some prime p.
+
+For a fixed prime p, the set {l : 2^l ≡ n mod p²} is either empty or periodic with period ord_{p²}(2).
+By the Chinese Remainder Theorem, the probability that n - 2^l is divisible by p² for a "random" l is approximately 1/p².
+
+The probability that n - 2^l is squarefree is ∏_p (1 - 1/p²) = 6/π². With log₂(n) independent candidates, the probability that NONE is squarefree is approximately (1 - 6/π²)^{log n} → 0.
+
+To make this rigorous:
+1. Define squarefree_candidate (n l : ℕ) := Squarefree (n - 2^l)
+2. For each prime p, count l ∈ [0, log₂ n] with p² | (n - 2^l)
+   - The number of such l is ≤ ⌈log₂(n) / ord_{p²}(2)⌉ + 1
+3. By inclusion-exclusion over primes p ≤ n^{1/2}:
+   - #{l : NOT squarefree(n - 2^l)} ≤ Σ_p ⌈log₂(n)/ord_{p²}(2)⌉
+4. Key lemma: Σ_{p prime} 1/ord_{p²}(2) converges (since ord_{p²}(2) ≥ p-1)
+5. Therefore for large enough n: #{non-squarefree candidates} < log₂(n), so at least one candidate IS squarefree
+
+APPROACH 2: Elementary bounded verification + modular coverage
+
+For the bounded case (prove for all odd n ≤ some bound):
+- For n ≤ 2^l, check n - 2^l for each l from 0 to ⌊log₂ n⌋
+- Use Nat.Squarefree decidability and native_decide
+
+For modular coverage:
+- For each prime p, classify n mod p² to determine which 2^l values give p² | (n - 2^l)
+- Show that for n in certain residue classes mod lcm(4, 9, 25, 49) = 44100, there always exists a suitable l
+
+APPROACH 3: Conditional on abc-conjecture (speculative)
+
+Under the abc conjecture, for any ε > 0, if n = k + 2^l with k squarefree, then
+rad(k · 2^l · n) ≥ n^{1-ε}. This gives strong constraints on possible failures.
+
+=== WHAT TO PROVE ===
+
+PRIMARY: The full conjecture erdos_11 if possible (ambitious but HAVE FAITH)
+
+FALLBACK 1: Prove for all odd 1 < n < 10^5 using native_decide
+  theorem erdos_11_bounded (n : ℕ) (hn : Odd n) (h : n < 10^5) (hn' : 1 < n) :
+    ∃ k l : ℕ, Squarefree k ∧ n = k + 2 ^ l
+
+FALLBACK 2: Prove the density result — for almost all odd n, the representation exists
+  theorem erdos_11_density : naturalDensity {n : ℕ | Odd n ∧ 1 < n ∧ ¬∃ k l, Squarefree k ∧ n = k + 2^l} 0
+
+FALLBACK 3: Prove the weaker variant with two powers of 2 (also open):
+  theorem erdos_11_two_pow (n : ℕ) (hn : Odd n) (hn' : 1 < n) :
+    ∃ k l m : ℕ, Squarefree k ∧ n = k + 2^l + 2^m
+
+FALLBACK 4: Prove the Granville-Soundararajan conditional:
+  theorem granville_soundararajan (H : ∀ n, Odd n → 1 < n → ∃ k l, Squarefree k ∧ n = k + 2^l) :
+    {p : ℕ | p.Prime ∧ 2^p ≡ 2 [MOD p^2]}.Infinite
+
+Mathlib tools: Nat.Squarefree, Nat.Prime, ZMod, native_decide for bounded cases.

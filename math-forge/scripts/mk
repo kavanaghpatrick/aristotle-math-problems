@@ -4,20 +4,29 @@
 
 set -uo pipefail
 
+# Resolve symlinks to find the real script location
+SCRIPT_PATH="$0"
+while [ -L "$SCRIPT_PATH" ]; do
+    SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+    SCRIPT_PATH="$(readlink "$SCRIPT_PATH")"
+    [[ "$SCRIPT_PATH" != /* ]] && SCRIPT_PATH="$SCRIPT_DIR/$SCRIPT_PATH"
+done
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+
 # 3-level DB path resolution
 if [ -n "${MATH_FORGE_DB:-}" ]; then
     DB="$MATH_FORGE_DB"
 elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
     DB="${CLAUDE_PLUGIN_ROOT}/data/knowledge.db"
 else
-    DB="$(dirname "$0")/../data/knowledge.db"
+    DB="${SCRIPT_DIR}/../data/knowledge.db"
 fi
 
 # Also need tracking.db for cross-queries
 if [ -n "${CLAUDE_PROJECT_DIR:-}" ]; then
     TRACKING_DB="${CLAUDE_PROJECT_DIR}/submissions/tracking.db"
 else
-    TRACKING_DB="$(dirname "$0")/../../submissions/tracking.db"
+    TRACKING_DB="${SCRIPT_DIR}/../../submissions/tracking.db"
 fi
 
 # Color support (TTY-aware)
@@ -59,7 +68,7 @@ check_db() {
     fi
 }
 
-SCHEMA_PATH="$(dirname "$0")/../data/schema.sql"
+SCHEMA_PATH="${SCRIPT_DIR}/../data/schema.sql"
 
 case "${1:-help}" in
     search)
@@ -281,7 +290,7 @@ case "${1:-help}" in
             fi
         fi
         # Run migration if tracking.db exists
-        MIGRATE_SCRIPT="$(dirname "$0")/migrate_tracking.py"
+        MIGRATE_SCRIPT="${SCRIPT_DIR}/migrate_tracking.py"
         if [ -f "$MIGRATE_SCRIPT" ] && [ -f "$TRACKING_DB" ]; then
             echo "[math-forge] Running migration from tracking.db..."
             python3 "$MIGRATE_SCRIPT" --tracking-db "$TRACKING_DB" --knowledge-db "$DB"
@@ -295,7 +304,7 @@ case "${1:-help}" in
             echo "  Delegates to safe_aristotle_submit.py with all args passed through."
             exit 1
         fi
-        SUBMIT_SCRIPT="$(dirname "$0")/../../scripts/safe_aristotle_submit.py"
+        SUBMIT_SCRIPT="${SCRIPT_DIR}/../../scripts/safe_aristotle_submit.py"
         if [ ! -f "$SUBMIT_SCRIPT" ]; then
             echo "[math-forge] ERROR: safe_aristotle_submit.py not found at $SUBMIT_SCRIPT" >&2
             exit 1
@@ -305,7 +314,7 @@ case "${1:-help}" in
 
     status)
         shift
-        FETCH_SCRIPT="$(dirname "$0")/../../scripts/aristotle_fetch.py"
+        FETCH_SCRIPT="${SCRIPT_DIR}/../../scripts/aristotle_fetch.py"
         if [ ! -f "$FETCH_SCRIPT" ]; then
             echo "[math-forge] ERROR: aristotle_fetch.py not found at $FETCH_SCRIPT" >&2
             exit 1

@@ -1,0 +1,46 @@
+Pollock's Conjecture: Every positive integer is the sum of at most 5 tetrahedral numbers.
+
+Tetrahedral number: T(n) = n(n+1)(n+2)/6 for n >= 0.
+First few: 0, 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286, 364, 455, 560, 680, 816, 969, ...
+
+FORMAL STATEMENT:
+  def tetrahedral (n : ℕ) : ℕ := n * (n + 1) * (n + 2) / 6
+  theorem pollock_tetrahedral (N : ℕ) :
+    ∃ f : Fin 5 → ℕ, N = ∑ i, tetrahedral (f i)
+
+Known: Salzer-Levine showed exactly 241 numbers need 5 tetrahedral numbers,
+largest being 343867. All others need at most 4.
+
+PROOF TARGETS (in order of achievability):
+
+TARGET 1: Prove for N ≤ 100 by explicit witness construction.
+Each N needs 5 values (a,b,c,d,e) with T(a)+T(b)+T(c)+T(d)+T(e) = N.
+T(0)=0 acts as padding. Examples:
+- N=0: f = (0,0,0,0,0)
+- N=1: f = (1,0,0,0,0) since T(1)=1
+- N=2: f = (1,1,0,0,0)
+- N=3: f = (1,1,1,0,0)
+- N=4: f = (2,0,0,0,0) since T(2)=4
+- N=5: f = (2,1,0,0,0)
+- N=8: f = (2,2,0,0,0)
+- N=10: f = (3,0,0,0,0) since T(3)=10
+Use native_decide or decide for verification.
+
+TARGET 2: Every tetrahedral number T(n) has representation (trivially: f(0)=n, rest 0).
+
+TARGET 3: Structural lemma — T(n) ≡ 0, 1, or 4 mod 9 for all n.
+Proof: n(n+1)(n+2)/6 mod 9. Check n mod 9 in {0,...,8}:
+T(0)=0, T(1)=1, T(2)=4, T(3)=10≡1, T(4)=20≡2, T(5)=35≡8, T(6)=56≡2, T(7)=84≡3, T(8)=120≡3
+Actually T mod 9 cycles with period 9: {0,1,4,1,2,8,2,3,3}.
+Sum of 5 such values can cover all residues mod 9.
+
+TARGET 4: T(n) mod small primes analysis — show 5 tetrahedral numbers
+suffice to cover all residue classes mod p for small primes.
+
+TARGET 5: Greedy algorithm proof — show that for N > 343867,
+we can always find a ≤ 4-term representation using the greedy approach
+(pick largest T(n) ≤ N, subtract, repeat). The key is that T(n) ~ n^3/6
+grows cubically, so gaps between consecutive tetrahedral numbers grow quadratically,
+and 4 such numbers with quadratic gaps can fill any integer.
+
+Please prove as many targets as possible. Target 1 (bounded cases) is most achievable.

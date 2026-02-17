@@ -1,0 +1,12 @@
+OPEN GAP: Jacobian conjecture
+Source: formal-conjectures/FormalConjectures/Wikipedia/JacobianConjecture.lean
+Domain: algebra
+
+For a field k of characteristic 0, if F : k^n → k^n is a polynomial map with
+invertible Jacobian determinant, then F has a polynomial inverse.
+
+theorem jacobian_conjecture (F : RegularFunction k σ σ)
+    (H : IsUnit F.Jacobian.det) :
+    ∃ (G : RegularFunction k σ σ), G.comp F = id k σ ∧ F.comp G = id k σ := by sorry
+
+Status: OPEN since 1939. One of Smale's 18 problems for the 21st century. Many false proofs published.

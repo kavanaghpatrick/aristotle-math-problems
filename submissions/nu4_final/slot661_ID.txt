@@ -1,0 +1,3 @@
+4c46ee72-7b79-4bf8-b0d8-bec5575d8cd8
+# Task: Sierpinski 5/n density completion — connect to Dirichlet, prove density(uncovered)=0, almost-all theorem
+# Submitted: 2026-02-17T00:11:29

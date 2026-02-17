@@ -1,0 +1,12 @@
+OPEN GAP: Bunyakovsky conjecture
+Source: formal-conjectures/FormalConjectures/Wikipedia/Bunyakovsky.lean
+Domain: NT
+
+If f ∈ ℤ[X] satisfies the Bunyakovsky condition (irreducible, positive leading coeff,
+gcd of values = 1), then f(n) is prime for infinitely many natural numbers n.
+
+theorem bunyakovsky_conjecture (f : ℤ[X]) :
+    BunyakovskyCondition f ∧ SchinzelCondition {f} →
+    Infinite {n : ℕ | (f.eval (n : ℤ)).natAbs.Prime} := by sorry
+
+Status: OPEN since 1857. Implies Dirichlet, twin primes (special cases). No proof known.

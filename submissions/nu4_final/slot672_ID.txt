@@ -1,0 +1,3 @@
+eed5e059-d9db-432d-b13f-9d53c2351ad2
+# Task: Erdős 249 v3 — FINAL irrationality proof, connect 2-adic pieces
+# Submitted: 2026-02-17T16:03:56

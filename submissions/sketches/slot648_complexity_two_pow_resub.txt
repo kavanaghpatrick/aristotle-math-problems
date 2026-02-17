@@ -1,0 +1,69 @@
+Integer Complexity: Prove ‖2^n‖ = 2n for all n > 0.
+
+This is an OPEN problem. The attached context file has excellent infrastructure:
+- Reachable inductive predicate (1s via + and *)
+- Decidability instance for Reachable
+- complexity function (minimum n such that Reachable m n)
+- Reachable.pow: proves ‖m^n‖ ≤ m*n (upper bound)
+- Various helper lemmas (dec, le, self, complexity_le, complexity_eq)
+
+The UPPER BOUND ‖2^n‖ ≤ 2n follows from Reachable.pow.
+Aristotle noted: "failed to find a proof" for the full theorem.
+
+PROOF STRATEGY FOR THE LOWER BOUND ‖2^n‖ ≥ 2n:
+
+Use strong induction on n. Base case: ‖2^1‖ = ‖2‖ = 2 (2 = 1+1, needs 2 ones).
+
+Inductive step: Suppose ‖2^k‖ = 2k for all 0 < k < n. We need ‖2^n‖ ≥ 2n.
+
+If 2^n is reached in m steps, the LAST operation is either:
+(a) 2^n = a + b where Reachable a m₁ and Reachable b m₂ with m₁+m₂ = m
+(b) 2^n = a * b where Reachable a m₁ and Reachable b m₂ with m₁+m₂ = m
+
+Case (b): a * b = 2^n means a = 2^i, b = 2^j with i+j = n (since 2^n has only
+powers-of-2 factors). By induction: m₁ ≥ 2i and m₂ ≥ 2j, so m ≥ 2n. Done.
+
+Case (a): a + b = 2^n. This is harder. We need:
+Claim: If a + b = 2^n with a,b > 0, then ‖a‖ + ‖b‖ ≥ 2n.
+
+Sub-approach 1 (2-adic valuation): Let v = v₂(a) = v₂(b) (they must have equal
+2-adic valuation since a+b = 2^n and a,b < 2^n). Write a = 2^v * a', b = 2^v * b'
+with a',b' odd and a'+b' = 2^(n-v). Then ‖a‖ ≥ ‖2^v‖ + ‖a'‖ - ‖2^v‖ ...
+this doesn't directly work via simple decomposition bounds.
+
+Sub-approach 2 (additive complexity is subadditive): ‖a+b‖ ≤ ‖a‖ + ‖b‖ (one step).
+But we need the REVERSE for the specific case a+b = 2^n.
+
+Sub-approach 3 (direct structural induction via reachable_iff_of_two_le):
+Use the existing reachable_iff_of_two_le to decompose ANY reachable witness
+into sub-witnesses with strictly smaller values. The key insight from the context
+file is that this gives a complete recursive characterization.
+
+For 2^n with n ≥ 2, any witness decomposes via add or mul of sub-witnesses.
+For mul: a*b = 2^n forces a = 2^i, b = 2^j, apply IH.
+For add: a+b = 2^n. Need to show ‖a‖ + ‖b‖ ≥ 2n.
+
+KEY LEMMA: For any m, ‖m‖ ≥ 3*log₂(m) (Selfridge-Guy bound). Actually the
+known bound is ‖m‖ ≥ 3*log₃(m). For m = 2^n this gives ‖2^n‖ ≥ 3n*log₃(2) ≈ 1.89n.
+This is NOT tight enough (need ≥ 2n).
+
+BETTER APPROACH: Prove the stronger statement by simultaneous induction:
+For all m that are powers of 2: ‖m‖ = 2*log₂(m).
+The multiplication case closes by IH. For addition a+b = 2^n:
+- v₂(a) = v₂(b) = v for some v < n (since a ≠ b, both < 2^n)
+- a = 2^v * a', b = 2^v * b' with a'+b' = 2^(n-v), a' odd, b' odd
+- ‖a‖ ≥ ‖a'‖ + 2v (can build a by multiplying a' by 2^v)... wait, inequality goes wrong way
+- Need: ‖a‖ ≥ f(a) for some f. Use ‖a‖ ≥ ‖2^v₂(a)‖ + something...
+
+Actually the clean approach: define weight(m) = sum over prime factorization p^k of m of k*‖p‖.
+Then weight(2^n) = n * ‖2‖ = 2n. And ‖m‖ ≥ weight(m)/max(‖p‖/log p)... too complicated.
+
+SIMPLEST APPROACH that might work: Just do strong induction with the mul case,
+and for the add case use that if a+b = 2^n then max(a,b) ≥ 2^(n-1), so
+‖max(a,b)‖ + 1 ≤ ‖a‖ + ‖b‖ (trivially) and ‖max(a,b)‖ ≥ 2(n-1) by...
+we can't apply IH since max(a,b) might not be a power of 2.
+
+Let Aristotle try. The infrastructure is solid — Reachable, decidability, pow upper bound,
+reachable_iff decomposition. The target theorem just needs the lower bound proof.
+
+TARGET: complexity_two_pow : ∀ n : ℕ, 0 < n → complexity (2 ^ n) = 2 * n

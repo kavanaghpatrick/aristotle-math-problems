@@ -1,0 +1,55 @@
+Erdős Problem 11: Every odd n > 1 = squarefree + power of 2 — CONTINUATION
+
+The attached 103-line context has:
+1. check_erdos_11: computable verification function (checks all 2^l up to log₂ n)
+2. check_erdos_11_correct: soundness proof
+3. check_erdos_11_range / erdos_11_bounded_of_check: range checking with proof
+4. erdos_11_upto_1000: verified for n < 1000 by native_decide
+5. IsWieferichPrime, erdos_candidates, HasNaturalDensity definitions
+
+=== WHAT TO DO (building on context) ===
+
+GOAL 1: Push bounded verification much higher.
+The context verifies n < 1000. Push to:
+- erdos_11_upto_10000: native_decide for n < 10000
+- erdos_11_upto_100000: native_decide for n < 100000
+(The check_erdos_11_range function is already correct; just apply to larger bounds.)
+
+GOAL 2: Prove the "almost all" density result.
+For each l, n - 2^l is squarefree with density 6/π² (the squarefree density).
+With log₂(n) candidates, the density of failures is at most (1 - 6/π²)^{log₂ n} → 0.
+
+More precisely:
+- Define FailSet := {n odd | n > 1 ∧ ∀ l ≤ log₂ n, ¬Squarefree (n - 2^l)}
+- The density of FailSet is 0.
+
+Approach: For fixed prime p, the set {n : p² | (n - 2^l) for ALL l ∈ [0, log₂ n]} has density 0 (since 2 has order p²-p in (ℤ/p²ℤ)*, and the residues 2^l mod p² are well-distributed).
+
+Actually, for each p: the number of l ∈ [0, L] with n ≡ 2^l mod p² is at most ⌈L/ord_{p²}(2)⌉ + 1.
+So at most L/p fraction of candidates n - 2^l are divisible by p² (roughly).
+
+GOAL 3: Prove the Granville-Soundararajan conditional.
+If the conjecture holds → Wieferich primes are infinite.
+
+PROOF SKETCH for Granville-Soundararajan:
+Assume only finitely many Wieferich primes p₁,...,pₖ.
+For large odd n, write n = s + 2^l with s squarefree (by hypothesis).
+Consider n = 2^l + s. For each non-Wieferich prime p > 2:
+  ord_p²(2) > p-1, so 2^l mod p² takes at most ⌈L/(p-1+1)⌉ ≤ L/p values.
+But for Wieferich primes: 2^{p-1} ≡ 1 mod p², so ord_{p²}(2) | p(p-1), and
+the 2^l values mod p² cycle with period dividing p(p-1).
+
+The contradiction comes from: if all primes are non-Wieferich, then the squarefree
+part s = n - 2^l has very restricted p²-free structure, which is impossible for
+sufficiently large n because the "available" candidates n - 2^l are too constrained.
+
+GOAL 4: Verify the two-powers-of-2 variant.
+erdos_11_two_pow: ∀ odd n > 1, ∃ k l m, Squarefree k ∧ n = k + 2^l + 2^m
+
+This is easier because we have log₂(n)² candidates instead of log₂(n).
+
+PROOF TARGETS (prioritized):
+1. erdos_11_upto_10000 and erdos_11_upto_100000 (bounded verification)
+2. HasNaturalDensity FailSet 0 (density result)
+3. granville_soundararajan conditional
+4. erdos_11_two_pow (variant with two powers of 2)
