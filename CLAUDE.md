@@ -47,7 +47,7 @@ Nothing else. No "Proof Strategy". No "Key Lemmas". No "Proposed Approach". No m
 8. **HAVE FAITH IN ARISTOTLE** -- submit aggressively, fear nothing
 9. **Never submit without tracking** -- every submission gets a DB entry
 10. **Check DB before submitting** -- `mk failed` and `false_lemmas` table
-11. **Process every result** -- `/project:fetch` or `/project:process-result`
+11. **Process every result** -- `/fetch` or `/process-result`
 12. **"compiled clean" != "resolved the gap"** -- only celebrate actual gap resolutions
 
 ---
@@ -55,17 +55,17 @@ Nothing else. No "Proof Strategy". No "Key Lemmas". No "Proposed Approach". No m
 ## Commands
 
 ```
-/project:sketch <problem>         # Write bare-gap sketch (<=30 lines)
-/project:submit <file> [slot]     # Gap-targeting gate -> auto-context -> submit INFORMAL
-/project:sweep [--domain nt]      # Scan for open gaps -> state bare -> submit
-/project:fetch <uuid-or-slot>     # Download result -> audit -> gap-resolution assessment
-/project:status [uuid-or-slot]    # Check Aristotle queue & job status
-/project:screen <problem>         # Binary: OPEN -> submit, NOT OPEN -> skip
-/project:screen-batch <dir>       # Batch screen: OPEN vs SKIP
-/project:audit <file.lean>        # Audit result for gap resolution
-/project:process-result <file>    # Audit local result -> DB
-/project:debate "topic"           # Multi-AI debate to identify the exact open gap
-/project:optimize <file>          # Always: "State the gap bare, submit INFORMAL"
+/sketch <problem>         # Write bare-gap sketch (<=30 lines)
+/submit <file> [slot]     # Gap-targeting gate -> auto-context -> submit INFORMAL
+/sweep [--domain nt]      # Scan for open gaps -> state bare -> submit
+/fetch <uuid-or-slot>     # Download result -> audit -> gap-resolution assessment
+/status [uuid-or-slot]    # Check Aristotle queue & job status
+/screen <problem>         # Binary: OPEN -> submit, NOT OPEN -> skip
+/screen-batch <dir>       # Batch screen: OPEN vs SKIP
+/audit <file.lean>        # Audit result for gap resolution
+/process-result <file>    # Audit local result -> DB
+/debate "topic"           # Multi-AI debate to identify the exact open gap
+/optimize <file>          # Always: "State the gap bare, submit INFORMAL"
 ```
 
 ---
@@ -109,5 +109,5 @@ Knowledge base in `math-forge/data/knowledge.db` with FTS5 search.
 1. `mk failed <keywords>` -- already disproven?
 2. `mk context <problem>` -- what did Aristotle try before?
 3. Try a different problem -- plenty of open gaps
-4. Run `/project:debate` to identify the exact open gap
+4. Run `/debate` to identify the exact open gap
 5. Accept that some problems are too hard right now -- move on

@@ -108,15 +108,17 @@ The harness is orchestrated through Claude Code with project-specific skills:
 
 | Skill | Purpose |
 |-------|---------|
-| `/project:screen` | Binary decision: is this problem open? |
-| `/project:sketch` | Write a bare-gap sketch |
-| `/project:submit` | Gate check → auto-context → submit INFORMAL |
-| `/project:sweep` | Batch: scan for open gaps, sketch, submit |
-| `/project:fetch` | Download result → audit → update DB |
-| `/project:status` | Queue and job status |
-| `/project:audit` | Deep audit of a result file |
-| `/project:process-result` | Audit + DB update in one step |
-| `/project:debate` | Multi-AI debate to identify the exact open gap |
+| `/screen` | Binary decision: is this problem open? |
+| `/sketch` | Write a bare-gap sketch |
+| `/submit` | Gate check → auto-context → submit INFORMAL |
+| `/sweep` | Batch: scan for open gaps, sketch, submit |
+| `/fetch` | Download result → audit → update DB |
+| `/status` | Queue and job status |
+| `/audit` | Deep audit of a result file |
+| `/process-result` | Audit + DB update in one step |
+| `/debate` | Multi-AI debate to identify the exact open gap |
+| `/optimize` | Recommend optimal submission path |
+| `/screen-batch` | Batch screen: OPEN vs SKIP |
 
 ### math-forge CLI
 
@@ -177,8 +179,8 @@ math/
 │   ├── aristotle_fetch.py         # Result fetching and tracking
 │   └── math_forge.py              # Knowledge base CLI (mk commands)
 ├── math-forge/data/               # FTS5 knowledge base
-├── skills/                        # Claude Code skill definitions
-├── hooks/                         # Session and validation hooks
+├── .claude/commands/              # Claude Code skill definitions
+├── .claude/settings.json          # Hooks and session config
 └── CLAUDE.md                      # Pipeline rules and methodology
 ```
 
