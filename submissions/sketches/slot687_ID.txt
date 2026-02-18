@@ -1,4 +1,4 @@
-f7de8cd3-0ea5-4469-a2b0-7b9be175253d
-# Task: slot687_sierpinski_5n_v4
-# Hash: 32ca5c1c7da203b6
-# Submitted: 2026-02-17T11:22:46.560361
+d548b3db-fa68-45a4-80d1-031439a43f07
+# Task: slot687_pell_primes_resub
+# Hash: 8230757a57a64688
+# Submitted: 2026-02-17T15:00:25.950641

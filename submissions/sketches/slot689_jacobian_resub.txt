@@ -1,0 +1,9 @@
+OPEN GAP: Jacobian Conjecture
+Source: Open problem (Smale's list)
+Domain: algebra
+
+If F : k^n -> k^n is a polynomial map over a field of characteristic zero with det(JF) a nonzero constant, then F has a polynomial inverse.
+
+theorem jacobian_conjecture {k : Type*} [Field k] [CharZero k] {n : ℕ} (F : RegularFunction k (Fin n) (Fin n)) (hF : IsUnit (jacobianDet F)) : ∃ G, G.comp F = RegularFunction.id k (Fin n) ∧ F.comp G = RegularFunction.id k (Fin n) := by sorry
+
+Status: OPEN. The attached context proves the easy direction and the triangular case. Close the full conjecture.

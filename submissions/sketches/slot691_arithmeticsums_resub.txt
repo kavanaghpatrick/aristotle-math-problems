@@ -1,0 +1,9 @@
+OPEN GAP: ArithmeticSumS Conjecture 1.1 — S(k) > 0 for all odd primes k
+Source: ArithmeticSumS Conj 1.1
+Domain: nt
+
+For odd prime k, define S(k) = sum_{h=1}^{k-1} S'(h,k) where S'(h,k) = sum_{j=1}^{k-1} (floor(hj/k) - hj/k + 1/2). Prove S(k) > 0 for all odd primes k.
+
+theorem conj_1_1 : ∀ k : ℕ, k.Prime → Odd k → 0 < S k := by sorry
+
+Status: OPEN. Verified computationally for k < 1000. Context has full verification infrastructure. Prove for all k.

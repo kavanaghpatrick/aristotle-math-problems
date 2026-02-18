@@ -1,0 +1,9 @@
+OPEN GAP: Infinitely many Pell primes
+Source: Open problem in number theory
+Domain: nt
+
+The Pell numbers P_n satisfy P_0=0, P_1=1, P_{n+2}=2P_{n+1}+P_n. It is conjectured that infinitely many Pell numbers are prime. Prove that the set {n : P_n is prime} is infinite.
+
+theorem pell_primes_infinite : Set.Infinite {n : ℕ | (pellNumber n).Prime} := by sorry
+
+Status: OPEN. P_n prime implies n prime, Pell numbers form a strong divisibility sequence. Context proves these. Close the gap.

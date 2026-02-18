@@ -1,0 +1,9 @@
+OPEN GAP: Agoh-Giuga Conjecture (full resolution)
+Source: Open problem in number theory (Agoh 1995, Giuga 1950)
+Domain: nt
+
+The Agoh-Giuga conjecture: no composite n satisfies sum_{k=1}^{n-1} k^{n-1} ≡ -1 (mod n). Equivalently, every strong Giuga number is prime.
+
+theorem agoh_giuga : ∀ n : ℕ, 2 ≤ n → IsStrongGiuga n → n.Prime := by sorry
+
+Status: OPEN. Prior Aristotle result (slot 690) proved: any Giuga number must be odd, squarefree, have ≥9 prime factors, exceed 10^6, and reduced the conjecture to the n ≥ 10^6 case via agoh_giuga_iff_open. Close the remaining gap.

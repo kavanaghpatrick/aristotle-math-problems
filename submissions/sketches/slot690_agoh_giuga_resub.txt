@@ -1,0 +1,9 @@
+OPEN GAP: Agoh-Giuga conjecture
+Source: Open problem in number theory
+Domain: nt
+
+A composite n is a Giuga number if for every prime p dividing n, p divides (n/p - 1). The conjecture states no Giuga number exists, equivalently: n is prime iff sum_{k=1}^{n-1} k^{n-1} ≡ -1 (mod n).
+
+theorem agoh_giuga : ∀ n : ℕ, 2 ≤ n → IsStrongGiuga n → n.Prime := by sorry
+
+Status: OPEN. Known that any Giuga number has ≥9 prime factors and exceeds 10^6. The attached context proves both bounds. Close the gap.

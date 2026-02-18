@@ -1,0 +1,9 @@
+OPEN GAP: Infinitely many regular primes
+Source: Open problem in algebraic number theory
+Domain: nt
+
+A prime p is regular if p does not divide the class number of Q(zeta_p). Prove there are infinitely many regular primes.
+
+theorem regular_primes_infinite : Set.Infinite {p : ℕ | p.Prime ∧ IsRegularPrime p} := by sorry
+
+Status: OPEN. Heuristically ~61% of primes are regular. Siegel showed infinitely many primes have p not dividing certain Bernoulli numbers. The attached context has the definition and proves 2 is regular. Close the gap.
