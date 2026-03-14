@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 1004 — Distinct Totient Values in Intervals
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1004.lean
+Domain: nt
+
+For any c > 0, for large x, does there exist n <= x with phi(n+1),...,phi(n+(log x)^c) all distinct?
+
+theorem erdos_1004 :
+    answer(sorry) ↔ ∀ c > (0 : ℝ), ∀ᶠ x in atTop, ∃ n ≤ x,
+      IsDistinctTotientRun n ⌊(Real.log (x : ℝ)) ^ c⌋₊ := by sorry
+
+Status: OPEN. EPS87 proved K <= n/exp(c*(log n)^{1/3}) upper bound on run length.

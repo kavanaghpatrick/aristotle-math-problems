@@ -55,7 +55,18 @@ Nothing else. No "Proof Strategy". No "Key Lemmas". No "Proposed Approach". No m
 ## Commands
 
 ```
+/codex-prove <problem>    # Codex proof loop: write Lean 4, iterate against lake build
 /sketch <problem>         # Write bare-gap sketch (<=30 lines)
+
+## Proof Orchestrator (autonomous Codex → Aristotle queue)
+
+```
+python3 scripts/proof_orchestrator.py enqueue "<problem>" --problem-id <id>  # Add to queue
+python3 scripts/proof_orchestrator.py run [--single-pass]                    # Run orchestrator
+python3 scripts/proof_orchestrator.py status                                 # Show queue
+python3 scripts/proof_orchestrator.py cancel <id>                            # Cancel a job
+python3 scripts/proof_orchestrator.py retry <id>                             # Reset to QUEUED
+```
 /submit <file> [slot]     # Gap-targeting gate -> auto-context -> submit INFORMAL
 /sweep [--domain nt]      # Scan for open gaps -> state bare -> submit
 /fetch <uuid-or-slot>     # Download result -> audit -> gap-resolution assessment
@@ -79,6 +90,8 @@ mk failed [keyword]          # Failed approaches -- check BEFORE sketching
 mk context <problem_id>      # Prior Aristotle results for auto-context
 mk gaps                      # Open gaps being targeted + status
 mk stats                     # Knowledge base dashboard
+mk codex [problem_id]        # Codex proof history
+mk codex-best <problem_id>   # Best compiled Codex proof path
 ```
 
 ---
@@ -90,6 +103,8 @@ All state in `submissions/tracking.db`:
 | Table | Purpose |
 |-------|---------|
 | `submissions` | All Aristotle jobs (with `gap_statement`, `submission_type`, `target_resolved`) |
+| `codex_proofs` | Codex proof loop results (problem_id, sorry_count, compiled, lean_file) |
+| `proof_queue` | Autonomous orchestrator queue (state machine, Codex↔Aristotle loop) |
 | `false_lemmas` | Disproven claims -- always check before submitting |
 | `failed_approaches` | What doesn't work and why |
 

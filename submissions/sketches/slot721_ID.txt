@@ -1,0 +1,4 @@
+9d0d34ef-f6f4-4514-8fbe-b9cdb4055572
+# Task: slot721_erdos258_divisor_irrationality
+# Hash: d8ec478c6c59513b
+# Submitted: 2026-03-15T05:39:11.329550

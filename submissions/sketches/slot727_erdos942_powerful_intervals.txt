@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 942 — Powerful Numbers Between Consecutive Squares
+Source: formal-conjectures/FormalConjectures/ErdosProblems/942.lean
+Domain: nt
+
+Is there c > 0 such that the count of powerful numbers in [n^2, (n+1)^2) is ~(log n)^c?
+
+theorem erdos_942 : answer(sorry) ↔ ∃ c > 0, ∃ (o : ℕ → ℝ), o =o[atTop] (1 : ℕ → ℝ) ∧
+    (∀ᶠ n in atTop, erdos_942.h n < (Real.log n) ^ (c + o n)) ∧
+    {n | erdos_942.h n > (Real.log n) ^ (c - o n)}.Infinite := by sorry
+
+Status: OPEN. Known that limsup h(n) = infinity. The precise growth rate is unknown.

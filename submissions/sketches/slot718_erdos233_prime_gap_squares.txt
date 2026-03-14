@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 233 — Sum of Squares of Prime Gaps
+Source: formal-conjectures/FormalConjectures/ErdosProblems/233.lean
+Domain: nt
+
+Show sum_{n<=N} (p_{n+1}-p_n)^2 = O(N (log N)^2). Heath-Brown conjecture on prime gap moments.
+
+theorem erdos_233 :
+    (fun N => ((∑ n ∈ Finset.range N, (primeGap n) ^ 2) : ℝ)) =O[atTop] fun N => N * (log N)^2 := by sorry
+
+Status: OPEN. Lower bound Omega(N(logN)^2) follows from PNT. Cramer proved O(N(logN)^4) under RH.

@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 826 — Divisor Function Linear Bound
+Source: formal-conjectures/FormalConjectures/ErdosProblems/826.lean
+Domain: nt
+
+Are there infinitely many n such that tau(n+k) <= C*k for all k >= 1?
+
+theorem erdos_826 : answer(sorry) ↔
+    ∃ C > (0 : ℝ), { n | ∀ k ≥ 1, σ 0 (n + k) ≤ C * k }.Infinite := by sorry
+
+Status: OPEN. Asks whether infinitely many n have linearly controlled divisor growth in neighborhoods.

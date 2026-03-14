@@ -17,7 +17,7 @@ import re
 import time
 from pathlib import Path
 from datetime import datetime, timedelta
-from aristotlelib import Project, ProjectInputType, set_api_key
+from aristotlelib import Project, set_api_key
 
 # Configuration
 ARISTOTLE_API_KEY = os.environ.get("ARISTOTLE_API_KEY")
@@ -320,19 +320,17 @@ async def safe_submit(
     description: str,
     force: bool = False,
     context_files: list[Path] | None = None,
-    input_type: str = "formal",
     batch: bool = False,
 ) -> str:
     """
     Safely submit to Aristotle with multiple safety checks.
 
     Args:
-        input_file: Path to input file
+        input_file: Path to input file (.txt sketch)
         project_id_file: Where to save the project ID
         description: Human-readable description for logging
         force: Skip safety checks (use with caution!)
         context_files: Optional list of additional context files (.lean, .md, .txt, .tex)
-        input_type: "formal" (default, FORMAL_LEAN) or "informal" (INFORMAL)
 
     Returns:
         Project ID string
@@ -352,7 +350,26 @@ async def safe_submit(
     print()
 
     # GAP-TARGETING GATE (runs before all other checks)
-    gap_info = check_gap_targeting(input_file)
+    if force:
+        # --force bypasses gap-targeting gate (for informal proof pipeline)
+        content = input_file.read_text()
+        lines = content.splitlines()
+        non_blank = [l for l in lines if l.strip() and not l.strip().startswith('---')]
+        gap_statement = ""
+        for line in lines:
+            stripped = line.strip().lstrip('#').lstrip('-').strip()
+            if stripped:
+                gap_statement = stripped[:200]
+                break
+        gap_info = {
+            "pass": True,
+            "submission_type": "informal_proof",
+            "gap_statement": gap_statement,
+            "line_count": len(non_blank),
+        }
+        print("   ⚠️  Gap-targeting gate BYPASSED (--force)")
+    else:
+        gap_info = check_gap_targeting(input_file)
     print(f"   Gap: {gap_info['gap_statement'][:60]}")
     print(f"   Type: {gap_info['submission_type']}")
     print(f"   Lines: {gap_info['line_count']}")
@@ -429,24 +446,32 @@ async def safe_submit(
             "file_size": file_size
         })
 
-        # Determine input type
-        pit = ProjectInputType.FORMAL_LEAN if input_type == "formal" else ProjectInputType.INFORMAL
+        # Read sketch content as prompt
+        prompt_text = input_file.read_text()
 
-        # Build submission kwargs
-        submit_kwargs = {
-            "input_file_path": str(input_file),
-            "project_input_type": pit,
-            "wait_for_completion": False,
-        }
+        # If context files exist, bundle them into a tar.gz
+        tar_path = None
         if context_files:
-            submit_kwargs["context_file_paths"] = [str(p) for p in context_files]
-            print(f"   📎 {len(context_files)} context file(s) attached")
+            import tarfile
+            import tempfile
+            tar_path = Path(tempfile.mktemp(suffix='.tar.gz'))
+            with tarfile.open(tar_path, 'w:gz') as tar:
+                for ctx in context_files:
+                    tar.add(ctx, arcname=ctx.name)
+            print(f"   📎 {len(context_files)} context file(s) bundled")
 
-        # Submit (with immediate ID extraction)
-        result = await Project.prove_from_file(**submit_kwargs)
+        # Submit via new Project.create API
+        try:
+            project = await Project.create(
+                prompt=prompt_text,
+                tar_file_path=tar_path,
+            )
+        finally:
+            # Clean up temp tar
+            if tar_path and tar_path.exists():
+                tar_path.unlink()
 
-        # Extract project ID immediately
-        project_id = result if isinstance(result, str) else getattr(result, 'project_id', str(result))
+        project_id = project.project_id
 
         # IMMEDIATELY save project ID (before anything else can fail)
         with open(project_id_file, 'w') as f:
@@ -483,7 +508,6 @@ async def submit_with_retry(
     max_retries: int = 3,
     retry_delay: int = 30,
     context_files: list[Path] | None = None,
-    input_type: str = "formal",
     force: bool = False,
     batch: bool = False,
 ) -> str:
@@ -504,7 +528,7 @@ async def submit_with_retry(
         try:
             return await safe_submit(
                 input_file, project_id_file, description,
-                force=force, context_files=context_files, input_type=input_type,
+                force=force, context_files=context_files,
                 batch=batch,
             )
 
@@ -541,6 +565,15 @@ if __name__ == "__main__":
         if arg == '--context' and i + 1 < len(all_args):
             context_files.append(Path(all_args[i + 1]))
             i += 2
+        elif arg == '--codex-context' and i + 1 < len(all_args):
+            codex_problem_id = all_args[i + 1]
+            best_path = MATH_DIR / "codex_proofs" / codex_problem_id / "best.lean"
+            if best_path.exists():
+                context_files.append(best_path.resolve())
+                print(f"   Codex context: {best_path}")
+            else:
+                print(f"WARNING: No Codex best proof found for '{codex_problem_id}'")
+            i += 2
         elif arg.startswith('--'):
             flags.add(arg)
             i += 1
@@ -550,7 +583,6 @@ if __name__ == "__main__":
 
     batch_mode = '--batch' in flags
     force = '--force' in flags
-    input_type = "informal" if '--informal' in flags else "formal"
 
     if len(positional) < 1:
         print("Usage: python3 safe_aristotle_submit.py <input_file> [slot_number] [options]")
@@ -558,16 +590,16 @@ if __name__ == "__main__":
         print()
         print("Options:")
         print("  --force              Skip safety checks")
-        print("  --informal           Use INFORMAL input type (default: FORMAL_LEAN)")
         print("  --context <file>     Add context file (can repeat)")
+        print("  --codex-context <id> Auto-locate best Codex proof as context")
         print("  --batch              Submit multiple files (skips interactive prompts)")
         print()
         print("Examples:")
         print("  # Single file (auto-detect slot):")
-        print("  python3 safe_aristotle_submit.py submissions/nu4_final/slot565_foo.lean")
+        print("  python3 safe_aristotle_submit.py submissions/sketches/erdos850.txt")
         print()
         print("  # Batch submit:")
-        print("  python3 safe_aristotle_submit.py --batch sketch1.txt sketch2.txt --informal")
+        print("  python3 safe_aristotle_submit.py --batch sketch1.txt sketch2.txt")
         sys.exit(1)
 
     def resolve_file(filepath_str: str) -> tuple[Path, Path, str]:
@@ -597,15 +629,12 @@ if __name__ == "__main__":
             print(f"📁 Input: {input_file}")
             print(f"📋 ID file: {id_file}")
             print(f"📝 Description: {description}")
-            if input_type == "informal":
-                print(f"🔤 Mode: INFORMAL")
             print()
 
             try:
                 project_id = asyncio.run(submit_with_retry(
                     input_file, id_file, description,
                     context_files=context_files or None,
-                    input_type=input_type,
                     force=force,
                     batch=True,
                 ))
@@ -645,15 +674,12 @@ if __name__ == "__main__":
         print(f"📁 Input: {input_file}")
         print(f"📋 ID file: {id_file}")
         print(f"📝 Description: {description}")
-        if input_type == "informal":
-            print(f"🔤 Mode: INFORMAL")
         print()
 
         try:
             project_id = asyncio.run(submit_with_retry(
                 input_file, id_file, description,
                 context_files=context_files or None,
-                input_type=input_type,
                 force=force,
                 batch=False,
             ))

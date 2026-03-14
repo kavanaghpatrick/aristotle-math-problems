@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 208 — Squarefree Number Gaps
+Source: formal-conjectures/FormalConjectures/ErdosProblems/208.lean
+Domain: nt
+
+Let s_1 < s_2 < ... be the squarefree numbers. Is s_{n+1} - s_n = O(s_n^eps) for all eps > 0?
+
+theorem erdos_208.i : answer(sorry) ↔
+    ∀ ε > (0 : ℝ), (fun n => (s (n + 1) - s n : ℝ)) =O[atTop] (fun n => (s n : ℝ)^ε) := by sorry
+
+Status: OPEN. Best known gap bound is O(n^{1/5}) by Filaseta-Trifonov; the eps-power conjecture remains open.

@@ -1,0 +1,4 @@
+1afbc7f6-1610-4ab8-b7dd-0e1a49fde7d0
+# Task: jacobian_informal_proof
+# Hash: e32d8790663a1963
+# Submitted: 2026-02-20T00:31:12.269877

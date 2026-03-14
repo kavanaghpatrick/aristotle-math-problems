@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 1073 — Composite Divisors of n! + 1
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1073.lean
+Domain: nt
+
+Let A(x) count composite u < x with u | n!+1 for some n. Is A(x) <= x^{o(1)}?
+
+theorem erdos_1073 :
+    answer(sorry) ↔ ∃ (o : ℕ → ℝ), o =o[atTop] (1 : ℕ → ℝ) ∧ ∀ x, A x ≤ x ^ (o x) := by sorry
+
+Status: OPEN. Connected to Wilson's theorem and factorial residues modulo composites.

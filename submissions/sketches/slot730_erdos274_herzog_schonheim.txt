@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 274 — Herzog-Schonheim Conjecture
+Source: formal-conjectures/FormalConjectures/ErdosProblems/274.lean
+Domain: algebra
+
+If G is exactly covered by cosets of subgroups G_1,...,G_k with k > 1, must two indices [G:G_i] coincide?
+
+theorem herzog_schonheim {G : Type*} [Group G] (hG : 1 < ENat.card G)
+    {ι : Type*} [Fintype ι] (hι : 1 < Fintype.card ι)
+    (P : Group.ExactCovering G ι) :
+    ∃ i j, i ≠ j ∧ (P.parts i).index = (P.parts j).index := by sorry
+
+Status: OPEN. Proved for finite abelian groups. The general group case remains open.

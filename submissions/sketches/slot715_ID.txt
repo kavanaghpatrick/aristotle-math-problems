@@ -1,0 +1,4 @@
+27160711-064d-40fc-ad9c-5abb88d05db7
+# Task: regular_primes_informal_proof
+# Hash: 5563f4d04fa6e8ee
+# Submitted: 2026-02-20T00:31:07.747713

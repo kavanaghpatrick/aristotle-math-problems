@@ -469,6 +469,46 @@ case "${1:-help}" in
         echo "Gaps resolved: ${RESOLVED:-0}"
         ;;
 
+    codex)
+        shift
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found" >&2; exit 1
+        fi
+        PROBLEM="${1:-}"
+        if [ -z "$PROBLEM" ]; then
+            echo "[math-forge] Codex proof history (all)"; echo "---"
+            run_sql "$TRACKING_DB" -header -column "
+                SELECT problem_id, iterations, sorry_count,
+                       CASE compiled WHEN 1 THEN 'YES' ELSE 'no' END as compiled,
+                       model, wall_time_seconds as secs, created_at
+                FROM codex_proofs ORDER BY created_at DESC LIMIT 20;"
+        else
+            ESCAPED=$(escape_sql "$PROBLEM")
+            echo "[math-forge] Codex proofs for '${PROBLEM}'"; echo "---"
+            run_sql "$TRACKING_DB" -header -column "
+                SELECT id, iterations, sorry_count,
+                       CASE compiled WHEN 1 THEN 'YES' ELSE 'no' END as compiled,
+                       reasoning_effort, wall_time_seconds as secs, lean_file, created_at
+                FROM codex_proofs WHERE problem_id LIKE '%${ESCAPED}%'
+                ORDER BY created_at DESC;"
+        fi
+        ;;
+
+    codex-best)
+        shift
+        if [ $# -eq 0 ]; then echo "Usage: mk codex-best <problem-id>"; exit 1; fi
+        if [ ! -f "$TRACKING_DB" ]; then
+            echo "[math-forge] ERROR: tracking.db not found" >&2; exit 1
+        fi
+        ESCAPED=$(escape_sql "$1")
+        BEST=$(run_sql "$TRACKING_DB" "SELECT lean_file FROM codex_proofs WHERE problem_id LIKE '%${ESCAPED}%' AND compiled=1 ORDER BY sorry_count ASC, created_at DESC LIMIT 1;")
+        if [ -n "$BEST" ]; then
+            echo "$BEST"
+        else
+            echo "[math-forge] No compiled Codex proof for '${1}'" >&2; exit 1
+        fi
+        ;;
+
     help|*)
         echo "mk — Math-forge Knowledge Base CLI"
         echo ""
@@ -479,6 +519,10 @@ case "${1:-help}" in
         echo "  failed [keyword]                          Failed approaches (don't repeat these!)"
         echo "  stats                                     KB dashboard"
         echo "  init                                      Initialize/bootstrap knowledge.db"
+        echo ""
+        echo "Codex commands:"
+        echo "  codex [problem-id]                        Codex proof history (all or by problem)"
+        echo "  codex-best <problem-id>                   Best compiled Codex proof path"
         echo ""
         echo "Pipeline commands:"
         echo "  submit <file> [args...]                   Submit sketch to Aristotle"

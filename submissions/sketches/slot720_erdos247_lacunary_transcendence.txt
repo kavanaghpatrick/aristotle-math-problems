@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 247 — Transcendence of Lacunary Binary Sums
+Source: formal-conjectures/FormalConjectures/ErdosProblems/247.lean
+Domain: nt
+
+If n_1 < n_2 < ... with limsup(n_k/k) = infinity, is sum 1/2^{n_k} transcendental?
+
+theorem erdos_247 : answer(sorry) ↔ ∀ (n : ℕ → ℕ), (StrictMono n) →
+    atTop.limsup (fun k => (n k / k.succ : EReal)) = ⊤ →
+    Transcendental ℚ (∑' k, (1 : ℝ) / 2 ^ n k) := by sorry
+
+Status: OPEN. Known under stronger condition limsup(n_k/k^t)=inf for all t>=1 (Erdos-Graham 1980).

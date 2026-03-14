@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 680 — Least Prime Factor of Shifted Integers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/680.lean
+Domain: nt
+
+For all large n, does there exist k != 0 with minFac(n+k) > k^2 + 1?
+
+theorem erdos_680 :
+    answer(sorry) ↔ ∀ᶠ (n : ℕ) in .atTop, ∃ k ≠ 0, (n + k).minFac > k^2 + 1 := by sorry
+
+Status: OPEN. Related to distribution of smooth numbers near arbitrary n.

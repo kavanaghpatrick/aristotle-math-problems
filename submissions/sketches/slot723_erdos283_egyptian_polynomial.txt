@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 283 — Egyptian Fraction Polynomial Representations
+Source: formal-conjectures/FormalConjectures/ErdosProblems/283.lean
+Domain: nt
+
+For polynomial p with positive leading coeff and no common divisor, can all large m be written as
+p(n_1)+...+p(n_k) with 1/n_1+...+1/n_k = 1?
+
+theorem erdos_283 : answer(sorry) ↔ ∀ p : ℤ[X], Condition p := by sorry
+
+Status: OPEN. Known for p(x) = x by Graham (1963). General polynomial case is open.

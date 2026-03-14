@@ -1,0 +1,10 @@
+OPEN GAP: Zariski Cancellation Problem
+Source: formal-conjectures/FormalConjectures/Arxiv/2208.14736/ZariskiCancellation.lean
+Domain: algebra
+
+Is every polynomial ring k[x_1,...,x_n] over a char-0 field cancellative? I.e., A[X] = k[x_1,...,x_n,X] implies A = k[x_1,...,x_n]?
+
+theorem zariski_cancellation_problem {k : Type*} [Field k] [CharZero k]
+    {ι : Type*} [Fintype ι] : IsCancellative k (MvPolynomial ι k) := by sorry
+
+Status: OPEN. Known for dim 1-2. False in positive characteristic dim >= 3 (Gupta).

@@ -1,0 +1,9 @@
+OPEN GAP: Erdos 236 — Representations as p + 2^k
+Source: formal-conjectures/FormalConjectures/ErdosProblems/236.lean
+Domain: nt
+
+Let f(n) count representations n = p + 2^k with p prime, k >= 0. Show f(n) = o(log n).
+
+theorem erdos_236 : (fun n => (f n : ℝ)) =o[atTop] (fun n => Real.log (n : ℝ)) := by sorry
+
+Status: OPEN. Trivially f(n) <= log_2(n). The o(log n) bound is unproven.

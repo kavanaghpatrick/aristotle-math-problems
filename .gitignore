@@ -54,6 +54,7 @@ Thumbs.db
 tracking.db.backup.*
 .aristotle_submit.lock
 iterations/
+codex_proofs/
 *-verify/
 
 # Large data files
@@ -66,3 +67,6 @@ formal-conjectures/
 .claude/
 specs/.current-spec
 **/.progress.md
+*.tar.gz
+/*.lean
+/*-aristotle.tar.gz

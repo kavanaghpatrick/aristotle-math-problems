@@ -1,0 +1,10 @@
+OPEN GAP: Erdos 263 — Is 2^{2^n} an Irrationality Sequence?
+Source: formal-conjectures/FormalConjectures/ErdosProblems/263.lean
+Domain: nt
+
+Is a_n = 2^{2^n} an irrationality sequence? I.e., for any b_n > 0 with a_n/b_n -> 1, is sum 1/b_n irrational?
+
+theorem erdos_263.parts.i : answer(sorry) ↔
+    IsIrrationalitySequence (fun n : ℕ => 2 ^ 2 ^ n) := by sorry
+
+Status: OPEN. Kovac-Tao (2024) showed sub-doubly-exponential sequences fail. The boundary case 2^{2^n} is unresolved.

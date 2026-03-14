@@ -419,22 +419,31 @@ async def cmd_resub(slot: int, sketch_path: str, context_slot: int | None = None
         print(f"ERROR: Sketch not found: {sketch}")
         return
 
-    kwargs = {
-        "input_file_path": str(sketch),
-        "project_input_type": aristotlelib.ProjectInputType.INFORMAL,
-        "wait_for_completion": False,
-    }
+    prompt_text = sketch.read_text()
 
-    # Find context file from previous slot result
+    # Find context file from previous slot result and bundle as tar
+    tar_path = None
     if context_slot:
         context_file = result_exists(context_slot)
         if context_file:
-            kwargs["context_file_paths"] = [str(context_file)]
+            import tarfile, tempfile
+            tar_path = Path(tempfile.mktemp(suffix='.tar.gz'))
+            with tarfile.open(tar_path, 'w:gz') as tar:
+                tar.add(context_file, arcname=context_file.name)
             print(f"Using context from slot {context_slot}: {context_file}")
         else:
             print(f"WARNING: No result file found for context slot {context_slot}")
 
-    uuid = await aristotlelib.Project.prove_from_file(**kwargs)
+    try:
+        project = await aristotlelib.Project.create(
+            prompt=prompt_text,
+            tar_file_path=tar_path,
+        )
+    finally:
+        if tar_path and tar_path.exists():
+            tar_path.unlink()
+
+    uuid = project.project_id
     print(f"Submitted as slot {slot}: {uuid}")
 
     # Track it properly

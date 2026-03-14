@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 258 — Irrationality of Divisor Sum Series
+Source: formal-conjectures/FormalConjectures/ErdosProblems/258.lean
+Domain: nt
+
+Let a_n -> infinity be nonzero naturals. Is sum d(n)/(a_1*...*a_n) irrational?
+
+theorem erdos_258 : answer(sorry) ↔ ∀ (a : ℕ → ℕ), (∀ n, a n ≠ 0) →
+    Filter.Tendsto a Filter.atTop Filter.atTop →
+    Irrational (∑' (n : ℕ), ((n+1).divisors.card / ∏ i ∈ Finset.Icc 1 n, a i)) := by sorry
+
+Status: OPEN. Monotone case proved by Erdos-Straus. General (non-monotone) case remains open.

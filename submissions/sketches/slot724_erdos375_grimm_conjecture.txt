@@ -1,0 +1,9 @@
+OPEN GAP: Erdos 375 — Grimm's Conjecture
+Source: formal-conjectures/FormalConjectures/ErdosProblems/375.lean
+Domain: nt
+
+If n+1,...,n+k are all composite, can one assign distinct primes p_i | (n+i) for each i?
+
+theorem erdos_375 : answer(sorry) ↔ Erdos375Prop := by sorry
+
+Status: OPEN. Verified for k up to c*(log n / log log n)^3 by Ramachandra-Shorey-Tijdeman (1975).

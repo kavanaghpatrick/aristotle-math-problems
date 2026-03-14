@@ -1,0 +1,4 @@
+1ff4881d-b740-4918-a828-223f02910376
+# Task: slot719_erdos236_prime_plus_power2
+# Hash: 9e6ab3d385bd326a
+# Submitted: 2026-03-15T05:41:15.610461

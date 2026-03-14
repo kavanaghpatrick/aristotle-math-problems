@@ -1,0 +1,4 @@
+5e3c8712-f26f-4bb1-8020-ebf9a34c5770
+# Task: slot725_erdos680_least_prime_factor
+# Hash: 323d745ff4acda8b
+# Submitted: 2026-03-15T05:40:46.769539
