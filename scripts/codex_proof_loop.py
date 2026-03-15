@@ -28,6 +28,7 @@ TRACKING_DB = MATH_DIR / "submissions" / "tracking.db"
 PROOFS_DIR = MATH_DIR / "codex_proofs"
 LAKE_PACKAGES = MATH_DIR / ".lake" / "packages"
 MATHLIB_REV = "f897ebcf72cd16f89ab4577d0c826cd14afaafc7"
+FORMAL_CONJECTURES = MATH_DIR / "formal-conjectures" / "FormalConjectures"
 
 # ── Dataclasses ────────────────────────────────────────────────────────────
 
@@ -210,25 +211,199 @@ def cleanup_temp(temp_dir: Path, keep: bool):
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 
+# ── Knowledge Enrichment ──────────────────────────────────────────────────
+
+def resolve_formal_statement(problem_id: str) -> Optional[str]:
+    """Look up the formal theorem statement from formal-conjectures repo."""
+    if not FORMAL_CONJECTURES.exists():
+        return None
+
+    # Try common patterns: ErdosProblems/NNN.lean, Arxiv/*/Name.lean
+    pid = problem_id.lower().replace('_', '')
+
+    # Extract number from erdosNNN patterns
+    import re
+    m = re.match(r'erdos(\d+)', pid)
+    if m:
+        num = m.group(1)
+        candidate = FORMAL_CONJECTURES / "ErdosProblems" / f"{num}.lean"
+        if candidate.exists():
+            content = candidate.read_text()
+            # Extract the open theorem(s)
+            theorems = []
+            for line in content.splitlines():
+                if '@[category research open' in line:
+                    theorems.append(line)
+                elif theorems and ('theorem ' in line or 'sorry' in line or ':=' in line):
+                    theorems.append(line)
+                elif theorems and line.strip() == '':
+                    break
+            if theorems:
+                return '\n'.join(theorems)
+            # Fallback: return first theorem with sorry
+            lines = content.splitlines()
+            for i, line in enumerate(lines):
+                if 'theorem ' in line and 'sorry' in content[content.index(line):]:
+                    return '\n'.join(lines[max(0,i-2):min(len(lines),i+8)])
+            return None
+
+    # Try glob for other patterns
+    for candidate in FORMAL_CONJECTURES.rglob("*.lean"):
+        if problem_id.lower().replace('_', '') in candidate.stem.lower().replace('_', ''):
+            content = candidate.read_text()
+            lines = content.splitlines()
+            for i, line in enumerate(lines):
+                if '@[category research open' in line:
+                    return '\n'.join(lines[i:min(len(lines),i+6)])
+            break
+
+    return None
+
+
+def get_failed_approaches(problem_id: str) -> list:
+    """Check failed_approaches and false_lemmas tables for this problem."""
+    results = []
+    try:
+        conn = sqlite3.connect(str(TRACKING_DB))
+        # Failed approaches
+        rows = conn.execute(
+            "SELECT approach, reason FROM failed_approaches WHERE problem_id LIKE ? LIMIT 5",
+            (f'%{problem_id}%',)
+        ).fetchall()
+        for r in rows:
+            results.append(f"FAILED: {r[0]} — {r[1]}")
+
+        # False lemmas
+        rows = conn.execute(
+            "SELECT lemma_name, reason FROM false_lemmas WHERE lemma_name LIKE ? LIMIT 5",
+            (f'%{problem_id}%',)
+        ).fetchall()
+        for r in rows:
+            results.append(f"FALSE LEMMA: {r[0]} — {r[1]}")
+
+        conn.close()
+    except Exception:
+        pass
+    return results
+
+
 # ── Codex Invocation ───────────────────────────────────────────────────────
 
-def build_initial_prompt(problem: str, context_files: list) -> str:
-    """Build the first-iteration prompt for Codex."""
+def _summarize_lean_context(lean_code: str, max_lines: int = 200) -> str:
+    """Extract a useful summary from a large Lean context file.
+
+    Keeps: theorem/lemma/def signatures, sorry locations, key structure.
+    Drops: long proof bodies, repetitive tactic blocks.
+    """
+    lines = lean_code.splitlines()
+    if len(lines) <= max_lines:
+        return lean_code
+
+    summary_lines = []
+    in_proof_body = False
+    proof_depth = 0
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+
+        # Always keep: imports, theorem/lemma/def signatures, sorry lines, section markers
+        if any(stripped.startswith(kw) for kw in
+               ['import ', 'open ', 'namespace ', 'end ', 'section ',
+                'theorem ', 'lemma ', 'def ', 'instance ', 'class ',
+                'structure ', '#check ', '#eval ', '@[', '/-', '-/']):
+            summary_lines.append(line)
+            in_proof_body = False
+            continue
+
+        if 'sorry' in stripped:
+            summary_lines.append(line)
+            continue
+
+        if ':= by' in stripped or ':= by' in (lines[i-1] if i > 0 else ''):
+            summary_lines.append(line)
+            in_proof_body = True
+            proof_depth = 0
+            continue
+
+        # In proof bodies, keep first 3 lines then skip
+        if in_proof_body:
+            proof_depth += 1
+            if proof_depth <= 3:
+                summary_lines.append(line)
+            elif proof_depth == 4:
+                summary_lines.append("    -- [proof body truncated]")
+            continue
+
+        # Keep other structural lines
+        if stripped and not stripped.startswith('--'):
+            summary_lines.append(line)
+
+    result = '\n'.join(summary_lines[:max_lines])
+    if len(summary_lines) > max_lines:
+        result += f"\n-- [truncated, {len(lines)} total lines in original]"
+    return result
+
+
+def build_initial_prompt(problem: str, context_files: list,
+                         problem_id: Optional[str] = None) -> str:
+    """Build the first-iteration prompt for Codex.
+
+    Auto-enriches with:
+    - Formal theorem statement from formal-conjectures (if available)
+    - Failed approaches / false lemmas from DB (to avoid dead ends)
+    - Summarized context from prior attempts
+    """
     # If problem is a file path, read it
     problem_text = problem
     if os.path.isfile(problem):
         problem_text = Path(problem).read_text()
 
+    # Auto-resolve formal theorem statement
+    formal_section = ""
+    if problem_id:
+        formal = resolve_formal_statement(problem_id)
+        if formal:
+            formal_section = f"\nFORMAL THEOREM (from formal-conjectures, this is the exact target):\n```lean\n{formal}\n```\n"
+
+    # Check for dead ends
+    dead_ends_section = ""
+    if problem_id:
+        dead_ends = get_failed_approaches(problem_id)
+        if dead_ends:
+            dead_ends_section = "\nKNOWN DEAD ENDS (do NOT try these approaches):\n"
+            for de in dead_ends:
+                dead_ends_section += f"- {de}\n"
+
+    # Build context from prior work
     context_section = ""
     for cf in context_files:
         p = Path(cf)
         if p.exists():
-            context_section += f"\nCONTEXT FILE ({p.name}):\n```lean\n{p.read_text()}\n```\n"
+            raw = p.read_text()
+            # Summarize large context files
+            if len(raw.splitlines()) > 200:
+                summarized = _summarize_lean_context(raw)
+                sorry_count = count_sorries(raw)
+                context_section += (
+                    f"\nPRIOR WORK ({p.name}, {len(raw.splitlines())} lines, {sorry_count} sorry remaining):\n"
+                    f"The following Lean 4 code was produced by a prior attempt. "
+                    f"It contains proven lemmas you can REUSE and sorry gaps you should try to CLOSE.\n"
+                    f"```lean\n{summarized}\n```\n"
+                )
+            else:
+                sorry_count = count_sorries(raw)
+                label = f"PRIOR WORK ({p.name}, {sorry_count} sorry)" if sorry_count else f"PROVEN CONTEXT ({p.name})"
+                context_section += f"\n{label}:\n```lean\n{raw}\n```\n"
 
     return f"""Write a Lean 4 proof for the following problem. Output ONLY valid Lean 4 code.
 
 PROBLEM:
 {problem_text}
+{formal_section}{dead_ends_section}
+YOUR TASK:
+1. If prior work is provided below, BUILD ON IT — reuse proven lemmas, close remaining sorry gaps.
+2. If no prior work exists, write a proof from scratch.
+3. Focus on CLOSING sorry gaps. Each sorry you eliminate is progress.
 {context_section}
 RULES:
 - Start with `import Mathlib`
@@ -292,7 +467,7 @@ def invoke_codex(prompt: str, reasoning_effort: str = "high") -> str:
 
         result = subprocess.run(
             ["bash", "-c", cmd],
-            capture_output=True, text=True, timeout=300,
+            capture_output=True, text=True, timeout=3600,
             cwd=str(MATH_DIR)
         )
         output = result.stdout.strip()
@@ -300,7 +475,7 @@ def invoke_codex(prompt: str, reasoning_effort: str = "high") -> str:
             print(f"  Codex stderr: {result.stderr[:200]}")
         return output
     except subprocess.TimeoutExpired:
-        print("  Codex timed out (300s)")
+        print("  Codex timed out (3600s)")
         return ""
     except FileNotFoundError:
         print("  ERROR: `codex` CLI not found. Install: npm install -g @anthropic-ai/codex")
@@ -536,13 +711,16 @@ def run_loop(config: LoopConfig) -> LoopResult:
 
             # Build prompt
             if i == 1:
-                prompt = build_initial_prompt(config.problem, config.context_files)
-            else:
+                prompt = build_initial_prompt(config.problem, config.context_files, config.problem_id)
+            elif iterations:
                 prev = iterations[-1]
                 prompt = build_revision_prompt(
                     config.problem, prev.lean_code, prev.build_errors,
                     locked_statement, prev.sorry_count, i
                 )
+            else:
+                # No prior iteration succeeded — retry with initial prompt
+                prompt = build_initial_prompt(config.problem, config.context_files, config.problem_id)
 
             # Invoke Codex
             print("  Calling Codex...", end=" ", flush=True)

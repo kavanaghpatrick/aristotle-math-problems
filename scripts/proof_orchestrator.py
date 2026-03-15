@@ -280,8 +280,12 @@ class ProofOrchestrator:
 
                 if best_lean.exists():
                     content = best_lean.read_text()
-                    sorry_count = content.count('sorry')
+                    sorry_count = count_sorries(content)
                     print(f"\n  Codex worker done: {pid} — sorry={sorry_count} (exit={ret})")
+
+                    # Re-read row from DB to avoid stale data from parallel workers
+                    row = db_query("SELECT * FROM proof_queue WHERE id = ?", (queue_id,))
+                    row = row[0] if row else worker['row']
 
                     # Build a minimal LoopResult-like object for decide_after_codex
                     class _MiniResult:
@@ -309,49 +313,52 @@ class ProofOrchestrator:
             del self._codex_workers[qid]
 
     def decide_after_codex(self, queue_id, row, result: LoopResult):
-        """State transition after Codex finishes."""
+        """State transition after Codex finishes. Keep re-running Codex with its own
+        results as context until resolved or stalled — no Aristotle handoff."""
         attempts = row['codex_attempts'] + 1
+        sorry_count = result.best.sorry_count if result.best else 999
+        prev_best = row['best_sorry_count'] or 999
 
-        if result.compiled and result.best and result.best.sorry_count == 0:
-            # Validate: check that the proof actually addresses the target problem
-            # by looking for the problem_id or key terms in the lean file
-            lean_content = result.lean_file.read_text() if result.lean_file and result.lean_file.exists() else ""
-            problem_terms = row['problem_id'].lower().replace('_', ' ').split()
-            source_terms = row['problem_source'].lower()[:200].split()[:5]
-            # Heuristic: if the lean file is very short or doesn't reference key problem terms,
-            # it may have proved something trivial — still send to Aristotle for validation
-            if len(lean_content) < 300:
-                print(f"  WARNING: Codex proof is only {len(lean_content)} chars — sending to Aristotle for validation")
-                self.transition(queue_id, 'ARISTOTLE_PENDING',
-                              codex_attempts=attempts, codex_compiled=1,
-                              codex_best_sorry=0, best_sorry_count=0,
-                              total_rounds=row['total_rounds'] + 1)
-                return
-            print(f"  Codex compiled with 0 sorry — sending to Aristotle for validation")
-            self.transition(queue_id, 'ARISTOTLE_PENDING',
-                          codex_attempts=attempts,
-                          codex_compiled=1,
-                          codex_best_sorry=0,
-                          best_sorry_count=0,
-                          total_rounds=row['total_rounds'] + 1)
+        if result.compiled and sorry_count == 0:
+            print(f"  RESOLVED by Codex! 0 sorry after {attempts} attempts")
+            self.transition(queue_id, 'RESOLVED',
+                          resolved_proof=str(result.lean_file) if result.lean_file else None,
+                          resolved_at=datetime.now().isoformat(),
+                          codex_attempts=attempts, codex_compiled=1,
+                          codex_best_sorry=0, best_sorry_count=0)
             return
 
-        sorry_count = result.best.sorry_count if result.best else 999
-
         if result.compiled and sorry_count > 0:
-            # Compiled with sorries → send to Aristotle
-            print(f"  Codex compiled with {sorry_count} sorry → queueing for Aristotle")
-            best_sorry = min(sorry_count, row['best_sorry_count'] or 999)
-            self.transition(queue_id, 'ARISTOTLE_PENDING',
-                          codex_attempts=attempts,
-                          codex_compiled=1,
-                          codex_best_sorry=sorry_count,
-                          codex_proof_id=db_scalar(
-                              "SELECT id FROM codex_proofs WHERE problem_id=? ORDER BY id DESC LIMIT 1",
-                              (row['problem_id'],)),
-                          best_sorry_count=best_sorry,
-                          last_sorry_count=sorry_count,
-                          total_rounds=row['total_rounds'] + 1)
+            best_sorry = min(sorry_count, prev_best)
+            made_progress = sorry_count < prev_best
+
+            # Add the best proof as context for the next attempt
+            context = json.loads(row['context_files'] or '[]')
+            best_lean = PROOFS_DIR / row['problem_id'] / "best.lean"
+            if best_lean.exists() and str(best_lean) not in context:
+                context.append(str(best_lean))
+
+            if attempts < row['max_codex_attempts'] or made_progress:
+                status = "improving" if made_progress else "same"
+                effort = row['reasoning_effort'] or 'high'
+                if not made_progress:
+                    effort = self.escalate_effort(effort)
+                print(f"  Codex: {sorry_count} sorry ({status}, best={best_sorry}) → re-queuing Codex attempt {attempts+1}")
+                self.transition(queue_id, 'QUEUED',
+                              codex_attempts=attempts, codex_compiled=1,
+                              codex_best_sorry=sorry_count,
+                              best_sorry_count=best_sorry,
+                              last_sorry_count=sorry_count,
+                              reasoning_effort=effort,
+                              context_files=json.dumps(context),
+                              total_rounds=row['total_rounds'] + 1)
+            else:
+                print(f"  Codex stalled at {sorry_count} sorry after {attempts} attempts")
+                self.transition(queue_id, 'STALLED',
+                              codex_attempts=attempts, codex_compiled=1,
+                              codex_best_sorry=sorry_count,
+                              best_sorry_count=best_sorry,
+                              error_message=f'Codex stalled at {sorry_count} sorry after {attempts} attempts')
             return
 
         # Failed to compile
@@ -710,7 +717,7 @@ def main():
     p_enq.add_argument("--problem-id", help="Explicit problem ID")
     p_enq.add_argument("--priority", type=int, default=5, help="1=highest, 10=lowest")
     p_enq.add_argument("--context", action="append", default=[])
-    p_enq.add_argument("--max-codex", type=int, default=3)
+    p_enq.add_argument("--max-codex", type=int, default=10)
     p_enq.add_argument("--max-aristotle", type=int, default=3)
     p_enq.add_argument("--max-rounds", type=int, default=8)
 
