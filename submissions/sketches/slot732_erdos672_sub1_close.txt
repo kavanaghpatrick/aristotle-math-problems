@@ -1,0 +1,13 @@
+OPEN GAP: Erdos 672 — Close final sorry in SeqA ∩ SeqB intersection proof
+
+The attached Lean file proves SeqA ∩ SeqB ⊂ {v : v ≡ 1 mod 3080} where:
+- SeqA: 1, 5, 29, 169, 985, ... (solves u² = 2v² - 1, recurrence 6a_{n+1} - a_n)
+- SeqB: 1, 3, 11, 41, 153, ... (solves d² = 3v² - 2, recurrence 4b_{n+1} - b_n)
+
+REMAINING SORRY: Strengthen v ≡ 1 mod 3080 to v = 1.
+Both sequences grow exponentially. SeqA(2)=29, SeqB(2)=11.
+The next common value after 1 must be ≡ 1 mod 3080, but SeqA grows as ~(3+2√2)^n
+and SeqB grows as ~(2+√3)^n. Show these growth rates preclude any common value > 1
+with v ≡ 1 mod 3080.
+
+Status: OPEN. One sorry remaining in compiled 231-line proof.

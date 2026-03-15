@@ -459,20 +459,23 @@ def invoke_codex(prompt: str, reasoning_effort: str = "high") -> str:
         prompt_file = f.name
 
     try:
-        cmd_parts = ["codex", "exec", "--full-auto"]
+        # Read prompt text to pass directly
+        prompt_text = Path(prompt_file).read_text()
+
+        cmd = ["codex", "exec", "--full-auto"]
         if reasoning_effort != "medium":
-            cmd_parts.extend(["-c", f'model_reasoning_effort="{reasoning_effort}"'])
-        # Read prompt from file
-        cmd = " ".join(cmd_parts) + f" \"$(cat '{prompt_file}')\""
+            cmd.extend(["-c", f"model_reasoning_effort={reasoning_effort}"])
+        cmd.append(prompt_text)
 
         result = subprocess.run(
-            ["bash", "-c", cmd],
+            cmd,
             capture_output=True, text=True, timeout=3600,
             cwd=str(MATH_DIR)
         )
         output = result.stdout.strip()
         if not output and result.stderr:
-            print(f"  Codex stderr: {result.stderr[:200]}")
+            # Show last 200 chars of stderr for debugging
+            print(f"  Codex stderr: {result.stderr[-200:]}")
         return output
     except subprocess.TimeoutExpired:
         print("  Codex timed out (3600s)")
