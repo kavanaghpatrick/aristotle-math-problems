@@ -11,8 +11,9 @@
 
 use std::env;
 use std::time::Instant;
+use rayon::prelude::*;
 
-const SIEVE_LIMIT: usize = 100_000_000;
+const DEFAULT_SIEVE_LIMIT: usize = 100_000_000;
 
 /// Sieve of Eratosthenes up to limit, returning Vec<u64>
 fn sieve_primes(limit: usize) -> Vec<u64> {
@@ -197,9 +198,7 @@ fn verify_known(primes: &[u64], sieve_limit: u64) {
 fn search(n: u64, max_k: u64, report_interval: u64, primes: &[u64], sieve_limit: u64) {
     println!("Searching for a({}) with max_k={}...", n, max_k);
     let start = Instant::now();
-    let mut checked: u64 = 0;
-    let mut false_positives: u64 = 0;
-
+    let mut checked: u64;
     let need_large_check = sieve_limit < n + 2 * max_k;
     if need_large_check {
         println!(
@@ -209,58 +208,41 @@ fn search(n: u64, max_k: u64, report_interval: u64, primes: &[u64], sieve_limit:
         );
     }
 
-    for k in 1..=max_k {
-        if check_divisibility_sieved(n, k, primes) {
-            if !need_large_check || sieve_limit >= n + 2 * k {
-                // Sieve covers this k fully
-                let elapsed = start.elapsed().as_secs_f64();
-                println!();
-                println!("========================================");
-                println!("FOUND: a({}) = {}", n, k);
-                println!("========================================");
-                println!("Time: {:.2}s, Rate: {:.0} k/s", elapsed, checked as f64 / elapsed);
-                println!("False positives filtered: {}", false_positives);
-                check_pairing(n, k, primes, sieve_limit);
-                return;
-            }
-            // Need large-prime verification
-            if verify_no_large_prime_factors(n, k, primes, sieve_limit) {
-                let elapsed = start.elapsed().as_secs_f64();
-                println!();
-                println!("========================================");
-                println!("FOUND: a({}) = {}", n, k);
-                println!("========================================");
-                println!("Time: {:.2}s, Rate: {:.0} k/s", elapsed, checked as f64 / elapsed);
-                println!("False positives filtered: {}", false_positives);
-                check_pairing(n, k, primes, sieve_limit);
-                return;
-            } else {
-                false_positives += 1;
-                if false_positives <= 10 || false_positives % 100 == 0 {
-                    println!(
-                        "  [FP #{}] k={} passed sieve but failed large-prime check",
-                        false_positives, k
-                    );
-                }
-            }
-        }
-        checked += 1;
-        if checked % report_interval == 0 {
+    let chunk_size = report_interval.max(1);
+    let mut chunk_start = 1u64;
+    while chunk_start <= max_k {
+        let chunk_end = (chunk_start + chunk_size - 1).min(max_k);
+        let found = (chunk_start..=chunk_end)
+            .into_par_iter()
+            .find_first(|&k| check_full(n, k, primes, sieve_limit));
+
+        if let Some(k) = found {
             let elapsed = start.elapsed().as_secs_f64();
-            let rate = checked as f64 / elapsed;
-            let remaining = max_k - checked;
-            let eta = remaining as f64 / rate;
-            println!(
-                "  k up to {:>12}: {:.0} k/s, {:.1}s elapsed, ETA {:.0}s ({:.1}h), FP={}",
-                checked, rate, elapsed, eta, eta / 3600.0, false_positives
-            );
+            println!();
+            println!("========================================");
+            println!("FOUND: a({}) = {}", n, k);
+            println!("========================================");
+            println!("Time: {:.2}s, Rate: {:.0} k/s", elapsed, k as f64 / elapsed);
+            check_pairing(n, k, primes, sieve_limit);
+            return;
         }
+
+        checked = chunk_end;
+        let elapsed = start.elapsed().as_secs_f64();
+        let rate = checked as f64 / elapsed;
+        let remaining = max_k - checked;
+        let eta = remaining as f64 / rate;
+        println!(
+            "  k up to {:>12}: {:.0} k/s, {:.1}s elapsed, ETA {:.0}s ({:.1}h)",
+            checked, rate, elapsed, eta, eta / 3600.0
+        );
+        chunk_start = chunk_end + 1;
     }
 
     let elapsed = start.elapsed().as_secs_f64();
     println!();
     println!("NOT FOUND: a({}) > {}", n, max_k);
-    println!("Time: {:.2}s, False positives: {}", elapsed, false_positives);
+    println!("Time: {:.2}s", elapsed);
 }
 
 fn check_pairing(n: u64, k: u64, primes: &[u64], sieve_limit: u64) {
@@ -294,17 +276,22 @@ fn main() {
         return;
     }
 
-    // Sieve primes up to SIEVE_LIMIT
-    eprintln!("Sieving primes up to {}...", SIEVE_LIMIT);
+    let sieve_limit_usize = env::var("A375071_SIEVE_LIMIT")
+        .ok()
+        .and_then(|s| s.parse::<usize>().ok())
+        .unwrap_or(DEFAULT_SIEVE_LIMIT);
+
+    // For bounded searches, primes above sqrt(max(n+2k)) are unnecessary.
+    eprintln!("Sieving primes up to {}...", sieve_limit_usize);
     let sieve_start = Instant::now();
-    let primes = sieve_primes(SIEVE_LIMIT);
+    let primes = sieve_primes(sieve_limit_usize);
     eprintln!(
         "Sieved {} primes in {:.2}s",
         primes.len(),
         sieve_start.elapsed().as_secs_f64()
     );
 
-    let sieve_limit = SIEVE_LIMIT as u64;
+    let sieve_limit = sieve_limit_usize as u64;
 
     match args[1].as_str() {
         "verify" => verify_known(&primes, sieve_limit),

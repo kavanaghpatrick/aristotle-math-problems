@@ -21,6 +21,9 @@ aristotle-*/
 *_OUTPUT.lean
 *.log
 
+# Rust build artifacts
+**/target/
+
 # Lean build artifacts
 .lake/
 lake-manifest.json
