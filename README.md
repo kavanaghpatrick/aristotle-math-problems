@@ -5,6 +5,8 @@ An automated research harness for solving open mathematical problems. We identif
 [![Aristotle](https://img.shields.io/badge/Powered%20by-Aristotle-blue)](https://aristotle.harmonic.fun)
 [![Lean 4](https://img.shields.io/badge/Lean-4-purple)](https://lean-lang.org/)
 
+**1,160 submissions | 96 open problems | 205 compiled clean | 568 knowledge base entries | 15 months of operation**
+
 ---
 
 ## The Idea
@@ -100,6 +102,56 @@ Results come back as `.lean` files. Auditing checks whether the result actually 
 
 ---
 
+## Autonomous Proof Loop
+
+Beyond the manual workflow, the harness includes an autonomous Codex-to-Aristotle proof loop that automates multi-attempt proof campaigns.
+
+### Codex Proof Engine
+
+[Codex](https://openai.com/index/codex/) (OpenAI's `codex` CLI) writes complete Lean 4 proofs, iterating against `lake build` in an isolated temp project with symlinked Mathlib cache. Build errors feed back to Codex for iterative fixing. Results are tracked in the `codex_proofs` table.
+
+```bash
+# One-shot proof attempt
+/codex-prove <problem>
+```
+
+### Proof Orchestrator
+
+The orchestrator (`scripts/proof_orchestrator.py`) is a persistent background process that drives a Codex → Aristotle cycle via a state machine:
+
+```
+QUEUED → CODEX_RUNNING → CODEX_DONE
+                              │
+                    ┌─────────┴──────────┐
+                    │                    │
+              0 sorry = RESOLVED    has sorries
+                                         │
+                                    auto-sketch
+                                         │
+                              ARISTOTLE_SUBMITTED
+                                         │
+                              ARISTOTLE_COMPLETE
+                                         │
+                              ┌──────────┴──────────┐
+                              │                     │
+                        fewer sorries          no progress
+                              │                     │
+                     feed back as context      STALLED
+                     re-enter QUEUED
+```
+
+Features: parallel Codex workers (up to 4 concurrent), reasoning effort escalation, crash recovery, sorry-count tracking, sub-problem decomposition for partial proofs.
+
+```bash
+python3 scripts/proof_orchestrator.py enqueue "<problem>" --problem-id <id>
+python3 scripts/proof_orchestrator.py run [--single-pass]
+python3 scripts/proof_orchestrator.py status
+python3 scripts/proof_orchestrator.py cancel <id>
+python3 scripts/proof_orchestrator.py retry <id>
+```
+
+---
+
 ## Tooling
 
 ### Claude Code Skills
@@ -116,6 +168,7 @@ The harness is orchestrated through Claude Code with project-specific skills:
 | `/status` | Queue and job status |
 | `/audit` | Deep audit of a result file |
 | `/process-result` | Audit + DB update in one step |
+| `/codex-prove` | Codex proof loop: write Lean 4, iterate against lake build |
 | `/debate` | Multi-AI debate to identify the exact open gap |
 | `/optimize` | Recommend optimal submission path |
 | `/screen-batch` | Batch screen: OPEN vs SKIP |
@@ -123,12 +176,20 @@ The harness is orchestrated through Claude Code with project-specific skills:
 ### math-forge CLI
 
 ```bash
-mk search "<query>"      # FTS5 full-text search across knowledge base
-mk find "<problem_id>"   # All findings for a specific problem
-mk failed [keyword]      # Failed approaches — check BEFORE sketching
-mk context <problem_id>  # Prior Aristotle results for auto-context
-mk gaps                  # All open gaps currently being targeted
-mk stats                 # Dashboard: submissions, clean rate, queue
+mk search "<query>"          # FTS5 full-text search across knowledge base
+mk find "<problem_id>"       # All findings for a specific problem
+mk failed [keyword]          # Failed approaches — check BEFORE sketching
+mk context <problem_id>      # Prior Aristotle results for auto-context
+mk gaps                      # All open gaps currently being targeted
+mk stats                     # Dashboard: submissions, clean rate, queue
+mk codex [problem_id]        # Codex proof loop history
+mk codex-best <problem_id>   # Best compiled Codex proof file path
+mk strategies [domain]       # Proven techniques by frequency/domain
+mk partials                  # Near-miss submissions (sorry=1)
+mk resubmittable             # Resubmission candidates (1-3 sorries)
+mk query "<sql>"             # Read-only SQL against tracking.db
+mk submit <file>             # Submit sketch to Aristotle
+mk status [uuid-or-slot]     # Aristotle queue status
 ```
 
 ### Multi-Agent Support
@@ -137,10 +198,10 @@ When stuck on problem identification or gap analysis, the harness can invoke mul
 
 - **Grok** — web search, X/Twitter search for recent results
 - **Gemini** — deep analysis with large context window
-- **Codex** — autonomous task delegation
+- **Codex** — Lean 4 proof generation via iterative compile-fix loop
 - **Claude** — synthesis, orchestration, sketch writing
 
-These are used for *screening and gap identification*, never for proof guidance.
+These are used for *screening, gap identification, and proof generation*, never for proof guidance to Aristotle.
 
 ---
 
@@ -151,10 +212,12 @@ All state lives in `submissions/tracking.db` (SQLite):
 | Table | Purpose |
 |-------|---------|
 | `submissions` | Every Aristotle job — UUID, status, gap statement, resolution flag |
+| `codex_proofs` | Codex proof loop results — problem_id, sorry count, compiled status, lean file |
+| `proof_queue` | Autonomous orchestrator queue — state machine, Codex↔Aristotle loop |
 | `false_lemmas` | Mathematical claims that seemed plausible but are provably wrong |
 | `failed_approaches` | Approaches that were tried and failed, with reasons |
 
-A separate knowledge base (`math-forge/data/knowledge.db`) provides FTS5 search across accumulated mathematical findings.
+A separate knowledge base (`math-forge/data/knowledge.db`) provides FTS5 search across 568+ accumulated mathematical findings.
 
 ### Key Fields on `submissions`
 
@@ -166,21 +229,49 @@ A separate knowledge base (`math-forge/data/knowledge.db`) provides FTS5 search 
 
 ---
 
+## Hooks and Guardrails
+
+Two layers of automation enforce the gap-targeting methodology:
+
+**Project-level** (`.claude/settings.json`):
+- **SessionStart** — injects orchestrator queue status and gap-targeting reminder
+
+**Plugin-level** (`math-forge/hooks/`):
+- **SessionStart** — generates session briefing from tracking.db and knowledge.db
+- **PostToolUse** — validates `.txt` sketches for proof-strategy keywords and line count; blocks sorry-replacing edits in `.lean` files; warns on false lemma references
+
+---
+
 ## Repository Structure
 
 ```
 math/
 ├── submissions/
-│   ├── sketches/                  # Bare-gap .txt files for submission
+│   ├── sketches/                  # Bare-gap .txt files (253 sketches)
 │   ├── nu4_final/                 # Aristotle result files (.lean)
+│   ├── results/                   # Additional result directories
 │   └── tracking.db                # Submission state and knowledge DB
 ├── scripts/
-│   ├── safe_aristotle_submit.py   # Safe submission with all checks
+│   ├── safe_aristotle_submit.py   # Safe submission with all gate checks
 │   ├── aristotle_fetch.py         # Result fetching and tracking
-│   └── math_forge.py              # Knowledge base CLI (mk commands)
-├── math-forge/data/               # FTS5 knowledge base
-├── .claude/commands/              # Claude Code skill definitions
-├── .claude/settings.json          # Hooks and session config
+│   ├── proof_orchestrator.py      # Autonomous Codex→Aristotle loop
+│   ├── codex_proof_loop.py        # Codex Lean 4 proof iteration engine
+│   ├── debate.py                  # Multi-AI debate orchestrator
+│   ├── workflow.py                # Unified submission CLI
+│   ├── a375071_rust/              # Rust: OEIS A375071 computation (Erdos 389)
+│   └── erdos396_rust/             # Rust: Erdos 396 search
+├── math-forge/
+│   ├── data/knowledge.db          # FTS5 knowledge base
+│   ├── hooks/                     # Plugin hooks (gap-targeting enforcement)
+│   └── scripts/mk                 # math-forge CLI wrapper
+├── results_v07/                   # Aristotle result tarballs
+├── codex_proofs/                  # Codex proof loop outputs
+├── Math/                          # Lean 4 source directory
+├── lakefile.toml                  # Lean 4 build configuration
+├── lean-toolchain                 # Lean 4 toolchain version
+├── .claude/
+│   ├── commands/                  # Claude Code skill definitions
+│   └── settings.json              # Hooks and session config
 └── CLAUDE.md                      # Pipeline rules and methodology
 ```
 
