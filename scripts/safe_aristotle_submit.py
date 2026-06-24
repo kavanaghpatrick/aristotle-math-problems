@@ -212,7 +212,7 @@ async def check_rate_limit_and_capacity(window_minutes: int = 10) -> dict:
 
     The concurrent-submission cap is MAX_CONCURRENT (default 25; configurable via
     ARISTOTLE_MAX_CONCURRENT env var). This is a project-side guardrail, not an
-    Aristotle server-side limit (aristotlelib 0.7.0 has no documented hard cap).
+    Aristotle server-side limit (aristotlelib 2.0.0 has no documented hard cap).
 
     Returns:
         {

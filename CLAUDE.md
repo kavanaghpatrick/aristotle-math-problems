@@ -12,7 +12,7 @@ We do NOT develop proof strategies. We do NOT write step-by-step proof outlines.
 
 ## Aristotle System Facts (W-team findings, May 30 2026)
 
-**Aristotle is built by Harmonic AI** (NOT Anthropic). Harmonic is a math-AI startup co-founded by Vlad Tenev (also Robinhood CEO). Endpoint: `https://aristotle.harmonic.fun`. SDK: `aristotlelib` (currently 0.7.0).
+**Aristotle is built by Harmonic AI** (NOT Anthropic). Harmonic is a math-AI startup co-founded by Vlad Tenev (also Robinhood CEO). Endpoint: `https://aristotle.harmonic.fun`. SDK: `aristotlelib` (0.7.0 at the time of the W-team audit; now 2.0.0 — `Project.create`/`create_from_directory`/`ask`, outcome on the latest `AgentTask`).
 
 **Aristotle is a HYBRID solver-formalizer, not a pure formalizer.** It has three subsystems (per arXiv:2510.01346):
 

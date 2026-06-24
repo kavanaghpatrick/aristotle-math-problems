@@ -12,7 +12,8 @@ when signals are mixed, the output is "ambiguous" rather than guessing.
 
 Background (see I9 spec, docs/infrastructure_changes_may30/I9_informal_mode.md):
 
-  Aristotle 0.7.0 exposes ONE submission endpoint. The choice of subsystem is
+  Aristotle 0.7.0 exposed ONE submission endpoint at the time of the I9 audit
+  (2.0.0 adds create_from_directory/ask). The choice of subsystem is still
   driven by prompt shape:
 
   - Subsystem #1 (MCGS, formalizer): Lean theorem statement attached as a

@@ -9,15 +9,17 @@ Submit a bare gap sketch to Aristotle's informal-reasoner subsystem (subsystem
 is the lane that solved Erdős #124 (Boris Alexeev, ~6h, Dec 2025) from a bare
 problem statement, and E728 (Barreto + GPT-5.2 Pro, Jan 2026, paired strategy).
 
-Discovery (I9, 2026-05-30)
--------------------------
-aristotlelib 0.7.0 exposes exactly ONE submission endpoint:
+Discovery (I9, 2026-05-30; SDK now 2.0.0)
+-----------------------------------------
+As of the I9 audit, aristotlelib 0.7.0 exposed exactly ONE submission endpoint:
 
     Project.create(prompt: str, tar_file_path: Path | None = None) -> Project
 
-There is no separate `Project.from_informal()`, `Project.solve_informal()`, or
-`aristotle informal` CLI subcommand. The CLI's `aristotle submit "<prompt>"`
-and `aristotle formalize <file>` BOTH ultimately call `Project.create()`.
+aristotlelib 2.0.0 (current) adds `Project.create_from_directory()` and the
+multi-turn `Project.ask()`, but this module still submits via `Project.create()`.
+There is still no separate `Project.from_informal()` / `Project.solve_informal()`
+or `aristotle informal` CLI subcommand; `aristotle submit "<prompt>"` and
+`aristotle formalize <file>` both ultimately call `Project.create()`.
 
 What distinguishes "informal mode" from "formalize mode" on the SERVER SIDE is
 the SHAPE of the prompt:
@@ -273,7 +275,7 @@ def build_informal_prompt(sketch_text: str,
 
 
 # ---------------------------------------------------------------------------
-# Submission (async, uses aristotlelib 0.7.0)
+# Submission (async, uses aristotlelib 2.0.0)
 # ---------------------------------------------------------------------------
 
 async def submit_informal(prompt: str, *, description: str | None = None) -> str:

@@ -1,5 +1,27 @@
 # Agentic Theorem Proving System
 
+> ## ⚠️ STATUS: DORMANT / ASPIRATIONAL — NOT OPERATIONAL
+>
+> This document describes a planned multi-daemon architecture that was **never run
+> end-to-end**. It predates the Feb-2026 gap-targeting pivot and the May-2026
+> four-lane methodology, and its core premise — submitting `.lean` files with
+> embedded proof *strategy* — directly **contradicts** the current
+> bare-conjecture / INFORMAL-`.txt`-only pipeline (see the root `README.md` and
+> `CLAUDE.md`, which are the source of truth).
+>
+> Many files referenced below **do not exist**: `generators/proof_generator.py`,
+> `generators/gap_filler.py`, `generators/variant_explorer.py`,
+> `validators/syntax_checker.py`, `validators/false_lemma_detector.py`,
+> `validators/grok_reviewer.py`, `learning/scaffolding.py`,
+> `learning/false_lemma_recorder.py`, `monitor/metrics.py`. What actually exists is
+> scaffolding only: `config.py`, `orchestrator.py`, `health_check.py`, `setup.py`,
+> `generators/pool.py`, `validators/pipeline.py`, `validators/counterexample_hunter.py`,
+> `learning/extractor.py`, `monitor/dashboard.py`. All 15 Aristotle slots are empty
+> and the queue rows are `never_submitted`.
+>
+> **Do not treat this as a working system and do not revive it without a rewrite.**
+> Retained for historical / design reference only.
+
 ## Overview
 
 This system maintains 15 parallel Aristotle slots for autonomous theorem proving on Tuza's conjecture (nu=4 case). It uses a multi-tier architecture with specialized agents for generation, validation, counterexample hunting, and learning.
