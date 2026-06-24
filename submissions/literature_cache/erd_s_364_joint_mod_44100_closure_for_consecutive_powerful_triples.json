@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780164934.374471,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T18:15:34+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_364_joint_mod_44100_closure_for_consecutive_powerful_triples",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

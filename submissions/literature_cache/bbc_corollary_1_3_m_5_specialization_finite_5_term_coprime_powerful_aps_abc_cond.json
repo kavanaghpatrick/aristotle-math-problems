@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780162458.449954,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:34:18+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "bbc_corollary_1_3_m_5_specialization_finite_5_term_coprime_powerful_aps_abc_cond",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

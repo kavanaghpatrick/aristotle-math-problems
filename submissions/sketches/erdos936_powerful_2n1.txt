@@ -1,0 +1,17 @@
+OPEN GAP: Erdős Problem 936 — Finitely Many Powerful 2^n + 1
+Source: Erdős Problem 936
+Domain: nt
+
+There are only finitely many n such that 2^n + 1 is powerful
+(every prime factor appears with exponent ≥ 2).
+
+Only known powerful value: 2^3 + 1 = 9 = 3².
+Conditionally follows from ABC conjecture.
+No unconditional proof known.
+
+theorem erdos936 : Set.Finite
+    {n : ℕ | n ≥ 1 ∧
+      ∀ p : ℕ, Nat.Prime p → p ∣ (2 ^ n + 1) → p ^ 2 ∣ (2 ^ n + 1)}
+    := by sorry
+
+Status: OPEN. Only 2³+1=9 is powerful. ABC implies finiteness.

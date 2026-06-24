@@ -1,0 +1,13 @@
+OPEN GAP: Erdos 389 — Consecutive products divisibility
+Source: FormalConjectures/ErdosProblems/389.lean
+Domain: nt
+
+For every positive integer n, there exists k > 0 such that
+the product (n+1)(n+2)...(n+k) divides (n+k+1)...(n+2k).
+
+theorem erdos_389 : ∀ n : ℕ, n ≥ 1 →
+    ∃ k : ℕ, k > 0 ∧
+    (∏ i in Finset.range k, (n + 1 + i)) ∣
+    (∏ i in Finset.range k, (n + k + 1 + i)) := by sorry
+
+Status: OPEN. Known for k=n via central binomial coefficient.

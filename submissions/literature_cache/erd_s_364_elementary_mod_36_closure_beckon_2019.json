@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780162819.893321,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:40:19+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_364_elementary_mod_36_closure_beckon_2019",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

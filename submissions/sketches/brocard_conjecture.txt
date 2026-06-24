@@ -1,0 +1,18 @@
+OPEN GAP: Brocard's Problem
+Source: Brocard (1876), Ramanujan
+Domain: nt
+
+The only solutions to n! + 1 = m² in positive integers are
+n = 4 (m=5), n = 5 (m=11), n = 7 (m=71).
+
+Verified computationally for n ≤ 10^9 (Berndt-Galway).
+
+For n ≥ 8: n! + 1 lies strictly between consecutive squares.
+Key: if n! + 1 = m², then m² - (n-1)!·n = 1, giving m ≡ ±1 mod n.
+For n ≥ 8, Wilson: (n-1)! ≡ -1 mod n if n prime.
+Growth: n! grows super-exponentially vs m ≈ √(n!).
+
+theorem brocard (n : ℕ) (hn : n ≥ 8) :
+    ¬ ∃ m : ℕ, n.factorial + 1 = m ^ 2 := by sorry
+
+Status: OPEN. No solution beyond n=7. ABC conjecture implies finitely many.

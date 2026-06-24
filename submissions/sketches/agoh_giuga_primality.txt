@@ -1,0 +1,16 @@
+OPEN GAP: Agoh-Giuga Conjecture
+Source: Agoh (1995), Giuga (1950)
+Domain: nt
+
+No composite n satisfies ∑_{a=1}^{n-1} a^{n-1} ≡ -1 (mod n).
+
+Equivalently: nB_{n-1} ≡ -1 (mod n) implies n is prime.
+A composite counterexample must be both Carmichael and Giuga:
+squarefree, (p-1)|(n-1) and p|(n/p - 1) for all primes p|n.
+Borwein-Maitland-Skerritt (2013): any counterexample has ≥ 4771
+prime factors and exceeds 10^{19907}.
+
+theorem agoh_giuga (n : ℕ) (hn : n > 1) (hcomp : ¬ Nat.Prime n) :
+    ¬ (n ∣ (∑ a in Finset.range n, a ^ (n - 1) + 1)) := by sorry
+
+Status: OPEN. Any counterexample exceeds 10^19907.

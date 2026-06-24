@@ -1,0 +1,20 @@
+OPEN GAP: Erdős Problem 931 — Same Prime Factors in Consecutive Products
+Source: Erdős Problem 931
+Domain: nt
+
+For k₁ ≥ k₂ ≥ 3, are there only finitely many pairs (n₁, n₂) with
+n₁ + k₁ ≤ n₂ such that the products n₁(n₁+1)···(n₁+k₁-1) and
+n₂(n₂+1)···(n₂+k₂-1) have the same set of prime factors?
+
+rad(∏_{i=0}^{k-1} (n+i)) grows with n since new primes enter.
+For k ≥ 3, the product of k consecutive integers always includes
+a prime > k (by Sylvester-Schur), making shared radical very rigid.
+
+theorem erdos931 (k1 k2 : ℕ) (hk1 : k1 ≥ 3) (hk2 : k2 ≥ 3)
+    (hk : k1 ≥ k2) :
+    Set.Finite {p : ℕ × ℕ | p.1 + k1 ≤ p.2 ∧
+      Nat.factors (∏ i in Finset.range k1, (p.1 + i + 1)) =
+      Nat.factors (∏ i in Finset.range k2, (p.2 + i + 1))} := by
+  sorry
+
+Status: OPEN. Sylvester-Schur gives structural constraints.

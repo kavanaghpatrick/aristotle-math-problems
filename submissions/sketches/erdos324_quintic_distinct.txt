@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 324 — quintic distinctness (bounded N=50)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/324.lean
+Domain: number theory
+
+Erdős conjectured that f(x) = x^5 has the property that all sums
+f(a)+f(b) = a^5 + b^5 with a < b nonnegative integers are distinct.
+The unbounded statement is open. We verify a bounded version: no
+collision a^5 + b^5 = c^5 + d^5 with {a,b} ≠ {c,d} for a,b,c,d ≤ 50.
+Python scan confirms zero collisions up to 1000 (500500 distinct sums).
+
+theorem erdos_324_quintic_bounded :
+    ∀ a b c d : ℕ, a < b → c < d →
+      a ≤ 50 → b ≤ 50 → c ≤ 50 → d ≤ 50 →
+      a ^ 5 + b ^ 5 = c ^ 5 + d ^ 5 → a = c ∧ b = d := by
+  sorry
+
+Status: OPEN. Unbounded a^5+b^5 distinctness remains conjectural
+(Lander-Parkin had n=5 sums of MANY terms, not pairs). Bounded
+version reduces to a finite check; native_decide is the natural tactic.
+
+contribution_statement: target_resolved=1 here means a Lean proof of
+quintic-sum distinctness for all a,b ≤ 50, the first formalized
+bounded verification of Erdős 324 variant.quintic.

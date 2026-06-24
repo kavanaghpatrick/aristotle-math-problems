@@ -1,0 +1,24 @@
+OPEN GAP: Erdős 617 — Erdős–Gyárfás balanced-coloring at r = 5 (K_26)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/617.lean
+Domain: combinatorics
+
+The Erdős–Gyárfás conjecture asserts that every r-edge-coloring of K_{r²+1}
+has an (r+1)-subset whose induced K_{r+1} misses some color. Proven by
+Erdős–Gyárfás 1999 for r ∈ {3, 4} (already research-solved in source).
+First OPEN case: r = 5, K_26. Is there a balanced 5-coloring of K_26 in which
+every 6-vertex subset's K_6 sees all 5 colors? If yes: counterexample disproves
+617 at r = 5; if no: positive direction holds at r = 5.
+
+theorem erdos_617_r5_disproof :
+    ∃ (coloring : Sym2 (Fin 26) → Fin 5),
+      ∀ (S : Finset (Fin 26)), S.card = 6 →
+        ∀ (k : Fin 5),
+          ∃ u ∈ S, ∃ v ∈ S, u ≠ v ∧ coloring s(u, v) = k := by sorry
+
+Status: OPEN. K_26 has 325 edges; 5^325 ≈ 10^227 colorings is far beyond brute
+force. Random search over 50,000 colorings found best worst-case deficit = 2
+(every coloring sampled has some 6-subset missing ≥2 colors). The 6-vertex
+clique has 15 edges, so seeing all 5 colors requires average ≥3 per color —
+a tight extremal constraint. If a Cayley/circular coloring on Z/26Z exists
+(search ~5^13 ≈ 10^9, manageable by native_decide), that would be a
+counterexample; otherwise positive direction at r=5 is the open problem.

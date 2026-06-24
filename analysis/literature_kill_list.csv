@@ -1,0 +1,30 @@
+problem_id,erdos_n,registry_theorem,registry_file,literature_status,wiki_status,erdosproblems_status,top_evidence,checked_at
+erdos_1051,1051,erdos_1051,formal-conjectures/FormalConjectures/ErdosProblems/1051.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:26+00:00
+erdos_1105_cycles,1105,erdos_1105_cycles,formal-conjectures/FormalConjectures/ErdosProblems/1105.lean,RECENTLY_SOLVED,POSSIBLY_SOLVED,solved,wiki 2(a): AI surfaced prior literature,2026-05-30T07:53:26+00:00
+erdos_1105_paths,1105,erdos_1105_paths,formal-conjectures/FormalConjectures/ErdosProblems/1105.lean,RECENTLY_SOLVED,POSSIBLY_SOLVED,solved,wiki 2(a): AI surfaced prior literature,2026-05-30T07:53:27+00:00
+erdos_1148,1148,erdos_1148,formal-conjectures/FormalConjectures/ErdosProblems/1148.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(d): AI + human collaboration,2026-05-30T07:53:27+00:00
+erdos_125,125,erdos_125,formal-conjectures/FormalConjectures/ErdosProblems/125.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:28+00:00
+erdos_152,152,erdos_152,formal-conjectures/FormalConjectures/ErdosProblems/152.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:29+00:00
+erdos_258,258,erdos_258,formal-conjectures/FormalConjectures/ErdosProblems/258.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(c): AI building on literature,2026-05-30T07:53:29+00:00
+erdos_26,26,erdos_26,formal-conjectures/FormalConjectures/ErdosProblems/26.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(c): AI building on literature,2026-05-30T07:53:29+00:00
+erdos_283,283,erdos_283,formal-conjectures/FormalConjectures/ErdosProblems/283.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(d): AI + human collaboration,2026-05-30T07:53:30+00:00
+erdos_326,326,erdos_326,formal-conjectures/FormalConjectures/ErdosProblems/326.lean,AMBIGUOUS,AMBIGUOUS,open,wiki 1(d): AI + human collaboration,2026-05-30T07:53:31+00:00
+erdos_330_statement,330,erdos_330_statement,formal-conjectures/FormalConjectures/ErdosProblems/330.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(d): AI + human collaboration,2026-05-30T07:53:31+00:00
+erdos_347,347,erdos_347,formal-conjectures/FormalConjectures/ErdosProblems/347.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(d): AI + human collaboration,2026-05-30T07:53:32+00:00
+erdos_351,351,erdos_351,formal-conjectures/FormalConjectures/ErdosProblems/351.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(d): AI + human collaboration,2026-05-30T07:53:32+00:00
+erdos_38,38,erdos_38,formal-conjectures/FormalConjectures/ErdosProblems/38.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:33+00:00
+erdos_397,397,erdos_397,formal-conjectures/FormalConjectures/ErdosProblems/397.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:33+00:00
+erdos_42,42,erdos_42,formal-conjectures/FormalConjectures/ErdosProblems/42.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(a) Partial/Other: partial AI progress,2026-05-30T07:53:34+00:00
+erdos_457,457,erdos_457,formal-conjectures/FormalConjectures/ErdosProblems/457.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:35+00:00
+erdos_694,694,erdos_694,formal-conjectures/FormalConjectures/ErdosProblems/694.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:36+00:00
+erdos_728,728,erdos_728,formal-conjectures/FormalConjectures/ErdosProblems/728.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:38+00:00
+erdos_741,741,erdos_741.density,formal-conjectures/FormalConjectures/ErdosProblems/741.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:38+00:00
+erdos_846,846,erdos_846,formal-conjectures/FormalConjectures/ErdosProblems/846.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:39+00:00
+erdos_848,848,erdos_848,formal-conjectures/FormalConjectures/ErdosProblems/848.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(c): AI building on literature,2026-05-30T07:53:39+00:00
+erdos_851,851,erdos_851,formal-conjectures/FormalConjectures/ErdosProblems/851.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:40+00:00
+erdos_888,888,erdos_888,formal-conjectures/FormalConjectures/ErdosProblems/888.lean,RECENTLY_SOLVED,AMBIGUOUS,solved,wiki 1(a) Partial/Other: partial AI progress,2026-05-30T07:53:40+00:00
+erdos_897,897,erdos_897.parts.i,formal-conjectures/FormalConjectures/ErdosProblems/897.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(b): AI alongside literature,2026-05-30T07:53:41+00:00
+erdos_90,90,erdos_90,formal-conjectures/FormalConjectures/ErdosProblems/90.lean,AI_CLOSED,AI_CLOSED,solved,wiki 1(a): AI standalone — Full solution,2026-05-30T07:53:41+00:00
+erdos_942,942,erdos_942,formal-conjectures/FormalConjectures/ErdosProblems/942.lean,AI_CLOSED,AI_CLOSED,open,wiki 1(c): AI building on literature,2026-05-30T07:53:42+00:00
+erdos_996,996,erdos_996.log3,formal-conjectures/FormalConjectures/ErdosProblems/996.lean,AMBIGUOUS,AMBIGUOUS,open,wiki 1(d): AI + human collaboration,2026-05-30T07:53:42+00:00
+erdos_672,672,erdos_672,formal-conjectures/FormalConjectures/ErdosProblems/672.lean,LITERATURE_CLOSED,POSSIBLY_SOLVED,open,BBGH 2006 Proc London Math Soc 92 Thm 1.1 (4 ≤ k ≤ 11 no perfect power) + HTT 2009 Publ Math Debrecen 74 Thm 2.1 (cubes k<39 b=1 only n<0 exceptions) + GHP 2009 Compositio 145 Thm 1.1 (3<k<35) — all unconditional; (k=4 ℓ=3) closed since 2006,2026-05-30T00:00:00+00:00

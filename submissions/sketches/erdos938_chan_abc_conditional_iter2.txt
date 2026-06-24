@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 938 (iter2) — finite many 3-term APs of consecutive powerful numbers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the sequence of powerful numbers (those n ≥ 1 with
+the property that p ∣ n implies p² ∣ n). Are there only finitely many three-term
+arithmetic progressions formed by three consecutive terms n_k, n_{k+1}, n_{k+2}?
+
+theorem erdos_938 :
+    {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+      P = {Nat.nth Nat.Powerful k, Nat.nth Nat.Powerful (k+1),
+           Nat.nth Nat.Powerful (k+2)}}.Finite := by sorry
+
+Status: OPEN. Closely tied to the Erdős–Mollin–Walsh conjecture (no three
+consecutive powerful integers, k.k+1, k+2). Every perfect square is powerful,
+so the consecutive condition forces n_{k+2} - n_k ≤ 2·√(n_{k+2}) + O(1):
+any larger gap would admit an intervening square. No proof of finiteness
+is known in the literature.

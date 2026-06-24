@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Family-level sub_claim_closure of the Feit-Thompson p=3 conjecture for the residue class q ≡ 71 (mod 72) up to q = 5000. The 28 family primes split into small-r (23 primes, A(q) composite) and large-r (5 primes — q ∈ {71, 1583, 2663, 3671, 4751}, A(q) prime). CS=sub_claim_closure: closes the residue-class sub-family of FT p=3 to q=5000; the full conjecture remains open beyond q=5000 and across other residue classes. CM=structural_finite_reduction: universal-over-ℕ statement reduced to Finset.range 5001 via R3 iter5's Nat.ModEq → q%72=71 template, then dispatched by native_decide handling both dichotomy branches uniformly. CR=clean_decidable: max modular exponentiation is ~28 squarings on a 25-bit modulus (q=4751 large-r branch, A(q)=22576753); whole family decision compiles cleanly under elevated maxHeartbeats budget (40-80M). HM=journal_subclaim: publishable as a 2.5x extension over iter5 validating native_decide scaling to ~25-bit moduli. real_closure_candidate=true: genuine bound extension over R3 iter5 — adds 14 new family primes including 3 new large-r primes {2663, 3671, 4751}, exercising the dichotomy on both branches across a wider arithmetic range."
+}

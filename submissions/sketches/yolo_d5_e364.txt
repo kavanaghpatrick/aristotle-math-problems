@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 364 — mod-36 closure for consecutive powerful triples
+Source: formal-conjectures/FormalConjectures/ErdosProblems/364.lean
+Domain: nt
+
+A natural number n is powerful iff for every prime p dividing n, p^2 also
+divides n. The conjecture below asserts: if n, n+1, and n+2 are all powerful,
+then n is congruent to 7, 27, or 35 modulo 36. This is an unconditional
+elementary modular partial result toward the full conjecture (no consecutive
+powerful triple), and is not currently formalized in Mathlib.
+
+theorem erdos_364_mod36
+    (n : ℕ) (hn : Powerful n) (hn1 : Powerful (n + 1)) (hn2 : Powerful (n + 2)) :
+    n % 36 = 7 ∨ n % 36 = 27 ∨ n % 36 = 35 := by
+  sorry
+
+Status: OPEN as a Mathlib formalization. The full conjecture (no three
+consecutive powerful numbers) remains OPEN (no triple found for n < 10^22).
+Mathlib has Nat.Powerful (as Nat.Full 2), Nat.factorization,
+not_full_of_prime_mod_prime_sq (FormalConjecturesForMathlib.Data.Nat.Full),
+omega, native_decide, and Decidable (Powerful n); no prior submission has
+assembled them into this iff statement. Prior E364 submissions (slots 581,
+622, 634, 636, 638, 640, 653, 656) all targeted ABC-conditional finiteness
+or cube-centred subcases — none produced the unconditional mod-36 closure.

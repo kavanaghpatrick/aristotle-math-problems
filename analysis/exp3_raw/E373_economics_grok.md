@@ -1,0 +1,38 @@
+# EXP3 — E373 × economics × grok
+Prompt date: 2026-05-31  Elapsed: 8.1s  Bytes: 1022
+
+## Prompt
+
+```
+You are a cross-domain mathematician searching for DEEP STRUCTURAL ANALOGS — not surface keyword matches.
+
+PROBLEM:
+Erdős/Surányi conjectured (Problem 373) that the only solution in integers ≥ 2 to the equation n! = a! · b! (with n > a ≥ b ≥ 2) is (n,a,b) = (10,7,6) — i.e., 10! = 7! · 6!. The conjecture predicts finiteness; only one solution is known. Habsieger 2019 verified up to C ≤ 10^3000. Luca 2007 gives conditional finiteness on ABC. The Stirling–Bernoulli expansion of log Γ provides a high-order analytic constraint, but turning it into a finite check requires bounding (n - a) uniformly (Erdős 1993 gives a_1 ≥ n - 5 log log n).
+
+STRUCTURE: A Diophantine equation in 3 variables (n, a, b) where both sides are EXPONENTIALLY-GROWING multiplicative objects (factorials). The equation forces a near-cancellation between log Γ(n+1) and log Γ(a+1) + log Γ(b+1). Asymptotic expansion produces a finite-dim constraint, but it lives in real coordinates while solutions live in integers. The TENSION is: continuous near-cancellation must support an integer-valued exact identity at exactly one (n,a,b). The known solution (10,7,6) is a tiny isolated exceptional case.
+
+TASK: Find the deepest structural analog to this problem in economics (auction theory, equilibrium, mechanism design, game theory, financial markets).
+
+CRITICAL: Do NOT propose mathematical analogs (no Roth, no cap-set, no Szemerédi, no removal lemmas, no slice-rank, no Bombieri-Lang, no ABC, no L-functions, no sieve methods, no Mordell-Weil). These have already been mined. Your job is to find the OFF-DOMAIN analog.
+
+For your chosen analog, give:
+
+(i) THE ANALOG PROBLEM: Name and one-sentence statement of the problem in the target domain that has the SAME structural shape (sparse deterministic set + second-order pattern, or near-cancellation of multiplicative quantities). Be specific — name researchers, papers, equations.
+
+(ii) THE TECHNIQUE THAT SOLVED IT THERE: The named method/argument (e.g., "renormalization group flow with relevant operator analysis at the Wilson-Fisher fixed point"). If unsolved in the target domain, name the most successful partial result.
+
+(iii) THE OBSTRUCTION TO DIRECT TRANSPLANT: What property of the original problem fails the precondition of the technique? Be precise about the failure mode.
+
+(iv) THE BRIDGE: A SPECIFIC modification of either the technique or the problem reformulation that bridges the obstruction. This must be CONCRETE — a defined object, a measurable parameter, a function to compute. Not "consider an analogous structure" — produce a named construction with explicit ingredients.
+
+FORMAT: 4 numbered paragraphs (i)-(iv), 100-200 words each. Be terse and technical. If no genuine analog exists in this domain, say so directly with one sentence of explanation — do NOT fabricate.
+
+REMEMBER: The user knows the standard mathematical analogs. We are searching for a NON-OBVIOUS bridge. Surprise us, or admit there is no bridge here.
+
+```
+
+## Response
+
+(i) No genuine structural analog exists in economics. The Erdős–Surányi equation encodes an exact multiplicative identity among three instances of the same super-exponential function whose logarithms admit a uniform asymptotic expansion with rapidly decreasing coefficients; the resulting Diophantine constraint is therefore a finite-dimensional real-analytic condition on integer points. Auction theory, mechanism design, and general equilibrium models instead equate additive or linear functionals (utilities, payments, excess demands) whose continuity or convexity properties already guarantee existence or isolation without ever producing an isolated exact multiplicative cancellation between three copies of one and the same combinatorial object. No named paper or equation in the target literatures replicates this shape.
+
+(ii)–(iv) Consequently the remaining items are undefined; no technique, obstruction, or bridge can be stated without fabricating a correspondence that the structural criteria explicitly forbid.

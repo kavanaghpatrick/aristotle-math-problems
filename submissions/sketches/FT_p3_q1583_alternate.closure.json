@@ -1,0 +1,10 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "retroactive": true,
+  "applied_at": "2026-05-30",
+  "rationale": "Diagnostic single-prime case q=1583 inside the FT p=3, q≡71 (mod 72) family. The first family member > 100 at which A(q) = q^2 + q + 1 is itself prime; the slot720 small-witness Fermat-reduction mechanism is inapplicable. Closes a single q via the slot720 helper not_dvd_via_fermat_factor with r = A(1583) = 2,507,473. Sub-claim of the family conjecture, not the family itself. Real closure candidate — adds one prime to the FT cleared list, structurally significant because A(q) prime is the family boundary."
+}

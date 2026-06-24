@@ -1,0 +1,4 @@
+3b1246dd-e976-4138-b20c-a016d9415ec6
+# Task: erdos931_same_primes
+# Hash: fd3afb6e934bb218
+# Submitted: 2026-03-13T18:36:50.702425

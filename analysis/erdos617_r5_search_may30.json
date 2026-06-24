@@ -1,0 +1,26 @@
+{
+  "conjecture": "Erd\u0151s-Gy\u00e1rf\u00e1s 617 (1999): for r \u2265 3, every r-edge-coloring of K_{r\u00b2+1} has an (r+1)-subset with a missing color.",
+  "status_table": {
+    "r=3 (K_10)": "SOLVED (Erd\u0151s-Gy\u00e1rf\u00e1s 1999)",
+    "r=4 (K_17)": "SOLVED (Erd\u0151s-Gy\u00e1rf\u00e1s 1999)",
+    "r=5 (K_26)": "OPEN \u2014 first open case (as of 2026)",
+    "r=6 (K_37)": "OPEN"
+  },
+  "first_open_case": "r=5, n=26",
+  "search_space": {
+    "edges_in_K_26": 325,
+    "colors": 5,
+    "coloring_count_log10": 227.16525
+  },
+  "random_search": {
+    "n_samples": 591,
+    "best_deficit": 2,
+    "trials_completed": 591,
+    "duration_s": 120.07508397102356,
+    "found_counterexample": false
+  },
+  "verdict": "r=4 (K_17) was SOLVED by Erd\u0151s-Gy\u00e1rf\u00e1s themselves in 1999 (per formal-conjectures); the user's brief to target r=4 was based on outdated info. The first OPEN case is r=5 (K_26). Random search over 591 colorings found worst-case deficit = 2; that's strictly positive (no counterexample), consistent with Erd\u0151s-Gy\u00e1rf\u00e1s being TRUE at r=5. Search space 10^227 makes blind search hopeless; SAT solvers (Glucose/Cadical) at K_26 are at the edge of feasibility (325 vars, millions of 6-clique clauses). Worth submitting BOUNDED VERSION: r=5 K_26 over a STRUCTURED coloring class (e.g., circular or Cayley colorings) where the search space shrinks to ~10^5 and is brute-forceable by native_decide.",
+  "recommended_sketch_target": "Bounded version: Erd\u0151s-Gy\u00e1rf\u00e1s 617 for r=5 over CIRCULAR / Cayley colorings on Z/26Z (vertex-transitive on K_26). Search space ~5^13 = 10^9 (manageable). Aristotle native_decide. Won't resolve the full conjecture but settles whether the structured search space contains a counterexample.",
+  "alternate_target": "Sub-claim: prove the r=5 conjecture under additional ASSUMPTION (e.g., the coloring is symmetric/proper edge-coloring of K_26). Aristotle has not done this kind of structural proof though \u2014 risk = infrastructure_only.",
+  "runtime_s": 120.07508897781372
+}

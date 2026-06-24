@@ -300,8 +300,20 @@ case "${1:-help}" in
     submit)
         shift
         if [ $# -eq 0 ]; then
-            echo "Usage: mk submit <file> [args...]"
-            echo "  Delegates to safe_aristotle_submit.py with all args passed through."
+            echo "Usage: mk submit <file> [--yes] [--bare-only] [other safe_aristotle_submit.py args...]"
+            echo ""
+            echo "  Convenience wrapper around safe_aristotle_submit.py with"
+            echo "  upfront lane detection (U1, 2026-05-30):"
+            echo ""
+            echo "    <stem>.fusion.json present  -> 'Will use FUSION lane'"
+            echo "    <stem>.closure.json present -> 'Will use BARE lane (+ recommendation)'"
+            echo "    no companion file           -> 'Will use BARE lane'"
+            echo ""
+            echo "  Flags:"
+            echo "    --yes        Skip the interactive confirmation prompt."
+            echo "    --bare-only  Force BARE lane even if a .fusion.json exists."
+            echo "                 Logs BARE_OVERRIDE for audit."
+            echo "    (all other flags are passed through to safe_aristotle_submit.py)"
             exit 1
         fi
         SUBMIT_SCRIPT="${SCRIPT_DIR}/../../scripts/safe_aristotle_submit.py"
@@ -309,7 +321,89 @@ case "${1:-help}" in
             echo "[math-forge] ERROR: safe_aristotle_submit.py not found at $SUBMIT_SCRIPT" >&2
             exit 1
         fi
-        python3 "$SUBMIT_SCRIPT" "$@"
+
+        # Parse args: first non-flag arg is the sketch file. --yes is consumed
+        # locally; --bare-only is consumed locally for the pre-check banner
+        # and ALSO passed through.
+        SKETCH_FILE=""
+        YES_FLAG="no"
+        BARE_ONLY="no"
+        FUSION_FLAG="no"
+        REMAINING_ARGS=()
+        for arg in "$@"; do
+            case "$arg" in
+                --yes|-y) YES_FLAG="yes" ;;
+                --bare-only)
+                    BARE_ONLY="yes"
+                    REMAINING_ARGS+=("$arg")
+                    ;;
+                --fusion-lane)
+                    FUSION_FLAG="yes"
+                    REMAINING_ARGS+=("$arg")
+                    ;;
+                --*) REMAINING_ARGS+=("$arg") ;;
+                *)
+                    if [ -z "$SKETCH_FILE" ]; then
+                        SKETCH_FILE="$arg"
+                    fi
+                    REMAINING_ARGS+=("$arg")
+                    ;;
+            esac
+        done
+
+        if [ -z "$SKETCH_FILE" ]; then
+            echo "${RED}[mk submit] ERROR: no sketch file in arguments.${RESET}" >&2
+            echo "Usage: mk submit <file> [--yes] [--bare-only] [args...]" >&2
+            exit 1
+        fi
+
+        if [ ! -f "$SKETCH_FILE" ]; then
+            echo "${RED}[mk submit] ERROR: sketch file not found: $SKETCH_FILE${RESET}" >&2
+            exit 1
+        fi
+
+        # Pre-check companion files. Strip the suffix and look for siblings.
+        # Use Bash parameter expansion to drop the last extension.
+        SKETCH_STEM="${SKETCH_FILE%.*}"
+        FUSION_COMPANION="${SKETCH_STEM}.fusion.json"
+        CLOSURE_COMPANION="${SKETCH_STEM}.closure.json"
+
+        echo "${BOLD}${CYAN}[mk submit] Lane pre-check${RESET}"
+        echo "  Sketch:   $SKETCH_FILE"
+        echo "  Fusion companion:  $([ -f "$FUSION_COMPANION" ] && echo "FOUND ($FUSION_COMPANION)" || echo "absent")"
+        echo "  Closure companion: $([ -f "$CLOSURE_COMPANION" ] && echo "FOUND ($CLOSURE_COMPANION)" || echo "absent")"
+
+        if [ "$BARE_ONLY" = "yes" ]; then
+            LANE_BANNER="${YELLOW}Will use BARE lane (forced by --bare-only)${RESET}"
+        elif [ "$FUSION_FLAG" = "yes" ]; then
+            LANE_BANNER="${GREEN}Will use FUSION lane (explicit --fusion-lane)${RESET}"
+        elif [ -f "$FUSION_COMPANION" ]; then
+            LANE_BANNER="${GREEN}Will use FUSION lane (auto-detected via .fusion.json)${RESET}"
+        elif [ -f "$CLOSURE_COMPANION" ]; then
+            LANE_BANNER="${YELLOW}Will use BARE lane (closure-only companion — recommendation may follow)${RESET}"
+        else
+            LANE_BANNER="${YELLOW}Will use BARE lane (no companion file)${RESET}"
+        fi
+        echo "  -> $LANE_BANNER"
+        echo ""
+
+        # Interactive confirmation unless --yes
+        if [ "$YES_FLAG" != "yes" ]; then
+            if [ -t 0 ] && [ -t 1 ]; then
+                read -p "Proceed with submission? [y/N] " confirm
+                if [ "$confirm" != "y" ] && [ "$confirm" != "Y" ] && [ "$confirm" != "yes" ]; then
+                    echo "${YELLOW}[mk submit] Aborted by user.${RESET}"
+                    exit 0
+                fi
+            else
+                # Non-interactive without --yes: refuse to submit silently.
+                echo "${RED}[mk submit] ERROR: non-interactive session without --yes. Aborting.${RESET}" >&2
+                echo "  Re-run with --yes to confirm submission, or invoke in a TTY." >&2
+                exit 2
+            fi
+        fi
+
+        python3 "$SUBMIT_SCRIPT" "${REMAINING_ARGS[@]}"
         ;;
 
     status)
@@ -328,12 +422,15 @@ case "${1:-help}" in
             echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
             exit 1
         fi
+        # Canonical status enum (2026-05-28): partials live in 'compiled_partial'.
+        # 'near_miss'/'completed' were legacy buckets that collapsed into
+        # compiled_partial (sorry>=1) or compiled_no_advance (sorry=0).
         echo "[math-forge] Near-miss submissions (sorry=1)"
         echo "---"
         run_sql "$TRACKING_DB" -header -column "
             SELECT filename, sorry_count, proven_count, notes, completed_at
             FROM submissions
-            WHERE sorry_count = 1 AND status IN ('near_miss', 'completed')
+            WHERE sorry_count = 1 AND status = 'compiled_partial'
             ORDER BY completed_at DESC;
         "
         ;;
@@ -344,6 +441,9 @@ case "${1:-help}" in
             echo "[math-forge] ERROR: tracking.db not found at $TRACKING_DB" >&2
             exit 1
         fi
+        # Canonical status enum (2026-05-28): a resubmittable row has an
+        # artifact (output_file) and modest sorry count. 'compile_failed' may
+        # also be resubmittable if Aristotle couldn't load the file.
         echo "[math-forge] Resubmittable submissions"
         echo "---"
         run_sql "$TRACKING_DB" -header -column "
@@ -351,7 +451,7 @@ case "${1:-help}" in
                    COALESCE(output_file, '') as output,
                    COALESCE(SUBSTR(notes, 1, 80), '') as notes
             FROM submissions
-            WHERE status IN ('near_miss', 'completed', 'failed')
+            WHERE status IN ('compiled_partial', 'compile_failed')
               AND sorry_count >= 1
               AND sorry_count <= 3
               AND output_file IS NOT NULL
@@ -368,7 +468,7 @@ case "${1:-help}" in
         if [ $# -eq 0 ]; then
             echo "Usage: mk query <sql>"
             echo "  Runs read-only SQL against tracking.db."
-            echo "  Example: mk query \"SELECT COUNT(*) FROM submissions WHERE status='compiled_clean'\""
+            echo "  Example: mk query \"SELECT COUNT(*) FROM submissions WHERE status='compiled_no_advance'\""
             exit 1
         fi
         SQL="$1"
@@ -402,13 +502,20 @@ case "${1:-help}" in
         echo "[math-forge] Context files for '${1}':"
         echo "---"
 
+        # Canonical status enum (2026-05-28): include any row with an
+        # artifact that isn't 'compile_failed' and wasn't explicitly marked
+        # invalid (verified=0). This mirrors gather_context() in
+        # safe_aristotle_submit.py — gate on artifact presence, not status,
+        # so future status renames don't silently kill auto-context.
         RESULTS=$(run_sql "$TRACKING_DB" "
             SELECT output_file, status, proven_count
             FROM submissions
             WHERE (problem_id LIKE '%${PROBLEM}%'
                    OR filename LIKE '%${PROBLEM}%')
               AND output_file IS NOT NULL
-              AND status IN ('compiled_clean', 'near_miss', 'completed', 'disproven')
+              AND output_file != ''
+              AND status != 'compile_failed'
+              AND (verified IS NULL OR verified != 0)
             ORDER BY submitted_at DESC;
         ")
 
@@ -442,15 +549,31 @@ case "${1:-help}" in
         echo "[math-forge] Open Gaps Being Targeted"
         echo "==="
 
+        # Canonical status enum (2026-05-28). 'best_status' ranks rows by
+        # how close to gap resolution they came: compiled_advance >
+        # compiled_no_advance > compiled_partial > disproven > compile_failed
+        # > submitted. SQLite MAX over a CASE-mapped numeric column gives
+        # the ordering; we map back to the label for display.
         run_sql "$TRACKING_DB" -header -column "
             SELECT
                 COALESCE(problem_id, filename) as problem,
                 COALESCE(gap_statement, SUBSTR(notes, 1, 60)) as gap,
                 COUNT(*) as subs,
-                MAX(CASE WHEN status = 'compiled_clean' THEN 'compiled_clean'
-                         WHEN status = 'near_miss' THEN 'near_miss'
-                         WHEN status = 'completed' THEN 'completed'
-                         ELSE status END) as best_status,
+                CASE MAX(CASE status
+                            WHEN 'compiled_advance' THEN 6
+                            WHEN 'compiled_no_advance' THEN 5
+                            WHEN 'compiled_partial' THEN 4
+                            WHEN 'disproven' THEN 3
+                            WHEN 'compile_failed' THEN 2
+                            WHEN 'submitted' THEN 1
+                            ELSE 0 END)
+                    WHEN 6 THEN 'compiled_advance'
+                    WHEN 5 THEN 'compiled_no_advance'
+                    WHEN 4 THEN 'compiled_partial'
+                    WHEN 3 THEN 'disproven'
+                    WHEN 2 THEN 'compile_failed'
+                    WHEN 1 THEN 'submitted'
+                    ELSE '?' END as best_status,
                 MAX(CASE WHEN target_resolved = 1 THEN 'YES' ELSE '' END) as resolved
             FROM submissions
             WHERE submission_type = 'gap_targeting'
@@ -509,6 +632,113 @@ case "${1:-help}" in
         fi
         ;;
 
+    debate)
+        shift
+        # Convenience wrapper: mk debate <problem-id> <template> [--rounds N] [--models grok,gemini,codex]
+        # Delegates to scripts/debate_fusion.py for cross-domain technique scouting.
+        DEBATE_FUSION="${SCRIPT_DIR}/../../scripts/debate_fusion.py"
+        if [ ! -f "$DEBATE_FUSION" ]; then
+            echo "[math-forge] ERROR: debate_fusion.py not found at $DEBATE_FUSION" >&2
+            exit 1
+        fi
+        if [ $# -lt 2 ]; then
+            echo "Usage: mk debate <problem-id> <template> [--rounds N] [--models M1,M2,M3]"
+            echo ""
+            echo "Available templates:"
+            echo "  technique_scout       — 5 cross-domain techniques per AI per round"
+            echo "  adjacent_analog       — 3-5 structurally isomorphic closed problems"
+            echo "  tao_simulator         — Tao's first 3 moves (roleplay)"
+            echo "  bias_flush            — adversarial critique of our default toolkit"
+            echo "  bridge_lemma          — factor the problem via a single bridge lemma"
+            echo "  obstruction_diagnosis — why has the problem resisted attack?"
+            echo ""
+            echo "Examples:"
+            echo "  mk debate erdos_938 technique_scout"
+            echo "  mk debate erdos_938 bridge_lemma --rounds 2"
+            echo "  mk debate erdos_938 bias_flush --models gemini,codex"
+            exit 1
+        fi
+        PROBLEM_ID="$1"; shift
+        TEMPLATE="$1"; shift
+        python3 "$DEBATE_FUSION" "$PROBLEM_ID" --template "$TEMPLATE" "$@"
+        ;;
+
+    fusion)
+        shift
+        if [ $# -eq 0 ]; then
+            echo "Usage: mk fusion <problem-id> [--force] [--max-papers N] [--keywords \"a,b,c\"]"
+            echo "Runs Stages 1-3 of the research-fusion pipeline (I6/I8 design):"
+            echo "  Stage 1: arXiv literature breadth + erdosproblems.com excerpt"
+            echo "  Stage 2: 3-AI analogy mining (Grok+Gemini+Codex parallel debate)"
+            echo "  Stage 3: Codex technique-transfer cards w/ fit_score"
+            echo ""
+            echo "Outputs:    research_fusion/runs/<problem-id>/{01..03}_*.md / .json"
+            echo "Aggregated: research_fusion/runs/<problem-id>/fusion_candidate.json"
+            exit 1
+        fi
+        PROBLEM_ID="$1"; shift
+        # Locate project root (one level up from math-forge/).
+        if [ -n "${CLAUDE_PROJECT_DIR:-}" ]; then
+            PROJECT_ROOT="$CLAUDE_PROJECT_DIR"
+        else
+            PROJECT_ROOT="${SCRIPT_DIR}/../.."
+        fi
+        # Pass-through flags.
+        FORCE=""
+        MAX_PAPERS=""
+        KEYWORDS_FLAG=""
+        KEYWORDS_VAL=""
+        while [ $# -gt 0 ]; do
+            case "$1" in
+                --force) FORCE="--force"; shift ;;
+                --max-papers) MAX_PAPERS="$2"; shift 2 ;;
+                --keywords) KEYWORDS_FLAG="--keywords"; KEYWORDS_VAL="$2"; shift 2 ;;
+                *) echo "[math-forge] unknown flag: $1"; exit 1 ;;
+            esac
+        done
+        echo -e "${CYAN}${BOLD}[mk fusion]${RESET} running Stages 1-3 for ${BOLD}${PROBLEM_ID}${RESET}"
+        echo -e "${CYAN}---${RESET}"
+        echo -e "${CYAN}[stage 1]${RESET} literature breadth (arXiv + erdosproblems.com)"
+        STAGE1_ARGS=(--problem-id "$PROBLEM_ID")
+        [ -n "$FORCE" ] && STAGE1_ARGS+=("$FORCE")
+        [ -n "$MAX_PAPERS" ] && STAGE1_ARGS+=(--max-papers "$MAX_PAPERS")
+        [ -n "$KEYWORDS_FLAG" ] && STAGE1_ARGS+=("$KEYWORDS_FLAG" "$KEYWORDS_VAL")
+        (cd "$PROJECT_ROOT" && python3 -m research_fusion.stage1_literature "${STAGE1_ARGS[@]}") \
+            || { echo -e "${RED}[mk fusion] Stage 1 failed${RESET}"; exit 1; }
+        echo -e "${CYAN}[stage 2]${RESET} analogy mining (Grok+Gemini+Codex parallel debate)"
+        STAGE2_ARGS=(--problem-id "$PROBLEM_ID")
+        [ -n "$FORCE" ] && STAGE2_ARGS+=("$FORCE")
+        (cd "$PROJECT_ROOT" && python3 -m research_fusion.stage2_analogy "${STAGE2_ARGS[@]}") \
+            || { echo -e "${RED}[mk fusion] Stage 2 failed${RESET}"; exit 1; }
+        echo -e "${CYAN}[stage 3]${RESET} technique transfer (Codex deep-think cards)"
+        STAGE3_ARGS=(--problem-id "$PROBLEM_ID")
+        [ -n "$FORCE" ] && STAGE3_ARGS+=("$FORCE")
+        (cd "$PROJECT_ROOT" && python3 -m research_fusion.stage3_techniques "${STAGE3_ARGS[@]}") \
+            || { echo -e "${RED}[mk fusion] Stage 3 failed${RESET}"; exit 1; }
+        echo ""
+        echo -e "${GREEN}${BOLD}[mk fusion] DONE${RESET}"
+        echo "Dossier directory: ${PROJECT_ROOT}/research_fusion/runs/${PROBLEM_ID}/"
+        echo ""
+        FC="${PROJECT_ROOT}/research_fusion/runs/${PROBLEM_ID}/fusion_candidate.json"
+        if [ -f "$FC" ]; then
+            python3 - "$FC" <<'PYEOF'
+import json, sys
+fc = json.load(open(sys.argv[1]))
+print(f"problem_id:    {fc['problem_id']}")
+print(f"generated_at:  {fc['generated_at']}")
+print(f"papers:        {fc['literature']['paper_count']} across {len(fc['literature']['domains_covered'])} domains")
+print(f"analogs (top): {len(fc['analogies']['top_analogs'])}")
+for a in fc['analogies']['top_analogs'][:3]:
+    print(f"  - {a['analog_id']}: {a['analog_problem']} [{a['analog_domain']}] tech={a['named_technique']}")
+print(f"technique cards: {len(fc['technique_cards'])}")
+for c in fc['technique_cards']:
+    print(f"  - rank{c.get('rank','?')}: {c['name']} fit={c.get('fit_score',0):.3f} (analog {c.get('source_analog_id','?')})")
+PYEOF
+        else
+            echo "[math-forge] WARNING: fusion_candidate.json not found at $FC"
+        fi
+        ;;
+
     help|*)
         echo "mk — Math-forge Knowledge Base CLI"
         echo ""
@@ -524,6 +754,10 @@ case "${1:-help}" in
         echo "  codex [problem-id]                        Codex proof history (all or by problem)"
         echo "  codex-best <problem-id>                   Best compiled Codex proof path"
         echo ""
+        echo "Research-fusion commands:"
+        echo "  fusion <problem-id> [--force]             Run Stages 1-3 (lit/analogy/technique)"
+        echo "  debate <problem-id> <template>            Run a templated 3-AI debate"
+        echo ""
         echo "Pipeline commands:"
         echo "  submit <file> [args...]                   Submit sketch to Aristotle"
         echo "  status [uuid-or-slot]                     Aristotle queue status"
@@ -532,6 +766,11 @@ case "${1:-help}" in
         echo "  partials                                   Near-miss submissions (sorry=1)"
         echo "  resubmittable                              Resubmission candidates"
         echo "  query <sql>                                Read-only SQL on tracking.db"
+        echo ""
+        echo "Cross-domain debate commands:"
+        echo "  debate <problem-id> <template>            Run a cross-domain technique-scouting debate"
+        echo "    Templates: technique_scout, adjacent_analog, tao_simulator,"
+        echo "               bias_flush, bridge_lemma, obstruction_diagnosis"
         echo ""
         echo "  help                                      Show this help"
         echo ""

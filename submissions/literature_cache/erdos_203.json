@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780134956.2714481,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T09:55:56+00:00",
+  "citations": [],
+  "erdos_n": 203,
+  "erdosproblems_status": "open",
+  "erdosproblems_url": "https://www.erdosproblems.com/203",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_203",
+  "status": "CLEAR",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

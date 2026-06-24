@@ -1,0 +1,4 @@
+c45dc9cf-ab9d-4887-b903-9bab088df9d8
+# Task: slot746_erdos329_perfdiffset_sidon
+# Hash: 2b7eda91a0b14bd5
+# Submitted: 2026-05-30T12:33:11.885697

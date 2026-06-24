@@ -1,0 +1,19 @@
+name = "RequestProject"
+defaultTargets = ["slot699_result", "slot704_result", "Erdos251"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.28.0"
+
+[[lean_lib]]
+name = "slot699_result"
+globs = ["slot699_result"]
+
+[[lean_lib]]
+name = "slot704_result"
+globs = ["slot704_result"]
+
+[[lean_lib]]
+name = "Erdos251"
+globs = ["Erdos251"]

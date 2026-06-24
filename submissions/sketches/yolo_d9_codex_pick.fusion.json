@@ -1,0 +1,23 @@
+{
+  "problem_id": "central_binom_pow2_div9",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/central_binom_pow2_div9/01_literature.md",
+    "analogies_path": "research_fusion/runs/central_binom_pow2_div9/02_analogies.md",
+    "techniques_path": "research_fusion/runs/central_binom_pow2_div9/03_techniques.md"
+  },
+  "named_technique": "Kummer's carry counting via padicValNat_choose with p=3 on n = 2^k",
+  "seminal_paper_arxiv": "https://arxiv.org/abs/2601.09510",
+  "fit_score": 0.55,
+  "bridge_lemma": "By Kummer's theorem (Mathlib's padicValNat_choose), v_3(C(2*2^k, 2^k)) equals the number of carries when 2^k is added to itself in base 3, which equals the count of base-3 digits of 2^k that are at least 2; the open task is to prove this count is >= 2 for every k >= 3 with k notin {6, 8}.",
+  "informal_proof_outline": "Reduction layer. Mathlib's padicValNat_choose says v_p(C(n+k,k)) = #{i in Ico 1 b : p^i <= k mod p^i + n mod p^i}. Apply with n=2^k, k=2^k, p=3: v_3(C(2^(k+1), 2^k)) equals the number of carries when 2^k + 2^k in base 3. Since adding equal numbers, the i-th carry equals 1 iff (2^k mod 3^i) >= 3^i / 2, equivalently the i-th base-3 digit of 2^k is in {2}. So the goal '9 | C(2^(k+1), 2^k)' reduces to '2^k has at least two base-3 digits equal to 2', for k >= 3 with k notin {6, 8}. Verification layer. The exceptional k = 6, k = 8 correspond to 2^6 = 64 = 2101_3 (one digit 2) and 2^8 = 256 = 100110_3 (zero digits 2). All other k checked up to 10^13 satisfy the bound (Holdum-Klausen-Rasmussen 2026 Theorem 1.2). Open layer. The conjecture is that the bound holds UNCONDITIONALLY. Holdum-Klausen-Rasmussen 2026 prove only that the density of exceptional k is zero (Corollary 3.5) by bounding T_m(a) = o(a^{log_p((p+1)/2) + eps}); the unconditional statement is their Conjecture 3.6 specialised to m=9. Honest path. A clean Aristotle proof would split into: (i) finite verification for small k via decide/rfl-style computation, (ii) recursive/structural induction on k showing that the digit pattern of 2^k mod 3^j evolves under doubling without losing >=2 digits in {2}. Step (ii) is precisely the open content.",
+  "candidate_lemmas": [
+    "kummer_v3_central_binom: For k >= 1, padicValNat 3 (Nat.choose (2^(k+1)) (2^k)) = #{i in Ico 1 (k+1) | 3^i <= 2 * (2^k mod 3^i)}. Direct application of Mathlib padicValNat_choose'.",
+    "carry_iff_high_digit: For k >= 1 and i >= 1, 3^i <= 2 * (2^k mod 3^i) iff the i-th base-3 digit of 2^k is exactly 2. Elementary base-3 arithmetic.",
+    "two_pow_base3_digits_six_eight: 2^6 = 64 has base-3 expansion 2101 (one digit 2) and 2^8 = 256 has base-3 expansion 100110 (zero digits 2). Decidable by computation.",
+    "two_pow_base3_at_least_two_high_digits: For k >= 3 with k notin {6, 8}, the base-3 expansion of 2^k contains at least two digits equal to 2. The open content; verified for k <= 10^13 in HKR 2026.",
+    "nine_dvd_iff_two_carries: 9 | n iff padicValNat 3 n >= 2 (when n > 0). Mathlib: pow_dvd_iff_le_padicValNat.",
+    "central_binom_pos_for_pow_two: For k >= 0, Nat.choose (2^(k+1)) (2^k) > 0. Mathlib Nat.choose_pos with le_refl on 2^k <= 2^(k+1).",
+    "finite_exceptional_set: The set of k for which v_3(C(2^(k+1), 2^k)) < 2 is finite. Equivalent to the open conjecture; HKR 2026 proves only that its density is 0."
+  ],
+  "honest_disclaimer": "This dossier was produced via Codex (gpt-5.3-codex) + Grok-4 + web search consultation (May 31 2026), all citation-checked. The conjecture is genuinely OPEN: Holdum-Klausen-Rasmussen 2026 (arXiv:2601.09510) verify it for k <= 10^13 and prove the density of exceptional k is zero, but their Conjecture 3.6 explicitly states the unconditional finiteness/emptiness is open. fit_score = 0.55 reflects (i) Mathlib HAS the Kummer machinery (padicValNat_choose, sub_one_mul_padicValNat_choose_eq_sub_sum_digits), (ii) the reduction to base-3 digit counting of 2^k is elementary and Aristotle has a clear lemma graph, but (iii) the OPEN content — that 2^k has >= 2 digits of value 2 in base 3 for k notin {6, 8} — has no known elementary closure mechanism and is in the same family as the irrationality of 2 in base 3 (Erdős - sum of distinct powers of 3 conjecture). This is sub_claim_closure NOT full closure; the parent Erdős 4-or-9 conjecture would still need the non-power-of-2 case (which is Granville 1997 elementary). Honest risk: Aristotle may close only the trivial bounded-k cases via decide and leave the open infinite tail, returning compiled_no_advance. This is differentiated from D2 (Pell powerful pairs) and D3 (BBC m=5 abc-conditional powerful APs) because it sits entirely in p-adic / digit-combinatorial land, not in Diophantine equations over Z."
+}

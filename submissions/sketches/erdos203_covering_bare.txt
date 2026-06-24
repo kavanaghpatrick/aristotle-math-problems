@@ -1,0 +1,13 @@
+OPEN GAP: Erdos 203 — Covering system for 2^k * 3^l * m + 1
+Source: FormalConjectures/ErdosProblems/203.lean
+Domain: nt
+
+There exists m > 0 coprime to 6 such that for all k, l >= 0,
+the number 2^k * 3^l * m + 1 is never prime.
+
+theorem erdos_203 :
+    ∃ m : ℕ, m > 0 ∧ m.Coprime 6 ∧
+    ∀ k l : ℕ, ¬ (2^k * 3^l * m + 1).Prime := by sorry
+
+Status: OPEN. Requires constructing a covering system with
+primes > 3 covering all residue classes of 2^k * 3^l.

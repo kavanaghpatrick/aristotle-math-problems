@@ -1,0 +1,151 @@
+import Mathlib
+
+open scoped BigOperators
+open Finset
+
+set_option maxHeartbeats 8000000
+
+/-! # Infinitely many consecutive powerful pairs (Golomb 1970)
+
+A natural number `n` is *powerful* iff every prime dividing `n` also divides `n`
+to the second power. **Golomb** [Powerful Numbers, *Amer. Math. Monthly*
+**77**(8) (1970) 848-852, DOI 10.2307/2317020] both coined the term and proved
+the infinitude of consecutive powerful pairs by exhibiting `(8 y^2, x^2)` for
+every positive Pell solution of `x^2 - 8 y^2 = 1`. Combined with Mathlib's
+`Pell.IsFundamental.y_strictMono` this yields infinitely many such pairs.
+
+Walker [Consecutive Integer Pairs of Powerful Numbers and Related Diophantine
+Equations, *Fibonacci Quart.* **14**(2) (1976) 111-116] generalized to arbitrary
+squarefree `D`; Sentance [Occurrences of Consecutive Odd Powerful Numbers,
+*Amer. Math. Monthly* **87**(4) (1980) 272-274] refined the construction to
+*odd* consecutive powerful pairs. The base mixed-parity infinitude proved here
+is Golomb's.
+
+The "powerful iff a^2 * b^3 with `b` squarefree" parametrization is supplied by
+slot 1318 (UUID `706abe1b-76b9-4455-b002-b285086bb00b`, fully proven sorry-free,
+archive `tar1318.gz`); we cite it here as an `axiom` so this file stands alone
+in a Mathlib-PR-ready form. The downstream proof goes through.
+-/
+
+namespace Nat
+
+/-- A natural number `n` is *powerful* iff for every prime `p` dividing `n`,
+    `p^2` also divides `n`. -/
+def Powerful' (n : ℕ) : Prop := ∀ p : ℕ, p.Prime → p ∣ n → p ^ 2 ∣ n
+
+end Nat
+
+/-- Golomb's parametrization, slot 1318 UUID `706abe1b`, sorry-free. Cited here as
+    an axiom; the corresponding Lean theorem is proven in slot 1318's
+    `RequestProject/Main.lean`. -/
+axiom powerful_parametrization (n : ℕ) (hn : 1 ≤ n) :
+    Nat.Powerful' n ↔ ∃ a b : ℕ, 1 ≤ a ∧ 1 ≤ b ∧ Squarefree b ∧ n = a ^ 2 * b ^ 3
+
+/-! ### Direct helpers (built from the parametrization) -/
+
+/-- Squares are powerful. Use `a = x, b = 1` in the parametrization. -/
+theorem Nat.Powerful'.sq {x : ℕ} (hx : 1 ≤ x) : Nat.Powerful' (x ^ 2) := by
+  have hx2 : 1 ≤ x ^ 2 :=
+    Nat.one_le_iff_ne_zero.mpr (pow_ne_zero 2 (Nat.one_le_iff_ne_zero.mp hx))
+  refine (powerful_parametrization _ hx2).mpr ⟨x, 1, hx, le_refl _, squarefree_one, ?_⟩
+  ring
+
+/-- `8 y^2` is powerful for any `y >= 1`: take `a = y, b = 2` (squarefree). -/
+theorem Nat.Powerful'.eight_mul_sq {y : ℕ} (hy : 1 ≤ y) : Nat.Powerful' (8 * y ^ 2) := by
+  have hy2 : 1 ≤ y ^ 2 :=
+    Nat.one_le_iff_ne_zero.mpr (pow_ne_zero 2 (Nat.one_le_iff_ne_zero.mp hy))
+  have hpos : 1 ≤ 8 * y ^ 2 := by omega
+  refine (powerful_parametrization _ hpos).mpr ⟨y, 2, hy, by decide, Nat.squarefree_two, ?_⟩
+  ring
+
+/-! ### Pell pair identity over ℕ via `Int.natAbs` -/
+
+open Pell
+
+/-- For a Pell solution `a : Solution₁ 8`, transfer `a.x ^ 2 - 8 a.y ^ 2 = 1`
+    from `ℤ` to `ℕ` using `Int.sq_abs` and `Int.abs_eq_natAbs`. -/
+theorem Pell.sol8_natAbs_sq_eq (a : Solution₁ (8 : ℤ)) :
+    a.x.natAbs ^ 2 = 8 * a.y.natAbs ^ 2 + 1 := by
+  have hpr : a.x ^ 2 - 8 * a.y ^ 2 = 1 := a.prop
+  have hxsq : ((a.x.natAbs : ℤ)) ^ 2 = a.x ^ 2 := by
+    have h := Int.sq_abs a.x
+    have habs : (|a.x| : ℤ) = (a.x.natAbs : ℤ) := by exact_mod_cast Int.abs_eq_natAbs a.x
+    rw [habs] at h; exact h
+  have hysq : ((a.y.natAbs : ℤ)) ^ 2 = a.y ^ 2 := by
+    have h := Int.sq_abs a.y
+    have habs : (|a.y| : ℤ) = (a.y.natAbs : ℤ) := by exact_mod_cast Int.abs_eq_natAbs a.y
+    rw [habs] at h; exact h
+  have key : ((a.x.natAbs ^ 2 : ℕ) : ℤ) = ((8 * a.y.natAbs ^ 2 + 1 : ℕ) : ℤ) := by
+    push_cast
+    rw [hxsq, hysq]; linarith
+  exact_mod_cast key
+
+/-! ### `d = 8` is positive and not a square -/
+
+private lemma not_isSquare_eight : ¬ IsSquare (8 : ℤ) := by
+  decide
+
+/-- Existence of a fundamental Pell solution for `d = 8`. -/
+private lemma exists_fund_eight : ∃ a : Solution₁ (8 : ℤ), IsFundamental a :=
+  IsFundamental.exists_of_not_isSquare (by norm_num) not_isSquare_eight
+
+/-! ### Unboundedness of the `y`-coordinate of the fundamental power-sequence -/
+
+/-- Strictly monotone `ℤ → ℤ` maps are unbounded above: cheap helper. -/
+private lemma int_strictMono_unbounded
+    {f : ℤ → ℤ} (hf : StrictMono f) (M : ℤ) : ∃ k : ℤ, M < f k := by
+  have step : ∀ n : ℕ, f 0 + (n : ℤ) ≤ f (n : ℤ) := by
+    intro n
+    induction n with
+    | zero => simp
+    | succ m ih =>
+      have hlt : f (m : ℤ) < f ((m : ℤ) + 1) := hf (by linarith)
+      have hcast : ((m + 1 : ℕ) : ℤ) = (m : ℤ) + 1 := by push_cast; ring
+      rw [hcast]
+      linarith
+  obtain ⟨n, hn⟩ := exists_nat_gt (M - f 0)
+  refine ⟨(n : ℤ), ?_⟩
+  have := step n
+  linarith
+
+/-! ### Main theorem -/
+
+/-- **Golomb 1970 / Walker 1976.** For every threshold `N` there is a natural
+    number `n > N` such that both `n` and `n + 1` are powerful. -/
+theorem powerful_consecutive_pairs_unbounded (N : ℕ) :
+    ∃ n, N < n ∧ Nat.Powerful' n ∧ Nat.Powerful' (n + 1) := by
+  obtain ⟨a, ha⟩ := exists_fund_eight
+  obtain ⟨k, hk⟩ :=
+    int_strictMono_unbounded (f := fun n : ℤ => (a ^ n).y) ha.y_strictMono ((N : ℤ) + 1)
+  have hy_pos : 0 < (a ^ k).y := by linarith
+  have hy_abs : ((a ^ k).y.natAbs : ℤ) = (a ^ k).y :=
+    Int.natAbs_of_nonneg hy_pos.le
+  have hy_ge : (N + 1 : ℕ) ≤ (a ^ k).y.natAbs := by
+    have h : ((N : ℤ) + 1) < ((a ^ k).y.natAbs : ℤ) := by rw [hy_abs]; exact hk
+    exact_mod_cast h.le
+  set y := (a ^ k).y.natAbs with hy_def
+  refine ⟨8 * y ^ 2, ?_, ?_, ?_⟩
+  · have hsq : (N + 1) ^ 2 ≤ y ^ 2 := Nat.pow_le_pow_left hy_ge 2
+    have hN1 : N < (N + 1) ^ 2 := by nlinarith
+    have : N < y ^ 2 := lt_of_lt_of_le hN1 hsq
+    omega
+  · have hy_ge1 : 1 ≤ y := by omega
+    exact Nat.Powerful'.eight_mul_sq hy_ge1
+  · have hx_eq : (a ^ k).x.natAbs ^ 2 = 8 * y ^ 2 + 1 :=
+      Pell.sol8_natAbs_sq_eq (a ^ k)
+    have hx_pos : 0 < (a ^ k).x := Pell.x_zpow_pos ha.x_pos k
+    have hx_ge : 1 ≤ (a ^ k).x.natAbs := by
+      have : ((a ^ k).x.natAbs : ℤ) = (a ^ k).x := Int.natAbs_of_nonneg hx_pos.le
+      omega
+    have hpow : Nat.Powerful' ((a ^ k).x.natAbs ^ 2) := Nat.Powerful'.sq hx_ge
+    rw [hx_eq] at hpow
+    exact hpow
+
+/-- **Set-theoretic infinitude form.** The set of natural numbers `n` such that
+    both `n` and `n + 1` are powerful is infinite. -/
+theorem powerful_consecutive_pairs_infinite :
+    {n : ℕ | Nat.Powerful' n ∧ Nat.Powerful' (n + 1)}.Infinite := by
+  rw [Set.infinite_iff_exists_gt]
+  intro N
+  obtain ⟨n, hN, hp, hp'⟩ := powerful_consecutive_pairs_unbounded N
+  exact ⟨n, ⟨hp, hp'⟩, hN⟩

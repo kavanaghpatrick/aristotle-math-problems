@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 1052 — Unitary Perfect Numbers Are Even
+Source: Erdős Problem 1052
+Domain: nt
+
+A unitary perfect number n satisfies σ*(n) = 2n where
+σ*(n) = ∑_{d|n, gcd(d,n/d)=1} d.
+
+Known: 6, 60, 90, 87360 — all even.
+Wall (1972): no odd unitary perfect with ≤ 4 prime factors.
+
+For squarefree n = p₁...p_k: σ*(n) = ∏(pᵢ+1).
+So σ*(n) = 2n means ∏(pᵢ+1) = 2∏pᵢ, i.e. ∏(1+1/pᵢ) = 2.
+For k odd primes ≥ 3: ∏(1+1/pᵢ) ≤ (4/3)(6/5)(8/7)...
+This product converges, giving an upper bound on k.
+
+def unitarySigma (n : ℕ) : ℕ :=
+  ∑ d ∈ Nat.divisors n |>.filter (fun d => Nat.Coprime d (n/d)), d
+
+theorem erdos1052 (n : ℕ) (hn : n > 1) (hodd : Odd n)
+    (hperf : unitarySigma n = 2 * n) : False := by sorry
+
+Status: OPEN. No odd unitary perfect known. ≤4 factors excluded.

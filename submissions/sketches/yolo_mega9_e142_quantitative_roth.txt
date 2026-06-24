@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 142 — close the quantitative Roth sorry from slot 1320
+Source: formal-conjectures/FormalConjectures/ErdosProblems/142.lean; erdosproblems.com/142
+Slot 1320 result: 7353e4d7-230f-49b6-9849-a4c508c830dc (compiled, 1 sorry)
+Domain: combinatorics (additive)
+
+Slot 1320 reduced Erdős 142 (finite-threshold form) to a single sorry:
+
+theorem rothNumberNat_times_log_eventually_lt :
+    ∃ N₁ : ℕ, ∀ N : ℕ, N₁ ≤ N →
+      (rothNumberNat N : ℝ) * Real.log N < (N : ℝ) := by sorry
+
+Mathlib has rothNumberNat_isLittleO_id (qualitative r₃(N) = o(N)). Mathlib
+does NOT have any quantitative Roth upper bound; cornersTheoremBound is
+tower-type and insufficient.
+
+theorem erdos_142_quantitative_roth_lever :
+    ∃ N₁ : ℕ, ∀ N : ℕ, N₁ ≤ N →
+      (rothNumberNat N : ℝ) * Real.log N < (N : ℝ) := by sorry
+
+Status: OPEN sub-lemma. The cleanest cited input is Bloom–Sisask 2020
+(arXiv:2007.03528, Thm 1.1) — r₃(N) ≤ C·N/(log N)^{1+c} for absolute
+c, C > 0.

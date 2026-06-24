@@ -1,0 +1,21 @@
+{
+  "problem_id": "erdos_617",
+  "sketch_path": "submissions/sketches/erdos617_disproof.txt",
+  "target": "Construct a balanced 5-coloring of K_26 such that every 6-subset sees all 5 colors — a disproof of Erdős-Gyárfás 617 at r=5 (the first open case).",
+  "predecessor_slots": [],
+  "closure_scope": "disproof_closure",
+  "closure_mechanism": "explicit_witness",
+  "closure_risk_primary": "witness_search_explosion",
+  "closure_risk_secondary": ["clean_decidable"],
+  "honesty_marker": "journal_clean",
+  "real_closure_candidate": true,
+  "strategic_subclaim": true,
+  "closure_probability_1_to_10": 2,
+  "rationale": "First open case is r=5 (K_26), NOT r=4 (which is research_solved per Erdős-Gyárfás 1999, confirmed in formal-conjectures source). Search space 5^325 ≈ 10^227. Random search found NO counterexample (worst-case deficit ≥ 2 in every random coloring). SAT-feasible at the edge — Glucose/Cadical on K_26 has 325 vars, ~C(26,6)·5 = 1.5M clauses for 'every 6-subset, every color present'. Aristotle's verification scaffold (native_decide on Fin 26 graph) is robust if a witness is FOUND, but Aristotle is a verifier, not a SAT engine. Disproof depends on supplied witness — if none exists, no closure.",
+  "search_evidence": "scripts/erdos617_r5_search.py + analysis/erdos617_r5_search_may30.json: 591 random colorings on K_26 (120s budget) yielded best worst-case deficit = 2 (no counterexample; every coloring had at least one 6-subset missing ≥2 of 5 colors). Search would need structured / external SAT solver, not blind random.",
+  "literature_check": "Erdős-Gyárfás 1999 proved r=3 and r=4 cases; r=5 still open in 2025. Hu-Shen 2024 and Hegde-Sandeep-Shashank Feb 2025 worked on a DIFFERENT Erdős-Gyárfás conjecture (power-of-2 cycles, problem 64), not balanced colorings. No 2025 progress found on r=5 balanced coloring.",
+  "user_brief_correction": "User brief said 'analog to E64 but for r=4 instead of r=2'. Two issues: (1) r=4 is already SOLVED (research_solved in formal-conjectures, Erdős-Gyárfás 1999). The first open case is r=5. (2) The Erdős-Gyárfás r-balanced-coloring conjecture (this is problem 617) is structurally unrelated to the Erdős-Gyárfás 2^k-cycle conjecture (problem 64). 'r=2 → r=4' analogy is unfounded.",
+  "submission_recommendation": "HOLD — do NOT submit unless an external SAT search yields a candidate balanced 5-coloring of K_26. Pure verification without a candidate = no closure.",
+  "do_not_celebrate_as": "E617 closure",
+  "celebrate_as": "If hit: disproof of Erdős-Gyárfás 617 at r=5 (prize-class result)."
+}

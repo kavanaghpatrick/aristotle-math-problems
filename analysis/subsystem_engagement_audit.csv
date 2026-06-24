@@ -1,0 +1,15 @@
+slot,uuid,filename,lane_db,db_status,subsystem_engaged,validation_criteria_hit,evidence_signals,informal_proof_section,separate_formalization_section,nl_reasoning_words,mathlib_imports_count,summary_words,pure_computational_tactic,unresolved_sorry
+i9_smoke,f9e23cf2-55f2-4eab-940c-6c06e79f54e5,,,,informal_reasoner,C1|C2|C3|C4,"informal_header:informal proof|formalization_header:formalization,formal proof|nl_words=88|mathlib_imports=1",1,1,88,1,135,0,0
+slot723,d3af7e55-644d-4ce7-94af-cb685bab1a56,slot723_erdos647_existence_delta,bare,submitted,formalizer_only,,unresolved_sorry|mathlib_imports=1,0,0,0,1,386,0,1
+slot724,af5b7da5-947a-4807-b0e3-16e39e8cac4f,slot724_erdos203_covering,bare,submitted,formalizer_only,,unresolved_sorry|mathlib_imports=1,0,0,0,1,706,0,1
+slot736,ab2e8e34-1226-47df-a1d2-ba4386dbe115,,,,ambiguous,C4,mathlib_imports=1,0,0,0,1,98,0,0
+slot737,d10f9308-5ecf-4b18-89f0-6d2d03bac302,,,,ambiguous,C4,mathlib_imports=1,0,0,0,1,267,0,0
+slot738,4bfb5e56-6964-466c-adb0-3bf35eddff41,,,,ambiguous,C4,mathlib_imports=1,0,0,0,1,254,0,0
+slot739,2b2955a9-7cd0-4c50-a077-df0a2f0dc1b3,,,,ambiguous,C4,mathlib_imports=1,0,0,0,1,370,0,0
+slot740,0054b276-59f9-4ecc-9227-dcbb16587341,,,,ambiguous,C2,formalization_header:formal proof|pure_computational_tactic|unresolved_sorry|mathlib_imports=1,0,1,0,1,278,1,1
+slot741,9fa69652-7f15-4ebc-8c5c-16e4dd35f7c3,slot741_erdos647_cunningham_residual_35,closure,compiled_no_advance,ambiguous,C4,mathlib_imports=1,0,0,0,1,178,0,0
+slot742,be1e80e5-e7b7-4066-9fad-79552cffc155,slot742_erdos203_sierpinski_1d_benchmark,,disproven,formalizer_only,,pure_computational_tactic|unresolved_sorry|mathlib_imports=1,0,0,0,1,168,1,1
+slot743,cdf8c4de-78a9-4297-9a63-9230440720df,slot743_erdos203_grid_12x12_B1000,,compiled_no_advance,ambiguous,C2|C4,"formalization_header:formalization,lean formalization|mathlib_imports=1",0,1,0,1,279,0,0
+slot744,b2236ca3-82b4-4cde-b608-4caf694579c7,slot744_FT_p3_q1583_alternate,,compiled_no_advance,formalizer_only,,pure_computational_tactic|mathlib_imports=1,0,0,0,1,109,1,0
+slot745,9cb693c2-bf0b-4277-bc83-28c5f559d17d,slot745_brocard_nrange_1001_2000,,compiled_no_advance,ambiguous,C4,mathlib_imports=1,0,0,0,1,271,0,0
+slot746,4dab36cf-5ed8-4df9-ac5f-cfd93a2c3e71,,,,ambiguous,C4,mathlib_imports=1,0,0,0,1,175,0,0

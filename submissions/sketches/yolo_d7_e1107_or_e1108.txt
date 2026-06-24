@@ -1,0 +1,19 @@
+OPEN GAP: Bounded-cardinality powerful factorial sums (E1108 sub-claim)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1108.lean
+Domain: nt
+
+Erdős 1108 asks whether the set of finite sums of distinct factorials
+contains only finitely many powerful numbers (n is powerful iff every
+prime dividing n divides it with multiplicity at least 2). The full
+conjecture is currently abc-conditional. We submit the bounded-support
+sub-question.
+
+theorem bounded_card_powerful_factorial_sums (K : ℕ) :
+    {a : ℕ | (∃ S : Finset ℕ, S.card ≤ K ∧ a = ∑ n ∈ S, n.factorial) ∧
+             (∀ p : ℕ, p.Prime → p ∣ a → p^2 ∣ a)}.Finite := by sorry
+
+Status: OPEN unconditionally for K ≥ 2. The K=1 case is finite by
+inspection. The K=2 case (sums m! + n!) has no published unconditional
+proof; only abc-conditional results exist (Luca-Sárközy 1996,
+Bolvardizadeh-Yavari 2025). General fixed K remains open. Slot 631
+attempted the full conjecture and stalled at compiled_no_advance.

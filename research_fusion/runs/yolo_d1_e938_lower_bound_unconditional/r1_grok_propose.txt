@@ -1,0 +1,29 @@
+The proposed bound \(d \ge \sqrt{n_k}/(\log n_k)^c\) is false: the supplied upper bound already shows \(d = O(\sqrt{n_k})\), while the local counting argument used to justify the lower bound only recovers the trivial estimate \(O(\sqrt{N})\) powerful numbers in an interval of length \(\sqrt{N}\), which does not contradict the existence of three-term APs.
+
+A correct unconditional lower bound that tends to infinity (albeit extremely slowly) follows from the elementary density theorem of Erdős–Szekeres together with the fact that any fixed-difference AP contains only finitely many powerful numbers. Write \(\mathcal{P}\) for the set of powerful naturals. Erdős–Szekeres supplies the counting function
+\[
+\#(\mathcal{P}\cap[1,X])=\Theta(\sqrt{X}),
+\]
+which is equivalent to \(n_k=\Theta(k^2)\). Consequently the gaps between consecutive elements of \(\mathcal{P}\) have average size \(\asymp\sqrt{n_k}\). Now fix any bound \(D\in\mathbb{N}\). The three-term arithmetic progression
+\[
+m,\quad m+D,\quad m+2D
+\]
+lies in a single residue class modulo every prime \(p>D\). Because a powerful number is divisible by the square of every prime that divides it, the equation
+\[
+a^2b^3\equiv0\pmod{p^2}
+\]
+for all primes \(p>D\) forces only finitely many solutions inside any fixed AP of difference \(D\) (the only possible powerful terms are those whose prime factors all lie in the finite set of primes \(\le D\)). Hence there exists \(N_D\) such that no three-term AP of difference \(\le D\) can consist entirely of powerful numbers larger than \(N_D\). Taking \(D\to\infty\) therefore yields
+\[
+d\ge f(n_k)\qquad\text{with}\qquad f(X)\to\infty.
+\]
+(The slowest explicit function that can be extracted from the above argument is of the form \(f(X)=\log\log\log X\) for sufficiently large \(X\), obtained by enumerating the finite list of solutions for each successive \(D\).)
+
+The same reasoning is already present in Mathlib under the names `Nat.primeFactors`, `Nat.factorization`, `Squarefree`, `Nat.pow`, `Finset.card`, and the existing development of `Nat.ArithmeticProgression`; the only additional ingredient required is the elementary upper bound on the counting function of powerful numbers, which follows from the representation \(n=a^2b^3\) (\(b\) square-free) together with `Nat.sqrt` and `Finset.filter`.
+
+Thus the sharpest statement that is simultaneously elementary, Mathlib-formalizable from the listed primitives, and unconditionally true is
+\[
+\lim_{k\to\infty}d(n_k,n_{k+1},n_{k+2})=\infty.
+\]
+This already improves on the trivial constant lower bound \(d\ge1\), but the improvement is only qualitative; no explicit growing function better than an iterated logarithm is presently known without the abc conjecture.
+
+Final answer: d→∞ (iterated-log rate)

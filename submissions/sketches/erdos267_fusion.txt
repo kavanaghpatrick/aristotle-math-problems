@@ -1,0 +1,19 @@
+OPEN GAP: Erdős 267 — lacunary Fibonacci reciprocal irrationality
+Source: formal-conjectures/FormalConjectures/ErdosProblems/267.lean
+Domain: nt
+
+CLAIM. Let F_1 = F_2 = 1 and F_{n+1} = F_n + F_{n-1} be the Fibonacci sequence.
+Let n_1 < n_2 < n_3 < ... be a strictly increasing infinite sequence of positive
+integers, and let c > 1 be a real constant such that n_{k+1} / n_k ≥ c for every
+k. The series S = Σ_{k=1}^{∞} 1 / F_{n_k} is irrational.
+
+Status: OPEN in the range 1 < c < 2. André-Jeannin (1989) proved the full
+sum Σ 1/F_n is irrational. Good (1974) and Bicknell–Hoggatt (1976) showed
+the doubling subsequence n_k = 2^k gives an irrational (in fact algebraic)
+value. Badea (1987) closed the range c ≥ 2 via a one-step convergence
+criterion, and Nguyen (2022, Trans. AMS) closed c > 2 with transcendence
+of the limit. The intermediate range 1 < c < 2 has resisted every existing
+irrationality criterion because all known general tools require denominator
+growth at least like F_{n_k}^2, which a sub-quadratic gap ratio does not
+supply. The conjecture as stated by Erdős asks whether some uniform method
+covers the full range 1 < c < ∞.

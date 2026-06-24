@@ -1,0 +1,15 @@
+**No, a refined abc application cannot close Erdős 938 (finiteness of consecutive powerful 3-APs) conditionally on abc alone.**
+
+The setups you outline are the natural ones. The key identity \(n_k n_{k+2} = n_{k+1}^2 - d^2\) and the triple \((d^2, n_k n_{k+2}, n_{k+1}^2)\) (all powerful, after any common \(g = \gcd\)) yield precisely the “sandwich” you derived:
+
+\[
+c_\varepsilon \, n_{k+1}^{(1-3\varepsilon)/(2(1+\varepsilon))} \ll d \le 2n_{k+1}^{1/2} + O(1).
+\]
+
+For every fixed \(\varepsilon > 0\) the lower exponent is strictly less than \(1/2\), so the inequality is compatible with arbitrarily large solutions. The \(\varepsilon\)-loss is structural: it is the price of the radical bound in the abc conjecture itself. Refinements (better constants, quality, square-free part tracking, or using that the numbers are powerful) improve the implicit constant or the range of \(\varepsilon\) but cannot eliminate the positive \(\varepsilon\) term. Hence the lower bound on \(d\) never reaches or exceeds the consecutiveness upper bound \(O(n^{1/2})\).
+
+The gcd reduction by \(g = \gcd(d^2, n_k n_{k+2}, n_{k+1}^2)\) improves the effective radical only when \(g\) is large relative to the radicals; in the consecutive-powerful setting this \(g\) is typically small (or controlled by the same local obstructions that produce the known infinite families of non-consecutive powerful 3-APs). It does not close the gap.
+
+The only way to obtain finiteness is to combine the abc-derived lower bound with an independent upper-density or sieve argument that shows the powerful numbers are too sparse to realize the narrow window \(d \asymp n^{1/2 - \delta}\) infinitely often while remaining consecutive in the powerful sequence. abc alone, even refined, supplies only the sandwich and is therefore insufficient for a full conditional proof of E938.
+
+(Chan-type results are therefore optimal in the abc-conditional world; stronger statements require additional arithmetic input.)

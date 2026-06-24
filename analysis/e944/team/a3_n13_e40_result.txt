@@ -1,0 +1,3 @@
+# A3 kill-test: n=13 |E|=40 (delta>=6, Delta<=7) parallel  Wed Jun 10 16:22:05 BST 2026
+{"slice": "n=13 |E|=40 deg<=7", "total": 20899992, "vc4": 0, "witnesses": []}
+# done Wed Jun 10 16:29:21 BST 2026

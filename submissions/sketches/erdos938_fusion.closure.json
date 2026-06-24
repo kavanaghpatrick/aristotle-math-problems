@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "partial_result_only",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": false,
+  "rationale": "Realistic Aristotle outcome on E938 via Frey-Hellegouarch + Ribet kernel-control: a sub-claim (bounded-kernel nonexistence or empty-newform-space at explicit small kernels), NOT full finiteness. Per F5: only if Aristotle constructs the Frey curve and applies level-lowering to derive contradiction at the predicted weight-2 cusp form is this a real cross-domain advance; the moving-conductor barrier and fixed exponents (2,3) make full closure 4/10 plausibility. Submit on --rubric-points; tracked as fusion-lane first end-to-end test, not as E938 closure."
+}

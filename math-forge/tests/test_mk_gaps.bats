@@ -18,8 +18,8 @@ setup() {
         );
         INSERT INTO submissions (filename, problem_id, status, submission_type, gap_statement, target_resolved, submitted_at)
         VALUES
-        ('slot700_test.txt', 'test_prob', 'compiled_clean', 'gap_targeting', 'Test gap statement', 0, datetime('now')),
-        ('slot701_test.txt', 'test_prob', 'near_miss', 'gap_targeting', 'Test gap statement', 0, datetime('now'));
+        ('slot700_test.txt', 'test_prob', 'compiled_no_advance', 'gap_targeting', 'Test gap statement', 0, datetime('now')),
+        ('slot701_test.txt', 'test_prob', 'compiled_partial', 'gap_targeting', 'Test gap statement', 0, datetime('now'));
     "
     export CLAUDE_PROJECT_DIR="$TMPDIR_PROJ"
 }

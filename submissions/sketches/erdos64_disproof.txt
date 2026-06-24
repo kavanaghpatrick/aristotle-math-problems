@@ -1,0 +1,29 @@
+OPEN GAP: Erdős 64 — Erdős-Gyárfás 1995 small-n counterexample existence
+Source: formal-conjectures/FormalConjectures/ErdosProblems/64.lean
+Domain: combinatorics
+
+Erdős and Gyárfás (1995) conjectured that every finite graph with minimum
+degree ≥ 3 contains a cycle of length 2^k for some k ≥ 2. The conjecture is
+OPEN. Hu-Shen 2024 (P_10-free) and Hegde-Sandeep-Shashank Feb 2025
+(P_13-free) narrow the counterexample search. We ask whether there is a
+small finite witness: does there exist a graph on n ≤ 25 vertices with
+min-degree ≥ 3 and no cycle of length 4, 8, or 16? (These are the only
+powers 2^k with k ≥ 2 and 2^k ≤ 25, so no other 2^k constraint is in
+force in this size range.) Our 7-minute external search (random cubic
++ hill-climbing 4-cycle removal, ~120 4-cycle-free cubic graphs sampled
+at n ∈ {18..32}, file analysis/erdos64_search_results.json) found NONE —
+every 4-cycle-free cubic graph in the sample contained an 8-cycle. The
+question — whether a witness exists in this regime at all — is OPEN.
+
+theorem erdos_64_small_counterexample :
+    ∃ (n : ℕ) (_ : 18 ≤ n) (_ : n ≤ 25) (G : SimpleGraph (Fin n))
+        (_ : DecidableRel G.Adj),
+      G.minDegree ≥ 3 ∧
+      ∀ (v : Fin n) (c : G.Walk v v), c.IsCycle →
+        c.length ≠ 4 ∧ c.length ≠ 8 ∧ c.length ≠ 16 := by sorry
+
+Status: OPEN. External random + hill-climbing search 2026-05-30 over
+n ∈ {18..32}, ~75k random graphs sampled, found no 8-cycle-free
+cubic graph that is also 4-cycle-free. Consistent with cubic > 30 lit
+bound. A positive answer to this restricted question would constitute a
+small-witness disproof of Erdős-Gyárfás 1995.

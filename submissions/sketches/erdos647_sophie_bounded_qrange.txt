@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 647 — bounded Sophie Germain range extension
+Source: formal-conjectures/FormalConjectures/ErdosProblems/647.lean
+Domain: nt
+
+Slot723 left one sorry: the case n ≡ 0 (mod 6), n ≥ 3000, n-1 prime,
+(n-2)/2 prime. Computational evidence to n ≤ 10^6 confirms the Erdős 647
+inequality fails for these too. Extend the verified range to all
+Sophie Germain n in [3000, 10^7] explicitly (and contribute the proven
+range as a finite witness lemma usable in the slot723 case split).
+
+theorem erdos_647_sophie_bounded
+    (n : ℕ) (hn1 : 3000 ≤ n) (hn2 : n ≤ 10^7) (h6 : 6 ∣ n)
+    (hp1 : Nat.Prime (n-1)) (hq : Nat.Prime ((n-2)/2)) :
+    ∃ m : Fin n, n + 2 < (m : ℕ) + σ 0 m := by sorry
+
+Status: OPEN universally. Bounded statement is a finite check.
+Closes slot723's remaining sorry up to n = 10^7, isolating any genuine
+counterexample (if it exists) above that bound.

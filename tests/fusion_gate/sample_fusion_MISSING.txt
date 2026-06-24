@@ -1,0 +1,10 @@
+OPEN GAP: Erdős 938 MISSING-companion (illustrative test sketch)
+Source: formal-conjectures/Erdos938
+Domain: nt
+
+The conjecture states no nontrivial integer solution exists.
+
+theorem erdos_938_missing_test (p : ℕ) (hp : 3 ≤ p) :
+    ¬ ∃ a b c : ℤ, a ≠ 0 ∧ b ≠ 0 ∧ c ≠ 0 ∧ a^p + b^p = c^p := by sorry
+
+Status: OPEN. Test that submitting on --fusion-lane WITHOUT a sibling .fusion.json is REJECTED.

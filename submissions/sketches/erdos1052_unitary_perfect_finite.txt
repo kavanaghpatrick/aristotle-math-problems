@@ -1,0 +1,16 @@
+OPEN GAP: Erdos 1052 — Finitely Many Unitary Perfect Numbers
+Source: FormalConjectures/ErdosProblems/1052.lean
+Domain: nt
+
+Are there only finitely many unitary perfect numbers? A unitary perfect
+number n satisfies σ*(n) = 2n where σ* sums divisors d with gcd(d, n/d) = 1.
+Only five are known: 6, 60, 90, 87360, 146361946186458562560000.
+
+theorem erdos_1052 :
+    answer(sorry) ↔ {n | IsUnitaryPerfect n}.Finite := by
+  sorry
+
+Status: OPEN. Aristotle previously proved all unitary perfect numbers
+are even (in this file). Wall (1972) proved finiteness for any fixed
+number of prime factors. The full file contains the multiplicative
+formula σ*(n) = ∏(1 + p^a) and extensive infrastructure.

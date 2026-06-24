@@ -1,0 +1,3 @@
+699622d7-59b2-4268-8d7b-6e6efc2e44ad
+# Task: Erdős 203 index-1 covering M=8 B=500 (slot724 followup)
+# Submitted: 2026-05-29T05:36:04

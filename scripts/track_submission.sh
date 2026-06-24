@@ -120,7 +120,7 @@ echo "1. Submit to Aristotle:"
 echo "   aristotle prove-from-file $FILE --no-wait"
 echo
 echo "2. Update with Aristotle UUID:"
-echo "   sqlite3 $DB \"UPDATE submissions SET uuid='<aristotle_uuid>', status='running' WHERE uuid='$UUID';\""
+echo "   sqlite3 $DB \"UPDATE submissions SET uuid='<aristotle_uuid>', status='submitted' WHERE uuid='$UUID';\""
 echo
 
 exit 0

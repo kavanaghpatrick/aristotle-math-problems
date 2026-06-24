@@ -1,0 +1,8 @@
+N = 100000000000, B_BOUND = 4643
+  squarefree sieve to 4643 done in 0.0s
+  generated 680330 powerful numbers in 0.1s (pre-sort)
+  sorted in 0.1s
+  |P(N)| / sqrt(N) = 2.1514  (expected ~2.1732)
+  total elapsed: 0.1s
+  saving to /Users/patrickkavanagh/math/experiments/exp4_computational_first/powerful_1e11.bin...
+  saved (5 MB)

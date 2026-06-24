@@ -1,0 +1,15 @@
+**A) No, not airtight.** The contradiction logic is sound in outline, but the `IsUnit` step (lines 13-15) is broken (see B). Also `Nat.exists_prime_and_dvd (Nat.ne_of_gt hgcd_pos).symm` is fragile; `hgcd_pos` proves `1 < gcd`, so `Nat.exists_prime_and_dvd (Nat.one_lt_iff_ne_zero_and_ne_one.mp hgcd_pos).2` or simply `Nat.exists_prime_and_dvd (by omega)` is clearer.
+
+**B) Wrong.** `hsq p hpp_mul` already yields `IsUnit p`. Replace the whole `exact ...` line with `exact hp_prime.not_unit this`. `Nat.isUnit_iff.mpr (Nat.isUnit_iff.mp this)` produces `IsUnit 1`, which is useless.
+
+**C) Wrong name.** No `hp.dvd_of_dvd_pow`. Use `hp.dvd_of_dvd_pow h3` (from `Nat.Prime.dvd_of_dvd_pow`) or the more common `pow_dvd_pow_of_dvd` + `Prime.dvd_of_pow`.
+
+**D) Yes.** `hpow.2 p hp (by omega)` is the correct projection of the new `Powerful` definition in all three mod-4/9 lemmas.
+
+**E) Correct.** `Nat.gcd_pos_of_pos_right n hd` is the right lemma for `gcd n d`.
+
+**Other API issues**
+- `Nat.dvd_sub'` does not exist; use `Nat.dvd_sub` (or `dvd_sub` after `have : n ≤ n+d`).
+- `NOT` is not Lean; must be `¬`.
+
+Fix B and the two API names above; the rest is locally ok.

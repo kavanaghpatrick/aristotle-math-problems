@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 931 — Consecutive Products Same Prime Factors
+Source: Erdős Problem 931
+Domain: nt
+
+For k₁ ≥ k₂ ≥ 3, finitely many pairs (n₁, n₂) with n₁+k₁ ≤ n₂
+have ∏(n₁+i) and ∏(n₂+j) sharing the same prime factor set.
+
+PRIOR RESULTS (proved, attached as context):
+- primeFactors_bound: all primes of 2nd product ≤ n₁+k₁
+- smooth_constraint: each element B-smooth with B = n₁+k₁
+- boundary_prime_bound: boundary case forces p ≤ k₁+k₂-1
+- consecutive_smooth_finite axiom (S-unit/Baker theorem)
+
+REMAINING GAP: Use smooth_constraint + S-unit theorem to show
+the set of valid n₂ is finite for each n₁, then bound n₁.
+
+theorem erdos931 (k1 k2 : ℕ) (hk1 : k1 ≥ 3) (hk2 : k2 ≥ 3)
+    (hk : k1 ≥ k2) :
+    Set.Finite {p : ℕ × ℕ | p.1 + k1 ≤ p.2 ∧
+      (consecProd p.1 k1).primeFactors =
+      (consecProd p.2 k2).primeFactors} := by sorry
+
+Status: OPEN. Structural lemmas proved. Needs S-unit application.

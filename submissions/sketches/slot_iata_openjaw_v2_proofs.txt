@@ -1,0 +1,33 @@
+IATA Rule 3015 — Fix open jaw proofs to use v2 (Middle East scoped)
+
+The attached context has two versions of open jaw:
+- v1 (is_permitted_open_jaw): buggy, checks EuropeMiddleEast continent
+- v2 (is_permitted_open_jaw_v2): correct, checks is_middle_east country codes
+
+The proofs open_jaw_implies_same_continent and generalized_loop_same_continent use v1. Re-prove them with v2.
+
+Extend consistent_city to include Middle East countries:
+  (c.country ∈ ["AE","BH","IL","IQ","IR","JO","KW","LB","OM","PS","QA","SA","SY","YE","EG","LY","SD"] → c.continent = .EuropeMiddleEast)
+
+theorem open_jaw_v2_implies_same_continent (itin : Itinerary) (s : Segment)
+  (h_cons_orig : consistent_city_v2 s.origin)
+  (h_cons_dest : consistent_city_v2 s.destination)
+  (h_perm : is_permitted_open_jaw_v2 itin s)
+  (h_same_country : ∀ c1 c2, c1.country = c2.country → consistent_city_v2 c1 → consistent_city_v2 c2 → c1.continent = c2.continent) :
+  s.origin.continent = s.destination.continent
+
+def is_generalized_loop_v2 (itin : Itinerary) : Prop :=
+  match itin.head?, itin.getLast? with
+  | some first, some last =>
+    is_permitted_open_jaw_v2 itin { origin := last.destination, destination := first.origin, type := .Surface, isStopover := false }
+  | _, _ => False
+
+theorem generalized_loop_v2_same_continent (itin : Itinerary)
+  (h_gen_loop : is_generalized_loop_v2 itin)
+  (h_cons_first : consistent_city_v2 (itin.head!.origin))
+  (h_cons_last : consistent_city_v2 (itin.getLast!.destination))
+  (h_same_country : ∀ c1 c2, c1.country = c2.country → consistent_city_v2 c1 → consistent_city_v2 c2 → c1.continent = c2.continent) :
+  (itin.head!.origin).continent = (itin.getLast!.destination).continent
+
+Prove: is_middle_east c → c.continent = .EuropeMiddleEast (under consistent_city_v2)
+Prove: is_permitted_open_jaw_v2 is strictly more restrictive than is_permitted_open_jaw for EME cities

@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 647 — divisor gaps / Sophie Germain (existence, delta on prior wins)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/647.lean
+Domain: number theory
+
+Is there n > 24 such that max_{m < n}(m + τ(m)) ≤ n + 2, where τ = σ₀ is
+the divisor-count function? Verified true for n = 24. Existence direction
+of the Erdős 647 main conjecture.
+
+theorem erdos_647_existence : ∃ n > 24, ⨆ m : Fin n, (m : ℕ) + σ 0 m ≤ n + 2 := by
+  sorry
+
+Status: OPEN. Sub-results already proven in this project (slot 402):
+tau_ge_two, exists_large_m_plus_tau, max_m_plus_tau_unbounded.
+
+USE THESE, DO NOT RE-DERIVE THEM. The new contribution must extend beyond
+these three lemmas — it must close the main existence statement above
+(produce an explicit witness n > 24, or a non-constructive existence
+argument using density / Cunningham-chain obstructions on the Sophie
+Germain residue class n ≡ 0 mod 12 with n-1 and (n-2)/2 prime).
+
+contribution_statement: target_resolved=1 means a Lean proof of
+erdos_647_existence that meaningfully extends beyond tau_ge_two /
+exists_large_m_plus_tau / max_m_plus_tau_unbounded.

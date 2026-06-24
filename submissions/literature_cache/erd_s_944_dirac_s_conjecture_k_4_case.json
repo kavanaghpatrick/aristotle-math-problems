@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780140679.1851342,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T11:31:19+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_944_dirac_s_conjecture_k_4_case",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

@@ -1,0 +1,23 @@
+**1) Module name**  
+`Mathlib/NumberTheory/Powerful.lean` (short, matches `Squarefree`/`Perfect` naming).
+
+**2) Section ordering**  
+- `section Defs` (inductive `Powerful`, `powerful_iff_prime_multiplicity`, basic API)  
+- `section Basic` (T2 `powerful_sq`, closure under squares/lcm/gcd, `powerful_one`)  
+- `section Param` (T1 `powerful_parametrization`, `existsUnique_param` with `Squarefree b ∧ Coprime a b`)  
+- `section Erdős` (T4 `erdos_364_mod36`, T3 `erdos_938_upper_bound`, using `mod36` + AP lemmas)  
+- `section Multiperfect` (T5 `multiperfect_prime_card_divisors`, T6 `powerful_three_AP_not_div_p`)  
+- `section Bridges` (new cross-results, placed last).
+
+**3) Unifying meta theorem**  
+`powerful_param_unique_coprime` (T1+T6): every powerful `n` admits a unique `(a,b)` with `Squarefree b`, `Coprime a b`, `n = a²*b³`; this immediately yields the valuation condition of T6 and the coprimality needed for the mod-36 obstruction in T4.
+
+**4) Auxiliary lemmas between def and mains**  
+`powerful_val_ge_two`, `powerful_iff_square_mul_cube`, `Squarefree.coprime_of_param`, `mod36_powerful_cases`, `three_AP_val_p_one`, `sigma_prime_divisors`.
+
+**5) New bridge content (add explicitly)**  
+- `existsUnique_param` (strengthens T1)  
+- `powerful_multiperfect_card_divisors_ge_four` (T5 + `powerful_val_ge_two`)  
+- `no_three_powerful_AP_mod36` (T4 + T2, explicit infinite family of 3-APs ruled out).  
+
+All statements are placed after the relevant sections and before any `deprecated` block. Total file stays <800 LOC.

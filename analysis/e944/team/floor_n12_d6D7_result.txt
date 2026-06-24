@@ -1,0 +1,3 @@
+# n=12 FULL delta>=6 (deg in [6,7], Delta<=n-5) across 8 shards Wed Jun 10 15:40:30 BST 2026
+{"n": 12, "regime": "delta>=6 (deg in [6,7])", "total": 4455844, "vc4": 0, "witnesses": []}
+# done Wed Jun 10 15:41:27 BST 2026

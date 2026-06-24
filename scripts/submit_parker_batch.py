@@ -61,11 +61,14 @@ DB_PATH = "submissions/tracking.db"
 
 
 async def check_queue():
-    """Check if queue has capacity."""
-    projects, _ = await aristotlelib.Project.list_projects(limit=20)
-    active = [p for p in projects
-              if p.status.value in ('QUEUED', 'IN_PROGRESS', 'NOT_STARTED', 'PENDING_RETRY')]
-    return len(active), 5 - len(active)
+    """Check if queue has capacity.
+
+    aristotlelib 2.0: project-level status is RUNNING/IDLE/UNKNOWN; old QUEUED/IN_PROGRESS
+    moved to TaskStatus. Server-side filter on RUNNING is sufficient for capacity.
+    """
+    from aristotlelib import ProjectStatus
+    projects, _ = await aristotlelib.Project.list_projects(limit=20, status=ProjectStatus.RUNNING)
+    return len(projects), 5 - len(projects)
 
 
 async def submit_file(info):
@@ -80,12 +83,10 @@ async def submit_file(info):
     print(f"  Sorry: {info['sorry']}, Proven: {info['proven']}")
 
     try:
-        result = await aristotlelib.Project.prove_from_file(
-            input_file_path=path,
-            project_input_type=aristotlelib.ProjectInputType.FORMAL_LEAN,
-            wait_for_completion=False,
-        )
-        project_id = str(result)
+        with open(path) as f:
+            prompt_text = f.read()
+        project = await aristotlelib.Project.create(prompt=prompt_text)
+        project_id = project.project_id
         print(f"  PROJECT_ID: {project_id}")
 
         # Save ID file

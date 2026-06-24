@@ -1,0 +1,8 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_partial",
+  "real_closure_candidate": false,
+  "rationale": "Verified computationally NO coprime 4-term AP of 3-full numbers up to 10^11 (18589 3-fulls, 9586 APs, all gcd>=216); unbounded E672 k=4 l=3 (Bajpai-Bennett-Chan 2023) open. Parent: slot712."
+}

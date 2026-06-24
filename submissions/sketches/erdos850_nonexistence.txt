@@ -1,0 +1,19 @@
+OPEN GAP: Erdos 850 — No three consecutive same-radical pairs
+Source: FormalConjectures/ErdosProblems/850.lean
+Domain: nt
+
+Prove that no distinct positive integers x, y have
+rad(x)=rad(y), rad(x+1)=rad(y+1), and rad(x+2)=rad(y+2).
+
+Computational search to 10^8 found zero k=3 witnesses.
+The k=2 family x=2^n-2, y=2^n(2^n-2) cannot extend to k=3
+because y+2=(2^n-1)^2+1 always has an odd prime factor.
+
+theorem erdos_850_no_triple :
+    ¬ ∃ x y : ℕ, 0 < x ∧ 0 < y ∧ x ≠ y ∧
+    x.primeFactors = y.primeFactors ∧
+    (x+1).primeFactors = (y+1).primeFactors ∧
+    (x+2).primeFactors = (y+2).primeFactors := by sorry
+
+Status: OPEN. No witness known to 10^8. Structural obstruction
+blocks extension of all known k=2 families.

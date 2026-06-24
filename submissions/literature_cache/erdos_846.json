@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780127619.054849,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T07:53:39+00:00",
+  "citations": [
+    {
+      "evidence": "wiki 1(b): AI alongside literature",
+      "snapshot": "2026-05-30",
+      "source": "teorth-wiki",
+      "url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+    },
+    {
+      "evidence": "status indicator: solved",
+      "source": "erdosproblems.com",
+      "url": "https://www.erdosproblems.com/846"
+    }
+  ],
+  "erdos_n": 846,
+  "erdosproblems_status": "solved",
+  "erdosproblems_url": "https://www.erdosproblems.com/846",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_846",
+  "status": "AI_CLOSED",
+  "wiki_evidence": [
+    "wiki 1(b): AI alongside literature"
+  ],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "AI_CLOSED"
+}

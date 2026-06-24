@@ -1,0 +1,10 @@
+OPEN GAP: Erdős 938 OVERSIZED (illustrative test sketch)
+Source: formal-conjectures/Erdos938
+Domain: nt
+
+The conjecture states no nontrivial integer solution exists.
+
+theorem erdos_938_oversized_test (p : ℕ) (hp : 3 ≤ p) :
+    ¬ ∃ a b c : ℤ, a ≠ 0 ∧ b ≠ 0 ∧ c ≠ 0 ∧ a^p + b^p = c^p := by sorry
+
+Status: OPEN. Test that an oversized .fusion.json (>80 lines) is REJECTED.

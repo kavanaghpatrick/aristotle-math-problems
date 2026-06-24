@@ -1,0 +1,3 @@
+65da8d8c-4059-4454-b3b4-ea2e3b87ede7
+# Task: Odd multiperfect σ₀=11 sub-case closure (slot737 DNA, first real_closure_candidate=true)
+# Submitted: 2026-05-30T07:18:46

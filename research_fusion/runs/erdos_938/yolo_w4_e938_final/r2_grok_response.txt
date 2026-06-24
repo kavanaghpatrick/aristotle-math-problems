@@ -1,0 +1,13 @@
+**Answer:**
+
+(1) No. Bajpai–Bennett–Chan (arXiv:2302.03113) proves only the pairwise-coprime case: their Thm 1.1 / 1.2 and the abc application in §3–4 are stated for gcd(a,b,c)=1 (or after extracting a fixed square factor that is absorbed into the radical). The proof rewrites the AP equation as an abc triple whose radical is essentially the product of the three coprime powerful parts; the same rewriting fails when a common kernel d>1 is present, because the radical then loses the factors of d and the height comparison that yields A_∞(2)=4 no longer holds. No lemma in the paper (including the auxiliary Lemmas 2.x on S-unit equations) supplies uniformity over varying kernels.
+
+(2) The displayed identity is a surface, not a curve of bounded genus. After fixing (b1,b2,b3) it becomes a generalized Pell or Thue equation in the a_i, but when the b_i are allowed to vary over square-free triples the equation is essentially a three-variable exponential-Diophantine equation whose solution set is not known to be finite. Van Doorn’s family (x²−7³y²=2) produces infinitely many solutions in which the kernels themselves grow (roughly like the size of x); the resulting powerful numbers remain consecutive only after the common square factor is divided out, so the example does not contradict the conjecture but shows that kernels are unbounded in the broader powerful-AP landscape.
+
+(3) The unconditional bound d≤√N+1 is already the trivial gap between consecutive squares; the abc lower bound merely pins d∼√N. Substituting d=√N+r with |r|≪N^ε yields an AP whose middle term is within O(N^ε) of a square, but the resulting Diophantine approximation problem is again a variable-kernel generalized Pell equation and does not close the argument without an additional uniformity statement.
+
+(4)–(5) The honest synthesis is exactly the one you state: the bounded-kernel slice is finite by the Mordell–Siegel argument on each fixed triple (b1,b2,b3); the unbounded-kernel case reduces to a kernel-uniformity claim that is independent of BBC and remains open. No cheaper unconditional or abc-conditional shortcut is visible from the given data.
+
+Thus E938 reduces to the kernel-uniformity sub-claim; that sub-claim is the open core.
+
+Final answer: bounded-kernel finite; unbounded reduces to open kernel-uniformity independent of BBC

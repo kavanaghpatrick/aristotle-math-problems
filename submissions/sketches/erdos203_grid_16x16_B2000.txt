@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 203 — 16×16 index-1+2 covering existence at bound B = 2000
+Source: Erdős problem 203; slot740 closed 8×8 at B=500 with 22 index-1 primes;
+A1 quotient-lift analysis shows that cover tiles only ~70% of the K×L lattice
+Domain: nt
+
+Slot740 produced m₀ = 1579554969991861182625270235031094424159694 catching every
+(k,l) ∈ [0,8)² with index-1 primes p ≤ 500. Extended Monte-Carlo on K×L with
+1135 index-1+2 primes ≤ 10000 saturates at coverage 0.751 — the slot740 cover
+cannot lift. Open: does ANY m exist for which index-1 OR index-2 primes ≤ 2000
+catch every cell of [0,16)²? (Larger grid, larger prime pool, falsifiable.)
+
+theorem erdos203_grid_16x16_B2000_exists :
+    ∃ m : ℕ, ∀ k l : ℕ, k < 16 → l < 16 →
+      ∃ p ∈ Finset.range 2001, p.Prime ∧ 3 < p ∧
+        ((Nat.totient p) ≤ 2 * Nat.lcm (orderOf (2 : ZMod p)) (orderOf (3 : ZMod p))) ∧
+        p ∣ 2 ^ k * 3 ^ l * m + 1 := by sorry
+
+Status: OPEN. Slot740's 8×8 result extends to 12×12 only for new m and only by
+admitting index-2 primes. 16×16 with 256 cells and B=2000 yielding ~283 candidate
+primes is the sharper finite question — either Aristotle finds m by greedy
+set-cover + CRT, or 16×16 is uncoverable in this regime (clean impossibility,
+sharper than slot740). Either outcome is a measurable advance.

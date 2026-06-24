@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-"""Backfill missing slot entries into tracking.db"""
+"""Backfill missing slot entries into tracking.db
+
+Two modes:
+  (default)            Legacy mode: scan nu4_final for slots <= 330 with top-level .lean files.
+  --slots A-B          Extracted mode: backfill slots A..B from slot{N}_extracted/*_aristotle/
+                       RequestProject/*.lean layout (post-May-2026 fetch convention).
+                       Supports --dry-run.
+"""
 
 import os
 import re
 import sqlite3
 import glob
+import argparse
+from datetime import date
 
 DB_PATH = "/Users/patrickkavanagh/math/submissions/tracking.db"
 SUBMISSIONS_DIR = "/Users/patrickkavanagh/math/submissions/nu4_final"
@@ -102,18 +111,28 @@ def extract_notes(lean_content, filename):
     return None
 
 def determine_status(sorry_count, proven_count, has_uuid, lean_content):
-    """Determine submission status."""
+    """Determine submission status.
+
+    Canonical status enum (2026-05-28):
+      submitted | compile_failed | compiled_partial | compiled_no_advance
+      | compiled_advance | disproven
+
+    Note: this is a historical backfill script; we never auto-promote to
+    compiled_advance (opt-in only).
+    """
     if sorry_count is not None:
         if sorry_count == 0 and proven_count and proven_count > 0:
-            # Check for axiom
+            # Check for axiom — axioms are dishonest, downgrade to compile_failed
             if re.search(r'^axiom\s', lean_content, re.MULTILINE):
-                return 'completed'
-            return 'compiled_clean'
+                return 'compile_failed'
+            return 'compiled_no_advance'
+        elif sorry_count >= 1:
+            return 'compiled_partial'
         elif has_uuid:
-            return 'completed'
+            return 'submitted'
         else:
-            return 'completed'
-    return 'draft'
+            return 'compile_failed'
+    return 'submitted'
 
 def extract_fin_size(lean_content):
     """Extract Fin n size from content."""
@@ -121,6 +140,104 @@ def extract_fin_size(lean_content):
     if m:
         return int(m.group(1))
     return None
+
+def count_sorry_proven_content(content):
+    """Same as count_sorry_proven but on already-read content."""
+    sorry_count = len(re.findall(r'\bsorry\b', content))
+    blocks = re.split(r'(?=\b(?:theorem|lemma)\s)', content)
+    proven = 0
+    for block in blocks:
+        if re.search(r'\b(theorem|lemma)\s+\w+', block):
+            if not re.search(r'\bsorry\b', block):
+                proven += 1
+    return sorry_count, proven
+
+
+def parse_id_file(path):
+    """Parse slotN_ID.txt -> (uuid, task, submitted_at)."""
+    uuid = task = submitted_at = None
+    try:
+        with open(path) as fh:
+            for line in fh:
+                line = line.strip()
+                m = re.search(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', line)
+                if m and uuid is None:
+                    uuid = m.group(0)
+                m = re.match(r'#\s*Task:\s*(.+)', line)
+                if m:
+                    task = m.group(1).strip()
+                m = re.match(r'#\s*Submitted:\s*(.+)', line)
+                if m:
+                    submitted_at = m.group(1).strip()
+    except OSError:
+        pass
+    return uuid, task, submitted_at
+
+
+def backfill_extracted_slots(slot_lo, slot_hi, dry_run=False):
+    """Backfill slots from the slot{N}_extracted/*_aristotle/RequestProject layout."""
+    conn = sqlite3.connect(DB_PATH)
+    existing = get_existing_slots(conn)
+    inserted = 0
+    for slot in range(slot_lo, slot_hi + 1):
+        if slot in existing:
+            print(f"  Slot {slot}: already in DB, skipping")
+            continue
+        lean_paths = sorted(glob.glob(
+            os.path.join(SUBMISSIONS_DIR, f"slot{slot}_extracted", "*_aristotle", "RequestProject", "*.lean")))
+        if not lean_paths:
+            print(f"  Slot {slot}: no extracted RequestProject .lean files, skipping")
+            continue
+        id_path = os.path.join(SUBMISSIONS_DIR, f"slot{slot}_ID.txt")
+        uuid, task, submitted_at = parse_id_file(id_path)
+
+        contents = {}
+        for p in lean_paths:
+            try:
+                with open(p) as f:
+                    contents[p] = f.read()
+            except OSError:
+                contents[p] = ""
+        all_content = "\n".join(contents.values())
+        sorry_count, proven_count = count_sorry_proven_content(all_content)
+        has_axiom = bool(re.search(r'^axiom\s', all_content, re.MULTILINE))
+        status = determine_status(sorry_count, proven_count, uuid is not None, all_content)
+
+        # Main artifact = the lean file with the most theorem/lemma declarations
+        def n_decls(c):
+            return len(re.findall(r'\b(theorem|lemma)\s+\w+', c))
+        output_file = max(contents, key=lambda p: n_decls(contents[p]))
+        output_file_rel = os.path.relpath(output_file, "/Users/patrickkavanagh/math")
+
+        # Filename: slotN_<last theorem name in main artifact> (the main theorem by convention)
+        thm_names = re.findall(r'\btheorem\s+(\w+)', contents[output_file])
+        suffix = thm_names[-1] if thm_names else (task or "unknown").lower().replace(" ", "_")[:48]
+        filename = f"slot{slot}_{suffix}"
+
+        verified = 1 if (status == 'compiled_no_advance' and sorry_count == 0) else (0 if has_axiom else None)
+        notes = (f"Backfilled {date.today().isoformat()} from on-disk extraction "
+                 f"(scripts/backfill_slots.py --slots). Task: {task or 'unknown'}. "
+                 f"Run dir: {os.path.basename(os.path.dirname(os.path.dirname(output_file)))}.")
+
+        print(f"  Slot {slot}: {filename} [{status}] sorry={sorry_count} proven={proven_count} "
+              f"uuid={uuid} submitted_at={submitted_at}")
+        if dry_run:
+            continue
+        conn.execute("""
+            INSERT INTO submissions
+            (filename, uuid, status, sorry_count, proven_count, frontier_id,
+             notes, verified, submitted_at, output_file, lane, informal_mode_used, paired_llm)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'bare', 0, 'none')
+        """, (filename, uuid, status, sorry_count, proven_count, 'nu_4',
+              notes, verified, submitted_at, output_file_rel))
+        inserted += 1
+    conn.commit()
+    if dry_run:
+        print("\nDRY RUN — nothing inserted")
+    else:
+        print(f"\nInserted {inserted} entries")
+    conn.close()
+
 
 def main():
     conn = sqlite3.connect(DB_PATH)
@@ -162,10 +279,10 @@ def main():
             status = determine_status(sorry_count, proven_count, uuid is not None, content)
             problem_id = extract_problem_id(content, slot_num, lean_file)
 
-            # Check for axioms - mark as incomplete
+            # Check for axioms — axioms are dishonest, downgrade
             has_axiom = bool(re.search(r'^axiom\s', content, re.MULTILINE))
-            if has_axiom and status == 'compiled_clean':
-                status = 'completed'
+            if has_axiom and status == 'compiled_no_advance':
+                status = 'compile_failed'
                 if notes:
                     notes = f"HAS AXIOMS. {notes}"
                 else:
@@ -173,7 +290,7 @@ def main():
 
             # Determine verified status
             verified = None
-            if status == 'compiled_clean' and sorry_count == 0:
+            if status == 'compiled_no_advance' and sorry_count == 0:
                 verified = 1
             elif has_axiom:
                 verified = 0
@@ -223,4 +340,14 @@ def main():
     conn.close()
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description="Backfill missing slot entries into tracking.db")
+    parser.add_argument('--slots', help="Slot range A-B for extracted-layout backfill (e.g. 734-739)")
+    parser.add_argument('--dry-run', action='store_true', help="Print what would be inserted, change nothing")
+    args = parser.parse_args()
+    if args.slots:
+        m = re.match(r'^(\d+)-(\d+)$', args.slots)
+        if not m:
+            raise SystemExit("--slots expects a range like 734-739")
+        backfill_extracted_slots(int(m.group(1)), int(m.group(2)), dry_run=args.dry_run)
+    else:
+        main()

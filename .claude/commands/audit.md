@@ -106,14 +106,25 @@ Did this result resolve the stated open gap?
 - **INVALID**: Has axioms, self-loops, false lemmas, or unsafe sym2 (unfixable without rewrite)
 
 ## After Audit
-If PROVEN, update the database:
+
+Canonical status enum (2026-05-28):
+`submitted | compile_failed | compiled_partial | compiled_no_advance | compiled_advance | disproven`.
+
+If CLEAN COMPILE (0 sorry, 0 axiom), update the database:
 ```bash
-sqlite3 submissions/tracking.db "UPDATE submissions SET status='proven', verified=1, sorry_count=0, proven_count=<N>, notes='...' WHERE filename='<file>'"
+sqlite3 submissions/tracking.db "UPDATE submissions SET status='compiled_no_advance', verified=1, sorry_count=0, proven_count=<N>, notes='...' WHERE filename='<file>'"
 ```
 
-If INVALID or NEEDS_WORK, update accordingly:
+If NEEDS_WORK (sorry >= 1), update:
 ```bash
-sqlite3 submissions/tracking.db "UPDATE submissions SET status='<status>', verified=0, sorry_count=<N>, proven_count=<N>, notes='...' WHERE filename='<file>'"
+sqlite3 submissions/tracking.db "UPDATE submissions SET status='compiled_partial', verified=NULL, sorry_count=<N>, proven_count=<N>, notes='...' WHERE filename='<file>'"
 ```
+
+If INVALID (axiom, self-loop, false lemma, unsafe sym2), downgrade:
+```bash
+sqlite3 submissions/tracking.db "UPDATE submissions SET status='compile_failed', verified=0, sorry_count=<N>, proven_count=<N>, notes='...' WHERE filename='<file>'"
+```
+
+Promotion to `compiled_advance` is OPT-IN and requires manual confirmation that the open gap was actually resolved (`target_resolved=1`, `axiomatizes_prior_work=0`, `contribution_statement NOT NULL`).
 
 Report the full audit table and verdict to the user.

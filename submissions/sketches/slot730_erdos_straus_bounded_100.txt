@@ -1,0 +1,19 @@
+OPEN GAP: Erdős-Straus conjecture — bounded verification n ∈ [2, 100]
+Source: classical (Erdős-Straus 1948)
+Domain: number theory
+
+For every n with 2 ≤ n ≤ 100, the equation 4/n = 1/x + 1/y + 1/z has a
+solution in positive integers x, y, z. Bounded version of Erdős-Straus.
+
+theorem erdos_straus_bounded_100 :
+    ∀ n : ℕ, 2 ≤ n → n ≤ 100 →
+      ∃ x y z : ℕ, 0 < x ∧ 0 < y ∧ 0 < z ∧
+        4 * x * y * z = n * y * z + n * x * z + n * x * y := by sorry
+
+Status: OPEN in full generality (Erdős-Straus 1948). Schinzel proved
+infinitely many residue classes mod 840 are solvable. Bounded verification
+for small n is computational but not formally in Lean.
+
+contribution_statement: target_resolved=1 means a Lean proof of Erdős-Straus
+for all n ∈ [2, 100], filling the small-n gap of the Schinzel residue-class
+program with machine-verified witnesses.

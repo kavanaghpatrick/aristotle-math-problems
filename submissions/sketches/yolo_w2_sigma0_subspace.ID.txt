@@ -1,0 +1,4 @@
+43f8646f-ad17-42bf-a497-0ae427857ab5
+# Task: yolo_w2_sigma0_subspace
+# Hash: 11fd3ae3742ec455
+# Submitted: 2026-05-30T14:49:27.966230

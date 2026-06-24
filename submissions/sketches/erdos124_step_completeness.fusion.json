@@ -1,0 +1,22 @@
+{
+  "problem_id": "erdos_124",
+  "stage_outputs": {
+    "literature_path": "analysis/e124q2/team/scholar_BEGL96_proof_dissected.md",
+    "analogies_path": "analysis/e124q2/team/cassels_completeness_lemma.md",
+    "techniques_path": "analysis/e124q2/team/cassels_completeness_machinery.md"
+  },
+  "named_technique": "Cassels interval-filling at a single step M (window + M-closure)",
+  "seminal_paper_arxiv": "http://matwbn.icm.edu.pl/ksiazki/aa/aa77/aa7722.pdf",
+  "fit_score": 0.95,
+  "bridge_lemma": "Any integer n > T is uniquely n0 + j*M with n0 in the window [T+1, T+M] and j >= 0 (n0 = T+1 + ((n-T-1) mod M)). The window hypothesis places n0 in R, and j applications of the +M-closure hypothesis walk n0, n0+M, ..., n0+jM = n through R, so n in R.",
+  "informal_proof_outline": "We prove: under (hwin) [the M consecutive integers T+1, ..., T+M all lie in R] and (hclose) [for every n > T, n in R implies n+M in R], every integer n > T lies in R.\n\nFix n with n > T. Set r = (n - T - 1) mod M and n0 = T + 1 + r. Then 0 <= r < M, so n0 lies in the window [T+1, T+M], and by (hwin) (instantiated at i = r < M) we have n0 in R. Moreover n - n0 = (n - T - 1) - r is a nonnegative multiple of M; write n = n0 + j*M with j = (n - n0)/M >= 0.\n\nWe show n0 + j*M in R by induction on j. Base j=0: n0 in R, just established. Inductive step: suppose n0 + j*M in R for some j with n0 + j*M < n (so n0 + j*M is one of n0, n0+M, ..., n-M). Since n0 >= T+1 > T, every value n0 + j*M is > T, so (hclose) applies: from n0 + j*M in R and n0 + j*M > T we get n0 + (j+1)*M in R. After exactly j steps we reach n0 + j*M = n in R.\n\nHence every n > T is in R, i.e. R contains the entire tail (T, infinity) and is cofinite. QED.\n\nThis is the classical Cassels filling criterion specialized to one step M. In the BEGL96 application R = sum_{d in D} d^k * B_d and M = (min D)^k; the threshold T is the largest non-representable integer, and the team verified the exact identity T = v + M where v is the highest +M-closure failure (e.g. (3,4,7) k=1: T=581, v=578, M=3). The criterion is elementary; ALL the open difficulty of the conjecture is in proving that the window and closure hypotheses eventually hold (which needs the density condition sum 1/(d-1) >= 1 and, on the harmonic boundary, transcendence input). This lemma is the clean reusable engine, independent of those hard inputs.",
+  "candidate_lemmas": [
+    "euclidean_decomp: every n > T equals n0 + j*M with n0 = T+1 + ((n-T-1) mod M) in [T+1,T+M] and j = (n-n0)/M >= 0.",
+    "window_base: by hwin, n0 in [T+1, T+M] implies n0 in R (instantiate i = (n-T-1) mod M < M).",
+    "closure_step: by hclose, if m > T and m in R then m+M in R.",
+    "ladder_induction: induction on j shows n0 + j*M in R for all j>=0, since each intermediate value exceeds T and closure applies.",
+    "cofinite_conclusion: combining gives every n > T in R, so the complement of R is contained in [0,T], finite.",
+    "begl_instantiation: with R = sum_{d in D} d^k * B_d and M = (min D)^k this is the completeness engine; threshold identity T = v + M (last +M-closure failure) was verified exactly across admissible families."
+  ],
+  "honest_disclaimer": "Elementary and fully proven (team-verified across many admissible families with two independent reachability engines). Role: ADJUDICATION -- Aristotle/Lean VERIFIES this abstract criterion. It is stated for an ARBITRARY set R and step M, so it proves nothing about E124 by itself; its value is as the reusable filling engine that the hard window/closure inputs feed into. Formalization is a clean strong-induction / Nat.le_induction on the multiple j; the only care needed is the truncated-subtraction arithmetic in N (all quantities are kept nonnegative via n > T). The open conjecture's difficulty lives entirely in establishing hwin and hclose, NOT in this lemma."
+}

@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780163192.3435678,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:46:32+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_problem_366_2_full_followed_by_3_full",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

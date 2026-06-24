@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 373 (Hickerson) — bounded maximality on n ∈ [17, 100]
+Source: formal-conjectures/FormalConjectures/ErdosProblems/373.lean
+Domain: nt
+
+Hickerson conjectured that 16! = 14!·5!·2! is the largest solution to
+n! = a₁!·a₂!···aₖ! with n − 1 > a₁ ≥ a₂ ≥ ··· ≥ aₖ > 1. L8 iter1
+(UUID ffdbaad1) proved (16,[14,5,2]), (9,[7,3,3,2]), (10,[7,6]),
+(10,[7,5,3]) ∈ S and scanned n ∈ [3, 80] with no further solution.
+This bounded subclaim extends the scan to n ∈ [17, 100], k ≤ 8.
+
+open scoped Nat
+namespace Erdos373
+
+theorem erdos_373_iter2 :
+    ∀ s ∈ S, 17 ≤ s.fst → s.fst ≤ 100 → False := by
+  sorry
+
+end Erdos373
+
+Status: OPEN. Independent prime-factorization scan (Legendre's formula on
+v_p(n!) = Σ_{i≥1} ⌊n/pⁱ⌋, k ≤ 8) confirms 0 solutions for n ∈ [17, 100].
+Full Hickerson (n > 16) remains open. Distinct from Surányi k=2 (id 1260).

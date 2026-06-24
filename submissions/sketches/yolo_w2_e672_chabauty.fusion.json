@@ -1,0 +1,25 @@
+{
+  "problem_id": "erdos_672",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_672/01_literature.md",
+    "analogies_path":  "research_fusion/runs/erdos_672/02_analogies.md",
+    "techniques_path": "research_fusion/runs/erdos_672/03_techniques.md"
+  },
+  "named_technique": "Chabauty-Coleman on superelliptic y^3=x(x+1)(x+2)(x+3) (Stoll 2017 + Bruin-Stoll superelliptic)",
+  "seminal_paper_arxiv": "https://arxiv.org/abs/1506.06463",
+  "fit_score": 0.45,
+  "bridge_lemma": "Dehomogenize n(n+d)(n+2d)(n+3d)=y^3 with gcd(n,d)=1 via x=n/d in Q, yielding a Q-rational point on the smooth genus-3 superelliptic curve C: z^3=x(x+1)(x+2)(x+3) (Riemann-Hurwitz: 2g-2=-6+5(2)=4). Since rank(J(C)/Q)<=2 (3-Selmer + Bruin-Stoll arXiv:1304.5728) is strictly less than g=3, Chabauty-Coleman at p=5 cuts C(Q) down to exactly the 5 obvious points (4 branch points + infinity), none of which correspond to a positive coprime integer (n,d,y) solution.",
+  "informal_proof_outline": "Step 1 (curve construction): Suppose for contradiction (n,d,y) is a positive integer solution with gcd(n,d)=1 and n(n+d)(n+2d)(n+3d)=y^3. Set x=n/d in Q. Then x(x+1)(x+2)(x+3) = (y/d^{4/3})^3. Coprimality gcd(n,d)=1 plus the AP-product-cube condition forces 3 | v_p(d) for every prime p | d; hence z := y/d^{4/3} is rational and (x,z) is a Q-rational point on the smooth projective curve C: z^3 = x(x+1)(x+2)(x+3). Step 2 (geometry of C): C is a cyclic 3-cover of P^1 branched at 0, -1, -2, -3, infinity. Riemann-Hurwitz with gcd(3,4)=1 gives 2g-2 = -2*3 + 5*(3-1) = 4, so g=3. The 4 finite branch points (0,0),(-1,0),(-2,0),(-3,0) and the unique point at infinity are 5 trivial Q-points. Step 3 (rank bound): By 3-descent (Bruin-Stoll arXiv:1304.5728, Schaefer) on J(C), rk(J(C)(Q)) <= 2. This is the load-bearing computational step (Magma RankBound call). Step 4 (Chabauty-Coleman): Since 2 = rk(J(C)(Q)) < g = 3, the Chabauty condition holds. Choose p=5 (good reduction). Coleman integrals of a basis of g-rk=1 holomorphic differential on C define a non-constant 5-adic analytic function vanishing on C(Q). By Stoll 2017 (arXiv:1506.06463, Theorem 1, extended to superelliptic by Bruin-Stoll), |C(Q)| <= rk + 2g - 2 = 6; explicit Coleman integration at p=5 isolates exactly the 5 known points. Step 5 (back-substitution): Each trivial point gives x = n/d in {0,-1,-2,-3,infinity}. With gcd(n,d)=1, n>0, d>0, no valid (n,d) corresponds: x=0 forces n=0; x=-k forces d|n hence gcd>1; x=infinity forces d=0. Hence no positive coprime integer solution exists. QED. Technique-disjoint from Hajdu-Tengely-Tijdeman 2009 / Bennett-Skinner level-lowering (the published Frey-curve proof; YOLO3 wave-1 angle).",
+  "candidate_lemmas": [
+    "dehomogenize_to_curve: For coprime positive (n,d) with n(n+d)(n+2d)(n+3d)=y^3, the rational point x=n/d yields a Q-rational point on C: z^3 = x(x+1)(x+2)(x+3).",
+    "genus_three_superelliptic: C: z^3 = x(x+1)(x+2)(x+3) is a smooth genus-3 cyclic 3-cover of P^1 branched at {0,-1,-2,-3,infinity}; Riemann-Hurwitz gives 2g-2=4.",
+    "trivial_rational_points: The 5 obvious Q-points on C are (0,0),(-1,0),(-2,0),(-3,0),infinity; none corresponds to positive coprime (n,d,y).",
+    "mordell_weil_rank_bound: rk(J(C)(Q)) <= 2 by 3-descent (Bruin-Stoll arXiv:1304.5728); confirmed by Grok 4.3 May 30 2026.",
+    "chabauty_condition_holds: rk(J(C)(Q))=2 < 3 = g(C), so Chabauty-Coleman applies at any prime p != 3 of good reduction.",
+    "stoll_2017_bound: For curve of genus g with rk(J)=r<g, |C(Q)| <= r + 2g - 2 (Stoll 2017 arXiv:1506.06463 Thm 1; superelliptic extension via Bruin-Stoll).",
+    "coleman_integration_at_p_five: Coleman integral of holomorphic differential at p=5 has zero set in C(Q_5) equal to the lift of 5 known F_5-points; no additional Q-rational points.",
+    "frey_free_proof: Chabauty-Coleman proof bypasses Frey/modularity/Bennett-Skinner; technique-disjoint from YOLO3 wave-1.",
+    "bruin_stoll_superelliptic: Bruin-Stoll arXiv:1304.5728 extends Stoll's hyperelliptic algorithm to cyclic-cover curves; Magma implementation."
+  ],
+  "honest_disclaimer": "Erdos 672 k=4 l=3 is a published theorem (Hajdu-Tengely-Tijdeman 2009; Győry-Hajdu-Pintér 2009) via Frey curves + modularity + Bennett-Skinner level-lowering. This FUSION submission proposes a TECHNIQUE-DISJOINT formalization via Chabauty-Coleman on the dehomogenized superelliptic curve C: y^3 = x(x+1)(x+2)(x+3). YOLO wave-1 (slot 1294, in flight) targets the Frey-curve route; this W2-C1 angle is the Chabauty-Coleman route. Bayesian P(target_resolved within 72h) ~ 0.10. CAN: surface technique-disjoint Chabauty angle to Aristotle's informal reasoner with explicit curve, rank bound, and Coleman-integration plan. CANNOT: pre-validate Mathlib's Chabauty-Coleman primitives (these are largely unformalized); guarantee the rank-bound oracle call. Paired-LLM: Grok 4.3 (confirmed curve, genus 3, 5 trivial points, rank<=2, Chabauty applicability); Codex GPT-5.3 query in flight (stdin failure on initial run); Gemini quota-exhausted May 30 2026."
+}

@@ -1,0 +1,4 @@
+c77f40fd-15ad-4945-b9db-dd26e7b64853
+# Task: brocard_nrange_501_1000
+# Hash: c560d4e0ea1c700d
+# Submitted: 2026-05-29T13:35:19.420651

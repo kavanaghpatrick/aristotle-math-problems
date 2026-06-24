@@ -1,0 +1,4 @@
+966c9b33-230f-4e98-a3c6-31d85189df44
+# Task: erdos470_odd_weird
+# Hash: 2c6cf7cdbefffb2c
+# Submitted: 2026-02-18T19:36:45.686835

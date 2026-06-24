@@ -1,0 +1,11 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_partial",
+  "real_closure_candidate": false,
+  "retroactive": true,
+  "applied_at": "2026-05-30",
+  "hedge": true,
+  "rationale": "12x12 finite-grid covering existence at B=1000 — bounded version closure that sharpens slot740's 8x8 at B=500. Honest hedge: Monte-Carlo on the 1135-prime pool caps coverage at 0.751 for K×L, strongly suggesting unsatisfiability. Either way produces a measurable advance over slot740 (covered = strict strengthening; uncoverable = clean impossibility) but neither resolves the open E203 unbounded conjecture (the lift problem remains open). Twin sketch erdos203_grid_16x16_B2000 exists with same shape at a stricter parameter."
+}

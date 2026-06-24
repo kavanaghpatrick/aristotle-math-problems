@@ -1,0 +1,10 @@
+OPEN GAP: Erdos Problem 251 — Irrationality of Sum p_n / 2^n
+Source: FormalConjectures/ErdosProblems/251.lean
+Domain: nt
+
+Is the sum of p_n / 2^n irrational, where p_n is the n-th prime?
+
+theorem erdos_251 : answer(sorry) ↔ Irrational (∑' n : ℕ, (Nat.nth Nat.Prime n) / (2 ^ n)) := by
+  sorry
+
+Status: OPEN. Expected True. Related to Erdos 249 (phi(n)/2^n). Binary representations of primes.

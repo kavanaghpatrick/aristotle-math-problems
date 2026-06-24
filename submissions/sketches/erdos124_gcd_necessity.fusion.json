@@ -1,0 +1,22 @@
+{
+  "problem_id": "erdos_124",
+  "stage_outputs": {
+    "literature_path": "analysis/e124q2/team/scholar_BEGL96_proof_dissected.md",
+    "analogies_path": "analysis/e124q2/team/troika_gcd_necessity.md",
+    "techniques_path": "analysis/e124q2/team/lift_gcd_necessity.md"
+  },
+  "named_technique": "Divisibility confinement: common prime divides every summand",
+  "seminal_paper_arxiv": "http://matwbn.icm.edu.pl/ksiazki/aa/aa77/aa7722.pdf",
+  "fit_score": 0.95,
+  "bridge_lemma": "Each element of sumsOfDistinctPowers d k is divisible by d^k, and D.gcd id divides every base d hence every d^k, so D.gcd id divides every summand and therefore every element of the pointwise sumset. When gcd(D) > 1 this confines the sumset to multiples of gcd(D), omitting every integer coprime to it (e.g. n = 1).",
+  "informal_proof_outline": "Write g = D.gcd id. Goal: every n in the pointwise sumset sum_{d in D} sumsOfDistinctPowers d k is divisible by g (for k >= 1).\n\nStep 1 (every summand is divisible by d^k, hence by g). Fix d in D and a in sumsOfDistinctPowers d k, so a = sum_{i in s} d^i with every i in s satisfying i >= k. By the scaling identity sumsOfDistinctPowers d k = d^k * B_d, a is a multiple of d^k; equivalently, each term d^i = d^k * d^{i-k} is a multiple of d^k, so d^k | a. Now g = D.gcd id divides d (g is the gcd of the elements of D under id), hence g | d | d^k whenever k >= 1, so g | d^k | a. Thus g divides every element of every component set sumsOfDistinctPowers d k.\n\nStep 2 (g divides the sum). An element n of the pointwise sumset has the form n = sum_{d in D} a_d with each a_d in sumsOfDistinctPowers d k. By Step 1, g | a_d for every d in D, so g divides the sum: g | n. This is the claim.\n\nConsequence (necessity of gcd=1). If g = gcd(D) > 1, then every representable n is a multiple of g, so every n coprime to g -- in particular n = 1 and, more strongly, all infinitely many integers of the form g*t + 1 -- is permanently non-representable. Hence the BEGL96 conclusion '(for all sufficiently large n) n is representable' cannot hold, and gcd(D)=1 is necessary for k >= 1. (Contrast k=0: sumsOfDistinctPowers d 0 contains d^0 = 1, so g need not divide a summand; the confinement breaks, consistent with the gcd-free k=0 statement erdos124.zero.)\n\nNote on edge cases: if D is empty the empty sumset is {0} and g = 0 with 0 | 0, vacuously fine; the interesting content is D nonempty with all d >= 3. The statement as written (universal over n in the sumset) is decidable-flavored and avoids any eventual/filter wrapper.",
+  "candidate_lemmas": [
+    "summand_div_dk: every element of sumsOfDistinctPowers d k is divisible by d^k (each term d^i with i>=k is d^k*d^{i-k}); equivalently the scaling identity S(d,k)=d^k*B_d.",
+    "gcd_divides_base: D.gcd id divides every d in D (definition of Finset.gcd under id).",
+    "gcd_divides_summand: for k>=1, D.gcd id | d | d^k, and d^k divides every element of sumsOfDistinctPowers d k, so D.gcd id divides every such element.",
+    "gcd_divides_sum: if g | a_d for every d in D then g | sum_{d in D} a_d; hence D.gcd id divides every element of the pointwise sumset.",
+    "confinement_misses_coprime: if gcd(D)=g>1 then every n coprime to g (e.g. n=1, and all g*t+1) is non-representable, so eventual coverage fails.",
+    "k0_escape: sumsOfDistinctPowers d 0 contains 1 (exponent 0), so g need not divide a summand at k=0; explains why erdos124.zero needs no gcd hypothesis."
+  ],
+  "honest_disclaimer": "Fully proven, elementary, and team-confirmed computationally (gcd-2 family (4,6,8,10,12,14,16) at k=1 covers 0 of 60000 odd numbers below 120000; gcd-3 family (3,6,9,12,15,18) covers 0 non-multiples-of-3). Density-admissible gcd>1 families exist for every g, so the hypothesis is non-vacuous. Role: ADJUDICATION (Aristotle/Lean VERIFIES the divisibility-confinement statement). The theorem is stated as the clean universal divisibility 'D.gcd id divides every element of the sumset' (decidable-flavored, no filter wrapper); the necessity-of-gcd=1 consequence follows immediately since multiples of g>1 omit all coprime residues. This is one direction only -- it does NOT prove the conjecture; the hard sufficiency direction (gcd=1 + density => cofinite) remains open."
+}

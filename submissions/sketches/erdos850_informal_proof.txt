@@ -1,0 +1,44 @@
+INFORMAL PROOF ARGUMENT: Erdos Problem 850
+Source: Erdos 850; Domain: nt
+
+CLAIM: There exist infinitely many n such that n, n+1, n+2 all have the same
+set of prime factors (i.e., same prime factorization support/radical).
+
+STEP 1 — REFORMULATION. We seek n with rad(n) = rad(n+1) = rad(n+2), where
+rad(m) = product of distinct prime factors of m. Equivalently, n, n+1, n+2 are
+all supported on the same set of primes {p_1,...,p_k} for some k.
+
+STEP 2 — SMOOTH NUMBER APPROACH. Three consecutive integers n, n+1, n+2 must
+all be {p_1,...,p_k}-smooth (composed only of primes in a fixed set). By the
+theory of S-integers, for a fixed finite set S of primes, the S-unit equation
+a + b = c with a,b,c all S-units has finitely many solutions (Evertse's theorem).
+But we need THREE consecutive, not just a single equation.
+
+STEP 3 — EXPLICIT CONSTRUCTION VIA POWERS. Look for n = 2^a * 3^b - 1 where
+also n+1 = 2^a * 3^b and n+2 = 2^a * 3^b + 1 are both {2,3}-smooth.
+n+2 = 2^a * 3^b + 1 being {2,3}-smooth requires 2^a * 3^b + 1 = 2^c * 3^d.
+This is a special case of Pillai's equation: 2^a * 3^b - 2^c * 3^d = -1.
+By Tijdeman's theorem (extension of Baker's method), such equations have finitely
+many solutions. Known solutions: 2*3-1=5 (not smooth), 8-1=7 (not smooth),
+2^3*3-1=23 (not smooth). Need larger prime sets.
+
+STEP 4 — CATALAN-TYPE APPROACH WITH MORE PRIMES. For primes S = {2,3,5}, seek
+consecutive S-smooth triples. n=80: 80=2^4*5, 81=3^4, 82=2*41 — fails (41).
+n=2^a*3^b*5^c type. The abc conjecture implies that for any eps>0,
+rad(n(n+1)(n+2)) >> n^{1-eps}. If all three are S-smooth, then
+rad(n(n+1)(n+2)) <= prod S, which is bounded. So n is bounded — finitely many.
+
+STEP 5 — PRIME FACTORIZATION SETS (NOT SMOOTH). The key distinction: we need
+SAME set of prime factors, not that the set is small. Consider n = 2^a * p^b,
+n+1 = 2^c * p^d, n+2 = 2^e * p^f for some prime p. Or allow the shared set to
+grow with n. The problem asks for n, n+1, n+2 to have the SAME prime factor set.
+If this set has many primes, the constraint is weaker. By probabilistic heuristic:
+the probability that rad(n)=rad(n+1) is roughly prod_{p|n} (v_p(n+1)>0 prob) which
+for typical n is extremely small. This suggests only finitely many solutions exist.
+
+theorem erdos_850 :
+  ∃ x y : ℕ, x ≠ y ∧ x.primeFactors = y.primeFactors ∧
+  (x+1).primeFactors = (y+1).primeFactors ∧
+  (x+2).primeFactors = (y+2).primeFactors := by sorry
+
+Status: OPEN. Heuristics suggest finite or empty solution set. Connection to abc conjecture.

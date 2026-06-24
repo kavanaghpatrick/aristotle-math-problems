@@ -1,4 +1,4 @@
-6388327a-2dab-4a3d-bf53-de8ea53b7ea6
-# Task: slot722_erdos263_irrationality_sequence
-# Hash: 6b97dde16b92fc34
-# Submitted: 2026-03-15T05:39:13.857201
+3948eb96-accb-4cf5-9355-fd2fd98a11cf
+# Task: brocard_bounded_n2_to_50
+# Hash: 2abcf72e5b3ec567
+# Submitted: 2026-05-28T11:46:04.802203

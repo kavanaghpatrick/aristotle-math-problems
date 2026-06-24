@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "technique_card.schema.json",
+  "title": "TechniqueCard",
+  "description": "Per-candidate output of Stage 3. Catalog-style, no proof guidance.",
+  "type": "object",
+  "required": ["name", "what_it_does", "input_requirements",
+               "output_signature", "input_match", "fit_score"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Named technique, e.g. 'Bilu-Tichy', 'polynomial method'."
+    },
+    "seminal_paper": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "arxiv_id": {"type": ["string", "null"]},
+        "doi": {"type": ["string", "null"]},
+        "citation": {"type": "string"},
+        "year": {"type": ["integer", "null"]}
+      },
+      "required": ["citation"]
+    },
+    "home_domain": {"type": "string"},
+    "what_it_does": {
+      "type": "string",
+      "maxLength": 600,
+      "description": "2-3 sentence catalog blurb — NEVER a proof sketch."
+    },
+    "input_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    },
+    "output_signature": {"type": "string"},
+    "input_match": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement", "match"],
+        "properties": {
+          "requirement": {"type": "string"},
+          "match": {"type": "string", "enum": ["YES", "NO", "PARTIAL"]},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "known_obstructions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "fit_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "(# YES + 0.5 * # PARTIAL) / total input_requirements."
+    },
+    "rank": {"type": "integer", "minimum": 1},
+    "source_analog_id": {
+      "type": "string",
+      "description": "Id of the analog from Stage 2 this technique was extracted from."
+    }
+  }
+}

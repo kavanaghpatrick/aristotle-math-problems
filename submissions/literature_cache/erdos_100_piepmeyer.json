@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780317582.5688372,
+  "arxiv_recent": [],
+  "checked_at": "2026-06-01T12:39:42+00:00",
+  "citations": [],
+  "erdos_n": 100,
+  "erdosproblems_status": "open",
+  "erdosproblems_url": "https://www.erdosproblems.com/100",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_100_piepmeyer",
+  "status": "CLEAR",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

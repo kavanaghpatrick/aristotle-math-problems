@@ -1,0 +1,19 @@
+OPEN GAP: Erdős 124 — Necessity of gcd(D)=1 for k ≥ 1
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.ne_zero)
+Domain: nt
+
+In the open BEGL96 case (k ≠ 0), the hypothesis gcd(D)=1 is necessary. When gcd(D) > 1 and
+k ≥ 1, the whole k-shifted pointwise sumset is confined to multiples of gcd(D): every
+representable n satisfies (D.gcd id) ∣ n. Hence once gcd(D) > 1 the value n = 1 (and every n
+coprime to gcd(D)) is permanently missed, so the eventual-coverage conclusion cannot hold.
+
+theorem erdos124_gcd_confinement
+    (D : Finset ℕ) (k : ℕ) (hk : k ≠ 0)
+    (n : ℕ) (hn : n ∈ ∑ d ∈ D, Erdos124.sumsOfDistinctPowers d k) :
+    (D.gcd id) ∣ n := by
+  sorry
+
+Status: OPEN component (the necessity half of the open conjecture's gcd hypothesis). Known
+mechanism: every element of sumsOfDistinctPowers d k is divisible by d^k, and D.gcd id divides
+every d hence every d^k, so it divides every summand and every representable n. With gcd(D) > 1
+this omits all n coprime to gcd(D); the k=0 statement escapes because d^0 = 1. Not in Mathlib.

@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Family-level sub_claim_closure of the Feit-Thompson p=3 conjecture for the residue class q ≡ 71 (mod 72) up to q = 2000. The 14 family primes split into two operationally distinct branches on the primality of A(q) = q^2 + q + 1: small-r (12 primes, A(q) composite, smallest prime divisor witnesses the Fermat reduction) and large-r (2 primes — q ∈ {71, 1583}, A(q) prime, r := A(q) witnesses directly). CS=sub_claim_closure: closes one residue-class sub-family of the FT p=3 conjecture; the full conjecture for p=3 remains open beyond q=2000 and across other residue classes. CM=structural_finite_reduction: the universal-over-ℕ statement is reduced to Finset.range 2001 then dispatched by native_decide, which handles both dichotomy branches uniformly. CR=clean_decidable: the most expensive native_decide step (q=1583 large-r branch) is ~23 modular squarings on a 22-bit modulus; the whole family decision compiles cleanly under maxHeartbeats 8000000. HM=journal_subclaim: publishable as a structural complement demonstrating both branches of the dichotomy across a non-trivial residue class. real_closure_candidate=true: genuine structural extension over slot720/slot736 — adds the large-r branch at q=1583 (proven independently by slot744 v2) to the family-level discharge, validating the dichotomy on both branch types in a single theorem rather than as separate sub-claims."
+}

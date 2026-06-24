@@ -1,0 +1,22 @@
+OPEN GAP: Erdős Problem 267 — Fibonacci Subsequence Irrationality
+Source: Erdős Problem 267
+Domain: nt
+
+Let F_n be the Fibonacci numbers. If (n_k) is a strictly increasing
+sequence of positive integers with n_{k+1}/n_k → c where 1 < c < 2,
+is ∑ 1/F_{n_k} necessarily irrational?
+
+Badea (1987) proved irrationality for c ≥ 2: the key is
+F_{2n} = F_n · L_n > F_n² - F_n + 1, giving quadratic denominator
+growth that triggers the Oppenheim/Brun irrationality criterion.
+
+For 1 < c < 2, denominator growth is subquadratic and the
+criterion fails. No rational-valued counterexample is known.
+
+theorem erdos267_fibonacci (n : ℕ → ℕ) (hn_inc : StrictMono n)
+    (c : ℝ) (hc1 : 1 < c) (hc2 : c < 2)
+    (hlim : Filter.Tendsto (fun k => (n (k+1) : ℝ) / n k)
+      Filter.atTop (nhds c)) :
+    Irrational (∑' k, (1 : ℝ) / Nat.fib (n k)) := by sorry
+
+Status: OPEN. Proved for c ≥ 2 (Badea 1987). Open for 1 < c < 2.

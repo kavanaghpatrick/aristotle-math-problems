@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "partial_result_only",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": false,
+  "rationale": "Closure of φ(n)=φ(n+1) infinitude under the two-pillar approach (S-unit/Subspace stratification + Tao 2016 entropy decrement). Full closure is implausible: the Subspace Theorem yields fixed-support finiteness (Pillar 1) but cannot itself reach the unbounded-support contribution; Tao's entropy decrement was a parity-barrier-crossing technique for two-point correlations of completely multiplicative functions and does not directly produce lower bounds for equality of φ at consecutive integers. The realistic sub-claim Aristotle may close is structural: a finite-support reduction theorem that for fixed (r,s) bounds solutions effectively, making this a journal_subclaim. Submit on --rubric-points override; tracked as second end-to-end fusion-lane validation (E938 was first)."
+}

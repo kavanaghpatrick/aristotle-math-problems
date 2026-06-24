@@ -1,0 +1,22 @@
+{
+  "problem_id": "erdos_124",
+  "stage_outputs": {
+    "literature_path": "analysis/e124q2/team/scholar_BEGL96_proof_dissected.md",
+    "analogies_path": "analysis/e124q2/team/sumset_reduction_scaling.md",
+    "techniques_path": "analysis/e124q2/team/troika_scaling.md"
+  },
+  "named_technique": "Exponent-shift bijection (Minkowski scaling of a digit set)",
+  "seminal_paper_arxiv": "http://matwbn.icm.edu.pl/ksiazki/aa/aa77/aa7722.pdf",
+  "fit_score": 0.95,
+  "bridge_lemma": "Every exponent set s with all elements >= k is the image of a unique arbitrary finite exponent set s' under the shift j -> j+k, and this shift multiplies the corresponding power sum by exactly d^k. Hence the k-shifted digit set is d^k times the unshifted digit set, giving the divisibility-plus-quotient membership criterion.",
+  "informal_proof_outline": "Let S(d,k) = sumsOfDistinctPowers d k = { sum_{i in s} d^i : s a finite Finset of N, all i in s satisfy k <= i }. Write B_d = S(d,0), the set of base-d numbers using only digits 0 and 1. Goal: x in S(d,k) iff d^k | x and x/d^k in B_d.\n\nFORWARD. Suppose x in S(d,k), say x = sum_{i in s} d^i with every i >= k. The map phi : j |-> j + k is a bijection from N onto {m in N : m >= k}, with inverse m |-> m - k. Let s' = s.map(phi^{-1}) = { i - k : i in s }; since phi^{-1} is injective on {m >= k} (it is the genuine subtraction there), |s'| = |s| and the elements of s' are arbitrary naturals. Now d^i = d^{(i-k)+k} = d^k * d^{i-k}, so x = sum_{i in s} d^k * d^{i-k} = d^k * sum_{j in s'} d^j = d^k * y, where y = sum_{j in s'} d^j is an element of B_d (a 0/1-digit base-d number). Thus d^k | x and x/d^k = y in B_d.\n\nBACKWARD. Suppose d^k | x and y := x/d^k in B_d, say y = sum_{j in s'} d^j for a finite Finset s' of N. Let s = s'.map(phi) = { j + k : j in s' }; every element of s is >= k, and |s| = |s'| since phi is injective. Then sum_{i in s} d^i = sum_{j in s'} d^{j+k} = d^k * sum_{j in s'} d^j = d^k * y = x. Hence x in S(d,k).\n\nThis proves the equivalence. The corollary, applied termwise to a finite set D, rewrites the pointwise sumset sum_{d in D} S(d,k) as sum_{d in D} d^k * B_d, which is the canonical form for the open BEGL96 question. Note d=0 and edge cases: for d >= 1 the powers d^k are positive; the empty Finset gives 0 in both S(d,k) and B_d, consistent with the criterion (d^k | 0 and 0 in B_d).",
+  "candidate_lemmas": [
+    "shift_bijection: j |-> j+k is a bijection N -> {m : m >= k} with inverse m |-> m-k; it preserves Finset cardinality under map.",
+    "power_split: for i >= k, d^i = d^k * d^{i-k}.",
+    "forward_scaling: x = sum_{i in s} d^i with all i>=k implies x = d^k * sum_{j in s'} d^j where s' = {i-k : i in s}, so d^k | x and x/d^k in B_d.",
+    "backward_scaling: y = sum_{j in s'} d^j in B_d implies d^k * y = sum_{i in s} d^i with s = {j+k : j in s'} all >= k, so d^k*y in S(d,k).",
+    "zero_membership: 0 in S(d,k) and 0 in B_d (empty Finset), and d^k | 0, so the criterion holds at x=0.",
+    "sumset_rewrite_corollary: for a finite set D, sum_{d in D} S(d,k) = sum_{d in D} d^k * B_d (termwise application of the equivalence)."
+  ],
+  "honest_disclaimer": "This is an elementary, fully-proven identity (sumset's one-line lemma, team-confirmed for d in {3,4,5,7}, k in {1,2,3}). Role here is ADJUDICATION: Aristotle/Lean VERIFIES it. The only formalization subtlety is the Finset.map injectivity bookkeeping for the shift bijection (truncated subtraction in N: i - k is honest only because i >= k is in the hypothesis). Standalone result; combined with the residue-coverage and density lemmas it drives the full BEGL96 analysis, but on its own it proves nothing about cofiniteness."
+}

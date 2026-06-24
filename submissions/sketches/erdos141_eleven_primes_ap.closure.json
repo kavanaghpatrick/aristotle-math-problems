@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Erdős 141 variant.eleven asks for the existence of 11 consecutive primes in arithmetic progression. The conjecture is bare existence (∃ s, s.IsAPAndPrimeProgressionOfLength 11). CS=direction_closure: we close the existence direction with a concrete tuple. CM=explicit_witness: the canonical closure form is to exhibit a starting prime p and common difference d (necessarily 11# | d, by Dirichlet/local obstructions) such that p, p+d, …, p+10d are all prime and no prime lies strictly between consecutive terms. CR=clean_decidable: once any candidate (p, d) is fixed, primality of the 11 terms and absence of intervening primes is decidable arithmetic — primality checks plus a sieve over each open interval (p+id, p+(i+1)d). HM=journal_subclaim: the k≤10 case (Toplic/Dubner/Forbes/Lygeros/Mizony/Zimmermann, 1998, common difference 7#=210) is published; the k=11 case is a stated open problem (Dubner et al. estimated a trillion-fold speedup needed; PrimeGrid AP26/AP27 work targets non-consecutive APs). real_closure_candidate=true: erdos_141.variant.eleven is the named open theorem in the FC file, and any explicit 11-tuple discharges the existence claim outright. No EM tautology — this is bare existence, not (P ∨ ¬P). The honest gap: no witness is currently known; Aristotle's task is to construct or prove constructible such a tuple."
+}

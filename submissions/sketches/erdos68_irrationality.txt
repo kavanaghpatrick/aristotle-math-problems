@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 68 — Irrationality of sum 1/(n!-1)
+Source: FormalConjectures/ErdosProblems/68.lean
+Domain: nt
+
+Is the sum from n=2 to infinity of 1/(n!-1) irrational?
+
+theorem erdos_68 :
+    Irrational (∑' n : ℕ, 1 / ((n + 2).factorial - 1 : ℝ)) := by sorry
+
+Status: OPEN. The series equals sum of 1/(n!)^k over n,k.
+Rapid convergence suggests irrationality provable via
+Mahler-type or factorial-based approximation arguments.

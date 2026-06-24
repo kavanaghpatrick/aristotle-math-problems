@@ -1,0 +1,18 @@
+OPEN GAP: Erdős Problem 267 — Lacunary Reciprocal Sum Irrationality
+Source: Erdős Problem 267
+Domain: nt
+
+If (n_k) is a strictly increasing sequence of positive integers with
+n_{k+1}/n_k → c where 1 < c < 2, then ∑ 1/n_k is irrational.
+
+Known: Badea's criterion proves irrationality when c ≥ 2 (since
+n_{k+1} ≥ 2n_k eventually forces n_{k+1} > n_k(n_k - 1) + 1).
+The case 1 < c < 2 remains open.
+
+theorem erdos267 (n : ℕ → ℕ) (hn_pos : ∀ k, 0 < n k)
+    (hn_inc : StrictMono n) (c : ℝ) (hc1 : 1 < c) (hc2 : c < 2)
+    (hlim : Filter.Tendsto (fun k => (n (k+1) : ℝ) / n k)
+      Filter.atTop (nhds c)) :
+    Irrational (∑' k, (1 : ℝ) / n k) := by sorry
+
+Status: OPEN. Solved for c ≥ 2 (Badea). Open for 1 < c < 2.

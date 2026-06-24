@@ -1,0 +1,9 @@
+1. **Step “Since our triples are consecutive, their common difference satisfies \(d\ll x^{1/2}\) along an infinite subsequence.”** This does not follow from the counting asymptotic. The formula for the number of powerful numbers up to \(X\) gives an average gap of order \(X^{1/2}\) among all powerful numbers up to \(X\), but an arbitrary infinite subsequence of special gaps may consist entirely of much larger-than-average gaps. Average gap control gives no bound on the gaps occurring in the assumed AP triples.
+
+2. **Step “the pigeonhole principle gives an infinite subsequence for which \((b_0,b_1,b_2)\) is constant.”** This is a false pigeonhole use. The squarefree kernels \(b_i\) are not drawn from a fixed finite set; they can grow with \(x\), since \(b_i^3\le x+2d\), so \(b_i\le (x+2d)^{1/3}\). Infinitely many triples distributed among infinitely many possible kernel triples need not repeat any one kernel triple infinitely often. The cited natural density of squarefree integers is irrelevant to this conclusion.
+
+3. **Step invoking “Thue-Siegel” to force \(b_0=b_1=b_2\).** This is both the wrong theorem and a false claim. Equation  
+\[
+b_0^3a_0^2-2b_1^3a_1^2+b_2^3a_2^2=0
+\]
+is a ternary quadratic equation, i.e. a conic-type Diophantine equation, not a Thue equation of degree at least \(3\). Nonsingular ternary quadratic forms often have infinitely many primitive integer solutions. The additional claim that solutions are finite when variables lie in intervals of length \(O(x^{1/4})\) is also unjustified, because the interval moves with \(x\) and does not give a fixed finite search region. Thus this step cannot force equality of the \(b_i\).

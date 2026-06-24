@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780313840.827372,
+  "checked_at": "2026-06-01T11:37:20+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2021 partial/weak: Twin Prime Conjecture - Proof that there are infinite twin primes.",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.14293/s2199-1006.1.sor-.ppkave2.v1"
+    }
+  ],
+  "status": "CLEAR"
+}

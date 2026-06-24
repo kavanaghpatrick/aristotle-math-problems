@@ -1,0 +1,16 @@
+OPEN GAP: Erdős 938 — finitely many 3-APs of consecutive powerful numbers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the sequence of powerful numbers (those n ≥ 1
+with the property that p ∣ n implies p² ∣ n). Are there only finitely many
+three-term arithmetic progressions formed by three consecutive terms
+n_k, n_{k+1}, n_{k+2}?
+
+theorem erdos_938 :
+    {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+      P = {Nat.nth Nat.Powerful k, Nat.nth Nat.Powerful (k+1),
+           Nat.nth Nat.Powerful (k+2)}}.Finite := by sorry
+
+Status: OPEN. No unconditional finiteness proof is known. Chan 2022
+(arXiv:2210.00281) gives the count finite under ABC.

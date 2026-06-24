@@ -1,0 +1,20 @@
+OPEN GAP: Odd multiperfect with σ₀(n) = 11
+Source: erdosproblems.com odd-multiperfect lineage; slot737 σ₀ multiplicativity DNA
+Domain: nt
+
+No odd multiperfect number n (i.e., odd n with σ(n) = k·n for some integer k≥2)
+with σ₀(n) = 11 exists. Since 11 is prime, σ₀ multiplicativity forces
+n = p^10 for a single odd prime p; then σ(p^10) = 1 + p + … + p^10 ≡ 1 (mod p),
+so p ∤ σ(p^10), so p^10 ∤ σ(p^10). Trivially TRUE but unformalized in Mathlib.
+
+theorem odd_multiperfect_sigma0_11_impossible :
+    ¬ ∃ n : ℕ, Odd n ∧ n > 1 ∧
+      (Nat.divisors n).card = 11 ∧
+      ∃ k : ℕ, k ≥ 2 ∧ ((Nat.divisors n).sum id) = k * n := by sorry
+
+Status: OPEN (as a Lean formalization target). Trivially true by a 1-line
+p-adic argument; the OPEN gap is whether Aristotle can discover this proof
+unprompted using its slot737 σ₀-multiplicativity machinery. Numerical
+verification: for every odd prime p ≤ 1000 (167 primes), p^10 is not
+multiperfect. Adjacent searches show NO odd multiperfect with σ₀(n) ∈
+{12, 14, 15} up to N = 10^7.

@@ -47,6 +47,8 @@ All audited .lean files use **CORRECT** definitions:
 # Analyze output
 python3 scripts/workflow.py analyze <output-file>
 
-# Update database
-python3 -c "UPDATE submissions SET status='completed' WHERE uuid='...'"
+# Update database (canonical status enum 2026-05-28:
+#   submitted | compile_failed | compiled_partial | compiled_no_advance
+#   | compiled_advance | disproven)
+python3 -c "UPDATE submissions SET status='compiled_no_advance' WHERE uuid='...'"
 ```

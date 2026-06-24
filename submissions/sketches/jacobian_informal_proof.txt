@@ -1,0 +1,40 @@
+INFORMAL PROOF ARGUMENT: Jacobian Conjecture (degree 2 case)
+Source: Keller 1939, Smale's problem 16; Domain: algebra
+
+CLAIM: If F : C^n -> C^n is a polynomial map with constant nonzero Jacobian
+determinant, then F is a polynomial automorphism (has polynomial inverse).
+We prove the degree-2 case: if each component of F has degree at most 2.
+
+STEP 1 — SETUP. Let F = (F_1,...,F_n) : C^n -> C^n with each F_i a polynomial
+of degree <= 2 and det(JF) = c ≠ 0 (constant). Write F_i = L_i + Q_i where
+L_i is affine (degree <= 1) and Q_i is homogeneous of degree 2.
+
+STEP 2 — REDUCTION TO TRIANGULAR. By Wang's theorem (1980), the Jacobian
+conjecture for degree d maps reduces to the case where F = Id + H with H
+homogeneous of degree 3 and JH nilpotent. For degree 2: F = L + Q. After
+an affine change of coordinates (composing with L^{-1}), WLOG F = Id + Q
+where Q is homogeneous degree 2 and JQ is nilpotent everywhere.
+
+STEP 3 — NILPOTENT JACOBIAN IMPLIES INVERSE. JF = I + JQ. Since JQ is
+nilpotent (all eigenvalues 0), (I + JQ)^{-1} = I - JQ + (JQ)^2 - ... which
+terminates since JQ is nilpotent of index at most n. This gives a formal
+inverse for JF, but we need to show F itself has a polynomial inverse.
+
+STEP 4 — DEGREE 2 EXPLICIT INVERSE. For F = Id + Q with Q homogeneous degree 2
+and JQ nilpotent: the formal inverse G of F is G = Id - Q(G). Substituting
+iteratively: G = Id - Q + Q(Q) - Q(Q(Q)) + ... Since each Q_i has degree 2,
+the k-th iterate has degree 2^k. But nilpotency of JQ means Q∘Q∘...∘Q = 0
+after at most n compositions (by the nilpotency index). So G is polynomial
+of degree at most 2^n.
+
+STEP 5 — VERIFICATION. F∘G = Id: F(G(x)) = G(x) + Q(G(x)) = x - Q(G(x)) + ... + Q(G(x)) = x
+by the telescoping from Step 4. Similarly G∘F = Id. Since G is polynomial, F is
+an automorphism. This proves the Jacobian conjecture for degree 2.
+
+theorem jacobian_degree_2 {n : ℕ} (F : (Fin n → ℂ) → (Fin n → ℂ))
+  (hpoly : IsPolynomialMap F) (hdeg : PolyDegree F ≤ 2)
+  (hjac : ∀ x, det (jacobianMatrix F x) ≠ 0) :
+  ∃ G : (Fin n → ℂ) → (Fin n → ℂ), IsPolynomialMap G ∧
+  (∀ x, F (G x) = x) ∧ (∀ x, G (F x) = x) := by sorry
+
+Status: OPEN in general. Degree 2 is known (Bass-Connell-Wright 1982 reduction).

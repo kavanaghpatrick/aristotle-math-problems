@@ -1,0 +1,19 @@
+OPEN GAP: Erdős 1052 — Unitary Perfect Numbers with Exactly 3 Prime Factors
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1052.lean
+Domain: nt
+
+A unitary perfect number n satisfies σ*(n) = 2n where σ*(n) = ∑_{d|n, gcd(d, n/d) = 1} d.
+Aristotle previously proved (in iter1, uuid a9e232a2-2593-4765-920a-a3c080a6898d):
+σ*(p^a) = 1 + p^a; multiplicativity of σ* on coprime arguments; the product
+formula σ*(n) = ∏_{p ∈ primeFactors n}(1 + p^{v_p(n)}); evenness of every unitary
+perfect number; the 2-prime classification (only n=6). The bare gap here is
+the next prime-factor count: classify all unitary perfect numbers with
+exactly 3 prime factors.
+
+theorem erdos_1052_three_primes {n : ℕ} (hn : IsUnitaryPerfect n)
+    (hk : n.primeFactors.card = 3) :
+    n = 60 ∨ n = 90 := by sorry
+
+Status: OPEN classification at this exact k=3 granularity in Lean. The known
+unitary perfect numbers 60 = 2²·3·5 and 90 = 2·3²·5 both lie at k=3. iter1
+closed k=2 sorry-free; this is the natural next specialization.

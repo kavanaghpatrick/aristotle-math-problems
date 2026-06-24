@@ -1,0 +1,27 @@
+{
+  "_cache_ts": 1780127611.105074,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T07:53:31+00:00",
+  "citations": [
+    {
+      "evidence": "wiki 1(d): AI + human collaboration",
+      "snapshot": "2026-05-30",
+      "source": "teorth-wiki",
+      "url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+    }
+  ],
+  "erdos_n": 326,
+  "erdosproblems_status": "open",
+  "erdosproblems_url": "https://www.erdosproblems.com/326",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_326",
+  "status": "AMBIGUOUS",
+  "wiki_evidence": [
+    "wiki 1(d): AI + human collaboration"
+  ],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "AMBIGUOUS"
+}

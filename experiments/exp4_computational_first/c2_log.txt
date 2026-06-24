@@ -1,0 +1,58 @@
+Loading powerful numbers from /Users/patrickkavanagh/math/experiments/exp4_computational_first/powerful_1e11.bin...
+  loaded 680330 numbers in 0.0s
+
+=== PART A: Consecutive powerful 3-APs up to 10^11 ===
+  found 6 consecutive 3-APs in 0.1s
+    (1728, 1764, 1800)  gap=36
+    (6912, 7056, 7200)  gap=144
+    (729000, 729316, 729632)  gap=316
+    (1458000, 1458632, 1459264)  gap=632
+    (2916000, 2917264, 2918528)  gap=1264
+    (11664000, 11669056, 11674112)  gap=5056
+
+=== PART B: All powerful 3-APs with n_0 <= 10^8 ===
+  21044 powerful with n_0 <= 100000000
+  i=0/21044, |3aps|=8, t=0.0s
+  i=5000/21044, |3aps|=117251, t=20.3s
+  i=10000/21044, |3aps|=189733, t=34.4s
+  i=15000/21044, |3aps|=230763, t=43.0s
+  i=20000/21044, |3aps|=246421, t=46.6s
+  total: 246812 powerful 3-APs with n_0 <= 10^8 in 46.7s
+
+=== PART C: Distribution analysis ===
+  3-AP counts by log10(n_0) bin:
+    [10^0, 10^1): 42 3-APs
+    [10^1, 10^2): 153 3-APs
+    [10^2, 10^3): 871 3-APs
+    [10^3, 10^4): 3438 3-APs
+    [10^4, 10^5): 12266 3-APs
+    [10^5, 10^6): 36996 3-APs
+    [10^6, 10^7): 89777 3-APs
+    [10^7, 10^8): 103269 3-APs
+
+=== PART D: For each non-consecutive 3-AP, count intervening powerfuls ===
+  intervening powerful count histogram (over 246812 3-APs):
+    0 intervening: 6 3-APs
+    1 intervening: 11 3-APs
+    2 intervening: 9 3-APs
+    3 intervening: 9 3-APs
+    4 intervening: 19 3-APs
+    5 intervening: 22 3-APs
+    6 intervening: 18 3-APs
+    7 intervening: 20 3-APs
+    8 intervening: 11 3-APs
+    9 intervening: 22 3-APs
+    10 intervening: 21 3-APs
+    11 intervening: 17 3-APs
+    12 intervening: 23 3-APs
+    13 intervening: 19 3-APs
+    14 intervening: 13 3-APs
+    15 intervening: 24 3-APs
+    16 intervening: 17 3-APs
+    17 intervening: 18 3-APs
+    18 intervening: 15 3-APs
+    19 intervening: 15 3-APs
+  3-APs with 0 intervening (= consecutive): 6
+
+Saved to /Users/patrickkavanagh/math/experiments/exp4_computational_first/c2_results.json
+  all 3-APs saved to c2_all_3aps.txt (246812 entries)

@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318588.0662558,
+  "checked_at": "2026-06-01T12:56:28+00:00",
+  "evidence": "3 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "1979 partial/weak: ON THE ZEROS OF SUCCESSIVE DERIVATIVES OF AN ENTIRE FUNCTION",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1515/dema-1979-0118"
+    },
+    {
+      "evidence": "2022 partial/weak: A NOTE ON THE DISTRIBUTION OF ZEROS OF POLYNOMIALS AND CERTAIN CLASS OF TRANSCENDENTAL ENTIRE FUNCTIONS",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.58250/jnanabha.2022.52119"
+    },
+    {
+      "evidence": "2009 partial/weak: Bounds for Zeros of Entire Functions",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1201/9781439800331-9"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780313802.906007,
+  "checked_at": "2026-06-01T11:36:42+00:00",
+  "evidence": "4 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "1985 partial/weak: On Einstein's work of 1914 on the theory of irregularly fluctuating series of observations",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3983115"
+    },
+    {
+      "evidence": "2009 partial/weak: Conditional matching preclusion sets",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:5532956"
+    },
+    {
+      "evidence": "2025 partial/weak: On the Smallest Size of Internal Collage Systems",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2509.11602v2"
+    },
+    {
+      "evidence": "2025 partial/weak: Instance-Dependent Regret Bounds for Learning Two-Player Zero-Sum Games with Bandit Feedback",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2502.17625v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

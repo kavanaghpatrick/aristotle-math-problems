@@ -1,0 +1,16 @@
+OPEN GAP: Feit-Thompson p=3, q ≡ 71 (mod 72), q ≤ 2000
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+The Feit-Thompson prime conjecture asserts: for distinct primes p < q,
+(q^p - 1)/(q - 1) does not divide (p^q - 1)/(p - 1). Open since 1962.
+
+Extension of slot720 (q ≤ 1000), slot736 (q ≤ 1500), and slot744 v2 (q=1583)
+to q ≤ 2000. Family covers 14 primes ≡ 71 (mod 72) in this range.
+
+theorem feit_thompson_p3_q71_family_2000 :
+    ∀ q : ℕ, q.Prime → 3 < q → q ≡ 71 [MOD 72] → q ≤ 2000 →
+      ¬ (q ^ 3 - 1) / (q - 1) ∣ (3 ^ q - 1) / 2 := by sorry
+
+Status: OPEN in full generality. The full Feit-Thompson conjecture for p = 3
+remains open beyond q = 2000 and across other residue classes.

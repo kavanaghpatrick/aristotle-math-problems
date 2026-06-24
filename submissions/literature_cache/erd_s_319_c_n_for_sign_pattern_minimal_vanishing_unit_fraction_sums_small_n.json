@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780140760.349499,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T11:32:40+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_319_c_n_for_sign_pattern_minimal_vanishing_unit_fraction_sums_small_n",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

@@ -1,0 +1,17 @@
+=== count ASSAULT: min-deg>=6 (IRREGULAR allowed) annealer ===
+covers Prop 5.1 feasible region m>3n that strict-6reg excludes
+
+--- md6-n12 (n=12, m=36), 120000 iters
+  [md6-n12] it=25000 T=1.58 cur=54.0 best=54.0 info(chi,ncV,crE,minD,maxD)=(4, 4, 6, 6, 6) (53s)
+  [md6-n12] it=50000 T=0.50 cur=54.0 best=54.0 info(chi,ncV,crE,minD,maxD)=(4, 4, 6, 6, 6) (108s)
+  [md6-n12] it=75000 T=0.16 cur=54.0 best=54.0 info(chi,ncV,crE,minD,maxD)=(4, 4, 6, 6, 6) (162s)
+  [md6-n12] it=100000 T=0.05 cur=54.0 best=54.0 info(chi,ncV,crE,minD,maxD)=(4, 4, 6, 6, 6) (216s)
+  => md6-n12: best=54.0 info(chi,ncV,crE,minD,maxD)=(4, 4, 6, 6, 6)
+--- md6-n13 (n=13, m=39), 120000 iters
+  [md6-n13] it=25000 T=1.58 cur=79.0 best=77.0 info(chi,ncV,crE,minD,maxD)=(4, 6, 5, 6, 6) (67s)
+  [md6-n13] it=50000 T=0.50 cur=79.0 best=77.0 info(chi,ncV,crE,minD,maxD)=(4, 6, 5, 6, 6) (135s)
+  [md6-n13] it=75000 T=0.16 cur=79.0 best=77.0 info(chi,ncV,crE,minD,maxD)=(4, 6, 5, 6, 6) (202s)
+  [md6-n13] it=100000 T=0.05 cur=79.0 best=77.0 info(chi,ncV,crE,minD,maxD)=(4, 6, 5, 6, 6) (268s)
+  => md6-n13: best=77.0 info(chi,ncV,crE,minD,maxD)=(4, 6, 5, 6, 6)
+--- md6-n14 (n=14, m=42), 120000 iters
+  [md6-n14] it=25000 T=1.58 cur=69.0 best=69.0 info(chi,ncV,crE,minD,maxD)=(4, 5, 9, 6, 8) (105s)

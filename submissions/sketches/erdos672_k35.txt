@@ -1,0 +1,19 @@
+OPEN GAP: Erdos 672 — Product of 35 coprime AP terms is never a perfect power
+Source: FormalConjectures/ErdosProblems/672.lean
+Domain: nt
+
+For n,d > 0 with gcd(n,d)=1, the product of 35 consecutive
+terms in arithmetic progression n(n+d)(n+2d)...(n+34d) is
+never a perfect l-th power for any l >= 2.
+
+Cases k=4 through k=34 are solved (Bennett et al. 2006,
+Gyory-Hajdu-Pinter 2009). k=35 is the first open case.
+
+theorem erdos_672_k35 :
+    ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+    ∀ l : ℕ, l ≥ 2 →
+    ¬ ∃ y : ℕ, (∏ i in Finset.range 35, (n + i * d)) = y ^ l := by
+  sorry
+
+Status: OPEN. First unsolved case. k≤34 proved, k large proved
+(Bennett-Siksek 2020). Gap is 35 ≤ k ≤ threshold.

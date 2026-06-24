@@ -1,0 +1,35 @@
+### WITHDRAWN — KNOWN RESULT. DO NOT SUBMIT TO ARISTOTLE. ###
+# Gate verdict (team-lead, scholar prior-art check): this k=0 (s=0) result is PUBLICLY KNOWN.
+#   - Alexeev 2025: public Lean proof Erdos124b.lean, 407 lines, Dec 2025 (github plby/lean-proofs);
+#     announced on Bloom's erdosproblems site / Xena blog.
+#   - Mathematically a corollary of Brown 1961 (Amer. Math. Monthly 68, 557-560) + Erdős 1962
+#     (Acta Arith. 7) interval-filling completeness. [NB: "Cassels 1960" for this lemma is a PHANTOM ref.]
+# Therefore NOT a novelty claim and NOT an adjudication candidate. cassels' elementary proof is
+# RETAINED in the workspace ONLY as an independent re-derivation / machinery calibration, never to
+# be fired. No successor should resurrect this as a submission. (The 4 already-fired E124 elementary
+# dossiers are unaffected: they were adjudication-of-team-lemmas, not novelty claims.)
+### END WITHDRAWN NOTICE ###
+
+OPEN GAP: Erdős 124, s=0 analogue — complete-from-0 for finite digit-restricted power sets
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.zero)
+Domain: nt / combinatorics
+Note: this is the s=0 analogue, OUTSIDE the BEGL96 conjecture (which is stated only for s ≥ 1).
+k=0 case: conjectured Erdős [Er97], resolved Alexeev/Aristotle 2025 (Erdos124b.lean). The OPEN
+target of E124 is the k≠0 conjecture (erdos124.ne_zero), NOT this k=0 case — this dossier is the
+known base-case reference only, never a submission.
+
+Let B_d = { ∑_{i∈s} d^i : s ⊂ ℕ finite } be the set of nonnegative integers whose
+base-d representation uses only the digits 0 and 1 (sums of distinct powers of d).
+For a finite set D of integers, all ≥ 3, with ∑_{d∈D} 1/(d−1) ≥ 1, every nonnegative
+integer is a sum ∑_{d∈D} a_d with a_d ∈ B_d. (Pointwise sumset = ℕ; stronger than the
+"all sufficiently large n" form, which is erdos124.zero.)
+
+theorem erdos124_k0 (D : Finset ℕ) (hD : ∀ d ∈ D, 3 ≤ d)
+    (hsum : 1 ≤ ∑ d ∈ D, (d - 1 : ℚ)⁻¹) :
+    ∀ n : ℕ, n ∈ ∑ d ∈ D, Erdos124.sumsOfDistinctPowers d 0 := by sorry
+
+Status: KNOWN result (Brown's interval-filling criterion 1961, Amer. Math. Monthly 68; with
+Erdős 1962, Acta Arith. 7; Alexeev's public Lean proof Erdos124b.lean reproves it constructively). This dossier supplies the
+elementary proof in the "= ℕ contiguous from 0" form (strictly stronger than erdos124.zero's
+eventual form) in the companion .fusion.json — as a clean Lean adjudication target, NOT a
+novelty claim. Verify or refute.

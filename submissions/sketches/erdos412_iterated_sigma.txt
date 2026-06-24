@@ -1,0 +1,11 @@
+OPEN GAP: Erdos Problem 412 — Iterated Sum-of-Divisors Convergence
+Source: FormalConjectures/ErdosProblems/412.lean
+Domain: nt
+
+For every m, n >= 2, do the iterated sum-of-divisors sequences eventually collide?
+That is, do there exist i, j such that sigma^[i](m) = sigma^[j](n)?
+
+theorem erdos_412 : answer(sorry) ↔ ∀ᵉ (m ≥ 2) (n ≥ 2), ∃ i j, (σ 1)^[i] m = (σ 1)^[j] n := by
+  sorry
+
+Status: OPEN. The sigma function is superadditive and grows fast, so orbits are constrained. No counterexample known.

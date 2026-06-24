@@ -1,0 +1,140 @@
+{
+  "winner": {
+    "engine": "claude",
+    "dossier": {
+      "engine": "claude",
+      "verdict": "no_argument",
+      "informal_proof_outline": "[OFFLINE STUB — no LLM call made] Placeholder informal argument for erdos_1059. This stub exists solely to validate the author_argument.py pipeline end to end without spending on a model call. It claims no proof; verdict is no_argument so it never masquerades as a real advance. The real run replaces this with an authored argument from claude.",
+      "candidate_lemmas": [
+        "stub_lemma_1: placeholder sub-claim for erdos_1059 (no mathematical content)"
+      ],
+      "named_technique": "offline-stub (no technique)",
+      "bridge_lemma": "Offline stub bridge lemma: no real reduction is asserted here.",
+      "seminal_paper_arxiv": "none",
+      "fit_score": 0.0,
+      "honest_disclaimer": "Offline stub: zero mathematical content; for pipeline validation only.",
+      "confidence": 0.0
+    },
+    "grade": {
+      "grader": "codex",
+      "faithful": true,
+      "rigor_score": 0.5,
+      "issue": null,
+      "cost_usd": 0.0,
+      "ok": true
+    },
+    "diff": {
+      "checked": false,
+      "faithful": true,
+      "severity": "none",
+      "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+      "undetermined": true
+    },
+    "score": 0.0075,
+    "author_cost": 0.0
+  },
+  "all": [
+    {
+      "engine": "claude",
+      "dossier": {
+        "engine": "claude",
+        "verdict": "no_argument",
+        "informal_proof_outline": "[OFFLINE STUB — no LLM call made] Placeholder informal argument for erdos_1059. This stub exists solely to validate the author_argument.py pipeline end to end without spending on a model call. It claims no proof; verdict is no_argument so it never masquerades as a real advance. The real run replaces this with an authored argument from claude.",
+        "candidate_lemmas": [
+          "stub_lemma_1: placeholder sub-claim for erdos_1059 (no mathematical content)"
+        ],
+        "named_technique": "offline-stub (no technique)",
+        "bridge_lemma": "Offline stub bridge lemma: no real reduction is asserted here.",
+        "seminal_paper_arxiv": "none",
+        "fit_score": 0.0,
+        "honest_disclaimer": "Offline stub: zero mathematical content; for pipeline validation only.",
+        "confidence": 0.0
+      },
+      "grade": {
+        "grader": "codex",
+        "faithful": true,
+        "rigor_score": 0.5,
+        "issue": null,
+        "cost_usd": 0.0,
+        "ok": true
+      },
+      "diff": {
+        "checked": false,
+        "faithful": true,
+        "severity": "none",
+        "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+        "undetermined": true
+      },
+      "score": 0.0075,
+      "author_cost": 0.0
+    },
+    {
+      "engine": "codex",
+      "dossier": {
+        "engine": "codex",
+        "verdict": "no_argument",
+        "informal_proof_outline": "[OFFLINE STUB — no LLM call made] Placeholder informal argument for erdos_1059. This stub exists solely to validate the author_argument.py pipeline end to end without spending on a model call. It claims no proof; verdict is no_argument so it never masquerades as a real advance. The real run replaces this with an authored argument from codex.",
+        "candidate_lemmas": [
+          "stub_lemma_1: placeholder sub-claim for erdos_1059 (no mathematical content)"
+        ],
+        "named_technique": "offline-stub (no technique)",
+        "bridge_lemma": "Offline stub bridge lemma: no real reduction is asserted here.",
+        "seminal_paper_arxiv": "none",
+        "fit_score": 0.0,
+        "honest_disclaimer": "Offline stub: zero mathematical content; for pipeline validation only.",
+        "confidence": 0.0
+      },
+      "grade": {
+        "grader": "gemini",
+        "faithful": true,
+        "rigor_score": 0.5,
+        "issue": null,
+        "cost_usd": 0.0,
+        "ok": true
+      },
+      "diff": {
+        "checked": false,
+        "faithful": true,
+        "severity": "none",
+        "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+        "undetermined": true
+      },
+      "score": 0.0075,
+      "author_cost": 0.0
+    },
+    {
+      "engine": "gemini",
+      "dossier": {
+        "engine": "gemini",
+        "verdict": "no_argument",
+        "informal_proof_outline": "[OFFLINE STUB — no LLM call made] Placeholder informal argument for erdos_1059. This stub exists solely to validate the author_argument.py pipeline end to end without spending on a model call. It claims no proof; verdict is no_argument so it never masquerades as a real advance. The real run replaces this with an authored argument from gemini.",
+        "candidate_lemmas": [
+          "stub_lemma_1: placeholder sub-claim for erdos_1059 (no mathematical content)"
+        ],
+        "named_technique": "offline-stub (no technique)",
+        "bridge_lemma": "Offline stub bridge lemma: no real reduction is asserted here.",
+        "seminal_paper_arxiv": "none",
+        "fit_score": 0.0,
+        "honest_disclaimer": "Offline stub: zero mathematical content; for pipeline validation only.",
+        "confidence": 0.0
+      },
+      "grade": {
+        "grader": "codex",
+        "faithful": true,
+        "rigor_score": 0.5,
+        "issue": null,
+        "cost_usd": 0.0,
+        "ok": true
+      },
+      "diff": {
+        "checked": false,
+        "faithful": true,
+        "severity": "none",
+        "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+        "undetermined": true
+      },
+      "score": 0.0075,
+      "author_cost": 0.0
+    }
+  ]
+}

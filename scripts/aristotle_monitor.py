@@ -33,32 +33,21 @@ def save_json(path: str, data: dict):
 async def get_all_projects() -> list:
     try:
         from aristotlelib import Project
-        projects = await Project.list_projects()
-        all_projects = []
-        for item in projects:
-            if isinstance(item, list):
-                all_projects.extend(item)
-        return all_projects
+        projects, _ = await Project.list_projects(limit=50)
+        return list(projects)
     except Exception as e:
         log(f"Error fetching projects: {e}")
         return []
 
 async def download_output(project_id: str, output_dir: str = RESULTS_DIR) -> Optional[str]:
+    """Download a project's result tar via aristotlelib 2.0 Project.get_files()."""
     try:
         from aristotlelib import Project
         project = await Project.from_id(project_id)
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-        output_path = f"{output_dir}/{project_id}-output.lean"
-
-        if hasattr(project, 'output') and project.output:
-            with open(output_path, 'w') as f:
-                f.write(project.output)
-            return output_path
-        elif hasattr(project, 'download_output'):
-            await project.download_output(output_path)
-            if Path(output_path).exists():
-                return output_path
-        return None
+        output_path = f"{output_dir}/{project_id}-output.tar.gz"
+        await project.get_files(destination=output_path)
+        return output_path if Path(output_path).exists() else None
     except Exception as e:
         log(f"Error downloading {project_id}: {e}")
         return None
@@ -188,7 +177,9 @@ async def check_completions() -> list:
     completed = []
 
     for project in projects:
-        status = str(project.status).split('.')[-1]
+        # aristotlelib 2.0: outcome lives on AgentTask, not Project.
+        tasks, _ = await project.get_tasks(limit=1)
+        status = tasks[0].status.name if tasks else "UNKNOWN"
         pid = project.project_id
 
         our_submission = None
@@ -202,7 +193,7 @@ async def check_completions() -> list:
         if pid in analysis_log:
             continue
 
-        if status in ['COMPLETE', 'FAILED', 'ERROR']:
+        if status in ['COMPLETE', 'COMPLETE_WITH_ERRORS', 'FAILED', 'OUT_OF_BUDGET', 'CANCELED']:
             log(f"Completed: {pid[:8]}... ({status}) - {Path(our_submission).name}")
             output_path = await download_output(pid)
 

@@ -1,0 +1,21 @@
+OPEN GAP: Erdos 477 — X^3 unique-representation complement (FUSION + INFORMAL, W4-D)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/477.lean (theorem erdos_477.X_pow_three)
+Domain: combinatorics (additive combinatorics / unique-representation bases)
+
+Erdos (1959): is there a polynomial f in Z[X] of degree at least 2
+and a set A of integers such that for every z in Z there is EXACTLY ONE pair (a, b)
+with a in A and b = f(n) for some n > 0 and z = a + b?
+The case f(n) = n^2 was closed (no such A) in 1959. The cubic case f(n) = n^3 is open.
+Show: no such A exists for f(n) = n^3.
+
+theorem erdos_477_x_pow_three : letI f : ℤ[X] := X ^ 3
+    ∀ A : Set ℤ, ∃ z : ℤ, ¬ ∃! a ∈ A ×ˢ (f.eval '' {n | 0 < n}), z = a.1 + a.2 := by sorry
+
+Status: OPEN. The degree-two case was generalised by AlphaProof in Jan 2026 to
+a·n^2 + b·n + c with a | b, a and b nonzero (formal-conjectures #477, theorem
+erdos_477.degree_two_dvd_condition_b_ne_zero). AlphaProof Nexus attempted the X^3
+case but produced no proof (listed in erdos_problems_attempted.txt; absent from
+APNOutputs/ErdosProblems/). Cubic case remains open per teorth/erdosproblems
+AI-contributions wiki (snapshot 2026-05-30) and erdosproblems.com/477.
+Prior submission slot 747 (UUID 7c9dd7d8) on a different lane is still pending;
+this is a parallel attempt invoking the informal reasoner subsystem.

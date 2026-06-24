@@ -1,0 +1,12 @@
+OPEN GAP: Erdos-Straus Conjecture (Erdos 242)
+Source: FormalConjectures/ErdosProblems/242.lean
+Domain: nt
+
+For every integer n >= 2, 4/n = 1/x + 1/y + 1/z has a
+solution in positive integers x, y, z.
+
+theorem erdos_straus : ∀ n : ℕ, n ≥ 2 →
+    ∃ x y z : ℕ, x > 0 ∧ y > 0 ∧ z > 0 ∧
+    4 * x * y * z = n * (y * z + x * z + x * y) := by sorry
+
+Status: OPEN. Verified to 10^17. No general proof known.

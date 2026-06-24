@@ -1,0 +1,44 @@
+INFORMAL PROOF ARGUMENT: Infinitely Many Regular Primes
+Source: Siegel conjecture; Domain: nt
+
+CLAIM: There are infinitely many regular primes (primes p not dividing any
+Bernoulli number B_2, B_4, ..., B_{p-3}).
+
+STEP 1 — DENSITY HEURISTIC (SIEGEL). A prime p is irregular iff p divides
+some B_{2k} for 1 <= k <= (p-3)/2. By the Kummer congruences and heuristic
+independence, the probability that p | B_{2k} is approximately 1/p for each k.
+There are (p-3)/2 such Bernoulli numbers, so the expected number of divisibilities
+is approximately (p-3)/(2p) ~ 1/2. The probability of being regular is
+approximately (1-1/p)^{(p-3)/2} ~ e^{-1/2} ~ 0.6065.
+
+STEP 2 — IRREGULARITY INDEX DISTRIBUTION. The irregularity index i(p) (number
+of Bernoulli numbers B_{2k} divisible by p, for 1<=k<=(p-3)/2) is asymptotically
+Poisson distributed with parameter lambda = 1/2. Thus P(i(p)=0) -> e^{-1/2}.
+Computations confirm this: among primes up to 12 million, about 60.35% are regular.
+
+STEP 3 — ANALYTIC ARGUMENT. By the von Staudt-Clausen theorem, the denominator
+of B_{2k} is prod_{(p-1)|2k} p. The numerators of B_{2k}/2k grow rapidly. For a
+fixed prime p, p | B_{2k} (for p-1 not dividing 2k) is governed by the p-adic
+properties of the Riemann zeta function at negative integers: B_{2k} = -2k*zeta(1-2k).
+The p-adic L-function L_p(s, omega^{1-2k}) interpolates these values. p | B_{2k}
+iff the p-adic L-function has a zero.
+
+STEP 4 — IWASAWA THEORY CONNECTION. By Herbrand-Ribet and Iwasawa theory,
+p is irregular iff the p-part of the class group of Q(zeta_p) is nontrivial.
+The lambda and mu invariants of the Iwasawa module govern the growth. Ferrero-
+Washington theorem: mu = 0 for all primes. The lambda invariant is 0 for regular
+primes. Since lambda has bounded average (conjectured ~1/2), infinitely many
+primes have lambda = 0, hence are regular.
+
+STEP 5 — COUNTING ARGUMENT. Suppose only finitely many regular primes exist.
+Let P be the largest. For p > P, every p is irregular, meaning p | B_{2k} for
+some k. But sum over p>P of sum_{k=1}^{(p-3)/2} 1_{p|B_{2k}} ~ sum_{p>P} 1/2.
+If every p contributes at least 1, the sum of 1/p over irregular primes diverges
+(since sum 1/p over all primes diverges). But by the equidistribution of B_{2k}
+mod p (Carlitz, Wagstaff), the density of irregular primes is bounded away from 1.
+Contradiction with the assumption that all sufficiently large primes are irregular.
+
+theorem infinitely_many_regular_primes :
+  Set.Infinite {p : ℕ | p.Prime ∧ IsRegularPrime p} := by sorry
+
+Status: OPEN. Widely believed true (60% density). No unconditional proof exists.

@@ -1,0 +1,48 @@
+{
+  "name": "square-free morphisms and entropy compression",
+  "seminal_paper": {
+    "arxiv_id": null,
+    "doi": null,
+    "citation": "A. Thue, \"Über unendliche Zeichenreihen\", Norske Videnskabers Selskabs Skrifter I. Mat.-Naturv. Klasse 7 (1906), 1-22.",
+    "year": 1906
+  },
+  "home_domain": "combinatorics on words",
+  "what_it_does": "Square-free morphisms give explicit infinite words avoiding adjacent repeated blocks, typically by proving that a substitution preserves square-freeness. Entropy compression gives probabilistic-existence and algorithmic constructions for avoiding forbidden word patterns under local dependency constraints.",
+  "input_requirements": [
+    "a word encoding in which the target configurations are forbidden adjacent squares",
+    "freedom to construct or resample symbols of the word",
+    "a finite alphabet or controlled finite dependency structure",
+    "local forbidden-pattern constraints amenable to morphic preservation or entropy-compression bounds"
+  ],
+  "output_signature": "an infinite word avoiding the specified repeated-block patterns, or a constructive existence theorem for such a word",
+  "input_match": [
+    {
+      "requirement": "a word encoding in which the target configurations are forbidden adjacent squares",
+      "match": "YES",
+      "evidence": "Prior slot A2: with g_k = n_{k+1}-n_k, an erdos_938 triple is exactly an adjacent repeated letter g_k g_k."
+    },
+    {
+      "requirement": "freedom to construct or resample symbols of the word",
+      "match": "NO",
+      "evidence": "Prior slot A2 obstruction: the powerful-number gap word is fixed and arithmetically generated."
+    },
+    {
+      "requirement": "a finite alphabet or controlled finite dependency structure",
+      "match": "NO",
+      "evidence": "Prior slot A2 obstruction: the gap word has an infinite alphabet and no supplied finite dependency model."
+    },
+    {
+      "requirement": "local forbidden-pattern constraints amenable to morphic preservation or entropy-compression bounds",
+      "match": "PARTIAL",
+      "evidence": "Prior slot A2 gives a local repeated-letter obstruction, but no morphism, resampling process, or dependency bound is available."
+    }
+  ],
+  "known_obstructions": [
+    "The word is fixed rather than constructed.",
+    "The alphabet of gap sizes is unbounded.",
+    "Morphic square-free methods preserve avoidance under substitutions, but no natural substitution structure is supplied by powerful numbers.",
+    "Entropy compression requires random choices or resampling dependencies, which are absent from the deterministic gap sequence."
+  ],
+  "fit_score": 0.375,
+  "source_analog_id": "A2"
+}

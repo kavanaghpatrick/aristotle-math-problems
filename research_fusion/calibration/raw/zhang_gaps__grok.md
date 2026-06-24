@@ -1,0 +1,40 @@
+### Technique 1: Furstenberg correspondence principle + multiple recurrence theorem
+**Seminal paper or theorem**: Furstenberg (1977), "Ergodic behavior of diagonal measures and a theorem of Szemeredi on arithmetic progressions".  
+**Structural analog**: Unlocked Szemerédi's theorem on arbitrary-length APs in any positive upper-density subset of ℤ; the analogous feature here is that GPY-weighted almost-primes (truncated von Mangoldt) acquire "positive measure" in a suitable probability space, allowing recurrence to detect pairs with bounded separation without needing equidistribution in APs.  
+**Diagnosis of why the default toolkit failed**: density-zero issue (primes have zero natural density, so large-sieve/dispersion estimates cannot produce positive lower bound on weighted correlations once θ hits 1/2).  
+**Implementation comment**: `ergodic-theory` namespace (existing `measure_preserving_dynamics`, `recurrence`); missing is the bridge formalizing GPY weights as a measure on a probability space and the transfer lemma from `number_theory.von_mangoldt` to an abstract mpt.
+
+### Technique 2: Gowers inverse theorem + uniformity norms (order ≥3)
+**Seminal paper or theorem**: Gowers (2001), "A new proof of Szemerédi's theorem for arithmetic progressions of length four" (inverse theorem for U³).  
+**Structural analog**: Unlocked quantitative Szemerédi for dense subsets without ergodic machinery (via control by uniformity norms); analogous here because the Selberg-sieve almost-primes sit inside a pseudorandom set whose Gowers norms can be bounded, detecting the linear configuration {n, n+h} once the analytic obstruction at θ=1/2 is reframed combinatorially.  
+**Diagnosis of why the default toolkit failed**: parity problem (Selberg weights are even-order convolutions, invisible to linear Fourier/large-sieve analysis that saturates exactly at square-root cancellation).  
+**Implementation comment**: `additive_combinatorics.gowers_norm` (Mathlib has basic `additive_combinatorics` and `fourier_analysis`); missing inverse theorems for U^k and the formalization of how GPY weights interact with higher-order uniformity on `nat` with von Mangoldt truncation.
+
+### Technique 3: Ratner's theorem + quantitative unipotent equidistribution
+**Seminal paper or theorem**: Ratner (1991), "On Raghunathan's measure conjecture".  
+**Structural analog**: Unlocked Oppenheim conjecture (values of indefinite quadratic forms densely approaching 0) and counting in thin orbits; the analogous feature is that prime gaps correspond to returns of unipotent orbits in the space of lattices (or adelic quotients) encoding admissible tuples, where effective rates bypass sieve limitations.  
+**Diagnosis of why the default toolkit failed**: density-zero issue combined with height bound (classical exponential-sum/large-sieve methods lose all power on zero-density sets once the height of the test function hits the 1/2 barrier).  
+**Implementation comment**: `dynamics.homogeneous_space` and `lie_group` namespaces (existing Ratner-style classification stubs in Mathlib); missing effective quantitative versions, the link from `number_theory.prime_gaps` to SL(n,ℤ)\SL(n,ℝ) actions, and polynomial mixing rates.
+
+### Technique 4: Deligne Weil II + Laumon Fourier transform for ℓ-adic sheaves
+**Seminal paper or theorem**: Deligne (1980), "La conjecture de Weil, II" (with Laumon (1987) Fourier transform for perverse sheaves).  
+**Structural analog**: Unlocked optimal Weil bounds and equidistribution for exponential sums on varieties over finite fields; analogous to the exponential sums appearing in the dispersion method/Bombieri-Vinogradov mean-value theorem, where monodromy groups of the sheaf attached to the von Mangoldt weights yield cancellation past square-root level uniformly in the modulus.  
+**Diagnosis of why the default toolkit failed**: char-0 vs char-p (classical analytic NT lives in characteristic zero where the large sieve saturates at θ=1/2; geometric methods supply an ℓ-adic lift that detects extra cancellation invisible to classical bilinear forms).  
+**Implementation comment**: No existing namespace; would live in a future `algebraic_geometry.etale_cohomology` or `number_theory.l_adic_sheaves`; Mathlib entirely lacks ℓ-adic cohomology, perverse sheaves, and monodromy-group actions, so the whole geometric Fourier transform infrastructure is missing.
+
+### Technique 5: Kazhdan property (T) + uniform spectral gap for congruence quotients
+**Seminal paper or theorem**: Kazhdan (1967), "On the connection of the dual space of a group with the structure of its closed subgroups".  
+**Structural analog**: Unlocked explicit expander graphs and the affine linear sieve (Bourgain–Gamburd–Sarnak); analogous because the congruence quotients appearing in the Bombieri-Vinogradov moduli space carry a uniform spectral gap from property (T), turning the large-sieve bilinear form into an expander walk that produces θ>1/2 without relying on Ramanujan-type conjectures.  
+**Diagnosis of why the default toolkit failed**: sieve barrier (large-sieve inequality saturates precisely because spectral gaps for congruence subgroups deteriorate with the level; property (T) supplies a level-independent gap).  
+**Implementation comment**: `representation_theory.kazhdan_property` and `combinatorics.expander` (Mathlib has basic Kazhdan stubs and spectral graph theory); missing is the formalization of unitary representations attached to GPY weights and the transfer to the mean-value theorem in `analytic_number_theory`.
+
+## Ranking
+**Rank 1 (highest probability ≈ 0.28)**: Technique 4 (Deligne Weil II + Laumon Fourier). Bayesian prior 0.35 (geometric methods have broken every classical square-root barrier they touched: Weil conjectures, Deligne's equidistribution, Katz–Sarnak monodromy statistics). Likelihood given this problem ≈ 0.8 (exponential sums over residue classes are the exact place the dispersion method lives; an ℓ-adic sheaf whose stalk encodes the GPY weight directly upgrades the mean-value theorem). Posterior dominates because the 1/2 barrier is manifestly a char-0 analytic artifact.
+
+**Rank 2 (≈ 0.22)**: Technique 5 (Kazhdan (T) + uniform spectral gap). Prior 0.30 (property (T) routinely upgrades sieves in thin orbits and affine sieves past classical limits). Likelihood ≈ 0.73 (the large sieve is literally a spectral estimate on congruence quotients; a uniform gap is the precise missing ingredient for θ>1/2 uniformly in all moduli). Slightly lower than geometry because primes are not literally an orbit, requiring an extra adelic-bridge step.
+
+**Rank 3 (≈ 0.18)**: Technique 3 (Ratner's theorem + quantitative unipotent equidistribution). Prior 0.25 (dynamics has solved every Oppenheim-type density-zero problem it reached). Likelihood ≈ 0.72 (prime gaps embed cleanly into returns on SL(n,ℤ)\SL(n,ℝ); effective rates from quantitative Ratner would give explicit C). Downgraded because effective constants remain notoriously hard and the reduction from primes to homogeneous orbits is not yet fully axiomatized.
+
+**Rank 4 (≈ 0.15)**: Technique 2 (Gowers inverse + uniformity norms). Prior 0.40 (combinatorial methods crushed every dense-set Szemerédi instance). Likelihood ≈ 0.38 (works beautifully once you already have almost-primes, but converting the θ>1/2 analytic input into a Gowers-norm bound still requires crossing the same bilinear-form wall the classical toolkit cannot pass). High prior but structure-specific likelihood penalized.
+
+**Rank 5 (≈ 0.12)**: Technique 1 (Furstenberg correspondence + multiple recurrence). Prior 0.35 (ergodic theory solved Szemerédi). Likelihood ≈ 0.35 (transfers density-zero issues elegantly but supplies no new cancellation on the exponential sums that actually block θ>1/2; Green–Tao still needed heavy analytic number theory). Lowest because it sidesteps rather than confronts the Bombieri–Vinogradov mean-value obstruction at the heart of the GPY reduction.

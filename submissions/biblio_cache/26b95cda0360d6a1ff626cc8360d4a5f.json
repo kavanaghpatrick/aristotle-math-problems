@@ -1,0 +1,56 @@
+{
+  "_cache_ts": 1780318085.231971,
+  "checked_at": "2026-06-01T12:48:05+00:00",
+  "evidence": "7 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "1993 partial/weak: Approximate Studentization with marginal and conditional inference",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:484660"
+    },
+    {
+      "evidence": "2001 partial/weak: On the asymptotics of the number of binary words with a given length of a maximal series",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:1698517"
+    },
+    {
+      "evidence": "2010 partial/weak: Action minimizing properties and distances on the group of Hamiltonian diffeomorphisms",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:5826892"
+    },
+    {
+      "evidence": "1997 partial/weak: On the accuracy of approximate studentization",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:1129306"
+    },
+    {
+      "evidence": "2010 partial/weak: An affirmative answer to the extended Gopalsamy and Liu\u2019s conjecture on the global asymptotic stability in a p",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1016/j.nonrwa.2009.11.022"
+    },
+    {
+      "evidence": "2026 partial/weak: Architecture-driven Shift: towards a lightweight selector for capturing the trends of logit shift",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.27469v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Remarks on the distribution of Dirichlet $L$-functions along cosets",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.07869v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

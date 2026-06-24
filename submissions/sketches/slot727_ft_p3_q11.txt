@@ -1,0 +1,16 @@
+OPEN GAP: Feit-Thompson prime conjecture — case (p=3, q=11)
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+For p=3, q=11 specifically: (11³-1)/(11-1) does not divide (3¹¹-1)/(3-1).
+Single-pair specialization of the Feit-Thompson Prime Conjecture.
+
+theorem feit_thompson_p3_q11 :
+    ¬ (11 ^ 3 - 1) / (11 - 1) ∣ (3 ^ 11 - 1) / (3 - 1) := by sorry
+
+Status: OPEN in full generality (Feit-Thompson Prime Conjecture). Specific
+prime-pair specializations are computationally checkable; this pair has
+never been formally verified in Lean.
+
+contribution_statement: target_resolved=1 means a Lean proof of FT for
+(p,q)=(3,11), extending the (3,71) win to another small pair via native_decide.

@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 942 limsup — powerful counts in [n^2,(n+1)^2)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/942.lean (variants.limsup); erdosproblems.com/942
+Domain: nt
+
+Let h(n) count powerful integers in [n^2, (n+1)^2):
+  h(n) := #{m : n^2 ≤ m < (n+1)^2, ∀ prime p | m, p^2 | m}.
+Erdős asserts (and erdosproblems.com confirms) limsup_{n→∞} h(n) = ∞.
+This is the limsup variant; the main conjecture (existence of c > 0
+with h(n) ≪ (log n)^{c+o(1)} and h(n) ≫ (log n)^{c-o(1)} i.o.)
+remains open. De Koninck–Luca–Shparlinski (Bull. Austral. Math.
+Soc. 71 (2005), 11–16) prove the quantitative strengthening
+h(n) ≫ (log n)^{1/3 + o(1)} infinitely often.
+
+theorem erdos_942.variants.limsup :
+    atTop.limsup (((fun (n : ℕ) ↦ (n : ℕ∞)) ∘ erdos_942.h)) = ⊤ := by sorry
+-- where erdos_942.h n := ((Finset.Ico (n^2) ((n+1)^2)).filter Nat.Powerful).card
+-- and Nat.Powerful is the (2)-Full predicate from FormalConjecturesForMathlib.Data.Nat.Full
+
+Status: OPEN as Mathlib formalization. Mathematical content is closed
+(Erdős "not hard to prove"; De Koninck–Luca–Shparlinski 2005 gives the
+quantitative limsup). No prior Aristotle submission has resolved this
+limsup variant.

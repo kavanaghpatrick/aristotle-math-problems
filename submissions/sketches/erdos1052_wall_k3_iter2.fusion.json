@@ -1,0 +1,23 @@
+{
+  "problem_id": "erdos_1052",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_1052/01_literature.md",
+    "analogies_path":  "research_fusion/runs/erdos_1052/debates/adjacent_analog.md",
+    "techniques_path": "analysis/research_fusion_erdos1052.md"
+  },
+  "named_technique": "Wall 1972 k=3 multiplicative analysis: enumerate prime triples (p,q,r) with sigma*(p^a*q^b*r^c) = 2*p^a*q^b*r^c",
+  "seminal_paper_arxiv": "https://www.cambridge.org/core/journals/canadian-mathematical-bulletin/article/unitary-perfect-numbers/741FD190AF22FFAC67645BCB29324531",
+  "fit_score": 0.55,
+  "bridge_lemma": "Extend the product formula sigma*(n) = prod (1 + p^{v_p(n)}) to exactly 3 prime factors and analyze the Diophantine system (1+p^a)(1+q^b)(1+r^c) = 2 p^a q^b r^c. Combined with Goto 2007's effective bound n < 2^{2^k} = 2^8 = 256 for k=3, the search space is finite and Lean-decidable. The only unitary perfect numbers below 256 with omega(n)=3 are 60 (= 2^2 * 3 * 5) and 90 (= 2 * 3^2 * 5).",
+  "informal_proof_outline": "Step 1 (Lift product formula to k=3). Let n be unitary perfect with primeFactors n = {p,q,r}. Write n = p^a * q^b * r^c with a,b,c >= 1. By iter1's unitarySigma_mul_coprime applied twice and unitarySigma_prime_pow, sigma*(n) = (1+p^a)(1+q^b)(1+r^c). Unitary perfection gives (1+p^a)(1+q^b)(1+r^c) = 2 p^a q^b r^c. Step 2 (Even-implies-2 in support). By iter1's IsUnitaryPerfect.even, every unitary perfect n is even, so 2 is in primeFactors n. Without loss of generality p = 2. The equation becomes (1+2^a)(1+q^b)(1+r^c) = 2^{a+1} q^b r^c with q,r odd primes distinct from 2 and from each other. Step 3 (Goto bound forces finite search). Goto (Rocky Mountain J. Math. 37, 2007, Thm 2) proves that any unitary perfect number n with omega(n) = k satisfies n < 2^{2^k}. For k = 3 this gives n < 2^8 = 256. Step 4 (Decide by enumeration). The set {n in Finset.range 256 | IsUnitaryPerfect n and n.primeFactors.card = 3} is finite and equals {60, 90}. Both factorizations 60 = 2^2 * 3 * 5 (sigma* = (1+4)(1+3)(1+5) = 5*4*6 = 120 = 2*60) and 90 = 2 * 3^2 * 5 (sigma* = 3*10*6 = 180 = 2*90) verify directly. Step 5 (Closure of the k=3 case). Combining steps 1-4: any unitary perfect n with exactly 3 prime factors equals 60 or 90. This is a sub-claim closure of E1052 (analogous to iter1's wall_k2 at k=2). The technique cleanly extends iter1: the k=2 case used the identity (p^a - 1)(q^b - 1) = 2; the k=3 case uses the analogous 3-fold identity together with Goto's effective bound to bypass the need for an open-form Diophantine argument. NOT claiming the full E1052 finiteness — only the k=3 specialization, matching wall_k2 in pattern.",
+  "candidate_lemmas": [
+    "wall_k3: if IsUnitaryPerfect n and n.primeFactors.card = 3 then n = 60 or n = 90.",
+    "sigma_three_prime_formula: if p,q,r are distinct primes with n = p^a * q^b * r^c (a,b,c >= 1) then sigma* n = (1+p^a)(1+q^b)(1+r^c).",
+    "isUnitaryPerfect_omega_three_iff: IsUnitaryPerfect n and n.primeFactors.card = 3 iff exactly the Diophantine identity (1+p^a)(1+q^b)(1+r^c) = 2 p^a q^b r^c with 2 in support.",
+    "goto_bound_k3: every IsUnitaryPerfect n with omega(n) = 3 satisfies n < 256 (Goto 2007 specialized to k=3).",
+    "unitaryPerfect_lt_256_omega3_decide: by native_decide, {n in Finset.range 256 | IsUnitaryPerfect n and n.primeFactors.card = 3} = {60, 90}.",
+    "wall_k3_60_witness: IsUnitaryPerfect 60 and (60).primeFactors.card = 3.",
+    "wall_k3_90_witness: IsUnitaryPerfect 90 and (90).primeFactors.card = 3."
+  ],
+  "honest_disclaimer": "iter2 of E1052; extends iter1's wall_k2 sorry-free closure. Realistic shot: the multiplicative formula and IsUnitaryPerfect.even are already proven in iter1 and propagate cleanly. Risk: Goto's bound is not in Mathlib so step 3 may require either (a) Aristotle formalizing the abundancy-monotonicity argument itself, or (b) finding a tight elementary bound at k=3 that Aristotle can prove without invoking Goto. If (b) succeeds the final step is native_decide. Fit_score 0.55 reflects: high structural fit with iter1 (k=2 -> k=3 is a clean continuation), risk that Goto's general bound is harder to formalize than expected, and that the k=3 case has historically been settled by case analysis rather than uniform Diophantine machinery."
+}

@@ -1,0 +1,38 @@
+{
+  "_cache_ts": 1780318418.281676,
+  "checked_at": "2026-06-01T12:53:38+00:00",
+  "evidence": "4 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2025 partial/weak: Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21275/sr251204121358"
+    },
+    {
+      "evidence": "2025 partial/weak: Understanding the Erdos Straus Conjecture and Its Path toward Possible Resolution",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21275/sr251206125822"
+    },
+    {
+      "evidence": "2023 partial/weak: A SIMPLE DIRECT PROOF OF THE ERDOS\u2013STRAUS CONJECTURE",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.31219/osf.io/gecwa"
+    },
+    {
+      "evidence": "2024 partial/weak: A Proof of the Erdos-Turan Conjecture on Asymptotic Additive Bases",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.31219/osf.io/mxgbu"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

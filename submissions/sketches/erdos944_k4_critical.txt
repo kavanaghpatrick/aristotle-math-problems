@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 944 — Dirac's conjecture, k=4 case
+Source: formal-conjectures/FormalConjectures/ErdosProblems/944.lean
+Domain: combinatorics
+
+Dirac (1970) asked: for every k ≥ 4, does there exist a graph G with chromatic
+number k such that every vertex is critical (removing any vertex drops χ) yet
+no edge is critical (every edge is "redundant" — its removal does not drop χ)?
+The cases k=5 (Brown 1992), k=6 (Lattanzio 2002, k−1 not prime), and k ≥ 5
+(Jensen 2002) are solved. The case k=4 remains OPEN.
+
+theorem erdos_944_k_eq_four :
+    ∃ (V : Type) (G : SimpleGraph V),
+      G.IsCritical 4 ∧
+      (∀ (edges : Set (Sym2 V)), G.IsCriticalEdges edges → 1 < edges.ncard) := by
+  sorry
+
+Status: OPEN. k=4 evades every existing construction (Brown's k=5 example does
+not descend; Jensen's k≥5 family starts at k=5; Lattanzio's k−1-not-prime fails
+since 4−1=3 is prime). Either a 4-critical witness graph exists (existence
+disproves the "every 4-critical graph has a critical edge" direction) or no
+such graph exists (positive Dirac for k=4). This is the last remaining case of
+Dirac's 1970 conjecture.

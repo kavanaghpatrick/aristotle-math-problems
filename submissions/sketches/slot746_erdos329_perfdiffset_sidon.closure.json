@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Forward direction of Erdős 329 PerfectDifferenceSet ↔ Sidon-density-1 link. Hypothesis (every finite Sidon set embeds in a PDS) is FALSE by Alexeev–Mixon 2025 (arXiv:2510.19804) — counterexample {1,2,4,8,13}, and Hall 1947 {1,3,9,10,13}. False antecedent ⇒ vacuous implication. Submitted as one-way implication to avoid the iff_rfl_trap (F1). Converse direction (density 1 ⇒ embeddability) remains genuinely open and is NOT submitted here."
+}

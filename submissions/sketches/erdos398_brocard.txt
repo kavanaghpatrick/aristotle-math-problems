@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 398 — Brocard's problem
+Source: FormalConjectures/ErdosProblems/398.lean
+Domain: nt
+
+The only solutions to n! + 1 = m^2 are n = 4, 5, 7.
+
+theorem erdos_398 :
+    {n : ℕ | ∃ m : ℕ, n ! + 1 = m ^ 2} = {4, 5, 7} := by sorry
+
+Status: OPEN. Verified computationally to n = 10^9.
+No solution beyond n=7. High-profile classical problem.

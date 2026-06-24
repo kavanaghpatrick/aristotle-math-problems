@@ -1,0 +1,8 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_partial",
+  "real_closure_candidate": false,
+  "rationale": "Extends slot722 (Brocard n in [2,500]) to [501,1000] via chunked native_decide. Brocard unbounded remains open; this is a publishable research-note range bump."
+}

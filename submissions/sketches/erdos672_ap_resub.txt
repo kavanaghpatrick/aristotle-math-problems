@@ -1,0 +1,17 @@
+OPEN GAP: Erdos 672 — AP products are not perfect powers
+Source: FormalConjectures/ErdosProblems/672.lean
+Domain: nt
+
+The product of k>=4 terms of an arithmetic progression with
+gcd(n,d)=1 cannot be a perfect l-th power (l>=2).
+
+Prior result (slot698) proved GCD structure, Pell reduction
+(2d^4+5d^2+2=m^2 implies (4d^2+5)^2-8m^2=9), and Pell
+sequence infrastructure for the k=4 l=2 case.
+
+theorem erdos_672 : answer(sorry) ↔
+    ∀ k l n d, k ≥ 4 → l ≥ 2 → n > 0 → d > 0 → n.gcd d = 1 →
+    ¬∃ y, (∏ i in Finset.range k, (n + i * d)) = y ^ l := by sorry
+
+Status: OPEN. Erdos-Selfridge proved k=1. The general case for
+k>=4 remains open.

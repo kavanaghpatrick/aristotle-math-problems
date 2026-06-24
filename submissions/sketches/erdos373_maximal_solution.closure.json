@@ -1,0 +1,8 @@
+{
+  "CS": "full_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Hickerson's conjecture (Erdős 373 maximal_solution, open since 1976) states (16,[14,5,2]) is the maximal solution to n! = ∏aᵢ! with n−1 > a₁ ≥ ··· ≥ aₖ > 1. The Lean theorem '(16, [14, 5, 2]) ∈ S ∧ ∀ s ∈ S, s.fst ≤ 16' is α-equivalent to the FC source statement (CS=full_closure — no quantifier weakening, no n ≤ N restriction). CM=structural_finite_reduction: Erdős 1976 (Theorem 2) proved this follows from a structural lower bound on P(n(n−1)) for n > n₀; combined with finite checking for n ≤ n₀, this is a finite-reduction proof. CR=clean_decidable: the membership half (16,[14,5,2]) ∈ S is decidable arithmetic; the universal half is a structural argument over a finite reduction (no asymptotic limits, no real-analysis Tendsto). HM=journal_subclaim: even partial progress (e.g. bounded n ≤ N via the of_lower_bound variant which is already proved-conditional in the same FC file) is publishable. Distinct from Surányi variant (k=2, id 1260, UUID 67d9e1d9). Numerical scan n ≤ 80, k ≤ 7 confirms no solution exceeds n=16."
+}

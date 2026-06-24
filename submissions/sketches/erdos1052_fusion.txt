@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 1052 — Finitely Many Unitary Perfect Numbers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1052.lean
+Domain: nt
+
+Are there only finitely many unitary perfect numbers? A unitary perfect
+number n satisfies σ*(n) = 2n where σ*(n) = ∑_{d|n, gcd(d, n/d) = 1} d.
+Only five are known: 6, 60, 90, 87360, 146361946186458562560000.
+Wall (1972) proved finiteness for any fixed number of prime factors;
+the open gap is uniform finiteness over all such factor counts.
+
+theorem erdos_1052 :
+    answer(sorry) ↔ {n | IsUnitaryPerfect n}.Finite := by
+  sorry
+
+Status: OPEN since the 1960s. Aristotle previously proved every unitary
+perfect number is even (in this file). The Lean file already contains
+the multiplicative formula σ*(n) = ∏(1 + p^{a_p}) and all infrastructure
+for the unitary divisor sum.

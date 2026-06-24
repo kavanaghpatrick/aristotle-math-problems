@@ -1,0 +1,3 @@
+966c9b33-230f-4e98-a3c6-31d85189df44
+# Task: Erdos 470 odd weird numbers — bare gap
+# Submitted: 2026-02-18T19:36:56

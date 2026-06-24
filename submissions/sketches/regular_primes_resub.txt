@@ -1,0 +1,13 @@
+OPEN GAP: Regular primes infinitude
+Source: formal-conjectures
+Domain: nt
+
+Prior result (slot678) proved the full structure but got stuck on
+Mathlib API for CyclotomicField 2 ℚ ≃ₐ[ℚ] ℚ and class number = 1.
+The proof is structurally complete — close the remaining exact? goals.
+
+theorem regular_primes_infinite :
+    Set.Infinite {p : ℕ | p.Prime ∧ IsRegularPrime p} := by sorry
+
+Status: OPEN. slot678 is 1 sorry away. The isRegularPrime_two
+lemma needs CyclotomicField 2 isomorphism and class group facts.

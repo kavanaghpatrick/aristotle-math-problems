@@ -1,0 +1,7 @@
+1. The sentence "It follows that each is itself a perfect power: there exist integers \(a,b,c\geq 2\) and exponents \(\alpha,\beta,\gamma\geq 2\) such that \(n=a^\alpha\), …" is unjustified and false. Pairwise coprimality (true) and squarefulness together imply only that the prime factors are distinct; they do not force every exponent in the prime factorization to be a multiple of the same integer \(\geq 2\), so a squareful number need not be a pure perfect power (counter-example: \(2^3\cdot 3^2=72\)).
+
+2. The paragraph beginning "By Mihăilescu’s theorem … Consequently one of \(n,n+2\) equals 8 and the other 9" contains two errors: it misapplies Mihăilescu (which concerns difference 1) to difference 2, and it omits the known solution \(3^3-5^2=2\). The latter pair consists of two powerful numbers, so the claim that the only powerful solution pair is essentially \(\{8,9\}\) is false.
+
+3. The final parenthetical paragraph asserts that the abc conjecture applied to \(a^\alpha+2=c^\gamma\) yields emptiness rather than mere finiteness. Even if the radical estimate were correct, abc is unproved; the text therefore supplies neither a complete proof nor a reduction to a finite check, yet concludes "This completes the proof."
+
+Final answer: 1. unjustified claim squareful+coprime⇒pure power (false, e.g. 72); 2. missed 27-25=2 in Mihăilescu/diff-2 analysis; 3. abc gives only finiteness, not emptiness, and remains conjectural

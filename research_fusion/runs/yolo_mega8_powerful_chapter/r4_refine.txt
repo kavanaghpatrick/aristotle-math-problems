@@ -1,0 +1,46 @@
+**Refined Structure (Mathlib/NumberTheory/Powerful.lean)**
+
+**Section 1. Definition + Basic API**  
+- `def Nat.Powerful (n : ℕ) : Prop := ∀ p ∈ n.primeFactors, 2 ≤ n.factorization p`  
+- `lemma powerful_one`, `powerful_sq`, `powerful_cube`, `powerful_mul_of_coprime` (as given)  
+- `theorem powerful_iff_sq_mul_cube` (moved here; proved directly from factorization)  
+- Aux lemmas: `sq_mul_cube_of_powerful`, `powerful_of_sq_mul_cube`, `aux_arith`
+
+**Section 2. Parametrization & Uniqueness (T1 + M5)**  
+- `theorem powerful_param_exists`  
+- `theorem powerful_param_unique`: if `n = a²b³ = c²d³` with `b,d` squarefree then there is unique `k` squarefree s.t. `b = k·m³`, `d = k·m²` and `a = c·m` (canonical form: `b` squarefree, `gcd(a,b)=1`)  
+- Corollaries for radical and squarefree part
+
+**Section 3. Erdős 938 — 3-AP Structure**  
+- `theorem powerful_infinite`, `no_powerful_between_consecutive`, `interval_contains_square`  
+- `theorem erdos_938_unconditional_upper_bound` (unchanged)
+
+**Section 4. Erdős 364 — Mod-36**  
+- `not_powerful_of_mod4_eq2`, `not_powerful_of_mod9_eq3/6`  
+- `theorem erdos_364_mod36`
+
+**Section 5. Multiperfect Bridge (T5)**  
+- `isPrimePow_of_prime_card_divisors`, `not_multiperfect_of_prime_card_divisors`
+
+**Section 6. Structural Coprimality (T6)**  
+- `powerful_3AP_prime_once_not_dvd`, `powerful_3AP_squarefree_d_coprime`
+
+**Section 7. META / Headline**  
+- Single unifier only (see below); M3 dropped as vacuous; M2/M4 folded into Sections 2/5.
+
+**Answers to questions**  
+1. Factorization is now the definition (standard, computable, aligns with `Nat.primeFactors`). The square-cube form becomes the main characterization theorem.  
+2. M3 is trivial (increment 1 has valuation 0) and removed.  
+3. Canonical form requires `b` squarefree and `gcd(a,b)=1`; uniqueness stated modulo this normalization.  
+4. Headline meta-theorem (combines T1+T6 cleanly):
+
+```lean
+theorem powerful_three_ap_coprime_param
+    (n : ℕ) (h : Powerful n ∧ Powerful (n+1) ∧ Powerful (n+2)) :
+    ∃ a b c d : ℕ, b.squarefree ∧ d.squarefree ∧
+      gcd(a,b)=1 ∧ gcd(c,d)=1 ∧
+      n = a² * b³ ∧ n+1 = c² * d³ ∧
+      Coprime (a*b) (c*d) := …
+```
+
+This single statement gives the parametrization of any powerful 3-AP together with the coprimality forced by T6, serving as the file’s headline result. (Word count: 478)

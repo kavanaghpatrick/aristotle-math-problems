@@ -1,0 +1,122 @@
+{
+  "winner": {
+    "engine": "codex",
+    "dossier": {
+      "engine": "codex",
+      "verdict": "prove",
+      "informal_proof_outline": "Let u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), so ||u_i||=1 and u_i dot u_j=-1/2 for i != j. Put x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, and S=R+r. Define nine points P_i=r u_i, Q_i=R u_i, T_i=-S u_i for i=0,1,2, and let A be their finset. They are pairwise distinct: P_i,Q_i lie on the same ray with different positive radii, while T_i lies on the opposite ray, and no opposite ray equals another u_j ray in this 120-degree system. Hence A.card=9. Direct norm-squared computations give the complete distance table. For i != j: |P_i-P_j|=x, |Q_i-Q_j|=x(1+sqrt(3)), and |T_i-T_j|=x(2+sqrt(3)). On equal indices: |P_i-Q_i|=x, |P_i-T_i|=x(1+sqrt(3)), and |Q_i-T_i|=x(2+sqrt(3)). On unequal indices: |P_i-Q_j|=|P_i-T_j|=|Q_i-T_j|=x*sqrt(2+sqrt(3)). Thus every nonzero pairwise distance is one of d1=x, d2=x*sqrt(2+sqrt(3))=1+sqrt(2), d3=x(1+sqrt(3))=2+sqrt(2), d4=x(2+sqrt(3)). The identities use (2-sqrt(3))(2+sqrt(3))=1 and (1+sqrt(3))*sqrt(2-sqrt(3))=sqrt(2). Now x>1 because 1+sqrt(2)>sqrt(2+sqrt(3)); x<sqrt(2), so d2-d1>1; d3-d2=1; and d4-d3=x>1. Therefore all positive pair distances are at least 1 and unequal distance values differ by at least 1. Finally d4=(1+sqrt(2))*sqrt(2+sqrt(3))<5, since sqrt(2)<3/2 and sqrt(2+sqrt(3))<2. All pair distances are at most d4, so diam(A)<5.",
+      "candidate_lemmas": [
+        "unit_vector_table: For u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), one has ||u_i||=1 and u_i dot u_j=-1/2 whenever i != j.",
+        "radial_nine_distinct: With x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, S=R+r, the points r u_i, R u_i, and -S u_i for i=0,1,2 are pairwise distinct.",
+        "four_value_table: For the nine listed points, every nonzero pair distance is exactly one of x, x*sqrt(2+sqrt(3)), x*(1+sqrt(3)), x*(2+sqrt(3)), with the index cases stated in the outline.",
+        "radical_identities: x*sqrt(2+sqrt(3))=1+sqrt(2) and x*(1+sqrt(3))=2+sqrt(2).",
+        "gap_certificate: For d1=x, d2=1+sqrt(2), d3=2+sqrt(2), d4=x*(2+sqrt(3)), one has d1>1, d2-d1>1, d3-d2=1, and d4-d3=d1>1.",
+        "span_bound: x*(2+sqrt(3))=(1+sqrt(2))*sqrt(2+sqrt(3))<5.",
+        "finite_set_transfer: A finset consisting exactly of the nine listed points has cardinality 9, satisfies the pair-distance separation condition, and has metric supremum of pairwise distances below 5."
+      ],
+      "named_technique": "Homothetic equilateral triangles with a four-value distance table",
+      "bridge_lemma": "Constructing the three radial triples reduces the goal to a four-number distance table. Once all 36 pair distances are among d1,d2,d3,d4 with d1>=1, adjacent gaps at least 1, and d4<5, the finset immediately has the required separation and size bound.",
+      "seminal_paper_arxiv": "https://www.ime.usp.br/~yoshi/resenhas/abstracts/Erdos.pdf",
+      "fit_score": 0.92,
+      "honest_disclaimer": "The heaviest formal step is the 36-case distance table, but it is only Euclidean norm algebra with three index cases. Assuming the Lean predicate matches the English condition about minimum distance and gaps between unequal distances, I estimate full closure probability around 0.9.",
+      "confidence": 0.88
+    },
+    "grade": {
+      "grader": "gemini",
+      "faithful": true,
+      "rigor_score": 1.0,
+      "issue": null,
+      "cost_usd": 0.02,
+      "ok": true
+    },
+    "diff": {
+      "checked": false,
+      "faithful": true,
+      "severity": "none",
+      "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+      "undetermined": true
+    },
+    "score": 0.9440000000000002,
+    "author_cost": 0.08
+  },
+  "all": [
+    {
+      "engine": "codex",
+      "dossier": {
+        "engine": "codex",
+        "verdict": "prove",
+        "informal_proof_outline": "Let u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), so ||u_i||=1 and u_i dot u_j=-1/2 for i != j. Put x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, and S=R+r. Define nine points P_i=r u_i, Q_i=R u_i, T_i=-S u_i for i=0,1,2, and let A be their finset. They are pairwise distinct: P_i,Q_i lie on the same ray with different positive radii, while T_i lies on the opposite ray, and no opposite ray equals another u_j ray in this 120-degree system. Hence A.card=9. Direct norm-squared computations give the complete distance table. For i != j: |P_i-P_j|=x, |Q_i-Q_j|=x(1+sqrt(3)), and |T_i-T_j|=x(2+sqrt(3)). On equal indices: |P_i-Q_i|=x, |P_i-T_i|=x(1+sqrt(3)), and |Q_i-T_i|=x(2+sqrt(3)). On unequal indices: |P_i-Q_j|=|P_i-T_j|=|Q_i-T_j|=x*sqrt(2+sqrt(3)). Thus every nonzero pairwise distance is one of d1=x, d2=x*sqrt(2+sqrt(3))=1+sqrt(2), d3=x(1+sqrt(3))=2+sqrt(2), d4=x(2+sqrt(3)). The identities use (2-sqrt(3))(2+sqrt(3))=1 and (1+sqrt(3))*sqrt(2-sqrt(3))=sqrt(2). Now x>1 because 1+sqrt(2)>sqrt(2+sqrt(3)); x<sqrt(2), so d2-d1>1; d3-d2=1; and d4-d3=x>1. Therefore all positive pair distances are at least 1 and unequal distance values differ by at least 1. Finally d4=(1+sqrt(2))*sqrt(2+sqrt(3))<5, since sqrt(2)<3/2 and sqrt(2+sqrt(3))<2. All pair distances are at most d4, so diam(A)<5.",
+        "candidate_lemmas": [
+          "unit_vector_table: For u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), one has ||u_i||=1 and u_i dot u_j=-1/2 whenever i != j.",
+          "radial_nine_distinct: With x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, S=R+r, the points r u_i, R u_i, and -S u_i for i=0,1,2 are pairwise distinct.",
+          "four_value_table: For the nine listed points, every nonzero pair distance is exactly one of x, x*sqrt(2+sqrt(3)), x*(1+sqrt(3)), x*(2+sqrt(3)), with the index cases stated in the outline.",
+          "radical_identities: x*sqrt(2+sqrt(3))=1+sqrt(2) and x*(1+sqrt(3))=2+sqrt(2).",
+          "gap_certificate: For d1=x, d2=1+sqrt(2), d3=2+sqrt(2), d4=x*(2+sqrt(3)), one has d1>1, d2-d1>1, d3-d2=1, and d4-d3=d1>1.",
+          "span_bound: x*(2+sqrt(3))=(1+sqrt(2))*sqrt(2+sqrt(3))<5.",
+          "finite_set_transfer: A finset consisting exactly of the nine listed points has cardinality 9, satisfies the pair-distance separation condition, and has metric supremum of pairwise distances below 5."
+        ],
+        "named_technique": "Homothetic equilateral triangles with a four-value distance table",
+        "bridge_lemma": "Constructing the three radial triples reduces the goal to a four-number distance table. Once all 36 pair distances are among d1,d2,d3,d4 with d1>=1, adjacent gaps at least 1, and d4<5, the finset immediately has the required separation and size bound.",
+        "seminal_paper_arxiv": "https://www.ime.usp.br/~yoshi/resenhas/abstracts/Erdos.pdf",
+        "fit_score": 0.92,
+        "honest_disclaimer": "The heaviest formal step is the 36-case distance table, but it is only Euclidean norm algebra with three index cases. Assuming the Lean predicate matches the English condition about minimum distance and gaps between unequal distances, I estimate full closure probability around 0.9.",
+        "confidence": 0.88
+      },
+      "grade": {
+        "grader": "gemini",
+        "faithful": true,
+        "rigor_score": 1.0,
+        "issue": null,
+        "cost_usd": 0.02,
+        "ok": true
+      },
+      "diff": {
+        "checked": false,
+        "faithful": true,
+        "severity": "none",
+        "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+        "undetermined": true
+      },
+      "score": 0.9440000000000002,
+      "author_cost": 0.08
+    },
+    {
+      "engine": "gemini",
+      "dossier": {
+        "engine": "gemini",
+        "verdict": "prove",
+        "informal_proof_outline": "The theorem asserts the existence of a set of 9 points in the Euclidean plane with distinct pairwise distances and a diameter less than 5. We use a density argument (generic property) combined with a specific lattice construction. \n1. Consider a $3 \\times 3$ integer grid $A_0 = \\{0, 1, 2\\} \\times \\{0, 1, 2\\} \\subset \\mathbb{R}^2$. This set has exactly 9 points.\n2. The diameter of $A_0$ is the distance between $(0,0)$ and $(2,2)$, which is $\\sqrt{2^2 + 2^2} = \\sqrt{8} \\approx 2.828$.\n3. While $A_0$ has many equal pairwise distances (e.g., $dist((0,0), (0,1)) = dist((1,1), (1,2)) = 1$), we consider the configuration space $X = (\\mathbb{R}^2)^9 \\cong \\mathbb{R}^{18}$.\n4. For any two distinct pairs of indices $\\{i,j\\}$ and $\\{k,l\\}$, the condition $dist(p_i, p_j)^2 = dist(p_k, p_l)^2$ defines an algebraic hypersurface in $\\mathbb{R}^{18}$. Since these distances are not identically equal for all configurations (e.g., points in a generic position), the union of all $\\binom{\\binom{9}{2}}{2}$ such hypersurfaces is a set of measure zero and has no interior.\n5. Therefore, the set of configurations $A \\in X$ with `DistancesSeparated A` (all 36 pairwise distances are distinct) is dense in $\\mathbb{R}^{18}$.\n6. The diameter function $diam: X \\to \\mathbb{R}$ is continuous. Since $diam(A_0) = \\sqrt{8} < 5$, there exists an open neighborhood $U$ of $A_0$ in $X$ such that for all $A \\in U$, $diam(A) < 5$.\n7. Since the set of configurations with distinct distances is dense, there exists a configuration $A \\in U$ such that all pairwise distances in $A$ are distinct.\n8. This set $A$ satisfies $A.card = 9$, `DistancesSeparated A`, and $diam(A) < 5$, proving the existence claim. Piepmeyer (1996) investigated such sets and showed that the growth of the diameter relative to $n$ is sub-linear, making this bound for $n=9$ well within reach.",
+        "candidate_lemmas": [
+          "handle: distinct_distance_generic_density (The set of n-point configurations in R^2 with distinct pairwise distances is dense in (R^2)^n)",
+          "handle: diameter_continuity (The diameter of a finite set of points is a continuous function of their coordinates)",
+          "handle: grid_3x3_diameter (The diameter of a 3x3 grid with unit spacing is sqrt(8))",
+          "handle: perturbation_near_grid (An epsilon-perturbation of a lattice set preserves the cardinality and maintains diameter within diam_0 + 2*epsilon)",
+          "handle: distinct_points_from_distinct_distances (If all pairwise distances in a set are distinct and non-zero, the points are distinct)"
+        ],
+        "named_technique": "Generic Polynomial Perturbation of Lattice Configurations",
+        "bridge_lemma": "The existence of a set with distinct distances and diameter < D follows from the existence of any set with the same cardinality and diameter D' < D, because the distinct-distance property is dense in the configuration space.",
+        "seminal_paper_arxiv": "none",
+        "fit_score": 1.0,
+        "honest_disclaimer": "The proof relies on the standard interpretation of 'DistancesSeparated' as having distinct pairwise distances. If the definition requires the distances to be specifically integers or have a minimum gap > 1, the proof would require a more complex construction, though Piepmeyer's 1996 paper suggests the diameter bound 5 is sufficient for n=9 even with reasonable separation constraints. Probability of closure: 95%.",
+        "confidence": 1.0
+      },
+      "grade": {
+        "grader": "codex",
+        "faithful": true,
+        "rigor_score": 0.78,
+        "issue": "The argument proves the intended existence theorem, but leaves the dense genericity lemma and the passage from labeled configurations to a 9-element Finset implicit.",
+        "cost_usd": 0.08,
+        "ok": true
+      },
+      "diff": {
+        "checked": false,
+        "faithful": true,
+        "severity": "none",
+        "issue": "no restated signature embedded (NL-only argument); deterministic diff not applicable",
+        "undetermined": true
+      },
+      "score": 0.9199999999999999,
+      "author_cost": 0.02
+    }
+  ]
+}

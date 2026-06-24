@@ -50,13 +50,17 @@ def validate_file(filepath: str) -> Tuple[int, List[str]]:
         return 2, [f"FAIL: Validation error: {e}"]
 
 def get_running_jobs() -> List[dict]:
-    """Get currently running Aristotle jobs."""
+    """Get currently in-flight Aristotle jobs.
+
+    Canonical status enum (2026-05-28): an Aristotle job is in-flight when
+    status='submitted' (no terminal verdict yet).
+    """
     conn = get_db()
     cur = conn.cursor()
     cur.execute("""
         SELECT uuid, filename, problem_id, created_at
         FROM submissions
-        WHERE status = 'running' OR status = 'pending'
+        WHERE status = 'submitted'
         ORDER BY created_at DESC
     """)
     jobs = cur.fetchall()
@@ -65,12 +69,18 @@ def get_running_jobs() -> List[dict]:
             for j in jobs]
 
 def get_completed_today() -> int:
-    """Get count of jobs completed today."""
+    """Get count of jobs completed today.
+
+    Canonical status enum (2026-05-28): a completion is any terminal
+    verdict — compile_failed, compiled_partial, compiled_no_advance,
+    compiled_advance, or disproven.
+    """
     conn = get_db()
     cur = conn.cursor()
     cur.execute("""
         SELECT COUNT(*) FROM submissions
-        WHERE status = 'completed'
+        WHERE status IN ('compile_failed', 'compiled_partial', 'compiled_no_advance',
+                         'compiled_advance', 'disproven')
         AND date(created_at) = date('now')
     """)
     count = cur.fetchone()[0]

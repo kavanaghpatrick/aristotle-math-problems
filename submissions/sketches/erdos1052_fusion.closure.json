@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "partial_result_only",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Realistic Aristotle outcome on E1052 via Bilu-Hanrot-Voutier primitive divisor + UnitaryDependencyGraph support-closure: a sub-claim (bounded-ω closure for an explicit K, i.e. {n : IsUnitaryPerfect n ∧ ω(n) ≤ K}.Finite) is plausible. Full closure of E1052 (the unconditional {n : IsUnitaryPerfect n}.Finite) requires the abundancy_product_bound at variable rank, which is the same moving-rank obstruction that defeated all 6 prior attempts. The fusion lane is a real shot because (a) it introduces a new structural object — the UnitaryDependencyGraph — that none of the 6 prior attempts used, (b) it explicitly names BHV/Lucas-sequence primitive divisors as the support-explosion mechanism (prior attempts only invoked Wall extension or abundancy monotonicity), and (c) the support-closure constraint is finitely checkable on graphs up to bounded order, giving Aristotle a structured search target. real_closure_candidate=true: this is the first cross-domain fusion attempt on a 1960s-open conjecture, and even a sub-claim closure (bounded-ω with explicit K) would be a genuine advance over Wall 1972's fixed-k result."
+}

@@ -1,0 +1,31 @@
+YOLO mode is enabled. All tool calls will be automatically approved.
+YOLO mode is enabled. All tool calls will be automatically approved.
+Attempt 1 failed: You have exhausted your capacity on this model.. Retrying after 10763ms...
+Attempt 2 failed: You have exhausted your capacity on this model.. Retrying after 22211ms...
+Attempt 3 failed: You have exhausted your capacity on this model.. Retrying after 35806ms...
+Attempt 4 failed: You have exhausted your capacity on this model.. Retrying after 32978ms...
+Attempt 5 failed: You have exhausted your capacity on this model.. Retrying after 34271ms...
+Attempt 6 failed: You have exhausted your capacity on this model.. Retrying after 35474ms...
+Attempt 7 failed: You have exhausted your capacity on this model.. Retrying after 34622ms...
+Attempt 8 failed: You have exhausted your capacity on this model.. Retrying after 32451ms...
+Attempt 9 failed: You have exhausted your capacity on this model.. Retrying after 31266ms...
+Attempt 10 failed: You have exhausted your capacity on this model.. Max attempts reached
+Error when talking to Gemini API Full report available at: /var/folders/tv/mjd7bwd918b7745mldgg045w0000gn/T/gemini-client-error-Turn.run-sendMessageStream-2026-05-31T08-00-27-454Z.json RetryableQuotaError: You have exhausted your capacity on this model.
+    at classifyGoogleError (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:304200:18)
+    at retryWithBackoff (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:304863:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async GeminiChat.makeApiCallAndProcessStream (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:328262:28)
+    at async GeminiChat.streamWithRetries (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:328079:29)
+    at async Turn.run (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:328826:24)
+    at async GeminiClient.processTurn (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:342181:22)
+    at async GeminiClient.sendMessageStream (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/chunk-GPVT36PL.js:342278:14)
+    at async file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/gemini-T3PINYWC.js:10871:26
+    at async main (file:///opt/anaconda3/envs/claude-code/lib/node_modules/@google/gemini-cli/bundle/gemini-T3PINYWC.js:16276:5) {
+  cause: {
+    code: 429,
+    message: 'You have exhausted your capacity on this model.',
+    details: [ [Object], [Object] ]
+  },
+  retryDelayMs: 10000
+}
+An unexpected critical error occurred:[object Object]

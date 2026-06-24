@@ -1,0 +1,14 @@
+OPEN GAP: Erdos 985 — Primitive root smaller than p
+Source: FormalConjectures/ErdosProblems/985.lean
+Domain: nt
+
+For every odd prime p, there exists a prime q < p
+that is a primitive root modulo p.
+
+theorem erdos_985 :
+    ∀ p : ℕ, p.Prime → p ≠ 2 →
+    ∃ q : ℕ, q.Prime ∧ q < p ∧
+    orderOf (q : ZMod p) = p - 1 := by sorry
+
+Status: OPEN. Related to Artin's conjecture. Heath-Brown
+proved at least one of {2,3,5} is primitive root for inf primes.

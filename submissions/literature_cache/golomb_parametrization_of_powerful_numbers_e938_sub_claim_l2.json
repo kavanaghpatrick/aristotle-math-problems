@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780160592.407752,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:03:12+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "golomb_parametrization_of_powerful_numbers_e938_sub_claim_l2",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

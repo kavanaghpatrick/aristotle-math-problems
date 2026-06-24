@@ -1,0 +1,461 @@
+{
+  "q": 1583,
+  "q_is_prime": true,
+  "q_mod_72": 71,
+  "in_family": true,
+  "A_of_q": 2507473,
+  "A_factorization": {
+    "2507473": 1
+  },
+  "A_is_prime": true,
+  "slot720_mechanism": "Find prime r > 3 with r | A(q). Fermat-reduce 3^q mod r as 3^(q mod (r-1)) mod r. If != 1, FT holds at this q (witness r).",
+  "per_small_candidate_checks": [
+    {
+      "candidate_r": 2,
+      "is_prime_r": true,
+      "r_gt_3": false,
+      "A_of_q": 2507473,
+      "A_mod_r": 1,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 5,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 3,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 7,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 3,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 11,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 1,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 13,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 7,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 17,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 7,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 19,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 5,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 23,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 13,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 29,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 17,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 31,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 7,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 37,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 20,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 41,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 36,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 43,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 14,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 47,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 23,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 53,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 43,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 59,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 32,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 61,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 7,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 67,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 65,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 71,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 37,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 73,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 69,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 79,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 13,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 83,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 43,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 89,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 76,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    },
+    {
+      "candidate_r": 97,
+      "is_prime_r": true,
+      "r_gt_3": true,
+      "A_of_q": 2507473,
+      "A_mod_r": 23,
+      "r_divides_A": false,
+      "valid_slot720_witness": false,
+      "reason": "fails preconditions (need prime r > 3 with r | A(q))"
+    }
+  ],
+  "all_small_primes_lt_200_dividing_A": [],
+  "alternate_witness_found": false,
+  "any_small_divisor_of_A_in_candidate_set": false,
+  "direct_FT_check_at_A": {
+    "q": 1583,
+    "A_of_q": 2507473,
+    "A_is_prime": true,
+    "3_pow_q_mod_A": 1702700,
+    "3_pow_q_equiv_1_mod_A": false,
+    "FT_p3_q_holds_at_this_q": true,
+    "ord_3_mod_A": 208956
+  },
+  "slot720_known_family_members": [
+    {
+      "q": 71,
+      "A_q": 5113,
+      "A_q_check": 5113,
+      "A_q_factors": {
+        "5113": 1
+      },
+      "A_q_is_prime": true,
+      "small_prime_factor_used": null
+    },
+    {
+      "q": 359,
+      "A_q": 129241,
+      "A_q_check": 129241,
+      "A_q_factors": {
+        "7": 1,
+        "37": 1,
+        "499": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 7
+    },
+    {
+      "q": 431,
+      "A_q": 186193,
+      "A_q_check": 186193,
+      "A_q_factors": {
+        "7": 1,
+        "67": 1,
+        "397": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 7
+    },
+    {
+      "q": 503,
+      "A_q": 253513,
+      "A_q_check": 253513,
+      "A_q_factors": {
+        "13": 1,
+        "19501": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 13
+    },
+    {
+      "q": 647,
+      "A_q": 419257,
+      "A_q_check": 419257,
+      "A_q_factors": {
+        "211": 1,
+        "1987": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 211
+    },
+    {
+      "q": 719,
+      "A_q": 517681,
+      "A_q_check": 517681,
+      "A_q_factors": {
+        "487": 1,
+        "1063": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 487
+    },
+    {
+      "q": 863,
+      "A_q": 745633,
+      "A_q_check": 745633,
+      "A_q_factors": {
+        "7": 2,
+        "15217": 1
+      },
+      "A_q_is_prime": false,
+      "small_prime_factor_used": 7
+    }
+  ],
+  "structural_scan_q_equiv_71_mod_72_le_2000": [
+    {
+      "q": 71,
+      "A_q": 5113,
+      "A_q_is_prime": true,
+      "smallest_prime_factor": 5113,
+      "n_distinct_prime_factors": 1
+    },
+    {
+      "q": 359,
+      "A_q": 129241,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 3
+    },
+    {
+      "q": 431,
+      "A_q": 186193,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 3
+    },
+    {
+      "q": 503,
+      "A_q": 253513,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 13,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 647,
+      "A_q": 419257,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 211,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 719,
+      "A_q": 517681,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 487,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 863,
+      "A_q": 745633,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 1151,
+      "A_q": 1325953,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 19,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 1223,
+      "A_q": 1496953,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 19,
+      "n_distinct_prime_factors": 2
+    },
+    {
+      "q": 1367,
+      "A_q": 1870057,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 3
+    },
+    {
+      "q": 1439,
+      "A_q": 2072161,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 3
+    },
+    {
+      "q": 1511,
+      "A_q": 2284633,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 13,
+      "n_distinct_prime_factors": 4
+    },
+    {
+      "q": 1583,
+      "A_q": 2507473,
+      "A_q_is_prime": true,
+      "smallest_prime_factor": 2507473,
+      "n_distinct_prime_factors": 1
+    },
+    {
+      "q": 1871,
+      "A_q": 3502513,
+      "A_q_is_prime": false,
+      "smallest_prime_factor": 7,
+      "n_distinct_prime_factors": 3
+    }
+  ],
+  "predicted_breakpoints_in_1500_2000": [
+    {
+      "q": 1583,
+      "A_q": 2507473,
+      "A_q_is_prime": true,
+      "smallest_prime_factor": 2507473,
+      "n_distinct_prime_factors": 1
+    }
+  ],
+  "conclusion": {
+    "branch": "no_small_witness_but_FT_holds_by_direct_mod_A",
+    "headline": "No small (r \u2264 97 or even r < 200) Fermat-reduction witness exists because A(1583) = 2,507,473 is itself prime. The slot720 small-witness MECHANISM breaks at q=1583. FT_p3_q still holds at q=1583 by direct computation: 3^1583 mod A(1583) != 1. So the family theorem is TRUE at q=1583 but requires a different (large-prime, direct-modpow) proof tactic.",
+    "FT_p3_q_at_1583_true": true,
+    "mechanism_breaks": true
+  }
+}

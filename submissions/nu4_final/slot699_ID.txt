@@ -1,0 +1,3 @@
+a72ba82f-da51-4297-959f-afa0c3f0500f
+# Task: Erdos 251 prime binary irrationality — bare gap
+# Submitted: 2026-02-18T19:37:21

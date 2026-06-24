@@ -1,0 +1,24 @@
+{
+  "problem_id": "erdos_938",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_938/01_literature.md",
+    "analogies_path": "research_fusion/runs/erdos_938/02_analogies.md",
+    "techniques_path": "research_fusion/runs/erdos_938/03_techniques.md"
+  },
+  "named_technique": "norm form x^2 - 343 y^2 = 2 with iterated unit multiplication",
+  "seminal_paper_arxiv": "https://arxiv.org/abs/2605.06697",
+  "fit_score": 0.92,
+  "bridge_lemma": "Van Doorn's recurrence (a, b, c, d) = (130576328, 2418307437, 7050459, 130576328) preserves the Pell relation x^2 - 343 y^2 = 2 and is strictly increasing on (x_0, y_0) = (11427, 617). Therefore the solution set is infinite, and each (x, y) yields a powerful 3-AP ((x-2)^2, (x-1)^2, x^2 - 2 = 7^3 y^2) with d = 2x - 3 = 2*sqrt(N) + 1.",
+  "informal_proof_outline": "Let (x_0, y_0) = (11427, 617). By direct check, x_0^2 - 343 y_0^2 = 130576329 - 343*380689 = 2. Define the recurrence: x_{k+1} = 130576328 x_k + 2418307437 y_k, y_{k+1} = 7050459 x_k + 130576328 y_k. This is multiplication by the unit 130576328 + 7050459*sqrt(343) in Z[sqrt(343)], which has norm 130576328^2 - 343 * 7050459^2 = 1 (verified directly). Hence (x^2 - 343 y^2) is invariant under the recurrence, so x_k^2 - 343 y_k^2 = 2 for all k. Since the coefficients are positive, x_{k+1} > x_k > 0, so the sequence is strictly increasing. Hence infinitely many distinct solutions. For each (x_k, y_k): the triple ((x_k - 2)^2, (x_k - 1)^2, x_k^2 - 2) is a 3-AP with common difference d_k = 2 x_k - 3 = 2 sqrt((x_k - 2)^2) + 1. Each term is powerful: (x-2)^2 and (x-1)^2 are perfect squares, hence trivially powerful (every prime divides with even exponent). x_k^2 - 2 = 7^3 y_k^2 by the Pell relation, so 7 divides it with exponent 3 + 2 v_7(y_k) >= 3, and every other prime q dividing x_k^2 - 2 must divide y_k (since 7 || the coefficient 343), hence q^2 divides y_k^2, hence q^2 divides x_k^2 - 2. Thus x_k^2 - 2 is powerful. Hence the set {(N, d) : N, N+d, N+2d powerful, d = 2 sqrt(N) + 1} contains the infinite family {((x_k - 2)^2, 2 x_k - 3) : k in N}, hence is infinite.",
+  "candidate_lemmas": [
+    "initial_solution: 11427^2 - 343 * 617^2 = 2 (direct decide)",
+    "recurrence_invariant: if x^2 - 343 y^2 = 2 then (130576328 x + 2418307437 y)^2 - 343 (7050459 x + 130576328 y)^2 = 2",
+    "recurrence_strict_increasing: 130576328 x + 2418307437 y > x for x, y >= 1",
+    "square_powerful: forall n, Nat.Powerful (n^2)",
+    "seven_cubed_y_squared_powerful: forall y, Nat.Powerful (7^3 * y^2)",
+    "produces_3AP: if x^2 - 343 y^2 = 2 and x >= 3 then ((x-2)^2, (x-1)^2, x^2 - 2) is a 3-AP of powerful numbers with d = 2 sqrt((x-2)^2) + 1",
+    "infinite_solutions: the set of (x, y) satisfying x^2 - 343 y^2 = 2 is infinite (via the recurrence on (11427, 617))",
+    "main_target: the set of (N, d) satisfying Powerful N, Powerful (N+d), Powerful (N+2d), and d = 2 Nat.sqrt N + 1 is infinite"
+  ],
+  "honest_disclaimer": "FUSION lane delivers an UNCONDITIONAL Lean formalization of van Doorn's Theorem 1, NOT his Conjecture 5 (which would falsify Erdos 938). Theorem 1 is mathematically true and proven on paper; numerical verification confirmed (a) the Pell recurrence preserves x^2 - 343 y^2 = 2; (b) for k=0..20, every triple is a valid powerful 3-AP. Conjecture 5 (infinitely many of these are CONSECUTIVE in the powerful sequence) requires unproven equidistribution mod 1 of {x_k / m^{3/2}} for small squarefree m, and is OUT OF SCOPE for this submission. k=23 was identified as a strong numerical candidate (zero obstructions for squarefree m <= 10^6) but verifying full consecutiveness would require sieving m up to 10^132 which is infeasible. This submission therefore advances Erdos 938 by formalizing the key upstream construction, not by resolving the question itself."
+}

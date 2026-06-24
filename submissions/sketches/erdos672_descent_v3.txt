@@ -1,0 +1,21 @@
+OPEN GAP: Erdos 672 — Close remaining sorry in descent proof
+Source: FormalConjectures/ErdosProblems/672.lean
+Domain: nt
+
+Product of 4 coprime AP terms is never a perfect cube.
+Three sorry remain in the attached 184-line proof:
+
+1. not_square_27a4_9a2_1: 27a^4+9a^2+1 is not a square (a≠0)
+2. no_three_cubes_in_ap: x^3+y^3=2z^3 implies x=y
+3. erdos_672_l3: main theorem via reduction to (2)
+
+All other lemmas are proved: ap4_product_identity,
+gcd_ap_terms_dvd, not_cube_mod9, not_square_a4_9a2_27,
+no_solution_mod8, coprime_product_implies_unit.
+
+theorem erdos_672_l3 :
+    ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+    ¬ ∃ y : ℕ, (∏ i ∈ Finset.range 4, (n + i * d)) = y ^ 3 := by
+  sorry
+
+Status: OPEN. Close the 3 sorry using the proved infrastructure.

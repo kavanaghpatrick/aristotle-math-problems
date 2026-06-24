@@ -1,0 +1,8 @@
+{
+  "CS": "disproof_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "Test fixture: explicit counterexample with decidable verification, journal-clean disproof of an open universal claim."
+}

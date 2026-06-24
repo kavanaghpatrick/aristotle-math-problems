@@ -1,0 +1,58 @@
+## 1. Underrated
+
+- **R4**: `T +2` (`7→9`). Bounded odd kernels reduce to a finite union of fixed-kernel problems; the anchor says fixed-kernel Mordell-Siegel finiteness is unconditional. Mathlib support: `Nat.factorization` and `Finset` enumeration.
+- **R7**: `T +1` (`7→8`). 5-smooth means fixed S-unit support, so this is a real finite-rank unit-equation slice, not a global kernel-uniformity problem.
+- **R5**: `T +1` (`6→7`). Fixing cube-free part `b=3` collapses the problem to a small family of Thue/Mordell-type equations; per-kernel finiteness is already the known tractable lever.
+- **N1**: `T +1` (`3→4`). It is not a blank-slate construction: Van Doorn 2026 explicitly asserts the A_1 infinitude direction, and `Mathlib.NumberTheory.Pell` gives usable Pell infrastructure.
+
+## 2. Overrated
+
+- **D7**: `I -4` (`9→5`). Powerful Pell solutions only control the A_1 channel, not non-A_1 triples; this duplicates the failed `yolo_mega7_e938_pell_classification` / `yolo_mega2_e938_van_doorn_verification` angle.
+- **D1**: `I -4` (`9→5`). Fixed-kernel finiteness is unconditional, but it does not “directly transfer” to E938 without kernel uniformity, exactly the Bombieri-Lang/Vojta obstruction.
+- **C3**: `T -3` (`5→2`). The split is not logically clean as stated: `W2 ∧ R2` does not cover middle non-square cases, and “non-trivial cube factor” is basically the residual full problem.
+- **C7**: `I -3` (`9→6`). Chan 2025 does not settle the whole cube-middle case; it handles a restricted prime odd-power shape, with She 2025 covering another narrow cube-centered family.
+- **N5**: `T -3` (`5→2`). Local admissibility does not lift to consecutive powerful triples; prior mod/joint-mod attempts already hit this wall, and mod-72 has 593 admissible classes.
+- **G7**: `T -5` (`7→2`). This is just E938 rewritten as `x+y=2z`; no tractability is gained.
+
+## 3. Redundant
+
+- **D7** is essentially `yolo_mega7_e938_pell_classification` plus `yolo_mega2_e938_van_doorn_verification`.
+- **D2** duplicates `erdos938_fusion`, `yolo_w3_e938_direct`, and `yolo_w4_e938_final` Frey-Hellegouarch/level-lowering attacks.
+- **C6/W3** duplicate `erdos938_chan_abc_conditional_iter2` and `yolo_e938_deep_abc`.
+
+## 4. Adjusted Top-5
+
+1. **R7 — No consecutive powerful 3-APs inside 5-smooth powerfuls**  
+   Adjusted `T=8, I=6, EV=48`.  
+   Best concrete slice now: fixed S-unit support plus `Nat.factorization`/finite-support enumeration avoids global kernel uniformity.
+
+2. **R4 — No consecutive powerful 3-APs with odd part <10^6**  
+   Adjusted `T=9, I=4, EV=36`.  
+   Finite kernel enumeration plus unconditional per-kernel Mordell-Siegel makes this a realistic certified finite-union target.
+
+3. **N1 — Infinitely many A_1 consecutive powerful 3-APs exist**  
+   Adjusted `T=4, I=10, EV=40`.  
+   Right falsification target because all 18 known examples are A_1 and Van Doorn 2026 asserts this direction; use Pell recurrences via `Mathlib.NumberTheory.Pell`.
+
+4. **D1 — Finiteness of powerful solutions to fixed-kernel quadratic**  
+   Adjusted `T=8, I=5, EV=40`.  
+   Worth formalizing as reusable infrastructure, but its impact is capped until kernel uniformity is solved.
+
+5. **R5 — Finitely many consecutive powerful 3-APs with prime b=3**  
+   Adjusted `T=7, I=5, EV=35`.  
+   A single small-kernel Thue/Mordell slice is a better proof target than another global Frey-curve attempt.
+
+## 5. Missed decomposition
+
+**E938 ⇔ X ∧ Y**
+
+- **X** = For every fixed squarefree kernel triple `(b1,b2,b3)`, the associated fixed-kernel equation has only finitely many consecutive-powerful AP solutions.
+- **Y** = Only finitely many squarefree kernel triples occur among consecutive powerful 3-APs.
+
+This is sharper than C1-C7 because **X is already unconditional** by the stated Mordell-Siegel anchor; the entire unsolved mass is isolated in **Y**, the kernel-uniformity/support problem.
+
+## 6. One-line verdict
+
+**PARTIAL** — Grok surfaced some useful finite-kernel/S-unit slices, but its top ranking is polluted by duplicates, tautologies, and invalid transfer claims around D7, D1, C3, and C7.
+
+Refs: Chan 2022 `abc`/non-consecutive construction: https://arxiv.org/abs/2210.00281; Van Doorn 2026 A_1 assertion: https://arxiv.org/abs/2605.06697; She 2025 cube-centered restriction: https://arxiv.org/abs/2507.16828; Mathlib Pell: https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/Pell.html; Mathlib factorization: https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Nat/Factorization/Defs.html.

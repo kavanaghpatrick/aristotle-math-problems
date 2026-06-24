@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780318123.500871,
+  "checked_at": "2026-06-01T12:48:43+00:00",
+  "evidence": "1 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "1998 partial/weak: The representation theories of elementarily equivalent rings",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2307/2586842"
+    },
+    {
+      "evidence": "2007 STRONG closure language: An algebraic characterization of equivalent preferential models",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2178/jsl/1191333843"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780166097.98863,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T18:34:57+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_938_gcd_n_k_d_is_powerful_for_consecutively_enumerated_powerful_3_aps",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

@@ -1,0 +1,33 @@
+N = 10000000000000, B_BOUND = 21547
+  squarefree sieve to 21547 done in 0.0s
+  generated 6840384 powerful numbers in 0.6s (pre-sort)
+  sorted in 0.2s
+  |P(N)|/sqrt(N) = 2.1631 (expected ~2.1732)
+  duplicate adjacent count: 0 (should be 0) in 0.3s
+
+=== CONSECUTIVE powerful 3-APs up to 1e13 ===
+  found 15 consecutive 3-APs in 0.7s
+
+=== Mordell-form fit per consecutive 3-AP ===
+  (1728, 1764, 1800) gap=36  =>  k=1, (w,x,y)=(6,15,21), base=(1728, 1764, 1800), deficit=9, delta/w^3=0.0416667
+  (6912, 7056, 7200) gap=144  =>  k=4, (w,x,y)=(6,15,21), base=(1728, 1764, 1800), deficit=9, delta/w^3=0.0416667
+  (729000, 729316, 729632) gap=316  =>  k=1, (w,x,y)=(45,302,427), base=(729000, 729316, 729632), deficit=79, delta/w^3=0.000866941
+  (1458000, 1458632, 1459264) gap=632  =>  k=2, (w,x,y)=(45,302,427), base=(729000, 729316, 729632), deficit=79, delta/w^3=0.000866941
+  (2916000, 2917264, 2918528) gap=1264  =>  k=4, (w,x,y)=(45,302,427), base=(729000, 729316, 729632), deficit=79, delta/w^3=0.000866941
+  (11664000, 11669056, 11674112) gap=5056  =>  k=16, (w,x,y)=(45,302,427), base=(729000, 729316, 729632), deficit=79, delta/w^3=0.000866941
+  *** (149022674775, 149022848000, 149023021225) gap=173225  DOES NOT FIT MORDELL FORM ***
+  *** (260102040004, 260102223752, 260102407500) gap=183748  DOES NOT FIT MORDELL FORM ***
+  *** (348796224200, 348796548100, 348796872000) gap=323900  DOES NOT FIT MORDELL FORM ***
+  *** (697592448400, 697593096200, 697593744000) gap=647800  DOES NOT FIT MORDELL FORM ***
+  *** (1040408160016, 1040408895008, 1040409630000) gap=734992  DOES NOT FIT MORDELL FORM ***
+  *** (1206916971500, 1206917268552, 1206917565604) gap=297052  DOES NOT FIT MORDELL FORM ***
+  *** (1395184896800, 1395186192400, 1395187488000) gap=1295600  DOES NOT FIT MORDELL FORM ***
+  *** (2413833943000, 2413834537104, 2413835131208) gap=594104  DOES NOT FIT MORDELL FORM ***
+  *** (4827667886000, 4827669074208, 4827670262416) gap=1188208  DOES NOT FIT MORDELL FORM ***
+
+=== Distinct primitive Mordell bases ===
+  (w,x,y)=(6,15,21)  base_AP=(1728,1764,1800)  multipliers k=[1, 4]
+  (w,x,y)=(45,302,427)  base_AP=(729000,729316,729632)  multipliers k=[1, 2, 4, 16]
+
+TOTAL consecutive: 15 | distinct primitive Mordell bases: 2
+GRAND TOTAL elapsed across script visible above.

@@ -1,0 +1,23 @@
+OPEN GAP: Juggler Conjecture
+Source: Juggler sequences (Erdős, attributed)
+Domain: nt
+
+For every positive integer n, the juggler sequence defined by
+  J(n) = floor(n^{1/2}) if n is even,
+  J(n) = floor(n^{3/2}) if n is odd,
+eventually reaches 1.
+
+Verified computationally for all n ≤ 10^6. Some trajectories
+reach very large intermediate values before descending.
+
+Odd steps cube-root-grow, even steps square-root-shrink.
+The net effect is shrinkage on average, but proving termination
+for all starting values remains open.
+
+theorem juggler (n : ℕ) (hn : n ≥ 1) :
+    ∃ k : ℕ, (Nat.iterate
+      (fun m => if m % 2 = 0 then Nat.sqrt m
+                else Nat.sqrt (m * m * m)) k n) = 1 := by
+  sorry
+
+Status: OPEN. Verified for n ≤ 10^6. No proof of termination.

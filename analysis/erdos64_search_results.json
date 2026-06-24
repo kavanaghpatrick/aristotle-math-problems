@@ -1,0 +1,404 @@
+{
+  "conjecture": "Every finite graph with min-degree >= 3 contains a cycle of length 2^k for some k >= 2.",
+  "search_target": "counterexample with min-degree >= 3 and no cycle of length 2^k (k >= 2)",
+  "started_at": "2026-05-30 07:48:10",
+  "search_log": [
+    {
+      "found": false,
+      "n": 18,
+      "trials": 4000,
+      "elapsed_s": 0.24,
+      "rejected_by_cycle_length": {
+        "4": 3743,
+        "8": 257,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 19,
+      "trials": 4000,
+      "elapsed_s": 0.0,
+      "rejected_by_cycle_length": {
+        "4": 0,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 20,
+      "trials": 4000,
+      "elapsed_s": 0.26,
+      "rejected_by_cycle_length": {
+        "4": 3732,
+        "8": 268,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 21,
+      "trials": 4000,
+      "elapsed_s": 0.0,
+      "rejected_by_cycle_length": {
+        "4": 0,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 22,
+      "trials": 4000,
+      "elapsed_s": 0.29,
+      "rejected_by_cycle_length": {
+        "4": 3694,
+        "8": 306,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 23,
+      "trials": 4000,
+      "elapsed_s": 0.0,
+      "rejected_by_cycle_length": {
+        "4": 0,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 24,
+      "trials": 4000,
+      "elapsed_s": 0.32,
+      "rejected_by_cycle_length": {
+        "4": 3721,
+        "8": 279,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 25,
+      "trials": 4000,
+      "elapsed_s": 0.0,
+      "rejected_by_cycle_length": {
+        "4": 0,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "cubic"
+    },
+    {
+      "found": false,
+      "n": 18,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.4,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 19,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.42,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 20,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.45,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 21,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.47,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 22,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.5,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 23,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.52,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 24,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.57,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 25,
+      "trials": 6000,
+      "mindeg3_accepted": 6000,
+      "elapsed_s": 0.57,
+      "rejected_by_cycle_length": {
+        "4": 6000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3"
+    },
+    {
+      "found": false,
+      "n": 18,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.25,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 19,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.25,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 20,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.27,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 21,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.28,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 22,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.3,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 23,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.3,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 24,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.32,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "found": false,
+      "n": 25,
+      "trials": 4000,
+      "mindeg3_accepted": 4000,
+      "elapsed_s": 0.33,
+      "rejected_by_cycle_length": {
+        "4": 4000,
+        "8": 0,
+        "16": 0
+      },
+      "phase": "mindeg3_dense"
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 18,
+      "trials": 200,
+      "elapsed_s": 0.04,
+      "converged_to_4cycle_free": 10,
+      "still_has_4cycle_after_repair": 190,
+      "rejected_by_8_cycle": 10,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 20,
+      "trials": 200,
+      "elapsed_s": 0.04,
+      "converged_to_4cycle_free": 22,
+      "still_has_4cycle_after_repair": 178,
+      "rejected_by_8_cycle": 22,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 22,
+      "trials": 200,
+      "elapsed_s": 0.05,
+      "converged_to_4cycle_free": 18,
+      "still_has_4cycle_after_repair": 182,
+      "rejected_by_8_cycle": 18,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 24,
+      "trials": 200,
+      "elapsed_s": 0.06,
+      "converged_to_4cycle_free": 15,
+      "still_has_4cycle_after_repair": 185,
+      "rejected_by_8_cycle": 15,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 26,
+      "trials": 200,
+      "elapsed_s": 0.07,
+      "converged_to_4cycle_free": 24,
+      "still_has_4cycle_after_repair": 176,
+      "rejected_by_8_cycle": 24,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 28,
+      "trials": 200,
+      "elapsed_s": 0.07,
+      "converged_to_4cycle_free": 19,
+      "still_has_4cycle_after_repair": 181,
+      "rejected_by_8_cycle": 19,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 30,
+      "trials": 200,
+      "elapsed_s": 0.09,
+      "converged_to_4cycle_free": 14,
+      "still_has_4cycle_after_repair": 186,
+      "rejected_by_8_cycle": 14,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    },
+    {
+      "phase": "hill_climbing",
+      "n": 32,
+      "trials": 200,
+      "elapsed_s": 0.09,
+      "converged_to_4cycle_free": 10,
+      "still_has_4cycle_after_repair": 190,
+      "rejected_by_8_cycle": 10,
+      "rejected_by_16_cycle": 0,
+      "found": false
+    }
+  ],
+  "found_witness": null,
+  "search_bound_reached": 32,
+  "finished_at": "2026-05-30 07:48:18",
+  "total_elapsed_s": 7.82,
+  "honest_assessment": "No counterexample found via random sampling. Random 3-regular graphs are dominated by 4-cycles at small n. Literature (Hu-Shen 2024, Hegde et al Feb 2025) requires cubic > 30, bipartite > 32 \u2014 random sampling at n \u2264 25 cannot reach this regime. A real CNF SAT encoding with a state-of-the-art solver (cadical/kissat) and a beefier machine is required to push n into the 28\u201340 range where a counterexample, if any, is most likely to live."
+}

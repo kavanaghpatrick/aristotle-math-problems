@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318136.073935,
+  "checked_at": "2026-06-01T12:48:56+00:00",
+  "evidence": "1 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "4 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2020 partial/weak: On the multiple holomorph of groups of squarefree or odd prime power order",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1016/j.jalgebra.2019.10.019"
+    },
+    {
+      "evidence": "2011 STRONG closure language: Fixed-point free action of an abelian group of odd non-squarefree exponent",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.1017/s0013091509000583"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

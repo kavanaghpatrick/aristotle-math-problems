@@ -1,0 +1,14 @@
+OPEN GAP: Erdos 251 — Irrationality of sum p_n / 2^n
+Source: FormalConjectures/ErdosProblems/251.lean
+Domain: nt
+
+Is the sum ∑ p_n / 2^n irrational, where p_n is the n-th prime?
+
+Prior result (slot699) proved p_n ≤ 2^(n+1) via Bertrand,
+p_{n+1} < 2p_n, and conditional summability.
+
+theorem erdos_251 : answer(sorry) ↔
+    Irrational (∑' n, (Nat.nth Nat.Prime n : ℝ) / 2^n) := by sorry
+
+Status: OPEN. The sum converges (by prime growth bounds). Its
+irrationality is unknown.

@@ -1,0 +1,29 @@
+OPEN GAP: Joint mod-36 admissibility for powerful 3-APs (general common difference)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/{364,938,940}.lean
+Domain: nt
+
+Beckon (RHUMJ 2019, vol 20 no 2 paper 3) proved that if m, m+1, m+2 are all
+powerful then m mod 36 in {7, 27, 35}. No published work generalizes this
+to powerful 3-APs n, n+d, n+2d with d >= 2. The following extends Beckon's
+mod-36 closure to arbitrary common difference d >= 1; the joint admissible
+set on (n mod 36, d mod 36) has exactly 259 elements out of 1296.
+
+def Powerful (n : ℕ) : Prop := ∀ p : ℕ, p.Prime → p ∣ n → p ^ 2 ∣ n
+
+theorem powerful_3ap_joint_mod36
+    (n d : ℕ) (hd : 0 < d)
+    (hn : Powerful n) (hn1 : Powerful (n + d)) (hn2 : Powerful (n + 2 * d)) :
+    n % 4 ≠ 2 ∧ (n + d) % 4 ≠ 2 ∧ (n + 2 * d) % 4 ≠ 2 ∧
+    n % 9 ≠ 3 ∧ n % 9 ≠ 6 ∧
+    (n + d) % 9 ≠ 3 ∧ (n + d) % 9 ≠ 6 ∧
+    (n + 2 * d) % 9 ≠ 3 ∧ (n + 2 * d) % 9 ≠ 6 ∧
+    (Finset.univ.filter (fun p : Fin 36 × Fin 36 =>
+       p.1.val = n % 36 ∧ p.2.val = d % 36)).card = 1 := by
+  sorry
+
+Status: OPEN as a Mathlib formalization. The d=1 specialization recovers
+Beckon's {7,27,35}; d>=2 is Mathlib-novel and absent from Chan-Phang
+(arXiv:2503.21485, 2025), She (arXiv:2507.16828, 2025), and van Doorn
+(arXiv:2605.06697, 2026). The joint admissible set on (n mod 36, d mod 36)
+has 259/1296 pairs (~20% density). Slot 1325 supplied the d=1 base case;
+slot 1317 supplied the orthogonal d < 2 sqrt(n_0) + 2 bound.

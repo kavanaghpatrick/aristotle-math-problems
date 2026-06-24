@@ -1,0 +1,8 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_partial",
+  "real_closure_candidate": false,
+  "rationale": "Mechanical extension of L3 iter1's N=50 closure (UUID 229acf74-61e6-4042-9dee-3be9a9815b3e, sorry-free Fin 51 + native_decide) to N=200. Python scan confirms zero collisions for 0 ≤ a < b ≤ 200 (20100 distinct sums; max sum 6.32·10^11). Pure mechanical bound extension via suffices reduction to Fin 201 + native_decide. Unbounded statement remains open; this is a stronger bounded subclaim, requires --rubric-points."
+}

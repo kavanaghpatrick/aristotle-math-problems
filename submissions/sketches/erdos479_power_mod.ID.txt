@@ -1,0 +1,4 @@
+00caaa41-c215-465b-a38e-1717a72a9605
+# Task: erdos479_power_mod
+# Hash: ee13a433b868dff8
+# Submitted: 2026-03-13T10:13:00.260581

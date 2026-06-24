@@ -110,6 +110,10 @@ class Dashboard:
         conn = self.get_db()
         cursor = conn.cursor()
 
+        # Canonical submissions.status enum (2026-05-28):
+        #   submitted | compile_failed | compiled_partial | compiled_no_advance
+        #   | compiled_advance | disproven
+        # A "completion" is any terminal status (anything except 'submitted').
         cursor.execute("""
         SELECT filename, sorry_count, proven_count, completed_at,
                CASE
@@ -118,7 +122,7 @@ class Dashboard:
                    ELSE 'INCOMPLETE'
                END as result
         FROM submissions
-        WHERE status = 'completed'
+        WHERE status IN ('compile_failed','compiled_partial','compiled_no_advance','compiled_advance','disproven')
           AND completed_at > datetime('now', '-' || ? || ' hours')
         ORDER BY completed_at DESC
         LIMIT 20

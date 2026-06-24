@@ -1,0 +1,44 @@
+{
+  "_cache_ts": 1780318855.728354,
+  "checked_at": "2026-06-01T13:00:55+00:00",
+  "evidence": "6 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2012 partial/weak: Infinitely Many Primes (Using Topology)",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.59350/y5exx-hae02"
+    },
+    {
+      "evidence": "2012 partial/weak: Infinitely Many Primes (Using Topology)",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.59350/nhhyc-rn105"
+    },
+    {
+      "evidence": "2012 partial/weak: There are Infinitely Many Primes (Erd\u0151s)",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.59350/cd47f-s6h88"
+    },
+    {
+      "evidence": "2012 partial/weak: There are Infinitely Many Primes (Erd\u0151s)",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.59350/efz9q-9h148"
+    },
+    {
+      "evidence": "2020 partial/weak: Dp-minimal profinite groups and valuations on the integers",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2008.08797v1"
+    },
+    {
+      "evidence": "2014 partial/weak: Satellite operators with distinct iterates in smooth concordance",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/1403.3883v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

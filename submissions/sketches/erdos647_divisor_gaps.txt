@@ -1,0 +1,19 @@
+OPEN GAP: Erdős Problem 647 — Divisor Function Gaps
+Source: Erdős Problem 647
+Domain: nt
+
+Is there n > 24 such that max_{m < n} (m + τ(m)) ≤ n + 2,
+where τ(m) is the number of divisors of m?
+
+For n ≤ 24, the maximum of m + τ(m) over m < n can be ≤ n + 2.
+The question is whether this "gap" phenomenon persists for large n.
+
+Since τ(m) ≥ 2 for m ≥ 2, we always have m + τ(m) ≥ m + 2.
+The density of highly composite numbers and the average
+τ(m) ~ log m suggest gaps should become rarer.
+
+theorem erdos647 : ¬ ∃ n : ℕ, n > 24 ∧
+    ∀ m : ℕ, 1 ≤ m → m < n → m + Nat.divisors m |>.card ≤ n + 2 := by
+  sorry
+
+Status: OPEN. No n > 24 found. Average growth of τ suggests none.

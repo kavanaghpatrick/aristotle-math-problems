@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780140680.87794,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T11:31:20+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_141_variant_11_consecutive_primes_in_arithmetic_progression",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

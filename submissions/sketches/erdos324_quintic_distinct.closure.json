@@ -1,0 +1,8 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": false,
+  "rationale": "Erdős 324 variant.quintic (a^5+b^5 distinct for a<b) is open in general; this submission targets the S1 bounded native_decide version for a,b ≤ 50. Python scan to N=1000 confirms zero collisions (500500 distinct sums). Lean theorem reduces to a finite decidable check. Unbounded statement remains open — this is a publishable bounded subclaim, not the full conjecture."
+}

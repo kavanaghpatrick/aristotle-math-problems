@@ -1,0 +1,8 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": false,
+  "rationale": "Erdős 319 asks for c(N) = max |A| over A ⊆ {1..N} with a sign pattern making Σ δ(n)/n = 0 and no nonempty proper subset of A also vanishing. The full problem is `answer(sorry)` form (S5 F1 trap). This sub-claim sidesteps F1 by stating a concrete explicit-witness lower bound at N=6: A={1,2,3,6} with δ=(−1,+1,+1,+1) gives −1+1/2+1/3+1/6=0 and every nonempty proper subset has nonzero signed sum. Brute-force scan: c(N)=0 for N≤5, c(N)=4 for 6≤N≤11, c(12)=6. Decidability is clean — all conditions are finite-rational equalities/inequalities on a finite Finset; `decide` or `native_decide` discharges the witness. This is a journal_subclaim (bounded-N explicit value), not a full closure of the unbounded c(N) question, which remains genuinely open (Croot/Adenwalla 1−1/e lower bound is the state of the art)."
+}

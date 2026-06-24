@@ -1,0 +1,50 @@
+{
+  "_cache_ts": 1780318856.498708,
+  "checked_at": "2026-06-01T13:00:56+00:00",
+  "evidence": "4 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "2 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "1978 partial/weak: On some unconventional problems on the divisors of integers",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3609782"
+    },
+    {
+      "evidence": "2009 partial/weak: On the bi-unitary analogues of Euler's arithmetical function and the gcd-sum function",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:5688285"
+    },
+    {
+      "evidence": "2023 STRONG closure language: On sums involving divisor function, Euler's totient function, and floor function",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.33774/coe-2023-sjwkq-v2"
+    },
+    {
+      "evidence": "2024 STRONG closure language: On sums involving divisor function, Euler's totient function, and floor function",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.33774/coe-2023-sjwkq-v4"
+    },
+    {
+      "evidence": "2023 STRONG closure language: On sums involving divisor function, Euler's totient function, and floor function",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.33774/coe-2023-sjwkq-v3"
+    },
+    {
+      "evidence": "2023 STRONG closure language: On sums involving divisor function, Euler's totient function, and floor function",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.33774/coe-2023-sjwkq"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

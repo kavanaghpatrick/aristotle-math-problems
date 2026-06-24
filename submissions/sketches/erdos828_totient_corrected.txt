@@ -1,0 +1,22 @@
+OPEN GAP: Erdős Problem 828 — Infinitely Many φ(n) | (n+1)?
+Source: Erdős Problem 828
+Domain: nt
+
+Are there infinitely many n with φ(n) | (n + 1)?
+
+Known solutions (OEIS A203966):
+1, 2, 3, 15, 255, 65535, 83623935, 4294967295, 6992962672132095.
+
+Chain construction: if 2φ(n) = n+1 and n+2 is prime, then
+m = n(n+2) also satisfies 2φ(m) = m+1. This generates
+1 → 3 → 15 → 255 → 65535 → 4294967295.
+
+Any solution with n > 2 must be odd and squarefree, with
+gcd(n, φ(n)) = 1 (normal family of prime factors).
+Heuristic evidence suggests finitely many solutions.
+
+theorem erdos828 :
+    Set.Infinite {n : ℕ | n > 0 ∧ Nat.totient n ∣ (n + 1)} := by
+  sorry
+
+Status: OPEN. Nine solutions known. Infinitude unknown.

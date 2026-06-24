@@ -1,0 +1,9 @@
+OPEN GAP: Erdos389 (illustrative test sketch)
+Source: formal-conjectures/Erdos389
+Domain: combinatorics
+
+Find an explicit witness disproving the conjecture's universal claim.
+
+theorem erdos389_test : ∃ n, ¬ P n := by sorry
+
+Status: OPEN. Test placeholder for closure-gate verification.

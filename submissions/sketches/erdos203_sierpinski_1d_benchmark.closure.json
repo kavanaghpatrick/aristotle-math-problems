@@ -1,0 +1,10 @@
+{
+  "CS": "formalization_only",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "calibration_only",
+  "real_closure_candidate": false,
+  "retroactive": true,
+  "applied_at": "2026-05-30",
+  "rationale": "1-D Sierpinski analog with index-1 primes only — calibration benchmark to validate the index-1 + native_decide pipeline. Sierpinski numbers and 1-D coverings are classical; the project's contribution here is formalization rather than new math. Not a real closure candidate. Useful as a pipeline smoke test before the harder 2-D grid attempt (slot743). No real_closure_candidate -> bare lane."
+}

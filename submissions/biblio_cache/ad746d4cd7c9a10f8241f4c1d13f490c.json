@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780313790.759378,
+  "checked_at": "2026-06-01T11:36:30+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    }
+  ],
+  "status": "CLEAR"
+}

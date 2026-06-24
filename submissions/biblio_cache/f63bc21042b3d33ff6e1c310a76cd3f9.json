@@ -1,0 +1,38 @@
+{
+  "_cache_ts": 1780318286.708152,
+  "checked_at": "2026-06-01T12:51:26+00:00",
+  "evidence": "1 paper(s) with strong closure language matching the named conjecture 'Erdos problem' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "1975 partial/weak: Some problems and results on the irrationality of the sum of infinite series",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3578925"
+    },
+    {
+      "evidence": "1972 partial/weak: On the Fundamental Problem of Mathematics",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2307/2316535"
+    },
+    {
+      "evidence": "2026 partial/weak: Optimal Experiments for Partial Causal Effect Identification",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.06993v1"
+    },
+    {
+      "evidence": "2026 STRONG closure language: Solution to the Erdos problem on distinct residues of factorials",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.26429v3"
+    },
+    {
+      "evidence": "2026 partial/weak: Falconer lattice sets and the Erdos similarity problem",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.01493v1"
+    }
+  ],
+  "status": "CLOSED"
+}

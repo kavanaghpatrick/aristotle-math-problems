@@ -1,0 +1,89 @@
+{
+  "problem_id"
+  :
+  "erdos_938"
+  ,
+  "stage_outputs"
+  :
+  {
+    "literature_path"
+    :
+    "research_fusion/runs/erdos_938/01_literature.md"
+    ,
+    "analogies_path"
+    :
+    "research_fusion/runs/erdos_938/02_analogies.md"
+    ,
+    "techniques_path"
+    :
+    "research_fusion/runs/erdos_938/03_techniques.md"
+  }
+  ,
+  "named_technique"
+  :
+  "Generic modularity technique"
+  ,
+  "seminal_paper_arxiv"
+  :
+  "https://arxiv.org/abs/0707.4035"
+  ,
+  "fit_score"
+  :
+  0.72
+  ,
+  "bridge_lemma"
+  :
+  "If a counterexample exists then level-lowering yields an empty newform space."
+  ,
+  "informal_proof_outline"
+  :
+  "Assume a counterexample exists for some prime."
+  ,
+  "candidate_lemmas"
+  :
+  [
+    "L1: foo bar 1"
+    ,
+    "L2: foo bar 2"
+    ,
+    "L3: foo bar 3"
+    ,
+    "L4: foo bar 4"
+    ,
+    "L5: foo bar 5"
+    ,
+    "L6: foo bar 6"
+    ,
+    "L7: foo bar 7"
+    ,
+    "L8: foo bar 8"
+    ,
+    "L9: foo bar 9"
+    ,
+    "L10: foo bar 10"
+    ,
+    "L11: extra padding lemma 11"
+    ,
+    "L12: extra padding lemma 12"
+    ,
+    "L13: extra padding lemma 13"
+    ,
+    "L14: extra padding lemma 14"
+    ,
+    "L15: extra padding lemma 15"
+    ,
+    "L16: extra padding lemma 16"
+    ,
+    "L17: extra padding lemma 17"
+    ,
+    "L18: extra padding lemma 18"
+    ,
+    "L19: extra padding lemma 19"
+    ,
+    "L20: extra padding lemma 20"
+  ]
+  ,
+  "honest_disclaimer"
+  :
+  "Test fixture deliberately formatted across many lines to exceed the 80-line cap."
+}

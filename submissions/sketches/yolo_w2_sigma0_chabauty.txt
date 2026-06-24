@@ -1,0 +1,19 @@
+OPEN GAP: Uniform odd-multiperfect impossibility for σ₀(n) ∈ {11, 13, 17, 19}
+Source: extends slot 746 (problem_id `odd_multiperfect_sigma0_11`); YOLO-W2 angle C
+Domain: nt
+
+For every odd natural number n > 1 whose divisor count σ₀(n) belongs to
+the set {11, 13, 17, 19}, n is not multiperfect: that is, there is no
+integer k ≥ 2 with σ(n) = k·n. The four prime values 11, 13, 17, 19 are
+to be treated by a single uniform argument. Slot 746 closed σ₀(n) = 11.
+
+theorem odd_multiperfect_sigma0_family_impossible :
+    ∀ q ∈ ({11, 13, 17, 19} : Finset ℕ),
+      ¬ ∃ n : ℕ, Odd n ∧ n > 1 ∧
+        (Nat.divisors n).card = q ∧
+        ∃ k : ℕ, k ≥ 2 ∧ ((Nat.divisors n).sum id) = k * n := by
+  sorry
+
+Status: OPEN as a uniform family theorem. σ₀(n) = 11 case closed (slot 746
+/ DB id 1258 / status compiled_no_advance). σ₀(n) ∈ {13, 17, 19} not in
+Mathlib and not in formal-conjectures.

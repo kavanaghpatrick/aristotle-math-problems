@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 647 — Sophie Germain residue subclass (defensive win)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/647.lean
+Domain: nt
+
+The Erdős 647 inequality max_{m<n}(m + τ(m)) ≤ n + 2 was proved (slot723)
+to fail for every n > 24 EXCEPT one residual case: n ≡ 0 (mod 6), n ≥ 3000,
+n-1 prime, and (n-2)/2 = q prime (Sophie Germain pair). Within that case,
+restrict further: assume (q-1)/2 is composite OR (2q-1)/3 is composite
+(both an exact modular condition once q is fixed).
+
+theorem erdos_647_sophie_subclass
+    (n : ℕ) (hn : n ≥ 3000) (h6 : 6 ∣ n)
+    (hp1 : Nat.Prime (n-1)) (hq : Nat.Prime ((n-2)/2))
+    (hsplit : ¬ Nat.Prime ((((n-2)/2) - 1) / 2)
+              ∨ ¬ Nat.Prime ((2 * ((n-2)/2) - 1) / 3)) :
+    ∃ m : Fin n, n + 2 < (m : ℕ) + σ 0 m := by sorry
+
+Status: OPEN. Slot723 closed all other branches sorry-free. The remaining
+universal Sophie Germain branch reduces to a Cunningham-chain compositeness
+question, itself an open sieve problem. This subclass excludes the
+Cunningham-chain core. Computationally 99.18% of Sophie pairs in
+[3000, 10^6] satisfy hsplit.

@@ -1,0 +1,44 @@
+{
+  "_cache_ts": 1780318076.957791,
+  "checked_at": "2026-06-01T12:47:56+00:00",
+  "evidence": "6 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2010 partial/weak: On the geometry of differential privacy",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:6330111"
+    },
+    {
+      "evidence": "1999 partial/weak: Backward error bounds for constrained least squares problems",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:1309450"
+    },
+    {
+      "evidence": "2022 partial/weak: Erythematous Nodule on the Upper Back: Answer",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1097/dad.0000000000002121"
+    },
+    {
+      "evidence": "2026 partial/weak: Smoothed Score Queries and the Complexity of Sampling",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.27769v1"
+    },
+    {
+      "evidence": "2026 partial/weak: MiRD: Reliable Set-Valued Prediction for Open-Ended Question Answering via Miscoverage Risk Decomposition",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.27091v1"
+    },
+    {
+      "evidence": "2026 partial/weak: A Two-Phase Stability Study of LLM Judges and Bar Council Examiners on Thai Bar-Exam Free-Form Essays",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.25652v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

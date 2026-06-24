@@ -1,0 +1,4 @@
+d8cff96c-7421-474e-9b88-9f0b2e338a01
+# Task: erdos672_ap_perfect_power
+# Hash: 3e07f327bb8d3c8f
+# Submitted: 2026-02-18T19:37:04.372572

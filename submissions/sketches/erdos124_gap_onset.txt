@@ -1,0 +1,25 @@
+OPEN GAP: Erdős 124 — effective onset of the interval-filling gap-condition (strict excess)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.ne_zero context)
+Domain: nt / combinatorics
+
+For a finite set D of integers all ≥ 3 with β := ∑_{d∈D} 1/(d−1) and any k ≥ 1, consider the
+merged atom set A = {d^j : d ∈ D, j ≥ k} and, for X ≥ 0, the partial sum S(X) = ∑ of atoms ≤ X.
+Let C' := ∑_{d∈D} d^k/(d−1). The structural bound is S(X) ≥ m·β − C', where m is the smallest
+atom exceeding X. Consequently, when σ := β − 1 > 0, the interval-filling gap-condition
+(next atom ≤ S(X) + 1) holds for every atom m ≥ (C'−1)/σ.
+
+-- For each base d, J d = the largest exponent j ≥ k with d^j ≤ X (assumed to exist, d ≥ 2).
+-- S(X) = ∑_d ∑_{j=k}^{J d} d^j (sum of all merged atoms ≤ X). m = min_d d^{J d + 1} (next atom).
+theorem erdos124_gap_onset
+    (D : Finset ℕ) (hD : ∀ d ∈ D, 2 ≤ d) (hne : D.Nonempty) (k : ℕ) (hk : k ≠ 0)
+    (J : ℕ → ℕ) (hJk : ∀ d ∈ D, k ≤ J d)
+    (m : ℕ) (hm : ∀ d ∈ D, m ≤ d ^ (J d + 1)) :
+    (∑ d ∈ D, ∑ j ∈ Finset.Icc k (J d), (d : ℚ) ^ j)
+      ≥ (m : ℚ) * (∑ d ∈ D, (d - 1 : ℚ)⁻¹) - ∑ d ∈ D, (d : ℚ) ^ k / (d - 1) := by
+  sorry
+
+Status: OPEN component of the BEGL96 problem (a NEW partial result, not in the literature). The
+bound S(X) ≥ m·β − C' is exact and elementary. It yields a closed-form, transcendence-free onset
+m₀ = (C'−1)/σ beyond which the Brown 1961 / Erdős 1962 interval-filling criterion holds. At σ = 0
+(the harmonic boundary ∑1/(d−1)=1) the onset is infinite — the elementary argument provably stops
+there. This is the gap-condition onset only, NOT cofiniteness. Not in Mathlib.

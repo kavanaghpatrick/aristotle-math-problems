@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780313466.17947,
+  "checked_at": "2026-06-01T11:31:06+00:00",
+  "evidence": "named-conjecture card: erdos_1051 = CLOSED (wiki 1(a): AI standalone \u2014 Full solution)",
+  "sources": [
+    {
+      "evidence": "card[erdos_1051]=CLOSED \u2014 wiki 1(a): AI standalone \u2014 Full solution",
+      "signal": "strong",
+      "source": "named_conjecture_status",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}

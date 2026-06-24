@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780313687.9952278,
+  "checked_at": "2026-06-01T11:34:47+00:00",
+  "evidence": "1 paper(s) with strong closure language matching the named conjecture 'Erd\u0151s problem 1041' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "2023 partial/weak: On the ERD\u0150S distance problem",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21203/rs.3.rs-2679663/v1"
+    },
+    {
+      "evidence": "2024 STRONG closure language: Optimal Solution to Erd\u0151s Distinct Distance Problem",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2139/ssrn.4775206"
+    }
+  ],
+  "status": "CLOSED"
+}

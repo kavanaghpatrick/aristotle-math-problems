@@ -1,0 +1,21 @@
+OPEN GAP: Erdos 203 — index-1 primes ≤ 1000 cannot cover the 10×10 (k,l) box
+Source: FormalConjectures/ErdosProblems/203.lean (slot724 follow-up)
+Domain: nt
+
+For every m ≥ 0 there is a pair (k,l) ∈ [0,10)² escaping every prime p ≤ 1000
+for which the subgroup ⟨2,3⟩ equals the full group (ℤ/pℤ)* (the "index-1"
+primes complementary to the index-2 set studied in slot724).
+
+theorem index1_covering_insufficient_M10_B1000 (m : ℕ) :
+    ∃ k l : ℕ, k < 10 ∧ l < 10 ∧
+      ∀ p : ℕ, p.Prime → 3 < p → p ≤ 1000 →
+        (((Finset.univ : Finset (Fin (p-1) × Fin (p-1))).image
+          (fun ab => (2 ^ ab.1.val * 3 ^ ab.2.val) % p)).card = p - 1) →
+        ¬ p ∣ 2 ^ k * 3 ^ l * m + 1 := by sorry
+
+Status: OPEN. Slot724 proved `index2_covering_insufficient`: the 11 index-2
+primes < 300 cover at most 39/100 cells in [0,10)² via `coverage_bound_for_m`
++ `native_decide` over `boxCoverage p r`. For index-1 primes the per-prime
+coverage drops to 1/(p−1), but ∑1/(p−1) over such primes diverges (Dirichlet),
+so this finite analog is open for every (M, B). This M=10 variant exactly
+matches slot724's grid size; B=1000 extends the prime range past 300.

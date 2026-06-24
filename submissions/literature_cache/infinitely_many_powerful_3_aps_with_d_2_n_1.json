@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780165817.134805,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T18:30:17+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "infinitely_many_powerful_3_aps_with_d_2_n_1",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

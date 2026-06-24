@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 364 — Powerful Triples, n ≡ 3 mod 4 Case
+Source: Erdős Problem 364
+Domain: nt
+
+No three consecutive positive integers n, n+1, n+2 are all powerful.
+
+PRIOR RESULT: The case n ≢ 3 (mod 4) is proved — one of the three
+is ≡ 2 mod 4, hence divisible by 2 but not 4, so not powerful.
+
+REMAINING GAP: n ≡ 3 (mod 4). Then n, n+2 are both odd and 4 | (n+1).
+Combining with mod 3: n ≡ 7, 27, or 35 (mod 36).
+
+Chan (Integers 2025): no triple of form x³-1=p³y², x³, x³+1=q³z².
+She (Integers 2025): no triple of form x³-1=p²a³, x³, x³+1=q²b³.
+No triple found for n < 10^22.
+
+theorem erdos364_mod4 (n : ℕ) (hn : n ≥ 1) (hmod : n % 4 = 3)
+    (h1 : ∀ p, Nat.Prime p → p ∣ n → p^2 ∣ n)
+    (h2 : ∀ p, Nat.Prime p → p ∣ (n+1) → p^2 ∣ (n+1))
+    (h3 : ∀ p, Nat.Prime p → p ∣ (n+2) → p^2 ∣ (n+2)) :
+    False := by sorry
+
+Status: OPEN. n ≢ 3 mod 4 proved. This is the exact remaining gap.

@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "iter2 of Erdős 1052 targeting the k=3 specialization. iter1 (uuid a9e232a2-2593-4765-920a-a3c080a6898d) closed wall_k2 sorry-free using the identity (p^a-1)(q^b-1)=2 derived from the 2-prime product formula. The k=3 analogue (1+p^a)(1+q^b)(1+r^c) = 2 p^a q^b r^c does not admit an equally elementary 2-line identity, but Goto's 2007 effective bound n < 2^{2^k} forces the entire k=3 search space inside Finset.range 256. Subbarao-Warren (1966) already proved exactly two solutions: 60 = 2^2·3·5 and 90 = 2·3^2·5. The Lean closure path is: (1) lift iter1's product formula and IsUnitaryPerfect.even to constrain the support to {2, q, r}; (2) invoke the Goto bound either by formalization or by a tight elementary bound; (3) close by native_decide on Finset.range 256. CR=clean_decidable because the residual goal after the bound is a decidable enumeration. CM=structural_finite_reduction because the proof reduces an a priori infinite k=3 family to a bounded finite set. HM=journal_subclaim mirrors iter1's wall_k2 in being a publishable specialization rather than the full conjecture. real_closure_candidate=true: this would be the first formal closure of the k=3 case in Lean and extends iter1's clean record at k=2. Risk of soft outcome: if Aristotle cannot formalize the Goto bound, it may close only the 'support contains 2' direction without the final enumeration; classify post-hoc."
+}

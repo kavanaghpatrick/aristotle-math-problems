@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780318426.143296,
+  "checked_at": "2026-06-01T12:53:46+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2018 partial/weak: On the representation of a number as the sum of a prime and two squares of square-free numbers",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.4064/aa8514-9-2016"
+    }
+  ],
+  "status": "CLEAR"
+}

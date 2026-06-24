@@ -1,0 +1,3269 @@
+{
+  "1": {
+    "main_q": "A finite set of naturals A is said to be a sum-distinct set for N N if A\\1, ..., N\\ and the sums _a Sa are distinct for all S A -/ abbrev IsSumDistinctSet (A : Finset \u2115) (N : \u2115) : Prop := A \u2286 Finset.I",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "3": {
+    "main_q": "If A N has _n A 1 n = , then must A contain arbitrarily long arithmetic progressions?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "4": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "6": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "9": {
+    "main_q": "The set of odd numbers that cannot be expressed as a prime plus two powers of 2. -/ def Erdos9A : Set \u2115 := n | Odd n \u2227 \u00ac \u2203 (p k l : \u2115), (Nat.Prime p) \u2227 n = p + 2 k + 2 l @[category test, AMS 5 11] the",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "10": {
+    "main_q": "The set of natural numbers that can be written as a sum of a prime and at most k powers of 2. -/ abbrev sumPrimeAndTwoPows (k : \u2115) : Set \u2115 := p + (pows.map (2 \u00b7)).sum | (p : \u2115) (pows : Multiset \u2115) (_ ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "11": {
+    "main_q": "Is every odd n > 1 the sum of a squarefree number and a power of 2?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "12": {
+    "main_q": "A set `A` is \"good\" if it is infinite and there are no distinct `a,b,c` in `A` such that `a \u2223 (b+c)` and `b > a`, `c > a`. -/ abbrev IsGood (A : Set \u2115) : Prop := A.Infinite \u2227 \u2200\u1d49 (a \u2208 A) (b \u2208 A) (c \u2208 A",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 12,
+    "AMS": [
+      "11"
+    ]
+  },
+  "13": {
+    "main_q": "A finite set of naturals `A` is said to be forbidden-triple-free if for all `a, b, c \u2208 A`, if `a < min(b, c)` then `a` does not divide `b + c`. -/ def IsForbiddenTripleFree (A : Finset \u2115) : Prop := \u2200 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "14": {
+    "main_q": "The number of integers in \\1,,N\\ which are not representable in exactly one way as the sum of two elements from A (either because they are not representable at all, or because they are representable i",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "17": {
+    "main_q": "A prime p is a cluster prime if every even natural number n p - 3 can be written as a difference of two primes q_1 - q_2 with q_1, q_2 p. -/ def IsClusterPrime (p : \u2115) : Prop := p.Prime \u2227 \u2200 n : \u2115, Eve",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "20": {
+    "main_q": "A sunflower F with kernel S is a collection of sets in which all possible distinct pairs of sets share the same intersection S. -/ def IsSunflowerWithKernel (F : Set (Set \u03b1)) (S : Set \u03b1) : Prop := F.P",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "25": {
+    "main_q": "Let n_1 < n_2 < be an arbitrary sequence of integers, each with an associated residue class a_i n_i. Let A be the set of integers n such that for every i either n < n_i or n a_i n_i. Must the logarith",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "26": {
+    "main_q": "A sequence of naturals (a_i) is _thick_ if their sum of reciprocals diverges: _i 1a_i = -/ def IsThick \u03b9 : Type* (A : \u03b9 \u2192 \u2115) : Prop := \u00acSummable (fun i \u21a6 (1 : \u211d) / A i) @[category test, AMS 11] theore",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "28": {
+    "main_q": "If A \u2286 N is such that A + A contains all but finitely many integers then 1_A \u2217 1_A(n) = .",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "30": {
+    "main_q": "Let h(N) be the maximum size of a Sidon set in \\1, , N\\. -/ noncomputable abbrev h (N : \u2115) : \u2115 := Finset.maxSidonSubsetCard (Finset.Icc 1 N) open Filter /-- Is it true that, for every > 0, h(N) = N + ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "33": {
+    "main_q": "Let `A \u2286 \u2115` be a set such that every integer can be written as `n2 + a` for some `a` in `A` and `n \u2265 0`. -/ -- Formalisation note: Changed 'every large integer' to 'every integer' as for the statement",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "36": {
+    "main_q": "The number of solutions to the equation a - b = k, for a A and b B. This represents the \"overlap\" between sets A and B for a given difference k. -/ def Overlap (A B : Finset \u2124) (k : \u2124) : \u2115 := ((A.prod",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 21,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "38": {
+    "main_q": "Does there exist B N which is not an additive basis, but is such that for every set A N of Schnirelmann density and every N there exists b B such that \\[ (A (A+b)) \\1, , N\\ ( + f()) N \\] where f() > 0",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "39": {
+    "main_q": "Is there an infinite Sidon set A N such that A \\1,N\\ _ N1/2- for all > 0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "40": {
+    "main_q": "The predicate for a function gN \u2192 R) that A \\1,,N\\ N1/2g(N) implies 1_A 1_A(n)=. -/ def Erdos40For (g : \u2115 \u2192 \u211d) : Prop := \u2200 A : Set \u2115, (fun N : \u2115 \u21a6 \u221aN / g N) =O[atTop] (fun N \u21a6 ((A \u2229 .Icc 1 N).ncard : ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "41": {
+    "main_q": "For a given set `A`, the n-tuple sums `a\u2081 + ... + a\u2099` are all distinct for `a\u2081, ..., a\u2099` in `A` (aside from the trivial coincidences). -/ def NtupleCondition (A : Set \u03b1) (n : \u2115) : Prop := \u2200 (I : Finse",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "42": {
+    "main_q": "**Erd\u0151s Problem 42**: Let M \u2265 1 and N be sufficiently large in terms of M. Is it true that for every maximal Sidon set `A \u2286 1,\u2026,N` there is another Sidon set `B \u2286 1,\u2026,N` of size M such that `(A - A) \u2229",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "44": {
+    "main_q": "The maximum size of a Sidon set in `1, ..., N` is less than or equal to `2 * \u221aN`. -/ @[category undergraduate, AMS 5 11] theorem maxSidonSubsetCard_icc_bound (N : \u2115) (hN : 1 \u2264 N) : maxSidonSubsetCard ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "48": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "51": {
+    "main_q": "Is there an infinite set A N such that for every a A, there is an integer n such that (n)=a, and yet if n_a is the smallest such integer, then n_aa \u2192 as a \u2192 \u221e?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "56": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "61": {
+    "main_q": "The Erd\u0151s\u2013Hajnal Conjecture states that there is a constant c(H) > 0 for each H such that we can take f(n) = nc(H) in the above formulation.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "05"
+    ]
+  },
+  "64": {
+    "main_q": "Does every finite graph with minimum degree at least 3 contain a cycle of length 2k for some k 2?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "66": {
+    "main_q": "Is there and A N is such that _n 1_A 1_A(n) n exists and is 0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "67": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "68": {
+    "main_q": "Is _n=2 1n!-1 irrational?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "69": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "74": {
+    "main_q": "For a given subgraph `A`, this is the set of all numbers `k` such that `A` can be made bipartite by deleting `k` edges. -/ def SimpleGraph.edgeDistancesToBipartite G : SimpleGraph V (A : G.Subgraph) :",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "82": {
+    "main_q": "A predicate that holds if S is a regular induced subgraph of G -/ def IsRegularInduced G : SimpleGraph V (S : Subgraph G) : Prop := S.IsInduced \u2227 \u2203 k, (S.coe).IsRegularOfDegree k /-- F(n) is the maxim",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "85": {
+    "main_q": "Let f(n) be the smallest integer for which every graph on n vertices with minimal degree f(n) contains a C_4. -/ noncomputable def f (n : \u2115) : \u2115 := sInf k : \u2115 | \u2200 (G : SimpleGraph (Fin n)), G.minDegre",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "89": {
+    "main_q": "The minimum number of distinct distances guaranteed for any set of n points. -/ noncomputable def minimalDistinctDistances (n : \u2115) : \u2115 := sInf (distinctDistances points : \u211d) | (points : Finset \u211d\u00b2) (_ ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "52"
+    ]
+  },
+  "90": {
+    "main_q": "Given a finite set of points, this function counts the number of **unordered pairs** of distinct points that are at a distance of exactly 1 from each other. -/ noncomputable def unitDistancePairsCount",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "52"
+    ]
+  },
+  "92": {
+    "main_q": "For a given point `x` and a set of other points, this function finds the maximum number of points that lie on a single circle centered at `x`. It does this by grouping the other points by their distan",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "52"
+    ]
+  },
+  "97": {
+    "main_q": "A set of points A has n equidistant points at p if there exist at least n other points in A that are equidistant from p. -/ def HasNEquidistantPointsAt (n : \u2115) (A : Finset \u211d\u00b2) (p : \u211d\u00b2) : Prop := \u2203 r :",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "52"
+    ]
+  },
+  "99": {
+    "main_q": "A set has minimum distance 1 if all pairwise distances are at least 1, and the minimum is achieved. -/ def HasMinDist1 (A : Finset \u211d\u00b2) : Prop := (\u2200\u1d49 (p \u2208 A) (q \u2208 A), p \u2260 q \u2192 dist p q \u2265 1) \u2227 (\u2203\u1d49 (p \u2208 A",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "52"
+    ]
+  },
+  "100": {
+    "main_q": "If two distances in A differ, they differ by at least 1. -/ def DistancesSeparated (A : Finset \u211d\u00b2) : Prop := \u2200 p\u2081 q\u2081 p\u2082 q\u2082, p\u2081 \u2208 A \u2192 q\u2081 \u2208 A \u2192 p\u2082 \u2208 A \u2192 q\u2082 \u2208 A \u2192 dist p\u2081 q\u2081 \u2260 dist p\u2082 q\u2082 \u2192 |dist p\u2081 q\u2081 - ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "52"
+    ]
+  },
+  "107": {
+    "main_q": "The set of N such that any N points in the plane, no three on a line, contain a convex n-gon. -/ def cardSet (n : \u2115) := N | \u2200 (pts : Finset \u211d\u00b2), pts.card = N \u2192 NonTrilinear pts.toSet \u2192 HasConvexNGon n",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "52"
+    ]
+  },
+  "108": {
+    "main_q": "For every r \u2265 4 and k \u2265 2 is there some finite f(k,r) such that every graph of chromatic number \u2265 f(k,r) contains a subgraph of girth \u2265 r and chromatic number \u2265 k?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "109": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "119": {
+    "main_q": "Let z_i be an infinite sequence of complex numbers such that |z_i| = 1 for all i 1. For n 1 let p_n(z) = _i n (z - z_i). -/ noncomputable def p (z : \u2115 \u2192 \u2102) (n : \u2115) : \u2102 \u2192 \u2102 := fun w => \u220f i \u2208 range n, (",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "30"
+    ]
+  },
+  "120": {
+    "main_q": "There exists a set E R, dependent on set A R, of positive measure which does not contain any set of the shape a * A + b for some a,b R and a 0? -/ def Erdos120For (A : Set \u211d) : Prop := \u2203 E : Set \u211d, 0 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "05 28"
+    ]
+  },
+  "123": {
+    "main_q": "A set `A` of natural numbers is **d-complete** if every sufficiently large integer is the sum of distinct elements of `A` such that no element divides another. Reference: [ErLe96] Erd\u0151s, P. and Lewin,",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "124": {
+    "main_q": "The set of integers which are the sum of distinct powers `d i` with `i \u2265 k`. -/ def sumsOfDistinctPowers (d k : \u2115) : Set \u2115 := x | \u2203 s : Finset \u2115, (\u2200 i \u2208 s, k \u2264 i) \u2227 \u2211 i \u2208 s, d i = x /-- Let 3 d_1 < d_",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "125": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "126": {
+    "main_q": "Let f(n) be maximal such that if AN has |A| = n then _a b A(a + b) has at least f(n) distinct prime factors. Is it true that f(n) n ?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "128": {
+    "main_q": "Let G be a graph with n vertices such that every subgraph on \u2265 n/2 vertices has more than n2/50 edges. Must G contain a triangle?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "137": {
+    "main_q": "Let k 3. Can the product of any k consecutive integers N ever be powerful? That is, must there always exist a prime p N such that p2 N?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "138": {
+    "main_q": "The set of natural numbers that guarantee a monochromatic arithmetic progression. A number `N` belongs to this set if, for a given number of colors `r` and an arithmetic progression length `k`, any `r",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 13,
+    "AMS": [
+      "11"
+    ]
+  },
+  "139": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "141": {
+    "main_q": "The predicate that a set `s` consists of `l` consecutive primes (possibly infinite). This predicate does not assert a specific value for the first term. -/ def Set.IsPrimeProgressionOfLength (s : Set ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 9,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "142": {
+    "main_q": "Prove an asymptotic formula for r_k(N), the largest possible size of a subset of \\1, , N\\ that does not contain any non-trivial k-term arithmetic progression.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "143": {
+    "main_q": "Let A (1, ) be a countably infinite set such that for all x y A and integers k 1 we have |kx - y| 1. -/ def WellSeparatedSet (A : Set \u211d) : Prop := (A \u2286 (Set.Ioi (1 : \u211d))) \u2227 Set.Infinite A \u2227 Set.Counta",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "145": {
+    "main_q": "Let s_1 < s_2 < be the sequence of squarefree numbers. -/ noncomputable abbrev s (n : \u2115) : \u2115 := Nat.nth Squarefree n /-- Let A(x) denote the set of indices n for which s_n x. -/ noncomputable abbrev A",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "152": {
+    "main_q": "Define `f n` to be the minimum of `|s | s - 1 \u2209 A + A, s \u2208 A + A, s + 1 \u2209 A + A|` as `A` ranges over all Sidon sets of size `n`. -/ noncomputable def f (n : \u2115) : \u2115 := \u2a05 A : A : Set \u2115 | A.ncard = n \u2227 I",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "153": {
+    "main_q": "Define `f n` to be the minimum of `\u2211 (i : Set.Ico 1 ((A + A).card), (s i - s (i - 1)) 2 / n` as `A` ranges over all Sidon sets of size `n`, where `s` is an order embedding from `Fin n` into `A`. -/ no",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "155": {
+    "main_q": "Let F(N) be the size of the largest Sidon subset of \\1, , N\\. -/ noncomputable abbrev F (N : \u2115) : \u2115 := Finset.maxSidonSubsetCard (Finset.Icc 1 N) /-- Is it true that for every k 1 we have F(N + k) F(N",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "158": {
+    "main_q": "A set `A \u2286 \u2115` is said to be a `B\u2082[g]` set if for all `n`, the equation `a + a' = n, a \u2264 a', a, a' \u2208 A` has at most `g` solutions. This is defined in [ESS94]. -/ def B2 (g : \u2115) (A : Set \u2115) : Prop := \u2200 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5"
+    ]
+  },
+  "160": {
+    "main_q": "Let h(n) be the smallest k such that \\1,,n\\ can be coloured with k colours so that every four-term arithmetic progression must contain at least three distinct colours. -/ noncomputable def erdos_160.h",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "5 51"
+    ]
+  },
+  "168": {
+    "main_q": "Say a finite set of natural numbers is *non ternary* if it contains no 3-term arithmetic progression of the form `n, 2n, 3n`. -/ def NonTernary (S : Finset \u2115) : Prop := \u2200 n : \u2115, n \u2209 S \u2228 2*n \u2209 S \u2228 3*n ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "170": {
+    "main_q": "An N-perfect ruler is a finite subset A N (the marks), such that each positive integer k N can be measured, that is, expressed as a difference k = a_1 - a_0 with a_0, a_1 A. The set A is then also cal",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "05"
+    ]
+  },
+  "172": {
+    "main_q": "Is it true that in any finite colouring of N there exist arbitrarily large finite A such that all sums and products of distinct elements in A are the same colour?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "188": {
+    "main_q": "The set of numbers k such that R2 can be red/blue coloured with no pair of red points unit distance apart, and no k-term arithmetic progression of blue points with distance 1. -/ def s := k : \u2115 | \u2203 bl",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "189": {
+    "main_q": "Erd\u0151s problem 189 asked whether the below holds for all rectangles. -/ def Erdos189For (P : \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 Prop) (A : \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 \u211d\u00b2 \u2192 \u211d) := \u2200\u1d49 (n > 0) (colouring : \u211d\u00b2 \u2192 Fin n), \u2203 colour, \u2200 ar",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 51"
+    ]
+  },
+  "194": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "195": {
+    "main_q": "What is the largest k such that in any permutation of Z there must exist a monotone k-term arithmetic progression x_1 < < x_k?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "196": {
+    "main_q": "Must every permutation of N, contain a monotone 4-term arithmetic progression?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "197": {
+    "main_q": "Can N be partitioned into two sets, each of which can be permuted to avoid monotone 3-term arithmetic progressions?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "198": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "5"
+    ]
+  },
+  "200": {
+    "main_q": "The length of the longest arithmetic progression of primes in \\1,,n\\. -/ noncomputable def longestPrimeArithmeticProgressions (n : \u2115) : \u2115 := sSup (k : \u2115) | \u2203 s \u2286 Set.Icc 1 n, s.IsAPOfLength k \u2227 \u2200 m \u2208 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "203": {
+    "main_q": "Is there an integer m with (m, 6) = 1 such that none of 2k 3 m + 1 are prime, for any k, 0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "204": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "208": {
+    "main_q": "The sequence of squarefree numbers, denoted by `s` as in Erd\u0151s problem 208. -/ noncomputable def erdos208.s : \u2115 \u2192 \u2115 := Nat.nth Squarefree open erdos208 /-- Let s_1 < s_2 < be the sequence of squarefre",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "212": {
+    "main_q": "Is there a dense subset of \u211d2 such that all pairwise distances are rational?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "52"
+    ]
+  },
+  "213": {
+    "main_q": "The predicate (on n) that there exist n points in R2, no three on a line and no four on a circle, such that all pairwise distances are integers. -/ def Erdos213For (n : \u2115) : Prop := \u2203 S : Set \u211d\u00b2, S.Fi",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "52"
+    ]
+  },
+  "218": {
+    "main_q": "The set of indices n for which a prime gap is followed by a larger or equal prime gap has a natural density of 1 2.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "219": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "228": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 12 41"
+    ]
+  },
+  "229": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "30"
+    ]
+  },
+  "233": {
+    "main_q": "The prime number theorem immediately implies a lower bound of N( N)2 for the sum of squares of gaps between consecutive primes. -/ @[category research solved, AMS 11] theorem sum_of_squares_of_prime_g",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "234": {
+    "main_q": "Is it true that for all `c \u2265 0`, the density `f c` of integers for which `(p (n + 1) - p n) / log n < c` exists and is a continuous function of `c`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "236": {
+    "main_q": "f(n) counts the number of solutions to n=p+2k for prime p and k 0. -/ def f (n : \u2115) : \u2115 := ((List.range (Nat.log2 n + 1)).filter (fun k => Nat.Prime (n - 2k))).length /-- Let f(n) count the number of ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "238": {
+    "main_q": "Let `c\u2081, c\u2082 > 0`. Is it true that for any sufficiently large `x`, there exists more than `c\u2081 * log x` many consecutive primes `\u2264 x` such that the difference between any two is `> c\u2082`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "239": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "242": {
+    "main_q": "For every n>2 there exist distinct integers 1 \u2264 x < y < z such that 4 n = 1 x + 1 y + 1 z.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "243": {
+    "main_q": "Let a_1 < a_2 < be a sequence of integers such that _n a_na_n-12 = 1 and 1a_n Q. Then, for all sufficiently large n 1, a_n = a_n-12 - a_n-1 + 1.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "40"
+    ]
+  },
+  "244": {
+    "main_q": "Let C > 1. Does the set of integers of the form p + Ck , for some prime p and k 0, have density >0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "245": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "247": {
+    "main_q": "Let n_1 < n_2 < be a sequence of integers such that n_kk = . Is _k=1 12n_k transcendental?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "248": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "249": {
+    "main_q": "Is _n (n)2n irrational? Here is the Euler totient function.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "250": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "251": {
+    "main_q": "Is _n=1 p_n2n irrational? Here p_n is the n-th prime (p_1=2, p_2=3, ).",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "252": {
+    "main_q": "`\u2211 \u03c3 0 n / n!` is irrational. This is proved in [ErSt71]. -/ @[category research solved, AMS 11] theorem erdos_252_0 : Irrational (\u2211' n, \u03c3 0 n / (n ! : \u211d)) := by sorry /-- `\u2211 \u03c3 1 n / n!` is irrational",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 9,
+    "AMS": [
+      "11"
+    ]
+  },
+  "253": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "257": {
+    "main_q": "Let AN be an infinite set. Is _n A 12n - 1 irrational?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "258": {
+    "main_q": "Let a_n be a sequence of non-zero natural numbers. Is _n d(n)(a_1 ... a_n) irrational, where d(n) is the number of divisors of n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "259": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "263": {
+    "main_q": "We call a sequence a_n of positive integers an _irrationality sequence_ if for any sequence b_n of positive integers with a_nb_n 1 as n , the sum 1b_n converges to an irrational number. Note: This is ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "264": {
+    "main_q": "A sequence a_n of integers is called an irrationality sequence if for every bounded sequence of integers b_n with a_n + b_n 0 and b_n 0 for all n, the sum 1a_n + b_n is irrational. Note: there are oth",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "266": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "267": {
+    "main_q": "Let F_1=F_2=1 and F_n+1 = F_n + F_n-1 be the Fibonacci sequence. Let n_1 < n_2 < be an infinite sequence with n_k+1n_k c > 1. Must _k 1 F_n_k be irrational?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "268": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "40 54"
+    ]
+  },
+  "269": {
+    "main_q": "A positive integer n has all its prime factors in the set P. By convention, 1 satisfies this for any P as it has no prime divisors. -/ def HasPrimeFactorsIn (P : Set \u2115) (n : \u2115) : Prop := n > 0 \u2227 \u2200 p, ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "273": {
+    "main_q": "Is there a covering system all of whose moduli are of the form p-1 for some primes p 5?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "274": {
+    "main_q": "An exact covering of a group `G` is a finite collection of subgroups `H_1, ..., H_k` and representative `g_1, ..., g_k` such that the cosets `g_iH_i` are pairwise disjoint and their union covers `G`. ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "20"
+    ]
+  },
+  "275": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "276": {
+    "main_q": "We define a Lucas sequence to be a Fibonacci sequence with arbitrary starting points `L 0` and `L 1`. TODO: There seems to be multiple definitions in the literature, some of which also allow coefficie",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "277": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "283": {
+    "main_q": "Given a polynomial `p`, the predicate that if the leading coefficient is positive and there exists no d\u22652 with d \u2223 p(n) for all n\u22651, then for all sufficiently large m, there exist integers 1\u2264n_1< < n_",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "285": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "288": {
+    "main_q": "Is it true that there are only finitely many pairs of intervals I_1, I_2 such that _n_1 I_1 1n_1 + _n_2 I_2 1n_2 N?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "289": {
+    "main_q": "Is it true that, for all sufficiently large k, there exists finite intervals I_1, , I_k N with |I_i| 2 for 1 i k such that 1 = _i=1k _n I_i 1n.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "295": {
+    "main_q": "Helper lemma: for each N, there exists k and n_1 < ... < n_k such that N \u2264 n_1 < \u22ef < n_k with 1 n_1 + ... + 1 n_k = 1. -/ @[category undergraduate, AMS 5 11] lemma exists_k (N : \u2115) : \u2203 (k : \u2115) (n : Fi",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "298": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "299": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11 40"
+    ]
+  },
+  "303": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "304": {
+    "main_q": "The set of `k` for which `a / b` can be expressed as a sum of `k` distinct unit fractions. -/ def unitFractionExpressible (a b : \u2115) : Set \u2115 := k | \u2203 s : Finset \u2115, s.card = k \u2227 (\u2200 n \u2208 s, n > 1) \u2227 (a / ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "306": {
+    "main_q": "Let a b Q_>0 with b squarefree. Are there integers 1 < n_1 < < n_k, each the product of two distinct primes, such that ab=1n_1++1n_k?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "307": {
+    "main_q": "Are there two finite set of primes P and Q such that 1 = ( _p P 1p ) ( _q Q 1q ) ? Asked by Barbeau [Ba76]. [Ba76] Barbeau, E. J., _Computer challenge corner: Problem 477: A brute force program._",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "312": {
+    "main_q": "Does there exist a constant `c > 0` such that, for any `K > 1`, whenever `A` is a sufficiently large finite multiset of integers with _n A 1/n > K there exists some S A such that 1 - (-(c*K)) < _n S 1",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "313": {
+    "main_q": "This set contains all solutions `(m, P)` to the Erd\u0151s problem 313. A solution is a pair where `m` is an integer `\u2265 2` and `P` is a non-empty, finite set of distinct prime numbers, such that the sum of",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "316": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "317": {
+    "main_q": "Is there some constant c>0 such that for every n 1 there exists some _k \\-1,0,1\\ for 1 k n with \\[0< _1 k n_kk < c2n?\\]",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "318": {
+    "main_q": "A set `A : Set \u2115` is said to have propery `P\u2081` if for any nonconstant sequence `f : A \u2192 -1, 1`, one can always select a finite, nonempty subset `S \u2286 A \\ 0` such that `\u2211 n \u2208 S, f\u2099 / n = 0`. This is def",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "319": {
+    "main_q": "What is the size of the largest A\\1, , N\\ such that there is a function : A \\-1, 1\\ such that _n A nn = 0 and _n A' nn 0 for all non-empty A' A.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 10,
+    "AMS": [
+      "5"
+    ]
+  },
+  "321": {
+    "main_q": "Let R(N) be the size of the largest A\\1, ..., N\\ such that all sums _n S 1n are distinct for S A. -/ noncomputable def R (N : \u2115) : \u2115 := sSup #A | (A) (_ : A \u2286 Finset.Icc 1 N) (_ : Set.InjOn (fun (S : ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 11,
+    "AMS": [
+      "11"
+    ]
+  },
+  "324": {
+    "main_q": "Does there exist a polynomial f(x)Z[x] such that all the sums f(a)+f(b) with a < b nonnegative integers are distinct?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "325": {
+    "main_q": "A predicate for n to be the sum of three kth powers. -/ def IsSumThreePower (k n : \u2115) : Prop := \u2203 a b c, a k + b k + c k = n /-- The number of integers x which are the sum of three kth powers. -/ nonc",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "326": {
+    "main_q": "Let A N be an additive basis of order 2. Must there exist B = \\b_1 < b_2 < \\ A which is also a basis such that _k b_kk2 does not exist?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "329": {
+    "main_q": "The partial density of a Sidon set `A` up to `N`, normalized by dividing by `\u221aN` instead of `N`. This measures how close the set comes to the optimal density for Sidon sets. -/ noncomputable def sqrtP",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "330": {
+    "main_q": "`Rep A m h` means `m` is a sum of at most `h` elements of `A`x. -/ def Rep (A : Set \u2115) (m h : \u2115) : Prop := \u2203 k : \u2115, k \u2264 h \u2227 \u2203 f : Fin k \u2192 \u2115, (\u2200 i, f i \u2208 A) \u2227 (\u2211 i : Fin k, f i) = m /-- Integers **not*",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "331": {
+    "main_q": "Let A,B N such that for all large N\\[ A \\1,,N\\ N1/2\\]and\\[ B \\1,,N\\ N1/2.\\] Is it true that there are infinitely many solutions to a_1-a_2=b_1-b_2 0 with a_1,a_2 A and b_1,b_2 B? Ruzsa has observed th",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "332": {
+    "main_q": "The set of numbers D(A) which occur infinitely often as a_1 - a_2 with a_1, a_2 A. -/ noncomputable def D_A (A : Set \u2115) : Set \u2124 := d : \u2124 | Set.Infinite (a, b) : \u2115 \u00d7 \u2115 | a \u2208 A \u2227 b \u2208 A \u2227 (a : \u2124) - (b : ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "340": {
+    "main_q": "Given a finite Sidon set `A` and a lower bound `m`, `go` finds the smallest number `m' \u2265 m` such that `A \u222a m'` is Sidon. If `A` is empty then this returns the value `m`. Note that the lower bound is r",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 12,
+    "AMS": [
+      "5"
+    ]
+  },
+  "341": {
+    "main_q": "Let A=\\a_1 < < a_k\\ be a finite set of integers and extend it to an infinite sequence A=\\a_1 < a_2 < \\ by defining a_n+1 for n k to be the least integer exceeding a_n which is not of the form a_i + a_",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "346": {
+    "main_q": "Is it true that for every lacunary, strongly complete sequence `A` that is not complete whenever infinitely many terms are removed from it, `lim A (n + 1) / A n = (1 + \u221a5) / 2`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "347": {
+    "main_q": "The set of subset sums of a set `A \u2286 \u2115`. -/ local notation \"\ud835\udcdf\" A => subsetSums A /-- Is there a sequence A=\\a_1 a_2 \\ of integers with \\[ a_n+1a_n=2\\] such that \\[P(A')= \\_n Bn : B A' finite \\\\] has d",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "348": {
+    "main_q": "For what values of 0 m < n is there a complete sequence A = \\a_1 a_2 \\ of integers such that 1. A remains complete after removing any m elements, but 2. A is not complete after removing any n elements",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "349": {
+    "main_q": "This defines the core property of the problem: For what values of t, (0,) is the sequence tn complete? -/ def IsGoodPair (t \u03b1 : \u211d) : Prop := IsAddComplete (range (fun n \u21a6 \u230at * \u03b1 n\u230b)) /-- For what valu",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "350": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "351": {
+    "main_q": "The set of rational numbers of the form `P(n) + 1 / n` where `n` is a natural number and `P` is a polynomial with rational coefficients. Note: We include `P 0` in there (since `1 / 0 = 0`), but this d",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "352": {
+    "main_q": "Is there some c > 0 such that every measurable A R2 of measure c contains the vertices of a triangle of area 1?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "51"
+    ]
+  },
+  "354": {
+    "main_q": "The sequence `\u230aa\u230b, \u230a\u03b3 * a\u230b, \u230a\u03b3 2 * a\u230b, ..., \u230a\u03b3 i * a\u230b, ...`. -/ noncomputable def FloorMultiples (a \u03b3 : \u211d) (n : \u2115) : \u2124 := \u230a\u03b3 n * a\u230b /-- The sequence `\u230aa\u230b, \u230ab\u230b, \u230a\u03b3 * a\u230b, \u230a\u03b3 * b\u230b, ... \u230a\u03b3 i * a\u230b, \u230a\u03b3 i * ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "355": {
+    "main_q": "Is there a lacunary sequence A N (so that A=\\a_1 < \\ and there exists some > 1 such that a_n+1/a_n for all n 1) such that \\[\\ _a A'1a : A' A finite\\\\] contain all rationals in some open interval?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "357": {
+    "main_q": "Let f(n) be the maximal k such that there exist integers 1 a_1 < < a_k n such that all sums of the shape _u i v a_i are distinct. -/ noncomputable def f (n : \u2115) : \u2115 := sSup k : \u2115 | \u2203 a : Fin k \u2192 \u2124, Se",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 29,
+    "AMS": [
+      "11"
+    ]
+  },
+  "358": {
+    "main_q": "When A_n = n, the function f defined above counts the number of odd divisors of n. -/ @[category high_school, AMS 5 11] theorem f_id : f id = fun n \u21a6 #d \u2208 n.divisors | Odd d := by sorry /-- Let A=\\a_1",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "359": {
+    "main_q": "The predicate that `A` is monotone, `A 0 = n` and for all `j`, `A (j + 1)` is the smallest natural number that cannot be written as a sum of consecutive terms of `A 0, ..., A j` -/ def IsGoodFor (A : ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "361": {
+    "main_q": "Let c > 0 and n be some large integer. What is the size of the largest set A \\1, , c n \\ such that n is not a sum of a subset of A? Does this depend on n in an irregular way?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "364": {
+    "main_q": "There is no consecutive triple of powerful numbers.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "366": {
+    "main_q": "Are there any 2-full n such that n+1 is 3-full?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "370": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "371": {
+    "main_q": "Let P(n) denote the largest prime factor of n. Show that the set of n with P(n+1) > P(n) has density 12.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "373": {
+    "main_q": "Let `S` be the set of non-trivial solutions to the equation `n! = a\u2081! \u00b7\u00b7\u00b7 a\u2096!` such that `a\u2081 \u2265 ... \u2265 a\u2096` and `n-1 > a\u2081`. -/ abbrev S : Set (\u2115 \u00d7 List \u2115) := (n, l) | n ! = (l.map Nat.factorial).prod \u2227 l",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "375": {
+    "main_q": "This is a proposition saying that for any `n \u2265 1` and any `k`, if `n + 1, ..., n + k` are all composite, then there are distinct primes `p\u2081, ... p\u2096` such that `p\u1d62 \u2223 n + i` for all `1 \u2264 i \u2264 k`. -/ def ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "376": {
+    "main_q": "Are there infinitely many n such that 2n n is coprime to 105?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "377": {
+    "main_q": "The sum of the inverses of all primes smaller than n, which don't divide the central binom coefficient. -/ noncomputable abbrev sumInvPrimesNotDvdCentralBinom (n : \u2115) : \u211d := \u2211 p \u2208 Finset.Icc 1 n with ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "379": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "383": {
+    "main_q": "Is it true that for every k there are infinitely many primes p such that the largest prime divisor of _i = 0k (p 2 + i) is p?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "385": {
+    "main_q": "Let F(n) := \\m + p(m) m < n composite\\\\ where p(m) is the least prime divisor of m. -/ noncomputable def F (n : \u2115) : \u2115 := sSup m + m.minFac | (m < n) (_ : m.Composite) /-- Note that trivially F(n) n +",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "386": {
+    "main_q": "There is a k, such that 2 k n - 2 and nk can be the product of consecutive primes infinitely often?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "387": {
+    "main_q": "Is there an absolute constant `c > 0` such that, for all `1 \u2264 k < n`, the binomial coefficient `n.choose k` has a divisor in `(cn, n]`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "389": {
+    "main_q": "Is it true that for every n 1 there is a k such that n(n + 1) (n + k - 1) (n + k) (n + 2k - 1)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "390": {
+    "main_q": "Let `f n` be the smallest integer for which `n!` can be represented as the product of distinct integers greater than n, the largest of which is `f n`. -/ noncomputable def f (n : \u2115) : \u2115 := sInf m : \u2115 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "392": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "394": {
+    "main_q": "Let t_k(n) denote the least m such that n m(m+1)(m+2) (m+k-1). -/ noncomputable def t (k n : \u2115) : \u2115 := sInf m : \u2115 | 0 < m \u2227 n \u2223 \u220f i \u2208 range k, (m + i) /-- Is it true that _n xt_2(n) x2( x)c for some c",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 10,
+    "AMS": [
+      "11"
+    ]
+  },
+  "396": {
+    "main_q": "Is it true that for every k there exists n such that _0 i k(n-i) 2nn?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "397": {
+    "main_q": "Are there only finitely many solutions to _i 2m_im_i=_j 2n_jn_j with the m_i,n_j distinct?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "398": {
+    "main_q": "**Brocard's Problem** Does n! + 1 = m2 have integer solutions other than n = 4, 5, 7?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "399": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "402": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "406": {
+    "main_q": "Is it true that there are only finitely many powers of 2 which have only the digits 0 and 1 when written in base 3?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "409": {
+    "main_q": "How many iterations of n(n) + 1 are needed before a prime is reached? -/ -- Formalisation note: the sequence of iterates always terminates if `n > 0` -- since it is strictly decreasing unless the inpu",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 25,
+    "AMS": [
+      "11"
+    ]
+  },
+  "410": {
+    "main_q": "Let \u03c3_1(n) = \u03c3(n), the sum of divisors function, and \u03c3_k(n) = \u03c3(\u03c3_k-1(n)). Is it true that _k \u2192 \u221e \u03c3_k(n) 1 k = \u221e? This is problem (iii) from Erdos, Granville, Pomerance, Spiro \"On the normal behavior ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "412": {
+    "main_q": "Let \u03c3_1(n)=\u03c3(n), the sum of divisors function, and \u03c3_k(n) = \u03c3(\u03c3_k-1(n)). Is it true that, for every m, n \u2265 2, there exist some i, j such that \u03c3_i(m) = \u03c3_j(n)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "413": {
+    "main_q": "`IsBarrier f n` means `n` is a barrier for the real-valued function `f`, i.e. `(m : \u211d) + f m \u2264 (n : \u211d)` for all `m < n`. -/ def IsBarrier (f : \u2115 \u2192 \u211d) (n : \u2115) : Prop := \u2200 m < n, (m : \u211d) + f m \u2264 n /-- A",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "414": {
+    "main_q": "Let h_1(n) = h(n) and h_k(n) = h(h_k-1(n)). Is it true, for any m,n, there exist i and j such that h_i(m) = h_j(n)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "416": {
+    "main_q": "Let `V(x)` count the number of `n\u2264x` such that `\u03d5(m)=n` is solvable. -/ noncomputable abbrev V (x : \u211d) : \u211d := (Finset.Icc 1 \u230ax\u230b\u208a |>.filter (fun n => \u2203 (m : \u2115), m.totient = n)).card /-- Let `V(x)` coun",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 9,
+    "AMS": [
+      "11"
+    ]
+  },
+  "417": {
+    "main_q": "Let\\[V'(x)=\\#\\(m) : 1 m x\\\\]and\\[V(x)=\\#\\(m) x : 1 m\\.\\] Does V(x)/V'(x) exist? Formalization note: We formalize the limit of the inverse fraction V'(x)/V(x) to ensure the limit is finite (bounded bet",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "418": {
+    "main_q": "Are there infinitely many integers not of the form n - (n)? This is true, as shown by Browkin and Schinzel [BrSc95]. [BrSc95] Browkin, J. and Schinzel, A., _On integers not of the form n-(n)_. Colloq.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "421": {
+    "main_q": "Is there a sequence 1 d_1 < d_2 < with density 1 such that all products _u i v d_i are distinct?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "422": {
+    "main_q": "Let f(1) = f(2) = 1 and for n > 2 f(n) = f(n - f(n - 1)) + f(n - f(n - 2)). Note: It is not known whether f(n) is well-defined for all n. -/ partial def f : \u2115+ \u2192 \u2115+ | 1 => 1 | 2 => 1 | n => f (n - f (",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "424": {
+    "main_q": "Defines the set of new numbers generated from a set A by the operation x y - 1 for x y. -/ def nextGeneration (A : Set \u2115) : Set \u2115 := z : \u2115 | \u2203 x y, x \u2208 A \u2227 y \u2208 A \u2227 x \u2260 y \u2227 z = x * y - 1 /-- The sequen",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "427": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "428": {
+    "main_q": "The density ratio of set A up to n relative to the prime counting function (n). -/ noncomputable def primeDensityRatio (A : Set \u2115) (n : \u2115) : \u211d := (A \u2229 Icc 1 n).ncard / (primeCounting n) /-- Is there a",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "434": {
+    "main_q": "A natural n is representable as a set A if it can be written as the sum of finitely many elements of A (with repetition allowed). -/ abbrev Nat.IsRepresentableAs (n : \u2115) (A : Set \u2115) := \u2203 (S : Multiset",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "442": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "454": {
+    "main_q": "Define `f n` to be the minimum of `(n + i).nth Prime + (n - i).nth Prime` over `0 < i < n`. -/ noncomputable def f (n : \u2115) : \u2115 := if n \u2264 1 then 0 else \u2a05 i : i : Fin n // 0 < (i : \u2115), (n + i).nth Prime",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "455": {
+    "main_q": "Let `q : \u2115 \u2192 \u2115` be a strictly increasing sequence of primes such that `q (n + 2) - q (n + 1) \u2265 q (n + 1) - q n`. Must `lim q n / (n 2) = \u221e`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "457": {
+    "main_q": "Is there some > 0 such that there are infinitely many n where all primes p (2 + ) n divide _1 i n (n + i)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "458": {
+    "main_q": "The least common multiple of the integers in the set \\1, , n\\. -/ def lcm_upto (n : \u2115) : \u2115 := (Finset.Icc 1 n).lcm id /-- Let lcm(1, , n) denote the least common multiple of \\1, , n\\. Let p_k be the k",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "463": {
+    "main_q": "Is there a function f with f(n) as n such that, for all large n, there is a composite number m such that n + f(n) < m < n + p(m) Here p(m) is the least prime factor of m.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "469": {
+    "main_q": "The proposition that `n` is a sum of distinct proper divisors. -/ def Nat.IsSumDivisors (n : \u2115) : Prop := \u2203 S \u2286 n.properDivisors, \u2211 d \u2208 S, d = n open Erdos469 /-- Let A be the set of all n such that n",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "470": {
+    "main_q": "Primitive weird numbers are weird numbers such that no proper divisor of n are weird. -/ def PrimitiveWeird (n : \u2115) := n.Weird \u2227 \u2200 d \u2208 n.properDivisors, \u00acd.Weird /-- The abundancy index is the sum of ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 10,
+    "AMS": [
+      "11"
+    ]
+  },
+  "477": {
+    "main_q": "Is there a polynomial f:Z Z of degree at least 2 and a set A Z such that for any z Z there is exactly one a A and b \\ f(n) : nZ\\ such that z=a+b?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "12"
+    ]
+  },
+  "479": {
+    "main_q": "Is it true that, for all k 1, there are infinitely many n such that 2n kn?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "480": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "486": {
+    "main_q": "For each n N choose some X_n Z/nZ. Let B = \\m N : n, m x n for all x X_n\\. Must B have a logarithmic density?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "488": {
+    "main_q": "Let A be a finite set and B=\\ n 1 : a n for some a A\\. Is it true that, for every m>n (A), B [1,m] m< 2 B [1,n]n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "494": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 9,
+    "AMS": [
+      "5"
+    ]
+  },
+  "495": {
+    "main_q": "The distance from `x` to the nearest integer, denoted \\|x\\|. -/ noncomputable def distNearestInt (x : \u211d) : \u211d := |x - round x| /-- Let , R. Is it true that\\[_n n \\| n \\| \\| n\\| =0\\]? This is also known",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "499": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "15"
+    ]
+  },
+  "503": {
+    "main_q": "What is the size of the largest A Rn such that every three points from A determine an isosceles triangle? That is, for any three points x, y, z from A, at least two of the distances |x - y|, |y - z|, ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "51"
+    ]
+  },
+  "508": {
+    "main_q": "The unit-distance graph in the plane, i.e. the graph whose vertices are points in the plane and whose edges connect points that are exactly 1 unit apart. -/ def UnitDistancePlaneGraph : SimpleGraph \u211d\u00b2",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "52"
+    ]
+  },
+  "509": {
+    "main_q": "An r-bounded disc cover of a subset of a metric space M is an indexed family of closed discs whose radii sum to at most r. -/ structure BoundedDiscCover (S : Set M) (r : \u211d) (\u03b9 : Type v) where (C : \u03b9 \u2192",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "54"
+    ]
+  },
+  "510": {
+    "main_q": "**Chowla's cosine problem** If A N is a finite set of positive integers of size N > 0 then is there some absolute constant c>0 and such that _n A(n) < -cN1/2?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "513": {
+    "main_q": "Let `f` be a transcendental entire function. What is the greatest possible value of `liminf (fun r : \u211d => ratio r f) atTop`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "30"
+    ]
+  },
+  "516": {
+    "main_q": "An entire function `f` is said to be of finite order if there exist numbers c, a \u2265 0 such that for all `z`, `\u2016f z\u2016 \u2264 c * rexp (\u2016z\u2016 a)`. -/ def OfFiniteOrder E F: Type* [NormedAddCommGroup E] [NormedSp",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "30"
+    ]
+  },
+  "517": {
+    "main_q": "If `f(z) = \u2211 a\u2096z\u207f\u2096` is an entire function (with `a\u2096 \u2260 0` for all `k`) such that `n\u2096 / k \u2192 \u221e`, is it true that `f` assumes every value infinitely often?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "30"
+    ]
+  },
+  "520": {
+    "main_q": "A random function f is Rademacher multiplicative if f(1) = 1, for each prime p, we independently choose f(p) \\-1, 1\\ uniformly at random, for each square-free integer n = p_1 p_r, f(n) = f(p_1) f(p_r)",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11 60"
+    ]
+  },
+  "522": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "12 60"
+    ]
+  },
+  "536": {
+    "main_q": "Let >0 and N be sufficiently large. Is it true that if A \\1,,N\\ has size at least N then there must be distinct a,b,c A such that [a, b]=[b, c]=[a, c], where [, ] denotes the least common multiple?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "541": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "562": {
+    "main_q": "Let R_r(n) denote the r-uniform hypergraph Ramsey number: the minimal m such that if we 2-colour all edges of the complete r-uniform hypergraph on m vertices then there must be some monochromatic copy",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "05"
+    ]
+  },
+  "564": {
+    "main_q": "Let R_3(n) be the minimal m such that if the edges of the 3-uniform hypergraph on m vertices are 2-coloured then there is a monochromatic copy of the complete 3-uniform hypergraph on n vertices. Is th",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "05"
+    ]
+  },
+  "566": {
+    "main_q": "Let G be such that any subgraph on k vertices has at most 2k-3 edges. Is it true that, if H has m edges and no isolated vertices, then r(G,H) m? In other words: if G is sparse (every induced subgraph ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "05"
+    ]
+  },
+  "567": {
+    "main_q": "Q_3 is the 3-dimensional hypercube graph (8 vertices, 12 edges). Vertices are 3-bit vectors. Two vertices are adjacent iff they differ in exactly one bit. -/ def Q3 : SimpleGraph (Fin 3 \u2192 Bool) where ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "05"
+    ]
+  },
+  "587": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "590": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 4,
+    "AMS": [
+      "3"
+    ]
+  },
+  "591": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "3"
+    ]
+  },
+  "592": {
+    "main_q": "Determine which countable ordinals \u03b2 have the property that, if \u03b1 = \u03b2, then in any red/blue colouring of the edges of K_\u03b1 there is either a red K_\u03b1 or a blue K_3.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "3"
+    ]
+  },
+  "598": {
+    "main_q": "Let = (2_0)+. This is the successor cardinal of the continuum. -/ noncomputable def \u03ba : Cardinal := Order.succ (2 \u2135\u2080) /-- **Erd\u0151s Problem 598:** Let m be an infinite cardinal and be the successor card",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "03 05"
+    ]
+  },
+  "617": {
+    "main_q": "Let r 3. If the edges of K_r2+1 are r-coloured then there exist r+1 vertices with at least one colour missing on the edges of the induced K_r+1. In other words, there is no balanced colouring. A conje",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "623": {
+    "main_q": "Let X be a set of cardinality _ and f be a function from the finite subsets of X to X such that f(A) A for all A. Must there exist an infinite Y X that is independent - that is, for all finite B Y we ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "3"
+    ]
+  },
+  "624": {
+    "main_q": "The condition that an integer `m` ensures the existence of a function `f` covering `Fin n` for all large enough subsets `Y`. The property is invariant under bijection, so we use a representative `Fin ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "645": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "647": {
+    "main_q": "Let (n) count the number of divisors of n. Is there some n > 24 such that _m < n(m + (m)) n + 2?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "659": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "52"
+    ]
+  },
+  "672": {
+    "main_q": "Erd\u0151s problem 672 conjectures that the below holds for any k \u2265 4 and l > 1. -/ def Erdos672With (k l : \u2115) : Prop := \u2200 (s : Finset \u2115), s.card = k \u2192 \u2200\u1d49 (n > 0) (d > 0), n.gcd d = 1 \u2192 Set.IsAPOfLengthWit",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "677": {
+    "main_q": "Erd\u0151s expected very few solutions for M(n, k) = M(m, l), where m n + k and l > 1. The only solutions he knew were the following. -/ @[category test, AMS 11] lemma lcmInterval_eq_example1 : lcmInterval",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "678": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "680": {
+    "main_q": "Is it true that, for all sufficiently large n, there exists some k such that \\[ p(n+k)>k2+1, \\] where p(m) denotes the least prime factor of m?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "681": {
+    "main_q": "`IsLPF p m` says that `p` is the least prime factor of `m`. -/ def IsLPF (p m : \u2115) : Prop := p.Prime \u2227 p \u2223 m \u2227 \u2200 q, q.Prime \u2227 q \u2223 m \u2192 p \u2264 q /-- **Erd\u0151s problem 681.** Is it true that for all large n t",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "686": {
+    "main_q": "Can every integer N\u22652 be written as N=_1 i k(m+i)_1 i k(n+i) for some k\u22652 and m\u2265n+k?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "689": {
+    "main_q": "Let `n` be sufficiently large. Is there some choice of congruence class `a_p` for all primes `2 \u2264 p \u2264 n` such that every integer in `[1,n]` satisfies at least two of the congruences `\u2261 a_p (mod p)`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "694": {
+    "main_q": "Let f_(n) be the largest m such that (m) = n, and f_(n) be the smallest such m, where is Euler's totient function. Investigate _n xf_(n)f_(n).",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "695": {
+    "main_q": "Let q_1 < q_2 < be a sequence of primes such that q_i + 1 1 q_i. Is it true that _k q_k1/k = ?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "697": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "699": {
+    "main_q": "Sylvester and Schur: for 1 i n/2 there is a prime p > i dividing `n.choose i`. -/ @[category research solved, AMS 11] theorem sylvester_schur (n i : \u2115) (hi : 1 \u2264 i) (hi_half : i \u2264 n / 2) : \u2203 p : \u2115, p.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "705": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "707": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 11,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "723": {
+    "main_q": "If there is a finite projective plane of order n then must n be a prime power?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "5"
+    ]
+  },
+  "727": {
+    "main_q": "Let k \u2265 2. Does ((n+k)!)2\u2223(2n)! hold for infinitely many n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "728": {
+    "main_q": "Let be sufficiently small and C, C' > 0. Are there integers a, b, n such that a, b > n a!\\, b! n!\\, (a + b - n)!, and C n < a + b - n < C' n ? Note that the website currently displays a simpler (trivi",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "730": {
+    "main_q": "Are there infinitely many pairs of integers n < m such that 2nn and 2mm have the same set of prime divisors?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "741": {
+    "main_q": "Let A N be such that A+A has positive density. Can one always decompose A=A_1 A_2 such that A_1+A_1 and A_2+A_2 both have positive density?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "749": {
+    "main_q": "Let >0. Does there exist A N such that the lower density of A+A is at least 1- and yet 1_A 1_A(n) _ 1 for all n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "757": {
+    "main_q": "We say that `c` is admissible if for any finit set `A` such that for any subset `B` of size `4`, `(B - B).card = 11`, there exists a Sidon subset `S` of size at least `c * A.ncard`. -/ def IsAdmissibl",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "770": {
+    "main_q": "Let `h n` be the minimal number such that `2 n - 1, ..., (h n) n - 1` are mutually coprime. -/ noncomputable def h (n : \u2115) : \u2115\u221e := sInf m | 2 < m \u2227 (Set.Icc 2 m).Pairwise fun i j => (i.toNat n - 1).Co",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 9,
+    "AMS": [
+      "11"
+    ]
+  },
+  "779": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "786": {
+    "main_q": "`Nat.IsMulCardSet A` means that `A` is a set of natural numbers that satisfies the property that a_1 a_r = b_1 b_s with a_i, b_j A can only hold when r = s. -/ def Set.IsMulCardSet \u03b1 : Type* [CommMono",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "817": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "822": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "825": {
+    "main_q": "Is there an absolute constant C > 0 such that every integer n with (n) > Cn is the distinct sum of proper divisors of n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "826": {
+    "main_q": "Are there infinitely many n such that, for all k 1 (n + k) k?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "828": {
+    "main_q": "Is it true that, for any a Z, there are infinitely many n such that (n) | n + a?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "830": {
+    "main_q": "We say that a,b N are an amicable pair if (a)=(b)=a+b. -/ @[mk_iff] structure IsAmicable (a b : \u2115) where left : \u03c3 1 a = a + b right : \u03c3 1 b = a + b /-- Let A(x) counts the number of amicable 1 a b x. ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "835": {
+    "main_q": "The property that for a given k, the k-subsets of a 2k-set can be colored with k+1 colors such that any (k+1)-subset contains all colors. -/ def Property (k : \u2115) : Prop := let K := s : Finset (Fin (2 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 13,
+    "AMS": [
+      "5"
+    ]
+  },
+  "845": {
+    "main_q": "Let C > 0. Is it true that the set of integers of the form n = b_1 + + b_t, with b_1 < < b_t, where b_i = 2k_i3l_i for 1 i t and b_t Cb_1 has density 0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "846": {
+    "main_q": "We say a subset `A` of points in the plane is `\u03b5`-non-trilinear if any subset `B` of `A`, contains a non-trilinear subset `C` of size at least `\u03b5|B|`. -/ def NonTrilinearFor (A : Set \u211d\u00b2) (\u03b5 : \u211d) : Pro",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "847": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "848": {
+    "main_q": "A set A has the non-squarefree product property if ab + 1 is not squarefree for all a, b \u2208 A. -/ def NonSquarefreeProductProp (A : Finset \u2115) : Prop := \u2200 a \u2208 A, \u2200 b \u2208 A, \u00acSquarefree (a * b + 1) /-- The",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "849": {
+    "main_q": "Is it true that, for every integer t1, there is some integer a such that n k = a with 1 k n2 has exactly t solutions?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "850": {
+    "main_q": "Can there exist two distinct integers x and y such that x,y have the same prime factors, x+1,y+1 have the same prime factors, and x+2,y+2 also have the same prime factors?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "851": {
+    "main_q": "`TwoPowAddSet r` is the set of integers of the form `2k+n`, where `k \u2265 0` and `n` has at most `r` prime divisors. -/ def TwoPowAddSet (r : \u2115) := (2 k + n) | (k : \u2115) (n : \u2115) (_ : n.primeFactors.card \u2264 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "853": {
+    "main_q": "Let d_n = p_n+1 - p_n, where p_n is the nth prime. Let r(x) be the smallest even integer t such that d_n = t has no solutions for n x. Is it true that r(x) ?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "855": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "859": {
+    "main_q": "`DivisorSumSet t` is the set of natural numbers `n` such that `t` can be represented as a sum of distinct divisors of `n`. -/ def DivisorSumSet (t : \u2115) := n : \u2115 | \u2203 s \u2286 Nat.divisors n, t = \u2211 i \u2208 s, i ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "868": {
+    "main_q": "The number of ways in which a natural `n` can be written as the sum of `o` members of the set `A`. -/ noncomputable def ncard_add_repr (A : Set \u2115) (o : \u2115) (n : \u2115) : \u2115 := a : Fin o \u2192 \u2115 | Set.range a \u2286 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "873": {
+    "main_q": "Let a be some sequence of natural numbers. We set F(A,X,k) to be the count of the number of i such that [a_i,a_i+1, ,a_i+k\u22121] < X, where the left-hand side is the least common multiple. -/ noncomputab",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "881": {
+    "main_q": "We interpret \"additive basis of order `k`\" as an asymptotic additive basis of order `k`, using the predicate `Set.IsAsymptoticAddBasisOfOrder` from additive combinatorics. A *minimal* additive basis o",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5 11"
+    ]
+  },
+  "885": {
+    "main_q": "For integer n 1 we define the factor difference set of n by D(n) = \\|a-b| : n=ab\\. -/ def factorDifferenceSet (n : \u2115) : Set \u2115 := d | \u2203 a b : \u2115, n = a * b \u2227 (d : \u2124) = |(a : \u2124) - b| /-- Is it true that,",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "886": {
+    "main_q": "The set of divisors of n in the interval (n1/2, n1/2 + n1/2-). -/ noncomputable def Erdos886Divisors (n : \u2115) (\u03b5 : \u211d) (C : \u211d) : Finset \u2115 := (divisors n).filter (fun d => (n : \u211d) (1/2 : \u211d) < d \u2227 (d : \u211d)",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "887": {
+    "main_q": "Is there an absolute constant K such that, for every C > 0, if n is sufficiently large then n has at most K divisors in (n12, n12 + C n14).",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "888": {
+    "main_q": "Condition on the sets `A` appearing in Erd\u0151s 888. Namely, let `A` be a subset of `1,...,n` such that if `a \u2264 b \u2264 c \u2264 d \u2208 A` and `abcd` square then `ad=bc`. -/ def RequiredCondition (A : Finset \u2115) (n :",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "889": {
+    "main_q": "v(n,k) counts the prime factors of n+k which do not divide n+i for all 0 i < k. -/ def v (n k : \u2115) : \u2115 := ((n + k).primeFactors.filter (fun p => \u2200 i \u2208 range k, \u00ac p \u2223 n + i)).card /-- v_0(n) is the sup",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "890": {
+    "main_q": "If (n) counts the number of distinct prime factors of n, then is it true that, for every k 1, _n _0 i < k(n+i) k+(k)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "891": {
+    "main_q": "Let 2=p_1 < p_2 < be the primes and k 2. Is it true that, for all sufficiently large n, there must exist an integer in [n,n+p_1 p_k) with >k many prime factors?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "11"
+    ]
+  },
+  "893": {
+    "main_q": "Definition of function f(n) := _1 k n(2k-1). Here is the divisor counting function, which is `\u03c3 0` in mathlib. -/ def f (n : \u2115) : \u2115 := \u2211 k \u2208 Finset.Icc 1 n, \u03c3 0 (2k - 1) /-- Does the limit _n f(2n)f(n",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5"
+    ]
+  },
+  "897": {
+    "main_q": "Let f(n) be an additive function (so that f(ab)=f(a)+f(b) if (a,b)=1 such that _p,k f(pk) (pk) = \u221e. Is it true that _n (f(n+1)\u2212f(n))/ n = \u221e?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 9,
+    "AMS": [
+      "11"
+    ]
+  },
+  "899": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "906": {
+    "main_q": "Does there exists an entire non-zero transcendental function `f : \u2102 \u2192 \u2102` such that for any sequence `n\u2080 < n\u2081 < ...`, ` z | \u2203 k, iteratedDeriv (n k) f z = 0 ` is dense.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "30"
+    ]
+  },
+  "912": {
+    "main_q": "If n! = _ip_ik_i is the factorization into distinct primes, then we define h(n) to be the number of distinct exponents k_i. -/ noncomputable def h (n : \u2115) : \u2115 := (n !).factorization.frange.card /-- Er",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "913": {
+    "main_q": "Are there infinitely many n such that if n(n + 1) = _i p_ik_i is the factorisation into distinct primes then all exponents k_i are distinct?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "918": {
+    "main_q": "Is there a graph with _2 vertices and chromatic number _2 such that every subgraph on _1 vertices has chromatic number _0? -/ -- Formalisation note: source material [ErHa68b] uses only induced subgrap",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 13,
+    "AMS": [
+      "5"
+    ]
+  },
+  "920": {
+    "main_q": "f_k(n) is the maximum possible chromatic number of a graph with n vertices which contains no K_k. -/ noncomputable def f (k n : \u2115) : \u2115 := sSup (G.chromaticNumber) | (G : SimpleGraph (Fin n)) (_ : G.Cl",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 6,
+    "AMS": [
+      "05"
+    ]
+  },
+  "930": {
+    "main_q": "n is a perfect power if there exist natural numbers m and l such that 1 < l and ml = n. -/ def IsPower (n : \u2115) : Prop := \u2203 m l, 1 < l \u2227 ml = n /-- Is it true that, for every r, there is a k such that ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "931": {
+    "main_q": "Let k_1 k_2 3. Are there only finitely many n_2 n_1 + k_1 such that _1 i k_1(n_1 + i)\\ and\\ _1 j k_2 (n_2 + j) have the same prime factors?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "932": {
+    "main_q": "Let p_k denote the kth prime. For infinitely many r there are at least two integers p_r < n < p_r+1 all of whose prime factors are < p_r + 1 - p_r.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "936": {
+    "main_q": "The predicate that `a n` is only powerful for finitely many `n`. -/ def EventuallyNotPowerful (a : \u2115 \u2192 \u2115) : Prop := atTop.Eventually (fun n => \u00ac (a n).Powerful) /-- Is 2n + 1 powerful for finitely man",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "938": {
+    "main_q": "Let A=\\n_1 < n_2 < \\ be the sequence of powerful numbers (if p n then p2 n). Are there only finitely many three-term progressions of consecutive terms n_k,n_k+1,n_k+2?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "939": {
+    "main_q": "A set `S` belongs to `Erdos939Sums r` if it meets the following criteria: - The size of the set is `|S| = r - 2`. - The elements of the set are coprime (their greatest common divisor is 1). - Every el",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "940": {
+    "main_q": "Let r 3. Is it true that the set of integers which are the sum of at most r r-powerful numbers has density 0?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "942": {
+    "main_q": "Let h(n) count the number of powerful integers in [n2, (n + 1)2). -/ def erdos_942.h (n : \u2115) : \u2115 := ((Finset.Ico (n 2) ((n + 1) 2)).filter Powerful).card /-- Is there some constant c > 0 such that h(n",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "943": {
+    "main_q": "Let A be the set of powerful numbers. Is is true that 1_A 1_A(n)=no(1) for every n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "944": {
+    "main_q": "The predicate that graph G with chromatic number k is such that every vertex is critical, yet every critical set of edges has size >r -/ def SimpleGraph.IsErdos944 (G : SimpleGraph V) (k r : \u2115) : Prop",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 10,
+    "AMS": [
+      "11"
+    ]
+  },
+  "945": {
+    "main_q": "Let F(x) be the maximal k such that there exist n+1, , n+k x with \u03c4(n+1), , \u03c4(n+k) all distinct, where \u03c4(m) counts the divisors of m. -/ noncomputable def F (x : \u211d) : \u2115 := sSup k | \u2203 (n : \u2115), n + k \u2264 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "946": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "949": {
+    "main_q": "Let S R be a set containing no solutions to a + b = c. Must there be a set A R S of cardinality continuum such that A + A R S?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "951": {
+    "main_q": "A sequence `a : \u2115 \u2192 \u211d` is said to have property `Erdos951_prop` if for any pair of distinct Beuring integers `x, y`, `|x - y| \u2265 1`. -/ def Erdos951_prop (a : \u2115 \u2192 \u211d) : Prop := \u2200 \u2983x y : \u211d\u2984, x \u2260 y \u2192 x \u2208 ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "952": {
+    "main_q": "Is there an infinite sequence of distinct Gaussian primes x_1,x_2, such that x_n+1-x_n 1?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "961": {
+    "main_q": "Sylvester and Schur [Er34] proved that every set of k consecutive integers greater than k contains an integer divisible by a prime greater than k, i.e. not (k+1)-smooth. -/ @[category research solved,",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "965": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "03 05"
+    ]
+  },
+  "968": {
+    "main_q": "`u n` is the normalized `n`th prime, defined as `p\u2099 / (n+1)` where `p\u2099` is the `n`th prime (with `0.nth Nat.Prime = 2`). This corresponds to the classical sequence `(p\u2081/1, p\u2082/2, p\u2083/3, ...)` while usin",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "971": {
+    "main_q": "`leastCongruentPrime a d` is the least prime congruent to `a` modulo `d`. -/ noncomputable def leastCongruentPrime (a d : \u2115) : \u2115 := sInf p : \u2115 | p.Prime \u2227 p \u2261 a [MOD d] /-- Let `p(a, d)` be the least ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "972": {
+    "main_q": "The set of primes `p` such that `Nat.floor (\u03b1 * p)` is also prime. -/ def primeSet (\u03b1 : \u211d) : Set \u2115 := p : \u2115 | Nat.Prime p \u2227 Nat.Prime \u230a (\u03b1 * p) \u230b\u208a /-- **Erd\u0151s problem 972.** Let > 1 be irrational. Are",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "975": {
+    "main_q": "Sum of (f(n)) from `0` to `\u230ax\u230b` for a polynomial f Z[X]. Here is the divisor counting function, which is `\u03c3 0` in mathlib. Also, for simplicity, we use `Nat.floor` to convert rational values to natura",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "978": {
+    "main_q": "Let `f \u2208 \u2124[X]` be an irreducible polynomial. Suppose that the degree `k` of `f` is larger than `2` and is not equal to a power of `2`. Then the set of `n` such that `f n` is `(k - 1)`-th power free is",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "979": {
+    "main_q": "Let k \u2265 2, and let f_k(n) count the number of solutions to n = p_1k + + p_kk, where the p_i are prime numbers. Is it true that f_k(n) = ?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "982": {
+    "main_q": "If n distinct points in R2 form a convex polygon then some vertex has at least n2 different distances to other vertices.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "52"
+    ]
+  },
+  "985": {
+    "main_q": "Is it true that, for every prime p, there is a prime q p which is a primitive root modulo p?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "996": {
+    "main_q": "Does there exists a positive constant `C` such that for all `f \u2208 L\u00b2[0,1]` and all lacunary sequences `n`, if `\u2016f - f\u2096\u2016\u2082 = O(1 / log log log k C)`, then for almost every `x`, `lim \u2211 k \u2208 Finset.range N,",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "42"
+    ]
+  },
+  "1003": {
+    "main_q": "Are there infinitely many solutions to (n) = (n+1), where is the Euler totient function?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1004": {
+    "main_q": "`IsDistinctTotientRun n K` means that the values `\u03c6(n+1), \u03c6(n+2), ..., \u03c6(n+K)` are all distinct. -/ def IsDistinctTotientRun (n K : \u2115) : Prop := (Set.Icc (n + 1) (n + K)).InjOn totient /-- For any fix",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1038": {
+    "main_q": "What is the infimum of `|x \u2208 \u211d : |f x| < 1|` over all nonconstant monic polynomials `f` such that all of its roots are real and contained in `[-1,1]`?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "28"
+    ]
+  },
+  "1041": {
+    "main_q": "The length of a subset s of C is defined to be its 1-dimensional Hausdorff measure H1(s). -/ noncomputable def length (s : Set \u2102) : \u211d\u22650\u221e := \u03bcH[1] s /-- **Erd\u0151s\u2013Herzog\u2013Piranian Component Lemma** (Metri",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "32"
+    ]
+  },
+  "1043": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "28 30"
+    ]
+  },
+  "1051": {
+    "main_q": "A sequence of integers `a` satisfies the growth condition if a_n12n > 1. -/ def GrowthCondition (a : \u2115 \u2192 \u2124) : Prop := Filter.liminf (fun n => ((a n : \u211d) (1 / 2 n : \u211d))) Filter.atTop > 1 /-- The series",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1052": {
+    "main_q": "A proper unitary divisor of n is a divisor d of n such that d is coprime to n/d, and d < n. -/ def properUnitaryDivisors (n : \u2115) : Finset \u2115 := d \u2208 Finset.Ico 1 n | d \u2223 n \u2227 d.Coprime (n / d) /-- A numb",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1054": {
+    "main_q": "Let f(n) be the minimal integer m such that n is the sum of the k smallest divisors of m for some k 1. -/ noncomputable def f (n : \u2115) : \u2115 := if h : \u2203\u1d49 (m) (k \u2265 1), n = \u2211 i < k, Nat.nth (\u00b7 \u2208 m.divisors",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1055": {
+    "main_q": "A prime p is in class 1 if the only prime divisors of p+1 are 2 or 3. In general, a prime p is in class r if every prime factor of p+1 is in some class r-1, with equality for at least one prime factor",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1056": {
+    "main_q": "The proposition that the modular product of a collection of consecutive interval equals 1 modulo p, where intervals are defined by a function specifying the consecutive boundaries. -/ def AllModProdEq",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1059": {
+    "main_q": "Are there infinitely many primes p such that p - k! is composite for each k such that 1 \u2264 k! < p?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1060": {
+    "main_q": "The conjecture is about the function f(n) which counts the number of solutions to k(k)=n, where (k) is the sum of divisors of k. The first bound is that f(n) grows slower than any power of n(1 n). The",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1061": {
+    "main_q": "Let `S x` count the number of **ordered** pairs of positive integers `(a, b)` with `a + b \u2264 x` such that `\u03c3(a) + \u03c3(b) = \u03c3(a + b)`, where `\u03c3` is the sum of divisors function. In particular, `(a, b)` an",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1062": {
+    "main_q": "A set `A` of positive integers is fork-free if no element divides two distinct other elements of `A`. -/ def ForkFree (A : Set \u2115) : Prop := \u2200 a \u2208 A, (b | b \u2208 A \\ a \u2227 a \u2223 b : Set \u2115).Subsingleton open s",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1063": {
+    "main_q": "Let n_k be the least n 2k such that all but one of the integers n - i with 0 i < k divide nk. -/ noncomputable def n (k : \u2115) : \u2115 := sInf m | 2 * k \u2264 m \u2227 \u2203 i0 < k, \u00ac (m - i0) \u2223 m.choose k \u2227 \u2200 i < k, i ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 7,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1064": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1065": {
+    "main_q": "Are there infinitely many primes p such that p = 2k * q + 1 for some prime q and k \u2265 0? This is mentioned as B46 in [Unsolved Problems in Number Theory](https://doi.org/10.1007/978-0-387-26677-0) by *",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1067": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1068": {
+    "main_q": "Does every graph with chromatic number _1 contain a countable subgraph which is infinitely connected?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1071": {
+    "main_q": "Two segments are disjoint if they only intersect at their endpoints (if at all). -/ def SegmentsDisjoint (seg1 seg2 : \u211d\u00b2 \u00d7 \u211d\u00b2) : Prop := segment \u211d seg1.1 seg1.2 \u2229 segment \u211d seg2.1 seg2.2 \u2286 seg1.1, seg",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "52"
+    ]
+  },
+  "1072": {
+    "main_q": "For any prime p, let f(p) be the least integer such that f(p)! + 1 0 p. -/ noncomputable def f (p : \u2115) : \u2115 := sInf n | (n)! + 1 \u2261 0 [MOD p] /-- Is it true that there are infinitely many p for which f(",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1073": {
+    "main_q": "Let A(x) count the number of composite u < x such that n!+1 0 ( u) for some n. -/ noncomputable def A (x : \u2115) : \u211d := u | u.Composite \u2227 \u2203 n, n ! + 1 \u2261 0 [MOD u] \u2227 u < x.ncard /-- Is it true that A(x) x",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1074": {
+    "main_q": "The EHS numbers (after Erd\u0151s, Hardy, and Subbarao) are those m 1 such that there exists a prime p 1m such that m! + 1 0p. -/ abbrev Nat.EHSNumbers : Set \u2115 := m | 1 \u2264 m \u2227 \u2203 p, p.Prime \u2227 \u00acp \u2261 1 [MOD m] ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 13,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1077": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 1,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1080": {
+    "main_q": "`IsBipartition G X Y` means that `X` and `Y` form a bipartition of the vertices of `G`. -/ def IsBipartition V : Type* (G : SimpleGraph V) (X Y : Set V) : Prop := Disjoint X Y \u2227 X \u222a Y = Set.univ \u2227 \u2200 \u2983",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1084": {
+    "main_q": "The maximal number of pairs of points which are distance 1 apart that a set of `n` 1-separated points in `\u211dd` make. -/ noncomputable def f (d n : \u2115) : \u2115 := \u2a06 (s : Finset (\u211d d)) (_ : s.card = n) (_ : I",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 5,
+    "AMS": [
+      "52"
+    ]
+  },
+  "1085": {
+    "main_q": "The maximal number of pairs of points which are distance 1 apart that a set of `n` points in `\u211dd` make. -/ noncomputable def f (d n : \u2115) : \u2115 := \u2a06 (s : Finset (\u211d d)) (_ : s.card = n), unitDistNum s /--",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 8,
+    "AMS": [
+      "52"
+    ]
+  },
+  "1092": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1093": {
+    "main_q": "If defined, the deficiency is the count of 0 i < k such that n - i is k-smooth. -/ noncomputable def deficiency (n k : \u2115) : \u2115 := #i \u2208 range k | n - i \u2208 smoothNumbers k /-- Are there infinitely many bi",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1094": {
+    "main_q": "For all n 2k the least prime factor of nk is (n/k,k), with only finitely many exceptions.",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1095": {
+    "main_q": "Let g(k)>k+1 be the smallest n such that all prime factors of nk are >k. -/ noncomputable def g (k : \u2115) : \u2115 := sInf m | k + 1 < m \u2227 k < (m.choose k).minFac /-- The current record is\\[g(k) (c( k)2)\\]fo",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1097": {
+    "main_q": "Given a finite set of integers `A` (modelled as a `Finset \u2124`), the set `CommonDifferencesThreeTermAP A` consists of all integers `d` such that there is a non-trivial three-term arithmetic progression ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1101": {
+    "main_q": "The set of integers not divisible by any u_i. -/ def ASet (u : \u2115 \u2192 \u2115) : Set \u2115 := a | \u2200 i, \u00ac u i \u2223 a /-- The sequence of integers A_u which are not divisible by any u_i arranged in a monotonic sequence",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1102": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1104": {
+    "main_q": null,
+    "has_open": false,
+    "has_solved_only": true,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1105": {
+    "main_q": "Is AR(n, C_k) = (k-22 + 1k-1)n + O(1)?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "05"
+    ]
+  },
+  "1106": {
+    "main_q": "The partition function p(n) is the number of ways to write n as a sum of positive integers (where the order of the summands does not matter). -/ def p : \u2115 \u2192 \u2115 := fun n => Fintype.card (Nat.Partition n",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1107": {
+    "main_q": "Helper Property: n is the sum of at most r+1 numbers, each of which is r-full. -/ def SumOfRPowerful (r n : \u2115) : Prop := \u2203 s : List \u2115, s.length \u2264 r + 1 \u2227 (\u2200 x \u2208 s, Nat.Full r x) \u2227 s.sum = n /-- Let r ",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1108": {
+    "main_q": "The set A = \\ _n Sn! : S N finite\\ of all finite sums of distinct factorials. -/ def FactorialSums : Set \u2115 := m : \u2115 | \u2203 S : Finset \u2115, m = \u2211 n \u2208 S, n.factorial /-- A number is powerful if each prime fa",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 4,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1135": {
+    "main_q": null,
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 1,
+    "AMS": [
+      "11 37"
+    ]
+  },
+  "1137": {
+    "main_q": "Let d_n=p_n+1-p_n, where p_n denotes the nth prime. Is it true that _n < xd_nd_n-1(_n < xd_n)2 0 as x ?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1139": {
+    "main_q": "Let 1 u_1 < u_2 < be the sequence of integers with at most 2 prime factors. Is it true that _k u_k+1-u_k k=?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1145": {
+    "main_q": "Let A=\\1 a_1 < a_2 < \\ and B=\\1 b_1 < b_2 < \\ be sets of integers with a_n/b_n 1. If A+B contains all sufficiently large positive integers then is it true that 1_A 1_B(n)=? Formalization note: There's",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "5"
+    ]
+  },
+  "1148": {
+    "main_q": "A natural number n which can be written as n if n = x2 + y2 - z2 with (x2, y2, z2) n. -/ def Erdos1148Prop (n : \u2115) : Prop := \u2203 x y z : \u2115, n = x 2 + y 2 - z 2 \u2227 x 2 \u2264 n \u2227 y 2 \u2264 n \u2227 z 2 \u2264 n /-- Can ever",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "11"
+    ]
+  },
+  "1150": {
+    "main_q": "Is there some constant c > 0 such that, for all large enough n and all polynomials P of degree n with coefficients in \\-1, 1\\, _|z|=1 |P(z)| > (1 + c) n?",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 3,
+    "AMS": [
+      "12 30"
+    ]
+  },
+  "1176": {
+    "main_q": "Let G be a graph with chromatic number _1. Is it true that there is a colouring of the edges with _1 many colours such that, in any countable colouring of the vertices, there exists a vertex colour co",
+    "has_open": true,
+    "has_solved_only": false,
+    "sorry_count": 2,
+    "AMS": [
+      "3 5"
+    ]
+  }
+}

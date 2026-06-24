@@ -1,0 +1,28 @@
+OPEN GAP: Erdős 938 — unconditional structural constraint on common difference of consecutive powerful 3-APs
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean; erdosproblems.com/938
+Domain: nt
+
+Let A := {n : ℕ | 0 < n ∧ ∀ p : ℕ, p.Prime → p ∣ n → p^2 ∣ n} be the set of
+powerful numbers. Slot 1315 (UUID 5ab86500-...) compiled sorry-free the
+upper bound d < 2·√(n_k) + 2 for any 3-AP (n_k, n_{k+1}, n_{k+2}) of
+consecutively-enumerated powerful numbers with common difference d. The
+companion abc-conditional lower bound d ≫ N^{1/2-ε} (Chan 2022,
+arXiv:2210.00281, Thm 2) remains sorry in slot 1315.
+
+We seek a sorry-free Lean 4 / Mathlib formalization of the following
+unconditional structural lemma about the common difference d of any 3-AP
+(n, n+d, n+2d) of powerful numbers (whether consecutively-enumerated or
+not):
+
+theorem powerful_3AP_prime_once_not_dvd
+    (n d p : ℕ) (hd : 0 < d) (hp : p.Prime)
+    (hpd : p ∣ d) (hpp : ¬ p^2 ∣ d)
+    (h0 : Nat.Powerful n) (h1 : Nat.Powerful (n + d))
+    (h2 : Nat.Powerful (n + 2 * d)) :
+    ¬ p ∣ n := by sorry
+
+Status: OPEN as a clean Mathlib-PR target. The structural lemma is true
+unconditionally (via the standard p-adic identity v_p(a+b)=min(v_p(a),v_p(b))
+when v_p(a) ≠ v_p(b), combined with the powerful property v_p ≥ 2). It does
+NOT give an unconditional growth-rate lower bound on d; the abc-conditional
+sandwich of slot 1315 remains the only known route to d ≫ N^{1/2-ε}.

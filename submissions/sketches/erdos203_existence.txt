@@ -1,0 +1,19 @@
+OPEN GAP: Erdos 203 — Existence of m coprime to 6 with no prime in 2^k * 3^l * m + 1
+Source: FormalConjectures/ErdosProblems/203.lean
+Domain: nt
+
+There exists a positive integer m coprime to 6 such that for every
+k, l >= 0, the number 2^k * 3^l * m + 1 is composite (never prime).
+
+theorem erdos_203_existence :
+    ∃ m : ℕ, m > 0 ∧ m.Coprime 6 ∧
+    ∀ k l : ℕ, ¬ (2^k * 3^l * m + 1).Prime := by sorry
+
+Status: OPEN. Analogue of the Sierpinski/Riesel covering-system problem.
+The variant without the 3^l factor (i.e. 2^k * m + 1 composite for all k)
+is solved via classical covering congruences. The 3^l twist is unresolved.
+
+contribution_statement: A Lean proof of this existence statement would
+resolve Erdos Problem 203 by constructing (explicitly or non-constructively)
+an integer m coprime to 6 such that every member of the family
+2^k * 3^l * m + 1 (k, l >= 0) is composite.

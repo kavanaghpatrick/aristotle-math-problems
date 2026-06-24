@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "problem_card.schema.json",
+  "title": "ProblemCard",
+  "description": "Normalized problem record used as input to all 5 fusion stages.",
+  "type": "object",
+  "required": ["problem_id", "title", "domain", "bare_statement", "open_status"],
+  "additionalProperties": false,
+  "properties": {
+    "problem_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Canonical id, e.g. 'erdos_938'."
+    },
+    "title": {"type": "string"},
+    "source_file": {
+      "type": "string",
+      "description": "formal-conjectures path or other primary reference."
+    },
+    "external_urls": {
+      "type": "array",
+      "items": {"type": "string", "format": "uri"}
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["nt", "algebra", "combinatorics", "analysis", "geometry",
+              "logic", "topology", "probability", "discrete", "other"]
+    },
+    "adjacent_domains": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "bare_statement": {"type": "string"},
+    "keywords": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "open_status": {
+      "type": "string",
+      "enum": ["open", "partial_progress", "conditional", "unknown"]
+    },
+    "what_is_known": {"type": "string"}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "CS": "bounded_version_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_partial",
+  "real_closure_candidate": false,
+  "retroactive": true,
+  "applied_at": "2026-05-30",
+  "rationale": "Brocard verified for n in [1001, 2000] — extends the n in [501, 1000] range bump (slot ~739) and the original n in [2, 50] (slot722). Chunked native_decide with explicit prime gaps. Brocard unbounded remains open. Publishable research-note range bump, not a real closure of the conjecture itself."
+}

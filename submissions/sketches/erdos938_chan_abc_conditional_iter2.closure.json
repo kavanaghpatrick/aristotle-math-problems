@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "partial_result_only",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "iter2 retargets E938 onto Chan 2022's published abc-conditional lower bound (arXiv:2210.00281, Theorem 2: d ≫_ε N^{1/2-ε}). The closure target is the CONDITIONAL DIRECTION — not full conditional finiteness (debate confirmed Chan's bound is compatible with Van Doorn's d ≈ 2√N constructions, so it does not close E938 even under abc) but rather the cleaner sub-statement that abc rules out 3-APs of powerful numbers with d = o(N^{1/2-ε}), giving a sharp density lower bound. This IS a journal-clean direction_closure: a real published mechanism, formalisable in Lean, advances the literature beyond v1's speculative chain. The realistic Aristotle outcome is a formalisation of Chan's bound as a lemma toward E938, not full closure — but the lemma is the strongest published partial and is real cross-domain progress (sieve methods + powerful-number density). Sub-statement CR=partial_result_only because abc is unproved; HM=journal_clean because a Lean formalisation of Chan Theorem 2 is itself publishable, independent of full E938 closure."
+}

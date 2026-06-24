@@ -1,0 +1,16 @@
+OPEN GAP: Erdos 389 — Consecutive product divisibility
+Source: FormalConjectures/ErdosProblems/389.lean
+Domain: nt
+
+For every n >= 1, does there exist k >= 1 such that the product
+n(n+1)...(n+k-1) divides the product (n+k)(n+k+1)...(n+2k-1)?
+
+Equivalently: C(n+2k-1,k)/C(n+k-1,k) is a positive integer.
+
+theorem erdos_389 : ∀ n : ℕ, n ≥ 1 →
+    ∃ k : ℕ, k ≥ 1 ∧
+    (∏ i in Finset.range k, (n + i)) ∣
+    (∏ i in Finset.range k, (n + k + i)) := by sorry
+
+Status: OPEN. Minimal k grows roughly as 3^n.
+Known: k=n gives C(2n,n) (always integer) but is NOT minimal.

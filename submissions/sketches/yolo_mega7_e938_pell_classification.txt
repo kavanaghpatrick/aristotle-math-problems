@@ -1,0 +1,16 @@
+OPEN GAP: Erdős 938 — finite many consecutive powerful 3-APs (computational classification)
+Source: erdosproblems.com/938; formal-conjectures FormalConjectures/ErdosProblems/938.lean
+Domain: nt / diophantine
+
+Let A = {n_1 < n_2 < ...} be the sequence of powerful numbers (∀ p prime, p|n → p^2|n).
+Question: is the set of k with 2*n_{k+1} = n_k + n_{k+2} finite?
+
+theorem erdos_938 : {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+    P = {Nat.nth Nat.Powerful k, Nat.nth Nat.Powerful (k+1), Nat.nth Nat.Powerful (k+2)}}.Finite := by sorry
+
+Status: OPEN. The question is whether to PROVE finite or DISPROVE (exhibit infinitely many).
+
+Computational data (this dossier, exhaustive sieve up to N=10^10, 214,122 powerful numbers): exactly 6 consecutive powerful 3-APs exist below 10^10:
+(1728, 1764, 1800), (6912, 7056, 7200), (729000, 729316, 729632), (1458000, 1458632, 1459264), (2916000, 2917264, 2918528), (11664000, 11669056, 11674112).
+
+Falsification axis: a recent 2026 preprint conjectures E938 is FALSE via an explicit infinite-family construction. Verification of the first candidate triple (130530625, 130553476, 130576327) shows 5 intermediate powerful integers in the open interval — NOT consecutive. Whether any later candidate from the construction yields a triple with NO intermediate powerful is unresolved. A YES verification disproves E938.

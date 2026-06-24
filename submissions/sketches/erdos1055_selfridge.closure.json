@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "explicit_witness",
+  "CR": "partial_result_only",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Erdős 1055 Selfridge variant asks ∃ M ∀ r, p_r^(1/r) ≤ M, where p_r is the least prime of Erdős-Selfridge class r. CS=direction_closure: we are closing the existential direction (∃ M …) of the open conjecture exactly as stated. CM=explicit_witness: an honest closure must exhibit a numerical M. Numerical scan over r=1..16 (OEIS A005105) gives max p_r^(1/r) ≈ 5.20 at r=16; a candidate witness is M=10 with substantial margin, but the witness must be paired with a proof that p_r^(1/r) ≤ M for ALL r — which is the actual research content. CR=partial_result_only: the witness M is decidable for any finite prefix (computable, since IsOfClass and Nat.find are decidable in principle), but the universal quantifier over r forces an asymptotic upper bound on p_r — this requires controlling least-class-r prime growth, not pure computation. HM=journal_subclaim: this is a named research-open variant in the Erdős collection (problem 1055, Selfridge conjecture, Guy A18); a resolution either way (proving boundedness with an explicit M, or disproving by exhibiting r with p_r^(1/r) exceeding any prior M) is a journal-grade subclaim. real_closure_candidate=true: the theorem erdos_1055.variants.selfridge_limit is the precise open gap and would be discharged by the existence statement."
+}

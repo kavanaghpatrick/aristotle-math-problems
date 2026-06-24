@@ -1,0 +1,25 @@
+OPEN GAP: Erdős 203 — 12×12 index-1 covering existence
+Source: Erdős problem 203; slot740 (8×8 done, does not lift to infinite witness)
+Domain: nt
+
+Slot740 found m = 1579554969991861182625270235031094424159694 such that every
+cell (k, l) in [0, 8)² is caught by an index-1 prime p ≤ 500 (i.e.,
+p divides 2^k · 3^l · m + 1, with ⟨2,3⟩ = (Z/pZ)*). Its 22 primes' periodic
+shadows cover only ~70% of the full Z² quotient lattice — the 8×8 cover does
+NOT lift to an infinite Erdős 203 witness. Open: does the 8×8 result extend
+to a strictly larger finite grid?
+
+theorem erdos203_grid_12x12_B1000_exists :
+    ∃ m : ℕ, ∀ k l : ℕ, k < 12 → l < 12 →
+      ∃ p ∈ Finset.range 1001, p.Prime ∧ 3 < p ∧
+        (((Finset.univ : Finset (Fin (p-1) × Fin (p-1))).image
+          (fun ab => (2 ^ ab.1.val * 3 ^ ab.2.val) % p)).card = p - 1) ∧
+        p ∣ 2 ^ k * 3 ^ l * m + 1 := by sorry
+
+Status: OPEN. Slot740 settled the 8×8 case at bound 500 with 22-prime cover but
+its shadows tile only ~70% of the K×L = 2.6·10^25 × 2.1·10^25 quotient
+(Monte-Carlo on 200k samples, density-sum upper bound 1.0283). For slot740's
+m, no index-1 prime ≤ 2000 catches the 23 cells missing from 12×12, so any
+12×12 witness requires a different m. Either it exists (Aristotle finds it via
+greedy set cover + CRT, in spirit of slot740) or it does not (bounded
+impossibility — sharper than 203's original ∀ m claim).

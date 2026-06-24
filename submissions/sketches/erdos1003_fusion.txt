@@ -1,0 +1,19 @@
+OPEN GAP: Erdős 1003 — Infinitely many n with φ(n) = φ(n+1)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1003.lean
+Domain: nt
+
+Let φ denote the Euler totient function. Are there infinitely many positive
+integers n such that φ(n) = φ(n+1)? Known solutions include n = 1, 3, 15, 104,
+164, 194, 255, 495, 584, 975, ... extending to roughly 10^11. The only known
+infinite-family-shaped construction is the Fermat-prime tower n = 2^(2^r) - 1
+which terminates at r = 5 because F_5 is composite. Erdős conjectured (1985)
+the answer is yes, but no proof of infinitude is known.
+
+theorem erdos_1003 :
+    {n : ℕ | Nat.totient n = Nat.totient (n + 1)}.Infinite := by sorry
+
+Status: OPEN. Erdős-Pomerance-Sárközy (1987) proved the count of n ≤ x is at
+most x / exp((log x)^{1/3}); density is zero. Graham-Holt-Pomerance (1998)
+showed standard prime-tuple constructions for shifts k ≥ 2 fail at k = 1.
+Any proof of infinitude must invoke an exceptional mechanism not present
+in the existing toolkit.

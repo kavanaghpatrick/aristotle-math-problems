@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Slot737 reduced E647 failure region to exactly 35 Sophie-Germain Cunningham-chain n in [3000, 10^6]; each has an explicit pre-computed witness m (offset 5 or 6). Universal over an enumerated finite family with verified witness table — slot738-style native_decide cascade. Closes the entire E647 failure region up to 10^6 when composed with slot737. Real sub-claim closure (not the unbounded conjecture, but a publishable bounded resolution beyond prior wins). [retroactive 2026-05-30]"
+}

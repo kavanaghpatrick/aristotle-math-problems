@@ -1,0 +1,54 @@
+{
+  "name": "Hypergraph removal lemma",
+  "seminal_paper": {
+    "arxiv_id": null,
+    "doi": "10.1073/pnas.0502771102",
+    "citation": "V. Rodl, B. Nagle, J. Skokan, M. Schacht, and Y. Kohayakawa, The hypergraph regularity method and its applications, Proc. Natl. Acad. Sci. U.S.A. 102(23):8109-8113, 2005.",
+    "year": 2005
+  },
+  "home_domain": "extremal_combinatorics",
+  "what_it_does": "The hypergraph removal lemma says that a large finite uniform hypergraph with few copies of a fixed small hypergraph can be made copy-free by deleting few edges. It is a general-purpose counting/deletion principle behind several density results, including multidimensional Szemeredi-type theorems and corner configurations.",
+  "input_requirements": [
+    "a fixed k-uniform hypergraph H whose copies encode the target structured configuration",
+    "a finite ambient hypergraph sequence with vertex sets growing to size n",
+    "an asymptotic upper bound saying the ambient hypergraphs contain few copies of H",
+    "a deletion/removal interpretation connecting removal of hyperedges to elimination of the target number-theoretic configurations",
+    "a density or pseudorandomness framework strong enough to model the relevant set inside a grid or product space"
+  ],
+  "output_signature": "For fixed H and epsilon, constants delta and n0 such that any n-vertex k-uniform hypergraph with at most delta*n^v(H) copies of H can be made H-free by deleting at most epsilon*n^k edges.",
+  "input_match": [
+    {
+      "requirement": "a fixed k-uniform hypergraph H whose copies encode the target structured configuration",
+      "match": "PARTIAL",
+      "evidence": "Set.IsAPOfLength identifies the 3-term AP configuration, but no hypergraph encoding is present."
+    },
+    {
+      "requirement": "a finite ambient hypergraph sequence with vertex sets growing to size n",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "an asymptotic upper bound saying the ambient hypergraphs contain few copies of H",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "a deletion/removal interpretation connecting removal of hyperedges to elimination of the target number-theoretic configurations",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "a density or pseudorandomness framework strong enough to model the relevant set inside a grid or product space",
+      "match": "NO",
+      "evidence": "no match"
+    }
+  ],
+  "known_obstructions": [
+    "Powerful numbers form a sparse one-dimensional sequence, while the technique is naturally dense/asymptotic in finite hypergraphs or grids.",
+    "The target asks for finiteness of APs among consecutive powerful numbers, not for existence of configurations in a positive-density set.",
+    "Consecutiveness in the ordered sequence of powerful numbers has no evident hypergraph-removal deletion analogue.",
+    "The supplied statement contains no multidimensional grid model or pseudorandom majorant for powerful numbers."
+  ],
+  "fit_score": 0.1,
+  "source_analog_id": "A2"
+}

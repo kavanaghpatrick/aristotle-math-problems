@@ -1,0 +1,23 @@
+OPEN GAP: No odd multiperfect with ω(n) ≤ 2
+Source: extends slot 1327 (problem_id `multiperfect_prime_sigma0_general`) to ω(n) = 2
+Domain: nt
+
+For every odd natural number n > 1 with at most 2 distinct prime factors,
+n is not multiperfect: there is no integer k ≥ 2 with σ(n) = k·n. Slot 1327
+(b4069fdc, compiled clean) formalized the ω(n)=1 case (n a prime power);
+the present statement extends to ω(n) ≤ 2 under an odd hypothesis. The two
+smallest odd primes are 3 and 5, and (3/2)·(5/4) = 15/8 < 2 is a strict
+upper bound on σ(n)/n; the bound on smaller pairs holds a fortiori. Lehmer
+(1900) established that every k-perfect with k ≥ 3 has at least 3 distinct
+prime factors; this special case is unformalized.
+
+theorem not_multiperfect_of_odd_omega_le_two {n : ℕ} (hn : 1 < n)
+    (hodd : Odd n) (hw : (Nat.primeFactors n).card ≤ 2) :
+    ¬ ∃ k : ℕ, 2 ≤ k ∧ (Nat.divisors n).sum id = k * n := by
+  sorry
+
+Status: OPEN as a Lean formalization target. Not in Mathlib (no `Multiperfect`
+predicate; only `Nat.Perfect`/`Nat.Deficient`/`Nat.Abundant`). Euclid-Euler
+(`even_and_perfect_iff`) lives in `Archive/Wiedijk100Theorems/PerfectNumbers.lean`,
+NOT imported by `import Mathlib`, so this target cannot leverage it. Not in
+formal-conjectures repo (verified by grep against `FormalConjectures`).

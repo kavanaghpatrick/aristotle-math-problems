@@ -1,0 +1,23 @@
+{
+  "problem_id": "erdos_100_piepmeyer",
+  "stage_outputs": {
+    "literature_path": "analysis/method1_authoring/erdos_100_piepmeyer.context.md",
+    "analogies_path": "analysis/method1_authoring/erdos_100_piepmeyer.dossier.json",
+    "techniques_path": "analysis/method1_authoring/erdos_100_piepmeyer.dossier.json"
+  },
+  "named_technique": "Homothetic equilateral triangles with a four-value distance table",
+  "seminal_paper_arxiv": "https://www.ime.usp.br/~yoshi/resenhas/abstracts/Erdos.pdf",
+  "fit_score": 0.92,
+  "bridge_lemma": "Constructing the three radial triples reduces the goal to a four-number distance table. Once all 36 pair distances are among d1,d2,d3,d4 with d1>=1, adjacent gaps at least 1, and d4<5, the finset immediately has the required separation and size bound.",
+  "informal_proof_outline": "Let u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), so ||u_i||=1 and u_i dot u_j=-1/2 for i != j. Put x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, and S=R+r. Define nine points P_i=r u_i, Q_i=R u_i, T_i=-S u_i for i=0,1,2, and let A be their finset. They are pairwise distinct: P_i,Q_i lie on the same ray with different positive radii, while T_i lies on the opposite ray, and no opposite ray equals another u_j ray in this 120-degree system. Hence A.card=9. Direct norm-squared computations give the complete distance table. For i != j: |P_i-P_j|=x, |Q_i-Q_j|=x(1+sqrt(3)), and |T_i-T_j|=x(2+sqrt(3)). On equal indices: |P_i-Q_i|=x, |P_i-T_i|=x(1+sqrt(3)), and |Q_i-T_i|=x(2+sqrt(3)). On unequal indices: |P_i-Q_j|=|P_i-T_j|=|Q_i-T_j|=x*sqrt(2+sqrt(3)). Thus every nonzero pairwise distance is one of d1=x, d2=x*sqrt(2+sqrt(3))=1+sqrt(2), d3=x(1+sqrt(3))=2+sqrt(2), d4=x(2+sqrt(3)). The identities use (2-sqrt(3))(2+sqrt(3))=1 and (1+sqrt(3))*sqrt(2-sqrt(3))=sqrt(2). Now x>1 because 1+sqrt(2)>sqrt(2+sqrt(3)); x<sqrt(2), so d2-d1>1; d3-d2=1; and d4-d3=x>1. Therefore all positive pair distances are at least 1 and unequal distance values differ by at least 1. Finally d4=(1+sqrt(2))*sqrt(2+sqrt(3))<5, since sqrt(2)<3/2 and sqrt(2+sqrt(3))<2. All pair distances are at most d4, so diam(A)<5.",
+  "candidate_lemmas": [
+    "unit_vector_table: For u_0=(1,0), u_1=(-1/2,sqrt(3)/2), u_2=(-1/2,-sqrt(3)/2), one has ||u_i||=1 and u_i dot u_j=-1/2 whenever i != j.",
+    "radial_nine_distinct: With x=(1+sqrt(2))*sqrt(2-sqrt(3)), r=x/sqrt(3), R=r+x, S=R+r, the points r u_i, R u_i, and -S u_i for i=0,1,2 are pairwise distinct.",
+    "four_value_table: For the nine listed points, every nonzero pair distance is exactly one of x, x*sqrt(2+sqrt(3)), x*(1+sqrt(3)), x*(2+sqrt(3)), with the index cases stated in the outline.",
+    "radical_identities: x*sqrt(2+sqrt(3))=1+sqrt(2) and x*(1+sqrt(3))=2+sqrt(2).",
+    "gap_certificate: For d1=x, d2=1+sqrt(2), d3=2+sqrt(2), d4=x*(2+sqrt(3)), one has d1>1, d2-d1>1, d3-d2=1, and d4-d3=d1>1.",
+    "span_bound: x*(2+sqrt(3))=(1+sqrt(2))*sqrt(2+sqrt(3))<5.",
+    "finite_set_transfer: A finset consisting exactly of the nine listed points has cardinality 9, satisfies the pair-distance separation condition, and has metric supremum of pairwise distances below 5."
+  ],
+  "honest_disclaimer": "The heaviest formal step is the 36-case distance table, but it is only Euclidean norm algebra with three index cases. Assuming the Lean predicate matches the English condition about minimum distance and gaps between unequal distances, I estimate full closure probability around 0.9."
+}

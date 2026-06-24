@@ -133,6 +133,143 @@ def classify_quantifiers(thm_text):
     }
 
 
+# ─── S1–S8 snipe-signature tagger (advance_dna_may30.md) ──────────────────────
+# Maps each open theorem to the Aristotle "advance DNA" signature whose scaffold
+# would crack it, plus the deep_structural_exclude flag (the codified
+# famous-structural reject that screen.md historically lacked).
+#
+# Source: analysis/advance_dna_may30.md — the 8 reproduced snipe signatures.
+#   S1  Bounded native_decide on a universal statement
+#   S2  Witness table + Nat.nth_count bridge (noncomputable Nat.nth Nat.Prime)
+#   S3  Residue-class subfamily + small-prime Fermat reduction
+#   S4  Greedy cover + CRT witness embedding (2D/finite-grid coverage)
+#   S5  Case-split + explicit small-offset witnesses + σ₀ multiplicativity
+#   S6  Explicit small graph counterexample (combinatorial falsification)
+#   S7  Explicit algebraic witness + standard verification
+#   S8  Structural constraints on counterexample shape (negative-only; does NOT
+#       resolve the gap — flagged so the queue does not over-value it)
+#   NONE  no snipe scaffold matched
+
+# Detection patterns per signature, applied to the open-theorem text.
+_S2_NTHPRIME = [r'Nat\.nth\b', r'nthPrime', r'\.nth\s+Nat\.Prime', r'primeCounting',
+                r'\bπ\b']
+_S3_RESIDUE = [r'≡\s*\d+\s*\[MOD', r'ZMod\b', r'%\s*\d+', r'ModEq', r'Fermat',
+               r'totient.*mod', r'\bq\s*≡']
+_S4_COVER = [r'CoveringSystem', r'covering', r'Sierpinski', r'Riesel',
+             r'CRT', r'chineseRemainder', r'∣.*∀.*Fin\s+\d+', r'partition']
+_S5_SIGMA = [r'sigma\b', r'σ₀', r'σ\b', r'\.divisors\b', r'numDivisors',
+             r'ArithmeticFunction', r'Cunningham']
+_S6_GRAPH = [r'SimpleGraph', r'Adj\b', r'\bGraph\b', r'chromatic', r'\bclique\b',
+             r'\bcolor', r'\bedge', r'\bvertex', r'\bvertices\b', r'Coloring']
+_S7_ALGEBRA = [r'Polynomial\b', r'Subgroup\b', r'IsCyclic\b', r'orderOf\b',
+               r'Coprime\b', r'\bGroup\b', r'\bRing\b', r'\bField\b', r'\bMonoid\b']
+_S8_NEGATIVE = [r'Squarefree', r'Odd\b', r'Even\b', r'¬\s*∃', r'∀.*counterexample',
+                r'minimal counterexample', r'radical', r'rad\b']
+
+
+def snipe_classify(thm_text, quant=None):
+    """Map an open theorem to its S1–S8 snipe signature + deep_structural_exclude.
+
+    Returns (snipe_signature, deep_structural_exclude, snipe_reasons).
+      snipe_signature: one of 'S1'..'S8' or 'NONE'
+      deep_structural_exclude: 1 if infinite-universal-only with zero GOOD_SIGNALS
+                               (famous-structural reject), else 0
+      snipe_reasons: list[str]
+
+    The signature is the SCAFFOLD that would crack the problem, not a guarantee.
+    deep_structural_exclude is the hard gate: infinite/asymptotic claims with no
+    finite/decidable handle never auto-pass to the Method-1 queue.
+    """
+    if quant is None:
+        quant = classify_quantifiers(thm_text)
+
+    reasons = []
+
+    def _hits(pats):
+        return sum(1 for p in pats if re.search(p, thm_text))
+
+    # An explicit numeric bound rescues an otherwise-infinite claim: a bounded
+    # universal (∀ n ≤ N / Finset.range / Finset.Icc) IS the S1 finite handle,
+    # even when classify_quantifiers cannot see an explicit ": ℕ" annotation.
+    has_numeric_bound = (
+        bool(re.search(r'Finset\.(?:range|Icc|Ioc|Ico)\b', thm_text)) or
+        bool(re.search(r'[≤<]\s*\d', thm_text)) or
+        bool(re.search(r'∀\s*[^,]*[≤<]\s*\w', thm_text))
+    )
+
+    # GOOD_SIGNALS density: the finite/decidable handle. Reuse the module list,
+    # but for the dse decision a `Finset` over an uncountable carrier (ℝ, ℂ)
+    # is NOT a decidable handle — strip those before counting.
+    good_hits = [pat for pat in GOOD_SIGNALS if re.search(pat, thm_text)]
+    good_count = len(good_hits)
+    # dse-specific: discount a bare Finset/Fintype hit when the only finite
+    # structure is over ℝ/ℂ (e.g. `Finset ℝ²`) — no native_decide handle there.
+    real_carrier = bool(re.search(r'Finset\s+(?:ℝ|ℂ|EuclideanSpace|ℝ²|ℝ\^)', thm_text))
+    good_count_decidable = good_count
+    if real_carrier and good_count > 0:
+        decidable_only = [p for p in good_hits
+                          if p not in (r'\bFinset\b', r'\bFintype\b')]
+        good_count_decidable = len(decidable_only)
+
+    # ── deep_structural_exclude: the codified famous-structural reject ────────
+    # infinite-universal-only AND zero decidable GOOD_SIGNALS => no finite
+    # handle exists. The ~0%-yield class (asymptotic/density/limit over an
+    # infinite domain with no decidable core). A numeric bound rescues it.
+    deep_structural_exclude = 0
+    if quant['infinite_universal'] and good_count_decidable == 0 and not has_numeric_bound:
+        deep_structural_exclude = 1
+        reasons.append('deep_structural_exclude: infinite-universal-only, '
+                       'zero decidable GOOD_SIGNALS (famous-structural reject)')
+
+    # ── snipe signature (best-matching scaffold) ──────────────────────────────
+    # Order matters: existence-witness scaffolds (S5/S7) are checked before the
+    # bounded-universal S1 when the claim is genuinely existential; the
+    # noncomputable / FT / cover / graph specials take precedence over both.
+    sig = 'NONE'
+    is_bounded_univ = has_numeric_bound or quant['fully_finite']
+    has_decide = bool(re.search(r'\b(?:decide|native_decide)\b', thm_text))
+
+    # S2: noncomputable Nat.nth Nat.Prime over a bounded index range
+    if _hits(_S2_NTHPRIME) and (is_bounded_univ or quant['fully_finite']):
+        sig = 'S2'
+        reasons.append('S2: Nat.nth-prime witness-table + nth_count bridge')
+    # S3: residue-class subfamily + Fermat reduction (FT-style)
+    elif _hits(_S3_RESIDUE) >= 2 and is_bounded_univ:
+        sig = 'S3'
+        reasons.append('S3: residue-class subfamily + small-prime Fermat reduction')
+    # S4: greedy cover + CRT (covering systems / 2D grid coverage)
+    elif _hits(_S4_COVER) >= 1 and (quant['has_finset'] or 'Fin ' in thm_text):
+        sig = 'S4'
+        reasons.append('S4: greedy cover + CRT witness embedding')
+    # S6: explicit small graph counterexample
+    elif _hits(_S6_GRAPH) >= 1 and (re.search(r'¬', thm_text) or quant['has_finset']
+                                    or quant['pure_existential']):
+        sig = 'S6'
+        reasons.append('S6: explicit small graph counterexample')
+    # S5: case-split + σ₀ multiplicativity (existence with arithmetic-function bound)
+    elif _hits(_S5_SIGMA) >= 1 and quant['pure_existential']:
+        sig = 'S5'
+        reasons.append('S5: case-split + σ₀ multiplicativity witness')
+    # S7: explicit algebraic witness + standard verification (existential)
+    elif _hits(_S7_ALGEBRA) >= 1 and quant['pure_existential']:
+        sig = 'S7'
+        reasons.append('S7: explicit algebraic witness + standard verification')
+    # S1: bounded native_decide on a universal statement
+    elif is_bounded_univ and good_count >= 1:
+        sig = 'S1'
+        reasons.append('S1: bounded native_decide on a universal statement')
+    # S8: negative-only structural constraints (does NOT resolve the gap)
+    elif _hits(_S8_NEGATIVE) >= 2 and not quant['pure_existential']:
+        sig = 'S8'
+        reasons.append('S8: structural constraints on counterexample shape '
+                       '(negative-only; does not resolve gap)')
+
+    if sig != 'NONE' and has_decide:
+        reasons.append('file carries decide/native_decide (computable core present)')
+
+    return sig, deep_structural_exclude, reasons
+
+
 def score_open_theorem(thm_text):
     """Score a single open theorem for AI-solvability. Returns (score, reasons, tier)."""
     score = 5.0  # baseline
@@ -272,6 +409,8 @@ def extract_metadata(filepath):
         'best_open_name': '',
         'best_open_reasons': [],
         'best_open_short': '',
+        'best_snipe': 'NONE',                 # S1–S8 signature of the best theorem
+        'best_deep_structural_exclude': 0,    # 1 => famous-structural reject
         'has_decide': False,
         'has_proven_lemmas': False,  # file has non-sorry proofs (scaffolding exists)
         'domain_score': 0,
@@ -326,6 +465,10 @@ def extract_metadata(filepath):
     for thm in open_thms:
         thm_score, reasons, tier = score_open_theorem(thm['full'])
 
+        # S1–S8 snipe signature + deep_structural_exclude (advance_dna_may30.md)
+        quant = classify_quantifiers(thm['full'])
+        snipe, dse, snipe_reasons = snipe_classify(thm['full'], quant)
+
         # Domain bonus applied at theorem level
         thm_score_with_domain = thm_score + (result['domain_score'] - 5) * 0.3
 
@@ -338,16 +481,20 @@ def extract_metadata(filepath):
         thm_score_with_domain = max(0, min(10, thm_score_with_domain))
 
         thm['score'] = round(thm_score_with_domain, 1)
-        thm['reasons'] = reasons
+        thm['reasons'] = reasons + snipe_reasons
         thm['tier'] = tier
+        thm['snipe'] = snipe
+        thm['deep_structural_exclude'] = dse
 
         if thm_score_with_domain > best_score:
             best_score = thm_score_with_domain
             result['best_open_score'] = round(thm_score_with_domain, 1)
             result['best_open_name'] = thm['name']
-            result['best_open_reasons'] = reasons
+            result['best_open_reasons'] = reasons + snipe_reasons
             result['best_open_short'] = thm['short']
             result['best_tier'] = tier
+            result['best_snipe'] = snipe
+            result['best_deep_structural_exclude'] = dse
 
     result['open_theorems'] = open_thms
     return result

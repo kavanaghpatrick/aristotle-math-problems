@@ -1,0 +1,36 @@
+**A) Verified real papers (include in docstring only)**
+
+- **Golomb 1970**  
+  Solomon W. Golomb, “Powerful numbers”, Amer. Math. Monthly 77 (1970) 848–852.  
+  (No DOI; journal is the canonical reference.)  
+  1-line: Introduces the term “powerful number” and proves every powerful number is of the form \(a^2 b^3\).  
+  → Module docstring only.
+
+**B) Folklore (no citation needed)**
+
+- Slot 1325 (Erdős 364 mod-36 result): direct CRT computation on residue classes. State the lemma without citation.
+
+**C) To be DROPPED**
+
+- Chan 2022 arXiv:2210.00281 — not a standard reference for the statements in T6; drop.
+- Mollin–Walsh 1986 — the cited DOI does not match a paper that supplies the exact valuation lemma used; drop.
+- Erdős 1976 (Hungar. Acad. Sci.) — the three-consecutive-powers conjecture is usually attributed to Erdős without a single 1976 paper carrying that exact statement; drop.
+- Heath-Brown 1988 — not applicable to the structural claims in slot 1329; already flagged as such, confirm drop.
+
+**D) Minimal citation set for the Mathlib PR docstring**
+
+Only one external reference survives the hygiene check:
+
+```lean
+/-- ... (module docstring) ...
+
+Powerful numbers were introduced by Golomb (1970), who showed that every
+powerful number can be written as \(a^2 b^3\).
+
+The remaining results are either folklore (mod-36 constraints via CRT) or
+direct consequences of definitions already in Mathlib (`Nat.Deficient`,
+`IsPrimePow`, etc.).
+-/
+```
+
+No inline citations are required; the single Golomb reference lives in the module docstring. All other slots are either internal or dropped.

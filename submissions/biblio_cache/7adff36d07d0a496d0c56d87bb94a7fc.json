@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780312358.844216,
+  "checked_at": "2026-06-01T11:12:38+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "2009 partial/weak: Some Conjectures on the Number of Primes in Certain Intervals",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:900069536"
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "arxiv",
+      "url": ""
+    }
+  ],
+  "status": "CLEAR"
+}

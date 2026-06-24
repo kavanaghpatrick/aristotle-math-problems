@@ -1,0 +1,10 @@
+OPEN GAP: Erdos Problem 252 — Irrationality of Sum sigma_k(n)/n! for k >= 5
+Source: FormalConjectures/ErdosProblems/252.lean
+Domain: nt
+
+For k >= 5, is the sum of sigma_k(n)/n! irrational? Known for k = 0,1,2,3,4.
+
+theorem erdos_252_ge_5 : answer(sorry) ↔ ∀ k ≥ 5, Irrational (∑' n, σ k n / (n ! : ℝ)) := by
+  sorry
+
+Status: OPEN. Pratt (2022) proved k=4 case. Conditional on Schinzel or prime k-tuples for all k.

@@ -1,0 +1,16 @@
+OPEN GAP: Feit-Thompson prime conjecture — case (p=7, q=11)
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+For p=7, q=11 specifically: (11⁷-1)/(11-1) does not divide (7¹¹-1)/(7-1).
+First p=7 case of the Feit-Thompson Prime Conjecture specialization.
+
+theorem feit_thompson_p7_q11 :
+    ¬ (11 ^ 7 - 1) / (11 - 1) ∣ (7 ^ 11 - 1) / (7 - 1) := by sorry
+
+Status: OPEN in full generality. p=7 first treatment in our pipeline; extends
+machine-verified Feit-Thompson coverage across distinct small primes.
+
+contribution_statement: target_resolved=1 means a Lean proof of FT for
+(p,q)=(7,11), giving us p ∈ {3,5,7} coverage with three machine-verified
+witnesses across the small primes.

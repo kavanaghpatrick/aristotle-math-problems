@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780148050.892471,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T13:34:10+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_1052_wall_k_3_lehmer_pair_primitive_divisor_theorem",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

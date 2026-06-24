@@ -1,0 +1,20 @@
+{
+  "problem_id": "erdos_938",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_938/01_literature.md",
+    "analogies_path":  "research_fusion/runs/erdos_938/02_analogies.md",
+    "techniques_path": "research_fusion/runs/erdos_938/03_techniques.md"
+  },
+  "named_technique": "Modularity lift via auxiliary elliptic curve",
+  "seminal_paper_arxiv": "https://arxiv.org/abs/0707.4035",
+  "fit_score": 0.72,
+  "bridge_lemma": "If a counterexample (a, b, c) exists for prime p >= 3, the associated auxiliary elliptic curve admits a modularity lift whose conductor is divisible only by primes dividing 2*a*b*c. Level-lowering then reduces to a weight-2 newform space that is empty for the computed level.",
+  "informal_proof_outline": "Suppose a counterexample (a, b, c) exists with a^p + b^p = c^p for some prime p >= 3, with gcd(a,b,c)=1. Associate to this triple an auxiliary elliptic curve of a standard form whose discriminant has a controlled prime factorization. By the modularity theorem (Wiles-Taylor), the curve corresponds to a weight-2 newform of some level N. A careful discriminant calculation shows N divides 2 * rad(a*b*c). Apply a level-lowering theorem to reduce the level to dividing 2. The space of weight-2 newforms at level dividing 2 is known to be trivial. This contradicts the existence of the newform. Therefore the counterexample cannot exist, and the conjecture holds.",
+  "candidate_lemmas": [
+    "aux_curve_modular: The auxiliary elliptic curve associated to (a,b,c) is modular of weight 2.",
+    "discriminant_bound: The conductor of the auxiliary curve divides 2 * rad(a*b*c).",
+    "level_lowering_weight2: Weight-2 newforms at level 2N can be level-lowered to level 2.",
+    "empty_newform_space_level2: The space of weight-2 newforms at level dividing 2 is trivial."
+  ],
+  "honest_disclaimer": "Dossier produced by paired-LLM consultation (Codex + Grok, 2026-05-30). Technique fit is the paired-LLM best guess at 0.72 confidence; not independently verified to apply to erdos_938. The bridge lemma may be unsound or require additional hypotheses. Aristotle's informal reasoner may still fail to assemble the proof. The fusion lane provides structured strategy; it does NOT pre-validate that strategy."
+}

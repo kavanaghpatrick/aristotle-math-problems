@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Sekanina (1959) closed the X^2 case of Erdos 477. AlphaProof (Jan 7 2026) generalized degree 2 to a·X^2+b·X+c with a|b, b≠0. The X^3 case is the natural and explicit next open instance, registered as theorem erdos_477.X_pow_three in formal-conjectures/FormalConjectures/ErdosProblems/477.lean and ATTEMPTED-but-not-solved by AlphaProof Nexus (listed in erdos_problems_attempted.txt; absent from APNOutputs/ErdosProblems/). CS=direction_closure because we are closing the negative direction (no such A exists for f=X^3) — same direction Sekanina closed for X^2. CM=structural_finite_reduction: the Sekanina-style argument reduces to a finite mod-m congruence obstruction (mod 4 for X^2 because f(2x+1)-f(2x)=4x is in (a-b) for any large enough A; for X^3 the analogous identity is f(n+1)-f(n)=3n^2+3n+1, suggesting a mod-3 / mod-9 / mod-3k local obstruction at infinite A). CR=clean_decidable — once the modular reduction is fixed, the contradiction at (a,f(n))-(b,f(n+k)) pairs is a finite Z-linear / integer-arithmetic check. HM=journal_subclaim — honest: this would be a publishable extension of Sekanina to degree 3 (one degree at a time is how the problem has historically been resolved). real_closure_candidate=true because erdos_477.X_pow_three is a named open theorem in the FC file."
+}

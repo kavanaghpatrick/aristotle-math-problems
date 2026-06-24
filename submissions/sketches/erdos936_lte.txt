@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 936 — Powerful 2^n+1 via LTE Exclusions
+Source: Erdős Problem 936
+Domain: nt
+
+Only finitely many n have 2^n + 1 powerful. Only known: n=3 (9=3²).
+
+KEY TOOL: Lifting the Exponent (LTE). Write n = 2^s · m, m odd.
+Let F_s = 2^{2^s} + 1 (Fermat number). For odd prime p | F_s:
+  v_p(2^n + 1) = v_p(F_s) + v_p(m).
+If v_p(F_s) = 1 and p ∤ m, then v_p(2^n+1) = 1, blocking powerful.
+
+Concrete unconditional exclusions:
+- s=0, p=3: odd n with 3 ∤ n ruled out
+- s=1, p=5: n ≡ 2 mod 4 with 5 ∤ (n/2) ruled out
+- s=2, p=17: n ≡ 4 mod 8 with 17 ∤ (n/4) ruled out
+- s=3, p=257; s=4, p=65537: further exclusions
+This rules out ≥ 77% of all n unconditionally.
+
+theorem erdos936_lte_exclusion (n : ℕ) (hn : n ≥ 1)
+    (hpow : ∀ p, Nat.Prime p → p ∣ (2^n+1) → p^2 ∣ (2^n+1)) :
+    n = 3 := by sorry
+
+Status: OPEN. LTE gives strong unconditional density exclusions.

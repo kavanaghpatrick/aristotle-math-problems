@@ -1,0 +1,17 @@
+OPEN GAP: Erdos 850 — Three Consecutive Pairs with Same Prime Factors
+Source: FormalConjectures/ErdosProblems/850.lean
+Domain: nt
+
+Do there exist distinct x, y such that x and y share the same prime
+factors, x+1 and y+1 share the same prime factors, AND x+2 and y+2
+share the same prime factors?
+
+theorem erdos_850 :
+    answer(sorry) ↔ ∃ x y : ℕ, x ≠ y ∧ x.primeFactors = y.primeFactors
+      ∧ (x + 1).primeFactors = (y + 1).primeFactors
+      ∧ (x + 2).primeFactors = (y + 2).primeFactors := by
+    sorry
+
+Status: OPEN. The k=2 version (two consecutive pairs) has solutions.
+The k=3 version is this open question. No witness or impossibility
+proof is known.

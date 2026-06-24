@@ -23,8 +23,9 @@ IN_FLIGHT=$(q "$TRACKING_DB" "SELECT COUNT(*) FROM submissions WHERE status IN (
 COMPLETED_UNFETCHED=$(q "$TRACKING_DB" \
     "SELECT GROUP_CONCAT('slot' || CAST(SUBSTR(filename, 5, INSTR(SUBSTR(filename,5),'_')-1) AS INTEGER), ', ')
      FROM submissions
-     WHERE status = 'completed' AND verified IS NULL
-     AND completed_at > datetime('now', '-48 hours')
+     WHERE status IN ('compiled_partial','compiled_no_advance','compiled_advance','disproven','compile_failed')
+       AND verified IS NULL
+       AND completed_at > datetime('now', '-48 hours')
      ORDER BY completed_at DESC LIMIT 5;")
 SLOTS_OPEN=$((5 - ${IN_FLIGHT:-0}))
 if [[ $SLOTS_OPEN -lt 0 ]]; then SLOTS_OPEN=0; fi
@@ -39,7 +40,7 @@ RECENT_PROVEN=$(q "$TRACKING_DB" \
 NEAR_MISS=$(q "$TRACKING_DB" \
     "SELECT filename || ' (' || sorry_count || ' sorry, ' || proven_count || ' proven)'
      FROM submissions
-     WHERE status = 'completed' AND sorry_count = 1 AND proven_count > 5
+     WHERE status = 'compiled_partial' AND sorry_count = 1 AND proven_count > 5
      ORDER BY proven_count DESC LIMIT 1;")
 
 # ---- Gather data from knowledge.db ----

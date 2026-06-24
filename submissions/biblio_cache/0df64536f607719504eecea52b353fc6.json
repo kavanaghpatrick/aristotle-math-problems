@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318868.915075,
+  "checked_at": "2026-06-01T13:01:08+00:00",
+  "evidence": "1 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2024 partial/weak: Every Prime Number Greater than Three Has Finitely Many Prime Friends",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.36227/techrxiv.170975355.56910419/v1"
+    },
+    {
+      "evidence": "2024 STRONG closure language: There are only finitely many Lucas-Carmichael numbers in the sequence  {2np-1}n\u22651",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.21203/rs.3.rs-4330099/v1"
+    },
+    {
+      "evidence": "2016 partial/weak: On the quotient between the greatest prime factor and the least prime factor",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.12988/imf.2016.68119"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

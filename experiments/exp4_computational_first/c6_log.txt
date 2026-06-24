@@ -1,0 +1,126 @@
+=== Verifying consecutiveness ===
+  (1728, 1764, 1800): 0 intervening (should be 0)
+  (6912, 7056, 7200): 0 intervening (should be 0)
+  (729000, 729316, 729632): 0 intervening (should be 0)
+  (1458000, 1458632, 1459264): 0 intervening (should be 0)
+  (2916000, 2917264, 2918528): 0 intervening (should be 0)
+  (11664000, 11669056, 11674112): 0 intervening (should be 0)
+
+=== A: Factorization signatures ===
+  AP (1728, 1764, 1800):
+    1728 = 2^6 * 3^3
+    1764 = 2^2 * 3^2 * 7^2
+    1800 = 2^3 * 3^2 * 5^2
+    GCD = 36 = 2^2 * 3^2
+    Normalized: (48, 49, 50)
+    sum of primes in n0, n1, n2: 2-exps=(6, 2, 3), 3-exps=(3, 2, 2), 5-exps=(0, 0, 2), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+  AP (6912, 7056, 7200):
+    6912 = 2^8 * 3^3
+    7056 = 2^4 * 3^2 * 7^2
+    7200 = 2^5 * 3^2 * 5^2
+    GCD = 144 = 2^4 * 3^2
+    Normalized: (48, 49, 50)
+    sum of primes in n0, n1, n2: 2-exps=(8, 4, 5), 3-exps=(3, 2, 2), 5-exps=(0, 0, 2), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+  AP (729000, 729316, 729632):
+    729000 = 2^3 * 3^6 * 5^3
+    729316 = 2^2 * 7^2 * 61^2
+    729632 = 2^5 * 151^2
+    GCD = 4 = 2^2
+    Normalized: (182250, 182329, 182408)
+    sum of primes in n0, n1, n2: 2-exps=(3, 2, 5), 3-exps=(6, 0, 0), 5-exps=(3, 0, 0), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+  AP (1458000, 1458632, 1459264):
+    1458000 = 2^4 * 3^6 * 5^3
+    1458632 = 2^3 * 7^2 * 61^2
+    1459264 = 2^6 * 151^2
+    GCD = 8 = 2^3
+    Normalized: (182250, 182329, 182408)
+    sum of primes in n0, n1, n2: 2-exps=(4, 3, 6), 3-exps=(6, 0, 0), 5-exps=(3, 0, 0), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+  AP (2916000, 2917264, 2918528):
+    2916000 = 2^5 * 3^6 * 5^3
+    2917264 = 2^4 * 7^2 * 61^2
+    2918528 = 2^7 * 151^2
+    GCD = 16 = 2^4
+    Normalized: (182250, 182329, 182408)
+    sum of primes in n0, n1, n2: 2-exps=(5, 4, 7), 3-exps=(6, 0, 0), 5-exps=(3, 0, 0), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+  AP (11664000, 11669056, 11674112):
+    11664000 = 2^7 * 3^6 * 5^3
+    11669056 = 2^6 * 7^2 * 61^2
+    11674112 = 2^9 * 151^2
+    GCD = 64 = 2^6
+    Normalized: (182250, 182329, 182408)
+    sum of primes in n0, n1, n2: 2-exps=(7, 6, 9), 3-exps=(6, 0, 0), 5-exps=(3, 0, 0), 7-exps=(0, 2, 0), 11-exps=(0, 0, 0)
+
+
+=== B: Family analysis ===
+F1 base check: 48 = 2^4 * 3^1, 49 = 7^2, 50 = 2^1 * 5^2
+  These are NOT all powerful, but they form an AP (49^2 = 48*50 + 1)
+  Scaled by 36 = 6^2: (1728, 1764, 1800) = (2^6*3^3, 2^2*3^2*7^2, 2^3*3^2*5^2)
+  Scaled by 144 = 12^2: (6912, 7056, 7200) = (2^8*3^3, 2^4*3^2*7^2, 2^5*3^2*5^2)
+
+F2 base check:
+  729000 = 2^3 * 3^6 * 5^3
+  729316 = 2^2 * 7^2 * 61^2
+  729632 = 2^5 * 151^2
+  729316 factored: 2^2 * 7^2 * 61^2 * 
+  729632 factored: 2^5 * 151^2 * 
+
+=== F2 Pell decomposition (MEGA-7 finding re-derived from data) ===
+  n0 = 729000 = 8 * 5^3 * 3^6
+  n1 = 729316 = 4 * 427^2 = 854^2
+  n2 = 729632 = 8 * 302^2
+  Identity: 427^2 - 302^2 = 5^3 * 3^6 = 91125
+  Factorization: (427-302)(427+302) = 125 * 729 = 5^3 * 3^6
+
+=== C: Generalized Pell search for consecutive 3-APs (n1 = square) ===
+We seek (a*x^2, m^2, a*y^2) consecutive powerful 3-APs.
+From the F2 structure: gcd constraint is unusual; n0/n2 ratio shows 3^6 * 5^3 structure.
+
+  AP (1728, 1764, 1800): gcd(n0,n2)=72=2^3 * 3^2, gcd(n0,n1)=36=2^2 * 3^2, gcd(n1,n2)=36=2^2 * 3^2
+    n0+n2 = 3528 = 2*n1 = 3528
+    n2-n0 = 72 = 2*d = 72
+    n0*n2 = 3110400
+    n1 = 42^2 -- so n0, n2 sum to 2*42^2
+  AP (6912, 7056, 7200): gcd(n0,n2)=288=2^5 * 3^2, gcd(n0,n1)=144=2^4 * 3^2, gcd(n1,n2)=144=2^4 * 3^2
+    n0+n2 = 14112 = 2*n1 = 14112
+    n2-n0 = 288 = 2*d = 288
+    n0*n2 = 49766400
+    n1 = 84^2 -- so n0, n2 sum to 2*84^2
+  AP (729000, 729316, 729632): gcd(n0,n2)=8=2^3, gcd(n0,n1)=4=2^2, gcd(n1,n2)=4=2^2
+    n0+n2 = 1458632 = 2*n1 = 1458632
+    n2-n0 = 632 = 2*d = 632
+    n0*n2 = 531901728000
+    n1 = 854^2 -- so n0, n2 sum to 2*854^2
+  AP (1458000, 1458632, 1459264): gcd(n0,n2)=16=2^4, gcd(n0,n1)=8=2^3, gcd(n1,n2)=8=2^3
+    n0+n2 = 2917264 = 2*n1 = 2917264
+    n2-n0 = 1264 = 2*d = 1264
+    n0*n2 = 2127606912000
+  AP (2916000, 2917264, 2918528): gcd(n0,n2)=32=2^5, gcd(n0,n1)=16=2^4, gcd(n1,n2)=16=2^4
+    n0+n2 = 5834528 = 2*n1 = 5834528
+    n2-n0 = 2528 = 2*d = 2528
+    n0*n2 = 8510427648000
+    n1 = 1708^2 -- so n0, n2 sum to 2*1708^2
+  AP (11664000, 11669056, 11674112): gcd(n0,n2)=128=2^7, gcd(n0,n1)=64=2^6, gcd(n1,n2)=64=2^6
+    n0+n2 = 23338112 = 2*n1 = 23338112
+    n2-n0 = 10112 = 2*d = 10112
+    n0*n2 = 136166842368000
+    n1 = 3416^2 -- so n0, n2 sum to 2*3416^2
+
+=== D: Is n1 always a perfect square for consecutive 3-APs? ===
+  n1 = 1764, sqrt = 42, is square? True
+  n1 = 7056, sqrt = 84, is square? True
+  n1 = 729316, sqrt = 854, is square? True
+  n1 = 1458632, sqrt = 1207, is square? False
+  n1 = 2917264, sqrt = 1708, is square? True
+  n1 = 11669056, sqrt = 3416, is square? True
+
+  1458632 factored: 2^3 * 7^2 * 61^2
+  1458000 factored: 2^4 * 3^6 * 5^3
+  1459264 factored: 2^6 * 151^2
+
+So F2 scaling by m=2: 729316 * 2 = 1458632 = 2 * 854^2. NOT a perfect square.
+So not all consecutive APs have square middle term.

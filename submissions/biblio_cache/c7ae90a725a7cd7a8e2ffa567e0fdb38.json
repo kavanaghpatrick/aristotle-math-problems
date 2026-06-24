@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318042.547816,
+  "checked_at": "2026-06-01T12:47:22+00:00",
+  "evidence": "3 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "1979 STRONG closure language: A Negative Answer to the Prime Sequence Question",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2307/2042708"
+    },
+    {
+      "evidence": "1979 STRONG closure language: A negative answer to the prime sequence question",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.1090/s0002-9939-1979-0539623-7"
+    },
+    {
+      "evidence": "2008 STRONG closure language: A Negative Answer to the Problem of Dixmier on Hearts of Prime Quotients of Enveloping Algebras",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.1080/00927870701509537"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

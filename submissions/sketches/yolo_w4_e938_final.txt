@@ -1,0 +1,15 @@
+OPEN GAP: Erdős 938 — finitely many 3-APs of consecutive powerful numbers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean; erdosproblems.com/938
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the strictly increasing sequence of powerful
+numbers (those n ≥ 1 with p ∣ n ⇒ p² ∣ n). Are there only finitely many
+indices k such that n_k, n_{k+1}, n_{k+2} form a three-term arithmetic
+progression?
+
+theorem erdos_938 :
+    {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+      P = {Nat.nth Nat.Powerful k, Nat.nth Nat.Powerful (k+1),
+           Nat.nth Nat.Powerful (k+2)}}.Finite := by sorry
+
+Status: OPEN. Up to 10^14, only 18 consecutive powerful 3-APs are known.

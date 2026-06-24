@@ -1,0 +1,19 @@
+{
+  "experiment_arm": "sketch_first",
+  "pattern": "informal_sketch_v1",
+  "pilot": "PILOT_ERDOS850",
+  "problem_id": "erdos850",
+  "sketch_model_primary": "claude-opus-4-7",
+  "sketch_model_secondary": null,
+  "merge_auditor": null,
+  "sketch_hash": "c395bd15fe69af96",
+  "candidate_lemmas_json": [
+    "S-restricted density bound O((log N)^|S|) for S-smooth integers",
+    "Three-way S-unit Evertse: bounded |S| gives finite solutions",
+    "abc-conditional impossibility for min(x,y) > K * largest prime",
+    "Computational verification x,y <= 10^12",
+    "Reduction to injectivity of triple-radical fingerprint x -> (rad(x), rad(x+1), rad(x+2))"
+  ],
+  "prior_context_used": "submissions/sketches/erdos850_informal_proof.txt (44 lines, prior team draft on rad(n)=rad(n+1)=rad(n+2) — single-number variant, related but distinct)",
+  "notes": "Claude Opus 4.7 written sketch. Hybrid mode unavailable today (Gemini 3.x = 404, GPT-5.5-Pro = transport errors). Single-source sketch; do not over-interpret pilot results compared to a true hybrid run."
+}

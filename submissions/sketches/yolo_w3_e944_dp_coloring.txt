@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 944 — Dirac's conjecture, k=4 case
+Source: formal-conjectures/FormalConjectures/ErdosProblems/944.lean
+Domain: combinatorics
+
+Dirac (1970) asked: for every k ≥ 4, does there exist a finite simple graph
+G with chromatic number k such that every vertex is critical (removing any
+vertex strictly drops χ) yet every single edge is non-critical (no
+single-edge deletion drops χ)? The cases k ≥ 5 are resolved positively
+(Brown 1992, Lattanzio 2002, Jensen 2002). The case k = 4 remains OPEN.
+
+theorem yolo_w3_erdos_944_dp_coloring :
+    ∃ (V : Type) (_ : Fintype V) (G : SimpleGraph V),
+      G.IsCritical 4 ∧
+      (∀ e : Sym2 V, ¬ G.IsCriticalEdge e) := by
+  sorry
+
+Status: OPEN. The k = 4 case evades every existing positive construction.
+The bare gap is the existence (or non-existence) of a finite
+4-vertex-critical simple graph in which no single edge is critical, using
+FormalConjecturesForMathlib's canonical predicates SimpleGraph.IsCritical
+and SimpleGraph.IsCriticalEdge from
+FormalConjecturesForMathlib/Combinatorics/SimpleGraph/Coloring.lean.

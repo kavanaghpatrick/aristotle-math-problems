@@ -1,0 +1,18 @@
+OPEN GAP: Goldbach binary conjecture — bounded verification n ∈ [4, 1000]
+Source: classical (Goldbach 1742); asymptotic verified to 4×10¹⁸ by Oliveira e Silva
+Domain: number theory
+
+Every even integer n with 4 ≤ n ≤ 1000 is the sum of two prime numbers.
+Bounded version of Goldbach's binary conjecture; native_decide tractable.
+
+theorem goldbach_bounded_1000 :
+    ∀ n : ℕ, 4 ≤ n → n ≤ 1000 → Even n →
+      ∃ p q : ℕ, p.Prime ∧ q.Prime ∧ p + q = n := by sorry
+
+Status: OPEN in full generality (Goldbach unresolved since 1742). Bounded
+versions checkable by computation. Asymptotic Helfgott (2013) covers ternary;
+binary verified to 4×10¹⁸ but not formally in Lean.
+
+contribution_statement: target_resolved=1 means a Lean proof of Goldbach
+binary for all even n ∈ [4, 1000], a small but novel formal-verification
+contribution to the long-standing bounded-verification trail of Goldbach.

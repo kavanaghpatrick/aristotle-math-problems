@@ -1,0 +1,28 @@
+OPEN GAP: Erdős 938 — abc-conditional structural sandwich on consecutive powerful 3-APs
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean; erdosproblems.com/938
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the powerful numbers (p | n ⇒ p² | n). Conditional
+on the abc conjecture, the common difference d of any consecutive powerful 3-AP
+(n_k, n_{k+1}, n_{k+2}) is sandwiched: for every ε > 0 there exists K_ε such that
+if N := n_k ≥ K_ε, then c_ε · N^{1/2-ε} < d < 2·√N + 2. The lower bound is Chan
+2022 (arXiv:2210.00281, Thm 2) applied via abc; the upper bound is the
+consecutive-square interloper constraint. We seek a Lean formalization of this
+abc-conditional structural theorem.
+
+theorem erdos_938_abc_sandwich (h_abc : ∀ ε : ℝ, 0 < ε →
+    {(a, b, c) : ℕ × ℕ × ℕ | 0 < a ∧ 0 < b ∧ 0 < c ∧
+      ({a, b, c} : Set ℕ).Pairwise Nat.Coprime ∧ a + b = c ∧
+      (ABC.radical (a * b * c) : ℝ)^(1 + ε) < c}.Finite) :
+    ∀ ε : ℝ, 0 < ε → ∃ K_ε : ℕ, ∀ k : ℕ,
+      let n0 := Nat.nth Nat.Powerful k
+      let n1 := Nat.nth Nat.Powerful (k+1)
+      let n2 := Nat.nth Nat.Powerful (k+2)
+      n0 ≥ K_ε → n1 - n0 = n2 - n1 →
+      (((n1 - n0 : ℝ) > (n0 : ℝ)^(1/2 - ε)) ∧
+       ((n1 - n0 : ℝ) < 2 * Real.sqrt n0 + 2)) := by sorry
+
+Status: OPEN. Full finiteness (E938) requires extra input beyond abc (sieve/
+density argument excluding d in the band). The sandwich theorem is the
+cleanest abc-conditional statement extractable; both Codex/gpt-5.5 and Grok-4
+independently confirmed (May 30 2026) that abc alone cannot close E938.

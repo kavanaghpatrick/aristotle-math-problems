@@ -1,0 +1,10 @@
+lemma powerful_one : Powerful 1
+lemma powerful_mul {m n} : Powerful m → Powerful n → m.Coprime n → Powerful (m*n)
+lemma powerful_iff : Powerful n ↔ ∀ p, v_p n ≠ 1
+lemma powerful_param_of_add {n d p} : v_p d = 1 → Powerful (n+d) → ∃ a b, Squarefree b ∧ n+d = a²*b³ ∧ p ∤ b
+lemma powerful_3AP_pairwise_coprime_params {n d} : (∀ k<3, Powerful (n+k*d)) → (T1 n).2.Coprime (T1 (n+d)).2
+lemma sigma0_prime_powerful_form {n} : Prime (σ₀ n) → Powerful n → ∃ p, n = p^{k} ∧ k ≥ 2 ∧ Prime p
+lemma mod36_powerful_param {n a b} : n = a²*b³ → Squarefree b → n % 36 ∈ {0,1,8,9,16,28}
+lemma powerful_sq_mul {m n} : Powerful m → Square n → Powerful (m*n²)
+
+(The above are all derivable from T1–T6 + Mathlib `Nat.factorization`/`sigma0`/`coprime` API; none exist in Mathlib.)

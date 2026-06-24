@@ -1,0 +1,16 @@
+Hi Folks — I've been building a Claude Code harness to iterate on problems using various LLMs alongside Aristotle for the past few months. Thought I'd resurface in case any of it is useful to fork or draw from: https://github.com/kavanaghpatrick/aristotle-math-problems
+
+What it does:
+- Gap-targeting pipeline: Claude screens problems → writes ≤30-line bare-conjecture sketches → submits INFORMAL → auto-attaches prior Aristotle results as context on resubmission
+- Codex proof loop: OpenAI Codex writes Lean 4, iterates against lake build, then promotes compiled results to Aristotle
+- Full SQLite tracking: 1,150+ submissions across 96 problems, with false lemma tracking and failed approach logging
+- mk CLI for querying the knowledge base, dead ends, and submission history
+
+Honest results: 0 open problems resolved. Aristotle consistently builds impressive infrastructure and scaffolding around hard conjectures but the sorry is always on the actual open gap — which is probably what you'd expect. The most useful output has been the negative results: 45 formally-verified false lemmas (mostly on Tuza's conjecture) that map out what doesn't work.
+
+What might actually be useful to others:
+- The context-compounding mechanism (auto-attaching prior .lean results on resubmission)
+- The tracking DB schema for managing many parallel Aristotle submissions
+- The gap-targeting gate (prevents submitting proof strategies — bare conjecture only)
+
+I'm a non-technical person leaning entirely on LLMs to build this, so the code quality reflects that. But if anyone is building systematic Aristotle workflows, feel free to grab whatever is useful.

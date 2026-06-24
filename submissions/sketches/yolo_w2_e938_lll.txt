@@ -1,0 +1,21 @@
+OPEN GAP: Selfridge-type squarefree odd Sierpinski numbers — LLL existence
+Source: formal-conjectures registry (E938 surrogate target); erdosproblems.com Sierpinski/covering tags
+Domain: nt
+
+A positive integer k is called Sierpinski if k*2^n + 1 is composite for every
+positive integer n. We seek the existence of infinitely many k that are
+simultaneously (a) odd, (b) squarefree, and (c) Sierpinski.
+
+theorem squarefree_odd_sierpinski_infinite :
+    {k : ℕ | Odd k ∧ Squarefree k ∧ ∀ n : ℕ, 0 < n → ¬ Nat.Prime (k * 2^n + 1)}.Infinite
+    := by sorry
+
+Status: OPEN. Sierpinski (1960) gave a constructive cover of {n} by primes
+{3,5,7,13,17,241} producing infinitely many odd Sierpinski k via CRT, but the
+constructed k inherit factors from the cover and need not be squarefree.
+Balister-Bollobás-Morris-Sahasrabudhe-Tiba 2022 (arXiv:2211.01417) prove no
+all-odd-squarefree covering system of the integers exists, blocking the
+covering-moduli route. The conjecture asks whether the squarefree-odd
+restriction on k itself (the residue variable, not the moduli) still admits
+infinitely many Sierpinski solutions via a non-covering-based existence
+argument.

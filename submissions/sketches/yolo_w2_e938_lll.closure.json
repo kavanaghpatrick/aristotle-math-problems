@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "density_sieve_closure",
+  "CR": "partial_result_only",
+  "HM": "journal_partial",
+  "real_closure_candidate": true,
+  "rationale": "Targets the existence direction of the Selfridge-style squarefree-odd Sierpinski conjecture by replacing the deterministic Erdős cover with a Lovász Local Lemma random cover (Bennett-Bohman / Alon-Spencer Ch.5 style) combined with the Filaseta-Trifonov 2008 squarefree-shifted-AP density theorem. The closure mechanism is density_sieve_closure: it produces an explicit positive-density set of odd-squarefree k ≡ k_0 (mod P) inside a Selfridge-Sierpinski AP. CR=partial_result_only because the LLL step gives existence of a cover but not an explicit cover-list, and the BBMST 2022 obstruction blocks the cleaner all-odd-squarefree-moduli formulation (the angle survives only via the cover-moduli vs CRT-residue squarefreeness distinction). HM=journal_partial: even a careful formalisation of 'Selfridge's cover plus FT density yields positive density of odd-squarefree Sierpinski k' is a publishable partial result on the squarefree-Sierpinski tail, independent of full LLL existence. Marked real_closure_candidate=true because (a) the FT density step is established literature; (b) the cover-survivor positive-density conclusion is a genuine direction_closure of a folklore question; (c) BBMST 2022 does not directly refute the targeted direction (it refutes a stronger formulation about cover-moduli). Plausibility of full closure within 72h ~ 0.04."
+}

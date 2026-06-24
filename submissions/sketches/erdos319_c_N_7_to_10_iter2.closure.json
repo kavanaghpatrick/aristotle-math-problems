@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "L10 iter1 (UUID 9823fd74-14ec-459f-929f-adc6887a2960) proved erdos_319_c6_lb sorry-free: c(6) ≥ 4 with explicit witness A={1,2,3,6}, δ=(−1,+1,+1,+1). All 14 proper nonempty subset signed sums verified nonzero by native_decide. F1 dodge applied: stated as explicit ∃-witness, not as `answer(sorry) ↔ …` biconditional. Iter2 extends this method to N ∈ {7, 8, 9, 10}. Brute-force computational scan (Python Fraction enumeration) confirms: c(N) = 4 for all N ∈ [6, 11] and c(12) = 6; the witness A={1,2,3,6} ⊆ {1..N} works uniformly for every N ∈ [6, 11] because it is contained in {1..6} ⊆ {1..N}, and the size-4 witness is unique up to global sign-flip in this range (no size-5 witness exists for N ≤ 11). CS=direction_closure: closes the existence direction c(N) ≥ 4 with explicit witness for N ∈ {7, 8, 9, 10}; the upper-bound direction (c(N) ≤ 4 for N ≤ 11) is left open and the unbounded asymptotic remains open (Croot-Adenwalla 1−1/e is state of the art). CM=explicit_witness: supply A={1,2,3,6} and the sign vector. CR=clean_decidable: all conditions are finite rational equalities/inequalities on a fixed Finset; `decide`/`native_decide` discharges. HM=journal_subclaim: bounded-N explicit lower bounds on c(N) for four specific N values, a genuine sub-result extending iter1 from one N to four. real_closure_candidate=true because the four ∃-witness statements (one per N ∈ {7,8,9,10}) are independently meaningful direction-closure subclaims, each formally discharging the lower-bound side of c(N) at that N."
+}

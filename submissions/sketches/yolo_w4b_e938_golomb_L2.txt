@@ -1,0 +1,22 @@
+OPEN GAP: Powerful numbers parametrization (E938 sub-claim)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean
+Domain: nt
+
+A natural number n is powerful iff for every prime p dividing n, p^2 also
+divides n. The conjecture below asserts: every powerful n >= 1 admits a
+decomposition n = a^2 * b^3 with a, b >= 1 and b squarefree, and conversely
+every such product is powerful. This characterization is unconditional but
+is not currently formalized in Mathlib. The two directions are independent.
+
+theorem powerful_parametrization (n : ℕ) (hn : 1 ≤ n) :
+    Nat.Powerful n ↔ ∃ a b : ℕ, 1 ≤ a ∧ 1 ≤ b ∧ Squarefree b ∧ n = a^2 * b^3 := by
+  sorry
+
+Status: OPEN as a Mathlib formalization. The forward direction is structural
+(per-prime exponent profile on Nat.factorization); the reverse direction is
+bookkeeping on prime divisibility. Mathlib has Nat.Powerful (as Nat.Full 2),
+Nat.factorization, Squarefree, and the multiplicative-product infrastructure;
+no prior submission has assembled them into this iff statement. This is the
+smallest unconditional sub-claim from the E938 program (slot 1316, UUID
+a2a76c13-d7ae-403f-a49f-a2956832cf63 produced only Nat.Powerful.sq and
+Nat.Powerful.infinite, leaving the iff above untouched).

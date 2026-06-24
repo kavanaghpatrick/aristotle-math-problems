@@ -40,9 +40,9 @@ Gather prior Aristotle results for this problem:
 mk context <problem_id>
 ```
 
-Or query directly:
+Or query directly (use artifact presence, NOT status — the status enum changes, output_file does not):
 ```bash
-sqlite3 submissions/tracking.db "SELECT output_file FROM submissions WHERE problem_id LIKE '%<id>%' AND output_file IS NOT NULL AND status IN ('compiled_clean','near_miss','completed') ORDER BY completed_at DESC"
+sqlite3 submissions/tracking.db "SELECT output_file FROM submissions WHERE problem_id LIKE '%<id>%' AND output_file IS NOT NULL AND output_file != '' AND status != 'compile_failed' AND (verified IS NULL OR verified != 0) ORDER BY completed_at DESC"
 ```
 
 Merge auto-detected context with any explicit `--context` files. All context passed via `context_file_paths`.

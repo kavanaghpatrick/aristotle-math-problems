@@ -1,0 +1,3 @@
+c77f40fd-15ad-4945-b9db-dd26e7b64853
+# Task: Brocard n∈[501,1000] iter3 (slot722 nthPrimeComp extension)
+# Submitted: 2026-05-29T05:36:04

@@ -10,6 +10,7 @@ Usage:
     python3 scripts/aristotle_queue.py --status  # Check current queue status
 """
 
+import os
 import subprocess
 import sys
 import time
@@ -48,53 +49,43 @@ def save_submissions_log(data: dict):
         json.dump(data, f, indent=2, default=str)
 
 async def get_queued_files() -> set:
-    """Get set of basenames already queued/running in Aristotle."""
-    try:
-        from aristotlelib import Project
-        projects = await Project.list_projects()
+    """Get set of basenames already queued/running in Aristotle.
 
-        all_projects = []
-        for item in projects:
-            if isinstance(item, list):
-                all_projects.extend(item)
+    aristotlelib 2.0: file_name now lives on AgentTask, not Project; project status
+    is only RUNNING/IDLE/UNKNOWN. We filter by ProjectStatus.RUNNING server-side then
+    pull the latest task per project for its file_name.
+    """
+    try:
+        from aristotlelib import Project, ProjectStatus
+        projects, _ = await Project.list_projects(limit=20, status=ProjectStatus.RUNNING)
 
         queued_files = set()
-        active_statuses = {'QUEUED', 'IN_PROGRESS', 'RUNNING', 'NOT_STARTED'}
-
-        for p in all_projects:
-            status = str(p.status).split('.')[-1]
-            if status in active_statuses and p.file_name:
-                # Store basename for consistent matching
-                queued_files.add(Path(p.file_name).name)
-
+        for p in projects:
+            tasks, _ = await p.get_tasks(limit=1)
+            if tasks and tasks[0].file_name:
+                queued_files.add(Path(tasks[0].file_name).name)
         return queued_files
     except Exception as e:
         log(f"Warning: Could not fetch queue status: {e}")
         return set()
 
 async def get_queue_status() -> dict:
-    """Get detailed queue status."""
+    """Get detailed queue status, bucketed by latest-task status."""
     try:
         from aristotlelib import Project
-        projects = await Project.list_projects()
+        projects, _ = await Project.list_projects(limit=20)
 
-        all_projects = []
-        for item in projects:
-            if isinstance(item, list):
-                all_projects.extend(item)
-
-        by_status = {}
-        for p in all_projects:
-            status = str(p.status).split('.')[-1]
-            if status not in by_status:
-                by_status[status] = []
-            by_status[status].append({
+        by_status: dict = {}
+        for p in projects:
+            tasks, _ = await p.get_tasks(limit=1)
+            t = tasks[0] if tasks else None
+            key = t.status.name if t else p.status.name
+            by_status.setdefault(key, []).append({
                 'id': p.project_id,
-                'file': p.file_name,
-                'desc': p.description,
-                'created': str(p.created_at) if p.created_at else None
+                'file': t.file_name if t else None,
+                'desc': (t.description if t else None) or p.description,
+                'created': str(p.created_at) if p.created_at else None,
             })
-
         return by_status
     except Exception as e:
         return {'ERROR': [{'desc': str(e)}]}
@@ -104,34 +95,24 @@ def submit_file(filepath: str) -> tuple[bool, str, str]:
     Try to submit a file to Aristotle.
     Returns (success, message, project_id).
     """
+    # aristotlelib 2.0: `aristotle prove-from-file` was removed; `aristotle submit` takes
+    # a prompt string. Use the SDK directly to read file contents and create a project.
     try:
-        result = subprocess.run(
-            ["aristotle", "prove-from-file", filepath, "--no-wait"],
-            capture_output=True,
-            text=True,
-            timeout=60
-        )
+        from aristotlelib import Project, set_api_key
+        api_key = os.environ.get("ARISTOTLE_API_KEY", "")
+        if not api_key:
+            return False, "ARISTOTLE_API_KEY not set", None
+        set_api_key(api_key)
 
-        output = result.stdout + result.stderr
-        project_id = None
-
-        # Extract project ID
-        for line in output.split('\n'):
-            if 'Created project' in line:
-                project_id = line.split()[-1]
-
-        if result.returncode == 0:
-            return True, f"Submitted! Project ID: {project_id}", project_id
-
-        if "429" in output or "Too Many Requests" in output or "already have 5 projects" in output:
-            return False, "Queue full (5/5)", project_id
-
-        return False, f"Error: {output[:200]}", project_id
-
-    except subprocess.TimeoutExpired:
-        return False, "Timeout", None
+        with open(filepath) as f:
+            prompt_text = f.read()
+        project = asyncio.run(Project.create(prompt=prompt_text))
+        return True, f"Submitted! Project ID: {project.project_id}", project.project_id
     except Exception as e:
-        return False, f"Exception: {e}", None
+        msg = str(e)
+        if "429" in msg or "Too Many Requests" in msg or "already have 5 projects" in msg:
+            return False, "Queue full (5/5)", None
+        return False, f"Exception: {msg}", None
 
 def monitor_and_submit(files: list[str], check_interval: int = 30, max_wait: int = 3600):
     """

@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780142430.225597,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T12:00:30+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_324_quintic_pair_sum_distinctness_unbounded_iter3",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

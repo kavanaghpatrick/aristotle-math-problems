@@ -1,0 +1,65 @@
+YOLO mode is enabled. All tool calls will be automatically approved.
+YOLO mode is enabled. All tool calls will be automatically approved.
+ATTACK VECTOR NAME: Coprime-Squarefree-d Reduction with Mod-36 Filter
+
+NOVELTY CHECK:
+- Closest existing submission: slot 1343 (`Powerful(gcd(n_k, d))`) and slot mega11 (mod-36 census for general `d`).
+- Why this is different: This approach explicitly combines the unconditional `gcd` structure from slot 1343 with the modular arithmetic of slot mega11. It first reduces the general consecutive powerful 3-AP `(n_k, n_{k+1}, n_{k+2})` to a simpler, coprime form `(m, m+r, m+2r)` where `r` is squarefree, and then applies the mod-36 constraints to this highly restricted form. No prior submission has performed this two-stage reduction and filtering.
+
+THE PROPOSED LEMMA(S):
+1.  Lemma A: `consecutive_powerful_ap_reduces_to_coprime_squarefree_d`
+    ```lean
+    theorem consecutive_powerful_ap_reduces_to_coprime_squarefree_d (k : ℕ) :
+        let n0 := Nat.nth Nat.Powerful k
+        let n1 := Nat.nth Nat.Powerful (k + 1)
+        let n2 := Nat.nth Nat.Powerful (k + 2)
+        let d  := n1 - n0
+        n1 - n0 = n2 - n1 →
+        ∃ (m r : ℕ), m.Powerful ∧ r.Squarefree ∧ Nat.Coprime m r ∧
+        Nat.Powerful (m + r) ∧ Nat.Powerful (m + 2 * r) ∧
+        n0 = Nat.gcd n0 d * m ∧ d = Nat.gcd n0 d * r := by sorry
+    ```
+    Proof sketch: Let `G = Nat.gcd n0 d`. By slot 1343, `G` is powerful. Define `m = n0 / G` and `r = d / G`. Then `Nat.Coprime m r`. The AP is `G·m, G·(m+r), G·(m+2r)`. We must show `m`, `m+r`, `m+2r` are powerful and `r` is squarefree. The powerful property for `m, m+r, m+2r` derives from `n0, n1, n2` being powerful, `G` being powerful, and `gcd(G, m)=1, gcd(G, m+r)=1, gcd(G, m+2r)=1` (this is the core structural check). The squarefree nature of `r` follows from `p|d, p^2 ∤ d => p ∤ n` (slot_1329), which implies that if `r` has a square factor, then `d` would have a `p^2` factor, and `G` would also have to "absorb" prime factors to ensure `m` is powerful in the coprime setting.
+
+2.  Lemma B: `admissible_coprime_squarefree_mod_36_set`
+    ```lean
+    theorem coprime_squarefree_d_ap_mod_36_constraint (m r : ℕ) :
+        m.Powerful ∧ r.Squarefree ∧ Nat.Coprime m r ∧
+        Nat.Powerful (m + r) ∧ Nat.Powerful (m + 2 * r) →
+        ∃ (mr_mod_pair : Fin 36 × Fin 36), (m % 36 = mr_mod_pair.1.val) ∧ (r % 36 = mr_mod_pair.2.val) ∧
+        mr_mod_pair ∈ admissible_coprime_squarefree_mod_36_set := by sorry
+    ```
+    Proof sketch: Construct `admissible_coprime_squarefree_mod_36_set` by filtering the 259 admissible `(n_mod, d_mod)` pairs from slot mega11. Each pair `(m_mod, r_mod)` must satisfy `Nat.Coprime m_mod r_mod` and `r_mod` must be squarefree (i.e., `v_p(r_mod) ≤ 1` for all `p`).
+
+3.  Main theorem combination: The set of consecutive powerful 3-APs is finite if and only if the set of coprime, squarefree-d powerful 3-APs `(m, m+r, m+2r)` satisfying the constraints derived from Lemma B is finite. This significantly narrows the search space for proving finiteness.
+
+CROSS-DOMAIN INGREDIENT:
+- Source paper: Bajpai, Bennett, Chan — *AP in squarefull integers* (arXiv:2302.03113)
+- Specific theorem/technique used: The general approach of reducing an AP problem to a coprime version and then applying bounds. Specifically, their Corollary 1.3 provides abc-conditional finiteness for coprime powerful APs of length `m ≥ 5`. This proposal reduces E938 to a (possibly conditional) finiteness problem for coprime powerful APs of length `m=3` with the additional constraint that `d` is squarefree.
+- Why importable into Mathlib via Aristotle: The reduction to coprime (Lemma A) and modular filtering (Lemma B) are structural results that fit Aristotle's demonstrated capabilities with `gcd`, `Nat.Powerful`, `Squarefree`, and modular arithmetic. The link to Bajpai, Bennett, Chan's work would be a future step after this reduction.
+
+COMPUTATIONAL VERIFICATION:
+- What to compute:
+    1.  Verify Lemma A rigorously. This means proving that `m` (from `n0 = G * m`) is powerful and `r` (from `d = G * r`) is squarefree under the given conditions.
+    2.  Construct `admissible_coprime_squarefree_mod_36_set`: For each of the 259 admissible `(n_mod, d_mod)` pairs from slot mega11, check `gcd(n_mod, d_mod) = 1` and `d_mod` is squarefree (for numbers less than 36).
+    3.  Report the count of pairs in `admissible_coprime_squarefree_mod_36_set`.
+- Expected outcome if approach works: A very small number of `(m_mod, r_mod)` pairs (e.g., < 20) remaining in the `admissible_coprime_squarefree_mod_36_set`. This implies tight modular control over the reduced problem.
+- Expected outcome if approach fails: The set `admissible_coprime_squarefree_mod_36_set` remains large (>100 pairs), or Lemma A cannot be proved unconditionally within Aristotle's current capabilities.
+- Runtime estimate: Computing `admissible_coprime_squarefree_mod_36_set` is a trivial loop over `36*36 = 1296` pairs, `native_decide` will resolve this in seconds.
+
+DIRECTION:
+- [X] Proof of finiteness (if the reduced and filtered classes can be proven finite).
+
+ARISTOTLE-CAPABILITY CHECK:
+- Mathlib modules needed: `Nat.Powerful`, `Nat.gcd`, `Nat.Coprime`, `Nat.Squarefree`, `Nat.ModEq`, `Finset`, `Nat.Prime.factorization`, basic arithmetic and divisibility properties.
+- Why this is within Aristotle's demonstrated capability: Aristotle has a strong grasp of these number-theoretic concepts and tactics (e.g., `omega`, `linarith`, `norm_num`, `native_decide`, `interval_cases`). It has proved similar gcd structures (slot 1343) and modular constraints (slot mega11). The reduction steps are structural and logical, leveraging existing definitions.
+
+PROBABILITY OF RESOLUTION:
+- P(target_resolved=1 in 72h): 60%
+- Reasoning: The crucial step is the rigorous unconditional proof of Lemma A (the reduction to `m` powerful, `r` squarefree, coprime). If this structural reduction holds, the subsequent modular filtering (Lemma B) is a very tractable computational task within Aristotle's capabilities. A significant reduction in admissible modular classes provides a clear, constrained search space for future attempts to prove finiteness or disproof, increasing the likelihood of overall problem resolution.
+
+WHY THIS ATTACK IS NEW
+
+This attack synthesizes two previously distinct lines of inquiry within the Erdős 938 dossier: the unconditional structural information about `gcd(n_k, d)` being powerful (slot 1343) and the comprehensive modular analysis of powerful 3-APs (slot mega11). Its novelty lies in the cascading application of these insights: first, a fundamental algebraic reduction using `gcd` to transform the original problem into an equivalent one involving coprime terms `(m, m+r, m+2r)` where `r` is squarefree. This creates a much cleaner, more constrained environment.
+
+Secondly, this reduced problem then becomes the target of the modular filter. The powerful implication that `gcd(m,r)=1` and `r` is squarefree dramatically shrinks the possibilities for the modular residues `(m % 36, r % 36)` compared to directly applying the modular sieve to `(n_k % 36, d % 36)`. By combining these unconditional structural results, this attack vector systematically eliminates vast regions of the problem space, focusing future efforts on a finite, enumerable set of modular archetypes for these reduced triples.

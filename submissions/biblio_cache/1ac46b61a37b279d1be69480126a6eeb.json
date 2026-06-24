@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780318070.4390059,
+  "checked_at": "2026-06-01T12:47:50+00:00",
+  "evidence": "3 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2026 partial/weak: Triangular-Reference Schr\u00f6dinger Bridges for Time Series Generation",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.27478v2"
+    },
+    {
+      "evidence": "2026 partial/weak: Explicit Signal-Adaptive Sequential Optimal Execution Quotes",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.24242v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Coupling-Informed Transport Maps for Bayesian Filtering in Nonlinear Dynamical Systems",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.13174v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

@@ -2,7 +2,18 @@
 """
 Multi-agent audit workflow for Lean submissions.
 
-Sends code to Grok and Gemini for independent review, records results in database.
+Sends code to Claude and Gemini for independent cross-model review, records
+results in database. This is the G2-L2 adversary node of the Method-1
+verification gauntlet: a second and third model (NOT the author) inspect the
+formalization for critical Lean bugs (Claude) and semantic/faithfulness gaps
+(Gemini).
+
+Grok was REMOVED (2026-06-01): the x.ai team has no access to a live model
+(grok-4 / grok-4.3 both dead — re-confirmed in the Method-1 scale-up plan,
+Risk 3). The dead Grok node is replaced by a Claude reviewer so the ensemble is
+Gemini + Claude, per the plan's "G2-L2 cross-model adversary (Gemini+Claude,
+NOT Grok)".
+
 Usage: python3 scripts/multi_agent_audit.py submissions/file.lean [--submission-uuid UUID]
 """
 
@@ -12,6 +23,7 @@ import sqlite3
 import sys
 import os
 import re
+import tempfile
 from pathlib import Path
 from datetime import datetime
 
@@ -19,16 +31,43 @@ from datetime import datetime
 MATH_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = MATH_DIR / "submissions" / "tracking.db"
 
-# API Keys
-GROK_API_KEY = os.environ.get("GROK_API_KEY")
+# CLI availability. Both Gemini and Claude are invoked via the repo's standard
+# `bash -c 'TOOL -p "$(cat tmpfile)"'` pattern (see debate.py). The `claude`
+# entry point is a login-shell function (teamclaude proxy), so Claude is invoked
+# through a login shell (`bash -lc`) which sources it. Codex is the fallback
+# third model if Claude is unreachable, keeping the ensemble at two non-Gemini
+# reviewers' worth of coverage without ever resurrecting Grok.
 GEMINI_AVAILABLE = subprocess.run(["which", "gemini"], capture_output=True).returncode == 0
+CODEX_AVAILABLE = subprocess.run(["which", "codex"], capture_output=True).returncode == 0
 
 
-def run_grok_audit(code: str, filename: str) -> dict:
-    """Send code to Grok for critical issue review."""
-    if not GROK_API_KEY:
-        return {"status": "skipped", "reason": "GROK_API_KEY not set"}
+def _parse_verdict_json(content: str) -> dict:
+    """Extract the last JSON object from a model's free-text reply."""
+    matches = re.findall(r'\{[\s\S]*?\}', content)
+    # Prefer the largest/last balanced-looking object that parses.
+    for cand in reversed(matches):
+        try:
+            return json.loads(cand)
+        except Exception:
+            continue
+    # Greedy single-object fallback.
+    m = re.search(r'\{[\s\S]*\}', content)
+    if m:
+        try:
+            return json.loads(m.group())
+        except Exception:
+            pass
+    return {"raw": content}
 
+
+def run_claude_audit(code: str, filename: str) -> dict:
+    """Send code to Claude (3rd ensemble model) for critical-issue review.
+
+    Replaces the dead Grok node. Claude is the always-available cross-model
+    adversary in the Method-1 gauntlet. Invoked via a login shell so the
+    `claude` shell function (teamclaude proxy) resolves; falls back to Codex if
+    the Claude entry point is unavailable.
+    """
     prompt = f"""You are a Lean 4 code reviewer. Review this submission for CRITICAL issues only.
 
 DO NOT solve any math. DO NOT discuss proof strategy.
@@ -47,10 +86,15 @@ ONLY check for these specific bugs:
 
 5. **Missing instances**: Graph operations without `[DecidableRel G.Adj]`?
 
+6. **Statement faithfulness**: Has the theorem statement been weakened, bounded,
+   or had a hypothesis stripped relative to a faithful formalization? Flag any
+   `native_decide`/`decide` over an injected numeric ceiling, or a conclusion
+   that is strictly weaker than the apparent intent.
+
 Respond with JSON only:
 {{
   "critical_issues": [{{
-    "type": "sinf_unrestricted|sym2_selfloop|set_finset|axiom|missing_instance",
+    "type": "sinf_unrestricted|sym2_selfloop|set_finset|axiom|missing_instance|weakened_statement",
     "line": <line_number_or_null>,
     "description": "brief description"
   }}],
@@ -63,46 +107,47 @@ File: {filename}
 {code}
 ```"""
 
-    # Write request to temp file for curl
-    request = {
-        "messages": [{"role": "user", "content": prompt}],
-        "model": "grok-4",
-        "temperature": 0,
-        "max_tokens": 1000
-    }
-
-    req_file = Path("/tmp/grok_audit_req.json")
-    req_file.write_text(json.dumps(request))
-
+    prompt_file = None
     try:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+            f.write(prompt)
+            prompt_file = f.name
+
+        # Try Claude first (login shell sources the `claude` function).
         result = subprocess.run(
-            ["curl", "-s", "-X", "POST",
-             "https://api.x.ai/v1/chat/completions",
-             "-H", f"Authorization: Bearer {GROK_API_KEY}",
-             "-H", "Content-Type: application/json",
-             "-d", f"@{req_file}"],
+            ["bash", "-lc", f'claude -p "$(cat \'{prompt_file}\')"'],
             capture_output=True,
             text=True,
-            timeout=180
+            timeout=300,
         )
+        content = (result.stdout or "").strip()
 
-        if result.returncode != 0:
-            return {"status": "error", "error": result.stderr}
+        # Fallback to Codex if Claude produced nothing usable.
+        if (result.returncode != 0 or not content) and CODEX_AVAILABLE:
+            result = subprocess.run(
+                ["bash", "-c",
+                 f'codex exec --full-auto --sandbox read-only "$(cat \'{prompt_file}\')"'],
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+            content = (result.stdout or "").strip()
 
-        response = json.loads(result.stdout)
-        content = response.get("choices", [{}])[0].get("message", {}).get("content", "")
+        if not content:
+            err = (result.stderr or "")[-500:]
+            return {"status": "error", "error": f"empty reply; stderr: {err}"}
 
-        # Try to extract JSON from response
-        json_match = re.search(r'\{[\s\S]*\}', content)
-        if json_match:
-            return {"status": "success", "result": json.loads(json_match.group())}
-        else:
-            return {"status": "success", "result": {"raw": content}}
+        return {"status": "success", "result": _parse_verdict_json(content)}
 
     except subprocess.TimeoutExpired:
         return {"status": "timeout"}
+    except FileNotFoundError:
+        return {"status": "skipped", "reason": "neither claude nor codex CLI available"}
     except Exception as e:
         return {"status": "error", "error": str(e)}
+    finally:
+        if prompt_file and os.path.exists(prompt_file):
+            os.unlink(prompt_file)
 
 
 def run_gemini_audit(code: str, filename: str) -> dict:
@@ -135,28 +180,38 @@ File: {filename}
 {code}
 ```"""
 
+    prompt_file = None
     try:
+        # Write prompt to a temp file and read via shell to avoid arg-length
+        # limits on large Lean files (repo standard, cf. debate.py).
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+            f.write(prompt)
+            prompt_file = f.name
+
         result = subprocess.run(
-            ["gemini", "-p", prompt],
+            ["bash", "-c", f'gemini -p "$(cat \'{prompt_file}\')"'],
             capture_output=True,
             text=True,
-            timeout=120
+            timeout=180
         )
 
-        if result.returncode != 0:
-            return {"status": "error", "error": result.stderr}
+        content = (result.stdout or "").strip()
+        if not content:
+            stderr = "\n".join(
+                line for line in (result.stderr or "").split("\n")
+                if "DeprecationWarning" not in line and "punycode" not in line and line.strip()
+            )
+            return {"status": "error", "error": stderr[:500] or "empty reply"}
 
-        content = result.stdout
-        json_match = re.search(r'\{[\s\S]*\}', content)
-        if json_match:
-            return {"status": "success", "result": json.loads(json_match.group())}
-        else:
-            return {"status": "success", "result": {"raw": content}}
+        return {"status": "success", "result": _parse_verdict_json(content)}
 
     except subprocess.TimeoutExpired:
         return {"status": "timeout"}
     except Exception as e:
         return {"status": "error", "error": str(e)}
+    finally:
+        if prompt_file and os.path.exists(prompt_file):
+            os.unlink(prompt_file)
 
 
 def run_local_audit(filepath: Path) -> dict:
@@ -199,41 +254,50 @@ def run_local_audit(filepath: Path) -> dict:
 
 
 def record_audit(db: sqlite3.Connection, submission_uuid: str,
-                 local_results: dict, grok_results: dict, gemini_results: dict):
-    """Record audit results in database."""
+                 local_results: dict, claude_results: dict, gemini_results: dict):
+    """Record audit results in database.
 
-    # Update submission record
-    grok_passed = (grok_results.get("status") == "success" and
-                   grok_results.get("result", {}).get("verdict") == "PASS")
-    gemini_passed = (gemini_results.get("status") == "success" and
-                     gemini_results.get("result", {}).get("verdict") == "CORRECT")
+    Claude is the 3rd ensemble model (replacing dead Grok). To avoid an
+    unowned schema change, the Claude reviewer payload is persisted in the
+    existing `grok_issues` column (the legacy "critical-issue reviewer" slot);
+    the JSON itself is self-describing (`status`/`result`). The write is
+    defensive: columns that don't exist are skipped so the audit never crashes
+    the caller.
+    """
+    # Try the full update; fall back to only-existing columns.
+    try:
+        db.execute(
+            "UPDATE submissions SET grok_issues = ?, gemini_issues = ? WHERE uuid = ?",
+            (json.dumps(claude_results), json.dumps(gemini_results), submission_uuid),
+        )
+    except sqlite3.OperationalError:
+        # One of the columns may be absent on an older DB — write what we can.
+        for col, payload in (("grok_issues", claude_results),
+                             ("gemini_issues", gemini_results)):
+            try:
+                db.execute(
+                    f"UPDATE submissions SET {col} = ? WHERE uuid = ?",
+                    (json.dumps(payload), submission_uuid),
+                )
+            except sqlite3.OperationalError:
+                pass
 
-    db.execute("""
-        UPDATE submissions SET
-            grok_reviewed = 1,
-            grok_issues = ?,
-            gemini_reviewed = 1,
-            gemini_issues = ?
-        WHERE uuid = ?
-    """, (
-        json.dumps(grok_results),
-        json.dumps(gemini_results),
-        submission_uuid
-    ))
-
-    # Log audit
-    db.execute("""
-        INSERT INTO audit_log (submission_id, action, agent, details)
-        SELECT id, 'multi_agent_audit', 'multi', ?
-        FROM submissions WHERE uuid = ?
-    """, (
-        json.dumps({
-            "local": local_results,
-            "grok_verdict": grok_results.get("result", {}).get("verdict"),
-            "gemini_verdict": gemini_results.get("result", {}).get("verdict")
-        }),
-        submission_uuid
-    ))
+    # Log audit (agent='gemini+claude').
+    try:
+        db.execute("""
+            INSERT INTO audit_log (submission_id, action, agent, details)
+            SELECT id, 'multi_agent_audit', 'gemini+claude', ?
+            FROM submissions WHERE uuid = ?
+        """, (
+            json.dumps({
+                "local": local_results,
+                "claude_verdict": claude_results.get("result", {}).get("verdict"),
+                "gemini_verdict": gemini_results.get("result", {}).get("verdict"),
+            }),
+            submission_uuid,
+        ))
+    except sqlite3.OperationalError:
+        pass
 
     db.commit()
 
@@ -281,25 +345,25 @@ def main():
         print(local_results["syntax"].get("output", "")[:500])
         sys.exit(1)
 
-    # Phase 2: Grok review
+    # Phase 2: Claude review (3rd ensemble model; replaces dead Grok)
     print()
-    print("Phase 2: Grok Review (Critical Issues)")
+    print("Phase 2: Claude Review (Critical Issues)")
     print("-" * 40)
-    grok_results = run_grok_audit(code, filename)
+    claude_results = run_claude_audit(code, filename)
 
-    if grok_results["status"] == "success":
-        verdict = grok_results.get("result", {}).get("verdict", "UNKNOWN")
+    if claude_results["status"] == "success":
+        verdict = claude_results.get("result", {}).get("verdict", "UNKNOWN")
         print(f"  Verdict: {verdict}")
 
-        issues = grok_results.get("result", {}).get("critical_issues", [])
+        issues = claude_results.get("result", {}).get("critical_issues", [])
         if issues:
             print(f"  Critical issues ({len(issues)}):")
             for issue in issues:
                 print(f"    - [{issue.get('type')}] {issue.get('description')}")
-    elif grok_results["status"] == "skipped":
-        print(f"  Skipped: {grok_results.get('reason')}")
+    elif claude_results["status"] == "skipped":
+        print(f"  Skipped: {claude_results.get('reason')}")
     else:
-        print(f"  Error: {grok_results.get('error', 'unknown')}")
+        print(f"  Error: {claude_results.get('error', 'unknown')}")
 
     # Phase 3: Gemini review
     print()
@@ -329,7 +393,7 @@ def main():
         print("-" * 40)
 
         conn = sqlite3.connect(DB_PATH)
-        record_audit(conn, submission_uuid, local_results, grok_results, gemini_results)
+        record_audit(conn, submission_uuid, local_results, claude_results, gemini_results)
         conn.close()
         print("  ✅ Audit recorded")
 
@@ -339,12 +403,12 @@ def main():
     print("AUDIT SUMMARY")
     print("=" * 70)
 
-    grok_verdict = grok_results.get("result", {}).get("verdict", "SKIPPED")
+    claude_verdict = claude_results.get("result", {}).get("verdict", "SKIPPED")
     gemini_verdict = gemini_results.get("result", {}).get("verdict", "SKIPPED")
 
     all_pass = (
         syntax_ok and defs_ok and
-        grok_verdict in ["PASS", "SKIPPED"] and
+        claude_verdict in ["PASS", "SKIPPED"] and
         gemini_verdict in ["CORRECT", "SKIPPED"]
     )
 
@@ -355,8 +419,8 @@ def main():
         print("⚠️  ISSUES FOUND - Review before submitting")
         if not defs_ok:
             print("   - Local definition audit failed")
-        if grok_verdict == "FAIL":
-            print("   - Grok found critical issues")
+        if claude_verdict == "FAIL":
+            print("   - Claude found critical issues")
         if gemini_verdict == "INCORRECT":
             print("   - Gemini found semantic issues")
 

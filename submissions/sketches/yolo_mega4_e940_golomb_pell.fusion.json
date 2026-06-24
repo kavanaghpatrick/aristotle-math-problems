@@ -1,0 +1,25 @@
+{
+  "problem_id": "consecutive_powerful_pairs_infinite",
+  "stage_outputs": {
+    "literature_path": "docs/research/aristotle_smoke_test_euclid_may30.md",
+    "analogies_path": "submissions/sketches/yolo_d2_e940_golomb_pell.fusion.json",
+    "techniques_path": "submissions/nu4_final/yolo_slot1318_extracted/706abe1b-76b9-4455-b002-b285086bb00b_aristotle/RequestProject/Main.lean"
+  },
+  "named_technique": "Golomb 1970 Pell x^2-8y^2=1 parametrization of consecutive powerful pairs (Amer. Math. Monthly 77(8):848-852).",
+  "seminal_paper_arxiv": "none",
+  "fit_score": 0.92,
+  "bridge_lemma": "For every fundamental Pell solution a : Pell.Solution_1 8 (exists by Pell.IsFundamental.exists_of_not_isSquare with d=8 not a square), the y-component of a^k strictly increases in k by Pell.IsFundamental.y_strictMono. For any k with (a^k).y > N+1, set y := (a^k).y.natAbs and n := 8*y^2. Then 8 y^2 > N, n is powerful (a=y, b=2 in slot 1318's a^2 b^3 parametrization, 2 squarefree), and n+1 = ((a^k).x.natAbs)^2 is a square hence powerful (a=x.natAbs, b=1).",
+  "informal_proof_outline": "Goal: for every N : Nat, exhibit n with N < n, Nat.Powerful n, Nat.Powerful (n+1). Use slot 1318 powerful_parametrization (powerful iff a^2 * b^3 with b squarefree, both >= 1) as an axiom — it is sorry-free in slot 1318 (UUID 706abe1b-76b9-4455-b002-b285086bb00b). Step 1: 8 is not a square in Int (decide). Step 2: Mathlib.NumberTheory.Pell.IsFundamental.exists_of_not_isSquare gives a fundamental a : Solution_1 8. Step 3: Pell.IsFundamental.y_strictMono shows k -> (a^k).y : Int -> Int is StrictMono. Step 4: Cheap lemma int_strictMono_unbounded shows for every M : Int there is k with (a^k).y > M. Step 5: Pick k with (a^k).y > N+1. Set y := (a^k).y.natAbs >= N+1 by Int.natAbs_of_nonneg. Step 6: 8 * y^2 > N from y^2 >= (N+1)^2 > N. Step 7: Nat.Powerful (8 y^2) via parametrization with a = y, b = 2 (squarefree_two). Step 8: From a.prop : a.x^2 - 8 a.y^2 = 1, transfer to Nat: (a.x.natAbs)^2 = 8 (a.y.natAbs)^2 + 1 using Int.sq_abs and Int.abs_eq_natAbs. Step 9: (a^k).x.natAbs >= 1 by Pell.x_zpow_pos. Step 10: Nat.Powerful ((a^k).x.natAbs ^ 2) via parametrization with b=1 (squarefree_one). Conclude 8 y^2 + 1 powerful by rewriting Step 8. Set.Infinite corollary by Set.infinite_iff_exists_gt.",
+  "candidate_lemmas": [
+    "L1 (Golomb parametrization): axiom from slot 1318 — Nat.Powerful n iff exists a b >= 1, b squarefree, n = a^2 * b^3.",
+    "L2 (Pell existence): Pell.IsFundamental.exists_of_not_isSquare (0 < 8) (not_isSquare_eight) : exists a : Solution_1 8, IsFundamental a.",
+    "L3 (Strict-mono y): Pell.IsFundamental.y_strictMono : StrictMono (fun k : Int => (a^k).y).",
+    "L4 (Int->Nat unbounded): For StrictMono f : Int -> Int and any M, there is k with M < f k. Induct on Nat then exists_nat_gt.",
+    "L5 (Squares powerful): For x >= 1, Nat.Powerful (x^2) via parametrization with a=x, b=1, squarefree_one.",
+    "L6 (8 y^2 powerful): For y >= 1, Nat.Powerful (8 y^2) via parametrization with a=y, b=2, Nat.squarefree_two.",
+    "L7 (Pell pair identity): For a : Solution_1 8, a.x.natAbs ^ 2 = 8 * a.y.natAbs ^ 2 + 1 via Int.sq_abs + Int.abs_eq_natAbs.",
+    "L8 (Main per-N): forall N, exists n > N with Powerful n and Powerful (n+1) — chosen k with (a^k).y > N+1 forces n := 8 * (a^k).y.natAbs^2 to work.",
+    "L9 (Set.Infinite corollary): Set.infinite_iff_exists_gt + L8."
+  ],
+  "honest_disclaimer": "This is a FORMALIZATION target, not a novel-math target. The math is Golomb 1970 (verified via download of Walker 1976 PDF which credits Golomb explicitly; verified via Wikipedia + Tandfonline DOI 10.2307/2317020). The Lean novelty is the assembly into Mathlib: no current Mathlib theorem exists for the infinitude of consecutive powerful pairs. Approach: 4-round Grok-4 + Codex iteration (R1 Codex stalled, written manually; R2 Grok critique surfaced 4 BLOCKERS plus 2 SERIOUS — all fixed; R3 manual fix applied; R4 Grok citations confirmed Golomb 1970 canonical and corrected Sentance year to 1980 AMM 87(4):272-274 and Walker venue to Fibonacci Quart). Slot 1324 (UUID bba5b032) submitted a similar Pell attack but is in `submitted` status — this MEGA-4 is independent. Bayesian estimates: P(target_resolved=1) = 0.65; P(compiled_partial with int_strictMono_unbounded needing rework) = 0.20; P(compile_failed) = 0.10; P(compiled_no_advance) = 0.05. Risk: the (8 : Int) coercion in IsFundamental.exists_of_not_isSquare and the namespaced .y_strictMono after open Pell. Per CLAUDE.md rule 10: HAVE FAITH IN ARISTOTLE."
+}

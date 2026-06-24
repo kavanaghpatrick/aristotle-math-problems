@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 647 — bounded residual closure on enumerated arithmetic family
+Source: formal-conjectures/FormalConjectures/ErdosProblems/647.lean
+Domain: nt
+
+For every integer n with 3000 ≤ n ≤ 10^6, n ≡ 0 (mod 6), n−1 prime, (n−2)/2
+prime, ((n−2)/2 − 1)/2 prime, and (2·(n−2)/2 − 1)/3 prime, there exists
+m < n with n + 2 < m + σ₀(m), where σ₀ enumerates the positive divisors of m.
+The qualifying integers n form a finite explicitly-enumerated subset of
+[3000, 10^6]; iter1 (slot 741, UUID 7031f637) returned compiled_no_advance
+because the audit could not consult the offset-tabulated dossier produced
+by the host investigation. iter2 attaches that dossier through the companion
+JSON so the informal reasoner can read it directly.
+
+theorem erdos_647_residual_bounded_iter2
+    (n : ℕ) (hn_lo : 3000 ≤ n) (hn_hi : n ≤ 1000000) (h6 : 6 ∣ n)
+    (hp1 : Nat.Prime (n - 1)) (hq : Nat.Prime ((n - 2) / 2))
+    (hr : Nat.Prime (((n - 2) / 2 - 1) / 2))
+    (hp : Nat.Prime ((2 * ((n - 2) / 2) - 1) / 3)) :
+    ∃ m : Fin n, n + 2 < (m : ℕ) + ArithmeticFunction.sigma 0 m := by sorry
+
+Status: OPEN — gap-closer iter2. Composed with slot 737's σ₀-multiplicativity
+reduction this resolves the entire E647 failure region up to 10^6.

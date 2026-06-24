@@ -1,0 +1,22 @@
+OPEN GAP: Erdős Problem 366 — 2-full followed by 3-full
+Source: FormalConjectures/ErdosProblems/366.lean
+Domain: nt
+
+Does there exist a positive integer n such that n is 2-full (every prime
+divisor appears to power at least 2) and n+1 is 3-full (every prime
+divisor appears to power at least 3)?
+
+The reverse direction is satisfied by (n, n+1) = (8, 9): 8 = 2^3 is 3-full
+and 9 = 3^2 is 2-full. No example of the forward direction is known.
+Computational search rules out any n < 10^22 (OEIS / Erdős–Graham).
+
+theorem erdos_366 :
+    ∃ n : ℕ, 0 < n ∧
+      (∀ p : ℕ, p.Prime → p ∣ n → p ^ 2 ∣ n) ∧
+      (∀ p : ℕ, p.Prime → p ∣ (n + 1) → p ^ 3 ∣ (n + 1)) := by
+  sorry
+
+Status: OPEN. Existence is conjectured false (Erdős–Graham). The ABC
+conjecture implies that the set of such n is finite. Never previously
+submitted to Aristotle. Prior project artifact: Nat.Powerful, ABC.radical,
+radical_sq_le_of_powerful (from E938 / slot 1315), directly applicable.

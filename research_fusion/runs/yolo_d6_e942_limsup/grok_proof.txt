@@ -1,0 +1,25 @@
+**Exact statement from https://erdosproblems.com/942 (as of the page content):**
+
+"Let \( h(n) \) count the number of powerful (if \( p \mid m \) then \( p^2 \mid m \)) integers in \([n^2, (n+1)^2)\). Estimate \( h(n) \). In particular is there some constant \( c > 0 \) such that
+
+\[ h(n) < (\log n)^{c+o(1)} \]
+
+and, for infinitely many \( n \),
+
+\[ h(n) > (\log n)^{c-o(1)} ? \]"
+
+The page notes that the problem is open, that Erdős proved \(\limsup h(n) = \infty\) and the existence of densities \(\delta_l\) with \(\sum \delta_l = 1\), and that De Koninck–Luca proved a lower bound \( h(n) \gg (\log n / \log\log n)^{1/3} \) infinitely often (along with the density of \( n \) with \( h(n) = 1 \)).[[1]](https://erdosproblems.com/942)
+
+**Erdős’s original paper:** The problem originates in Erdős’s work on extremal and related problems in number theory; see, e.g., P. Erdős, “Extremal Problems in Number Theory” (Rényi Institute preprint/collection, circa 1965, available via renyi.hu/~p_erdos archives) and related problem lists such as “Some Problems on Number Theory” (1986). The site itself directs readers to Erdős’s original sources for citations.[[2]](https://www.renyi.hu/~p_erdos/1965-02.pdf)
+
+**Known results on powerful/squarefull numbers in short intervals and gaps:**
+
+- **Heath-Brown**: D. R. Heath-Brown, “Square-full numbers in short intervals,” *Mathematical Proceedings of the Cambridge Philosophical Society* 109 (1991), 307–318 (or the 1991 Cambridge Univ. Press version). This gives asymptotic counts for squarefull numbers in short intervals of length roughly \( x^{1/2+\theta} \).[[3]](https://www.cambridge.org/core/journals/mathematical-proceedings-of-the-cambridge-philosophical-society/article/squarefull-numbers-in-short-intervals/38554318AF791BABD7EED5B3D3C4507A)
+
+- **Filaseta–Trifonov**: M. Filaseta and O. Trifonov, “The distribution of squarefull numbers in short intervals,” *Acta Arithmetica* 67 (1994), 323–333. They obtain results on the distribution (and gaps) of squarefull numbers in short intervals using elementary and exponential-sum methods.[[4]](https://eudml.org/doc/206635)
+
+- **De Koninck–Luca**: J.-M. De Koninck and F. Luca, “Powerful numbers in short intervals” (the 2004/2005 paper referenced as [DeLu04] on the Erdős Problems site; appears in *Bulletin of the Australian Mathematical Society* or related proceedings). They prove the \(\Omega((\log N)^{1/3-o(1)})\) lower bound for the number of powerful numbers in certain short intervals \((N^k, (N+1)^k)\).[[5]](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/548060C1CAADAFD0279DC9979D7CB932/S0004972700037953a.pdf/powerful_numbers_in_short_intervals.pdf)
+
+- **Granville on gaps**: Under the ABC conjecture, there are results implying that consecutive powerful numbers can be arbitrarily far apart relative to their size (large gaps between powerful numbers). This is discussed in works building on Granville’s ABC applications to squarefree/powerful counts and gaps (often in conjunction with results like those of Heath-Brown or Filaseta–Trifonov). Related unconditional upper-bound work appears in later notes such as Tsz Ho Chan, “A note on powerful numbers in short intervals,” arXiv:2207.08874 (2022).[[6]](https://arxiv.org/abs/2207.08874)
+
+These papers collectively address both the distribution of squarefull/powerful numbers in intervals of length \( x^\theta \) (for various \(\theta < 1\)) and the resulting gap bounds between consecutive such numbers. Further unconditional improvements on gaps or short-interval counts often rely on the above techniques or refinements.

@@ -1,0 +1,13 @@
+OPEN GAP: Erdos 677 — LCM of consecutive intervals injective
+Source: FormalConjectures/ErdosProblems/677.lean
+Domain: nt
+
+For k > 0 and m >= n+k, is lcm(m+1,...,m+k) ≠ lcm(n+1,...,n+k)?
+
+theorem erdos_677 :
+    ∀ (m n k : ℕ), k > 0 → m ≥ n + k →
+    Finset.lcmInterval m k ≠ Finset.lcmInterval n k := by sorry
+
+Status: OPEN. Small disjoint equalities for shifted versions include:
+lcm(5,6,7)=lcm(14,15), lcm(4,5,6,7)=lcm(20,21), and
+lcm(9,10,11,12)=lcm(44,45).

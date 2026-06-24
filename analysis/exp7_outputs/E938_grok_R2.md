@@ -1,0 +1,7 @@
+1. Gap asymptotic claim: Immediately after citing \(\#\{n\in\mathcal{P}:n\le X\}\sim c\sqrt{X}\), the proof asserts \(\delta_m\sim\frac12 c^{-1}\sqrt{n_m}\) “on average.” This coefficient is false; the correct differentiation of the inverse \(n_m\sim(m/c)^2\) yields the factor \(2c^{-1}\), so every later comparison that treats \(d\asymp\sqrt{b}\) inherits an incorrect implicit constant.
+
+2. Invocation of Erdős–Selfridge: The sentence “By the theorem of Erdős–Selfridge … a and c cannot both be proper powers unless they lie in a fixed finite list” misapplies the theorem. Erdős–Selfridge states that a product of two or more consecutive integers is never a perfect power; here \(a\) and \(c\) differ by \(2d\approx2\sqrt{b}\), so they are never consecutive and the theorem supplies no information about whether both can be powerful.
+
+3. Sieve upper bound: The paragraph asserts that the linear sieve (Halberstam–Richert, Thm. 9.3) produces the count \(O(X^{1/2}(\log X)^{-2})\) for equal consecutive gaps. The parenthetical remark concedes that the required level of distribution for the gap sequence is not available, rendering the bound unjustified; without it the subsequent Chinese-Remainder-Theorem incompatibility argument has no quantitative force.
+
+Final answer: 1. gap asymp. (½c^{-1} wrong); 2. Erdős-Selfridge misused (a,c not consecutive); 3. sieve bound unjustified (level of distrib. insufficient)

@@ -1,0 +1,185 @@
+{
+  "title": "Failure DNA Catalog — compiled_no_advance Traps",
+  "date": "2026-05-30",
+  "agent": "Agent #3 of 10",
+  "sample_size": {
+    "total_compiled_no_advance_in_db": 742,
+    "result_files_inspected": 25,
+    "problem_ids_sampled": 24,
+    "tuza_nu4_share_of_total": 216
+  },
+  "top_problem_ids_by_no_advance_count": {
+    "tuza_nu4": 216,
+    "<unlabeled>": 13,
+    "leinster": 8,
+    "feit_thompson": 8,
+    "sierpinski_5n": 7,
+    "path4_tau_le_8": 7,
+    "erdos850": 7,
+    "tuza_nu3": 6,
+    "erdos_1": 5,
+    "tau_le_8": 4,
+    "agoh_giuga": 4,
+    "tuza_tau_Te": 3,
+    "tuza_nu4_path4": 3,
+    "nu_4_cycle4": 3,
+    "nu4_cycle4": 3,
+    "arithmetic_sums": 3
+  },
+  "failure_modes": [
+    {
+      "id": "F1",
+      "name": "Restate-and-define (Iff.rfl trap)",
+      "frequency_in_sample": 11,
+      "frequency_pct": 44,
+      "shape_of_trigger": "Open conjectures with no decidable predicate where the slot is framed as 'define answer and prove answer ↔ Statement'. Aristotle defines `answer := <Statement>` then proves the bi-implication by `rfl` / `Iff.rfl` / `bound`.",
+      "examples": ["slot697_erdos470_odd_weird", "slot696_erdos412_iterated_sigma", "slot700_erdos252_irrationality", "slot684_hadamard", "slot682_artin_primitive", "slot681_bunyakovsky", "slot689_jacobian", "slot686_hardy_littlewood_1", "slot679_hardy_littlewood_2", "slot692_erdos1052", "slot700_erdos252"],
+      "pre_submission_red_flag": "Sketch theorem is a high-level non-decidable claim about all natural numbers, all real numbers, or asymptotic equivalence. No computable subclaim. No witness recipe. Sketch contains words like 'Irrational', 'IsEquivalent', 'HasDensity', 'classical density', or 'Hadamard'.",
+      "rubric_category_mapped": "structural-open without entry condition",
+      "diagnostic_test": "If you cannot turn the conjecture into either `∃ x ∈ Finset.range N, P x` or `∀ x ∈ Finset.range N, P x` with explicit N, the slot will produce a definitional tautology."
+    },
+    {
+      "id": "F2",
+      "name": "Excluded middle (P ∨ ¬P) tautology",
+      "frequency_in_sample": 2,
+      "frequency_pct": 8,
+      "shape_of_trigger": "Sketches phrased as 'does there exist X, OR does no such X exist?' which translate to P ∨ ¬P. Aristotle discharges with `exact em _`.",
+      "examples": ["slot717_erdos850_bare", "slot719_erdos850_bare_then_ask"],
+      "pre_submission_red_flag": "Disjunction of an existence claim with its negation. Already documented in `feedback_em_tautology_antipattern.md` and blocked by gate's C6 check, but legacy submissions slipped through.",
+      "rubric_category_mapped": "any category with EM-tautology shape — BLOCKED by gate",
+      "diagnostic_test": "Search the sketch for `∨ ¬ ∃` or `∨ ¬ ∀`. If found, REJECT."
+    },
+    {
+      "id": "F3",
+      "name": "Side-lemma proliferation without main target",
+      "frequency_in_sample": 7,
+      "frequency_pct": 28,
+      "shape_of_trigger": "Aristotle produces 30-100 helper lemmas (recurrences, modular periodicities, gcd analyses) for the structural problem but cannot close the main theorem. The result file has compiled lemmas but the main theorem is absent or sorried.",
+      "examples": ["slot703_erdos672_ap (1148 lines of Pell/SeqA/SeqB infrastructure)", "slot698_erdos672 (Pell periodicity lemmas)", "slot705_erdos850_smooth_diff (15+ lemmas, never closes the main)", "slot691_arithmetic_sums (S_eq_zero for primes, never closes Conj 4.3)", "slot676_arithmetic_sums (verify_conj_4_3 case-by-case, no aggregate)", "slot687_pell_primes (valuation infrastructure, no main)", "slot677_pell_primes (doubling formula, no main)"],
+      "pre_submission_red_flag": "Sketch contains 'reduces to' or 'follows from a well-known infinite descent / Pell / sieve' without naming the precise finite obstruction that closes it. Asks Aristotle to invent infrastructure for an infinite-depth analytic argument.",
+      "rubric_category_mapped": "structural-open masquerading as constructive-search",
+      "diagnostic_test": "Does the conjecture require an unbounded argument (e.g., 'for all n', 'infinitely many', 'asymptotic')? If yes and you have NOT cited a parent slot that did the legwork, the slot will produce infrastructure-without-target."
+    },
+    {
+      "id": "F4",
+      "name": "Axiomatize-the-hard-part (exact?/sorry stubs)",
+      "frequency_in_sample": 4,
+      "frequency_pct": 16,
+      "shape_of_trigger": "Aristotle peppers proofs with `exact?` calls that fail silently (left in result file) or `apply pell_valuation_mul_prime'` etc that reference earlier-in-file undefined names. Effectively, scaffold has gaps Aristotle pretends are closed.",
+      "examples": ["slot698 (multiple `exact?` after `have h_recurrence`)", "slot687 (referencing `pell_valuation_mul_prime` which itself uses `pell_valuation_mul_prime'`)", "slot705 (`exact?` for `h_parity`, `h_mod_3`)", "slot650_lemoine (`apply lemoine_upto_1000_corrected` defined as `exact?`)"],
+      "pre_submission_red_flag": "Sketch references a 'classical' or 'standard' fact (Fermat's Little Theorem, infinite primes mod 4≡3, Dirichlet) without identifying the exact Mathlib name. Aristotle leaves an `exact?` hole.",
+      "rubric_category_mapped": "All categories — risk increases when prior work missing",
+      "diagnostic_test": "Are all the 'plug-in' classical results explicitly named (e.g., `Nat.ModEq.pow_totient`, `Nat.exists_infinite_primes`)? If you write 'by known result' in plain prose, the result file will have `exact?`."
+    },
+    {
+      "id": "F5",
+      "name": "Counterexample disproves own scaffolding (recursive falsification)",
+      "frequency_in_sample": 3,
+      "frequency_pct": 12,
+      "shape_of_trigger": "On Tuza nu=4 family slots, Aristotle constructs a 'witness' graph but the witness fails to satisfy a precondition (e.g., apex not in bridge), and the proof ends with a corollary that contradicts the original lemma. The slot proves nothing about Tuza, only about the bad construction.",
+      "examples": ["slot543_bad_bridge_counterexample (apex_X_not_in_B; conclusion is that slot542's approach is fundamentally flawed)", "slot541_bridge_coverage_integration", "slot113_conservative_bound (cycle4 with diag-condition that already excludes the hard case)"],
+      "pre_submission_red_flag": "Sketch is a 'lemma about a specific apex/bridge/cycle subconfiguration' rather than about ν=4 itself. Result will be a clever proof of the wrong thing.",
+      "rubric_category_mapped": "structural-open dressed as constructive-search",
+      "diagnostic_test": "Is the sketch about 'the ν=4 conjecture' or about 'some auxiliary lemma toward ν=4'? If the latter, ensure that lemma is on a verified critical path. Otherwise: HOLD per rubric."
+    },
+    {
+      "id": "F6",
+      "name": "Restate-with-sorry (target = sorry, scaffold compiled)",
+      "frequency_in_sample": 4,
+      "frequency_pct": 16,
+      "shape_of_trigger": "Tuza/path4 slots specifically. The Aristotle file says 'Aristotle took a wrong turn (reason code: 9)' or 'Aristotle failed to find a proof.', then dumps the target theorem with `:= by sorry`, often with a long proof sketch in a comment.",
+      "examples": ["slot327_tau_le_8_final (tau_le_8 := by sorry, with multi-step plan in comment)", "all 7 path4_tau_le_8 slots"],
+      "pre_submission_red_flag": "Sketch is `tau_le_X` for a Tuza ν=4 sub-case. The required reduction needs 3+ unproved auxiliary lemmas, none of which are themselves in `mk codex-best` or a parent slot.",
+      "rubric_category_mapped": "structural-open without fresh diagnostic",
+      "diagnostic_test": "How many `slot<N>_*.lean` files would need to exist before this slot can be sorry-free? If more than 1, the slot is `structural-open` and the rubric demands HOLD."
+    },
+    {
+      "id": "F7",
+      "name": "Bounded verification dressed as infinite claim",
+      "frequency_in_sample": 3,
+      "frequency_pct": 12,
+      "shape_of_trigger": "Aristotle proves a stronger bounded version (e.g., 'Lemoine for n ≤ 1000', 'Conj 4.3 for k ≤ 3135') instead of the unbounded conjecture. Compiles; gap unmoved.",
+      "examples": ["slot650_lemoine (`lemoine_upto_1000_final`)", "slot676 (`conj_4_3_verified_3253`, `_3257`, `_3259`)", "slot669 (`conj_4_3_verified_3120_3130`)"],
+      "pre_submission_red_flag": "Sketch is an unbounded `∀ n, P n` and Aristotle has prior context showing it solved a small range. If the conjecture is GENUINELY for all n (no known computable reduction), it's `structural-open`.",
+      "rubric_category_mapped": "finite-verification leaking from structural-open",
+      "diagnostic_test": "Does the sketch contain unbounded universals? If yes, has a structural reduction to a finite case been done? If no: rubric says HOLD."
+    },
+    {
+      "id": "F8",
+      "name": "Wrong direction or vacuous equivalence",
+      "frequency_in_sample": 2,
+      "frequency_pct": 8,
+      "shape_of_trigger": "Aristotle proves `A ↔ B` where one direction is trivial. Or proves `n.Weird ∧ Odd n` is open-equivalent to itself by `unfold; rfl`. The conjecture's content is preserved as an `axiom`-like def.",
+      "examples": ["slot697 (`erdos_470.part1 : answer ↔ ∃ n, ...` via `rfl`)", "slot696 (`erdos_412 : answer ↔ ...` via `Iff.rfl`)", "slot684 (Hadamard conjecture wrapped, only k=0 and k=1 proved separately)"],
+      "pre_submission_red_flag": "Sketch theorem statement is of the form `Conjecture ↔ Definition_of_Conjecture`. Aristotle WILL prove this by `rfl`.",
+      "rubric_category_mapped": "known-formalization (or sometimes structural-open)",
+      "diagnostic_test": "Does the LHS and RHS of the iff differ only by a definitional unfolding? If yes: NEVER submit this shape."
+    },
+    {
+      "id": "F9",
+      "name": "Computational explosion (native_decide budget overrun)",
+      "frequency_in_sample": 2,
+      "frequency_pct": 8,
+      "shape_of_trigger": "Aristotle frames the verification as a `native_decide` that on the structural target either times out or proves a too-narrow range, leaving the open part untouched.",
+      "examples": ["slot650_lemoine (10000 range was attempted in some path, settled for 1000)", "slot684_hadamard (only k=0 and k=1, kernel exhausted on k=2 with 8x8 matrices)"],
+      "pre_submission_red_flag": "The decidable predicate has fan-out exceeding the per-cell budget (e.g., 4 nested `interval_cases` on a 1000-element range). The sketch implicitly assumes `native_decide` will close everything.",
+      "rubric_category_mapped": "finite-verification with budget mis-estimate",
+      "diagnostic_test": "Estimate fan-out before submission. If exponent times bound exceeds ~10^8 cells, the kernel will give up partway."
+    },
+    {
+      "id": "F10",
+      "name": "Definition mismatch with formal-conjectures",
+      "frequency_in_sample": 2,
+      "frequency_pct": 8,
+      "shape_of_trigger": "Aristotle introduces its own `def IsX` that differs from the upstream Mathlib / formal-conjectures definition. The proof is correct on its definition but doesn't move the upstream goal.",
+      "examples": ["slot689_jacobian (custom `RegularFunction`, `jacobianDet` — diverges from Mathlib's `MvPolynomial.aeval` API)", "slot688_regular_primes (custom `KummerCriterion` for class number)"],
+      "pre_submission_red_flag": "Sketch defines new `Prop` from scratch instead of opening the formal-conjectures statement. The hashes won't match.",
+      "rubric_category_mapped": "known-formalization or structural-open",
+      "diagnostic_test": "Cross-reference the upstream formal-conjectures file. If the sketch redefines anything upstream provides, the result will fail the gap-resolution audit."
+    }
+  ],
+  "tuza_nu4_dominant_mode": {
+    "problem_id": "tuza_nu4",
+    "total_no_advance": 216,
+    "out_of_total_submissions": 317,
+    "dominant_failure_mode": "F5 + F6 combined: side-lemma proliferation + restate-with-sorry",
+    "structural_pattern": "Tuza ν=4 has no known computable subclaim. The pipeline produced 317 submissions chasing apex/bridge/cycle4 / path4 sub-configurations. Each compiled a partial lemma about that sub-config, but the main `tau_le_8 (G : SimpleGraph V) ... := ∃ E, E.card ≤ 8 ∧ isTriangleCover G E` remained `by sorry` (slot327) or was tackled with auxiliary defs that turned out to be falsifiable (slot543 disproved slot542's apex claim — recursive falsification).",
+    "evidence": [
+      "slot327: final theorem `tau_le_8 := by sorry` with multi-step plan in comment",
+      "slot543: counterexample to slot542's `bridge_has_apex_in_bridge` — the apex approach (used in slots 538-542) is fundamentally flawed",
+      "slot541, slot540: bridge coverage and 5-packing core scaffolding, individual lemmas verified, but main target sorried",
+      "MEMORY.md FALSIFIED APPROACHES list explicitly: 'Tuza: Apex-based bridge coverage, 6-packing, LP duality, universal apex'",
+      "feasibility_filter_rubric.md classifies tuza_nu4 as `structural-open` (HOLD): 'no new diagnostic exists'"
+    ],
+    "lesson": "Per the rubric: Tuza ν=4 is structural-open and the entry condition (fresh diagnostic) has not been satisfied since the apex falsification. All 216 no_advance submissions retroactively confirm the rubric: SUBMITTING WITHOUT A FRESH STRUCTURAL DIAGNOSTIC PRODUCES POLISHED IRRELEVANCE."
+  },
+  "avoid_these_problem_shapes": [
+    {
+      "rank": 1,
+      "rule": "If the conjecture cannot be made `Decidable` over a finite range, do NOT submit a sketch that 'defines `answer` and proves `answer ↔ Statement`'. The submission will produce F1/F8 (Iff.rfl / answer-tautology). Examples: erdos412 iterated sigma collision, erdos470 odd weird, jacobian conjecture, hadamard for general k, bunyakovsky, artin primitive root.",
+      "covers_failure_modes": ["F1", "F8"]
+    },
+    {
+      "rank": 2,
+      "rule": "If a structural conjecture has no computable subclaim AND prior submissions have left falsified-approach records (mk failed), do NOT submit another structural sub-lemma. Examples: tuza_nu4, path4_tau_le_8, leinster, agoh_giuga. Result: F5/F6 (recursive falsification / restate-with-sorry).",
+      "covers_failure_modes": ["F5", "F6", "F3"]
+    },
+    {
+      "rank": 3,
+      "rule": "If the conjecture involves Pell sequences, infinite descent, or unbounded universal quantification over an analytic predicate (asymptotic, density, irrationality), do NOT submit unless a parent slot has reduced it to a `Decidable` finite check. Otherwise Aristotle will produce 1000-line infrastructure (F3) AND leave `exact?` stubs (F4). Examples: erdos672 (Pell), erdos251 (Pell), arithmetic_sums (conj 4.3), pell_primes, hardy_littlewood, second_hardy_littlewood.",
+      "covers_failure_modes": ["F3", "F4", "F7"]
+    }
+  ],
+  "sketch_red_flag_checklist": [
+    "[F1] Theorem RHS contains: `Irrational`, `IsEquivalent`, `HasDensity`, `Tendsto`, `Set.Finite`, `Set.Infinite` with no finite restriction.",
+    "[F2] Theorem contains `∨ ¬ ∃` or `∨ ¬ ∀` — blocked by gate C6, but legacy submissions slipped through.",
+    "[F3] Sketch invokes unbounded inductive analysis (Pell, sieve, density) without naming an explicit finite reduction.",
+    "[F4] Sketch says 'by classical X' or 'follows from standard Y' without naming the exact Mathlib lemma.",
+    "[F5] Sketch is about an apex / bridge / cycle sub-configuration of Tuza ν=4 with no fresh structural diagnostic.",
+    "[F6] Sketch is `tau_le_X` for a Tuza sub-case requiring 3+ unproved auxiliary lemmas.",
+    "[F7] Sketch is `∀ n, P n` and the conjecture is unbounded; check if a structural reduction exists.",
+    "[F8] Theorem is `answer ↔ <verbatim definition>` — provable by `rfl`, contributes nothing.",
+    "[F9] `native_decide` fan-out exceeds ~10^8 cells.",
+    "[F10] Sketch redefines `Prop` instead of importing formal-conjectures statement verbatim."
+  ]
+}

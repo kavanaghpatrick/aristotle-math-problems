@@ -55,6 +55,8 @@ Thumbs.db
 *.bak
 *.backup.*
 tracking.db.backup.*
+tracking.db.backup-*
+tracking.db.bak.*
 .aristotle_submit.lock
 iterations/
 codex_proofs/

@@ -1,0 +1,27 @@
+{
+  "_cache_ts": 1780160999.487953,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:09:59+00:00",
+  "citations": [
+    {
+      "evidence": "wiki 1(a) Partial/Other: partial AI progress",
+      "snapshot": "2026-05-30",
+      "source": "teorth-wiki",
+      "url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+    }
+  ],
+  "erdos_n": 251,
+  "erdosproblems_status": "open",
+  "erdosproblems_url": "https://www.erdosproblems.com/251",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos251_automatic",
+  "status": "AMBIGUOUS",
+  "wiki_evidence": [
+    "wiki 1(a) Partial/Other: partial AI progress"
+  ],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "AMBIGUOUS"
+}

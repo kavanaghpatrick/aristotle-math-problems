@@ -1,0 +1,53 @@
+{
+  "name": "Arakelov Theory",
+  "seminal_paper": {
+    "arxiv_id": null,
+    "doi": "10.1070/IM1974v008n06ABEH002141",
+    "citation": "S. Yu. Arakelov, \"Intersection theory of divisors on an arithmetic surface,\" Math. USSR-Izv. 8 (1974), 1167-1180.",
+    "year": 1974
+  },
+  "home_domain": "arithmetic_geometry",
+  "what_it_does": "Arakelov theory extends divisor and intersection theory to arithmetic surfaces by adding archimedean contributions from complex fibers. It produces arithmetic intersection numbers and height invariants used in finiteness results for rational or integral points.",
+  "input_requirements": [
+    "a smooth projective geometrically connected curve over a number field with a regular proper arithmetic model over the ring of integers",
+    "hermitian metrics or Green functions on line bundles/divisors over the complex fibers",
+    "arithmetic divisors or metrized line bundles whose intersection numbers/heights encode the Diophantine set",
+    "a finiteness target expressed as rational or integral points on an algebraic curve/variety, with usable genus or height structure",
+    "compatibility between the Diophantine condition and the chosen algebraic model, without an external order/consecutiveness predicate"
+  ],
+  "output_signature": "arithmetic intersection pairings, height functions, and height inequalities/finiteness criteria for rational or integral points on arithmetic varieties",
+  "input_match": [
+    {
+      "requirement": "a smooth projective geometrically connected curve over a number field with a regular proper arithmetic model over the ring of integers",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "hermitian metrics or Green functions on line bundles/divisors over the complex fibers",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "arithmetic divisors or metrized line bundles whose intersection numbers/heights encode the Diophantine set",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "a finiteness target expressed as rational or integral points on an algebraic curve/variety, with usable genus or height structure",
+      "match": "PARTIAL",
+      "evidence": "prior slot A3: structural_map compares AP triples of powerful numbers with integer points, but supplies no curve or genus data."
+    },
+    {
+      "requirement": "compatibility between the Diophantine condition and the chosen algebraic model, without an external order/consecutiveness predicate",
+      "match": "NO",
+      "evidence": "prior slot A3: obstruction identifies the consecutive constraint as order-based rather than algebraic-geometric."
+    }
+  ],
+  "known_obstructions": [
+    "The displayed problem is phrased in terms of `nth Powerful`, `Set.IsAPOfLength`, and finiteness, not as points on an arithmetic surface.",
+    "The consecutive-term condition is an ordering condition on the powerful-number sequence and is not naturally part of Arakelov-theoretic input.",
+    "Powerfulness is a prime-divisibility condition, not by itself a fixed curve or regular arithmetic model."
+  ],
+  "fit_score": 0.1,
+  "source_analog_id": "A3"
+}

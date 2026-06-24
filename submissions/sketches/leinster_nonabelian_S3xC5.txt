@@ -1,0 +1,18 @@
+OPEN GAP: Nonabelian Leinster group witness — S₃ × C₅
+Source: formal-conjectures/FormalConjectures/Wikipedia/LeinsterGroup.lean
+Domain: algebra
+
+Prove that the symmetric group S₃ × Z/5Z is a Leinster group (sum of orders
+of normal subgroups equals twice the group order = 60). This is the smallest
+known nonabelian Leinster group; a witness theorem.
+
+theorem nonabelian_leinster_S3xC5 :
+    LeinsterGroup.IsLeinster (Equiv.Perm (Fin 3) × ZMod 5) := by sorry
+
+Status: OPEN witness. The classification of Leinster groups is open.
+S3 × C5 has order 30 (a perfect-number multiple), so the sum of divisors
+matters. native_decide on Fin 30 should be tractable.
+
+contribution_statement: Resolving target_resolved=1 here means producing
+a checked Lean proof that S3 × C5 is a Leinster group — first formally
+verified nonabelian Leinster witness.

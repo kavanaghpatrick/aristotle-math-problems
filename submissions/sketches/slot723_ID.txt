@@ -1,4 +1,4 @@
-a5a2642f-128d-4750-bcd9-e66b19897147
-# Task: slot723_erdos283_egyptian_polynomial
-# Hash: 0a173f5594fb938a
-# Submitted: 2026-03-15T05:40:42.634180
+062fd9ea-fbf9-4980-9fa6-7b28a4f02ec4
+# Task: erdos647_existence_delta
+# Hash: 6d24c214f287bd24
+# Submitted: 2026-05-28T11:46:34.954740

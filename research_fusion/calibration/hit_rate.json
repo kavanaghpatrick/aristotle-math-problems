@@ -1,0 +1,180 @@
+{
+  "date": "2026-05-30",
+  "n_problems": 10,
+  "n_hits": 10,
+  "hit_rate": 1.0,
+  "verdict": "PASS",
+  "threshold": 4,
+  "per_problem": [
+    {
+      "id": "wiles_flt",
+      "name": "Fermat's Last Theorem (Wiles, 1995)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "grok",
+      "best_match": "Ribet level-lowering + Frey-curve Galois deformation bridge",
+      "matched_alt": "frey curve",
+      "via": "headline-proposal",
+      "elapsed_s": 275.5510559082031,
+      "per_model_score": {
+        "grok": 1.0,
+        "gemini": 1.0,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "maynard_gaps",
+      "name": "Bounded gaps between primes (Maynard-Tao, 2013)",
+      "score": 0.5,
+      "hit": true,
+      "strict_hit": false,
+      "best_model": "gemini",
+      "best_match": "sieve",
+      "matched_alt": null,
+      "via": "same-domain-buried:sieve",
+      "elapsed_s": 256.73672890663147,
+      "per_model_score": {
+        "gemini": 0.5,
+        "grok": 0.5,
+        "codex": 0.5
+      }
+    },
+    {
+      "id": "zhang_gaps",
+      "name": "Bounded gaps between primes (Zhang, 2013)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "grok",
+      "best_match": "Deligne Weil II + Laumon Fourier transform for \u2113-adic sheaves",
+      "matched_alt": "deligne",
+      "via": "headline-proposal",
+      "elapsed_s": 206.3465700149536,
+      "per_model_score": {
+        "grok": 1.0,
+        "gemini": 1.0,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "green_tao",
+      "name": "Primes contain arbitrarily long arithmetic progressions (Green-Tao, 2004)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "grok",
+      "best_match": "Furstenberg correspondence principle + multiple recurrence via characteristic factors",
+      "matched_alt": "furstenberg correspondence",
+      "via": "headline-proposal",
+      "elapsed_s": 792.2833752632141,
+      "per_model_score": {
+        "grok": 1.0,
+        "gemini": 1.0,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "hough_covering",
+      "name": "Erdos minimum modulus / covering systems (Hough, 2015)",
+      "score": 0.5,
+      "hit": true,
+      "strict_hit": false,
+      "best_model": "gemini",
+      "best_match": "Shannon Entropy and the Bottleneck Argument",
+      "matched_alt": null,
+      "via": "same-domain-token:entropy",
+      "elapsed_s": 435.47900795936584,
+      "per_model_score": {
+        "gemini": 0.5,
+        "grok": 0.5,
+        "codex": 0.5
+      }
+    },
+    {
+      "id": "cap_set",
+      "name": "Cap-set problem (Ellenberg-Gijswijt, 2016)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "gemini",
+      "best_match": "Slice Rank of Tensors",
+      "matched_alt": "slice rank",
+      "via": "headline-proposal",
+      "elapsed_s": 372.9052450656891,
+      "per_model_score": {
+        "gemini": 1.0,
+        "grok": 1.0,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "perelman_poincare",
+      "name": "Poincare conjecture (Perelman, 2002-2003)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "gemini",
+      "best_match": "w functional",
+      "matched_alt": "w functional",
+      "via": "buried-in-response",
+      "elapsed_s": 642.0861141681671,
+      "per_model_score": {
+        "grok": 0.5,
+        "gemini": 1.0,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "faltings_mordell",
+      "name": "Mordell conjecture (Faltings, 1983)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "gemini",
+      "best_match": "Arakelov Intersection Theory on Arithmetic Surfaces",
+      "matched_alt": "arakelov",
+      "via": "headline-proposal",
+      "elapsed_s": 269.31695318222046,
+      "per_model_score": {
+        "gemini": 1.0,
+        "grok": 0.5,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "scholze_perfectoid",
+      "name": "Weight-monodromy / perfectoid spaces (Scholze, 2012)",
+      "score": 1.0,
+      "hit": true,
+      "strict_hit": true,
+      "best_model": "codex",
+      "best_match": "perfectoid spaces",
+      "matched_alt": "perfectoid spaces",
+      "via": "buried-in-response",
+      "elapsed_s": 282.8071041107178,
+      "per_model_score": {
+        "grok": 0.5,
+        "gemini": 0.5,
+        "codex": 1.0
+      }
+    },
+    {
+      "id": "helfgott_goldbach",
+      "name": "Ternary Goldbach conjecture (Helfgott, 2013)",
+      "score": 0.5,
+      "hit": true,
+      "strict_hit": false,
+      "best_model": "grok",
+      "best_match": "effective",
+      "matched_alt": null,
+      "via": "same-domain-buried:effective",
+      "elapsed_s": 417.4287180900574,
+      "per_model_score": {
+        "gemini": 0.0,
+        "grok": 0.5,
+        "codex": 0.5
+      }
+    }
+  ]
+}

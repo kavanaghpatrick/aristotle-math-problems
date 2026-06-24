@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 373 (Surányi) — only solution is (10, 7, 6)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/373.lean
+Domain: nt
+
+Surányi conjectured (1960s, open) that the equation n! = a!·b! with
+1 < b ≤ a, a + 1 ≠ n has only the solution (n, a, b) = (10, 7, 6).
+iter1 (uuid 67d9e1d9-e73f-4f49-8d4b-60cb8c2fa40e) proved sorry-free
+two bounds: n < 2a and a + 2 ≤ n. Independent scan a ∈ [3, 50] finds
+exactly one solution, (a, n, b) = (7, 10, 6), matching the conjecture.
+
+open scoped Nat
+namespace Erdos373
+
+theorem erdos_373_suranyi :
+    {(n, a, b) : ℕ × ℕ × ℕ | n ! = a ! * b ! ∧ 1 < n ∧ 1 < a ∧ 1 < b
+      ∧ b ≤ a ∧ a + 1 ≠ n} = {(10, 7, 6)} := by
+  sorry
+
+end Erdos373
+
+Status: OPEN since 1960s. iter1 reduces the search to a + 2 ≤ n < 2a.
+No proof of the full uniqueness exists in the literature.

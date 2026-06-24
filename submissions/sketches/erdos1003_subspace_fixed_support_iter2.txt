@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 1003 iter2 — Fixed-support finiteness for φ(n)=φ(n+1)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1003.lean (sub-claim)
+Domain: nt
+
+For any finite set S of primes, only finitely many positive integers n
+satisfy φ(n) = φ(n+1) with supp(n) ∪ supp(n+1) ⊆ S.
+
+theorem erdos_1003_fixed_support_finite (S : Finset ℕ) (hS : ∀ p ∈ S, p.Prime) :
+    {n : ℕ | 0 < n ∧ Nat.totient n = Nat.totient (n + 1) ∧
+             (∀ p, p.Prime → p ∣ n → p ∈ S) ∧
+             (∀ p, p.Prime → p ∣ (n + 1) → p ∈ S)}.Finite := by sorry
+
+Status: OPEN sub-claim of Erdős 1003. Iter2 explicitly targets only the
+per-support finiteness direction; the infinitude conjecture itself remains
+open. Prior iter v1 (UUID 4697679f) explored a two-pillar approach; Aristotle
+verified seven specific small solutions (n = 1, 3, 15, 104, 164, 194, 255)
+sorry-free in v1 and critiqued the second pillar as speculative. This iter2
+keeps only the provable direction.

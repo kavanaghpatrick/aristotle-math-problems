@@ -1,0 +1,20 @@
+OPEN GAP: Erdős 324 — quintic distinctness (bounded N=200, iter2)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/324.lean
+Domain: number theory
+
+Erdős conjectured that f(x) = x^5 has the property that all sums
+f(a)+f(b) = a^5 + b^5 with a < b nonnegative integers are distinct.
+The unbounded statement is open. We extend L3 iter1's N=50 closure
+(UUID 229acf74-61e6-4042-9dee-3be9a9815b3e, sorry-free via Fin 51 +
+native_decide) to N=200. Python scan confirms zero collisions for
+0 ≤ a < b ≤ 200 (20100 distinct sums; max sum 6.32·10^11).
+
+theorem erdos_324_quintic_bounded_200 :
+    ∀ a b c d : ℕ, a < b → c < d →
+      a ≤ 200 → b ≤ 200 → c ≤ 200 → d ≤ 200 →
+      a ^ 5 + b ^ 5 = c ^ 5 + d ^ 5 → a = c ∧ b = d := by
+  sorry
+
+Status: OPEN. Unbounded a^5+b^5 distinctness remains conjectural.
+Bounded version reduces via suffices to a Fin 201 native_decide
+check, well within budget (slot738 handled 10^7-scale sieving).

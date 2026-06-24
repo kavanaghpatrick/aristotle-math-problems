@@ -1,0 +1,20 @@
+OPEN GAP: Selfridge — infinitely many odd squarefree Sierpiński numbers
+Source: erdosproblems.com/1113 (Erdős–Graham F13); cf. formal-conjectures/FormalConjectures/ErdosProblems/203.lean
+Domain: nt
+
+A Sierpiński number is an odd k ≥ 1 such that k · 2^n + 1 is composite for every
+n ≥ 1. Selfridge conjectured that there are infinitely many such k that are
+also squarefree.
+
+theorem selfridge_squarefree_sierpinski :
+    {k : ℕ | Odd k ∧ Squarefree k ∧ ∀ n ≥ 1, ¬ Nat.Prime (k * 2^n + 1)}.Infinite := by
+  sorry
+
+Status: OPEN. Sierpiński 1960 showed infinitely many odd Sierpiński k exist
+via the {3,5,7,13,17,241} cover of 78557. The simultaneous squarefree
+restriction is unsettled. Erdős–Graham [F13] and the 2008 Sierpiński survey
+ask whether every Sierpiński k is a perfect power or has a finite covering
+set; Izotov 1995 exhibited a non-covering Sierpiński k = 734110615000775^4
+(not squarefree). The squarefree density inside a fixed AP is bounded below
+in published analytic-number-theory results, but no extant argument lifts
+that density to infinitude of (odd ∧ squarefree ∧ Sierpiński) k.

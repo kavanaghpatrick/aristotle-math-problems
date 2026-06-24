@@ -1,0 +1,62 @@
+{
+  "_cache_ts": 1780313655.6774201,
+  "checked_at": "2026-06-01T11:34:15+00:00",
+  "evidence": "5 paper(s) with strong closure language matching the named conjecture 'Erd\u0151s problem 10' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "1975 partial/weak: Some problems and results on the irrationality of the sum of infinite series",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3578925"
+    },
+    {
+      "evidence": "1968 partial/weak: Problems and results on the convergence and divergence properties of the Lagrange interpolation polynomials an",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3256654"
+    },
+    {
+      "evidence": "2023 partial/weak: On the ERD\u0150S distance problem",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21203/rs.3.rs-2679663/v1"
+    },
+    {
+      "evidence": "2024 STRONG closure language: Optimal Solution to Erd\u0151s Distinct Distance Problem",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2139/ssrn.4775206"
+    },
+    {
+      "evidence": "2004 STRONG closure language: Erd\u0151s Graphs Resolve Fine's Canonicity Problem",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2178/bsl/1082986262"
+    },
+    {
+      "evidence": "2026 STRONG closure language: Finding a Solution to the Erd\u0151s-Ginzburg-Ziv Theorem in Linear Time",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.21753v1"
+    },
+    {
+      "evidence": "2026 STRONG closure language: A resolution of Erd\u0151s Problem #190 via Erd\u0151s-Lov\u00e1sz, BCT, and Baker-Harman-Pintz",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.20588v1"
+    },
+    {
+      "evidence": "2025 STRONG closure language: On an Erd\u0151s--Lov'asz problem: 3-critical 3-graphs of minimum degree 7",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2512.24850v1"
+    },
+    {
+      "evidence": "2025 partial/weak: Boosted second moment method in random regular graphs",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2510.12600v3"
+    }
+  ],
+  "status": "CLOSED"
+}

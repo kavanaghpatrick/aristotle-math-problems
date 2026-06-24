@@ -1,0 +1,40 @@
+### Technique 1: Mori flip theorem + cone theorem bridge
+**Seminal paper or theorem**: Mori, "Flip theorem and the existence of minimal models for 3-folds", J. Amer. Math. Soc. 1 (1988).  
+**Structural analog**: Unlocked the birational classification of terminal 3-folds (Mori 1988, Kollár-Mori 1998) by performing controlled surgeries (flips and divisorial contractions) on K_X-negative singularities while preserving terminality; the analogous structural feature here is the Ricci curvature playing the role of K_X, so that neckpinch and cusp singularities in the parabolic PDE flow admit a canonical surgery that continues the flow without losing volume or diffeomorphism type.  
+**Diagnosis of why the default toolkit failed**: missing computable bridge between the analytic singularity models (Hamilton-Ivey pinching) and a global canonical-neighborhood theorem that would allow indefinite continuation.  
+**Implementation comment**: Relevant infrastructure lives in `Mathlib/AlgebraicGeometry/MinimalModel`; what is missing is a formalized `RicciFlow` namespace with a bridge lemma translating scalar curvature monotonicity to the discrepancy of a Q-divisor on an algebraic model (requires new `AnalyticToAlgebraic` approx file).
+
+### Technique 2: Szemerédi regularity lemma + counting lemma
+**Seminal paper or theorem**: Szemerédi, "Regular partitions of graphs" (1978), with counting lemma formalized in Tao "Szemerédi’s regularity lemma revisited" (2006).  
+**Structural analog**: Unlocked Szemerédi’s theorem on arithmetic progressions by decomposing an arbitrary dense set into a structured (low-complexity) part plus a pseudorandom part whose irregularities are negligible; the analogous feature is a triangulation or ε-net on the 3-manifold whose curvature tensor can be decomposed into "canonical neighborhood" pieces (structured) versus pseudorandom pieces where singularity formation can be shown to have density zero.  
+**Diagnosis of why the default toolkit failed**: density-zero issue—the set of singular times produced by Hamilton’s flow has no uniform scale, so Cheeger-Gromov compactness cannot be applied uniformly.  
+**Implementation comment**: Lives in `Mathlib/Combinatorics/Regularity`; missing is a `Manifold.Regularity` extension that equips a smooth triangulation with a curvature graph and transfers the counting lemma to volume estimates (requires new `CurvatureGraph` API).
+
+### Technique 3: Pesin theory + Lyapunov exponent stable-manifold theorem
+**Seminal paper or theorem**: Pesin, "Characteristic Lyapunov exponents and smooth ergodic theory", Math. USSR-Sb. 33 (1977).  
+**Structural analog**: Unlocked the existence of stable/unstable foliations for nonuniformly hyperbolic diffeomorphisms despite dense singularities (Pesin 1977, Katok-Hasselblatt); the analogous structural feature is viewing the Ricci-flow PDE itself as a dynamical system on the space of metrics, where finite-time singularities correspond to blow-up times with positive Lyapunov exponents that still admit a hyperbolic splitting allowing controlled surgery.  
+**Diagnosis of why the default toolkit failed**: positive Lyapunov exponent barrier—Hamilton-Ivey pinching gives only scalar curvature control, not the full matrix of sectional curvatures needed to integrate the stable manifold through a singularity.  
+**Implementation comment**: Lives in `Mathlib/Dynamics/ErgodicTheory/Pesin`; missing is formalization of the Ricci-flow vector field as a (non-autonomous) dynamical system on `Riem(M)` together with a Lyapunov cocycle (requires new `RicciFlow.Dynamics` namespace).
+
+### Technique 4: Bass-Serre theory + graph-of-groups splitting
+**Seminal paper or theorem**: Serre, "Trees" (1980), with the key bridge lemma that a group acting without inversions on a tree splits as a graph of groups.  
+**Structural analog**: Unlocked the subgroup structure theorem for splittable groups (e.g., Stallings ends theorem for finitely generated groups); the analogous feature is that a simply-connected 3-manifold admitting a non-trivial incompressible surface would split, forcing (by contradiction) the manifold to be a graph of trivial groups, i.e., S^3.  
+**Diagnosis of why the default toolkit failed**: parity obstruction—Ricci flow with ad-hoc surgery cannot detect incompressible tori or spheres at the level of fundamental-group splittings because the flow destroys the π₁-action before the singularity forms.  
+**Implementation comment**: Lives in `Mathlib/GroupTheory/BassSerre`; missing is a `Manifold.FundamentalGroupoid` link that realizes the JSJ decomposition inside `Topology.ThreeManifold` and proves the sphere theorem from the trivial splitting (requires new `IncompressibleSurface` formalization).
+
+### Technique 5: o-minimal cell decomposition + monotonicity theorem
+**Seminal paper or theorem**: van den Dries-Wilkie, "On o-minimal structures on the real field", Ann. Math. 131 (1990); Wilkie’s Pfaffian closure (1996).  
+**Structural analog**: Unlocked tame topology for subanalytic sets by proving every definable set admits a finite cell decomposition with monotonicity of projections (no Cantor-set pathologies); the analogous structural feature is that the set of singular times and the singular set itself in Ricci flow become definable in an o-minimal expansion of the reals, allowing uniform control on neckpinch scales that Aleksandrov limits cannot see.  
+**Diagnosis of why the default toolkit failed**: wild topology in limit spaces—Cheeger-Gromov compactness produces only metric limits, not a tameness guarantee that would let one induct on the number of cells in a singularity.  
+**Implementation comment**: Lives in `Mathlib/ModelTheory/oMinimal`; missing is an `oMinimal.RicciFlow` instance showing that the curvature tensor satisfies a first-order PDE definable in the real field with exponentiation (requires new `CurvatureDefinable` file).
+
+## Ranking
+**Rank 1 (highest probability ≈ 35 %)**: Mori flip theorem + cone theorem bridge. Bayesian reasoning: prior ≈ 0.4 from its success on the structurally identical birational classification problem for 3-folds (terminal singularities ↔ neckpinches); likelihood ≈ 0.9 given that the Ricci-flow monotonicity functional is formally identical to the discrepancy of K_X, so the bridge lemma transfers almost verbatim (Perelman’s later entropy functional is essentially the analytic shadow of this). Posterior = prior × likelihood dominates all others.
+
+**Rank 2 (≈ 25 %)**: Pesin theory + Lyapunov exponent stable-manifold theorem. Prior ≈ 0.35 (worked for billiard flows and geodesic flows with dense singularities); likelihood ≈ 0.7 because the Ricci-flow PDE on the metric tensor is literally a smooth dynamical system on an infinite-dimensional manifold whose linearization at a singularity is hyperbolic exactly when Hamilton-Ivey pinching holds. Down-weighted relative to MMP because the infinite-dimensional setting lacks a pre-existing “flip” dictionary.
+
+**Rank 3 (≈ 15 %)**: Bass-Serre theory + graph-of-groups splitting. Prior ≈ 0.5 (decisive for 3-manifold JSJ decomposition in the topological category); likelihood ≈ 0.3 because the simply-connected assumption forces the splitting to be trivial, but the default analytic toolkit never produces the incompressible surfaces needed to feed the group action—hence only moderate lift.
+
+**Rank 4 (≈ 15 %)**: o-minimal cell decomposition + monotonicity theorem. Prior ≈ 0.25 (tame topology resolved pathologies in real-algebraic geometry); likelihood ≈ 0.6 given that singularity formation is governed by analytic PDEs known to be o-minimal; down-ranked because it gives uniform bounds but does not directly supply the surgery procedure itself.
+
+**Rank 5 (lowest ≈ 10 %)**: Szemerédi regularity lemma + counting lemma. Prior ≈ 0.2 (extremely successful in additive combinatorics); likelihood ≈ 0.5 because a discrete curvature graph on a triangulation does admit a regularity decomposition, yet the passage from discrete pseudorandomness back to smooth Ricci-flow surgery scales remains a large “discretization gap,” lowering the posterior.

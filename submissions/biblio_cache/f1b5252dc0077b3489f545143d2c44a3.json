@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318856.75828,
+  "checked_at": "2026-06-01T13:00:56+00:00",
+  "evidence": "3 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "1988 partial/weak: On the metric theory of nearest integer continued fractions",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1007/bf01934706"
+    },
+    {
+      "evidence": "1987 partial/weak: On the metric theory of nearest integer continued fractions",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1007/bf01934188"
+    },
+    {
+      "evidence": "1999 partial/weak: On the number of coprime integer pairs within a circle",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.4064/aa-90-1-1-16"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

@@ -1,0 +1,106 @@
+# airlock_blocklist.txt
+# ---------------------------------------------------------------------------
+# Default strategy-term blocklist for the FUSION-lane airlock check
+# (`scripts/airlock_check.py`).
+#
+# Purpose:
+#   The FUSION lane keeps ALL strategy content in the `.fusion.json` companion
+#   and NONE of it in the `.txt` sketch. The airlock check enforces this by
+#   scanning the .txt for substrings that look like strategy. Anything matched
+#   here in the .txt (outside of comment/source lines) causes a REJECT.
+#
+# Format:
+#   - One token per line
+#   - Lines starting with `#` are comments
+#   - Blank lines ignored
+#   - Tokens are matched CASE-INSENSITIVELY, as whole-word boundaries on the
+#     normalized .txt content (see scripts/airlock_check.py for matching rules)
+#
+# Maintenance:
+#   - This file is the DEFAULT blocklist. Authors may pass `--blocklist <path>`
+#     to airlock_check.py for problem-specific lists.
+#   - Additionally, every NAMED TECHNIQUE / BRIDGE LEMMA term used inside the
+#     companion `.fusion.json` is treated as an *implicit* blocklist entry
+#     for that specific submission. Authors do NOT need to update this file
+#     when they pick a new named technique — the airlock derives the dynamic
+#     blocklist from the companion automatically.
+#
+# Reference:
+#   docs/fusion_axis_companion_spec.md
+#   docs/infrastructure_changes_may30/I8_fusion_lane.md
+# ---------------------------------------------------------------------------
+
+# Famous named techniques (any mention in the bare .txt is a leak)
+Frey curve
+Frey-Hellegouarch
+Ribet level-lowering
+modular elliptic
+Wiles
+Taylor-Wiles
+Heegner point
+Iwasawa theory
+Selmer group
+Gross-Zagier
+Birch-Swinnerton-Dyer
+BSD
+Bombieri-Vinogradov
+Riemann hypothesis
+GRH
+Langlands
+Vinogradov circle method
+Hardy-Littlewood circle
+sieve of Eratosthenes
+Selberg sieve
+large sieve
+Brun sieve
+
+# Combinatorial techniques
+probabilistic method
+Lovasz local lemma
+Szemeredi regularity
+Szemerédi regularity
+container method
+hypergraph container
+Behrend construction
+algebraic method
+polynomial method
+Stepanov method
+slice rank
+
+# Analytic / arithmetic geometry
+p-adic analysis
+class field theory
+Iwasawa main conjecture
+crystalline cohomology
+etale cohomology
+Galois representation
+automorphic form
+Eichler-Shimura
+Deligne
+Faltings
+
+# Generic strategy keywords (proof-guidance leak)
+Proof Strategy
+Proof Outline
+Bridge Lemma
+Key Lemma
+Main Approach
+Proposed Approach
+Proof Sketch
+Strategy:
+Outline:
+Approach:
+Lemma 1:
+Step 1:
+First, we
+We argue
+We show that
+
+# Notes:
+# - Falsification language (counterexample, disprove, etc.) is NOT blocked here
+#   — those are allowed in the .txt because they are gap statements, not strategy.
+# - The companion JSON's `named_technique`, `bridge_lemma`, and the headline
+#   tokens of `candidate_lemmas` are dynamically added to this list per
+#   submission. So if the companion says `named_technique: "Frey curve"`, the
+#   .txt cannot mention "Frey" — even though "Frey curve" is also in the
+#   static list above.

@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 938 — finitely many consecutive powerful 3-APs (Maier-matrix angle)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the sequence of powerful numbers (p ∣ n ⇒ p² ∣ n).
+Prove there are only finitely many indices k such that n_k, n_{k+1}, n_{k+2}
+form an arithmetic progression.
+
+theorem erdos_938 :
+    {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+      P = {Nat.nth Nat.Powerful k, Nat.nth Nat.Powerful (k+1),
+           Nat.nth Nat.Powerful (k+2)}}.Finite := by sorry
+
+Status: OPEN. Tied to the Erdős-Mollin-Walsh conjecture (no three consecutive
+powerful integers). Chan 2022 (arXiv:2210.00281) gives a conditional lower
+bound d ≫ N^{1/2-ε} under abc; consecutiveness with intervening squares forces
+d ≤ 2·sqrt(n_{k+2}) + O(1). The structural gap between these two bounds
+is the open core.

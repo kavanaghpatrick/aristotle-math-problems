@@ -1,0 +1,46 @@
+{
+  "problem_id": "erdos_64",
+  "source": "formal-conjectures/FormalConjectures/ErdosProblems/64.lean",
+  "sketch_file": "submissions/sketches/erdos64_disproof.txt",
+  "submission_type": "falsification",
+  "CS": "disproof_closure",
+  "closure_scope": "disproof_closure",
+  "CM": "disproof_construction",
+  "closure_mechanism": "disproof_construction",
+  "CR": "clean_decidable",
+  "closure_risk_primary": "clean_decidable",
+  "closure_risk_secondary": [
+    "witness_search_explosion"
+  ],
+  "HM": "journal_clean",
+  "honesty_marker": "journal_clean",
+  "real_closure_candidate": true,
+  "strategic_subclaim": false,
+  "rationale": "Counterexample (if any) to Erdős-Gyárfás 1995 would disprove a 31-year-old conjecture (CS=disproof_closure). Mechanism is exhibit-and-decide: provide explicit Fin n SimpleGraph adjacency, decide G.minDegree >= 3, decide non-existence of 4-cycle, 8-cycle, 16-cycle via Mathlib SimpleGraph.Walk.IsCycle decidability (CM=disproof_construction). Aristotle's S6 graph-counterexample DNA (slots 114/131/250/267 Tuza ν=4 arc) is a structural match. CR primary=clean_decidable: G.minDegree and cycle length are computable for Fin n graphs with DecidableRel. CR secondary=witness_search_explosion: enumerating all SimpleGraph (Fin 25) is 2^300 — Aristotle cannot search; we (external SAT) provide the witness, Aristotle verifies. HM=journal_clean: a counterexample to Erdős-Gyárfás is a journal-headline result.",
+  "external_search": {
+    "script": "scripts/erdos64_sat_search.py",
+    "ran_at": "2026-05-30",
+    "wall_clock_s": 8,
+    "trials_total_approx": 76800,
+    "phases": [
+      "PHASE 1: random 3-regular graphs n in {18..25}, ~16k trials",
+      "PHASE 2: random min-deg-3 graphs m in [3n/2, 2n], ~48k trials",
+      "PHASE 3: random min-deg-3 graphs m in [2n, 2.5n], ~32k trials",
+      "PHASE 4: hill-climbing 4-cycle removal on cubic graphs n in {18..32}, ~1.6k trials with up to 100 swaps each"
+    ],
+    "result": "no counterexample found",
+    "fragment_observation": "Of ~120 random cubic graphs that hill-climbing brought to 4-cycle-free form across n ∈ {18,20,22,24,26,28,30,32}, ALL contained an 8-cycle. Consistent with Hu-Shen 2024 / Hegde et al Feb 2025 lit bounds.",
+    "search_bound_reached": 32,
+    "honest_assessment": "Random sampling at n ≤ 32 is incomplete; a real CNF SAT run on cadical/kissat could push to n ≈ 40 where a counterexample, if any, is most likely to live. The negative search result HOLD-signals the literature but does not rigorously prove non-existence at n ≤ 25 — that requires either (a) Aristotle's decide closing the impossibility direction, or (b) an exhaustive SAT search with proof certificate. The submitted sketch is the existence direction; if Aristotle returns sorry / no witness, this is a meaningful HOLD signal but not a closure of the impossibility direction."
+  },
+  "advance_signature_match": "S6 (explicit small graph counterexample — Tuza ν=4 arc slots 114/131/250/267)",
+  "aristotle_prior_history": "No prior Erdős 64 submission. Tuza arc (slots 114, 131, 250, 267) demonstrates Aristotle CAN verify supplied small-graph counterexamples via decide on adjacency + Finset enumeration. The gap here is: can Aristotle synthesize the counterexample without one being supplied? S6 DNA suggests YES for n ≤ 13; n ∈ {18..25} is at the outer edge of the demonstrated scale.",
+  "closure_probability_1_to_10": 3,
+  "feasibility_notes": "C7 mechanism analyst ranked feasibility 7/10 (Aristotle CAN verify). C10 ranked closure probability 3/10. Closure probability 3 here because: external search found nothing (8-cycle constraint is binding at all sampled n); without a supplied witness, Aristotle's S6 DNA does not extend cleanly to discovery in this regime. If Aristotle's compute is allocated to a cycle-length-DAG enumeration this could succeed; if it tries random adjacency synthesis it will likely fail.",
+  "expected_outcome": "compiled_partial OR compiled_no_advance with sorry on the existence claim; small chance of compiled_advance if Aristotle's enumeration synthesizes a witness; vanishingly small chance of a real disproof of Erdős-Gyárfás 1995.",
+  "submission_action": "DRAFT ONLY — not yet submitted. Submit only after agent #5 of 5 review.",
+  "created_at": "2026-05-30",
+  "agent": "closure-execution-team agent #3 of 5",
+  "fallback_used": true,
+  "fallback_rationale": "External search found no counterexample. Original plan (embed witness graph as def witness : SimpleGraph (Fin n)) cannot be executed without a witness. Fallback: state the existence question as a bare gap at the bounded scope n ≤ 25, let Aristotle attempt synthesis."
+}

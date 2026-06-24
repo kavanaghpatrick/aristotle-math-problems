@@ -1,0 +1,48 @@
+{
+  "name": "infinite descent",
+  "seminal_paper": {
+    "arxiv_id": null,
+    "doi": null,
+    "citation": "P. de Fermat, Observations sur Diophante, posthumously published in Diophantus, Arithmetica, Toulouse edition.",
+    "year": 1670
+  },
+  "home_domain": "Diophantine equations",
+  "what_it_does": "Infinite descent rules out nontrivial integral solutions by showing that any such solution would force the existence of a strictly smaller one of the same kind. It is most effective when the forbidden configuration has a rigid algebraic parametrization and a natural positive integer height.",
+  "input_requirements": [
+    "an integral Diophantine encoding of the forbidden equally spaced configuration",
+    "a well-founded positive height or size attached to every nontrivial solution",
+    "a descent map that sends every nontrivial solution to a strictly smaller solution of the same type",
+    "integrality or divisibility constraints proving the descended object remains in the same solution class"
+  ],
+  "output_signature": "nonexistence of nontrivial integer solutions, or finiteness after reduction to finitely many minimal cases",
+  "input_match": [
+    {
+      "requirement": "an integral Diophantine encoding of the forbidden equally spaced configuration",
+      "match": "PARTIAL",
+      "evidence": "A5 gives an analogy with arithmetic progressions in a power-divisibility-defined sparse set, but no explicit Diophantine encoding is present."
+    },
+    {
+      "requirement": "a well-founded positive height or size attached to every nontrivial solution",
+      "match": "PARTIAL",
+      "evidence": "A5 suggests ordered consecutive terms nth Powerful k, nth Powerful (k + 1), nth Powerful (k + 2), but no descent height is identified."
+    },
+    {
+      "requirement": "a descent map that sends every nontrivial solution to a strictly smaller solution of the same type",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "integrality or divisibility constraints proving the descended object remains in the same solution class",
+      "match": "PARTIAL",
+      "evidence": "A5 includes power-divisibility structure for powerful numbers, but no preservation mechanism for consecutive powerful triples is available."
+    }
+  ],
+  "known_obstructions": [
+    "The target problem concerns three terms rather than four squares, so the classical rigidity of four squares in arithmetic progression is absent.",
+    "Powerful numbers form a larger and less rigid class than squares.",
+    "The consecutiveness condition is global in the ordered sequence of powerful numbers, not just an algebraic condition on three integers.",
+    "No descent map preserving both powerfulness and consecutiveness is supplied by the analog."
+  ],
+  "fit_score": 0.375,
+  "source_analog_id": "A5"
+}

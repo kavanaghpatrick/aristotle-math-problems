@@ -1,0 +1,26 @@
+OPEN GAP: Erdős 364 — mod-44100 closure for consecutive powerful triples
+Source: formal-conjectures/FormalConjectures/ErdosProblems/364.lean
+Domain: nt
+
+A natural number n is powerful iff for every prime p dividing n, p^2 also
+divides n. We conjecture: if n, n+1, and n+2 are all powerful, then the
+following four modular conditions hold simultaneously:
+  n % 4 = 3,
+  n % 9 ∈ {0, 7, 8},
+  n % 25 ∈ {0, 1, 2, 6, 7, 11, 12, 16, 17, 21, 22, 23, 24},
+  n % 49 ∈ {0, 1, 2, 3, 4, 8, 9, 10, 11, 15, 16, 17, 18, 22, 23, 24,
+            25, 29, 30, 31, 32, 36, 37, 38, 39, 43, 44, 45, 46, 47, 48}.
+
+theorem erdos_364_mod44100
+    (n : ℕ) (hn : Powerful n) (hn1 : Powerful (n + 1)) (hn2 : Powerful (n + 2)) :
+    n % 4 = 3 ∧ (n % 9 = 0 ∨ n % 9 = 7 ∨ n % 9 = 8) ∧
+      (n % 25 ∈ ({0,1,2,6,7,11,12,16,17,21,22,23,24} : Finset ℕ)) ∧
+      (n % 49 ∈ ({0,1,2,3,4,8,9,10,11,15,16,17,18,22,23,24,25,
+                  29,30,31,32,36,37,38,39,43,44,45,46,47,48} : Finset ℕ)) := by
+  sorry
+
+Status: OPEN as a Mathlib formalization. Beckon (2019, slot 1325) proved
+n % 36 ∈ {7, 27, 35}. The mod-25 and mod-49 conditions stated above are
+absent from Beckon, Chan (arXiv:2503.21485), and She (arXiv:2507.16828).
+The full E364 conjecture (no consecutive powerful triple) is OPEN
+(verified for n < 10^22).

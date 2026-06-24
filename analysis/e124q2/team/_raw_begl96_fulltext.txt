@@ -1,0 +1,284 @@
+ACTA ARITHMETICA
+  LXXVII.2 (1996)
+
+
+
+
+          Complete sequences of sets of integer powers
+                                         by
+
+             S. A. Burr (Bronx, N.Y.), P. Erdős (Budapest),
+                  R. L. Graham (Murray Hill, N.J.) and
+                W. Wen-Ching Li (University Park, Penn.)
+
+
+    1. Introduction. For a sequence S = (s1 , s2 , . . .) of positive integers,
+define
+                      nX∞                       ∞
+                                                X            o
+              Σ(S) :=      εi si : εi = 0 or 1,    εi < ∞ .
+                             i=1                     i=1
+Call S complete if Σ(S) contains all sufficiently large integers.
+    It has been known for some time (see [B]) that if gcd(a, b) = 1 then
+the (nondecreasing) sequence formed from the values as bt with s0 ≤ s,
+t0 ≤ t ≤ f (s0 , t0 ) is complete, where s0 and t0 are arbitrary, and f (s0 , t0 ) is
+sufficiently large.
+    In this note we consider the analogous question for sequences formed
+from pure powers of integers. Specifically, for a sequence A of integers greater
+than 1, denote by Pow(A; s) the (nondecreasing) sequence formed from all
+the powers ak where a ∈ A and k ≥ s ≥ 1. Although we are currently unable
+to prove it, we believe the following should hold:
+   Conjecture. For any s, Pow(A; s) is complete if and only if
+        P
+    (i) a∈A 1/(a − 1) ≥ 1,
+   (ii) gcd{a ∈ A} = 1.
+   The necessity of (ii) is immediate. On the other hand, if (i) fails to hold
+then standard results in diophantine approximation show (as pointed out by
+Carl Pomerance) that in fact Σ(Pow(A; s)) has upper density less than 1.
+
+   2. The main result. For a sequence A, denote by A(x) the number of
+entries a ∈ A with a ≤ x.
+
+  The research of the fourth author was supported in part by grant from NSA number
+MDA 904-95-H-1006.
+
+                                        [133]
+134                             S. A. Burr et al.
+
+   Theorem 1. Suppose A is a sequence of integers greater than 1 satisfy-
+ing:
+       (i) lim supn→∞ A(n)/n > 0;
+      (ii) gcd{a ∈ A} = 1.
+Then for any s, there is a finite subset A0 = A0s such that Pow(A0 ; s) is
+complete.
+   P r o o f. To begin with, we first remove (by (ii)) a finite subsequence
+A0 ⊂ A so that gcd{a ∈ A0 } = 1. We will use A0 at the end of the proof.
+Next, we choose (by (i)) a finite increasing subsequence B = (b1 , . . . , bN ) ⊂
+                PN
+A \ A0 so that i=1 b−1 i  = β > 2.
+   Write Σ(Pow(B; s)) = {0 = p0 < p1 < p2 < . . .}.
+      Claim 1. For all k ≥ 0, pk+1 − pk ≤ 2bs+1
+                                            N .
+
+   P r o o f o f C l a i m 1. Write Pow(B; s) = {β1 < β2 < . . .}. Observe
+that for any k ≥ 1:
+    (a) The maximum gap size between consecutive terms of Σ(β1 , . . . , βk )
+is at mostPβk ;
+            k
+    (b) If i=1 βi ≥ βk+1 then the maximum gap size in Σ(β1 , . . . , βk+1 ) is
+less than or equal to the maximum gap size in Σ(β1 , . . . , βk ).
+    Let l denote the least index such that βl > 2bs+1        N . Then by (a),
+                                                        s+1
+Σ(β1 , . . . , βk−1 ) has maximum gap size at most 2bN for k ≤ l. For k > l,
+                                  t(i)         t(i)+1
+define t(i), 1 ≤ i ≤ N , so that bi < βk ≤ bi         . Then
+             N Xt(i)        N                                 N
+            X              X    t(i)+1
+                               bi      − bs+1                X     1
+                     bji =                 i
+                                              ≥ (βk − bs+1
+                                                       N   )
+            i=1 j=1        i=1
+                                    bi − 1                      b
+                                                             i=1 i
+                                                                   − 1
+
+                      ≥ β(βk − bs+1
+                                N ) ≥ βk
+
+since βk ≥ 2bs+1  N  and β > 2. Thus, by repeated application of (b), Σ(β1 , . . .
+. . . , βk ) has maximum gap size bounded by 2bs+1
+                                                N , and consequently, so does
+Σ(Pow(B; s)).
+      Now, let
+                                  1         A(n)
+                              δ :=  lim sup      .
+                                  2 n→∞       n
+By Szemerédi’s theorem [S], there is an integer R = R(δ, s) such that any
+subset of R consecutive integers with cardinality at least δR contains an
+arithmetic progression of length 2s . By (i), there exist infinitely many m
+so that the interval [m, m + R] contains at least δR elements of A0 := A \
+(A0 ∪ B). Select an infinite sequence of such disjoint intervals with left-hand
+endpoints m1 < m2 < . . . Set Aj := A0 ∩ [mj , mj + R]. Thus, each Aj
+                           Complete sequences of sets of integer powers                         135
+
+satisfies |Aj | ≥ δR and consequently, Aj contains an arithmetic progression
+aj + kdj , 0 ≤ k ≤ 2s − 1.
+      Claim 2. For each s it is possible to partition
+                              {0, 1, . . . , 2s − 1} = C(s) ∪ D(s)
+so that
+                            X               X
+(1)                                 cj =            dj ,    0 ≤ j ≤ s − 1,
+                           c∈C(s)          d∈D(s)
+
+and
+                                    X              X
+                                                           ds = s!2(2) .
+                                                                    s
+(2)                                        cs −
+                                 c∈C(s)           d∈D(s)
+
+   P r o o f o f C l a i m 2. To begin, set C(1) = {0}, D(1) = {1}. Now,
+recursively define
+                              C(k + 1) = C(k) ∪ {2k + D(k)},
+                              D(k + 1) = D(k) ∪ {2k + C(k)}
+for k = 1, 2, . . . , so that C(2) = {0, 3}, D(2) = {1, 2}, etc. Thus, (1) and (2)
+hold for s = 1.
+    Now assume that s ≥ 1 is fixed, and that (1) and (2) hold for s. Then
+       X                  X
+               cj −            dj
+      c∈C(s+1)         d∈D(s+1)
+                       X                 X                       X              X
+                 =               cj +         (2s + d)j −               dj −        (2s + c)j
+                      c∈C(s)            d∈D(s)                 d∈D(s)          c∈C(s)
+
+                     j−1  
+                     X                        X               X
+                          j
+                 =               2s(j−i)             di −            ci .
+                     i=0
+                             i
+                                            d∈D(s)          c∈C(s)
+
+By (1) and (2), this reduces to
+        
+     s+1 s X s              X
+                                cs = (s + 1)2s · s!2(2) = (s + 1)!2( 2 ) .
+                                                     s              s+1
+           2          d −
+       1
+                     d∈D(s)          c∈C(s)
+
+Thus, the claim follows by induction.
+    Since (1) is invariant under the affine transformation k 7→ aj + kdj , by
+Claim 2 we can decompose the set {aj + kdj : 0 ≤ k ≤ 2s − 1} into two
+disjoint sets Pj and Qj so that
+                       X        X
+                           pi =     qi ,   0 ≤ i ≤ s − 1,
+                             p∈Pj          q∈Qj
+136                                 S. A. Burr et al.
+
+and
+                            X             X
+                                                 q s = s!2(2) dsj .
+                                                           s
+                                   ps −
+                            p∈Pj          q∈Qj
+
+Of course, there are at most R · 21−s possible values for dj , so that one of
+them, say d, occurs infinitely often. From now on we restrict ourselves to
+these j, so that we can assume without loss of generality that all dj = d.
+Let us set D := s!2(2) ds .
+                    s
+
+
+
+   We have just shown that each sequence Pow(Aj ; s) contains two terms
+which differ by D. Since the Aj ’s are mutually disjoint, we conclude:
+   Claim 3. For any u ≥ 1, Σ(Pow(A1 ; s)) + . . . + Σ(Pow(Au ; s)) contains
+an arithmetic progression of length u + 1 and step size D.
+      Finally, we will need:
+      Claim 4. Σ(Pow(A0 ; s)) contains a complete residue system modulo D.
+   P r o o f o f C l a i m 4. Let q1 < . . . < qr be the distinct primes dividing
+D. By hypothesis, for some a(i) ∈ A0 , we have gcd(a(i), qi ) = 1, 1 ≤ i ≤ r.
+Thus, there exist ti (1) < ti (2) < ti (3) < . . . so that a(i)ti (k) mod D does
+not depend on k, say
+                    a(i)ti (k) ≡ c(i) (mod D),            k = 1, 2, . . . ,
+where, of course, gcd(c(i), qi ) = 1. Define Q : =q1 . . . qr . Then Σ(Pow(A0 ; s))
+certainly contains integers M (j) so that
+                            Q                Q
+                 M (j) ≡       c(1) + . . . + c(r) := M (mod D)
+                            q1               qr
+for 1 ≤ j ≤ D. Note that gcd(M, D) = 1. Finally, since
+                    k
+                    X
+                          M (j) ≡ kM (mod D),               1 ≤ k ≤ D,
+                    j=1
+
+it follows that Σ(Pow(A0 ; s)) contains a complete residue system modulo D
+as claimed.
+      To conclude the proof of Theorem 1, we observe by Claims 3 and 4 that
+      Σ(Pow(A0 ; s)) + Σ(Pow(A1 ; s)) + . . . + Σ(Pow(Au ; s))
+                                                     = Σ(Pow((A0 , A1 , . . . , Au ); s))
+must contain at least 2bs+1
+                        N   consecutive integers, provided u is taken suffi-
+ciently large. However, by Claim 1, it follows at once that
+                Σ(Pow((B, A0 , A1 , . . . , Au ); s)) ⊂ Σ(Pow(A; s))
+contains all sufficiently large integers. This proves the theorem.
+                    Complete sequences of sets of integer powers              137
+
+    3. Concluding remarks. We remark here that with very similar ar-
+guments, one can prove somewhat sharper forms of Theorem 1 when the
+initial set A has a special structure.
+   Theorem 2. For any ε > 0, there is an integer n0 (ε) so that if n > n0 (ε)
+and N > (e + ε)n then Pow({n, n + 1, . . . , N }; 1) is complete (and , in fact,
+contains all integers ≥ n).
+   Note that the bound on N is essentially best possible because of the
+necessity of condition (i) in the conjecture for any set A to have Pow(A; s)
+complete.
+   Theorem 3. There exists a function f : Z+ → Z+ such that for any
+s ≥ 1, if A = {n, n + 1, . . . , N } with N > f (s)ns then Pow(A; s) is complete.
+Moreover , for any ε > 0,
+                                     3
+                        f (s) = o(2s /2+ε )    as s → ∞.
+    The results we have described have all had an asymptotic flavor. That is,
+the sets A for which Pow(A; s) was proved complete were large. One might
+well ask for similar results for specific small sets A (indeed, this was our
+original motivation). The first nontrivial example is probably the set {3, 4, 7}
+         1     1      1
+(since 3−1 + 4−1  + 7−1  = 1). Using fairly recent estimates in diophantine
+approximation, such as the inequality
+                 |3p − 4q | > exp{ln 3(p − 500 ln 4(8 + ln p)2 )}
+of Mignotte and Waldschmidt [MW, Corollary 10.1], we can show that the
+largest integer not in Σ(Pow({3, 4, 7}; 1)) is 581. Similarly, the largest miss-
+ing integer in Σ(Pow{3, 5, 7, 13}; 1) is 111, and theP largest missing integer in
+Σ(Pow{3, 6, 7, 13, 21}; 1) is 16. Of course, when a∈A 1/(a−1) is larger than
+1, then one would expect it to be easier to show completeness of Pow(A; s),
+and our limited computational experience confirms this. For example, the
+largest missing integer in Σ(Pow({3, 4, 5}; 1)) is 78.
+    We are still fairly far from being able to prove the conjecture stated at
+the beginning. A related problem one could look at is the following. Suppose
+0 < a1 < . . . < ak satisfy
+                               X 1             1
+                                           >       .
+                                 i
+                                   log a i   log 2
+Must Σ(Pow{a1 , . . . , ak }; s) have positive density? positive upper density?
+For example, what about set {3, 4}?
+    We close by remarking that our investigations grew out of the following
+conjecture of Erdős and Lewin [EL]. Suppose {a1 , . . . , ak } is a set of k ≥ 2
+positive integers so that gcd(a1 , . . . , ak ) = 1. Prove that every sufficiently
+large integer is a sum of terms ar11 ar22 . . . arkk with all ri ≥ 1 so that no
+138                                   S. A. Burr et al.
+
+term in the sums divides any other. This was shown to hold for {2, 3} by
+Selfridge and Lewin (independently), and for {2, 5, 7} (and several other
+sets) by Erdős and Lewin [EL].
+
+
+                                         References
+
+  [B]    B. J. B i r c h, Note on a problem of Erdős, Proc. Cambridge Philos. Soc. 55 (1959),
+         370–373.
+ [EL]    P. E r d ő s and M. L e w i n, d-complete sequences of integers, Math. Comp. 65
+         (1996), 837–840.
+[MW]     M. M i g n o t t e and M. W a l d s c h m i d t, Linear forms in two logarithms and
+         Schneider’s method, II , Acta Arith. 53 (1989), 251–287.
+   [S]   E. S z e m e ré d i, On sets containing no k elements in arithmetic progression, ibid.
+         27 (1975), 199–245.
+
+Department of Mathematics                                            Mathematical Institute
+Lehman College (CUNY)                                        Hungarian Academy of Sciences
+Bronx, New York 10468                                                  Reáltanoda U. 13-15
+U.S.A.                                                          H-1053, Budapest, Hungary
+E-mail: stefan@bellcore.com
+AT&T Bell Laboratories                                          Department of Mathematics
+Murray Hill, New Jersey 07974                                 Pennsylvania State University
+U.S.A.                                                  University Park, Pennsylvania 16802
+E-mail: rlg@research.att.com                                                         U.S.A.
+                                                           E-mail: wli@leibniz.math.psu.edu
+
+
+                                   Received on 3.2.1995
+                              and in revised form on 9.4.1996                            (2738)
+

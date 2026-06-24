@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780314880.7579782,
+  "checked_at": "2026-06-01T11:54:40+00:00",
+  "evidence": "3 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2022 partial/weak: When Doesn\u2019t the Interval Contain any Primes? Theorem and Counterexamples (an is the nth Prime Number &amp; Pn",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.31559/glm2022.12.4.2"
+    },
+    {
+      "evidence": "2025 partial/weak: The nth Prime Exponentially",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.3390/math13111844"
+    },
+    {
+      "evidence": "2005 partial/weak: An Upper Bound on the nth Prime",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2307/30044844"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

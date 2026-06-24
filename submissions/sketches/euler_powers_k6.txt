@@ -1,0 +1,19 @@
+OPEN GAP: Euler's Sum of Powers Conjecture (k ≥ 6)
+Source: Euler (1769), counterexamples Lander-Parkin (1966), Elkies (1988)
+Domain: nt
+
+For k ≥ 6: there is no solution to a₁^k + a₂^k + ... + a_{k-1}^k = b^k
+in positive integers.
+
+Euler conjectured this for all k ≥ 3. Disproved for:
+- k=4: 2682440⁴+15365639⁴+18796760⁴ = 20615673⁴ (Elkies 1988)
+- k=5: 27⁵+84⁵+110⁵+133⁵ = 144⁵ (Lander-Parkin 1966)
+
+For k ≥ 6, no counterexample found. The conjecture may be true
+for all k ≥ 6 but no proof is known.
+
+theorem euler_powers_k6 (k : ℕ) (hk : k ≥ 6) (a : Fin (k-1) → ℕ)
+    (ha : ∀ i, a i > 0) (b : ℕ) (hb : b > 0) :
+    ∑ i, (a i)^k ≠ b^k := by sorry
+
+Status: OPEN. No counterexample for k ≥ 6. No proof either.

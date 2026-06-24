@@ -1,0 +1,8 @@
+{
+  "CS": "full_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "partial_result_only",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "Genuine cross-domain real-closure attempt on the unbounded Erdos 324 pair-collision statement, paired with Asiryan 2026 (arXiv:2512.11072) which closes the linearly-sliced subfamily under the parameter h=(c+d)-(a+b). Strategy: decompose unbounded gap into slice union, then apply Asiryan's 30|h obstruction plus rank-1 Mordell-Weil bound per slice. If Aristotle can scaffold even the slice-decomposition step or the h=0 trivial case formally, this is a real advance beyond bounded N variants. Honest assessment: full closure plausibility ~5%; meaningful structural sub-claim plausibility ~25%; Mathlib lacks elliptic-surface and Mordell-Weil rank infrastructure required for the rank-1 step. This is the third E324 iteration: iter1 (N=50) and iter2 (N=200) closed bounded; iter3 attempts the unbounded statement via the 2026 cross-domain insight."
+}

@@ -1,0 +1,16 @@
+OPEN GAP: Erdos 672 — No 3 cubes in arithmetic progression
+Source: FormalConjectures/ErdosProblems/672.lean
+Domain: nt
+
+No three distinct positive cubes form an arithmetic progression.
+Equivalently: x^3 + y^3 = 2*z^3 with x,y,z > 0 implies x = y.
+
+This is the key reduction for Erdos 672 (product of 4 coprime
+AP terms is never a cube). All other infrastructure is proved.
+
+theorem no_three_cubes_in_ap (x y z : ℕ)
+    (hx : x > 0) (hy : y > 0) (hz : z > 0)
+    (h : x ^ 3 + y ^ 3 = 2 * z ^ 3) : x = y := by sorry
+
+Status: OPEN. Classical Euler result but not yet in Mathlib.
+The descent uses Z[omega] or the substitution s=(x+y)/2, t=(x-y)/2.

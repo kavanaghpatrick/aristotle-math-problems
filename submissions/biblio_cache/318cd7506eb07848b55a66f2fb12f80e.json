@@ -1,0 +1,44 @@
+{
+  "_cache_ts": 1780318984.735931,
+  "checked_at": "2026-06-01T13:03:04+00:00",
+  "evidence": "1 paper(s) with strong closure language matching the named conjecture 'Tuza conjecture' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "2016 partial/weak: Transversal game on hypergraphs and the \\(\\frac{3}{4}\\)-conjecture on the total domination game",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:6629175"
+    },
+    {
+      "evidence": "2005 partial/weak: Highly connected counterexamples to a conjecture on \u03b1 -domination",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.7151/dmgt.1295"
+    },
+    {
+      "evidence": "2025 partial/weak: On the Erd\u0151s\u2013Tuza\u2013Valtr conjecture",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1016/j.ejc.2024.104085"
+    },
+    {
+      "evidence": "2014 partial/weak: On a Conjecture of Erd\u0151s, Gallai, and Tuza",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1002/jgt.21828"
+    },
+    {
+      "evidence": "2025 STRONG closure language: Bollob\u00e1s\u2010Erd\u0151s\u2010Tuza Conjecture for Graphs With No Induced Ks,t",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.1002/jgt.23246"
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "arxiv",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}

@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780165622.161841,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T18:27:02+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_938_finite_many_consecutive_powerful_3_aps_computational_classification",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

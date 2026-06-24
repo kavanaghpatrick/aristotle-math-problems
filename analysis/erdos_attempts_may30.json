@@ -1,0 +1,472 @@
+{
+  "1": {
+    "total": 12,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 7,
+    "failed": 5,
+    "sub": 0,
+    "aliases": [
+      "erdos1",
+      "erdos_1",
+      "erdos_1_improved",
+      "erdos_1_real"
+    ]
+  },
+  "1052": {
+    "total": 8,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 7,
+    "sub": 0,
+    "aliases": [
+      "erdos1052",
+      "erdos_1052"
+    ]
+  },
+  "11": {
+    "total": 4,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 2,
+    "failed": 1,
+    "sub": 1,
+    "aliases": [
+      "erdos11"
+    ]
+  },
+  "137": {
+    "total": 1,
+    "adv": 0,
+    "dis": 1,
+    "no_adv": 0,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos137"
+    ]
+  },
+  "203": {
+    "total": 5,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 4,
+    "aliases": [
+      "erdos203",
+      "erdos_203"
+    ]
+  },
+  "242": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 0,
+    "sub": 2,
+    "aliases": [
+      "erdos242"
+    ]
+  },
+  "249": {
+    "total": 3,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 2,
+    "failed": 0,
+    "sub": 1,
+    "aliases": [
+      "erdos249"
+    ]
+  },
+  "251": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 2,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos251"
+    ]
+  },
+  "252": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos252"
+    ]
+  },
+  "350": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos350"
+    ]
+  },
+  "36": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos36"
+    ]
+  },
+  "364": {
+    "total": 3,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 2,
+    "failed": 1,
+    "sub": 0,
+    "aliases": [
+      "erdos364",
+      "erdos_364"
+    ]
+  },
+  "370": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos370"
+    ]
+  },
+  "389": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 0,
+    "sub": 2,
+    "aliases": [
+      "erdos389"
+    ]
+  },
+  "412": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos412"
+    ]
+  },
+  "427": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos427"
+    ]
+  },
+  "470": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 1,
+    "failed": 0,
+    "sub": 0,
+    "aliases": [
+      "erdos470"
+    ]
+  },
+  "647": {
+    "total": 12,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 3,
+    "failed": 8,
+    "sub": 1,
+    "aliases": [
+      "erdos647",
+      "erdos_647",
+      "erdos_647_search"
+    ]
+  },
+  "672": {
+    "total": 4,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 2,
+    "failed": 0,
+    "sub": 2,
+    "aliases": [
+      "erdos672"
+    ]
+  },
+  "850": {
+    "total": 10,
+    "adv": 0,
+    "dis": 1,
+    "no_adv": 7,
+    "failed": 0,
+    "sub": 2,
+    "aliases": [
+      "erdos850"
+    ]
+  },
+  "107": {
+    "total": 3,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 3,
+    "sub": 0,
+    "aliases": [
+      "erdos_107"
+    ]
+  },
+  "123": {
+    "total": 6,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 6,
+    "sub": 0,
+    "aliases": [
+      "erdos_123"
+    ]
+  },
+  "128": {
+    "total": 3,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 3,
+    "sub": 0,
+    "aliases": [
+      "erdos_128"
+    ]
+  },
+  "138": {
+    "total": 6,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 6,
+    "sub": 0,
+    "aliases": [
+      "erdos_138"
+    ]
+  },
+  "143": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_143"
+    ]
+  },
+  "20": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_20"
+    ]
+  },
+  "3": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_3"
+    ]
+  },
+  "307": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 1,
+    "sub": 0,
+    "aliases": [
+      "erdos_307"
+    ]
+  },
+  "4": {
+    "total": 4,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 4,
+    "sub": 0,
+    "aliases": [
+      "erdos_4"
+    ]
+  },
+  "40": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_40"
+    ]
+  },
+  "56": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_56"
+    ]
+  },
+  "590": {
+    "total": 8,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 8,
+    "sub": 0,
+    "aliases": [
+      "erdos_590"
+    ]
+  },
+  "591": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_591"
+    ]
+  },
+  "592": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_592"
+    ]
+  },
+  "6": {
+    "total": 6,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 6,
+    "sub": 0,
+    "aliases": [
+      "erdos_6"
+    ]
+  },
+  "66": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_66"
+    ]
+  },
+  "67": {
+    "total": 4,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 4,
+    "sub": 0,
+    "aliases": [
+      "erdos_67"
+    ]
+  },
+  "707": {
+    "total": 14,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 14,
+    "sub": 0,
+    "aliases": [
+      "erdos_707"
+    ]
+  },
+  "723": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 0,
+    "sub": 2,
+    "aliases": [
+      "erdos_723"
+    ]
+  },
+  "913": {
+    "total": 1,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 1,
+    "sub": 0,
+    "aliases": [
+      "erdos_913"
+    ]
+  },
+  "92": {
+    "total": 2,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 2,
+    "sub": 0,
+    "aliases": [
+      "erdos_92"
+    ]
+  },
+  "97": {
+    "total": 9,
+    "adv": 0,
+    "dis": 0,
+    "no_adv": 0,
+    "failed": 9,
+    "sub": 0,
+    "aliases": [
+      "erdos_97"
+    ]
+  }
+}

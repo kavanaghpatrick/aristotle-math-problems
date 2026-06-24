@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780312572.674277,
+  "checked_at": "2026-06-01T11:16:12+00:00",
+  "evidence": "one strong closure-language match on a keyword query; needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2010 STRONG closure language: Sumset and Inverse Sumset Theory for Shannon Entropy",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.1017/s0963548309990642"
+    },
+    {
+      "evidence": "2022 partial/weak: Interstellar dust as a unique and interdisciplinary science case for the Interstellar Probe",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.5194/epsc2022-1002"
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "arxiv",
+      "url": ""
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

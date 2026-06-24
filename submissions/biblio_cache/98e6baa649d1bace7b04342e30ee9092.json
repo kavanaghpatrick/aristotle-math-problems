@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780318411.404879,
+  "checked_at": "2026-06-01T12:53:31+00:00",
+  "evidence": "3/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "2022 partial/weak: On the Minimum-Area Parallelogram Annulus Problem",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.3390/sym14020359"
+    },
+    {
+      "evidence": "1972 partial/weak: On the Fundamental Problem of Mathematics",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2307/2316535"
+    }
+  ],
+  "status": "CLEAR"
+}

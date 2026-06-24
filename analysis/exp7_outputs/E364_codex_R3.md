@@ -1,0 +1,8 @@
+1. **Powerful numbers are not globally perfect powers.**  
+   The approach tries to force every powerful number into Catalan’s setting, but Catalan only sees equations between genuine integer perfect powers \(X^p-Y^q=1\). A powerful number may have mixed prime exponents, e.g. \(2^3 3^2\), so it is not necessarily a square, cube, or any single perfect power. This is a structural mismatch: the ambient class “powerful numbers” is strictly larger and arithmetically messier than “perfect powers.”
+
+2. **The square-cube representation is a decomposition, not a conversion.**  
+   Writing a powerful number as \(a^2u^3\) separates prime exponents into their mod-\(6\) parts; it does not make the number a square or cube. The squarefree factor \(u\) records exactly the obstruction to being a pure square/cube. Trying to “absorb” it destroys the exponent structure. So the failure is not algebraic bookkeeping; it is that the decomposition preserves mixed local prime data, while Catalan requires one uniform global exponent.
+
+3. **Catalan controls the wrong boundary.**  
+   Consecutive perfect powers are rare and classified, but consecutive powerful numbers are governed by simultaneous local exponent constraints across different primes. A proof that only rules out consecutive perfect powers leaves untouched the main difficulty: powerful numbers can be consecutive without either term being a pure perfect power. Thus the strategy collapses because it replaces the original problem with a much narrower one, proving at most a statement about a subclass rather than about all powerful triples.

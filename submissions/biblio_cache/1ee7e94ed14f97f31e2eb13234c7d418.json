@@ -1,0 +1,62 @@
+{
+  "_cache_ts": 1780313853.681141,
+  "checked_at": "2026-06-01T11:37:33+00:00",
+  "evidence": "9 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "1980 partial/weak: A note on infinite triangulated graphs",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3788673"
+    },
+    {
+      "evidence": "2019 partial/weak: WITHDRAWN: A Note on The Gaussian Moat Problem",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:900384766"
+    },
+    {
+      "evidence": "2021 partial/weak: Twin Prime Conjecture - Proof that there are infinite twin primes.",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.14293/s2199-1006.1.sor-.ppkave2.v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Size-4 Counterexamples to the Sidon-Extension Conjecture",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.25214v3"
+    },
+    {
+      "evidence": "2026 partial/weak: The solvability of the inverse volcano problem over non-prime finite fields",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.11330v2"
+    },
+    {
+      "evidence": "2026 partial/weak: Disproof of the uniform Littlewood conjecture",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2603.12611v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Quartic del Pezzo surfaces over $\\mathbb{F}_p(t)$ without quadratic points",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2602.21861v1"
+    },
+    {
+      "evidence": "2025 partial/weak: Growth rates of sequences governed by the squarefree properties of its translates",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2512.01087v2"
+    },
+    {
+      "evidence": "2025 partial/weak: Prime numbers and dynamics of the polynomial $x^2-1$",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2502.11929v2"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

@@ -1,0 +1,15 @@
+OPEN GAP: Feit-Thompson prime conjecture — case (p=5, q=11)
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+For p=5, q=11 specifically: (11⁵-1)/(11-1) does not divide (5¹¹-1)/(5-1).
+First p=5 case of the Feit-Thompson Prime Conjecture specialization.
+
+theorem feit_thompson_p5_q11 :
+    ¬ (11 ^ 5 - 1) / (11 - 1) ∣ (5 ^ 11 - 1) / (5 - 1) := by sorry
+
+Status: OPEN in full generality. p=5 has never been treated in our pipeline;
+first formal verification for this prime branch.
+
+contribution_statement: target_resolved=1 means a Lean proof of FT for
+(p,q)=(5,11), expanding our pipeline's coverage from p=3 only to p=5 as well.

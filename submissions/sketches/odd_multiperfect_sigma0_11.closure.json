@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "σ₀(n)=11 prime → multiplicativity forces n=p^10 (single shape only; p^4·q^2 has σ₀=15, p^2·q·r has σ₀=12). σ(p^10) ≡ 1 (mod p) ⇒ p∤σ(p^10) ⇒ n=p^10 cannot satisfy σ(n)=kn. 1-line p-adic. Slot737 σ₀ DNA precedent. Verified zero counterexamples for 167 odd primes ≤1000 and adjacent σ₀ ∈ {12,14,15} up to 10^7."
+}

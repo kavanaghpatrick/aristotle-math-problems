@@ -1,0 +1,25 @@
+OPEN GAP: Erdős 124 — Residue Coverage Lemma for the BEGL96 sumset
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.ne_zero)
+Domain: nt
+
+Let B_d = {sums of distinct powers d^j, j ≥ 0} (base-d 0/1-digit numbers), and for
+k ≥ 1 let the BEGL96 sumset be Σ(D,k) = ∑_{d∈D} d^k · B_d (pointwise sumset over a
+finite set D of integers ≥ 3). The open question: for a finite D with all d ≥ 3,
+does Σ(D,k) reduced modulo an arbitrary modulus M cover every residue class of ℤ/M,
+for every M and every k ≥ 1, exactly when gcd(D) = 1?
+
+theorem erdos124_residue_coverage
+    (D : Finset ℕ) (hD : ∀ d ∈ D, 3 ≤ d) (hne : D.Nonempty) (k : ℕ) (hk : k ≠ 0) :
+    (∀ M : ℕ, 0 < M →
+      ∀ r : ZMod M, ∃ f : ℕ → Finset ℕ,
+        (∀ d ∈ D, (f d).Nonempty → ∀ j ∈ f d, k ≤ j) ∧
+        (∑ d ∈ D, ∑ j ∈ f d, (d : ZMod M) ^ j) = r)
+    ↔ D.gcd id = 1 := by
+  sorry
+
+Status: OPEN (component of the open BEGL96 conjecture). gcd(D)=1 is known NECESSARY
+(if a prime p divides every d then p divides every summand, so the sumset misses every
+residue not ≡ 0 mod p). The forward direction — gcd(D)=1 SUFFICES for full residue
+coverage at every M and every k≥1 — is the content. This isolates the congruence
+("local") half of BEGL96 from the density half (∑1/(d−1)≥1, which is orthogonal and
+not used here).

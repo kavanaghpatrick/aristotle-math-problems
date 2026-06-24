@@ -1,0 +1,25 @@
+OPEN GAP: Erdős 373 — only solution to n! = a!·b! is (10, 7, 6)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/373.lean
+Domain: nt
+
+It was conjectured (1960s, open since) that the equation n! = a!·b!
+with 1 < b ≤ a and a + 1 ≠ n has exactly one solution: (n, a, b) = (10, 7, 6).
+Equivalently, the only nontrivial way a factorial equals a product of two
+smaller factorials is 10! = 7! · 6! = 3,628,800.
+
+open scoped Nat
+namespace Erdos373
+
+theorem erdos_373_target :
+    {(n, a, b) : ℕ × ℕ × ℕ | n ! = a ! * b ! ∧ 1 < n ∧ 1 < a ∧ 1 < b
+      ∧ b ≤ a ∧ a + 1 ≠ n} = {(10, 7, 6)} := by
+  sorry
+
+end Erdos373
+
+Status: OPEN since 1960s. (10, 7, 6) is the only known non-trivial solution
+and is conjectured unique. No proof of the full uniqueness exists in the
+literature. Prior project submissions: slot 1260 (uuid 67d9e1d9) proved the
+two corridor bounds n < 2a and a + 2 ≤ n sorry-free; slot 1288 attempted
+full closure via prime-gap survivor enumeration; slot 1292 attempted a
+different angle.

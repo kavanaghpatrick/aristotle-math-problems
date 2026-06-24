@@ -1,0 +1,4 @@
+cc1060ce-81e5-47a2-87eb-66cf2a9d6311
+# Task: erdos936_powerful_2n1
+# Hash: d233a0c648f0c52b
+# Submitted: 2026-03-13T13:38:46.463741

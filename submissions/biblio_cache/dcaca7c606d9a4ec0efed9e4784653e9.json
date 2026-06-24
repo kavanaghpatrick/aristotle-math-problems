@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780313797.2561338,
+  "checked_at": "2026-06-01T11:36:37+00:00",
+  "evidence": "4 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2018 partial/weak: Infinite Paths to Infinite Reality",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1093/oso/9780190868239.001.0001"
+    },
+    {
+      "evidence": "2026 partial/weak: Intervals of hypergraph Tur\u00e1n densities",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.25914v1"
+    },
+    {
+      "evidence": "2026 partial/weak: On the complexity of extensions of non-archimedean Polish groups admitting a compatible complete left-invarian",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.24379v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Stabilizer Subgroups and the Simplicity of Reduced Crossed Products",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.22430v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

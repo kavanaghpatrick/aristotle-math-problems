@@ -1,0 +1,10 @@
+OPEN GAP: Erdos Problem 470 Part 1 — Odd Weird Numbers
+Source: FormalConjectures/ErdosProblems/470.lean
+Domain: nt
+
+Do odd weird numbers exist? A weird number is abundant but not pseudoperfect.
+
+theorem erdos_470.part1 : answer(sorry) ↔ ∃ n : ℕ, n.Weird ∧ Odd n := by
+  sorry
+
+Status: OPEN. No odd weird number found below 10^21 (Fang 2022). Any odd weird number must have at least 6 prime divisors.

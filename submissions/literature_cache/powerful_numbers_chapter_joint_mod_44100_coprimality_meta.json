@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780165783.0919838,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T18:29:43+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "powerful_numbers_chapter_joint_mod_44100_coprimality_meta",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

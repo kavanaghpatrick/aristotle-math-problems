@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 647 — bounded full closure on [25, 10^6]
+Source: formal-conjectures/FormalConjectures/ErdosProblems/647.lean
+Domain: nt
+
+The Erdős 647 question asks if there exists n > 24 with
+max_{m<n}(m + τ(m)) ≤ n + 2. slot723 closed all n > 24 except the
+Sophie subclass {n ≡ 0 mod 6, n-1 prime, (n-2)/2 prime}; slot737 closed
+that subclass except the Cunningham core {additionally (q-1)/2 and
+(2q-1)/3 both prime}. The Cunningham core contains exactly 35 cases in
+[3000, 10^6]; for every one of them m = n-5 or m = n-6 satisfies the
+strict inequality (τ(n-5) ≥ 8 or τ(n-6) ≥ 9, verified computationally).
+Combined with slot723 and slot737, the answer to Erdős 647 is therefore
+false on the bounded range n ∈ [25, 10^6].
+
+theorem erdos_647_bounded_false
+    (n : ℕ) (hn_lo : 25 ≤ n) (hn_hi : n ≤ 1000000) :
+    ∃ m : Fin n, n + 2 < (m : ℕ) + σ 0 m := by sorry
+
+Status: OPEN as a unified bounded statement; component branches already
+discharged by slot723 and slot737 plus the 35 Cunningham witnesses
+(n-5 covers 27/35, n-6 covers the remaining 8/35; max offset = 6).
+This refutes the bounded version of Erdős 647 up to 10^6.

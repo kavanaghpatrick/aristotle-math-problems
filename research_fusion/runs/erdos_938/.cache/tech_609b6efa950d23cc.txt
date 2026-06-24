@@ -1,0 +1,46 @@
+{
+  "name": "Fourier analytic method",
+  "seminal_paper": {
+    "arxiv_id": null,
+    "doi": "10.1112/jlms/s1-28.1.104",
+    "citation": "K. F. Roth, \"On certain sets of integers,\" Journal of the London Mathematical Society s1-28(1):104-109, 1953.",
+    "year": 1953
+  },
+  "home_domain": "additive_combinatorics",
+  "what_it_does": "The Fourier analytic method studies arithmetic progressions by representing a set through its indicator function on a finite additive group or interval. It converts additive-pattern questions into constraints on Fourier coefficients, enabling density-based existence or counting results for 3-term progressions.",
+  "input_requirements": [
+    "a finite additive ambient space such as [N] or Z/NZ containing the set under study",
+    "a subset with positive density relative to that ambient space",
+    "Fourier transform, Parseval, and convolution identities for the ambient additive group",
+    "a goal expressible as existence or abundance of 3-term arithmetic progressions inside that subset"
+  ],
+  "input_match": [
+    {
+      "requirement": "a finite additive ambient space such as [N] or Z/NZ containing the set under study",
+      "match": "PARTIAL",
+      "evidence": "The target uses `Finset ℕ`, but no finite interval or cyclic-group ambient model is present."
+    },
+    {
+      "requirement": "a subset with positive density relative to that ambient space",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "Fourier transform, Parseval, and convolution identities for the ambient additive group",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "a goal expressible as existence or abundance of 3-term arithmetic progressions inside that subset",
+      "match": "PARTIAL",
+      "evidence": "`Set.IsAPOfLength` records a 3-term arithmetic-progression condition, but the target asks finiteness of consecutive powerful-number triples rather than density-forced existence."
+    }
+  ],
+  "known_obstructions": [
+    "Powerful numbers have natural density zero, so classical Roth hypotheses do not apply directly.",
+    "The target concerns consecutive terms of the powerful-number sequence, adding an order-gap constraint absent from standard Roth settings.",
+    "A finiteness conclusion for exceptional consecutive triples is structurally different from a density-based existence theorem."
+  ],
+  "fit_score": 0.25,
+  "source_analog_id": "A4"
+}

@@ -1,0 +1,3 @@
+52f53591-7276-45df-afec-c0c7cfb75b78
+# Task: MEGA-9: E142 quantitative Roth lever — axiomatize Bloom-Sisask 2020 (weakest sufficient bound; FIRST to break log barrier), close slot 1320 sorry via Real.log/rpow asymptotic chasing in ~20-40 Lean lines. Predecessor slot 1320 (UUID 7353e4d7...) reduced E142 finite-threshold to exactly this sorry. 6-round Grok+Codex iteration confirmed: Sanders 2011, Bloom 2016, Schoen 2021, Bourgain 1999, Heath-Brown 1987 all INSUFFICIENT; Mathlib has NO Bohr sets/Gowers norms/Croot-Sisask. Paired-LLM: grok-4-1-fast-reasoning.
+# Submitted: 2026-05-30T18:29:19

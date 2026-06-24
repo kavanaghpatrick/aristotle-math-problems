@@ -1,0 +1,7 @@
+9583597d-56e1-491a-82b5-a6f8966cee69
+2026-05-28T11:46Z
+ft-warrior (blast-5-targets)
+FT p=3 q=71 close via Wieferich algebraic structure (slot 613) + quartic residue (slot 612)
+project-dir bundle: /tmp/ft_context_720/ (PROMPT.md + slot613_wieferich_structure.lean + slot612_quartic_residue.lean)
+target: feit_thompson_primes for (p,q)=(3,71), single-direction impossibility
+contribution: closes FT for (3,71) by combining slot 613 Theorem 8 (3^71 ≢ 1 mod A(71)) with the divisibility hypothesis contradiction

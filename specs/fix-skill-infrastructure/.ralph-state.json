@@ -1,0 +1,14 @@
+{
+  "source": "plan",
+  "name": "fix-skill-infrastructure",
+  "basePath": "specs/fix-skill-infrastructure",
+  "phase": "execution",
+  "taskIndex": 0,
+  "totalTasks": 6,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": false,
+  "awaitingApproval": true
+}

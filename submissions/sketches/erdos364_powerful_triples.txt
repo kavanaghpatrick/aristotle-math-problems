@@ -1,0 +1,17 @@
+OPEN GAP: Erdős Problem 364 — No Three Consecutive Powerful Numbers
+Source: Erdős Problem 364
+Domain: nt
+
+There do not exist three consecutive positive integers n, n+1, n+2
+that are all powerful (every prime divisor appears with exponent ≥ 2).
+
+Golomb proved consecutive powerful pairs exist (e.g., 8, 9).
+No consecutive powerful triple has ever been found.
+
+theorem erdos364 : ¬ ∃ n : ℕ, n ≥ 1 ∧
+    (∀ p : ℕ, Nat.Prime p → p ∣ n → p ^ 2 ∣ n) ∧
+    (∀ p : ℕ, Nat.Prime p → p ∣ (n + 1) → p ^ 2 ∣ (n + 1)) ∧
+    (∀ p : ℕ, Nat.Prime p → p ∣ (n + 2) → p ^ 2 ∣ (n + 2)) := by
+  sorry
+
+Status: OPEN. Pairs exist. No triple found. ABC implies finiteness.

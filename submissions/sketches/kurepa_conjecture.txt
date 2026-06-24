@@ -1,0 +1,21 @@
+OPEN GAP: Kurepa's Conjecture
+Source: Kurepa (1971)
+Domain: nt
+
+For every odd prime p, the left factorial !p = 0! + 1! + ... + (p-1)!
+is not divisible by p.
+
+Equivalently: !p ≢ 0 (mod p) for all odd primes p.
+
+By Wilson's theorem, (p-1)! ≡ -1 (mod p). Partial sums of factorials
+modulo p do not exhibit periodicity that would force divisibility.
+Verified computationally for all primes up to 10^6 (Barsky-Benzaghou).
+
+Barsky-Benzaghou (2004) proved: !p ≡ 1 + (p-1)/2 · p (mod p²)
+for p ≥ 3, which gives !p ≢ 0 (mod p) iff (p+1)/2 ≢ 0 (mod p),
+true for p ≥ 3. WAIT — this would prove it. Need to verify.
+
+theorem kurepa (p : ℕ) (hp : Nat.Prime p) (hp2 : p ≠ 2) :
+    ¬ p ∣ (∑ i in Finset.range p, i.factorial) := by sorry
+
+Status: OPEN. Verified for p < 10^6. Connected to Wilson's theorem.

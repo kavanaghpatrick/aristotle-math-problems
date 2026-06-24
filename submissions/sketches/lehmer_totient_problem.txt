@@ -1,0 +1,17 @@
+OPEN GAP: Lehmer's Totient Problem
+Source: Lehmer (1932)
+Domain: nt
+
+If φ(n) | (n-1), must n be prime?
+
+Known: any counterexample n must be odd, squarefree, have ≥ 15
+prime factors, and exceed 10^30.
+If n = p₁p₂...p_k with p₁ < p₂ < ... < p_k,
+then (p_i - 1) | (n - 1) for all i (Carmichael condition).
+Also n ≡ 1 mod φ(n), so n ≡ 1 mod (p_i - 1) for all i.
+
+theorem lehmer_totient (n : ℕ) (hn : n > 1)
+    (hdvd : Nat.totient n ∣ (n - 1)) :
+    Nat.Prime n := by sorry
+
+Status: OPEN. No counterexample. Composite ⇒ ≥15 prime factors.

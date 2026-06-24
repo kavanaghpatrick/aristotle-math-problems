@@ -1,0 +1,38 @@
+{
+  "_cache_ts": 1780313847.9069881,
+  "checked_at": "2026-06-01T11:37:27+00:00",
+  "evidence": "5 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2001 partial/weak: On the optimum of Delsarte's linear program",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:1694169"
+    },
+    {
+      "evidence": "2006 partial/weak: On the stopping redundancy of Reed-Muller codes",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:5455346"
+    },
+    {
+      "evidence": "2021 partial/weak: A better upper bound on the chromatic number of (cap, even-hole)-free graphs",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1016/j.disc.2021.112581"
+    },
+    {
+      "evidence": "2026 partial/weak: Counting finite O-sequences: sub-Fibonacci behaviour and growth estimates",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2604.10354v1"
+    },
+    {
+      "evidence": "2025 partial/weak: Normalized Square Root: Sharper Matrix Factorization Bounds for Differentially Private Continual Counting",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2509.14334v1"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

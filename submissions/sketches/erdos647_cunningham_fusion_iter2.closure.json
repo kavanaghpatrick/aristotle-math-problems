@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "witness_table_chunked",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "iter2 of slot 741 (UUID 7031f637, audited compiled_no_advance because the witness JSON was not auditable). Slot737 reduced E647 failure region to the Sophie-Germain Cunningham-chain residue class, leaving exactly 35 quadruples (n, q, r, p) in [3000, 10^6]; each has an explicit pre-computed witness m of offset 5 or 6 with sigma0(m) >= n - m + 3, tabulated in analysis/erdos647_cunningham_witnesses.json. Universal over an enumerated finite family with verified witness table — slot738-style native_decide cascade. iter2 embeds the dossier in the companion JSON so the audit can verify the cascade is grounded. Composed with slot737 this closes the entire E647 failure region up to 10^6. Real sub-claim closure: a publishable bounded resolution beyond prior wins, not the unbounded conjecture."
+}

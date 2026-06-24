@@ -1,0 +1,21 @@
+OPEN GAP: Singmaster's Conjecture
+Source: Singmaster (1971)
+Domain: combinatorics
+
+There is an absolute constant N such that no integer > 1
+appears more than N times in Pascal's triangle.
+
+Known: C(n,k) = C(n,n-k) (trivial), C(n,2) = C(m,2) iff
+n(n-1) = m(m-1) (Pell equation). The number 3003 = C(14,5)
+= C(15,5) appears 8 times. Conjectured N = 8.
+
+Infinitely many numbers appear 6 times:
+C(F_{2k}, F_{2k}-2) for Fibonacci F_{2k}.
+
+theorem singmaster :
+    ∃ N : ℕ, ∀ t : ℕ, t > 1 →
+    (Finset.filter (fun p : ℕ × ℕ => Nat.choose p.1 p.2 = t)
+      (Finset.range (t+1) ×ˢ Finset.range (t+1))).card ≤ N := by
+  sorry
+
+Status: OPEN. Best upper bound O(log t) from Erdős-style arguments.

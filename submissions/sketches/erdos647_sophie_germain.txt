@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 647 — Sophie Germain Sub-case
+Source: Erdős Problem 647
+Domain: nt
+
+Is there n > 24 such that max_{m<n}(m + τ(m)) ≤ n + 2?
+
+All cases proved EXCEPT: n ≡ 0 mod 12, n-1 prime, (n-2)/2 prime.
+
+This is the Sophie Germain configuration. When n-1 and (n-2)/2
+are both prime, witnesses n-1 and n-2 each give m+τ(m)≤n+2.
+Must find a witness among n-3, n-4, n-5, etc.
+
+The chain of conditions for ALL nearby witnesses to fail
+requires increasingly many numbers to be prime (Cunningham chain),
+which becomes impossible via covering congruences.
+
+theorem erdos647_sophie_germain (n : ℕ) (hn : n > 24)
+    (hmod12 : n % 12 = 0) (hprime : Nat.Prime (n - 1))
+    (hprime2 : Nat.Prime ((n - 2) / 2)) :
+    ∃ m, 1 ≤ m ∧ m < n ∧ n + 2 < m + (Nat.divisors m).card := by
+  sorry
+
+Status: OPEN. All other sub-cases proved. This is the final gap.

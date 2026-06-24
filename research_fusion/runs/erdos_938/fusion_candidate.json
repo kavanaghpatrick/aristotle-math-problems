@@ -1,0 +1,386 @@
+{
+  "problem_id": "erdos_938",
+  "generated_at": "2026-05-30T08:30:06+00:00",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_938/01_literature.md",
+    "analogies_path": "research_fusion/runs/erdos_938/02_analogies.md",
+    "techniques_path": "research_fusion/runs/erdos_938/03_techniques.md"
+  },
+  "literature": {
+    "paper_count": 7,
+    "domains_covered": [
+      "nt",
+      "analytic_nt",
+      "additive_combinatorics",
+      "diophantine",
+      "arithmetic_geometry",
+      "combinatorics"
+    ],
+    "path": "research_fusion/runs/erdos_938/01_literature.md",
+    "papers": [
+      {
+        "title": "Mixed thresholds in the Lonely Runner Conjecture",
+        "authors": [
+          "Alathea Jensen"
+        ],
+        "arxiv_id": "2605.27941",
+        "year": 2026,
+        "domain_tag": "nt",
+        "summary": "The Lonely Runner Conjecture states that if $k+1$ runners start at the same point on a unit-length circular track and run with distinct constant speeds, then each runner is at some time at least $1/(k+1)$-distant from every other runner. Equivalently, for every tuple of $k$ distinct positive integer speeds $s_1,\\ldots,s_k$, there is a real number $t$ such that $\\|s_i t\\|\\geq \\frac{1}{k+1}$ for all",
+        "url": "http://arxiv.org/abs/2605.27941v1"
+      },
+      {
+        "title": "Linnik's problem for multiplicative functions",
+        "authors": [
+          "Kaisa Matom\u00e4ki",
+          "Joni Ter\u00e4v\u00e4inen"
+        ],
+        "arxiv_id": "2605.27833",
+        "year": 2026,
+        "domain_tag": "nt",
+        "summary": "We study a multiplicative function analogue of Linnik's problem on the least prime in an arithmetic progression. Let $h\\colon \\mathbb{N}\\to\\mathbb{R}\\setminus\\{0\\}$ be a multiplicative function, and let $a \\pmod q$ be a reduced residue class. We ask how far one must go before finding square-free integers $n_1,n_2\\equiv a \\pmod q$ with $h(n_1)<0<h(n_2)$. We show that one can always find such intege",
+        "url": "http://arxiv.org/abs/2605.27833v1"
+      },
+      {
+        "title": "A proof of the $4,7$ cases of Sylvester's conjecture on cube sums",
+        "authors": [
+          "Hongbo Yin"
+        ],
+        "arxiv_id": "2605.25917",
+        "year": 2026,
+        "domain_tag": "nt",
+        "summary": "In this paper, we prove that every prime $p$ which is congruent to $4,7$ modulo $9$ is the sum of two rational cubes. This is $2/3$ of Sylvester's conjecture which has a history of nearly 150 years since 1879. In the proof, we use recent progress on Full BSD conjecture of rank $0$ elliptic curves in \\cite{BF} to deduce that the Manin-Stevens constants of some families of elliptic curves are units.",
+        "url": "http://arxiv.org/abs/2605.25917v2"
+      },
+      {
+        "title": "On the binary digits of the Erd\u0151s-Borwein constant",
+        "authors": [
+          "John M. Campbell"
+        ],
+        "arxiv_id": "2605.24160",
+        "year": 2026,
+        "domain_tag": "nt",
+        "summary": "In a landmark paper on arithmetical properties of Lambert series, Erd\u0151s proved that $\\sum_{n=1}^{\\infty} \\frac{1}{2^{n} - 1}$ is irrational. This value $E$ is now referred to as the Erd\u0151s-Borwein constant. Crandall, in 2012, studied properties of the base-2 expansion of this constant, and left the following as an open problem: Does the string $11$ occur infinitely often in the base-2 expansion of ",
+        "url": "http://arxiv.org/abs/2605.24160v1"
+      },
+      {
+        "title": "Pairs of square-free arithmetic progressions in infinite words",
+        "authors": [
+          "Thomas Del\u00e9pine",
+          "Pascal Ochem",
+          "Matthieu Rosenfeld"
+        ],
+        "arxiv_id": "2605.29853",
+        "year": 2026,
+        "domain_tag": "additive_combinatorics",
+        "summary": "We study a question of Harju from 2019 regarding the existence of infinite ternary square-free words whose subsequences modulo $p$ and $q$ are also square-free for relatively prime integers $p$ and $q$. Among such pairs $(p, q)$ with $p, q \\geq 3$, the only two pairs with this property known prior to this work were $(3, 11)$ and $(5, 6)$. We prove that there are finitely many pairs $(p, q)$ of rel",
+        "url": "http://arxiv.org/abs/2605.29853v1"
+      },
+      {
+        "title": "Finding a Solution to the Erd\u0151s-Ginzburg-Ziv Theorem in Linear Time",
+        "authors": [
+          "Sunghyeon Jo"
+        ],
+        "arxiv_id": "2605.21753",
+        "year": 2026,
+        "domain_tag": "combinatorics",
+        "summary": "The Erd\u0151s-Ginzburg-Ziv theorem states that every sequence of 2n - 1 integers contains a subsequence of length n whose sum is divisible by n. Choi, Kang, and Lim gave a simple deterministic O(n log n) algorithm for finding such a subsequence, and Leung recently improved this to O(n log log log n). We give a deterministic linear-time algorithm. The core is a linear-time algorithm for the following p",
+        "url": "http://arxiv.org/abs/2605.21753v1"
+      },
+      {
+        "title": "Box Progressions, Abelian Power-Free Morphisms and A Sieve Technique for the Template Method",
+        "authors": [
+          "Sad\u0131k Eyido\u011fan",
+          "Haydar G\u00f6ral",
+          "Nihan Tan\u0131sal\u0131"
+        ],
+        "arxiv_id": "2605.20504",
+        "year": 2026,
+        "domain_tag": "combinatorics",
+        "summary": "Given balls and boxes both enumerated by the positive integers, we consider a sequential allocation of the balls into the boxes. We fix $\\ell \\ge 2$. Proceeding in increasing order of box labels, assign to each box the next $r$ smallest balls for some $ 1\\leq r\\leq\\ell$. Given an integer $k\\ge 3$, is there a natural number $N$ such that in any placement of $N$ balls into boxes, there exist $k$ bal",
+        "url": "http://arxiv.org/abs/2605.20504v1"
+      }
+    ]
+  },
+  "analogies": {
+    "path": "research_fusion/runs/erdos_938/02_analogies.md",
+    "models_consulted": [
+      "grok",
+      "gemini",
+      "codex"
+    ],
+    "top_analogs": [
+      {
+        "analog_id": "A1",
+        "analog_problem": "Cap Set Problem",
+        "analog_domain": "additive_combinatorics",
+        "named_technique": "Slice rank method",
+        "structural_map": "Proving a sharp upper bound on the size of a set that avoids 3-term arithmetic progressions using algebraic rank.",
+        "obstruction": "The slice rank method is specifically optimized for vector spaces over finite fields (F_q^n) rather than the infinite set of integers.",
+        "confidence": 4,
+        "supporters": [
+          "codex/gpt-5.2 (openai)",
+          "gemini (google)"
+        ]
+      },
+      {
+        "analog_id": "A2",
+        "analog_problem": "Corners Theorem",
+        "analog_domain": "additive_combinatorics",
+        "named_technique": "Hypergraph removal lemma",
+        "structural_map": "Finding small structured configurations (corners) in a set, which serves as a multidimensional analog to 3-term APs.",
+        "obstruction": "Mapping the one-dimensional sequence of powerful numbers into a higher-dimensional grid suitable for corner analysis is non-trivial.",
+        "confidence": 2,
+        "supporters": [
+          "codex/gpt-5.2 (openai)",
+          "gemini (google)"
+        ]
+      },
+      {
+        "analog_id": "A3",
+        "analog_problem": "Dejean's Conjecture",
+        "analog_domain": "combinatorics_on_words",
+        "named_technique": "Currie-Rampersad Template Method",
+        "structural_map": "The condition of having consecutive terms in an AP is equivalent to the gap sequence containing a square (pattern 'dd'), mapping adjacency to word repetitions.",
+        "obstruction": "Powerful numbers are defined by multiplicative properties (p | n implies p^2 | n) rather than being generated by the fixed points of a morphism.",
+        "confidence": 4,
+        "supporters": [
+          "gemini (google)"
+        ]
+      },
+      {
+        "analog_id": "A4",
+        "analog_problem": "Roth's Theorem on Arithmetic Progressions",
+        "analog_domain": "additive_combinatorics",
+        "named_technique": "Fourier analytic method",
+        "structural_map": "The existence of 3-term arithmetic progressions in a subset of integers of a given density or growth rate.",
+        "obstruction": "Powerful numbers are extremely sparse (density zero), falling below the threshold where classical Roth-type density results guarantee the existence of APs.",
+        "confidence": 4,
+        "supporters": [
+          "gemini (google)"
+        ]
+      },
+      {
+        "analog_id": "A5",
+        "analog_problem": "Arithmetic removal lemma for 3-term progressions",
+        "analog_domain": "additive combinatorics",
+        "named_technique": "hypergraph removal lemma / arithmetic removal lemma (Green 2005; Kr\u00e1l-Serra-Vena 2009)",
+        "structural_map": "The equation x+z=2y for a 3-term AP is the same linear-configuration skeleton as the target triples n_k,n_{k+1},n_{k+2}.",
+        "obstruction": "Removal lemmas are density tools for large finite ambient groups, while powerful numbers are a zero-density deterministic sequence.",
+        "confidence": 4,
+        "supporters": [
+          "codex/gpt-5.2 (openai)"
+        ]
+      }
+    ]
+  },
+  "technique_cards": [
+    {
+      "name": "Slice rank method",
+      "seminal_paper": {
+        "arxiv_id": "1605.09223",
+        "doi": "10.4007/annals.2017.185.1.8",
+        "citation": "Ellenberg and Gijswijt, Ann. of Math. 185(1):339-343",
+        "year": 2017
+      },
+      "home_domain": "additive_combinatorics",
+      "what_it_does": "The slice rank method gives strong upper bounds for progression-free subsets of finite vector spaces by bounding the rank of tensors encoding forbidden additive patterns. It is especially effective for cap-set type problems over finite fields, where algebraic dimension replaces interval length or density in the integers.",
+      "input_requirements": [
+        "a finite vector space F_q^n or comparable finite-field product structure",
+        "a forbidden additive pattern expressible by a low-degree polynomial or tensor constraint",
+        "a subset whose size is to be bounded by algebraic rank arguments",
+        "finite-field coordinates allowing polynomial-degree truncation"
+      ],
+      "output_signature": "an exponential upper bound on the size of a subset avoiding the specified additive pattern",
+      "input_match": [
+        {
+          "requirement": "a finite vector space F_q^n or comparable finite-field product structure",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "a forbidden additive pattern expressible by a low-degree polynomial or tensor constraint",
+          "match": "PARTIAL",
+          "evidence": "Set.IsAPOfLength gives a 3-term arithmetic progression condition, but not a finite-field tensor constraint"
+        },
+        {
+          "requirement": "a subset whose size is to be bounded by algebraic rank arguments",
+          "match": "PARTIAL",
+          "evidence": "The theorem asks for finiteness of certain 3-term configurations, not a direct upper bound on a large progression-free set"
+        },
+        {
+          "requirement": "finite-field coordinates allowing polynomial-degree truncation",
+          "match": "NO",
+          "evidence": "no match"
+        }
+      ],
+      "known_obstructions": [
+        "The powerful numbers form an infinite ordered subsequence of the integers, not a finite vector space over F_q.",
+        "The target property concerns consecutive powerful numbers, which adds an order/gap constraint absent from the cap-set setting.",
+        "Slice-rank bounds are designed for large subsets avoiding progressions, while the open problem asks for finiteness of special progressions that do occur."
+      ],
+      "fit_score": 0.25,
+      "source_analog_id": "A1",
+      "rank": 1
+    },
+    {
+      "name": "hypergraph removal lemma / arithmetic removal lemma",
+      "seminal_paper": {
+        "arxiv_id": "math/0310476",
+        "doi": "10.1007/s00039-005-0509-8",
+        "citation": "B. Green, A Szemeredi-type regularity lemma in abelian groups, with applications, Geom. Funct. Anal. 15(2):340-376, 2005.",
+        "year": 2005
+      },
+      "home_domain": "additive combinatorics",
+      "what_it_does": "The arithmetic removal lemma turns a small count of linear configurations in finite abelian groups into a small deletion set that removes all such configurations. For 3-term progressions, its catalog signature concerns solutions of x+z=2y among specified subsets of a finite ambient group.",
+      "input_requirements": [
+        "a finite abelian ambient group G, or a finite interval modeled inside such a group",
+        "three subsets X,Y,Z of G with a quantitative upper bound on solutions to x+z=2y",
+        "the target configuration is expressible as the linear equation x+z=2y",
+        "a removal-style conclusion, allowing deletion of o(|G|) or epsilon|G| elements from the input subsets"
+      ],
+      "output_signature": "If the number of 3-term AP solutions is sufficiently small, delete a small number of elements from each input set so that no such solutions remain.",
+      "input_match": [
+        {
+          "requirement": "a finite abelian ambient group G, or a finite interval modeled inside such a group",
+          "match": "NO",
+          "evidence": "no match: the target statement is a global finiteness question about a deterministic sequence in \u2115."
+        },
+        {
+          "requirement": "three subsets X,Y,Z of G with a quantitative upper bound on solutions to x+z=2y",
+          "match": "NO",
+          "evidence": "no match: the statement provides no density or solution-count hypothesis over finite subsets."
+        },
+        {
+          "requirement": "the target configuration is expressible as the linear equation x+z=2y",
+          "match": "YES",
+          "evidence": "Mathlib predicate Set.IsAPOfLength P.toSet 3 appears in the target statement."
+        },
+        {
+          "requirement": "a removal-style conclusion, allowing deletion of o(|G|) or epsilon|G| elements from the input subsets",
+          "match": "NO",
+          "evidence": "no match: the requested conclusion is finiteness of consecutive powerful-number triples, not AP elimination by deletion."
+        }
+      ],
+      "known_obstructions": [
+        "Powerful numbers have zero density, while arithmetic removal lemmas are density tools in finite ambient groups.",
+        "The consecutive-term condition is an order constraint on the powerful-number sequence, not part of the linear equation x+z=2y.",
+        "A removal conclusion does not directly produce finiteness of exact consecutive triples."
+      ],
+      "fit_score": 0.25,
+      "source_analog_id": "A5",
+      "rank": 2
+    },
+    {
+      "name": "Currie-Rampersad Template Method",
+      "seminal_paper": {
+        "arxiv_id": "0905.1129",
+        "doi": "10.1090/S0025-5718-2010-02407-X",
+        "citation": "James D. Currie and Narad Rampersad, \"A proof of Dejean's conjecture,\" Mathematics of Computation 80(274):1063-1070, 2011.",
+        "year": 2011
+      },
+      "home_domain": "combinatorics_on_words",
+      "what_it_does": "The method certifies repetition-avoidance properties for infinite words produced by carefully chosen morphisms. It packages global repetition-threshold claims into finite checks involving encodings, kernel repetitions, and bounded forbidden configurations.",
+      "input_requirements": [
+        "an infinite word over a finite alphabet, typically generated by a uniform morphism or equivalent finite generator",
+        "the target property expressed as avoidance of fractional powers or finite forbidden templates in that word",
+        "a Pansiot-style encoding or comparable finite-state encoding preserving periods and exponents",
+        "an algebraic condition on the morphism, such as compatibility with a finite permutation semigroup",
+        "a bounded exhaustive check of candidate bad factors or kernel repetitions"
+      ],
+      "output_signature": "a certified infinite word avoiding the specified repetitions or templates, usually reducing the global avoidance claim to a finite verification certificate",
+      "input_match": [
+        {
+          "requirement": "an infinite word over a finite alphabet, typically generated by a uniform morphism or equivalent finite generator",
+          "match": "PARTIAL",
+          "evidence": "Prior slot A3 supplies a gap-sequence word viewpoint, but the gap alphabet is not finite and no morphic generator is identified."
+        },
+        {
+          "requirement": "the target property expressed as avoidance of fractional powers or finite forbidden templates in that word",
+          "match": "PARTIAL",
+          "evidence": "Prior slot A3 maps a consecutive 3-term AP to an adjacent equal-gap pattern, but only as a local square condition."
+        },
+        {
+          "requirement": "a Pansiot-style encoding or comparable finite-state encoding preserving periods and exponents",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "an algebraic condition on the morphism, such as compatibility with a finite permutation semigroup",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "a bounded exhaustive check of candidate bad factors or kernel repetitions",
+          "match": "NO",
+          "evidence": "no match"
+        }
+      ],
+      "known_obstructions": [
+        "Powerful numbers are defined by multiplicative prime-valuation conditions rather than by a morphic fixed point.",
+        "The natural gap sequence has unbounded integer symbols, unlike the finite alphabets used in the template method.",
+        "The desired conclusion is finiteness of occurrences, not construction of an infinite object avoiding all forbidden repetitions.",
+        "No Pansiot encoding, kernel-repetition structure, or finite verification bound is visible from the stated Lean problem."
+      ],
+      "fit_score": 0.2,
+      "source_analog_id": "A3",
+      "rank": 3
+    },
+    {
+      "name": "Hypergraph removal lemma",
+      "seminal_paper": {
+        "arxiv_id": null,
+        "doi": "10.1073/pnas.0502771102",
+        "citation": "V. Rodl, B. Nagle, J. Skokan, M. Schacht, and Y. Kohayakawa, The hypergraph regularity method and its applications, Proc. Natl. Acad. Sci. U.S.A. 102(23):8109-8113, 2005.",
+        "year": 2005
+      },
+      "home_domain": "extremal_combinatorics",
+      "what_it_does": "The hypergraph removal lemma says that a large finite uniform hypergraph with few copies of a fixed small hypergraph can be made copy-free by deleting few edges. It is a general-purpose counting/deletion principle behind several density results, including multidimensional Szemeredi-type theorems and corner configurations.",
+      "input_requirements": [
+        "a fixed k-uniform hypergraph H whose copies encode the target structured configuration",
+        "a finite ambient hypergraph sequence with vertex sets growing to size n",
+        "an asymptotic upper bound saying the ambient hypergraphs contain few copies of H",
+        "a deletion/removal interpretation connecting removal of hyperedges to elimination of the target number-theoretic configurations",
+        "a density or pseudorandomness framework strong enough to model the relevant set inside a grid or product space"
+      ],
+      "output_signature": "For fixed H and epsilon, constants delta and n0 such that any n-vertex k-uniform hypergraph with at most delta*n^v(H) copies of H can be made H-free by deleting at most epsilon*n^k edges.",
+      "input_match": [
+        {
+          "requirement": "a fixed k-uniform hypergraph H whose copies encode the target structured configuration",
+          "match": "PARTIAL",
+          "evidence": "Set.IsAPOfLength identifies the 3-term AP configuration, but no hypergraph encoding is present."
+        },
+        {
+          "requirement": "a finite ambient hypergraph sequence with vertex sets growing to size n",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "an asymptotic upper bound saying the ambient hypergraphs contain few copies of H",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "a deletion/removal interpretation connecting removal of hyperedges to elimination of the target number-theoretic configurations",
+          "match": "NO",
+          "evidence": "no match"
+        },
+        {
+          "requirement": "a density or pseudorandomness framework strong enough to model the relevant set inside a grid or product space",
+          "match": "NO",
+          "evidence": "no match"
+        }
+      ],
+      "known_obstructions": [
+        "Powerful numbers form a sparse one-dimensional sequence, while the technique is naturally dense/asymptotic in finite hypergraphs or grids.",
+        "The target asks for finiteness of APs among consecutive powerful numbers, not for existence of configurations in a positive-density set.",
+        "Consecutiveness in the ordered sequence of powerful numbers has no evident hypergraph-removal deletion analogue.",
+        "The supplied statement contains no multidimensional grid model or pseudorandom majorant for powerful numbers."
+      ],
+      "fit_score": 0.1,
+      "source_analog_id": "A2",
+      "rank": 4
+    }
+  ],
+  "honest_disclaimer": "This dossier catalogs cross-domain analogs and named techniques. It does NOT claim any technique closes the gap. fit_score is a structural overlap heuristic, NOT a probability of success. Stage 4 must still write a fusion sketch that does not propose a bridge lemma."
+}

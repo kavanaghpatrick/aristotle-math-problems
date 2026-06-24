@@ -1,0 +1,7 @@
+OPEN GAP: Test sketch with no companion file
+Source: synthetic
+Domain: nt
+
+theorem missing_test : ∃ n : ℕ, n + 0 = n := by sorry
+
+Status: OPEN (synthetic for transition-period warn-only behavior).

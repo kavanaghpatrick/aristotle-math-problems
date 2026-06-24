@@ -1,0 +1,24 @@
+OPEN GAP: Erdős 329 — forward direction (PerfectDifferenceSet embedding ⇒ Sidon density 1)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/329.lean — theorem erdos_329.of_sub_perfectDifferenceSet
+Domain: combinatorics / additive number theory
+
+If every finite Sidon set A ⊆ ℕ embeds in some perfect difference set, then
+  sSup { sidonUpperDensity A | IsSidon A } = 1.
+This is the forward direction of the Erdős density-1 program. Note: the hypothesis
+(every finite Sidon set embeds in a PDS) was disproved in 2025 by Alexeev–Mixon
+(arXiv:2510.19804): the Mian–Chowla set {1, 2, 4, 8, 13} does not embed in any
+perfect difference set. Hall (1947) gave an earlier counterexample {1, 3, 9, 10, 13}.
+So the antecedent is FALSE, and the implication is vacuously true. This is a
+direction-closure of one half of the Sidon ↔ PerfectDifferenceSet relationship,
+established by 2025 literature; the contrapositive content lies in Erdős 707.
+
+theorem erdos_329_of_sub_perfectDifferenceSet :
+    (∀ (A : Finset ℕ), IsSidon (A : Set ℕ) →
+      ∃ (D : Set ℕ) (n : ℕ), (A : Set ℕ) ⊆ D ∧ IsPerfectDifferenceSet D n) →
+    sSup { Erdos329.sidonUpperDensity A | (A : Set ℕ) (_ : IsSidon A) } = 1 := by
+  sorry
+
+Status: OPEN as stated in formal-conjectures. Hypothesis falsified by Alexeev–Mixon
+(2025); see Erdos707.counterexample_mian_chowla and Erdos707.counterexample_hall in
+formal-conjectures/FormalConjectures/ErdosProblems/707.lean. Vacuous-implication
+closure expected.

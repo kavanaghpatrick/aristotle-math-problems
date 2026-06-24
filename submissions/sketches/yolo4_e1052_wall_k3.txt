@@ -1,0 +1,23 @@
+OPEN GAP: Erdős 1052 / Wall k=3 — Lehmer Pair Primitive Divisor Theorem
+Source: Erdős Problem 1052 (third-iterate stratum)
+Domain: nt
+
+A Lehmer pair (α,β) is a pair of algebraic integers with α+β=√R, αβ=Q for
+coprime nonzero integers R,Q with α/β not a root of unity. The associated
+Lehmer sequence is U_n(α,β) = (α^n - β^n)/(α - β) when n is odd, and
+(α^n - β^n)/(α^2 - β^2) when n is even. The conjecture asserts that for
+every Lehmer pair and every n > 30 with n divisible by 3, the term U_n
+has a primitive prime divisor — a prime q that divides U_n but does not
+divide U_m for any 0 < m < n. The "Wall k=3" stratum is exactly this
+third-iterate restriction.
+
+theorem erdos_1052_wall_k3
+    (α β : ℂ) (hα : α + β ∈ Set.range (Int.cast : ℤ → ℂ))
+    (hαβ : α * β ∈ Set.range (Int.cast : ℤ → ℂ)) (hrat : α / β ∉ rootsOfUnity)
+    (n : ℕ) (hn : 30 < n) (h3 : 3 ∣ n) :
+    ∃ q : ℕ, q.Prime ∧ q ∣ lehmer_term α β n ∧
+      ∀ m < n, ¬ (q ∣ lehmer_term α β m) := by sorry
+
+Status: OPEN in Lean. No formalized proof exists in Mathlib for any
+Lehmer-pair primitive-divisor statement at this generality. The k=3
+stratum is the smallest non-trivial third-iterate case.

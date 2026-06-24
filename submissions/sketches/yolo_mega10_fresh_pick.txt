@@ -1,0 +1,20 @@
+OPEN GAP: Erdős Problem 779 — Deaconescu's prime conjecture on primorials
+Source: FormalConjectures/ErdosProblems/779.lean ; erdosproblems.com/779
+Domain: nt
+
+Let n >= 1 and let P = product of the first (n+1) primes. Does there
+always exist a prime p with p_n < p < P such that P + p is prime?
+
+theorem erdos_779 (n : ℕ) (hn : n ≥ 1) :
+    let P := ∏ i ∈ Finset.range (n + 1), Nat.nth Nat.Prime i
+    ∃ p, p.Prime ∧ (P + p).Prime ∧ Nat.nth Nat.Prime n < p ∧ p < P := by
+  sorry
+
+Status: FALSIFIABLE OPEN. A conjecture of Deaconescu (Math. Mag., 1982).
+Verified computationally for n ≤ 1000 (Deaconescu). Erdős expected
+the least such p satisfies p ≤ n^{O(1)}. Heuristic probability of
+failure for any given n is ~ exp(-n^{cn}) since P = n^{(1+o(1))n}
+and P+p is prime with chance ~ 1/log(P) for each candidate p.
+Never previously submitted to Aristotle. Mathlib has Finset.prod,
+Nat.nth, Nat.Prime, and native_decide for bounded n verification.
+OEIS A005235 lists the minimal witnesses.

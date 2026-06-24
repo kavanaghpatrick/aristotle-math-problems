@@ -1,0 +1,9 @@
+- Added a fast search script: `scripts/erdos850_search.py:1` (uses the necessary congruence `y = x + t·M` with `M = rad(x(x+1)(x+2))`, and enforces `x>=4`, `|x-y|>=30`; the `mod 6` constraint is automatic since `6 | M`).
+- Ran k=3 search with **no witnesses**:
+  - `--bound 1_000_000`: `x_with_room=285`, `tested_y=174,752`
+  - `--bound 10_000_000`: `x_with_room=648`, `tested_y=1,749,862`
+  - `--bound 20_000_000`: `x_with_room=821`, `tested_y=3,500,211`
+  - `--bound 50_000_000`: `x_with_room=1,165`, `tested_y=8,751,562`
+  - `--bound 100_000_000`: `x_with_room=1,466`, `tested_y=17,503,952`
+- “Why k=3 is hard” (empirical + structural): already for `bound=10^7`, among the `1,749,862` candidate `y=x+tM` values, only `157` satisfy `rad(y)=rad(x)`, only `9` satisfy both first two equalities, and `0` satisfy all three; those `9` are exactly the classic k=2 family `x=2^n-2, y=2^n(2^n-2)`, which *cannot* extend to k=3 because then `rad(y+2)=rad(x+2)=2` would force `y+2` to be a power of 2, but here `y+2=(2^n-1)^2+1 ≡ 2 (mod 8)` so it has an odd prime factor for `n≥2`.
+- Reproducing: `python scripts/erdos850_search.py --k 3 --bound 100000000` (and `--k 2` to see k=2 witnesses, including `x=75,y=1215`).

@@ -1,0 +1,74 @@
+{
+  "_cache_ts": 1780313649.729818,
+  "checked_at": "2026-06-01T11:34:09+00:00",
+  "evidence": "3 paper(s) with strong closure language matching the named conjecture 'Erd\u0151s problem 1' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "1975 partial/weak: Some problems and results on the irrationality of the sum of infinite series",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3578925"
+    },
+    {
+      "evidence": "1958 partial/weak: Problems and results on the theory of interpolation. I",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:3136803"
+    },
+    {
+      "evidence": "2023 partial/weak: On the ERD\u0150S distance problem",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21203/rs.3.rs-2679663/v1"
+    },
+    {
+      "evidence": "2024 STRONG closure language: Optimal Solution to Erd\u0151s Distinct Distance Problem",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2139/ssrn.4775206"
+    },
+    {
+      "evidence": "2026 partial/weak: An Improved Lower Bound for the de Bruijn--Erd\u0151s Consecutive Gap Problem",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.30959v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Above and below",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.27061v1"
+    },
+    {
+      "evidence": "2026 STRONG closure language: The maximum number of paths of a given length in a nonhamiltonian graph",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.26479v1"
+    },
+    {
+      "evidence": "2026 partial/weak: A finite-board reduction for the Erd\u0151s Matching Conjecture and the 4-uniform case via exact certificates",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.26060v1"
+    },
+    {
+      "evidence": "2026 partial/weak: On the binary digits of the Erd\u0151s-Borwein constant",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.24160v1"
+    },
+    {
+      "evidence": "2026 partial/weak: Polylogarithmic Bounds for Nested Cycles without Geometric Crossings",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.22232v1"
+    },
+    {
+      "evidence": "2026 STRONG closure language: Finding a Solution to the Erd\u0151s-Ginzburg-Ziv Theorem in Linear Time",
+      "signal": "strong",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.21753v1"
+    }
+  ],
+  "status": "CLOSED"
+}

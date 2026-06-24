@@ -1,0 +1,7 @@
+# trim best from biwheel(C7) drop a0,b1: n=4 m=6 critical_edges=6 vertex_critical=True
+0 1
+0 2
+0 3
+1 2
+1 3
+2 3

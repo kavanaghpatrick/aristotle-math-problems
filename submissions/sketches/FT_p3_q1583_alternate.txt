@@ -1,0 +1,26 @@
+OPEN GAP: Feit-Thompson prime conjecture — diagnostic case (p=3, q=1583)
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+For p=3, q=1583: (1583^3 - 1)/(1583 - 1) does not divide (3^1583 - 1)/2.
+Equivalently 3^1583 ≢ 1 (mod A(1583)) for A(1583) = 1583^2 + 1583 + 1 = 2507473.
+
+q=1583 is the first prime ≡ 71 (mod 72) with 3 < q ≤ 2000 at which the
+slot720/slot736 small-witness Fermat-reduction mechanism is inapplicable:
+A(1583) = 2,507,473 is itself prime, so no proper prime divisor 3 < r < A(q)
+exists to anchor Fermat's little theorem at a small modulus. Diagnostic
+question: does FT_p3_q hold at this barrier or fail.
+
+Diagnostic data in analysis/ft_q1583_diagnostic.json: direct computation gives
+3^1583 mod 2507473 = 1702700 ≠ 1, with ord_3 mod 2507473 = 208956. So FT_p3_q
+holds at q=1583.
+
+theorem feit_thompson_p3_q1583 :
+    ¬ (1583 ^ 3 - 1) / (1583 - 1) ∣ (3 ^ 1583 - 1) / 2 := by sorry
+
+Status: OPEN as a Lean result at q=1583. q=1583 is the structural analogue of
+q=71 inside the family: both are family primes at which A(q) is itself prime.
+Slot720 dispatched q=71 directly via native_decide because q ≤ 100. At q=1583
+the same approach must instantiate the slot720 helper not_dvd_via_fermat_factor
+with r = A(1583) = 2507473 (prime; trivially divides A(q); since 1583 < r-1 we
+have q mod (r-1) = 1583 and 3^1583 mod 2507473 = 1702700 ≠ 1).

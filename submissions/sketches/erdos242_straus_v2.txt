@@ -1,0 +1,16 @@
+OPEN GAP: Erdos-Straus Conjecture (Erdos 242)
+Source: FormalConjectures/ErdosProblems/242.lean
+Domain: nt
+
+For every integer n >= 2, the fraction 4/n can be written as a sum
+of three unit fractions: 4/n = 1/x + 1/y + 1/z.
+
+Known reductions: holds for n even, n≡3 mod 4, n≡2 mod 3,
+n≡5 mod 8, n≡5 mod 12, n≡17 mod 20. Reduces to n≡1 mod 24.
+Verified computationally for n < 10^17.
+
+theorem erdos_straus : ∀ n : ℕ, n ≥ 2 →
+    ∃ x y z : ℕ, x > 0 ∧ y > 0 ∧ z > 0 ∧
+    4 * x * y * z = n * (y * z + x * z + x * y) := by sorry
+
+Status: OPEN. The remaining gap is n ≡ 1 mod 24 with n prime.

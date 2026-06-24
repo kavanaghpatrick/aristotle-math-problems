@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 828 — phi(n) divides n+a infinitely often
+Source: FormalConjectures/ErdosProblems/828.lean
+Domain: nt
+
+For every integer a, there are infinitely many n
+with phi(n) | (n + a).
+
+theorem erdos_828 :
+    ∀ a : ℤ, Set.Infinite {n : ℕ | ↑(Nat.totient n) ∣ n + a} := by sorry
+
+Status: OPEN. Generalizes Lehmer's conjecture (a = -1).
+The a = 0 case is easy: phi(n)|n iff n = 2^a * 3^b.

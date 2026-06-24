@@ -1,0 +1,162 @@
+[
+  {
+    "problem": "E938",
+    "domain": "physics",
+    "model": "codex",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "cs",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 286.80329298973083,
+    "bytes": 3585
+  },
+  {
+    "problem": "E938",
+    "domain": "biology",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 284.93986678123474,
+    "bytes": 3305
+  },
+  {
+    "problem": "E938",
+    "domain": "economics",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 191.25137281417847,
+    "bytes": 3088
+  },
+  {
+    "problem": "E373",
+    "domain": "physics",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 174.060209274292,
+    "bytes": 2748
+  },
+  {
+    "problem": "E373",
+    "domain": "cs",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 163.82281398773193,
+    "bytes": 2895
+  },
+  {
+    "problem": "E373",
+    "domain": "biology",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 172.67915225028992,
+    "bytes": 3309
+  },
+  {
+    "problem": "E373",
+    "domain": "economics",
+    "model": "codex",
+    "status": "ok",
+    "elapsed_s": 136.44417595863342,
+    "bytes": 3202
+  },
+  {
+    "problem": "E938",
+    "domain": "physics",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "cs",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "biology",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "economics",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "physics",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "cs",
+    "model": "gemini",
+    "status": "err",
+    "elapsed_s": 2309.944458961487,
+    "bytes": 36
+  },
+  {
+    "problem": "E373",
+    "domain": "biology",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "economics",
+    "model": "gemini",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "physics",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "cs",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "biology",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E938",
+    "domain": "economics",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "physics",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "cs",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "biology",
+    "model": "grok",
+    "status": "cached"
+  },
+  {
+    "problem": "E373",
+    "domain": "economics",
+    "model": "grok",
+    "status": "cached"
+  }
+]

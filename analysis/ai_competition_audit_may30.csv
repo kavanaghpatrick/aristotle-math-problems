@@ -1,0 +1,28 @@
+problem_id,status,ai_team_if_closed,ai_date,citation_url,recommendation
+erdos_7,AI_PARTIAL,Aristotle (Jinook Lee collaboration),2026-05-02,https://erdosproblems.com/7,FALSE_CLAIM in wiki — claim retracted/incorrect; problem STILL OPEN; safe to continue but expect Aristotle has prior attempt DNA on this exact problem
+erdos_64,CLEAR,,,,STILL OPEN; no AI claim in wiki. Erdős-Gyárfás P_13-free proved 2024-2025 with COMPUTER-AIDED search (Hegde et al) but not AI-LLM resolution. SAT-cex search remains viable.
+erdos_137,CLEAR,,,,STILL OPEN; no AI entry in wiki. NOTE: literature_freshness_may30.csv already flagged k=4 as TRIVIALLY IMPLIED by k=3 — closure-mechanism trap unrelated to AI competition
+erdos_167,AI_PARTIAL,GPT-5 (lit search only),2025-10-13,https://erdosproblems.com/167,Section 2(a) — lit search PARTIAL only; no AI proof; FULL Tuza remains OPEN; AGAINST attempting per MEMORY.md (200+ Tuza no-advance + falsified-approach list)
+erdos_203,CLEAR,,,,STILL OPEN; no AI entry in wiki. Existential m Coprime 6 — explicit-witness lane still untouched by AI
+erdos_242,CLEAR,,,,STILL OPEN; no AI entry in wiki. Erdős-Straus 4/n still untouched by AI competition
+erdos_307,CLEAR_BUT_CHECK,,,,No AI entry in wiki BUT literature_freshness_may30.csv flags SOLVED_SINCE (Steinerberger 2024 + Liu-Sawhney 2024 for sum-version). Codex framing was PRODUCT — needs clarification; if true-product reading is novel it is CLEAR
+erdos_364,CLEAR,,,,STILL OPEN; no AI entry in wiki
+erdos_366,AI_PARTIAL,Automated research pipeline,2026-04-14,https://erdosproblems.com/366,Wiki Section 1(b) — PARTIAL_PROGRESS; some scope claimed but not full closure; investigate before submission to avoid duplicate effort
+erdos_617,CLEAR,,,,STILL OPEN; no AI entry in wiki. Erdős-Sós r-coloring r=4 cex on Fin 17 lane untouched by AI
+erdos_672,AI_PARTIAL,GPT (lit search only),2026-01-07,https://erdosproblems.com/672,Section 2(a) — LIT SEARCH PARTIAL only; no AI proof; k=4 ℓ=3 AP-of-powerful witness STILL OPEN. Direct extension of slot712 mechanism safe.
+erdos_835,AI_PARTIAL,AlphaProof (formalization only),2025-12-26,https://erdosproblems.com/835,Section 2(b) FORMALIZATION ONLY — AlphaProof formalized folklore proof; the OPEN problem (k>2 (k+1)-coloring of J(2k,k)) remains untouched. Untargeted lane still clear.
+erdos_938,CLEAR,,,,STILL OPEN; no AI entry in wiki
+erdos_952,CLEAR,,,,STILL OPEN; no AI entry in wiki. Gaussian moat (Basil Gordon 1962, often misattributed to Erdős) still open; infinite-witness lane structurally unreachable but verification of bounded steps is clean
+goormaghtigh_5_3,CLEAR,,,,Not in wiki AI list. Grantham 2024 bound to 10^700 is classical search not AI; bound-bumping FAILS C2 closure criterion
+odd_multiperfect_tau11,CLEAR,,,,Not in wiki AI list; STILL OPEN per literature_freshness_may30 (Tóth Oct 2025 on spoof multiperfect; no specific tau=11 resolution)
+primitive_weird_omega6,CLEAR_BUT_REFUTED,,,,Not in wiki — BUT literature_freshness_may30 flags REMOVE: Amato-Hasler-Melfi-Parton 2018-2019 found 12 PWNs at ω=6. Premise false; REMOVE from queue (NOT an AI-closure issue but a classical-closure issue)
+lehmer_omega7,CLEAR_BUT_REFUTED,,,,Not in wiki — BUT literature_freshness_may30 flags REMOVE: Cohen-Hagis 1980 proved ω(N)≥14; current bound ω≥15. Premise false; REMOVE from queue
+casas_alvero_deg12,CLEAR_BUT_REFUTED,,,,Not in wiki — BUT classically SOLVED_SINCE (Castryck-Laterveer-Ounaïes 2012 for deg 12; Ghosh Jan 2025 for full). REMOVE from queue
+wikipedia_lemoine,CLEAR,,,,Not in wiki AI list; STILL OPEN; disproof lane (find n>6 not p+2q) untouched by AI
+wikipedia_grimm,CLEAR,,,,Not in wiki AI list; STILL OPEN
+wikipedia_conway99graph,CLEAR,,,,Not in wiki AI list; STILL OPEN; $1000 prize from Conway
+wikipedia_magic_square_squares,CLEAR,,,,Not in wiki AI list; STILL OPEN (Sallows-Bremner)
+wikipedia_fermat_composite,CLEAR,,,,Not in wiki AI list; STILL OPEN
+conway_99_graph,CLEAR,,,,Not in wiki AI list; STILL OPEN (= wikipedia_conway99graph)
+distinct_odd_cover_E7,AI_PARTIAL,Aristotle (Jinook Lee),2026-05-02,https://erdosproblems.com/7,Duplicate of erdos_7 row — same FALSE_CLAIM
+tuza_v5_finite_witness,AI_PARTIAL,GPT-5 (lit search only on Erdős 167),2025-10-13,https://erdosproblems.com/167,No AI proof exists; small-graph SAT search lane is technically untouched but MEMORY.md falsified-approach list covers most lanes — AGAINST without novel mechanism

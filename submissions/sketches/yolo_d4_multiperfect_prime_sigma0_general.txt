@@ -1,0 +1,20 @@
+OPEN GAP: No multiperfect n > 1 has a prime number of divisors
+Source: extends slots 1293/1297/1299/1314 (problem_id `odd_multiperfect_sigma0_family`)
+Domain: nt
+
+For every natural number n > 1 with σ₀(n) prime, n is not multiperfect:
+there is no integer k ≥ 2 with σ(n) = k·n. The four prior slots formalize
+this for the specific values σ₀(n) ∈ {11, 13, 17, 19} under the odd
+hypothesis; the present statement drops the oddness hypothesis and the
+specific-q dispatch, giving the single universally-quantified theorem.
+
+theorem not_multiperfect_of_prime_card_divisors {n : ℕ} (hn : 1 < n)
+    (hp : Nat.Prime (Nat.divisors n).card) :
+    ¬ ∃ k : ℕ, 2 ≤ k ∧ (Nat.divisors n).sum id = k * n := by
+  sorry
+
+Status: OPEN as a single universal theorem. The four prior slots
+1293/1297/1299/1314 and slot 1258 each formalize the specific case
+σ₀(n) = q for q ∈ {11,13,17,19} with an unused `Odd n` hypothesis. The
+universal prime-σ₀ statement is not in Mathlib, not in formal-conjectures,
+and not in the project DB.

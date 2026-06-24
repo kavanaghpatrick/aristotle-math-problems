@@ -1,0 +1,21 @@
+OPEN GAP: Brocard's Conjecture verified for n ∈ [1001, 1500]
+Source: formal-conjectures/FormalConjectures/Wikipedia/BrocardConjecture.lean
+Domain: number theory
+
+For every n ∈ [1001, 1500], between the squares of the n-th and (n+1)-th
+primes there are at least four prime numbers. Continues the slot722 iter2
+extension. Ferreira (2023) is asymptotic; the gap is finite small/medium n.
+
+theorem brocard_conjecture_extended_1001_1500 :
+    ∀ n : ℕ, 1001 ≤ n → n ≤ 1500 →
+      4 ≤ ((Finset.Ioo (n.nth Nat.Prime ^ 2) ((n+1).nth Nat.Prime ^ 2)).filter
+        Nat.Prime).card := by sorry
+
+Status: OPEN. Brocard's conjecture is unresolved in general. The bounded
+version on [1001, 1500] reduces to a finite check. The verified sieving
+range reaches p_1501^2 ≈ 1.95·10^8.
+
+contribution_statement: target_resolved=1 here means a Lean proof of
+Brocard's conjecture for all n in [1001, 1500] verified by computation,
+extending the slot722 + [501,1000] advances and closing more of the small-n
+gap to Ferreira's asymptotic result.

@@ -1,0 +1,17 @@
+OPEN GAP: Twin prime existence — bounded count witness in [1, 10000]
+Source: classical (de Polignac 1849)
+Domain: number theory
+
+At least 100 distinct twin prime pairs (p, p+2 both prime) exist with
+p ≤ 10000. Bounded existence witness for the twin prime conjecture.
+
+theorem twin_primes_bounded_count :
+    100 ≤ ((Finset.range 10001).filter (fun p => p.Prime ∧ (p+2).Prime)).card := by sorry
+
+Status: OPEN in full generality (twin prime conjecture asserts infinitely many).
+Zhang/Maynard reduced gaps to ≤ 246. Bounded existence count is computational
+but not formally in Lean.
+
+contribution_statement: target_resolved=1 means a Lean proof that at least
+100 twin prime pairs exist up to 10000 — a concrete formal-verification
+data point for the twin prime conjecture's bounded existence direction.

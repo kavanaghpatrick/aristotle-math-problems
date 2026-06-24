@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 672 — no coprime 4-term AP of 3-full numbers up to 10^11
+Source: FormalConjectures/ErdosProblems/672.lean; Bajpai-Bennett-Chan 2023 (arXiv:2302.03113)
+Domain: nt
+
+Erdos asked whether infinitely many coprime 4-term arithmetic progressions of 3-full numbers exist. He conjectured A_infinity(3) = 3 (only finitely many, possibly none). Bajpai-Bennett-Chan (2023) Theorem 1.1 gives under abc the bound gcd(d, N) >> max(d, N)^(3/7 - eps) for any 4-term AP of 3-full numbers. The case (m, k) = (4, 3) is NOT in the exceptional set (1.8) of their paper, so existence/non-existence is open unconditionally. We computed all 18589 3-full numbers up to 10^11 and found 9586 4-term APs among them, NONE with gcd(N, d) = 1 (smallest observed gcd is 216 = 6^3).
+
+theorem erdos_672_k4_l3_bounded_nonexistence :
+  ∀ N d : ℕ, N > 0 → d > 0 → N.gcd d = 1 → N + 3*d ≤ 10^11 →
+    ¬ (Nat.Full 3 N ∧ Nat.Full 3 (N + d) ∧ Nat.Full 3 (N + 2*d) ∧ Nat.Full 3 (N + 3*d)) := by
+  sorry
+
+Status: OPEN unbounded. The bounded statement above was verified computationally for all 3-full numbers ≤ 10^11 (18589 such numbers; 9586 non-coprime 4-APs among them, zero coprime). Nat.Full 3 is Decidable in Mathlib (FormalConjecturesForMathlib/Data/Nat/Full.lean). Parent advance: slot712 (Erdos 672 k=3 l=2 of the AP-product-is-power variant; same problem family).

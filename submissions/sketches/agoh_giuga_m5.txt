@@ -1,0 +1,28 @@
+OPEN GAP: Agoh-Giuga — Exclude Small Prime Factor Counts
+Source: Agoh (1995), Giuga (1950)
+Domain: nt
+
+No composite n satisfies nB_{n-1} ≡ -1 (mod n).
+
+PRIOR RESULTS (all proved, attached as context):
+- Counterexample must be squarefree, odd, composite
+- Carmichael: (p-1)|(n-1) for all p|n
+- Giuga: p|(n/p - 1) for all p|n
+- 2-factor case impossible
+- Key identity: ∑_{p|n} n/p = kn + 1, so ∑ 1/p - 1/n = k ∈ ℤ₊
+
+NEW OBSERVATION: k ≥ 1 forces ∑ 1/pᵢ > 1.
+For m odd primes ≥ 3: ∑ 1/pᵢ ≤ 1/3+1/5+...+1/p_{m-th prime}.
+m=3: max 71/105 < 1. IMPOSSIBLE.
+m=4: max 1068/1155 < 1. IMPOSSIBLE.
+m=5: needs {3,5,7,11,13}, giving 15249/15015 > 1. Barely possible.
+
+Prove: any Carmichael+Giuga number has ≥ 5 prime factors.
+
+theorem agoh_giuga_five_factors (n : ℕ) (hn : n > 1)
+    (hcomp : ¬ Nat.Prime n) (hsqfree : Squarefree n)
+    (hkorselt : ∀ p, Nat.Prime p → p ∣ n → (p-1) ∣ (n-1))
+    (hgiuga : ∀ p, Nat.Prime p → p ∣ n → p ∣ (n/p - 1)) :
+    4 < n.primeFactors.card := by sorry
+
+Status: OPEN. 2-factor case done. This targets 3 and 4 factors.

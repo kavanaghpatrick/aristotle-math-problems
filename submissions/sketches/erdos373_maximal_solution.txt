@@ -1,0 +1,21 @@
+OPEN GAP: Erdős 373 (Hickerson) — maximal factorial-product (16, [14,5,2])
+Source: formal-conjectures/FormalConjectures/ErdosProblems/373.lean
+Domain: nt
+
+Hickerson conjectured that 16! = 14!·5!·2! is the largest solution to
+n! = a₁!·a₂!···aₖ! with n−1 > a₁ ≥ a₂ ≥ ··· ≥ aₖ > 1. Distinct from the
+Surányi case n!=a!·b! (k=2; submission id 1260). Numerical scan n ≤ 80,
+k ≤ 7 finds only (9,[7,3,3,2]), (10,[7,6]), (10,[7,5,3]), (16,[14,5,2]);
+none exceed n=16. Erdős 1976 showed this follows from P(n(n−1))>4 log n.
+
+open scoped Nat
+namespace Erdos373
+
+theorem erdos_373_variants_maximal_solution :
+    (16, [14, 5, 2]) ∈ S ∧ ∀ s ∈ S, s.fst ≤ 16 := by
+  sorry
+
+end Erdos373
+
+Status: OPEN. (16,[14,5,2]) is the largest known multi-factorial solution;
+Hickerson's maximality conjecture is unresolved. Distinct from Surányi (id 1260).

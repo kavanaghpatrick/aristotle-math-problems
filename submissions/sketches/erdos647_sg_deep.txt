@@ -1,0 +1,26 @@
+OPEN GAP: Erdős 647 — Sophie Germain Deep Witness
+Source: Erdős Problem 647
+Domain: nt
+
+Is there n > 24 such that max_{m<n}(m + τ(m)) ≤ n + 2?
+
+PRIOR RESULTS (attached): all cases proved EXCEPT
+n ≡ 0 mod 12, n-1 prime, (n-2)/2 prime.
+
+KEY FINDING (Codex analysis):
+- Witnesses n-3,...,n-6 can ALL fail simultaneously
+- Example: n=7224840 (verified via native_decide)
+- 45 such n exist below 10^9
+- But n-7 always works for these cases (τ(n-7) large)
+- Deeper analysis: need variable-depth witness
+
+The problem reduces to: for n ≡ 0 mod 12 with n-1 prime
+and (n-2)/2 prime, ∃ k ≤ C, τ(n-k) > k+2.
+Key: n-k for k ≤ 12 includes a multiple of 12, giving τ ≥ 6.
+
+theorem erdos647_sg (n : ℕ) (hn : n > 24) (hmod12 : n % 12 = 0)
+    (hp : Nat.Prime (n-1)) (hp2 : Nat.Prime ((n-2)/2)) :
+    ∃ m, 1 ≤ m ∧ m < n ∧ n + 2 < m + (Nat.divisors m).card := by
+  sorry
+
+Status: OPEN. Need variable-depth witness argument.

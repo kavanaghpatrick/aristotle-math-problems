@@ -1,0 +1,4 @@
+90b9f201-cd90-44ef-8aaf-ac7c53e05493
+# Task: erdos306_egyptian_semiprime
+# Hash: 82d9df354f4cf2e6
+# Submitted: 2026-05-30T12:33:03.139693

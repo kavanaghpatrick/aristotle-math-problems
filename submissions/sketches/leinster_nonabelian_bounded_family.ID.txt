@@ -1,0 +1,4 @@
+a817935a-d099-46ab-8240-749b14a6afcc
+# Task: leinster_nonabelian_bounded_family
+# Hash: 3f04d2824d036de5
+# Submitted: 2026-05-29T13:35:22.253118

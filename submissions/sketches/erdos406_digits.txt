@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 406 — Powers of 2 with digits {0,1} in base 3
+Source: FormalConjectures/ErdosProblems/406.lean
+Domain: nt
+
+Are there only finitely many powers of 2 whose base-3
+representation uses only the digits 0 and 1?
+
+theorem erdos_406 :
+    { n : ℕ | n.isPowerOfTwo ∧ Nat.digits 3 n ⊆ [0, 1] }.Finite := by sorry
+
+Status: OPEN. Expected answer is yes (finitely many).
+Connects to Baker-type bounds on linear forms in logarithms.

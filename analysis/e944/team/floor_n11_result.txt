@@ -1,0 +1,1 @@
+# e944 floor n=11 across 12 shards (geng -c -d3)  Wed Jun 10 12:56:50 BST 2026

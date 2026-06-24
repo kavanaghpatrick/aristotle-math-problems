@@ -1,0 +1,8 @@
+{
+  "CS": "disproof_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Dirac (1970) k=4 case is the LAST remaining open case of Dirac's vertex-critical-no-critical-edge conjecture: k=5 solved by Brown 1992, k≥5 by Jensen 2002, k-1 not prime by Lattanzio 2002 (944.lean lines 67-91). k=4 evades all existing constructions because (a) Brown's k=5 graph does not project to a 4-critical subgraph with the property, (b) Jensen's family starts at k=5, (c) Lattanzio requires k-1 composite but 3 is prime. S5 ranked this as #2 long-tail snipe with composite score 8.4: an explicit small 4-critical graph (likely finite, verifiable with Fin n + DecidableEq) where every vertex critical but no edge critical = disproof_closure of the open direction. Verification is clean_decidable: given a candidate G on Fin n, native_decide checks chromatic number = 4 (finite search over colorings), vertex-criticality (n subgraph chromatic checks), and absence of critical edges (m edge subgraph checks). HM=journal_subclaim because resolution of k=4 closes the full Dirac conjecture — publishable as the missing piece of a 54-year-old open problem. If no such graph exists, positive direction at k=4 becomes the open frontier instead. S6-graph-witness signature: SAT-friendly target."
+}

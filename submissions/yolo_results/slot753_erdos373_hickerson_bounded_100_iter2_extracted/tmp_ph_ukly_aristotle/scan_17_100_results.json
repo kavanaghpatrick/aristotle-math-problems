@@ -1,0 +1,15 @@
+{
+  "n_range": [
+    17,
+    100
+  ],
+  "k_max": 8,
+  "constraints": {
+    "a_min": 2,
+    "a_max_formula": "n - 2",
+    "ordering": "descending (a_1 >= a_2 >= ... >= a_k)"
+  },
+  "method": "Legendre v_p prime-exponent recursion (no big-integer multiplication)",
+  "total_solutions": 0,
+  "solutions_by_n": {}
+}

@@ -1,0 +1,26 @@
+A) `Squarefree.dvd_iff` won't shorten the core contradiction (still needs `not_unit` + `dvd_mul_of_dvd_pow`); current direct form is fine.
+
+B) Yes—add one-line docstring example for `d=6`.
+
+C) Split is more idiomatic: keep `powerful_iff_sq_mul_cube` as the `iff` view; export separate `Nat.Powerful.of_sq_mul_cube` constructor.
+
+D) Yes—remove stray `end Nat`; keep entire file under `namespace Nat`.
+
+E) No deprecated names found in the listed theorems/imports.
+
+F) Minimal imports (for PR):
+```
+import Mathlib.NumberTheory.Squarefree
+import Mathlib.Data.Nat.Prime
+import Mathlib.Data.Nat.Factorization
+import Mathlib.Algebra.IsPrimePow
+```
+(drop `import Mathlib`, `Pow.Real`).
+
+**Polish checklist**
+- Add docstring example (B)
+- Split constructor (C)
+- Enforce single `namespace Nat` (D)
+- Replace kitchen-sink import (F)
+
+Otherwise READY FOR SUBMIT.

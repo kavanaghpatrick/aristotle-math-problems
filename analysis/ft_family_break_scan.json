@@ -1,0 +1,118 @@
+{
+  "purpose": "Hedge analysis for FT_p3_q71_family extension beyond slot736 (q \u2264 1500). Identifies whether the slot720 small-prime-divisor Fermat-reduction mechanism breaks at q with A(q) prime AND whether the theorem itself fails at any such q.",
+  "q_with_A_prime_in_q_le_10000": [
+    1583,
+    2663,
+    3671,
+    4751,
+    5039,
+    6047,
+    6551,
+    9719
+  ],
+  "first_q_where_theorem_FAILS": null,
+  "all_q_with_A_prime_satisfy_3^q_neq_1_mod_A": true,
+  "structural_counterexamples_full_scan": [],
+  "per_q_records": [
+    {
+      "q": 1583,
+      "A": 2507473,
+      "A_bits": 22,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 1702700,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 208956,
+      "q_mod_ord3": 1583,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 2663,
+      "A": 7094233,
+      "A_bits": 23,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 4625215,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 591186,
+      "q_mod_ord3": 2663,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 3671,
+      "A": 13479913,
+      "A_bits": 24,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 10400619,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 33039,
+      "q_mod_ord3": 3671,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 4751,
+      "A": 22576753,
+      "A_bits": 25,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 14685264,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 1881396,
+      "q_mod_ord3": 4751,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 5039,
+      "A": 25396561,
+      "A_bits": 25,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 23908583,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 176365,
+      "q_mod_ord3": 5039,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 6047,
+      "A": 36572257,
+      "A_bits": 26,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 28720288,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 435384,
+      "q_mod_ord3": 6047,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 6551,
+      "A": 42922153,
+      "A_bits": 26,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 24613241,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 255489,
+      "q_mod_ord3": 6551,
+      "small_order_3_mod_A": false
+    },
+    {
+      "q": 9719,
+      "A": 94468681,
+      "A_bits": 27,
+      "A_prime": true,
+      "small_divisor_slot720_style": null,
+      "three_pow_q_mod_A": 5401870,
+      "theorem_holds_at_q": true,
+      "ord_3_mod_A": 7872390,
+      "q_mod_ord3": 9719,
+      "small_order_3_mod_A": false
+    }
+  ],
+  "interpretation": {
+    "if_no_counterexample": "The slot720 small-prime mechanism breaks at q where A(q) is prime, but the theorem itself is structurally true at every such q. The HEDGE submission is therefore not 'family fails at q*' but 'family holds at q with A(q) prime, requiring a direct A(q)-modulus witness whose verification cost scales as log(A(q)) ~ 2*log(q) bits of native_decide.'",
+    "if_counterexample": "If 3^q \u2261 1 mod A(q) for some q with A(q) prime, the family theorem ACTUALLY FAILS at that q, and the conjecture would need a different family-structure to recover."
+  }
+}

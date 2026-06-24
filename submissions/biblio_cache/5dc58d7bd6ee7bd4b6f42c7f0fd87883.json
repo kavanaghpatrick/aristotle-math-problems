@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780318116.680187,
+  "checked_at": "2026-06-01T12:48:36+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "6 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2005 partial/weak: 2-Exp Time lower bounds for propositional dynamic logics with intersection",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2178/jsl/1129642115"
+    }
+  ],
+  "status": "CLEAR"
+}

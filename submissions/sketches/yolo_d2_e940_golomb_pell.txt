@@ -1,0 +1,20 @@
+OPEN GAP: Infinitely many consecutive powerful number pairs (Mathlib novel)
+Source: FormalConjecturesForMathlib/Data/Nat/Full.lean (Nat.Powerful predicate); related to E938 (consecutive 3-AP, open) and E137 (k-consecutive product powerful, open).
+Domain: nt
+
+A natural number n is powerful iff for every prime p dividing n, p^2 also
+divides n (equivalently, Nat.Full 2 n). The conjecture below asserts that
+for every threshold N there exists a powerful n > N such that n+1 is also
+powerful — i.e., the set of consecutive powerful pairs is unbounded. The
+statement is logically equivalent to the Set.Infinite formulation, but is
+phrased as a per-N existence to remain structurally decidable.
+
+theorem powerful_consecutive_pairs_unbounded (N : ℕ) :
+    ∃ n, N < n ∧ Nat.Powerful n ∧ Nat.Powerful (n + 1) := sorry
+
+Status: OPEN as a Mathlib formalization. The needed predicate Nat.Powerful
+is already in the codebase as Nat.Full 2. Slot 1316 (UUID 48e6a18a)
+produced Nat.Powerful.sq and Nat.Powerful.infinite (the set of powerful
+naturals is unbounded via squares). Slot 1318 (UUID e0efda98, status IDLE)
+attempts a multiplicative-decomposition route in parallel. The present
+gap — the consecutive-pair unboundedness — is untouched by either.

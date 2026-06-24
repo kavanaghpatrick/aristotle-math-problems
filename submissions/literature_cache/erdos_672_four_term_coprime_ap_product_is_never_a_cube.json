@@ -1,0 +1,27 @@
+{
+  "_cache_ts": 1780148355.328974,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T13:39:15+00:00",
+  "citations": [
+    {
+      "evidence": "wiki 2(a): AI surfaced prior literature",
+      "snapshot": "2026-05-30",
+      "source": "teorth-wiki",
+      "url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+    }
+  ],
+  "erdos_n": 672,
+  "erdosproblems_status": "open",
+  "erdosproblems_url": "https://www.erdosproblems.com/672",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_672_four_term_coprime_ap_product_is_never_a_cube",
+  "status": "POSSIBLY_SOLVED",
+  "wiki_evidence": [
+    "wiki 2(a): AI surfaced prior literature"
+  ],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "POSSIBLY_SOLVED"
+}

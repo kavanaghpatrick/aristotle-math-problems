@@ -1,0 +1,20 @@
+OPEN GAP: Erdos 672 — four-term coprime AP product is never a cube (k=4, l=3)
+Source: FormalConjectures/ErdosProblems/672.lean (Erdos672With 4 3)
+Domain: nt
+
+For any positive integers n and d with gcd(n, d) = 1, the product
+n(n+d)(n+2d)(n+3d) is never a perfect cube. Equivalently: there exists
+N0 such that for all n >= N0 and all positive d coprime to n, no m in N
+satisfies n(n+d)(n+2d)(n+3d) = m^3.
+
+theorem erdos_672_k4_l3 :
+    ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+    ¬ ∃ m : ℕ, (∏ i ∈ Finset.range 4, (n + i * d)) = m ^ 3 := by
+  sorry
+
+Status: OPEN in Mathlib / formal-conjectures. Prior bare-mode Aristotle
+submissions (slots 698, 1218, 1243, 1248) returned compiled_no_advance.
+The result is a published theorem (Hajdu-Tengely-Tijdeman 2009; Győry-
+Hajdu-Pintér 2009) but no formalization in Mathlib. YOLO wave-1
+(slot 1294, in flight) targets the Frey-curve / modularity / Bennett-
+Skinner proof. This wave-2 angle is technique-disjoint.

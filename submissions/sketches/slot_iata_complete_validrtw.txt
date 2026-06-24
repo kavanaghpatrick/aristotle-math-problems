@@ -1,0 +1,33 @@
+IATA Rule 3015 — Unified CompleteValidRTW predicate
+
+The attached context has all individual rule predicates (rule_4b through rule_8, rule_6, rule_7) defined as standalone functions, plus a basic ValidRTW that only checks: continuous, loop, 3-16 segments, ocean crossings, 3 TC areas. None of the detailed routing rules are enforced.
+
+Create a unified FullSegment type and CompleteValidRTW that integrates ALL constraints into one predicate.
+
+Define FullSegment combining Segment + TimedSegment + BookedSegment fields:
+  origin, destination, type, isStopover, departureDate, arrivalDate, marketingCarrier, operatingCarrier, bookingCode, isGroundTransport
+
+Define FullItinerary := List FullSegment
+
+Define CompleteValidRTW (itin : FullItinerary) : Prop requiring ALL:
+  - is_continuous, is_loop (or is_generalized_loop with v2 open jaw)
+  - 3 ≤ length ≤ 16
+  - count_ocean Atlantic = 1, Pacific = 1
+  - visits_all_tc = 3
+  - rule_4b_forward_direction ∧ rule_4b_hawaii_backtracking
+  - rule_4c_open_jaw_v2 (Middle East scoped)
+  - rule_4d_no_transit_origin
+  - rule_4e_intercontinental_limits
+  - rule_4f_international_origin
+  - rule_4g_surface_sectors
+  - rule_4h_segment_limits
+  - rule_4i_no_duplicate_sectors
+  - rule_4j_codeshare
+  - rule_4k_us_canada_transcontinental_v2 ∧ rule_anchorage_restriction
+  - rule_4l_australia_transcontinental_v2
+  - rule_6_minimum_stay ∧ rule_7_maximum_stay
+  - rule_8_stopovers
+
+Prove: CompleteValidRTW itin → ValidRTW (itin.map toSegment)
+Prove: CompleteValidRTW itin → rule_4h_segment_limits (itin.map toSegment)
+Prove: CompleteValidRTW itin → fare_basis cabin (itin.map toSegment) is determined

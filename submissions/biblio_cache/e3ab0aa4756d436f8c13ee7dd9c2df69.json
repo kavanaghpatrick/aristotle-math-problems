@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780314733.800888,
+  "checked_at": "2026-06-01T11:52:13+00:00",
+  "evidence": "named-conjecture card: Fermat's Last Theorem = CLOSED (Wiles 1995 Ann. Math. 141; Taylor-Wiles 1995 Ann. Math. 141)",
+  "sources": [
+    {
+      "evidence": "card[Fermat's Last Theorem]=CLOSED \u2014 Wiles 1995 Ann. Math. 141; Taylor-Wiles 1995 Ann. Math. 141",
+      "signal": "strong",
+      "source": "named_conjecture_status",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}

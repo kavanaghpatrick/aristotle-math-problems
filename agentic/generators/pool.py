@@ -71,10 +71,14 @@ class GeneratorPool:
         conn = self.get_db()
         cursor = conn.cursor()
 
+        # Canonical submissions.status enum (2026-05-28):
+        #   submitted | compile_failed | compiled_partial | compiled_no_advance
+        #   | compiled_advance | disproven
+        # Near-miss = compiled_partial with low sorry count.
         cursor.execute("""
         SELECT s.uuid, s.filename, s.sorry_count, s.proven_count, s.output_file
         FROM submissions s
-        WHERE s.status = 'completed'
+        WHERE s.status = 'compiled_partial'
           AND s.sorry_count BETWEEN 1 AND 2
           AND s.proven_count > 0
         ORDER BY s.sorry_count ASC, s.proven_count DESC

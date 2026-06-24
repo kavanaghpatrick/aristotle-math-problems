@@ -1,0 +1,3 @@
+858a242f-b7bc-4da3-a1dd-c2a86161ea94
+# Task: FT p=3 q≡71 mod 72 q≤1500 iter3 (slot720 extension)
+# Submitted: 2026-05-29T05:36:04

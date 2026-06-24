@@ -1,0 +1,35 @@
+INFORMAL PROOF ARGUMENT: Erdos Problem 251
+Source: Erdos 251; Domain: nt
+
+CLAIM: The sum S = sum_{n=1}^{infty} p_n / 2^n is irrational, where p_n is
+the n-th prime.
+
+STEP 1 — BINARY EXPANSION. Write S in binary. The n-th prime p_n contributes
+p_n * 2^{-n} to the sum. In binary, this shifts p_n right by n positions.
+The binary expansion of S is determined by the binary representations of primes,
+shifted and summed. Since primes grow as p_n ~ n ln n (PNT), the contributions
+grow, creating increasingly complex binary patterns.
+
+STEP 2 — SUPPOSE S = a/b IS RATIONAL. Then 2^N * b * S is an integer for
+large N. Write 2^N * b * S = b * sum_{n=1}^{N} p_n * 2^{N-n} + b * sum_{n>N} p_n * 2^{N-n}.
+The first sum is an integer. So the tail T_N = b * sum_{n>N} p_n * 2^{N-n} must
+also be an integer.
+
+STEP 3 — TAIL ESTIMATE. T_N = b * (p_{N+1}/2 + p_{N+2}/4 + p_{N+3}/8 + ...).
+By PNT: p_n ~ n ln n, so T_N ~ b * sum_{k>=1} (N+k) ln(N+k) / 2^k.
+This sum converges to approximately b * (N+2) * ln(N+2) (geometric with
+polynomial weights). So T_N ~ b * N * ln N as N -> infty.
+
+STEP 4 — INTEGRALITY CONTRADICTION. For T_N to be an integer for ALL large N,
+we need T_N - T_{N+1} * 2 = b * p_{N+1} to hold. This is automatic. But consider
+T_N mod 2: T_N = b*p_{N+1}/2 + (remaining terms). Since p_{N+1} is odd for N>=1,
+b*p_{N+1}/2 is not an integer unless 2|b. If 2|b, factor it out and repeat.
+After removing all factors of 2 from b, we need an odd b' with
+b' * sum_{n>N} p_n * 2^{N-n} integer. The term b'*p_{N+1}/2 has denominator 2,
+and the remaining terms b'*p_{N+2}/4 + ... contribute a value strictly between
+0 and b'*p_{N+2}/2. For the total to be an integer, 2 | b'*p_{N+1}, but
+gcd(b',2)=1 and p_{N+1} is odd, contradiction.
+
+theorem erdos_251 : Irrational (∑' n, (Nat.nth Nat.Prime (n+1) : ℝ) / 2^(n+1)) := by sorry
+
+Status: OPEN. The binary digit argument makes this accessible to formalization.

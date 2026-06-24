@@ -1,0 +1,47 @@
+{
+  "name": "Slice rank method",
+  "seminal_paper": {
+    "arxiv_id": "1605.09223",
+    "doi": "10.4007/annals.2017.185.1.8",
+    "citation": "Ellenberg and Gijswijt, Ann. of Math. 185(1):339-343",
+    "year": 2017
+  },
+  "home_domain": "additive_combinatorics",
+  "what_it_does": "The slice rank method gives strong upper bounds for progression-free subsets of finite vector spaces by bounding the rank of tensors encoding forbidden additive patterns. It is especially effective for cap-set type problems over finite fields, where algebraic dimension replaces interval length or density in the integers.",
+  "input_requirements": [
+    "a finite vector space F_q^n or comparable finite-field product structure",
+    "a forbidden additive pattern expressible by a low-degree polynomial or tensor constraint",
+    "a subset whose size is to be bounded by algebraic rank arguments",
+    "finite-field coordinates allowing polynomial-degree truncation"
+  ],
+  "output_signature": "an exponential upper bound on the size of a subset avoiding the specified additive pattern",
+  "input_match": [
+    {
+      "requirement": "a finite vector space F_q^n or comparable finite-field product structure",
+      "match": "NO",
+      "evidence": "no match"
+    },
+    {
+      "requirement": "a forbidden additive pattern expressible by a low-degree polynomial or tensor constraint",
+      "match": "PARTIAL",
+      "evidence": "Set.IsAPOfLength gives a 3-term arithmetic progression condition, but not a finite-field tensor constraint"
+    },
+    {
+      "requirement": "a subset whose size is to be bounded by algebraic rank arguments",
+      "match": "PARTIAL",
+      "evidence": "The theorem asks for finiteness of certain 3-term configurations, not a direct upper bound on a large progression-free set"
+    },
+    {
+      "requirement": "finite-field coordinates allowing polynomial-degree truncation",
+      "match": "NO",
+      "evidence": "no match"
+    }
+  ],
+  "known_obstructions": [
+    "The powerful numbers form an infinite ordered subsequence of the integers, not a finite vector space over F_q.",
+    "The target property concerns consecutive powerful numbers, which adds an order/gap constraint absent from the cap-set setting.",
+    "Slice-rank bounds are designed for large subsets avoiding progressions, while the open problem asks for finiteness of special progressions that do occur."
+  ],
+  "fit_score": 0.25,
+  "source_analog_id": "A1"
+}

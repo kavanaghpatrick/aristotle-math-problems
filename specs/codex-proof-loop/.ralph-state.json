@@ -1,0 +1,14 @@
+{
+  "source": "research",
+  "name": "codex-proof-loop",
+  "basePath": "specs/codex-proof-loop",
+  "phase": "tasks",
+  "taskIndex": 0,
+  "totalTasks": 0,
+  "taskIteration": 0,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": false,
+  "awaitingApproval": true
+}

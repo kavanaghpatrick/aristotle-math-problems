@@ -1,0 +1,22 @@
+OPEN GAP: Brocard's Conjecture verified for n ∈ [1001, 2000]
+Source: formal-conjectures/FormalConjectures/Wikipedia/BrocardConjecture.lean
+Domain: number theory
+
+For every n ∈ [1001, 2000], between the squares of the n-th and (n+1)-th
+primes there are at least four prime numbers. Extends slot738's verified
+range [501, 1000] using the same explicit-witness encoding. Ferreira (2023)
+is asymptotic; the gap is small/medium n.
+
+theorem brocard_conjecture_extended_1001_2000 :
+    ∀ n : ℕ, 1001 ≤ n → n ≤ 2000 →
+      4 ≤ ((Finset.Ioo (n.nth Nat.Prime ^ 2) ((n+1).nth Nat.Prime ^ 2)).filter
+        Nat.Prime).card := by sorry
+
+Status: OPEN. Brocard's conjecture is unresolved in general. The bounded
+version on [1001, 2000] reduces to a finite check. The verified sieving
+range reaches p_2001^2 ≈ 3.03·10^8 (slot738 reached p_1001^2 ≈ 6.27·10^7).
+slot738 attached as prior context: it abandoned nthPrimeComp for an
+explicit witness-table encoding with a 10-chunk × 50-entry native_decide
+cascade (per-chunk maxHeartbeats 8M, file 800k). This submission tests
+whether the same encoding scales to a 20-chunk × 50-entry cascade at
+roughly 4.8× the sieving magnitude.

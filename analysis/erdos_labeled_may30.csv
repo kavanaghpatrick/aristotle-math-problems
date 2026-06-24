@@ -1,0 +1,364 @@
+problem_id,file_path,theorem_name,domain,feasibility,quantifier_geom,certificate_shape,snipe_signature,failure_risk,negative_evidence,attempts_total,attempts_no_adv,attempts_disproven,mathlib_native,theory_heavy,snipe_score_1_to_10,recommended_next_action
+erdos_1,formal-conjectures/FormalConjectures/ErdosProblems/1.lean,erdos_1,nt,structural-open,full-structural,explicit-witness,none,low,project-carcass,12,7,0,no,no,1,ALREADY_TRIED_RECENT
+erdos_3,formal-conjectures/FormalConjectures/ErdosProblems/3.lean,erdos_3,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,attempted-low,2,0,0,no,yes,1,AVOID
+erdos_4,formal-conjectures/FormalConjectures/ErdosProblems/4.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,4,0,0,n/a,n/a,1,AVOID
+erdos_6,formal-conjectures/FormalConjectures/ErdosProblems/6.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,6,0,0,n/a,n/a,1,AVOID
+erdos_9,formal-conjectures/FormalConjectures/ErdosProblems/9.lean,erdos_9,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_10,formal-conjectures/FormalConjectures/ErdosProblems/10.lean,erdos_10,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_11,formal-conjectures/FormalConjectures/ErdosProblems/11.lean,erdos_11,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-medium,4,2,0,no,no,5,RESEARCH_REQUIRED
+erdos_12,formal-conjectures/FormalConjectures/ErdosProblems/12.lean,erdos_12.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_13,formal-conjectures/FormalConjectures/ErdosProblems/13.lean,erdos_13_general,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_14,formal-conjectures/FormalConjectures/ErdosProblems/14.lean,erdos_14a,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_17,formal-conjectures/FormalConjectures/ErdosProblems/17.lean,erdos_17,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_20,formal-conjectures/FormalConjectures/ErdosProblems/20.lean,erdos_20,combinatorics,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-low,2,0,0,no,yes,3,AVOID
+erdos_25,formal-conjectures/FormalConjectures/ErdosProblems/25.lean,erdos_25,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_26,formal-conjectures/FormalConjectures/ErdosProblems/26.lean,erdos_26,nt,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_28,formal-conjectures/FormalConjectures/ErdosProblems/28.lean,erdos_28,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_30,formal-conjectures/FormalConjectures/ErdosProblems/30.lean,erdos_30,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_33,formal-conjectures/FormalConjectures/ErdosProblems/33.lean,erdos_33,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_36,formal-conjectures/FormalConjectures/ErdosProblems/36.lean,erdos_36.variants.lower,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,attempted-low,1,1,0,no,yes,1,AVOID
+erdos_38,formal-conjectures/FormalConjectures/ErdosProblems/38.lean,erdos_38,nt,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_39,formal-conjectures/FormalConjectures/ErdosProblems/39.lean,erdos_39,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_40,formal-conjectures/FormalConjectures/ErdosProblems/40.lean,erdos_40,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-low,2,0,0,no,no,1,AVOID
+erdos_41,formal-conjectures/FormalConjectures/ErdosProblems/41.lean,erdos_41,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_42,formal-conjectures/FormalConjectures/ErdosProblems/42.lean,erdos_42,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_44,formal-conjectures/FormalConjectures/ErdosProblems/44.lean,erdos_44,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,yes,no,6,DRAFT_FIRST
+erdos_48,formal-conjectures/FormalConjectures/ErdosProblems/48.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_51,formal-conjectures/FormalConjectures/ErdosProblems/51.lean,erdos_51,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_56,formal-conjectures/FormalConjectures/ErdosProblems/56.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,2,0,0,n/a,n/a,1,AVOID
+erdos_61,formal-conjectures/FormalConjectures/ErdosProblems/61.lean,erdos_61,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_64,formal-conjectures/FormalConjectures/ErdosProblems/64.lean,erdos_64,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_66,formal-conjectures/FormalConjectures/ErdosProblems/66.lean,erdos_66,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,attempted-low,2,0,0,no,yes,1,AVOID
+erdos_67,formal-conjectures/FormalConjectures/ErdosProblems/67.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,4,0,0,n/a,n/a,1,AVOID
+erdos_68,formal-conjectures/FormalConjectures/ErdosProblems/68.lean,erdos_68,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,yes,no,1,AVOID
+erdos_69,formal-conjectures/FormalConjectures/ErdosProblems/69.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_74,formal-conjectures/FormalConjectures/ErdosProblems/74.lean,erdos_74,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_82,formal-conjectures/FormalConjectures/ErdosProblems/82.lean,erdos_82,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_85,formal-conjectures/FormalConjectures/ErdosProblems/85.lean,erdos_85,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_89,formal-conjectures/FormalConjectures/ErdosProblems/89.lean,erdos_89,geometry,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_90,formal-conjectures/FormalConjectures/ErdosProblems/90.lean,erdos_90,geometry,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_92,formal-conjectures/FormalConjectures/ErdosProblems/92.lean,erdos_92.variants.weak,geometry,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,attempted-low,2,0,0,no,yes,1,AVOID
+erdos_97,formal-conjectures/FormalConjectures/ErdosProblems/97.lean,erdos_97,geometry,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-high,9,0,0,no,no,1,ALREADY_TRIED_RECENT
+erdos_99,formal-conjectures/FormalConjectures/ErdosProblems/99.lean,erdos_99,geometry,structural-open,full-structural,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_100,formal-conjectures/FormalConjectures/ErdosProblems/100.lean,erdos_100,geometry,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_107,formal-conjectures/FormalConjectures/ErdosProblems/107.lean,erdos_107,geometry,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-medium,3,0,0,no,no,1,AVOID
+erdos_108,formal-conjectures/FormalConjectures/ErdosProblems/108.lean,erdos_108,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_109,formal-conjectures/FormalConjectures/ErdosProblems/109.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_119,formal-conjectures/FormalConjectures/ErdosProblems/119.lean,erdos_119_3,analysis,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_120,formal-conjectures/FormalConjectures/ErdosProblems/120.lean,erdos_120,combinatorics,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_123,formal-conjectures/FormalConjectures/ErdosProblems/123.lean,erdos_123,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-high,6,0,0,no,no,1,ALREADY_TRIED_RECENT
+erdos_124,formal-conjectures/FormalConjectures/ErdosProblems/124.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_125,formal-conjectures/FormalConjectures/ErdosProblems/125.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_126,formal-conjectures/FormalConjectures/ErdosProblems/126.lean,erdos_126,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_128,formal-conjectures/FormalConjectures/ErdosProblems/128.lean,erdos_128,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-medium,3,0,0,no,no,1,AVOID
+erdos_137,formal-conjectures/FormalConjectures/ErdosProblems/137.lean,erdos_137,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-low,1,0,1,no,no,6,RESEARCH_REQUIRED
+erdos_138,formal-conjectures/FormalConjectures/ErdosProblems/138.lean,erdos_138,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,attempted-high,6,0,0,no,yes,1,ALREADY_TRIED_RECENT
+erdos_139,formal-conjectures/FormalConjectures/ErdosProblems/139.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_141,formal-conjectures/FormalConjectures/ErdosProblems/141.lean,erdos_141,nt,structural-open,full-structural,explicit-witness,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_142,formal-conjectures/FormalConjectures/ErdosProblems/142.lean,erdos_142,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_143,formal-conjectures/FormalConjectures/ErdosProblems/143.lean,erdos_143.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,attempted-low,2,0,0,no,yes,1,AVOID
+erdos_145,formal-conjectures/FormalConjectures/ErdosProblems/145.lean,erdos_145,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_152,formal-conjectures/FormalConjectures/ErdosProblems/152.lean,erdos_152,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_153,formal-conjectures/FormalConjectures/ErdosProblems/153.lean,erdos_153,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_155,formal-conjectures/FormalConjectures/ErdosProblems/155.lean,erdos_155,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_158,formal-conjectures/FormalConjectures/ErdosProblems/158.lean,erdos_158.B22,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_160,formal-conjectures/FormalConjectures/ErdosProblems/160.lean,erdos_160.better_upper,unknown,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_168,formal-conjectures/FormalConjectures/ErdosProblems/168.lean,erdos_168.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_170,formal-conjectures/FormalConjectures/ErdosProblems/170.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_172,formal-conjectures/FormalConjectures/ErdosProblems/172.lean,erdos_172,combinatorics,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_188,formal-conjectures/FormalConjectures/ErdosProblems/188.lean,erdos_188,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_189,formal-conjectures/FormalConjectures/ErdosProblems/189.lean,erdos_189.variants.parallelogram,unknown,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_194,formal-conjectures/FormalConjectures/ErdosProblems/194.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_195,formal-conjectures/FormalConjectures/ErdosProblems/195.lean,erdos_195,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_196,formal-conjectures/FormalConjectures/ErdosProblems/196.lean,erdos_196,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_197,formal-conjectures/FormalConjectures/ErdosProblems/197.lean,erdos_197,combinatorics,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_198,formal-conjectures/FormalConjectures/ErdosProblems/198.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_200,formal-conjectures/FormalConjectures/ErdosProblems/200.lean,erdos_200,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_203,formal-conjectures/FormalConjectures/ErdosProblems/203.lean,erdos_203,combinatorics,constructive-search,finite-reducible-infinite,explicit-witness,S7-algebraic-witness,low,attempted-medium,5,1,0,yes,no,8,DRAFT_FIRST
+erdos_204,formal-conjectures/FormalConjectures/ErdosProblems/204.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_208,formal-conjectures/FormalConjectures/ErdosProblems/208.lean,erdos_208.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_212,formal-conjectures/FormalConjectures/ErdosProblems/212.lean,erdos_212,geometry,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_213,formal-conjectures/FormalConjectures/ErdosProblems/213.lean,erdos_213,geometry,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_218,formal-conjectures/FormalConjectures/ErdosProblems/218.lean,erdos_218.variants.le,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_219,formal-conjectures/FormalConjectures/ErdosProblems/219.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_228,formal-conjectures/FormalConjectures/ErdosProblems/228.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_229,formal-conjectures/FormalConjectures/ErdosProblems/229.lean,(no research open theorem),analysis,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_233,formal-conjectures/FormalConjectures/ErdosProblems/233.lean,erdos_233,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_234,formal-conjectures/FormalConjectures/ErdosProblems/234.lean,erdos_234,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_236,formal-conjectures/FormalConjectures/ErdosProblems/236.lean,erdos_236,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_238,formal-conjectures/FormalConjectures/ErdosProblems/238.lean,erdos_238,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_239,formal-conjectures/FormalConjectures/ErdosProblems/239.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_242,formal-conjectures/FormalConjectures/ErdosProblems/242.lean,erdos_242,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-low,2,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_243,formal-conjectures/FormalConjectures/ErdosProblems/243.lean,erdos_243,unknown,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_244,formal-conjectures/FormalConjectures/ErdosProblems/244.lean,erdos_244,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_245,formal-conjectures/FormalConjectures/ErdosProblems/245.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_247,formal-conjectures/FormalConjectures/ErdosProblems/247.lean,erdos_247,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_248,formal-conjectures/FormalConjectures/ErdosProblems/248.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_249,formal-conjectures/FormalConjectures/ErdosProblems/249.lean,erdos_249,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,attempted-medium,3,2,0,no,no,1,AVOID
+erdos_250,formal-conjectures/FormalConjectures/ErdosProblems/250.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_251,formal-conjectures/FormalConjectures/ErdosProblems/251.lean,erdos_251,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,attempted-low,2,2,0,yes,no,1,AVOID
+erdos_252,formal-conjectures/FormalConjectures/ErdosProblems/252.lean,erdos_252_ge_5,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,attempted-low,1,1,0,yes,no,1,AVOID
+erdos_253,formal-conjectures/FormalConjectures/ErdosProblems/253.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_257,formal-conjectures/FormalConjectures/ErdosProblems/257.lean,erdos_257,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_258,formal-conjectures/FormalConjectures/ErdosProblems/258.lean,erdos_258,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_259,formal-conjectures/FormalConjectures/ErdosProblems/259.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_263,formal-conjectures/FormalConjectures/ErdosProblems/263.lean,erdos_263.parts.i,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_264,formal-conjectures/FormalConjectures/ErdosProblems/264.lean,erdos_264.parts.ii,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,yes,no,1,AVOID
+erdos_266,formal-conjectures/FormalConjectures/ErdosProblems/266.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_267,formal-conjectures/FormalConjectures/ErdosProblems/267.lean,erdos_267,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_268,formal-conjectures/FormalConjectures/ErdosProblems/268.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_269,formal-conjectures/FormalConjectures/ErdosProblems/269.lean,erdos_269.variants.rational,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_273,formal-conjectures/FormalConjectures/ErdosProblems/273.lean,erdos_273,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_274,formal-conjectures/FormalConjectures/ErdosProblems/274.lean,erdos_274,unknown,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_275,formal-conjectures/FormalConjectures/ErdosProblems/275.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_276,formal-conjectures/FormalConjectures/ErdosProblems/276.lean,erdos_276,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,yes,no,6,RESEARCH_REQUIRED
+erdos_277,formal-conjectures/FormalConjectures/ErdosProblems/277.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_283,formal-conjectures/FormalConjectures/ErdosProblems/283.lean,erdos_283,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_285,formal-conjectures/FormalConjectures/ErdosProblems/285.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_288,formal-conjectures/FormalConjectures/ErdosProblems/288.lean,erdos_288,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_289,formal-conjectures/FormalConjectures/ErdosProblems/289.lean,erdos_289,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_295,formal-conjectures/FormalConjectures/ErdosProblems/295.lean,erdos_295,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_298,formal-conjectures/FormalConjectures/ErdosProblems/298.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_299,formal-conjectures/FormalConjectures/ErdosProblems/299.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_303,formal-conjectures/FormalConjectures/ErdosProblems/303.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_304,formal-conjectures/FormalConjectures/ErdosProblems/304.lean,upper_bound,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_306,formal-conjectures/FormalConjectures/ErdosProblems/306.lean,erdos_306,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,yes,no,6,DRAFT_FIRST
+erdos_307,formal-conjectures/FormalConjectures/ErdosProblems/307.lean,erdos_307,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,attempted-low,1,0,0,no,no,2,AVOID
+erdos_312,formal-conjectures/FormalConjectures/ErdosProblems/312.lean,erdos_312,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_313,formal-conjectures/FormalConjectures/ErdosProblems/313.lean,erdos_313.variant.primary_pseudoperfect_are_infinite,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_316,formal-conjectures/FormalConjectures/ErdosProblems/316.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_317,formal-conjectures/FormalConjectures/ErdosProblems/317.lean,erdos_317,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_318,formal-conjectures/FormalConjectures/ErdosProblems/318.lean,erdos_318.square_excluding_one,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_319,formal-conjectures/FormalConjectures/ErdosProblems/319.lean,erdos_319,combinatorics,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,yes,no,6,DRAFT_FIRST
+erdos_321,formal-conjectures/FormalConjectures/ErdosProblems/321.lean,erdos_321,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_324,formal-conjectures/FormalConjectures/ErdosProblems/324.lean,erdos_324,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_325,formal-conjectures/FormalConjectures/ErdosProblems/325.lean,erdos_325,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_326,formal-conjectures/FormalConjectures/ErdosProblems/326.lean,erdos_326,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_329,formal-conjectures/FormalConjectures/ErdosProblems/329.lean,erdos_329,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_330,formal-conjectures/FormalConjectures/ErdosProblems/330.lean,erdos_330_statement,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_331,formal-conjectures/FormalConjectures/ErdosProblems/331.lean,erdos_331.variant.ruzsa,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_332,formal-conjectures/FormalConjectures/ErdosProblems/332.lean,erdos_332,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_340,formal-conjectures/FormalConjectures/ErdosProblems/340.lean,erdos_340,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_341,formal-conjectures/FormalConjectures/ErdosProblems/341.lean,erdos_341,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_346,formal-conjectures/FormalConjectures/ErdosProblems/346.lean,erdos_346,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_347,formal-conjectures/FormalConjectures/ErdosProblems/347.lean,erdos_347,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_348,formal-conjectures/FormalConjectures/ErdosProblems/348.lean,erdos_348,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_349,formal-conjectures/FormalConjectures/ErdosProblems/349.lean,erdos_349,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_350,formal-conjectures/FormalConjectures/ErdosProblems/350.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,1,1,0,n/a,n/a,1,AVOID
+erdos_351,formal-conjectures/FormalConjectures/ErdosProblems/351.lean,erdos_351,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_352,formal-conjectures/FormalConjectures/ErdosProblems/352.lean,erdos_352,unknown,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_354,formal-conjectures/FormalConjectures/ErdosProblems/354.lean,erdos_354.parts.i,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_355,formal-conjectures/FormalConjectures/ErdosProblems/355.lean,erdos_355,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_357,formal-conjectures/FormalConjectures/ErdosProblems/357.lean,erdos_357.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_358,formal-conjectures/FormalConjectures/ErdosProblems/358.lean,erdos_358.parts.i,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_359,formal-conjectures/FormalConjectures/ErdosProblems/359.lean,erdos_359.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_361,formal-conjectures/FormalConjectures/ErdosProblems/361.lean,erdos_361.bigO,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_364,formal-conjectures/FormalConjectures/ErdosProblems/364.lean,erdos_364,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-medium,3,2,0,no,no,5,RESEARCH_REQUIRED
+erdos_366,formal-conjectures/FormalConjectures/ErdosProblems/366.lean,erdos_366,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_370,formal-conjectures/FormalConjectures/ErdosProblems/370.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,1,1,0,n/a,n/a,1,AVOID
+erdos_371,formal-conjectures/FormalConjectures/ErdosProblems/371.lean,erdos_371,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_373,formal-conjectures/FormalConjectures/ErdosProblems/373.lean,erdos_373,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_375,formal-conjectures/FormalConjectures/ErdosProblems/375.lean,erdos_375,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_376,formal-conjectures/FormalConjectures/ErdosProblems/376.lean,erdos_376,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,yes,1,AVOID
+erdos_377,formal-conjectures/FormalConjectures/ErdosProblems/377.lean,erdos_377,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_379,formal-conjectures/FormalConjectures/ErdosProblems/379.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_383,formal-conjectures/FormalConjectures/ErdosProblems/383.lean,erdos_383,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_385,formal-conjectures/FormalConjectures/ErdosProblems/385.lean,erdos_385.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_386,formal-conjectures/FormalConjectures/ErdosProblems/386.lean,erdos_386,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_387,formal-conjectures/FormalConjectures/ErdosProblems/387.lean,erdos_387,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_389,formal-conjectures/FormalConjectures/ErdosProblems/389.lean,erdos_389,nt,constructive-search,finite-reducible-infinite,explicit-witness,S7-algebraic-witness,low,attempted-low,2,0,0,yes,no,8,SUBMIT_NOW
+erdos_390,formal-conjectures/FormalConjectures/ErdosProblems/390.lean,erdos_390_equivalent,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_392,formal-conjectures/FormalConjectures/ErdosProblems/392.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_394,formal-conjectures/FormalConjectures/ErdosProblems/394.lean,erdos_394_part_a,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_396,formal-conjectures/FormalConjectures/ErdosProblems/396.lean,erdos_396,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_397,formal-conjectures/FormalConjectures/ErdosProblems/397.lean,erdos_397,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,yes,1,AVOID
+erdos_398,formal-conjectures/FormalConjectures/ErdosProblems/398.lean,erdos_398,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_399,formal-conjectures/FormalConjectures/ErdosProblems/399.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_402,formal-conjectures/FormalConjectures/ErdosProblems/402.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_406,formal-conjectures/FormalConjectures/ErdosProblems/406.lean,erdos_406,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_409,formal-conjectures/FormalConjectures/ErdosProblems/409.lean,erdos_409.parts.i.variants.isTheta,nt,structural-open,infinite-parametric,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_410,formal-conjectures/FormalConjectures/ErdosProblems/410.lean,erdos_410,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_412,formal-conjectures/FormalConjectures/ErdosProblems/412.lean,erdos_412,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-low,1,1,0,yes,no,6,RESEARCH_REQUIRED
+erdos_413,formal-conjectures/FormalConjectures/ErdosProblems/413.lean,erdos_413,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_414,formal-conjectures/FormalConjectures/ErdosProblems/414.lean,erdos_414,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_416,formal-conjectures/FormalConjectures/ErdosProblems/416.lean,erdos_416.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_417,formal-conjectures/FormalConjectures/ErdosProblems/417.lean,erdos_417.part.a,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_418,formal-conjectures/FormalConjectures/ErdosProblems/418.lean,erdos_418.variants.density,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,yes,no,6,RESEARCH_REQUIRED
+erdos_421,formal-conjectures/FormalConjectures/ErdosProblems/421.lean,erdos_421,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,yes,no,1,AVOID
+erdos_422,formal-conjectures/FormalConjectures/ErdosProblems/422.lean,erdos_422,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_424,formal-conjectures/FormalConjectures/ErdosProblems/424.lean,erdos_424,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_427,formal-conjectures/FormalConjectures/ErdosProblems/427.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,1,1,0,n/a,n/a,1,AVOID
+erdos_428,formal-conjectures/FormalConjectures/ErdosProblems/428.lean,erdos_428,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_434,formal-conjectures/FormalConjectures/ErdosProblems/434.lean,erdos_434.parts.i,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_442,formal-conjectures/FormalConjectures/ErdosProblems/442.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_454,formal-conjectures/FormalConjectures/ErdosProblems/454.lean,erdos_454,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_455,formal-conjectures/FormalConjectures/ErdosProblems/455.lean,erdos_455,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_457,formal-conjectures/FormalConjectures/ErdosProblems/457.lean,erdos_457,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_458,formal-conjectures/FormalConjectures/ErdosProblems/458.lean,erdos_458,nt,structural-open,infinite-parametric,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_463,formal-conjectures/FormalConjectures/ErdosProblems/463.lean,erdos_463,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_469,formal-conjectures/FormalConjectures/ErdosProblems/469.lean,erdos_469,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_470,formal-conjectures/FormalConjectures/ErdosProblems/470.lean,erdos_470.part1,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,attempted-low,1,1,0,no,no,5,RESEARCH_REQUIRED
+erdos_477,formal-conjectures/FormalConjectures/ErdosProblems/477.lean,erdos_477,unknown,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_479,formal-conjectures/FormalConjectures/ErdosProblems/479.lean,erdos_479,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_480,formal-conjectures/FormalConjectures/ErdosProblems/480.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_486,formal-conjectures/FormalConjectures/ErdosProblems/486.lean,erdos_486,nt,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,yes,no,6,RESEARCH_REQUIRED
+erdos_488,formal-conjectures/FormalConjectures/ErdosProblems/488.lean,erdos_488,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,yes,no,6,DRAFT_FIRST
+erdos_494,formal-conjectures/FormalConjectures/ErdosProblems/494.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_495,formal-conjectures/FormalConjectures/ErdosProblems/495.lean,erdos_495,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_499,formal-conjectures/FormalConjectures/ErdosProblems/499.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_503,formal-conjectures/FormalConjectures/ErdosProblems/503.lean,erdos_503,unknown,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_508,formal-conjectures/FormalConjectures/ErdosProblems/508.lean,HadwigerNelsonProblem,geometry,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_509,formal-conjectures/FormalConjectures/ErdosProblems/509.lean,erdos_509,unknown,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_510,formal-conjectures/FormalConjectures/ErdosProblems/510.lean,erdos_510,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_513,formal-conjectures/FormalConjectures/ErdosProblems/513.lean,erdos_513.sup,analysis,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_516,formal-conjectures/FormalConjectures/ErdosProblems/516.lean,erdos_516.limsup_ratio_eq_one_of_hasFejerGaps,analysis,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_517,formal-conjectures/FormalConjectures/ErdosProblems/517.lean,erdos_517.fabry,analysis,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_520,formal-conjectures/FormalConjectures/ErdosProblems/520.lean,erdos_520,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_522,formal-conjectures/FormalConjectures/ErdosProblems/522.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_536,formal-conjectures/FormalConjectures/ErdosProblems/536.lean,erdos_536,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_541,formal-conjectures/FormalConjectures/ErdosProblems/541.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_562,formal-conjectures/FormalConjectures/ErdosProblems/562.lean,erdos_562,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_564,formal-conjectures/FormalConjectures/ErdosProblems/564.lean,erdos_564,combinatorics,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_566,formal-conjectures/FormalConjectures/ErdosProblems/566.lean,erdos_566,combinatorics,structural-open,full-structural,explicit-witness,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_567,formal-conjectures/FormalConjectures/ErdosProblems/567.lean,erdos_567_Q3,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_587,formal-conjectures/FormalConjectures/ErdosProblems/587.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_590,formal-conjectures/FormalConjectures/ErdosProblems/590.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,attempted-low,8,0,0,n/a,n/a,1,AVOID
+erdos_591,formal-conjectures/FormalConjectures/ErdosProblems/591.lean,(no research open theorem),unknown,known-formalization,n/a,n/a,none,low,attempted-low,2,0,0,n/a,n/a,1,AVOID
+erdos_592,formal-conjectures/FormalConjectures/ErdosProblems/592.lean,erdos_592,logic,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-low,2,0,0,no,yes,1,AVOID
+erdos_598,formal-conjectures/FormalConjectures/ErdosProblems/598.lean,erdos_598,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_617,formal-conjectures/FormalConjectures/ErdosProblems/617.lean,erdos_617,combinatorics,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_623,formal-conjectures/FormalConjectures/ErdosProblems/623.lean,erdos_623,logic,structural-open,full-structural,explicit-witness,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_624,formal-conjectures/FormalConjectures/ErdosProblems/624.lean,erdos_624,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_645,formal-conjectures/FormalConjectures/ErdosProblems/645.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_647,formal-conjectures/FormalConjectures/ErdosProblems/647.lean,erdos_647,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,project-carcass,12,3,0,yes,no,1,ALREADY_TRIED_RECENT
+erdos_659,formal-conjectures/FormalConjectures/ErdosProblems/659.lean,(no research open theorem),geometry,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_672,formal-conjectures/FormalConjectures/ErdosProblems/672.lean,erdos_672,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-medium,4,2,0,no,no,1,AVOID
+erdos_677,formal-conjectures/FormalConjectures/ErdosProblems/677.lean,erdos_677,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_678,formal-conjectures/FormalConjectures/ErdosProblems/678.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_680,formal-conjectures/FormalConjectures/ErdosProblems/680.lean,erdos_680,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_681,formal-conjectures/FormalConjectures/ErdosProblems/681.lean,erdos_681,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_686,formal-conjectures/FormalConjectures/ErdosProblems/686.lean,erdos_686,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,yes,no,6,DRAFT_FIRST
+erdos_689,formal-conjectures/FormalConjectures/ErdosProblems/689.lean,erdos_689,nt,structural-open,infinite-parametric,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_694,formal-conjectures/FormalConjectures/ErdosProblems/694.lean,erdos_694,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,1,AVOID
+erdos_695,formal-conjectures/FormalConjectures/ErdosProblems/695.lean,erdos_695,nt,structural-open,infinite-parametric,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_697,formal-conjectures/FormalConjectures/ErdosProblems/697.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_699,formal-conjectures/FormalConjectures/ErdosProblems/699.lean,erdos_699,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_705,formal-conjectures/FormalConjectures/ErdosProblems/705.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_707,formal-conjectures/FormalConjectures/ErdosProblems/707.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,attempted-low,14,0,0,n/a,n/a,1,AVOID
+erdos_723,formal-conjectures/FormalConjectures/ErdosProblems/723.lean,erdos_723,combinatorics,structural-open,infinite-parametric,none-known,none,F3-side-lemma-bloat,attempted-low,2,0,0,no,no,2,AVOID
+erdos_727,formal-conjectures/FormalConjectures/ErdosProblems/727.lean,erdos_727,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_728,formal-conjectures/FormalConjectures/ErdosProblems/728.lean,erdos_728,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_730,formal-conjectures/FormalConjectures/ErdosProblems/730.lean,erdos_730,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_741,formal-conjectures/FormalConjectures/ErdosProblems/741.lean,erdos_741.density,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_749,formal-conjectures/FormalConjectures/ErdosProblems/749.lean,erdos_749,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_757,formal-conjectures/FormalConjectures/ErdosProblems/757.lean,erdos_757,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_770,formal-conjectures/FormalConjectures/ErdosProblems/770.lean,erdos_770.density,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_779,formal-conjectures/FormalConjectures/ErdosProblems/779.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_786,formal-conjectures/FormalConjectures/ErdosProblems/786.lean,erdos_786.parts.i,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_817,formal-conjectures/FormalConjectures/ErdosProblems/817.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_822,formal-conjectures/FormalConjectures/ErdosProblems/822.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_825,formal-conjectures/FormalConjectures/ErdosProblems/825.lean,erdos_825,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,yes,no,6,RESEARCH_REQUIRED
+erdos_826,formal-conjectures/FormalConjectures/ErdosProblems/826.lean,erdos_826,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_828,formal-conjectures/FormalConjectures/ErdosProblems/828.lean,erdos_828,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_830,formal-conjectures/FormalConjectures/ErdosProblems/830.lean,erdos_830.parts.i,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_835,formal-conjectures/FormalConjectures/ErdosProblems/835.lean,erdos_835,combinatorics,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_845,formal-conjectures/FormalConjectures/ErdosProblems/845.lean,erdos_845,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_846,formal-conjectures/FormalConjectures/ErdosProblems/846.lean,erdos_846,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_847,formal-conjectures/FormalConjectures/ErdosProblems/847.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_848,formal-conjectures/FormalConjectures/ErdosProblems/848.lean,erdos_848,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_849,formal-conjectures/FormalConjectures/ErdosProblems/849.lean,erdos_849,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_850,formal-conjectures/FormalConjectures/ErdosProblems/850.lean,erdos_850,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,project-carcass,10,7,1,yes,no,6,ALREADY_TRIED_RECENT
+erdos_851,formal-conjectures/FormalConjectures/ErdosProblems/851.lean,erdos_851,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_853,formal-conjectures/FormalConjectures/ErdosProblems/853.lean,erdos_853,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_855,formal-conjectures/FormalConjectures/ErdosProblems/855.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_859,formal-conjectures/FormalConjectures/ErdosProblems/859.lean,erdos_859,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_868,formal-conjectures/FormalConjectures/ErdosProblems/868.lean,erdos_868.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_873,formal-conjectures/FormalConjectures/ErdosProblems/873.lean,erdos_873,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_881,formal-conjectures/FormalConjectures/ErdosProblems/881.lean,erdos_881,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_885,formal-conjectures/FormalConjectures/ErdosProblems/885.lean,erdos_885,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_886,formal-conjectures/FormalConjectures/ErdosProblems/886.lean,erdos_886,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_887,formal-conjectures/FormalConjectures/ErdosProblems/887.lean,erdos_887,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_888,formal-conjectures/FormalConjectures/ErdosProblems/888.lean,erdos_888,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_889,formal-conjectures/FormalConjectures/ErdosProblems/889.lean,erdos_889,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_890,formal-conjectures/FormalConjectures/ErdosProblems/890.lean,erdos_890.parts.a,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_891,formal-conjectures/FormalConjectures/ErdosProblems/891.lean,erdos_891,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_893,formal-conjectures/FormalConjectures/ErdosProblems/893.lean,erdos_893,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_897,formal-conjectures/FormalConjectures/ErdosProblems/897.lean,erdos_897.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_899,formal-conjectures/FormalConjectures/ErdosProblems/899.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_906,formal-conjectures/FormalConjectures/ErdosProblems/906.lean,erdos_906,analysis,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_912,formal-conjectures/FormalConjectures/ErdosProblems/912.lean,erdos_912.equivalent,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_913,formal-conjectures/FormalConjectures/ErdosProblems/913.lean,erdos_913,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,attempted-low,1,0,0,yes,no,3,AVOID
+erdos_918,formal-conjectures/FormalConjectures/ErdosProblems/918.lean,erdos_918.parts.ii,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_920,formal-conjectures/FormalConjectures/ErdosProblems/920.lean,erdos_920,combinatorics,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_930,formal-conjectures/FormalConjectures/ErdosProblems/930.lean,erdos_930,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_931,formal-conjectures/FormalConjectures/ErdosProblems/931.lean,erdos_931,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,1,AVOID
+erdos_932,formal-conjectures/FormalConjectures/ErdosProblems/932.lean,erdos_932,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_936,formal-conjectures/FormalConjectures/ErdosProblems/936.lean,erdos_936.variants.two_pow_add_one,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_938,formal-conjectures/FormalConjectures/ErdosProblems/938.lean,erdos_938,nt,constructive-search,fixed-finite-object,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_939,formal-conjectures/FormalConjectures/ErdosProblems/939.lean,erdos_939,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_940,formal-conjectures/FormalConjectures/ErdosProblems/940.lean,erdos_940,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_942,formal-conjectures/FormalConjectures/ErdosProblems/942.lean,erdos_942,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_943,formal-conjectures/FormalConjectures/ErdosProblems/943.lean,erdos_943,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_944,formal-conjectures/FormalConjectures/ErdosProblems/944.lean,erdos_944,nt,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_945,formal-conjectures/FormalConjectures/ErdosProblems/945.lean,erdos_945,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_946,formal-conjectures/FormalConjectures/ErdosProblems/946.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_949,formal-conjectures/FormalConjectures/ErdosProblems/949.lean,erdos_949,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_951,formal-conjectures/FormalConjectures/ErdosProblems/951.lean,erdos_951,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_952,formal-conjectures/FormalConjectures/ErdosProblems/952.lean,erdos_952,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_961,formal-conjectures/FormalConjectures/ErdosProblems/961.lean,erdos_961,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_965,formal-conjectures/FormalConjectures/ErdosProblems/965.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_968,formal-conjectures/FormalConjectures/ErdosProblems/968.lean,erdos_968,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_971,formal-conjectures/FormalConjectures/ErdosProblems/971.lean,erdos_971,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_972,formal-conjectures/FormalConjectures/ErdosProblems/972.lean,erdos_972,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_975,formal-conjectures/FormalConjectures/ErdosProblems/975.lean,erdos_975,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_978,formal-conjectures/FormalConjectures/ErdosProblems/978.lean,erdos_978.sub_two,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_979,formal-conjectures/FormalConjectures/ErdosProblems/979.lean,erdos_979,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_982,formal-conjectures/FormalConjectures/ErdosProblems/982.lean,erdos_982,geometry,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_985,formal-conjectures/FormalConjectures/ErdosProblems/985.lean,erdos_985,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,untouched,0,0,0,yes,no,3,AVOID
+erdos_996,formal-conjectures/FormalConjectures/ErdosProblems/996.lean,erdos_996.log3,unknown,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1003,formal-conjectures/FormalConjectures/ErdosProblems/1003.lean,erdos_1003,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1004,formal-conjectures/FormalConjectures/ErdosProblems/1004.lean,erdos_1004,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1038,formal-conjectures/FormalConjectures/ErdosProblems/1038.lean,erdos_1038.inf,unknown,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_1041,formal-conjectures/FormalConjectures/ErdosProblems/1041.lean,erdos_1041,unknown,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_1043,formal-conjectures/FormalConjectures/ErdosProblems/1043.lean,(no research open theorem),analysis,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1051,formal-conjectures/FormalConjectures/ErdosProblems/1051.lean,erdos_1051,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_1052,formal-conjectures/FormalConjectures/ErdosProblems/1052.lean,erdos_1052,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,attempted-high,8,1,0,no,no,1,ALREADY_TRIED_RECENT
+erdos_1054,formal-conjectures/FormalConjectures/ErdosProblems/1054.lean,erdos_1054.parts.i,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1055,formal-conjectures/FormalConjectures/ErdosProblems/1055.lean,erdos_1055,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1056,formal-conjectures/FormalConjectures/ErdosProblems/1056.lean,erdos_1056,nt,structural-open,infinite-parametric,explicit-witness,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1059,formal-conjectures/FormalConjectures/ErdosProblems/1059.lean,erdos_1059,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1060,formal-conjectures/FormalConjectures/ErdosProblems/1060.lean,erdos_1060.bound_one,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_1061,formal-conjectures/FormalConjectures/ErdosProblems/1061.lean,erdos_1061,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1062,formal-conjectures/FormalConjectures/ErdosProblems/1062.lean,erdos_1062.limit_density,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1063,formal-conjectures/FormalConjectures/ErdosProblems/1063.lean,erdos_1063.better_upper,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_1064,formal-conjectures/FormalConjectures/ErdosProblems/1064.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1065,formal-conjectures/FormalConjectures/ErdosProblems/1065.lean,erdos_1065a,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1067,formal-conjectures/FormalConjectures/ErdosProblems/1067.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1068,formal-conjectures/FormalConjectures/ErdosProblems/1068.lean,erdos_1068,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_1071,formal-conjectures/FormalConjectures/ErdosProblems/1071.lean,erdos_1071b,geometry,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1072,formal-conjectures/FormalConjectures/ErdosProblems/1072.lean,erdos_1072a,nt,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1073,formal-conjectures/FormalConjectures/ErdosProblems/1073.lean,erdos_1073,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1074,formal-conjectures/FormalConjectures/ErdosProblems/1074.lean,erdos_1074.part8_i_i,nt,structural-open,full-structural,none-known,none,F1-iff-rfl,untouched,0,0,0,no,no,1,AVOID
+erdos_1077,formal-conjectures/FormalConjectures/ErdosProblems/1077.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1080,formal-conjectures/FormalConjectures/ErdosProblems/1080.lean,erdos_1080,combinatorics,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID
+erdos_1084,formal-conjectures/FormalConjectures/ErdosProblems/1084.lean,erdos_1084_triangular_optimal_d2,geometry,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_1085,formal-conjectures/FormalConjectures/ErdosProblems/1085.lean,erdos_1085_upper_d3,geometry,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1092,formal-conjectures/FormalConjectures/ErdosProblems/1092.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1093,formal-conjectures/FormalConjectures/ErdosProblems/1093.lean,erdos_1093.parts.i,combinatorics,structural-open,full-structural,pure-existence,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,2,AVOID
+erdos_1094,formal-conjectures/FormalConjectures/ErdosProblems/1094.lean,erdos_1094,nt,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_1095,formal-conjectures/FormalConjectures/ErdosProblems/1095.lean,erdos_1095_upper_conjecture,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1097,formal-conjectures/FormalConjectures/ErdosProblems/1097.lean,erdos_1097,nt,constructive-search,finite-reducible-infinite,explicit-witness,none,low,untouched,0,0,0,no,no,5,DRAFT_FIRST
+erdos_1101,formal-conjectures/FormalConjectures/ErdosProblems/1101.lean,erdos_1101.polynomial,nt,structural-open,finite-reducible-infinite,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1102,formal-conjectures/FormalConjectures/ErdosProblems/1102.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1104,formal-conjectures/FormalConjectures/ErdosProblems/1104.lean,(no research open theorem),combinatorics,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1105,formal-conjectures/FormalConjectures/ErdosProblems/1105.lean,erdos_1105_cycles,combinatorics,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1106,formal-conjectures/FormalConjectures/ErdosProblems/1106.lean,erdos_1106,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,yes,yes,1,AVOID
+erdos_1107,formal-conjectures/FormalConjectures/ErdosProblems/1107.lean,erdos_1107,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1108,formal-conjectures/FormalConjectures/ErdosProblems/1108.lean,erdos_1108.k_th_powers,nt,structural-open,finite-reducible-infinite,pure-existence,none,low,untouched,0,0,0,no,no,5,RESEARCH_REQUIRED
+erdos_1135,formal-conjectures/FormalConjectures/ErdosProblems/1135.lean,(no research open theorem),nt,known-formalization,n/a,n/a,none,low,untouched,0,0,0,n/a,n/a,1,AVOID
+erdos_1137,formal-conjectures/FormalConjectures/ErdosProblems/1137.lean,erdos_1137,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1139,formal-conjectures/FormalConjectures/ErdosProblems/1139.lean,erdos_1139,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1145,formal-conjectures/FormalConjectures/ErdosProblems/1145.lean,erdos_1145,combinatorics,structural-open,full-structural,none-known,none,F3-side-lemma-bloat,untouched,0,0,0,no,no,1,AVOID
+erdos_1148,formal-conjectures/FormalConjectures/ErdosProblems/1148.lean,erdos_1148,nt,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1150,formal-conjectures/FormalConjectures/ErdosProblems/1150.lean,erdos_1150,analysis,structural-open,full-structural,pure-existence,none,F1-iff-rfl,untouched,0,0,0,no,yes,1,AVOID
+erdos_1176,formal-conjectures/FormalConjectures/ErdosProblems/1176.lean,erdos_1176,unknown,structural-open,full-structural,pure-existence,none,low,untouched,0,0,0,no,yes,3,AVOID

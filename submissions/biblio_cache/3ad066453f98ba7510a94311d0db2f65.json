@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780318055.866422,
+  "checked_at": "2026-06-01T12:47:35+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "6 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    }
+  ],
+  "status": "CLEAR"
+}

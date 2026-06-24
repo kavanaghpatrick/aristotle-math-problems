@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780318248.802797,
+  "checked_at": "2026-06-01T12:50:48+00:00",
+  "evidence": "3 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "1999 partial/weak: On the length of lemniscates",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:1548313"
+    },
+    {
+      "evidence": "2025 partial/weak: On the area of polynomial lemniscates",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:902696351"
+    },
+    {
+      "evidence": "2026 partial/weak: On the maximum product of distances of diameter $2$ point sets",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:902976521"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

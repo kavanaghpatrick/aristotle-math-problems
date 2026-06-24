@@ -24,8 +24,11 @@ CREATE TABLE IF NOT EXISTS submissions (
     submitted_at TEXT,
     completed_at TEXT,
 
-    -- Status
-    status TEXT DEFAULT 'draft',  -- draft, validated, submitted, running, completed, failed
+    -- Status — canonical enum (2026-05-28):
+    --   submitted | compile_failed | compiled_partial | compiled_no_advance
+    --   | compiled_advance | disproven
+    -- 'draft' is the pre-submission default before /submit fires.
+    status TEXT DEFAULT 'draft',
 
     -- Validation results
     syntax_valid INTEGER,
@@ -116,9 +119,12 @@ SELECT
     s.definition_audit_passed,
     s.verified
 FROM submissions s
-WHERE s.status IN ('submitted', 'running', 'validated')
+WHERE s.status = 'submitted'
 ORDER BY s.created_at DESC;
 
+-- Canonical status enum (2026-05-28):
+--   submitted | compile_failed | compiled_partial | compiled_no_advance
+--   | compiled_advance | disproven
 CREATE VIEW IF NOT EXISTS v_verification_needed AS
 SELECT
     s.id, s.uuid, s.filename, s.problem_id,
@@ -126,7 +132,7 @@ SELECT
     s.grok_reviewed, s.gemini_reviewed,
     s.verified
 FROM submissions s
-WHERE s.status = 'completed'
+WHERE s.status IN ('compiled_partial', 'compiled_no_advance', 'compiled_advance')
   AND s.verified IS NULL
   AND s.proven_count > 0
 ORDER BY s.completed_at DESC;

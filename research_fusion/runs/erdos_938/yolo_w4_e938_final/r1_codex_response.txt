@@ -1,0 +1,300 @@
+```text
+d <= sqrt(n_{k+2}) + 1,
+```
+
+or in the looser slot-1315 form,
+
+```text
+d < 2 sqrt(N) + 2.
+```
+
+Chan’s abc-conditional lower bound gives, for every `eps > 0`,
+
+```text
+d >>_eps N^{1/2 - eps}.
+```
+
+See Chan arXiv:2210.00281, abstract: https://arxiv.org/abs/2210.00281.
+
+Thus, under abc, a consecutive powerful 3-AP has gap essentially of square-root size:
+
+```text
+N^{1/2-o(1)} <= d <= N^{1/2+o(1)}.
+```
+
+This does not prove finiteness. It only says the gap has the same order as the unavoidable square gaps.
+
+Combined with the bounded-kernel finiteness above, any infinite family must enter the unbounded-kernel regime. Since
+
+```text
+n_i = a_i^2 b_i^3 ~ N,
+```
+
+large `b_i` forces
+
+```text
+a_i ~ N^{1/2} / b_i^{3/2}.
+```
+
+So kernel growth compresses the square part. The AP identity
+
+```text
+(n_{k+1})^2 = n_k n_{k+2} + d^2
+```
+
+becomes
+
+```text
+a_2^4 b_2^6 - a_1^2 a_3^2 (b_1 b_3)^3 = d^2.
+```
+
+Together with `d ~ sqrt(N)` under abc, this gives a genuine diophantine constraint coupling kernel growth and square-part shrinkage. This is the right place for a “kernel-uniformity” lemma.
+
+4. **Proposed Kernel-Uniformity Lemma** — **OPEN / SPECULATIVE**
+
+A useful load-bearing lemma would be:
+
+> For every infinite family of consecutive powerful 3-APs satisfying the abc gap window, the squarefree kernels `(b_1,b_2,b_3)` cannot grow without producing, after a controlled normalization, a bounded-length coprime powerful AP structure forbidden by Bajpai-Bennett-Chan under abc.
+
+More concretely, one would need to show that the equation
+
+```text
+a_2^4 b_2^6 - a_1^2 a_3^2 (b_1 b_3)^3 = d^2,
+```
+
+plus
+
+```text
+d = a_2^2 b_2^3 - a_1^2 b_1^3
+  = a_3^2 b_3^3 - a_2^2 b_2^3
+```
+
+forces a uniform bound on the squarefree kernels unless one can extract a forbidden coprime powerful 5-AP.
+
+This is not currently proved by the stated inputs. It is the missing bridge.
+
+5. **BBC Coprime Result Does Not Directly Apply** — **BBC-CONDITIONAL but insufficient**
+
+Bajpai-Bennett-Chan prove, unconditionally, infinitely many 4-term APs of pairwise-coprime powerful numbers, and under abc their Corollary 1.3 gives
+
+```text
+A_infty(2) = 4,
+```
+
+i.e. no 5-term pairwise-coprime powerful APs under abc. See arXiv:2302.03113: https://arxiv.org/abs/2302.03113.
+
+But a consecutive powerful 3-AP need not be coprime. Dividing by the gcd does not preserve powerfulness. For example:
+
+```text
+1728, 1764, 1800
+gcd = 36
+48, 49, 50
+```
+
+The reduced triple is coprime as a triple, but it is not a triple of powerful numbers.
+
+So BBC does not presently give a kernel bound for consecutive powerful 3-APs. To use BBC, one must prove an additional normalization theorem:
+
+> Every sufficiently large unbounded-kernel consecutive powerful 3-AP canonically yields a pairwise-coprime powerful AP of length at least 5.
+
+That theorem is OPEN. Without it, BBC’s `A_infty(2)=4` forbids the wrong object.
+
+6. **Final Status** — **OPEN**
+
+The synthesis gives a clean conditional strategy, but it does not close E938.
+
+What is proved/usable:
+
+```text
+bounded kernels -> finite, unconditionally per kernel triple;
+infinite family -> kernels unbounded;
+abc -> d has square-root size;
+unbounded kernels -> strong diophantine pressure.
+```
+
+What remains open:
+
+```text
+unbounded kernels -> BBC-forbidden coprime powerful 5-AP
+```
+
+or any equivalent uniform kernel bound.
+
+So the proposed load-bearing claim is exactly the kernel-uniformity lemma above. It is plausible as a research target, but it is not a consequence of BBC as currently stated.
+tokens used
+23,754
+1. **E938 Finiteness Claim** — **OPEN**
+
+Let `P_1 < P_2 < ...` be the powerful numbers. Erdős 938, in the consecutive form, asks whether there are only finitely many `k` such that
+
+```text
+P_k, P_{k+1}, P_{k+2}
+```
+
+are in arithmetic progression.
+
+Equivalently: finitely many pairs `(N,d)` with `d > 0` such that
+
+```text
+N, N+d, N+2d
+```
+
+are powerful and there is no other powerful number strictly between `N` and `N+2d`.
+
+This is not settled. Van Doorn’s 2026 conjectural family would falsify it if infinitely many members are genuinely consecutive; the first listed family member is powerful but not consecutive. See arXiv:2605.06697, whose abstract states the existence of infinitely many powerful 3-APs with `d = 2 sqrt(N)+1` and conjectures infinitely many are consecutive: https://arxiv.org/abs/2605.06697.
+
+2. **Bounded-Kernel Case** — **PROVEN, assuming slot 1316 L4**
+
+Write each powerful term uniquely as
+
+```text
+n_i = a_i^2 b_i^3,   b_i squarefree.
+```
+
+Fix `B` and assume
+
+```text
+max(b_1,b_2,b_3) <= B.
+```
+
+Then only finitely many kernel triples `(b_1,b_2,b_3)` occur. For each fixed kernel triple, the AP condition is
+
+```text
+a_1^2 b_1^3 - 2a_2^2 b_2^3 + a_3^2 b_3^3 = 0.
+```
+
+By the stated slot 1316 L4 input, each fixed-kernel equation has only finitely many consecutive solutions, via the Mordell-Siegel/integral-points reduction plus the square-interloper bound. Therefore bounded kernel contributes only finitely many consecutive powerful 3-APs, unconditionally per fixed `B`.
+
+So any infinite counterexample family to E938 must have
+
+```text
+max(b_1,b_2,b_3) -> infinity.
+```
+
+3. **Unbounded Kernels Are Forced in Any Infinite Family** — **PROVEN / abc-CONDITIONAL for the sharp size window**
+
+The unconditional square-interloper bound gives
+
+```text
+d <= sqrt(n_{k+2}) + 1,
+```
+
+or in the looser slot-1315 form,
+
+```text
+d < 2 sqrt(N) + 2.
+```
+
+Chan’s abc-conditional lower bound gives, for every `eps > 0`,
+
+```text
+d >>_eps N^{1/2 - eps}.
+```
+
+See Chan arXiv:2210.00281, abstract: https://arxiv.org/abs/2210.00281.
+
+Thus, under abc, a consecutive powerful 3-AP has gap essentially of square-root size:
+
+```text
+N^{1/2-o(1)} <= d <= N^{1/2+o(1)}.
+```
+
+This does not prove finiteness. It only says the gap has the same order as the unavoidable square gaps.
+
+Combined with the bounded-kernel finiteness above, any infinite family must enter the unbounded-kernel regime. Since
+
+```text
+n_i = a_i^2 b_i^3 ~ N,
+```
+
+large `b_i` forces
+
+```text
+a_i ~ N^{1/2} / b_i^{3/2}.
+```
+
+So kernel growth compresses the square part. The AP identity
+
+```text
+(n_{k+1})^2 = n_k n_{k+2} + d^2
+```
+
+becomes
+
+```text
+a_2^4 b_2^6 - a_1^2 a_3^2 (b_1 b_3)^3 = d^2.
+```
+
+Together with `d ~ sqrt(N)` under abc, this gives a genuine diophantine constraint coupling kernel growth and square-part shrinkage. This is the right place for a “kernel-uniformity” lemma.
+
+4. **Proposed Kernel-Uniformity Lemma** — **OPEN / SPECULATIVE**
+
+A useful load-bearing lemma would be:
+
+> For every infinite family of consecutive powerful 3-APs satisfying the abc gap window, the squarefree kernels `(b_1,b_2,b_3)` cannot grow without producing, after a controlled normalization, a bounded-length coprime powerful AP structure forbidden by Bajpai-Bennett-Chan under abc.
+
+More concretely, one would need to show that the equation
+
+```text
+a_2^4 b_2^6 - a_1^2 a_3^2 (b_1 b_3)^3 = d^2,
+```
+
+plus
+
+```text
+d = a_2^2 b_2^3 - a_1^2 b_1^3
+  = a_3^2 b_3^3 - a_2^2 b_2^3
+```
+
+forces a uniform bound on the squarefree kernels unless one can extract a forbidden coprime powerful 5-AP.
+
+This is not currently proved by the stated inputs. It is the missing bridge.
+
+5. **BBC Coprime Result Does Not Directly Apply** — **BBC-CONDITIONAL but insufficient**
+
+Bajpai-Bennett-Chan prove, unconditionally, infinitely many 4-term APs of pairwise-coprime powerful numbers, and under abc their Corollary 1.3 gives
+
+```text
+A_infty(2) = 4,
+```
+
+i.e. no 5-term pairwise-coprime powerful APs under abc. See arXiv:2302.03113: https://arxiv.org/abs/2302.03113.
+
+But a consecutive powerful 3-AP need not be coprime. Dividing by the gcd does not preserve powerfulness. For example:
+
+```text
+1728, 1764, 1800
+gcd = 36
+48, 49, 50
+```
+
+The reduced triple is coprime as a triple, but it is not a triple of powerful numbers.
+
+So BBC does not presently give a kernel bound for consecutive powerful 3-APs. To use BBC, one must prove an additional normalization theorem:
+
+> Every sufficiently large unbounded-kernel consecutive powerful 3-AP canonically yields a pairwise-coprime powerful AP of length at least 5.
+
+That theorem is OPEN. Without it, BBC’s `A_infty(2)=4` forbids the wrong object.
+
+6. **Final Status** — **OPEN**
+
+The synthesis gives a clean conditional strategy, but it does not close E938.
+
+What is proved/usable:
+
+```text
+bounded kernels -> finite, unconditionally per kernel triple;
+infinite family -> kernels unbounded;
+abc -> d has square-root size;
+unbounded kernels -> strong diophantine pressure.
+```
+
+What remains open:
+
+```text
+unbounded kernels -> BBC-forbidden coprime powerful 5-AP
+```
+
+or any equivalent uniform kernel bound.
+
+So the proposed load-bearing claim is exactly the kernel-uniformity lemma above. It is plausible as a research target, but it is not a consequence of BBC as currently stated.

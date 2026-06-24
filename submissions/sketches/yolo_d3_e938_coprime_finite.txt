@@ -1,0 +1,24 @@
+OPEN GAP: BBC Corollary 1.3 m=5 specialization — finite 5-term coprime powerful APs (abc-conditional)
+Source: arXiv:2302.03113 (Bajpai-Bennett-Chan 2024, IJNT 20:19-45) Corollary 1.3 + Theorem 1.1
+Domain: nt
+
+For m = 5, conditional on the abc-conjecture, the set of pairs (N, d) of
+positive integers with gcd(N, d) = 1 and each of N + i*d (for 0 <= i < 5)
+a powerful number is finite. This is BBC's Theorem 1.1 specialization
+to k = 2, m = 5: the gcd lower bound forces gcd(d, N) >> max(N, d)^{2/7 - eps},
+contradicting coprimality, hence finite. The bound m >= 5 is sharp:
+Theorem 1.2 case (m, k) = (4, 2) of BBC constructs infinitely many
+4-term coprime powerful APs (so A_infty(2) = 4 exactly, under abc).
+
+theorem bbc_cor_1_3_m5_coprime_finite
+    (abc : ∀ ε : ℝ, 0 < ε →
+      {(a, b, c) : ℕ × ℕ × ℕ | 0 < a ∧ 0 < b ∧ 0 < c ∧
+        ({a, b, c} : Set ℕ).Pairwise Nat.Coprime ∧ a + b = c ∧
+        (ABC.radical (a * b * c) : ℝ)^(1 + ε) < c}.Finite) :
+    {(N, d) : ℕ × ℕ | 0 < N ∧ 0 < d ∧ Nat.Coprime N d ∧
+      ∀ i, i < 5 → Nat.Powerful (N + i * d)}.Finite := by sorry
+
+Status: OPEN unconditionally (abc itself is open). The conditional statement
+is the natural Mathlib-PR target, exactly as with other abc-conditional
+results. Sharpness at m = 4 (infinitely many coprime 4-term powerful APs)
+is BBC Theorem 1.2 case (4, 2).

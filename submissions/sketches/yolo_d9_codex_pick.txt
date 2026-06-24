@@ -1,0 +1,23 @@
+OPEN GAP: 9 divides C(2^(k+1), 2^k) for all k >= 3, k != 6, k != 8
+Source: arXiv:2601.09510 (Holdum-Klausen-Rasmussen 2026, "Powers in prime bases and a problem on central binomial coefficients").
+Domain: nt
+
+For every natural number k with k >= 3 and k different from 6 and 8, the
+central binomial coefficient C(2^(k+1), 2^k) is divisible by 9. The two
+known exceptions are k = 6 (n = 64, where the 3-adic valuation equals
+exactly 1) and k = 8 (n = 256, where the 3-adic valuation equals exactly
+1). Holdum-Klausen-Rasmussen 2026 verify the divisibility computationally
+for k <= 10^13 and prove that the density of exceptional k is zero, but
+the unconditional statement for all k > 8 remains OPEN.
+
+theorem central_binom_pow_two_div_9
+    (k : Nat) (hk : 3 <= k) (hk6 : k != 6) (hk8 : k != 8) :
+    9 ∣ Nat.choose (2^(k+1)) (2^k) := by sorry
+
+Status: OPEN. Not in Mathlib, not in formal-conjectures. The Erdős
+conjecture "for every n > 4 with n not in {64, 256}, C(2n,n) is divisible
+by 4 or 9" reduces to this power-of-2 sub-claim under elementary 2-adic
+arithmetic. Holdum-Klausen-Rasmussen 2026 explicitly state the
+unconditional version remains open beyond their computational range.
+The Erdős #376 Graham 1000 dollar problem (gcd(C(2n,n), 105) = 1
+infinitely often) is a logically independent sister conjecture.

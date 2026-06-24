@@ -1,0 +1,22 @@
+OPEN GAP: Brocard's Conjecture verified for n ∈ [501, 1000]
+Source: formal-conjectures/FormalConjectures/Wikipedia/BrocardConjecture.lean
+Domain: number theory
+
+For every n ∈ [501, 1000], between the squares of the n-th and (n+1)-th
+primes there are at least four prime numbers. Extends slot722's verified
+range [2, 500] using the same parametric structure. Ferreira (2023) proved
+the conjecture for sufficiently large n; the gap is small/medium n.
+
+theorem brocard_conjecture_extended_501_1000 :
+    ∀ n : ℕ, 501 ≤ n → n ≤ 1000 →
+      4 ≤ ((Finset.Ioo (n.nth Nat.Prime ^ 2) ((n+1).nth Nat.Prime ^ 2)).filter
+        Nat.Prime).card := by sorry
+
+Status: OPEN. Brocard's conjecture is unresolved in general. The bounded
+version on [501, 1000] reduces to a finite check. The verified sieving
+range reaches p_1001^2 ≈ 6.27·10^7.
+
+contribution_statement: target_resolved=1 here means a Lean proof of
+Brocard's conjecture for all n in [501, 1000] verified by computation,
+extending the slot722 advance and closing more of the small-n gap to
+Ferreira's asymptotic result.

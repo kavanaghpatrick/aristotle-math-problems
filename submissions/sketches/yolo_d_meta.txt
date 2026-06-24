@@ -1,0 +1,24 @@
+OPEN GAP: Powerful triple residue and 8 y^2 pair conjunction (D-team META)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/{364,938,940}.lean
+Domain: nt
+
+Let A be the set of powerful naturals (Nat.Powerful = Nat.Full 2). The
+following three-conjunct theorem is Mathlib-novel: (a) there is an
+injective N -> N enumeration of y with both 8 y^2 and 8 y^2 + 1 in A;
+(b) for every m with m, m+1, m+2 all in A, m mod 36 is in {7, 27, 35};
+(c) if additionally m + 1 = 8 y^2 for some y, then m mod 36 = 7.
+
+theorem d_meta_walker_beckon_intersection :
+    (∃ f : ℕ → ℕ, Function.Injective f ∧
+       ∀ k, Nat.Powerful (8 * (f k)^2) ∧ Nat.Powerful (8 * (f k)^2 + 1))
+    ∧ (∀ m : ℕ, Nat.Powerful m → Nat.Powerful (m + 1) → Nat.Powerful (m + 2) →
+       m % 36 = 7 ∨ m % 36 = 27 ∨ m % 36 = 35)
+    ∧ (∀ m y : ℕ, m + 1 = 8 * y^2 →
+       Nat.Powerful m → Nat.Powerful (m + 1) → Nat.Powerful (m + 2) →
+       m % 36 = 7) := by
+  sorry
+
+Status: OPEN as a Mathlib formalization. The 3-conjunct statement is
+not in Mathlib and not in formal-conjectures. Prior project artifacts
+available: slot 1315 (Nat.Powerful and ABC.radical infrastructure) and
+slot 1297 (IsPrimePow.deficient pivot for prime-power numbers).

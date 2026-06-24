@@ -1,0 +1,11 @@
+OPEN GAP: Brocard extended range [501, 1000]
+Source: formal-conjectures/Brocard
+Domain: nt
+
+Verify Brocard's conjecture (n!+1 not a perfect square except n=4,5,7) on the
+bounded range n in [501, 1000], extending slot722's [2, 500] result.
+
+theorem brocard_501_1000 (n : ℕ) (hlo : 501 ≤ n) (hhi : n ≤ 1000) :
+    ¬ ∃ m, n.factorial + 1 = m * m := by sorry
+
+Status: OPEN unbounded. Bounded check via chunked native_decide.

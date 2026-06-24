@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780318581.733248,
+  "checked_at": "2026-06-01T12:56:21+00:00",
+  "evidence": "2/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "2016 partial/weak: Maximal subsemigroups of some semigroups of order-preserving mappings on a countably infinite set",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.1515/forum-2015-0093"
+    },
+    {
+      "evidence": "2023 partial/weak: A Bernstein-Type Bound on Shannon Entropy Over Countably Infinite Alphabets",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.2139/ssrn.4601987"
+    }
+  ],
+  "status": "CLEAR"
+}

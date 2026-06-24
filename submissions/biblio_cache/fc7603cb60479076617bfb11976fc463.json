@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780318262.1495051,
+  "checked_at": "2026-06-01T12:51:02+00:00",
+  "evidence": "1 strong closure-language match(es) on a keyword query (no named conjecture to confirm topical identity); needs human verification (fail-closed)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    },
+    {
+      "evidence": "1995 STRONG closure language: Is the binomial coefficient $2n \\choose n$ square free?",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.46298/hrj.1995.132"
+    },
+    {
+      "evidence": "2016 partial/weak: On the quotient between the greatest prime factor and the least prime factor",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.12988/imf.2016.68119"
+    },
+    {
+      "evidence": "1976 partial/weak: On the number of prime divisors of a binomial coefficient.",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.7146/math.scand.a-11662"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

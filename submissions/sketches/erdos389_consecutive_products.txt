@@ -1,0 +1,43 @@
+INFORMAL PROOF ARGUMENT: Erdos Problem 389
+Source: Erdos 389; Domain: nt
+
+CLAIM: For every integer n >= 1, there exists k such that
+n(n+1)...(n+k-1) divides (n+k)(n+k+1)...(n+2k-1).
+
+The ratio R(n,k) = prod_{i=0}^{k-1} (n+k+i) / prod_{i=0}^{k-1} (n+i).
+
+STEP 1 — REWRITE AS BINOMIAL RATIO. R(n,k) = C(n+2k-1, k) / C(n+k-1, k).
+Alternatively, R(n,k) = (n+2k-1)! * (n-1)! / ((n+k-1)!)^2 * ((n+k-1)!/(n-1)!)
+which simplifies. The key: R(n,k) is an integer iff for every prime p,
+v_p(prod second half) >= v_p(prod first half).
+
+STEP 2 — P-ADIC CONDITION. For prime p, v_p(R(n,k)) = sum over i of
+v_p(n+k+i) - v_p(n+i). By Legendre: this equals
+sum_{j>=1} [floor((n+2k-1)/p^j) - 2*floor((n+k-1)/p^j) + floor((n-1)/p^j)].
+This counts carries in adding (n-1) + k + k in base p at each digit position.
+
+STEP 3 — TAKE k = n * M FOR LARGE M. When k = nM, the ratio becomes
+prod_{i=0}^{nM-1} (n+nM+i) / prod_{i=0}^{nM-1} (n+i) = (n+2nM-1)! * (n-1)! / ((n+nM-1)!)^2 * ...
+For k >> n, most terms (n+k+i)/(n+i) are close to 2, and the product is
+approximately 2^k. More precisely: R(n,k) = C(n+2k-1, 2k)/C(n+k-1, k) * ...
+
+STEP 4 — EXPLICIT CONSTRUCTION. Take k = lcm(1,2,...,n) * L for large L.
+Then for every prime p <= n and every i, v_p(n+i) divides v_p(k). The p-adic
+valuation of the first-half product is controlled: v_p(prod (n+i)) is fixed
+(depends only on n), while v_p(prod (n+k+i)) can be made large by choosing L
+so that (n+k+i) picks up extra factors. Since k is a multiple of lcm(1..n),
+the residues n+k+i mod p^j cycle through the same classes as n+i mod p^j,
+ensuring v_p(second half) >= v_p(first half) for small primes.
+
+STEP 5 — LARGE PRIMES. For p > 2n+2k, neither half has any factor of p.
+For n < p <= 2n+2k: at most O(k/p) terms in each half are divisible by p.
+The second-half terms are shifted by k, so they hit the same number of
+multiples of p. By choosing k carefully (a multiple of p where needed),
+we ensure balance. CRT over finitely many primes gives a valid k.
+
+theorem erdos_389 (n : Nat) (hn : 1 <= n) :
+  ∃ k : Nat, 0 < k ∧
+    (Finset.range k).prod (fun i => n + i) ∣
+    (Finset.range k).prod (fun i => n + k + i) := by sorry
+
+Status: OPEN. Verified for n=1..18 (OEIS A375071). Cannot be resolved by finite computation.

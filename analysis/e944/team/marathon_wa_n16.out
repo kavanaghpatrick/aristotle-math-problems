@@ -1,0 +1,2 @@
+# anneal witness search n=16 budget=300.0s seed=20
+# no witness. best_energy(min #critical-edges among 4-vtx-critical)=16 tries=348 elapsed=300s

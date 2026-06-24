@@ -1,0 +1,44 @@
+{
+  "_cache_ts": 1780315777.598704,
+  "checked_at": "2026-06-01T12:09:37+00:00",
+  "evidence": "6 partial/weak-closure papers; ambiguous (fail-closed, not promoted to CLEAR)",
+  "sources": [
+    {
+      "evidence": "2009 partial/weak: Some Conjectures on the Number of Primes in Certain Intervals",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:900069536"
+    },
+    {
+      "evidence": "2026 partial/weak: Measuring Decidability as Related to Busy Beaver Numbers",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.20215v1"
+    },
+    {
+      "evidence": "2025 partial/weak: On the arithmetic average of the first $n$ primes",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2505.04951v3"
+    },
+    {
+      "evidence": "2023 partial/weak: A note on some polynomial-factorial diophantine equations",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2308.11002v3"
+    },
+    {
+      "evidence": "2020 partial/weak: Results of Brocard-Ramanujan problem on diophantine equation $n!+1=m^2$",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2004.09256v2"
+    },
+    {
+      "evidence": "2016 partial/weak: On solutions of some of unsolved problems in number theory, specifically on the distribution of primes",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/1605.01722v5"
+    }
+  ],
+  "status": "AMBIGUOUS"
+}

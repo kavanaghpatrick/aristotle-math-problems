@@ -1,0 +1,22 @@
+OPEN GAP: Feit-Thompson p=3, q ≡ 71 (mod 72), q ≤ 10000 (full prime-A scan)
+Source: formal-conjectures/FormalConjectures/Wikipedia/FeitThompsonPrimeConjecture.lean
+Domain: number theory
+
+The Feit-Thompson prime conjecture asserts: for distinct primes p < q,
+(q^p - 1)/(q - 1) does not divide (p^q - 1)/(p - 1). Open since 1962.
+slot720 / slot736 proved the p=3, q ≡ 71 (mod 72) family for q ≤ 1500
+via a "small prime divisor of A(q)" Fermat reduction. That mechanism
+breaks at q ∈ {1583, 2663, 3671, 4751, 5039, 6047, 6551, 9719} because
+A(q) = q²+q+1 is prime, so no small (≤ 10⁶) divisor exists. A May 30
+scan verified the theorem itself is structurally true at every such q
+(3^q ≢ 1 mod A(q)); the gap is whether Aristotle can produce a single
+proof covering BOTH small-divisor and prime-A cases up to a bound K
+where K is large enough to be non-trivial.
+
+theorem feit_thompson_p3_q71_family_10000 :
+    ∀ q : ℕ, q.Prime → 3 < q → q ≡ 71 [MOD 72] → q ≤ 10000 →
+      ¬ (q ^ 3 - 1) / (q - 1) ∣ (3 ^ q - 1) / 2 := by sorry
+
+Status: OPEN. slot736 covered q ≤ 1500 using small-divisor witnesses;
+q ≤ 10000 requires direct A(q)-modulus verification at the eight
+prime-A q-values listed above. Full FT for p=3 remains open.

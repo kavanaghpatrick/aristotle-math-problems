@@ -1,0 +1,17 @@
+OPEN GAP: Erdős 141 variant — 11 consecutive primes in arithmetic progression
+Source: formal-conjectures/FormalConjectures/ErdosProblems/141.lean (erdos_141.variant.eleven)
+Domain: number theory / combinatorics
+
+Do there exist 11 consecutive primes p, p+d, p+2d, …, p+10d in arithmetic
+progression (i.e. with no prime strictly between consecutive terms)?
+The case k ≤ 10 has been verified; the case k = 11 has been open since
+the 1960s and remains unresolved.
+
+theorem erdos_141_eleven :
+    ∃ (s : Set ℕ), s.IsAPAndPrimeProgressionOfLength 11 := by
+  sorry
+
+Status: OPEN. The case k = 10 was settled in 1998 by an explicit progression
+with common difference 210 = 7#. Any 11-term consecutive prime AP must have
+common difference divisible by 11# = 2310. Whether such a tuple exists is
+unknown.

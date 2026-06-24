@@ -1,0 +1,29 @@
+{
+  "shape_analysis": {
+    "sigma_0_eq_11_shape": "n = p^10 for a single prime p",
+    "argument": "\u03c3\u2080 is multiplicative; (a\u2081+1)\u2026(a\u2096+1) = 11 with 11 prime forces k=1, a\u2081=10.",
+    "impossibility_proof": "\u03c3(p^10) = 1+p+...+p^10 \u2261 1 (mod p), so p \u2224 \u03c3(p^10), so p^10 \u2224 \u03c3(p^10), so n = p^10 is never multiperfect.",
+    "sigma_0_eq_13": "Same \u2014 n = p^12, trivially never multiperfect"
+  },
+  "search_results": {
+    "sigma_0_eq_11_in_range": {
+      "primes_checked": 167,
+      "multiperfect_found": 0,
+      "samples": []
+    },
+    "adjacent_search": {
+      "N_MAX": 10000000,
+      "sigma_0_eq_12_examples": [],
+      "sigma_0_eq_14_examples": [],
+      "sigma_0_eq_15_examples": []
+    }
+  },
+  "verdict": "\u03c3\u2080(n)=11 odd multiperfect: TRIVIALLY IMPOSSIBLE via 1-line p-adic argument. The gap (no odd multiperfect with \u03c3\u2080=11) is provably TRUE but NOT a substantial result \u2014 the impossibility is elementary. The user's framing (3 shapes: p^10, p^4\u00b7q^2, p^2\u00b7q\u00b7r) was incorrect: 11 prime forces SHAPE = p^10 only. The 3-shape case-split corresponds to \u03c3\u2080=12 (4\u00b73) or \u03c3\u2080=10 (5\u00b72) or \u03c3\u2080=15 (5\u00b73), not \u03c3\u2080=11.",
+  "actionable_sketch_targets": [
+    "(A) \u03c3\u2080(n)=11 impossibility \u2014 TRIVIAL (1-line proof); not a closure target.",
+    "(B) Reframe as \u03c3\u2080=12 OR \u03c3\u2080=15 \u2014 these have 3-shape splits and are nontrivial.",
+    "(C) \u03a3 shape (p^4\u00b7q^2 or p^2\u00b7q\u00b7r) \u2014 these are FROM \u03c3\u2080=15, not \u03c3\u2080=11."
+  ],
+  "recommended_gap": "Submit IMPOSSIBILITY: \u00ac \u2203 n, n odd \u2227 \u03c3(n) = k\u00b7n \u2227 \u03c3\u2080(n) = 11. Aristotle's slot737 \u03c3\u2080 multiplicativity DNA applies but the argument is even simpler \u2014 case-split (a+1)...(a\u2096+1)=11 forces single-prime; (1+p+...+p^10) \u2261 1 (mod p). Bare conjecture sketch.",
+  "runtime_s": 68.73380208015442
+}

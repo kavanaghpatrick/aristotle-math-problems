@@ -1,0 +1,16 @@
+OPEN GAP: Erdos 672 — four-term coprime AP product is never a cube
+Source: FormalConjectures/ErdosProblems/672.lean (Erdos672With 4 3)
+Domain: nt
+
+For all sufficiently large n there is no positive integer d coprime
+to n with d > 0 and no positive integer m such that the product
+n(n+d)(n+2d)(n+3d) equals m^3.
+
+theorem erdos_672_k4_l3 :
+    ∃ N0 : ℕ, ∀ n d : ℕ, n ≥ N0 → d > 0 → n.gcd d = 1 →
+    ¬ ∃ m : ℕ, (∏ i ∈ Finset.range 4, (n + i * d)) = m ^ 3 := by
+  sorry
+
+Status: OPEN in Mathlib / formal-conjectures. Prior bare-mode Aristotle
+submissions (slot698, slot1218, slot1243, slot1248, slot~1294) returned
+compiled_no_advance. The unbounded statement remains unformalized.

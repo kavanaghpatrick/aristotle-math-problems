@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 142 — explicit threshold for r_3(N) < N / log N
+Source: formal-conjectures/FormalConjectures/ErdosProblems/142.lean; erdosproblems.com/142
+Domain: combinatorics (additive)
+
+Let r_3(N) := Set.IsAPOfLengthFree.maxCard 3 N denote the largest possible
+size of a subset of {1, ..., N} that does not contain any non-trivial
+3-term arithmetic progression. The Kelley–Meka 2023 quasi-polynomial bound
+(arXiv:2302.07211) is r_3(N) ≪ N · exp(-c (log N)^{1/12}). This implies a
+*finite, explicit* threshold N₀ such that r_3(N) · log N < N for every
+N ≥ N₀ in a finite range. We seek:
+
+theorem erdos_142_finite_threshold :
+    ∃ N₀ : ℕ, ∀ N ∈ Finset.Icc N₀ (N₀ + 10^6),
+      (Set.IsAPOfLengthFree.maxCard 3 N : ℝ) * Real.log N < (N : ℝ) := by
+  sorry
+
+Status: OPEN in formal-conjectures. The full asymptotic r_3(N) = o(N/log N)
+follows from Kelley-Meka 2023, but the *explicit finite* version — give
+N₀ ≤ 2^{2^30} such that the bound holds on [N₀, N₀ + 10^6] — is unformalized
+in Mathlib. Mathlib (Combinatorics/Additive/AP/Three/Defs) defines
+rothNumberNat and Behrend's lower bound, but the Roth/Kelley-Meka upper
+bound is a TODO in Mathlib.

@@ -78,12 +78,18 @@ def main():
         fin_size = extract_fin_size(content)
         has_axiom = bool(re.search(r'^axiom\s', content, re.MULTILINE))
 
-        # Determine status
+        # Determine status — canonical enum (2026-05-28):
+        # submitted | compile_failed | compiled_partial | compiled_no_advance
+        # | compiled_advance | disproven. Never auto-promote to compiled_advance.
         if sorry_count == 0 and proven_count and proven_count > 0 and not has_axiom:
-            status = 'compiled_clean'
+            status = 'compiled_no_advance'
             verified = 1
+        elif sorry_count and sorry_count >= 1:
+            status = 'compiled_partial'
+            verified = None
         else:
-            status = 'completed'
+            # Has axiom OR no sorry data — treat as compile_failed
+            status = 'compile_failed'
             verified = None
             if has_axiom:
                 verified = 0

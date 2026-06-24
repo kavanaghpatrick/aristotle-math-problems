@@ -1,0 +1,18 @@
+OPEN GAP: Feit-Thompson Divisibility Conjecture
+Source: Feit-Thompson (1962), Stephens (1971), Le (2012)
+Domain: nt
+
+For distinct odd primes p, q: Φ_p(q) does not divide Φ_q(p),
+where Φ_p(q) = (q^p - 1)/(q - 1).
+
+Stephens (1971) disproved the stronger gcd=1 form: gcd(Φ_17(3313), Φ_3313(17)) = 112643.
+Le (2012) proved the p=3 case: q²+q+1 ∤ (3^q-1)/2 for all odd primes q≠3.
+The full divisibility conjecture remains open for p ≥ 5.
+
+The exact gap: Φ_p(q) always has a prime divisor r with ord_r(q)=p but ord_r(p)≠q.
+
+theorem feit_thompson_divisibility (p q : ℕ) (hp : Nat.Prime p) (hq : Nat.Prime q)
+    (hp2 : p ≠ 2) (hq2 : q ≠ 2) (hpq : p ≠ q) :
+    ¬ ((q ^ p - 1) / (q - 1)) ∣ ((p ^ q - 1) / (p - 1)) := by sorry
+
+Status: OPEN. Le proved p=3 (2012). Full conjecture open.

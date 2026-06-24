@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780312953.95401,
+  "checked_at": "2026-06-01T11:22:33+00:00",
+  "evidence": "named-conjecture card: erdos_672 = CLOSED (BBGH 2006 Proc London Math Soc 92 Thm 1.1 (4 \u2264 k \u2264 11 no perfect power) + HTT 2009 Publ Math Debrecen 74 Thm 2.1 (cubes k<39 b=1 only n<0 exceptions) + GHP 2009 Compositio 145 Thm 1.1 (3<k<35) \u2014 all unconditional; (k=4 \u2113=3) closed since 2006)",
+  "sources": [
+    {
+      "evidence": "card[erdos_672]=CLOSED \u2014 BBGH 2006 Proc London Math Soc 92 Thm 1.1 (4 \u2264 k \u2264 11 no perfect power) + HTT 2009 Publ Math Debrecen 74 Thm 2.1 (cubes k<39 b=1 only n<0 exceptions) + GHP 2009 Compositio 145 Thm 1.1 (3<k<35) \u2014 all unconditional; (k=4 \u2113=3) closed since 2006",
+      "signal": "strong",
+      "source": "named_conjecture_status",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}

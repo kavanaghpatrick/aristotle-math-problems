@@ -1,0 +1,15 @@
+OPEN GAP: Erdős 1055 — Selfridge's bounded-class conjecture
+Source: formal-conjectures/FormalConjectures/ErdosProblems/1055.lean
+Domain: nt
+
+A prime p has Erdős–Selfridge class 1 if every prime factor of p+1 lies in {2,3};
+recursively, p has class r if every prime factor of p+1 has class ≤ r−1, with
+equality for at least one factor. Let p_r be the least prime of class r.
+Selfridge conjectured ∃ M with p_r^(1/r) ≤ M for all r (Erdős conjectured →∞).
+Numerically (OEIS A005105, r=1..16): max p_r^(1/r) ≈ 5.20 at r=16; values creep
+slowly upward. The conjecture asks for an explicit uniform constant M.
+
+theorem selfridge_limit : ∃ M, ∀ r, (p r : ℝ) ^ (1 / r : ℝ) ≤ M := by sorry
+
+Status: OPEN. Cannot be resolved by finite computation; an asymptotic argument
+controlling the growth of least-class-r primes is required.

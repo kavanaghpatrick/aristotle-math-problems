@@ -1,0 +1,12 @@
+OPEN GAP: Erdos 366 — 2-full n with 3-full n+1
+Source: FormalConjectures/ErdosProblems/366.lean
+Domain: nt
+
+Does there exist a 2-full n such that n+1 is 3-full?
+(Note: 8 is 3-full and 9 is 2-full, so the reverse exists.)
+
+theorem erdos_366 :
+    ¬ ∃ n : ℕ, n > 0 ∧ (2).Full n ∧ (3).Full (n + 1) := by sorry
+
+Status: OPEN. Expected answer is no such n exists.
+A 3-full number is n where p^3 | n for every prime p | n.

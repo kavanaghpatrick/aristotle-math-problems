@@ -1,0 +1,7 @@
+OPEN GAP: erdos_100_piepmeyer
+Source: candidate_queue/erdos_100_piepmeyer
+Domain: geometry
+
+theorem erdos_100_piepmeyer : ∃ A : Finset ℝ², A.card = 9 ∧ DistancesSeparated A ∧ diam (A : Set ℝ²) < 5 := by
+
+Status: OPEN.

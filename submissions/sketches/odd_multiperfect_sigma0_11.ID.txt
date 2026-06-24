@@ -1,0 +1,4 @@
+65da8d8c-4059-4454-b3b4-ea2e3b87ede7
+# Task: odd_multiperfect_sigma0_11
+# Hash: 935073775167e4f5
+# Submitted: 2026-05-30T08:18:39.503429

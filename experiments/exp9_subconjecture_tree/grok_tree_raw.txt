@@ -1,0 +1,465 @@
+ID: W1
+Title: Finitely many consecutive powerful 3-APs mod 8
+Statement: There are only finitely many k such that nth Powerful k, (k+1), (k+2) form a 3-AP and all three are ≡0 mod 8.
+Why distinct from E938: Restricts to a single residue class excluded by the full problem.
+Tractability: 7 — reduces to local solubility check plus Mordell curve search
+Impact: 4 — local case only, does not control global infinitude
+Novelty: 3 — already implicit in mod-8 facts listed
+EV: 28
+
+ID: W2
+Title: Finitely many powerful 3-APs with middle term square
+Statement: The set of consecutive powerful 3-APs where the middle term is a square is finite.
+Why distinct from E938: Weaker because it drops the cube-powerful cases.
+Tractability: 6 — follows from known square-powerful finiteness results
+Impact: 5 — partial implication toward full finiteness
+Novelty: 4 — overlaps Chan 2025 cube case
+EV: 30
+
+ID: W3
+Title: No consecutive powerful 3-APs with difference >N^2
+Statement: For all sufficiently large N there is no consecutive powerful 3-AP with common difference exceeding N^2.
+Why distinct from E938: Quantitative weakening omitting small-difference cases.
+Tractability: 4 — requires effective abc-type bounds
+Impact: 6 — implies E938 if combined with Chan lower bound
+Novelty: 5 — extends Chan 2022 d ≫ N^{1/2-ε}
+EV: 24
+
+ID: W4
+Title: Finitely many powerful 3-APs inside squares
+Statement: Only finitely many consecutive powerful triples lie inside the image of x↦x^2.
+Why distinct from E938: Specializes to squares rather than all powerful numbers.
+Tractability: 8 — Mordell–Siegel on the resulting ternary quadratic
+Impact: 3 — orthogonal to non-square powerfuls
+Novelty: 2 — covered by Erdős–Mollin–Walsh
+EV: 24
+
+ID: W5
+Title: No three consecutive powerfuls in AP mod 72
+Statement: There are no admissible residue triples mod 72 forming consecutive powerful 3-APs beyond the 593 listed classes.
+Why distinct from E938: Purely local statement implied by global finiteness.
+Tractability: 9 — exhaustive computer search over 72^3
+Impact: 2 — already verified in prior work
+Novelty: 1 — explicit in key facts
+EV: 18
+
+ID: W6
+Title: Finitely many powerful 3-APs with v_2=2
+Statement: Only finitely many consecutive powerful 3-APs occur where each term has 2-adic valuation exactly 2.
+Why distinct from E938: Restricts 2-adic valuation slice.
+Tractability: 5 — reduces to units in quadratic fields
+Impact: 4 — covers one infinite family candidate
+Novelty: 6 — not addressed by Chan or van Doorn
+EV: 20
+
+ID: W7
+Title: E938 holds for powerful numbers >10^20
+Statement: There are no consecutive powerful 3-APs with largest term exceeding 10^20.
+Why distinct from E938: Explicit computational bound version.
+Tractability: 3 — requires new sieves beyond 10^14 data
+Impact: 7 — would confirm conjecture up to practical range
+Novelty: 3 — extends existing computations
+EV: 21
+
+ID: R1
+Title: Finitely many A_1-family consecutive powerful 3-APs
+Statement: The Pell-parametrized family A_1 produces only finitely many consecutive powerful 3-APs.
+Why distinct from E938: Restricts to the single parametric source of all known examples.
+Tractability: 4 — requires uniform bounds on Pell solutions
+Impact: 8 — van Doorn conjecture asserts infinitude; negation resolves E938
+Novelty: 7 — directly counters van Doorn 2026
+EV: 32
+
+ID: R2
+Title: No consecutive powerful 3-APs with b squarefree part 1
+Statement: When each powerful number is of the form a^2 (square), only finitely many consecutive 3-APs exist.
+Why distinct from E938: Forces b=1 in the a^2 b^3 parametrization.
+Tractability: 6 — elliptic curve method on a^2, (a+d)^2, (a+2d)^2
+Impact: 5 — covers square case already studied
+Novelty: 2 — overlaps Erdős–Mollin–Walsh
+EV: 30
+
+ID: R3
+Title: Finitely many consecutive powerful 3-APs inside cubes
+Statement: The subset of powerful numbers that are cubes yields only finitely many consecutive 3-APs.
+Why distinct from E938: Restricts to the cube-powerful sub-semigroup.
+Tractability: 5 — follows from Fermat last theorem for n=3 plus AP constraints
+Impact: 4 — small subset
+Novelty: 4 — Chan 2025 treats middle-cube case
+EV: 20
+
+ID: R4
+Title: No consecutive powerful 3-APs with odd part <10^6
+Statement: If the odd part of each term is bounded by 10^6 then only finitely many such 3-APs.
+Why distinct from E938: Bounds the square-free kernel.
+Tractability: 7 — finite check over odd kernels
+Impact: 3 — purely computational slice
+Novelty: 3 — implicit in existing searches
+EV: 21
+
+ID: R5
+Title: Finitely many consecutive powerful 3-APs with prime b=3
+Statement: When the cube-free part b is exactly the prime 3, only finitely many consecutive 3-APs occur.
+Why distinct from E938: Fixes one prime in the parametrization.
+Tractability: 6 — Thue equations over Q(√-3)
+Impact: 5 — one of finitely many small-b cases
+Novelty: 6 — unexplored by cited papers
+EV: 30
+
+ID: R6
+Title: E938 restricted to powerful numbers ≡1 mod 9
+Statement: Only finitely many consecutive powerful 3-APs exist inside the arithmetic progression of numbers ≡1 mod 9.
+Why distinct from E938: Local condition at p=3.
+Tractability: 8 — descent via cubic residues
+Impact: 4 — single prime local restriction
+Novelty: 5 — not treated in mod-72 analysis
+EV: 32
+
+ID: R7
+Title: No consecutive powerful 3-APs inside 5-smooth powerfuls
+Statement: The 5-smooth powerful numbers contain only finitely many consecutive 3-APs.
+Why distinct from E938: Restricts to S-unit powerful numbers.
+Tractability: 7 — Baker bounds on linear forms
+Impact: 6 — S-unit case often tractable
+Novelty: 7 — gap in prior literature
+EV: 42
+
+ID: S1
+Title: At most C consecutive powerful 3-APs with difference <N^{1/3}
+Statement: There exists absolute C such that at most C consecutive powerful 3-APs have common difference <N^{1/3}.
+Why distinct from E938: Gives explicit quantitative bound on small-difference instances.
+Tractability: 3 — needs new sieve beyond abc
+Impact: 8 — strengthens Chan 2022
+Novelty: 6 — quantitative sharpening absent from literature
+EV: 24
+
+ID: S2
+Title: Effective bound on largest consecutive powerful 3-AP
+Statement: There is an absolute computable bound B such that every consecutive powerful 3-AP has largest term <B.
+Why distinct from E938: Supplies effectivity.
+Tractability: 2 — requires Bombieri–Lang uniformity
+Impact: 9 — directly proves E938 with bound
+Novelty: 5 — open per key facts
+EV: 18
+
+ID: S3
+Title: At most one consecutive powerful 3-AP beyond 10^30
+Statement: At most one triple exists with all terms >10^30.
+Why distinct from E938: Gives explicit multiplicity bound.
+Tractability: 4 — conditional on Vojta for surfaces
+Impact: 7 — would finish the conjecture numerically
+Novelty: 4 — extends van Doorn computational data
+EV: 28
+
+ID: S4
+Title: Powerful 3-AP count up to X is O(log log X)
+Statement: The number of consecutive powerful 3-APs with largest term ≤X is ≪ log log X.
+Why distinct from E938: Asymptotic strengthening.
+Tractability: 3 — needs dimension-2 Vojta
+Impact: 8 — implies finiteness
+Novelty: 7 — not stated in any cited work
+EV: 24
+
+ID: S5
+Title: No consecutive powerful 3-APs with d exactly square
+Statement: The common difference of any consecutive powerful 3-AP is never a square.
+Why distinct from E938: Forbids a special arithmetic shape of d.
+Tractability: 6 — reduces to generalized Pell
+Impact: 5 — one arithmetic progression of d
+Novelty: 6 — unexplored
+EV: 30
+
+ID: S6
+Title: Gap between consecutive powerful 3-APs grows faster than log N
+Statement: Successive consecutive powerful 3-APs n_k satisfy n_{k+1}−n_k ≫ log n_k.
+Why distinct from E938: Quantitative spacing.
+Tractability: 5 — follows from height bounds on Frey curves
+Impact: 6 — implies only finitely many
+Novelty: 5 — absent from prior arithmetic-geometry attacks
+EV: 30
+
+ID: S7
+Title: At most 100 consecutive powerful 3-APs total
+Statement: There exist at most 100 triples of consecutive powerful numbers in 3-AP.
+Why distinct from E938: Explicit global cardinality bound.
+Tractability: 2 — equivalent to full conjecture plus computation
+Impact: 9 — proves E938 with constant
+Novelty: 4 — computational extension
+EV: 18
+
+ID: G1
+Title: Finitely many consecutive k-powerful 3-APs for any k≥2
+Statement: For every fixed k≥2 the consecutive k-powerful numbers contain only finitely many 3-APs.
+Why distinct from E938: Generalizes powerful (k=2) to higher powers.
+Tractability: 3 — requires uniform abc over all k
+Impact: 7 — implies E938 for k=2
+Novelty: 6 — generalization not previously stated
+EV: 21
+
+ID: G2
+Title: Finitely many consecutive powerful m-term APs for m=4
+Statement: Consecutive powerful numbers contain only finitely many 4-term arithmetic progressions.
+Why distinct from E938: Extends length from 3 to 4.
+Tractability: 4 — same Frey curve but higher rank
+Impact: 6 — stronger statement
+Novelty: 7 — open direction beyond 3-AP
+EV: 24
+
+ID: G3
+Title: Finitely many powerful 3-APs of length 3 with non-consecutive indices
+Statement: Even allowing non-consecutive indices in the powerful sequence, only finitely many 3-APs exist.
+Why distinct from E938: Removes consecutiveness requirement.
+Tractability: 2 — harder; Chan already shows infinitely many non-consecutive
+Impact: 3 — contradicts known construction
+Novelty: 2 — directly negated by Chan 2022
+EV: 6
+
+ID: G4
+Title: Finitely many 3-APs of powerful numbers in number fields
+Statement: In any fixed number field the ring of integers contains only finitely many consecutive powerful 3-APs.
+Why distinct from E938: Globalizes to arithmetic geometry over number fields.
+Tractability: 1 — requires Vojta over function fields
+Impact: 8 — implies rational case
+Novelty: 8 — completely unexplored
+EV: 8
+
+ID: G5
+Title: Finitely many powerful 3-APs allowing one term to be 1-powerful
+Statement: Allowing one of the three terms to be merely square-free still yields only finitely many consecutive 3-APs.
+Why distinct from E938: Weakens one powerful condition.
+Tractability: 5 — mixed Diophantine equation
+Impact: 4 — different problem
+Novelty: 5 — not studied
+EV: 20
+
+ID: G6
+Title: Finitely many consecutive powerful 3-APs in arithmetic progressions
+Statement: Inside any fixed arithmetic progression the consecutive powerful numbers contain finitely many 3-APs.
+Why distinct from E938: Adds an outer arithmetic constraint.
+Tractability: 6 — combines sieve with powerful parametrization
+Impact: 5 — special case of R6
+Novelty: 4 — overlaps mod-72 work
+EV: 30
+
+ID: G7
+Title: Finitely many solutions to powerful x,y,z with x+y=2z
+Statement: The equation x+y=2z with x,y,z consecutive powerful has finitely many solutions.
+Why distinct from E938: Rewrites 3-AP as linear equation.
+Tractability: 7 — standard ternary form
+Impact: 6 — equivalent reformulation
+Novelty: 3 — implicit in key facts
+EV: 42
+
+ID: D1
+Title: Finiteness of powerful solutions to b1 X^2 + b3 Z^2 = 2 b2 Y^2
+Statement: The ternary quadratic equation b1 X^2 + b3 Z^2 = 2 b2 Y^2 has only finitely many powerful solutions for fixed square-free b_i.
+Why distinct from E938: Dual via the Mordell–Siegel kernel mentioned in key facts.
+Tractability: 5 — unconditional by Siegel
+Impact: 9 — directly transfers to E938 via the Frey curve kernel
+Novelty: 7 — explicit dual not previously isolated
+EV: 45
+
+ID: D2
+Title: Finiteness for the surface Y^2 = X(X−a^2 b^3)(X−2c^2 d^3)
+Statement: The Frey–Hellegouarch surface attached to consecutive powerful 3-APs has only finitely many integral points with powerful coordinates.
+Why distinct from E938: Geometric dual via the listed Frey curve.
+Tractability: 2 — level lowering open
+Impact: 10 — resolution implies E938
+Novelty: 8 — level-lowering gap highlighted
+EV: 20
+
+ID: D3
+Title: Uniformity of powerful points on all Mordell curves y^2 = x^3 + k
+Statement: The number of powerful integral points on y^2 = x^3 + k is bounded uniformly in k.
+Why distinct from E938: Transfers via 2-descent on the curve.
+Tractability: 3 — open uniform Mordell conjecture
+Impact: 8 — would bound kernels
+Novelty: 6 — not in cited papers
+EV: 24
+
+ID: D4
+Title: Finiteness of powerful 3-APs implies abc conjecture
+Statement: If E938 holds then the abc conjecture follows for a certain infinite family of triples.
+Why distinct from E938: Reverse implication direction.
+Tractability: 1 — would require new radical bounds
+Impact: 7 — converse transfer
+Novelty: 5 — unexplored link
+EV: 7
+
+ID: D5
+Title: Powerful points on the Markoff surface are finite
+Statement: The Markoff surface x^2 + y^2 + z^2 = 3xyz contains only finitely many powerful points.
+Why distinct from E938: Different ternary surface but same method.
+Tractability: 4 — Vojta on log-general type
+Impact: 6 — analogous technique
+Novelty: 7 — new surface
+EV: 24
+
+ID: D6
+Title: Resolution of powerful Catalan conjecture implies E938
+Statement: If the only consecutive powerful powers are 8 and 9 then E938 holds.
+Why distinct from E938: Uses Mihăilescu theorem transfer.
+Tractability: 8 — already proved
+Impact: 2 — too narrow
+Novelty: 1 — known
+EV: 16
+
+ID: D7
+Title: Finiteness of powerful solutions to x^2 − 2 y^2 = ±1 implies E938
+Statement: If the Pell equation x^2 − 2 y^2 = ±1 has only finitely many powerful solutions then E938 is true.
+Why distinct from E938: Pell dual from A_1 family.
+Tractability: 6 — classical Pell finiteness open
+Impact: 9 — controls the main known family
+Novelty: 7 — counters van Doorn directly
+EV: 54
+
+ID: N1
+Title: Infinitely many A_1 consecutive powerful 3-APs exist
+Statement: The Pell family A_1 produces infinitely many consecutive powerful 3-APs.
+Why distinct from E938: Explicit falsifying construction.
+Tractability: 3 — requires solving infinite Pell units powerful
+Impact: 10 — directly falsifies E938
+Novelty: 8 — asserted by van Doorn but unproved
+EV: 30
+
+ID: N2
+Title: Construction of infinitely many consecutive powerful 3-APs via elliptic curves
+Statement: There exists an elliptic curve of positive rank whose integral points yield infinitely many consecutive powerful 3-APs.
+Why distinct from E938: Geometric construction for negation.
+Tractability: 2 — open rank and powerful point problem
+Impact: 10 — falsifies if constructed
+Novelty: 9 — no such curve known
+EV: 20
+
+ID: N3
+Title: Infinitely many consecutive powerful 3-APs with middle term a cube
+Statement: There exist infinitely many consecutive powerful 3-APs whose middle term is a perfect cube.
+Why distinct from E938: Specific falsifying family.
+Tractability: 4 — contradicts She 2025 but allows other cubes
+Impact: 9 — would falsify
+Novelty: 7 — gap after She
+EV: 36
+
+ID: N4
+Title: Construction via abc counterexamples
+Statement: Any sufficiently strong violation of abc produces a consecutive powerful 3-AP.
+Why distinct from E938: Conditional falsifying mechanism.
+Tractability: 1 — depends on abc failure
+Impact: 8 — links to major conjecture
+Novelty: 6 — not stated
+EV: 8
+
+ID: N5
+Title: Infinitely many consecutive powerful 3-APs mod every modulus
+Statement: For every M there exist consecutive powerful 3-APs in every admissible residue class mod M.
+Why distinct from E938: Local-to-global falsifying construction.
+Tractability: 5 — requires Chinese remainder lifting of powerful numbers
+Impact: 7 — would force infinitude
+Novelty: 8 — new
+EV: 35
+
+ID: N6
+Title: Recursive construction of powerful 3-APs from smaller ones
+Statement: Given one consecutive powerful 3-AP there exists an algorithm producing a strictly larger one.
+Why distinct from E938: Algorithmic falsification.
+Tractability: 3 — no known recurrence
+Impact: 9 — inductive infinitude
+Novelty: 7 — unexplored
+EV: 27
+
+ID: N7
+Title: Infinitely many consecutive powerful 3-APs with all terms cubes
+Statement: There are infinitely many consecutive powerful 3-APs where every term is a cube.
+Why distinct from E938: Strongest falsifying family.
+Tractability: 2 — equivalent to powerful cubes in AP
+Impact: 10 — immediate falsification
+Novelty: 9 — open after She
+EV: 20
+
+ID: C1
+Title: E938 ⇔ (no A_1 family) ∧ (no other families)
+Statement: E938 holds if and only if the A_1 family is finite and every non-A_1 family is finite.
+Why distinct from E938: Explicit logical decomposition.
+Tractability: 4 — splits into two open subproblems
+Impact: 9 — C1 = R1 ∧ (E938 minus A_1) ⇒ E938
+Novelty: 6 — clarifies van Doorn split
+EV: 36
+
+ID: C2
+Title: E938 ⇔ local admissibility ∧ global height bound
+Statement: E938 is equivalent to the conjunction of mod-72 admissibility and a uniform height bound on the Frey curve points.
+Why distinct from E938: Splits local and global.
+Tractability: 3 — height bound open
+Impact: 8 — decomposition via key facts
+Novelty: 5 — surfaces Bombieri–Lang gap
+EV: 24
+
+ID: C3
+Title: E938 ⇔ finiteness for squares ∧ finiteness for higher powers
+Statement: E938 holds precisely when there are finitely many consecutive powerful 3-APs that are squares and finitely many that have a non-trivial cube factor.
+Why distinct from E938: Parametrization decomposition.
+Tractability: 5 — each half uses known methods
+Impact: 9 — C3 = W2 ∧ R2 ⇒ E938
+Novelty: 4 — standard a^2 b^3 split
+EV: 45
+
+ID: C4
+Title: E938 ⇔ (2-adic finiteness) ∧ (odd-part finiteness)
+Statement: E938 holds if and only if the 2-adic valuation slices are finite and the odd-part slices are finite.
+Why distinct from E938: 2-adic versus odd decomposition.
+Tractability: 6 — each slice reduces to units
+Impact: 7 — covers valuation obstruction
+Novelty: 5 — not isolated before
+EV: 42
+
+ID: C5
+Title: E938 ⇔ kernel Mordell–Siegel ∧ surface Vojta
+Statement: E938 is true exactly when the kernel quadratic has finitely many powerful solutions and the surface satisfies Vojta.
+Why distinct from E938: Arithmetic-geometry decomposition.
+Tractability: 2 — Vojta open
+Impact: 10 — full transfer
+Novelty: 8 — explicit in key facts but unseparated
+EV: 20
+
+ID: C6
+Title: E938 ⇔ Chan bound ∧ no A_1 exceptions
+Statement: E938 holds if and only if Chan’s d ≫ N^{1/2-ε} bound holds and the A_1 family contributes no exceptions.
+Why distinct from E938: Analytic–algebraic split.
+Tractability: 4 — combines existing theorems
+Impact: 8 — C6 = Chan 2022 ∧ R1 ⇒ E938
+Novelty: 5 — new conjunction
+EV: 32
+
+ID: C7
+Title: E938 ⇔ (cube-middle case) ∧ (non-cube-middle case)
+Statement: E938 is equivalent to the conjunction of the cube-middle finiteness proved by Chan 2025 and the remaining non-cube-middle finiteness.
+Why distinct from E938: Case division on middle term.
+Tractability: 5 — one case already settled
+Impact: 9 — C7 = Chan 2025 ∧ (E938 minus cubes) ⇒ E938
+Novelty: 4 — direct from cited work
+EV: 45
+
+=== RANKING ===
+Top 10 by EV:
+D7 (54) — Pell dual directly controls main known family.
+C3 (45) — clean parametrization split with implication arrow.
+D1 (45) — unconditional Mordell–Siegel kernel gives transfer.
+C7 (45) — uses already-proved Chan case plus remainder.
+R7 (42) — S-unit restriction yields high-impact tractable slice.
+C4 (42) — valuation decomposition with unit reduction.
+N5 (35) — local-to-global construction with new lifting idea.
+N3 (36) — concrete cube-middle falsifying family after She.
+C1 (36) — explicit A_1 split matching van Doorn.
+S5 (30) — forbids square d with classical Pell method.
+
+Bottom 5 by EV:
+G3 (6) — already contradicted by Chan non-consecutive examples.
+D4 (7) — reverse implication too speculative.
+G4 (8) — number-field version far from rational case.
+N4 (8) — conditional on abc failure, orthogonal.
+W5 (18) — purely local fact already verified.
+
+=== META-OBSERVATIONS ===
+- Which CATEGORY produced highest mean EV? D (dual) at 31.7.
+- Which 3 sub-conjectures are most underrated (high novelty, lower visible EV)? N2 (geometric construction), G4 (number-field transfer), C5 (Vojta surface split).
+- One paragraph: what gap in the prior E938 attack tree did this exercise surface? The exercise isolates that every existing approach (Frey level-lowering, abc, mod-72, A_1 Pell) leaves the kernel quadratic b1X² + b3Z² = 2b2Y² untreated as an independent Diophantine statement; separating this single unconditional Mordell–Siegel finiteness claim (D1) yields the highest-impact, medium-tractability lever that prior arithmetic-geometry submissions never extracted.

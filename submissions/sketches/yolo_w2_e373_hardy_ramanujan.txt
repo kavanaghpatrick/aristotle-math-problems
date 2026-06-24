@@ -1,0 +1,24 @@
+OPEN GAP: Erdős 373 (Surányi) — only solution to n! = a!·b! is (10, 7, 6)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/373.lean
+Domain: nt
+
+Surányi conjectured (1960s, open since) that the equation n! = a!·b!
+with 1 < b ≤ a and a + 1 ≠ n has exactly one solution: (n, a, b) = (10, 7, 6),
+i.e. 10! = 7!·6!. Numerical scan a ∈ [3, 200] confirms uniqueness; Habsieger
+2019 (Fibonacci Q. 57(1), arXiv:1903.08370) verified up to C ≤ 10^3000.
+
+open scoped Nat
+namespace Erdos373
+
+theorem erdos_373_suranyi :
+    {(n, a, b) : ℕ × ℕ × ℕ | n ! = a ! * b ! ∧ 1 < n ∧ 1 < a ∧ 1 < b
+      ∧ b ≤ a ∧ a + 1 ≠ n} = {(10, 7, 6)} := by
+  sorry
+
+end Erdos373
+
+Status: OPEN since 1960s. (10, 7, 6) is the only known non-trivial solution
+and is conjectured unique. Prior submission slot 1260 (uuid 67d9e1d9) proved
+the corridor bounds a + 2 ≤ n < 2a sorry-free. Habsieger 2019 gives an
+explicit bound C - B ≤ log log(B+1)/log 2 - 0.8803.
+No proof of the full uniqueness exists in the literature.

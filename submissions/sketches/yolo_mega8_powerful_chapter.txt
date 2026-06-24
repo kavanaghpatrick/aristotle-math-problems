@@ -1,0 +1,25 @@
+OPEN GAP: Powerful Numbers — chapter META coprimality theorem
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean ; Erdős 364, 938
+Domain: nt
+
+A natural number n is *powerful* iff every prime dividing n appears with
+exponent at least 2. Prior Aristotle work formalized the Golomb 1970
+parametrization (slot 1318), the Beckon mod-36 closure for consecutive
+powerful triples (slot 1325), the unconditional gap bound for
+consecutively-enumerated powerful 3-APs (slot 1317), and the multiperfect-σ₀
+exclusion (slot 1327). The chapter META below ties these into a single
+Mathlib-PR headline result, currently absent from Mathlib.
+
+def Nat.Powerful (n : ℕ) : Prop := 0 < n ∧ ∀ p : ℕ, p.Prime → p ∣ n → p ^ 2 ∣ n
+
+theorem powerful_3AP_squarefree_d_coprime
+    (n d : ℕ) (hd : 0 < d) (hsq : Squarefree d)
+    (h0 : Nat.Powerful n)
+    (h1 : Nat.Powerful (n + d))
+    (h2 : Nat.Powerful (n + 2 * d)) :
+    Nat.Coprime n d := by sorry
+
+Status: OPEN as a clean Mathlib chapter headline. The conjecture concerns
+arbitrary 3-APs of powerful numbers with squarefree common difference and
+provides the unifier between the Golomb form (slot 1318) and the D1
+structural lemma (slot 1329). Not in Mathlib.

@@ -1,0 +1,23 @@
+OPEN GAP: Erdos 203 — 1D Sierpinski analog with index-1 primes only
+Source: FormalConjectures/ErdosProblems/203.lean (slot740 methodology benchmark)
+Domain: nt
+
+For every m ≥ 0 there exists k ∈ [0,32) escaping every prime p ≤ 500 for which
+the subgroup ⟨2⟩ equals the full group (ℤ/pℤ)* (i.e. 2 is a primitive root
+mod p — the 1D index-1 primes, analogous to the 2D index-1 primes in slot740).
+
+theorem index1_sierpinski_insufficient_K32_B500 (m : ℕ) :
+    ∃ k : ℕ, k < 32 ∧
+      ∀ p : ℕ, p.Prime → 2 < p → p ≤ 500 →
+        (((Finset.univ : Finset (Fin (p-1))).image
+          (fun a => (2 ^ a.val) % p)).card = p - 1) →
+        ¬ p ∣ 2 ^ k * m + 1 := by sorry
+
+Status: OPEN. 1D analog of the 2D problem disproven in slot740 (m =
+1579554969991861182625270235031094424159694 covered the 8×8 (k,l) grid via
+greedy partition + CRT over 22 of 69 index-1 primes ≤ 500). Restricting to
+index-1 primes (2 a primitive root mod p — Artin primes: 3,5,11,13,19,29,
+37,53,59,61,67,…) avoids reusing the {7,73} of classical Sierpinski 78557
+already formalized in slot607. Periods (p−1) give cell counts ⌈32/(p−1)⌉,
+totalling ≥ 32 over the smallest few Artin primes, so a covering m exists.
+The same partition+greedy+CRT methodology as slot740 should construct it.

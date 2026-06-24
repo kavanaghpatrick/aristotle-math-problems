@@ -1,0 +1,26 @@
+{
+  "_cache_ts": 1780313700.9314969,
+  "checked_at": "2026-06-01T11:35:00+00:00",
+  "evidence": "1 paper(s) with strong closure language matching the named conjecture 'Erd\u0151s problem 1055' (zbMATH/Crossref/arXiv)",
+  "sources": [
+    {
+      "evidence": "2004 partial/weak: On the number of directions determined by a three-dimensional points set",
+      "signal": "weak",
+      "source": "zbmath",
+      "url": "https://zbmath.org/?q=an:2107878"
+    },
+    {
+      "evidence": "2023 partial/weak: On the ERD\u0150S distance problem",
+      "signal": "weak",
+      "source": "crossref",
+      "url": "https://doi.org/10.21203/rs.3.rs-2679663/v1"
+    },
+    {
+      "evidence": "2024 STRONG closure language: Optimal Solution to Erd\u0151s Distinct Distance Problem",
+      "signal": "strong",
+      "source": "crossref",
+      "url": "https://doi.org/10.2139/ssrn.4775206"
+    }
+  ],
+  "status": "CLOSED"
+}

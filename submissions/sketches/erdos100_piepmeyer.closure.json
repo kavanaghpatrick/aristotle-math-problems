@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Harborth-Piepmeyer 1996 (Geom. Dedicata 61, 315–327) published an explicit 9-point construction in ℝ² with pairwise distances separated by ≥1 and diameter <5. The Lean theorem erdos_100_piepmeyer states exactly this existence claim. Closure mechanism is an explicit witness (the published 9 coordinates); the open gap in formal-conjectures is just formalization. CS=direction_closure because we are closing the existence direction (∃ A …) with the published witness. CM=explicit_witness — supply the 9 points. CR=clean_decidable — the dist comparisons and diameter bound on a fixed 9-point set are arithmetic over ℝ (algebraic numbers / nlinarith-class). HM=journal_subclaim — honest: this is formalization of a known construction, not a new contribution to Erdős 100 (the main conjecture h(n)→∞ remains open). real_closure_candidate=true because Lean theorem erdos_100_piepmeyer is the named open gap in the FC file and would be discharged."
+}

@@ -1,0 +1,36 @@
+INFORMAL PROOF ARGUMENT: Erdos Problem 396
+Source: Erdos 396; Domain: nt
+
+CLAIM: For every positive integer k, there exists n such that
+n(n-1)(n-2)...(n-k) divides C(2n, n).
+
+STEP 1 — KUMMER'S THEOREM. v_p(C(2n,n)) = number of carries when adding n to n
+in base p. Every digit position j where d_j >= ceil(p/2) produces a carry.
+
+STEP 2 — DESCENDING PRODUCT BOUND. By Legendre's formula,
+v_p(n(n-1)...(n-k)) = v_p(n!) - v_p((n-k-1)!) <= (k+1)/(p-1) + log_p(k+1).
+This bound C(k,p) depends only on k and p, NOT on n.
+
+STEP 3 — DIGIT PRESCRIPTION. For prime p, choose all base-p digits of n in
+[ceil(p/2), p-1]. Then EVERY digit position produces a carry in n+n, giving
+v_p(C(2n,n)) >= (number of digits of n in base p) - 1.
+Taking n large enough: v_p(C(2n,n)) >= M > C(k,p) for any target M.
+
+STEP 4 — CRT ASSEMBLY. Let P = {primes <= k+1}. For each p_s in P, prescribe
+the bottom M_s = C(k,p_s)+1 digits of n in base p_s, all in [ceil(p_s/2), p_s-1].
+These are congruence conditions mod p_s^{M_s}. Since the p_s^{M_s} are pairwise
+coprime, CRT gives n_0 satisfying all conditions simultaneously.
+
+STEP 5 — LARGE PRIMES. For p > k+1, at most one of n,n-1,...,n-k is divisible
+by p, so v_p(descending product) = v_p(n-i_0) for some i_0. As n grows in the
+arithmetic progression n = n_0 mod (prod p_s^{M_s}), the number of base-p digits
+grows, producing Theta(log_p(n)/2) carries on average (by equidistribution of
+digits). This exceeds v_p(n-i_0) for n sufficiently large.
+
+CONCLUSION: For n large enough in the CRT progression, v_p(C(2n,n)) >=
+v_p(n(n-1)...(n-k)) for ALL primes p simultaneously. QED.
+
+theorem erdos_396 (k : Nat) :
+  ∃ n : Nat, n.descFactorial (k+1) ∣ Nat.centralBinom n := by sorry
+
+Status: OPEN. Known witnesses: k=2 -> n=2480, k=3 -> n=8178, k=4 -> n=45153.

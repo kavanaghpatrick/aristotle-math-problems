@@ -1,0 +1,20 @@
+{
+  "_cache_ts": 1780318093.7090611,
+  "checked_at": "2026-06-01T12:48:13+00:00",
+  "evidence": "3/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "2 prior failed project approach(es)",
+      "signal": "none",
+      "source": "mk-failed",
+      "url": ""
+    },
+    {
+      "evidence": "2022 partial/weak: Chemistry of comet atmospheres",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2207.04800v1"
+    }
+  ],
+  "status": "CLEAR"
+}

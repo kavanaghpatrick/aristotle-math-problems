@@ -61,7 +61,7 @@ If extraction fails, log a warning but do not block the fetch result.
 
 ## Gap Resolution Assessment
 
-After audit, if result is compiled_clean:
+After audit, if result is compiled_no_advance (sorry=0, axioms=0, no negation):
 - Did this result resolve the OPEN GAP stated in the submission?
 - Or did it just compile infrastructure/known math?
 - Set target_resolved=1 only if the actual open conjecture was proved.

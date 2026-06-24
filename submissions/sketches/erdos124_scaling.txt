@@ -1,0 +1,18 @@
+OPEN GAP: Erdős 124 — Scaling identity for sumsOfDistinctPowers
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (Erdos124.sumsOfDistinctPowers)
+Domain: nt
+
+In Erdős 124, sumsOfDistinctPowers d k = {x | ∃ s : Finset ℕ, (∀ i ∈ s, k ≤ i) ∧
+∑ i ∈ s, d^i = x}. A structural reduction underlies the whole open BEGL96 case: the
+k-shifted set is the unshifted set scaled by d^k. Stated as a membership equivalence,
+an integer x lies in sumsOfDistinctPowers d k exactly when d^k divides x and x / d^k
+lies in sumsOfDistinctPowers d 0 (the base-d 0/1-digit numbers).
+
+theorem erdos124_scaling (d k x : ℕ) :
+    x ∈ Erdos124.sumsOfDistinctPowers d k ↔
+      d ^ k ∣ x ∧ (x / d ^ k) ∈ Erdos124.sumsOfDistinctPowers d 0 := by
+  sorry
+
+Status: OPEN component (elementary reduction inside the open BEGL96 problem). It converts
+the pointwise sumset ∑_{d∈D} sumsOfDistinctPowers d k into ∑_{d∈D} d^k · B_d, the form on
+which every analysis of the open conjecture rests. Not yet formalized in Mathlib.

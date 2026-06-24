@@ -1,0 +1,17 @@
+OPEN GAP: Erdos 850 — Three consecutive same-radical pairs
+Source: FormalConjectures/ErdosProblems/850.lean
+Domain: nt
+
+Do there exist distinct x, y with rad(x)=rad(y), rad(x+1)=rad(y+1),
+and rad(x+2)=rad(y+2)?
+
+Prior results proved no solutions for x=0,1,2,3 via power-of-prime
+case analysis, |y-x|>=30, 6|(y-x), same parity constraints.
+
+theorem erdos_850 : answer(sorry) ↔ ∃ x y : ℕ, x ≠ y
+    ∧ x.primeFactors = y.primeFactors
+    ∧ (x+1).primeFactors = (y+1).primeFactors
+    ∧ (x+2).primeFactors = (y+2).primeFactors := by sorry
+
+Status: OPEN. k=2 has solutions. k=3 open. No witness or
+impossibility proof known.

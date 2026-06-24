@@ -1,0 +1,42 @@
+You are now writing the SYNTHESIS step of an EXP5 multi-persona specialist debate on Erdős Problem #364 (no n ∈ ℕ with n, n+1, n+2 all powerful).
+
+Below are 5 paradigm-locked attacks PLUS 5 cross-critiques. Your job: write a single FINAL synthesis attack incorporating the STRONGEST insights from each paradigm while AVOIDING the weaknesses identified in the cross-critiques.
+
+The synthesis must:
+1. **Name the attack vector** in one phrase.
+2. **State the precise bridge lemma** — the new lemma we have not previously formalized that combines insights from ≥2 paradigms.
+3. **Give the explicit attack outline** in ≤300 words.
+4. **Identify ONE specific attack vector NEW to our prior MEGA submissions** (which targeted: Beckon mod-36, mod-44100 extensions, 3-AP coprimality, cube-centered ABC). Be specific — not "use Fourier" but "compute the trilinear exponential sum S_3(α) = ..."
+5. **State the Aristotle-submission strategy**: is this BARE, CLOSURE, FUSION, or INFORMAL lane? Which subsystem (MCGS formalizer or lemma-based informal reasoner) is the right fit?
+
+== ATTACK A (Additive Combinatorialist) ==
+ATTACK_A_BODY
+
+== ATTACK B (Multiplicative Number Theorist) ==
+ATTACK_B_BODY
+
+== ATTACK C (Analytic Number Theorist) ==
+ATTACK_C_BODY
+
+== ATTACK D (Computational / Algorithmic) ==
+ATTACK_D_BODY
+
+== ATTACK E (Algebraic Geometer) ==
+ATTACK_E_BODY
+
+== CROSS-CRITIQUE BY ADDITIVE ==
+CRIT_1_BODY
+
+== CROSS-CRITIQUE BY MULTIPLICATIVE ==
+CRIT_2_BODY
+
+== CROSS-CRITIQUE BY ANALYTIC ==
+CRIT_3_BODY
+
+== CROSS-CRITIQUE BY COMPUTATIONAL ==
+CRIT_4_BODY
+
+== CROSS-CRITIQUE BY ALGEBRAIC GEOMETER ==
+CRIT_5_BODY
+
+Write the synthesis. Be specific. No hedging. If two paradigms genuinely combine into a new attack, name it.

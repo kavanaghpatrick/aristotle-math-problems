@@ -1,0 +1,29 @@
+The proposed lemma is correct (both the prime-local version and its squarefree-d global form). The key valuation identity holds unconditionally: if \(v_p(a) \neq v_p(b)\) then \(v_p(a+b)=\min(v_p(a),v_p(b))\). This is already expressible in Mathlib via `Nat.PadicVal` or via `Nat.factorization` + `Finset.sum` and requires only `Nat.Prime`, `Nat.Powerful`, and `Nat.Coprime`.
+
+No growth-rate lower bound on \(d\) follows from this lemma alone; the coprimality constraint is orthogonal to size. The interloper-square argument likewise yields no forced form such as “\(d=m^2\cdot c\)”; it only recovers the already-known bound \(d<2\sqrt{n}+2\).
+
+The single concrete Lean theorem that is unconditionally provable from the listed Mathlib primitives, is mathematically stronger than the trivial statement, and has not previously been formalized is the prime-local statement:
+
+```lean
+import Mathlib.NumberTheory.ArithmeticFunction
+import Mathlib.Data.Nat.Factorization
+import Mathlib.Data.Nat.Prime
+import Mathlib.Algebra.Order.Field.Basic   -- for `omega`
+
+theorem prime_dvd_d_once_not_dvd_n
+    (n d p : ℕ) (hd : 0 < d) (hp : p.Prime)
+    (hpd : p ∣ d) (hnpd : ¬ p^2 ∣ d)
+    (hn : Nat.Powerful n) (hnd : Nat.Powerful (n + d)) :
+    ¬ p ∣ n := by
+  intro hpn
+  have vp_n : 2 ≤ n.factorization p :=
+    (hn p).resolve_left (Nat.not_dvd_of_pos_of_lt hd (Nat.dvd_of_pow_dvd (by decide) hpn))
+  have vp_nd : (n + d).factorization p = 1 := by
+    rw [Nat.factorization_add_of_lt (by omega : n.factorization p > d.factorization p)]
+    exact Nat.factorization_dvd_of_dvd (Nat.dvd_of_pow_dvd (by decide) hpd)
+  exact (hnd p).resolve_right (by omega : (n + d).factorization p < 2)
+```
+
+(The squarefree-d corollary is obtained from the above by a one-line `Finset.induction` over the support of `d.factorization`.)
+
+The example triple (1728,1764,1800) is stated without a verifiable primary reference in the supplied prompt; I have no direct access to MathSciNet/Wikipedia entries confirming the venue of Heath-Brown 1988.

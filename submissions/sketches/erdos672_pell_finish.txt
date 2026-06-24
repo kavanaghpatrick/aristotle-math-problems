@@ -1,0 +1,21 @@
+OPEN GAP: Erdős 672 — Product of 3 Consecutive Not Perfect Square
+Source: Erdős 672
+Domain: nt
+
+No product of 3 consecutive integers in arithmetic progression
+(coprime to the common difference) is a perfect square.
+
+PRIOR RESULTS (1147 lines, 0 sorry, attached as context):
+- Pell equation x²-8y²=1 complete infrastructure
+- Case analysis reducing to Pell solutions
+- Sequence definitions SeqA, SeqB with recurrences
+- Solution structure via Pell8_x, Pell8_y
+- GCD and divisibility lemmas
+- Budget reached before final theorem
+
+REMAINING: Combine the Pell solution enumeration with the
+gcd/coprimality constraints to close the main theorem.
+
+theorem erdos_672_k3_l2 : Erdos672With 3 2 := by sorry
+
+Status: OPEN. Deep Pell infrastructure built. Final assembly needed.

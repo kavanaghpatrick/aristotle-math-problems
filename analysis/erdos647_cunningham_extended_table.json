@@ -1,0 +1,2534 @@
+{
+  "summary": {
+    "total_cunningham_cases": 35,
+    "cases_with_no_witness": 0,
+    "cases_covered_by_small_offset_k_le_12": 35,
+    "cases_needing_large_offset_k_gt_12": 0,
+    "max_offset_among_witnesses": 6,
+    "max_tau_among_witnesses": 32
+  },
+  "no_witness_cases": [],
+  "cases_needing_large_offset": [],
+  "rows": [
+    {
+      "n": 5640,
+      "q": 2819,
+      "r": 1409,
+      "p": 1879,
+      "n-5": {
+        "m": 5635,
+        "tau": 12,
+        "needed": 8,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 5634,
+        "tau": 12,
+        "needed": 9,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 5633,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 5632,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 5631,
+        "tau": 4,
+        "needed": 12,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 5630,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 5629,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 5628,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 5040,
+        "tau": 60
+      },
+      "witness": {
+        "m": 5635,
+        "tau": 12,
+        "offset_from_n": 5,
+        "slack": 4
+      }
+    },
+    {
+      "n": 25800,
+      "q": 12899,
+      "r": 6449,
+      "p": 8599,
+      "n-5": {
+        "m": 25795,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 25794,
+        "tau": 12,
+        "needed": 9,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 25793,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 25792,
+        "tau": 28,
+        "needed": 11,
+        "slack": 17,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 25791,
+        "tau": 4,
+        "needed": 12,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 25790,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 25789,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 25788,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 25200,
+        "tau": 90
+      },
+      "witness": {
+        "m": 25795,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 28320,
+      "q": 14159,
+      "r": 7079,
+      "p": 9439,
+      "n-5": {
+        "m": 28315,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 28314,
+        "tau": 36,
+        "needed": 9,
+        "slack": 27,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 28313,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 28312,
+        "tau": 8,
+        "needed": 11,
+        "slack": -3,
+        "is_witness": false
+      },
+      "n-9": {
+        "m": 28311,
+        "tau": 4,
+        "needed": 12,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 28310,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 28309,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 28308,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 27720,
+        "tau": 96
+      },
+      "witness": {
+        "m": 28315,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 35880,
+      "q": 17939,
+      "r": 8969,
+      "p": 11959,
+      "n-5": {
+        "m": 35875,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 35874,
+        "tau": 12,
+        "needed": 9,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 35873,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 35872,
+        "tau": 24,
+        "needed": 11,
+        "slack": 13,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 35871,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 35870,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 35869,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 35868,
+        "tau": 36,
+        "needed": 15,
+        "slack": 21,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 32760,
+        "tau": 96
+      },
+      "witness": {
+        "m": 35875,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 56040,
+      "q": 28019,
+      "r": 14009,
+      "p": 18679,
+      "n-5": {
+        "m": 56035,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 56034,
+        "tau": 24,
+        "needed": 9,
+        "slack": 15,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 56033,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 56032,
+        "tau": 24,
+        "needed": 11,
+        "slack": 13,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 56031,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 56030,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 56029,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 56028,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 55440,
+        "tau": 120
+      },
+      "witness": {
+        "m": 56035,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 58680,
+      "q": 29339,
+      "r": 14669,
+      "p": 19559,
+      "n-5": {
+        "m": 58675,
+        "tau": 6,
+        "needed": 8,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 58674,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 58673,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 58672,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 58671,
+        "tau": 16,
+        "needed": 12,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 58670,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 58669,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 58668,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 55440,
+        "tau": 120
+      },
+      "witness": {
+        "m": 58674,
+        "tau": 32,
+        "offset_from_n": 6,
+        "slack": 23
+      }
+    },
+    {
+      "n": 77280,
+      "q": 38639,
+      "r": 19319,
+      "p": 25759,
+      "n-5": {
+        "m": 77275,
+        "tau": 12,
+        "needed": 8,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 77274,
+        "tau": 28,
+        "needed": 9,
+        "slack": 19,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 77273,
+        "tau": 12,
+        "needed": 10,
+        "slack": 2,
+        "is_witness": true
+      },
+      "n-8": {
+        "m": 77272,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 77271,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 77270,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 77269,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 77268,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 75600,
+        "tau": 120
+      },
+      "witness": {
+        "m": 77275,
+        "tau": 12,
+        "offset_from_n": 5,
+        "slack": 4
+      }
+    },
+    {
+      "n": 99000,
+      "q": 49499,
+      "r": 24749,
+      "p": 32999,
+      "n-5": {
+        "m": 98995,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 98994,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 98993,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 98992,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 98991,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 98990,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 98989,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 98988,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 98280,
+        "tau": 128
+      },
+      "witness": {
+        "m": 98995,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 104760,
+      "q": 52379,
+      "r": 26189,
+      "p": 34919,
+      "n-5": {
+        "m": 104755,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 104754,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 104753,
+        "tau": 8,
+        "needed": 10,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 104752,
+        "tau": 10,
+        "needed": 11,
+        "slack": -1,
+        "is_witness": false
+      },
+      "n-9": {
+        "m": 104751,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 104750,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 104749,
+        "tau": 6,
+        "needed": 14,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 104748,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 98280,
+        "tau": 128
+      },
+      "witness": {
+        "m": 104755,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 121560,
+      "q": 60779,
+      "r": 30389,
+      "p": 40519,
+      "n-5": {
+        "m": 121555,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 121554,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 121553,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 121552,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 121551,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 121550,
+        "tau": 48,
+        "needed": 13,
+        "slack": 35,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 121549,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 121548,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 110880,
+        "tau": 144
+      },
+      "witness": {
+        "m": 121555,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 166920,
+      "q": 83459,
+      "r": 41729,
+      "p": 55639,
+      "n-5": {
+        "m": 166915,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 166914,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 166913,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 166912,
+        "tau": 22,
+        "needed": 11,
+        "slack": 11,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 166911,
+        "tau": 16,
+        "needed": 12,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 166910,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 166909,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 166908,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 166320,
+        "tau": 160
+      },
+      "witness": {
+        "m": 166915,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 174600,
+      "q": 87299,
+      "r": 43649,
+      "p": 58199,
+      "n-5": {
+        "m": 174595,
+        "tau": 4,
+        "needed": 8,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 174594,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 174593,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 174592,
+        "tau": 40,
+        "needed": 11,
+        "slack": 29,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 174591,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 174590,
+        "tau": 32,
+        "needed": 13,
+        "slack": 19,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 174589,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 174588,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 166320,
+        "tau": 160
+      },
+      "witness": {
+        "m": 174594,
+        "tau": 16,
+        "offset_from_n": 6,
+        "slack": 7
+      }
+    },
+    {
+      "n": 206640,
+      "q": 103319,
+      "r": 51659,
+      "p": 68879,
+      "n-5": {
+        "m": 206635,
+        "tau": 24,
+        "needed": 8,
+        "slack": 16,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 206634,
+        "tau": 8,
+        "needed": 9,
+        "slack": -1,
+        "is_witness": false
+      },
+      "n-7": {
+        "m": 206633,
+        "tau": 6,
+        "needed": 10,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 206632,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 206631,
+        "tau": 10,
+        "needed": 12,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 206630,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 206629,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 206628,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 196560,
+        "tau": 160
+      },
+      "witness": {
+        "m": 206635,
+        "tau": 24,
+        "offset_from_n": 5,
+        "slack": 16
+      }
+    },
+    {
+      "n": 253680,
+      "q": 126839,
+      "r": 63419,
+      "p": 84559,
+      "n-5": {
+        "m": 253675,
+        "tau": 12,
+        "needed": 8,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 253674,
+        "tau": 24,
+        "needed": 9,
+        "slack": 15,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 253673,
+        "tau": 12,
+        "needed": 10,
+        "slack": 2,
+        "is_witness": true
+      },
+      "n-8": {
+        "m": 253672,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 253671,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 253670,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 253669,
+        "tau": 12,
+        "needed": 14,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 253668,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 221760,
+        "tau": 168
+      },
+      "witness": {
+        "m": 253675,
+        "tau": 12,
+        "offset_from_n": 5,
+        "slack": 4
+      }
+    },
+    {
+      "n": 334320,
+      "q": 167159,
+      "r": 83579,
+      "p": 111439,
+      "n-5": {
+        "m": 334315,
+        "tau": 4,
+        "needed": 8,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 334314,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 334313,
+        "tau": 8,
+        "needed": 10,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 334312,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 334311,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 334310,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 334309,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 334308,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 332640,
+        "tau": 192
+      },
+      "witness": {
+        "m": 334314,
+        "tau": 32,
+        "offset_from_n": 6,
+        "slack": 23
+      }
+    },
+    {
+      "n": 350160,
+      "q": 175079,
+      "r": 87539,
+      "p": 116719,
+      "n-5": {
+        "m": 350155,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 350154,
+        "tau": 36,
+        "needed": 9,
+        "slack": 27,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 350153,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 350152,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 350151,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 350150,
+        "tau": 24,
+        "needed": 13,
+        "slack": 11,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 350149,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 350148,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 332640,
+        "tau": 192
+      },
+      "witness": {
+        "m": 350155,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 424080,
+      "q": 212039,
+      "r": 106019,
+      "p": 141359,
+      "n-5": {
+        "m": 424075,
+        "tau": 6,
+        "needed": 8,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 424074,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 424073,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 424072,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 424071,
+        "tau": 6,
+        "needed": 12,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 424070,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 424069,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 424068,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 415800,
+        "tau": 192
+      },
+      "witness": {
+        "m": 424074,
+        "tau": 32,
+        "offset_from_n": 6,
+        "slack": 23
+      }
+    },
+    {
+      "n": 433440,
+      "q": 216719,
+      "r": 108359,
+      "p": 144479,
+      "n-5": {
+        "m": 433435,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 433434,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 433433,
+        "tau": 16,
+        "needed": 10,
+        "slack": 6,
+        "is_witness": true
+      },
+      "n-8": {
+        "m": 433432,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 433431,
+        "tau": 10,
+        "needed": 12,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 433430,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 433429,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 433428,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 415800,
+        "tau": 192
+      },
+      "witness": {
+        "m": 433435,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 451680,
+      "q": 225839,
+      "r": 112919,
+      "p": 150559,
+      "n-5": {
+        "m": 451675,
+        "tau": 24,
+        "needed": 8,
+        "slack": 16,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 451674,
+        "tau": 24,
+        "needed": 9,
+        "slack": 15,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 451673,
+        "tau": 6,
+        "needed": 10,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 451672,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 451671,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 451670,
+        "tau": 24,
+        "needed": 13,
+        "slack": 11,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 451669,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 451668,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 443520,
+        "tau": 192
+      },
+      "witness": {
+        "m": 451675,
+        "tau": 24,
+        "offset_from_n": 5,
+        "slack": 16
+      }
+    },
+    {
+      "n": 452760,
+      "q": 226379,
+      "r": 113189,
+      "p": 150919,
+      "n-5": {
+        "m": 452755,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 452754,
+        "tau": 12,
+        "needed": 9,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 452753,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 452752,
+        "tau": 10,
+        "needed": 11,
+        "slack": -1,
+        "is_witness": false
+      },
+      "n-9": {
+        "m": 452751,
+        "tau": 24,
+        "needed": 12,
+        "slack": 12,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 452750,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 452749,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 452748,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 443520,
+        "tau": 192
+      },
+      "witness": {
+        "m": 452755,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 535920,
+      "q": 267959,
+      "r": 133979,
+      "p": 178639,
+      "n-5": {
+        "m": 535915,
+        "tau": 4,
+        "needed": 8,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 535914,
+        "tau": 24,
+        "needed": 9,
+        "slack": 15,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 535913,
+        "tau": 6,
+        "needed": 10,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 535912,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 535911,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 535910,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 535909,
+        "tau": 12,
+        "needed": 14,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 535908,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 498960,
+        "tau": 200
+      },
+      "witness": {
+        "m": 535914,
+        "tau": 24,
+        "offset_from_n": 6,
+        "slack": 15
+      }
+    },
+    {
+      "n": 539160,
+      "q": 269579,
+      "r": 134789,
+      "p": 179719,
+      "n-5": {
+        "m": 539155,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 539154,
+        "tau": 48,
+        "needed": 9,
+        "slack": 39,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 539153,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 539152,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 539151,
+        "tau": 4,
+        "needed": 12,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 539150,
+        "tau": 24,
+        "needed": 13,
+        "slack": 11,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 539149,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 539148,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 498960,
+        "tau": 200
+      },
+      "witness": {
+        "m": 539155,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 582720,
+      "q": 291359,
+      "r": 145679,
+      "p": 194239,
+      "n-5": {
+        "m": 582715,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 582714,
+        "tau": 48,
+        "needed": 9,
+        "slack": 39,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 582713,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 582712,
+        "tau": 24,
+        "needed": 11,
+        "slack": 13,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 582711,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 582710,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 582709,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 582708,
+        "tau": 36,
+        "needed": 15,
+        "slack": 21,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 554400,
+        "tau": 216
+      },
+      "witness": {
+        "m": 582715,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 595320,
+      "q": 297659,
+      "r": 148829,
+      "p": 198439,
+      "n-5": {
+        "m": 595315,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 595314,
+        "tau": 12,
+        "needed": 9,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 595313,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 595312,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 595311,
+        "tau": 4,
+        "needed": 12,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 595310,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 595309,
+        "tau": 16,
+        "needed": 14,
+        "slack": 2,
+        "is_witness": true
+      },
+      "n-12": {
+        "m": 595308,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 554400,
+        "tau": 216
+      },
+      "witness": {
+        "m": 595315,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 645840,
+      "q": 322919,
+      "r": 161459,
+      "p": 215279,
+      "n-5": {
+        "m": 645835,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 645834,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 645833,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 645832,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 645831,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 645830,
+        "tau": 32,
+        "needed": 13,
+        "slack": 19,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 645829,
+        "tau": 6,
+        "needed": 14,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 645828,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 554400,
+        "tau": 216
+      },
+      "witness": {
+        "m": 645835,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 671040,
+      "q": 335519,
+      "r": 167759,
+      "p": 223679,
+      "n-5": {
+        "m": 671035,
+        "tau": 4,
+        "needed": 8,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 671034,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 671033,
+        "tau": 8,
+        "needed": 10,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 671032,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 671031,
+        "tau": 16,
+        "needed": 12,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 671030,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 671029,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 671028,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 665280,
+        "tau": 224
+      },
+      "witness": {
+        "m": 671034,
+        "tau": 32,
+        "offset_from_n": 6,
+        "slack": 23
+      }
+    },
+    {
+      "n": 743280,
+      "q": 371639,
+      "r": 185819,
+      "p": 247759,
+      "n-5": {
+        "m": 743275,
+        "tau": 12,
+        "needed": 8,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 743274,
+        "tau": 48,
+        "needed": 9,
+        "slack": 39,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 743273,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 743272,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 743271,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 743270,
+        "tau": 32,
+        "needed": 13,
+        "slack": 19,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 743269,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 743268,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 720720,
+        "tau": 240
+      },
+      "witness": {
+        "m": 743275,
+        "tau": 12,
+        "offset_from_n": 5,
+        "slack": 4
+      }
+    },
+    {
+      "n": 819000,
+      "q": 409499,
+      "r": 204749,
+      "p": 272999,
+      "n-5": {
+        "m": 818995,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 818994,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 818993,
+        "tau": 8,
+        "needed": 10,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 818992,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 818991,
+        "tau": 10,
+        "needed": 12,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 818990,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 818989,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 818988,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 720720,
+        "tau": 240
+      },
+      "witness": {
+        "m": 818995,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 824040,
+      "q": 412019,
+      "r": 206009,
+      "p": 274679,
+      "n-5": {
+        "m": 824035,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 824034,
+        "tau": 8,
+        "needed": 9,
+        "slack": -1,
+        "is_witness": false
+      },
+      "n-7": {
+        "m": 824033,
+        "tau": 12,
+        "needed": 10,
+        "slack": 2,
+        "is_witness": true
+      },
+      "n-8": {
+        "m": 824032,
+        "tau": 24,
+        "needed": 11,
+        "slack": 13,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 824031,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 824030,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 824029,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 824028,
+        "tau": 12,
+        "needed": 15,
+        "slack": -3,
+        "is_witness": false
+      },
+      "max_tau": {
+        "m": 720720,
+        "tau": 240
+      },
+      "witness": {
+        "m": 824035,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 825480,
+      "q": 412739,
+      "r": 206369,
+      "p": 275159,
+      "n-5": {
+        "m": 825475,
+        "tau": 24,
+        "needed": 8,
+        "slack": 16,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 825474,
+        "tau": 32,
+        "needed": 9,
+        "slack": 23,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 825473,
+        "tau": 8,
+        "needed": 10,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 825472,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 825471,
+        "tau": 24,
+        "needed": 12,
+        "slack": 12,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 825470,
+        "tau": 32,
+        "needed": 13,
+        "slack": 19,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 825469,
+        "tau": 8,
+        "needed": 14,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 825468,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 720720,
+        "tau": 240
+      },
+      "witness": {
+        "m": 825475,
+        "tau": 24,
+        "offset_from_n": 5,
+        "slack": 16
+      }
+    },
+    {
+      "n": 885960,
+      "q": 442979,
+      "r": 221489,
+      "p": 295319,
+      "n-5": {
+        "m": 885955,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 885954,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 885953,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 885952,
+        "tau": 28,
+        "needed": 11,
+        "slack": 17,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 885951,
+        "tau": 32,
+        "needed": 12,
+        "slack": 20,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 885950,
+        "tau": 48,
+        "needed": 13,
+        "slack": 35,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 885949,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 885948,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 831600,
+        "tau": 240
+      },
+      "witness": {
+        "m": 885955,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    },
+    {
+      "n": 907200,
+      "q": 453599,
+      "r": 226799,
+      "p": 302399,
+      "n-5": {
+        "m": 907195,
+        "tau": 4,
+        "needed": 8,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 907194,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 907193,
+        "tau": 12,
+        "needed": 10,
+        "slack": 2,
+        "is_witness": true
+      },
+      "n-8": {
+        "m": 907192,
+        "tau": 48,
+        "needed": 11,
+        "slack": 37,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 907191,
+        "tau": 6,
+        "needed": 12,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 907190,
+        "tau": 16,
+        "needed": 13,
+        "slack": 3,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 907189,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 907188,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 831600,
+        "tau": 240
+      },
+      "witness": {
+        "m": 907194,
+        "tau": 16,
+        "offset_from_n": 6,
+        "slack": 7
+      }
+    },
+    {
+      "n": 978360,
+      "q": 489179,
+      "r": 244589,
+      "p": 326119,
+      "n-5": {
+        "m": 978355,
+        "tau": 8,
+        "needed": 8,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 978354,
+        "tau": 48,
+        "needed": 9,
+        "slack": 39,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 978353,
+        "tau": 4,
+        "needed": 10,
+        "slack": -6,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 978352,
+        "tau": 20,
+        "needed": 11,
+        "slack": 9,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 978351,
+        "tau": 16,
+        "needed": 12,
+        "slack": 4,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 978350,
+        "tau": 24,
+        "needed": 13,
+        "slack": 11,
+        "is_witness": true
+      },
+      "n-11": {
+        "m": 978349,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 978348,
+        "tau": 48,
+        "needed": 15,
+        "slack": 33,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 942480,
+        "tau": 240
+      },
+      "witness": {
+        "m": 978355,
+        "tau": 8,
+        "offset_from_n": 5,
+        "slack": 0
+      }
+    },
+    {
+      "n": 978480,
+      "q": 489239,
+      "r": 244619,
+      "p": 326159,
+      "n-5": {
+        "m": 978475,
+        "tau": 6,
+        "needed": 8,
+        "slack": -2,
+        "is_witness": false
+      },
+      "n-6": {
+        "m": 978474,
+        "tau": 16,
+        "needed": 9,
+        "slack": 7,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 978473,
+        "tau": 2,
+        "needed": 10,
+        "slack": -8,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 978472,
+        "tau": 16,
+        "needed": 11,
+        "slack": 5,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 978471,
+        "tau": 12,
+        "needed": 12,
+        "slack": 0,
+        "is_witness": true
+      },
+      "n-10": {
+        "m": 978470,
+        "tau": 8,
+        "needed": 13,
+        "slack": -5,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 978469,
+        "tau": 4,
+        "needed": 14,
+        "slack": -10,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 978468,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 942480,
+        "tau": 240
+      },
+      "witness": {
+        "m": 978474,
+        "tau": 16,
+        "offset_from_n": 6,
+        "slack": 7
+      }
+    },
+    {
+      "n": 994560,
+      "q": 497279,
+      "r": 248639,
+      "p": 331519,
+      "n-5": {
+        "m": 994555,
+        "tau": 16,
+        "needed": 8,
+        "slack": 8,
+        "is_witness": true
+      },
+      "n-6": {
+        "m": 994554,
+        "tau": 24,
+        "needed": 9,
+        "slack": 15,
+        "is_witness": true
+      },
+      "n-7": {
+        "m": 994553,
+        "tau": 6,
+        "needed": 10,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-8": {
+        "m": 994552,
+        "tau": 32,
+        "needed": 11,
+        "slack": 21,
+        "is_witness": true
+      },
+      "n-9": {
+        "m": 994551,
+        "tau": 8,
+        "needed": 12,
+        "slack": -4,
+        "is_witness": false
+      },
+      "n-10": {
+        "m": 994550,
+        "tau": 12,
+        "needed": 13,
+        "slack": -1,
+        "is_witness": false
+      },
+      "n-11": {
+        "m": 994549,
+        "tau": 2,
+        "needed": 14,
+        "slack": -12,
+        "is_witness": false
+      },
+      "n-12": {
+        "m": 994548,
+        "tau": 24,
+        "needed": 15,
+        "slack": 9,
+        "is_witness": true
+      },
+      "max_tau": {
+        "m": 982800,
+        "tau": 240
+      },
+      "witness": {
+        "m": 994555,
+        "tau": 16,
+        "offset_from_n": 5,
+        "slack": 8
+      }
+    }
+  ]
+}

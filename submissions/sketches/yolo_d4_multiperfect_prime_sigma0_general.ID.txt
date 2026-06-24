@@ -1,0 +1,4 @@
+00c404c7-5770-4f90-aaaa-b034dee30c3b
+# Task: yolo_d4_multiperfect_prime_sigma0_general
+# Hash: 2b7e06b9383bc0ba
+# Submitted: 2026-05-30T18:46:22.803567

@@ -1,0 +1,62 @@
+**Round 2 Response (Lean-formalizable statements only)**
+
+### 1. Critique of Claim A (iterated-log rate and unconditional unboundedness)
+
+Claim A is **not** formalizable from Mathlib's current `Nat.Powerful`, `Nat.factorization`, `Pell`, or `SiegelLemma` alone.
+
+- The statement “for each fixed `d`, the set `{n | Powerful n ∧ Powerful (n+d) ∧ Powerful (n+2*d)}` is finite” is **not** an elementary consequence of the definitions. It requires that the three terms are \(S\)-units for the finite set \(S\) of primes dividing \(2d\). Finiteness of solutions to the resulting \(S\)-unit equation in three terms is a theorem of Siegel–Mahler (or Evertse), which is not in Mathlib and is not implied by `SiegelLemma` (which only gives finiteness of integral points on a fixed curve of genus \(\ge 1\)).
+- Consequently the pigeonhole argument “\(d_k\to\infty\)” is also not currently Lean-formalizable. One would need an effective version or at least a proof that only finitely many \(d\le D\) admit solutions; no such lemma exists in Mathlib today.
+- The “iterated-log rate” is even further away: it would require either Baker’s theorem on linear forms in logarithms or an effective form of the abc conjecture. Both are absent.
+
+**Lean statement that cannot be proved from the listed hypotheses**
+```lean
+-- False in current Mathlib
+theorem powerful_3AP_diff_unbounded :
+  ∀ D, ∃ n d, d > D ∧ Powerful n ∧ Powerful (n+d) ∧ Powerful (n+2*d) := by
+  -- requires S-unit finiteness or abc/Baker
+```
+
+### 2. Elementary modular obstructions for small `d` (1..10)
+
+We work exclusively with congruences modulo 4, 8, 9, 27 that are expressible with `Nat.pow` and `Nat.factorization`. Results:
+
+- `d=1`: open (Erdős conjecture). No modular contradiction.  
+  Lean: `¬ ∃ n, Powerful n ∧ Powerful (n+1) ∧ Powerful (n+2)` is unprovable from listed hypotheses.
+
+- `d=2`: impossible mod 4.  
+  ```lean
+  theorem not_powerful_3AP_diff_2 :
+    ¬ ∃ n, Powerful n ∧ Powerful (n+2) ∧ Powerful (n+4) := by
+    -- proof: three consecutive even numbers; one ≡ 2 mod 4
+  ```
+
+- `d=3`: impossible mod 9. If all three divisible by 3 then each must be divisible by 9, hence `d` divisible by 9, contradiction.  
+  Lean lemma exists using only `mod` arithmetic.
+
+- `d=4`: impossible mod 8 (similar parity argument on the three terms).
+
+- `d=5`: no obstruction mod 4,8,9,27. Remains open.
+
+- `d=6`: impossible mod 9 (analogous to `d=3`).
+
+- `d=7,8,9,10`: no elementary modular contradiction found with moduli \(\le 27\).
+
+Thus the only unconditional elementary exclusions are `d=2,3,4,6`. The set of admissible small differences is still infinite in principle; we obtain only a finite list of forbidden residues, not a positive lower bound.
+
+### 3. Sharpest honest unconditional lower bound formalizable today
+
+From the above, the strongest statement currently expressible with Mathlib primitives is:
+
+```lean
+theorem powerful_3AP_diff_not_in_forbidden :
+  ∀ n d, Powerful n ∧ Powerful (n+d) ∧ Powerful (n+2*d) → d ∉ {2,3,4,6}
+```
+
+No positive constant lower bound `d ≥ c` (`c≥2`) is provable elementarily. In particular `d=1` remains open, so the best unconditional claim is exactly the exclusion of the four values above.
+
+### 4. Factual corrections
+
+- The triple `(1728, 1764, 1800)` with `d=36` is the smallest known; it appears in the literature (e.g., Nitaj’s tables) and is correctly reported.
+- Heath-Brown’s 1988 paper on powerful numbers (Math. Comp. 50 (1988)) does **not** treat consecutive 3-APs; the reference is therefore incorrect for this problem.
+
+All lemmas above are single-theorem statements whose hypotheses are exactly `Nat.Powerful`, `Nat.factorization`, and elementary modular arithmetic; none invoke Baker, Bombieri–Lang, or abc.

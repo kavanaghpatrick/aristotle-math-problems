@@ -1,0 +1,4 @@
+64cb46d8-7933-41e4-bac8-1b67b5338a65
+# Task: yolo_w3_sigma0_bombieri_lang
+# Hash: c75e288880fd9865
+# Submitted: 2026-05-30T15:48:22.437353

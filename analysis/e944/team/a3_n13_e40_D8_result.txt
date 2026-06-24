@@ -1,0 +1,3 @@
+# A3 COMPLETE |E|=40 slice: n=13 delta>=6 Delta<=8 (includes deg-8) parallel  Wed Jun 10 16:35:38 BST 2026
+{"slice": "n=13 |E|=40 COMPLETE (D<=8)", "total": 23489426, "vc4": 0, "witnesses": []}
+# done Wed Jun 10 16:43:37 BST 2026

@@ -1,0 +1,28 @@
+OPEN GAP: Agoh-Giuga — Exclude ≤8 Prime Factor Counts
+Source: Agoh (1995), Giuga (1950)
+Domain: nt
+
+No composite n satisfies nB_{n-1} ≡ -1 (mod n).
+
+PRIOR RESULTS (all proved, attached as context):
+- Squarefree, odd, composite, all factors ≥ 3
+- Carmichael + Giuga conditions
+- ∑ 1/p - 1/n = k ∈ ℤ₊, CRT: n | (∑ n/p - 1)
+- ≥5 factors (3,4-factor reciprocal bounds)
+
+NEW: Harmonic sum bounds exclude m=5,6,7,8:
+1/3+1/5+1/7+1/11+1/13 = 12673/15015 < 1
+1/3+1/5+1/7+1/11+1/13+1/17 = 230456/255255 < 1
+1/3+1/5+...+1/19 = 4633919/4849845 < 1
+1/3+1/5+...+1/23 = 111429982/111546435 < 1
+First > 1 at m=9: 3343015913/3234846615.
+
+Prove: any Carmichael+Giuga number has ≥ 9 prime factors.
+
+theorem agoh_giuga_nine_factors (n : ℕ) (hn : n > 1)
+    (hcomp : ¬ Nat.Prime n) (hsqfree : Squarefree n)
+    (hkorselt : ∀ p, Nat.Prime p → p ∣ n → (p-1) ∣ (n-1))
+    (hgiuga : ∀ p, Nat.Prime p → p ∣ n → p ∣ (n/p - 1)) :
+    8 < n.primeFactors.card := by sorry
+
+Status: OPEN. Pure reciprocal bound. BMS2013 achieves ≥4771.

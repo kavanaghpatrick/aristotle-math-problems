@@ -1,0 +1,8 @@
+{
+  "CS": "full_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "Surányi conjecture (1960s, still open per erdosproblems.com/373): the equation n! = a!·b! with 1 < b ≤ a, a+1 ≠ n has the unique non-trivial solution (10, 7, 6). Numerical scan confirms uniqueness for n ≤ 20. Full closure rules out all n > 20: Stirling bounds force a!·b!/n! → 0 unless a is close to n-1 (excluded by a+1 ≠ n), and prime-factor / multiplicativity arguments reduce the unbounded search to a finite structural check. CR=clean_decidable: statement is a set equality of decidable predicates with a single concrete witness. HM=journal_clean if Aristotle proves full uniqueness — this would be a genuine 60-year resolution. Long-tail snipe: zero forum traffic, zero prior AI attempts, S1/S5-flagged."
+}

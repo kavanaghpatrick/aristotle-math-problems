@@ -1,0 +1,19 @@
+OPEN GAP: Erdős 124 — (3,4,7) complete for k=2
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.ne_zero_three_four_seven)
+Domain: nt / combinatorics
+
+Let B_d = {∑_{j∈s} d^j : s ⊆ ℕ finite} be the integers with only digits 0,1 in base d.
+Consider the pointwise sumset 3^2·B_3 + 4^2·B_4 + 7^2·B_7 = Σ(Pow({3,4,7};2)): the integers
+n = a + b + c such that a is a sum of distinct powers 3^j (j ≥ 2), b a sum of distinct powers
+4^j (j ≥ 2), c a sum of distinct powers 7^j (j ≥ 2). The claim is that this sumset is
+cofinite, with every integer beyond 3,982,888 representable.
+
+open Erdos124 in
+theorem erdos124_347_k2 : ∀ n : ℕ, 3982888 < n →
+    n ∈ sumsOfDistinctPowers 3 2 + sumsOfDistinctPowers 4 2 + sumsOfDistinctPowers 7 2 := by
+  sorry
+
+Status: OPEN. BEGL96 published only the k=1 case (largest non-representable = 581); the
+all-k tag in 124.lean is uncited, and citation sweeps found no k=2 proof anywhere. The tail
+threshold 3,982,888 (the largest non-representable n, with 5,207 misses below it and a
+gap-free tail above it) is exact and independently bit-verified. Not in Mathlib.

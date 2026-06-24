@@ -1,0 +1,19 @@
+{
+  "problem_id": "erdos_938",
+  "stage_outputs": {
+    "literature_path": "research_fusion/runs/erdos_938/01_literature.md",
+    "analogies_path":  "research_fusion/runs/erdos_938/02_analogies.md",
+    "techniques_path": "research_fusion/runs/erdos_938/03_techniques.md"
+  },
+  "named_technique": "Frey curve + Ribet level-lowering",
+  "seminal_paper_arxiv": "https://arxiv.org/abs/0707.4035",
+  "fit_score": 0.72,
+  "bridge_lemma": "If a counterexample (a, b, c) exists for prime p >= 3, the Frey curve y^2 = x(x - a^p)(x + b^p) is modular of conductor dividing 2 * rad(abc).",
+  "informal_proof_outline": "Suppose a counterexample (a,b,c) exists. Form the Frey curve and apply modularity, then level-lowering, to derive a contradiction with the empty newform space at level dividing 2.",
+  "candidate_lemmas": [
+    "frey_modular: The Frey curve associated to (a,b,c) is modular.",
+    "level_lowering_weight2: Weight-2 newforms at level 2N lower to level 2.",
+    "empty_newform_space: Weight-2 newforms at level 2 form a trivial space."
+  ],
+  "honest_disclaimer": "Test dossier intentionally pairs with a leaking .txt. The bare .txt mentions 'Frey' and 'Frey curve' which should trigger an airlock REJECT (both via the static blocklist and via dynamic tokens derived from named_technique)."
+}

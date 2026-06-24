@@ -1,0 +1,25 @@
+{
+  "problem_id": "erdos_938",
+  "title": "Erd\u0151s Problem 938",
+  "source_file": "formal-conjectures/FormalConjectures/ErdosProblems/938.lean",
+  "external_urls": [
+    "https://www.erdosproblems.com/938"
+  ],
+  "domain": "nt",
+  "adjacent_domains": [
+    "analytic_nt",
+    "additive_combinatorics",
+    "diophantine",
+    "arithmetic_geometry",
+    "combinatorics"
+  ],
+  "bare_statement": "theorem erdos_938 : answer(sorry) \u2194 {P : Finset \u2115 | Set.IsAPOfLength P.toSet 3 \u2227 \u2203 k,\n    P = {nth Powerful k, nth Powerful (k + 1), nth Powerful (k + 2)}}.Finite := by\n  sorry",
+  "keywords": [
+    "powerful numbers",
+    "arithmetic progression",
+    "squarefull",
+    "consecutive integers"
+  ],
+  "open_status": "open",
+  "what_is_known": "Let $A=\\{n_1 < n_2 < \\cdots\\}$ be the sequence of powerful numbers (if $p\\mid n$ then $p^2\\mid n$).\nAre there only finitely many three-term progressions of consecutive terms $n_k,n_{k+1},n_{k+2}$?"
+}

@@ -138,7 +138,7 @@ def cmd_submit(filepath: str, problem_id: str = "unknown", pattern: str = "unspe
     print("-" * 40)
     print("Run this command to submit to Aristotle:")
     print()
-    print(f"  aristotle prove-from-file {filepath} --no-wait")
+    print(f"  python3 scripts/safe_aristotle_submit.py {filepath}")
     print()
     print("Then update the database with the Aristotle job ID:")
     print(f"  UPDATE submissions SET submitted_at=datetime('now') WHERE uuid='{submission_uuid}';")
@@ -173,14 +173,14 @@ def cmd_status() -> int:
     rows = conn.execute("""
         SELECT uuid, filename, problem_id, status, submitted_at, pattern
         FROM submissions
-        WHERE status IN ('validated', 'submitted', 'running')
+        WHERE status = 'submitted'
         ORDER BY created_at DESC
         LIMIT 10
     """).fetchall()
 
     if rows:
         for row in rows:
-            status_emoji = {'validated': '📋', 'submitted': '🚀', 'running': '⏳'}.get(row['status'], '❓')
+            status_emoji = {'submitted': '🚀'}.get(row['status'], '❓')
             print(f"  {status_emoji} [{row['uuid']}] {row['filename']}")
             print(f"     Problem: {row['problem_id']} | Pattern: {row['pattern']}")
             if row['submitted_at']:
@@ -188,13 +188,16 @@ def cmd_status() -> int:
     else:
         print("  No active submissions")
 
-    # Recent completions
+    # Recent completions — canonical statuses (2026-05-28):
+    #   compile_failed | compiled_partial | compiled_no_advance
+    #   | compiled_advance | disproven
     print("\nRecent Completions (last 7 days):")
     print("-" * 40)
     rows = conn.execute("""
         SELECT uuid, filename, problem_id, status, verified, sorry_count, proven_count
         FROM submissions
-        WHERE status IN ('completed', 'failed')
+        WHERE status IN ('compile_failed', 'compiled_partial', 'compiled_no_advance',
+                         'compiled_advance', 'disproven')
           AND completed_at > datetime('now', '-7 days')
         ORDER BY completed_at DESC
         LIMIT 10
@@ -215,7 +218,8 @@ def cmd_status() -> int:
     rows = conn.execute("""
         SELECT uuid, filename, problem_id, grok_reviewed, gemini_reviewed
         FROM submissions
-        WHERE status = 'completed' AND verified IS NULL AND proven_count > 0
+        WHERE status IN ('compiled_partial', 'compiled_no_advance', 'compiled_advance')
+          AND verified IS NULL AND proven_count > 0
         ORDER BY completed_at DESC
         LIMIT 5
     """).fetchall()

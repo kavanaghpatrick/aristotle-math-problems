@@ -1,0 +1,15 @@
+OPEN GAP: Jacobian conjecture
+Source: formal-conjectures
+Domain: algebra
+
+Prior result (slot683) proved triangular map injectivity by strong
+induction but the final aesop goal in the inductive step didn't
+close. The proof structure is complete — close the remaining goal.
+
+theorem jacobian_conjecture {k : Type*} [Field k] [CharZero k]
+    {n : ℕ} (F : MvPolynomial (Fin n) k → MvPolynomial (Fin n) k)
+    (hF : IsPolynomialMap F) (hJ : jacobian_nonzero F) :
+    Function.Injective F := by sorry
+
+Status: OPEN. slot683 is 1 sorry (skip) away — triangular
+injectivity induction step needs to close.

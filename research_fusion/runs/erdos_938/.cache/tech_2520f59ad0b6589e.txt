@@ -1,0 +1,48 @@
+{
+  "name": "Slice Rank Method",
+  "seminal_paper": {
+    "arxiv_id": "1605.09223",
+    "doi": "10.4007/annals.2017.185.1.8",
+    "citation": "J. S. Ellenberg and D. Gijswijt, Ann. of Math. (2) 185 (2017), no. 1, 339-343.",
+    "year": 2017
+  },
+  "home_domain": "algebraic_combinatorics",
+  "what_it_does": "The slice rank method is a polynomial-tensor technique for upper-bounding pattern-avoiding subsets of finite vector spaces. It is best known for giving exponential upper bounds for cap sets, i.e. subsets of F_q^n with no nontrivial three-term arithmetic progressions.",
+  "input_requirements": [
+    "an ambient finite vector space F_q^n or closely related finite algebraic product space",
+    "a forbidden configuration expressible by low-degree polynomial equations or linear forms over a finite field",
+    "a subset A whose pattern-avoidance property forces the associated pattern tensor to have essentially diagonal support",
+    "finite-field polynomial dimension bounds for the relevant degree slices"
+  ],
+  "output_signature": "an upper bound on the maximum size or density of a subset avoiding the specified algebraic pattern",
+  "input_match": [
+    {
+      "requirement": "an ambient finite vector space F_q^n or closely related finite algebraic product space",
+      "match": "NO",
+      "evidence": "no match: the target objects are powerful numbers in ℕ, not points of F_q^n."
+    },
+    {
+      "requirement": "a forbidden configuration expressible by low-degree polynomial equations or linear forms over a finite field",
+      "match": "PARTIAL",
+      "evidence": "Set.IsAPOfLength captures the three-term arithmetic-progression condition, but not over a finite field."
+    },
+    {
+      "requirement": "a subset A whose pattern-avoidance property forces the associated pattern tensor to have essentially diagonal support",
+      "match": "NO",
+      "evidence": "no match: the theorem asks finiteness of actual consecutive powerful-number triples, not avoidance by a large subset."
+    },
+    {
+      "requirement": "finite-field polynomial dimension bounds for the relevant degree slices",
+      "match": "NO",
+      "evidence": "no match: no finite-field polynomial degree-slice structure is present in the statement."
+    }
+  ],
+  "known_obstructions": [
+    "The integers lack the finite vector-space structure used by slice rank.",
+    "Consecutiveness in the ordered sequence of powerful numbers is not an algebraic finite-field constraint.",
+    "The target is an infinite-sequence finiteness question, while slice rank gives finite ambient-space density bounds.",
+    "No tensor encoding with diagonal-support behavior is apparent from the Lean statement."
+  ],
+  "fit_score": 0.125,
+  "source_analog_id": "A1"
+}

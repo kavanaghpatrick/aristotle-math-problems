@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780313476.540472,
+  "checked_at": "2026-06-01T11:31:16+00:00",
+  "evidence": "named-conjecture card: erdos_1105_cycles = CLOSED (wiki 2(a): AI surfaced prior literature)",
+  "sources": [
+    {
+      "evidence": "card[erdos_1105_cycles]=CLOSED \u2014 wiki 2(a): AI surfaced prior literature",
+      "signal": "strong",
+      "source": "named_conjecture_status",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}

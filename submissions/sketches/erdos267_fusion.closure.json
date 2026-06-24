@@ -1,0 +1,8 @@
+{
+  "CS": "direction_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "Closure of lacunary Fibonacci reciprocal irrationality via Pisot β-expansion stratification; Codex F8 best ROI target operationalized. CS=direction_closure because the conjectured proof handles the entire open range 1 < c < 2 (full lacunary case under the n_{k+1}/n_k ≥ c hypothesis), upgrading to full_closure if the symbolic obstruction holds for arbitrary StrictMono with bounded gap ratio. CM=structural_finite_reduction: the reduction is rationality ⟹ eventual periodicity (finite-state property) vs. lacunarity ⟹ aperiodic support (also finite-state) — a clean structural collision rather than a witness search. CR=clean_decidable if the carry-propagation lemma compiles as a finite-transducer non-confluence argument over Mathlib.Computability.DFA infrastructure. HM=journal_clean for full lacunary case (the only open piece in the literature); HM=journal_subclaim if Aristotle only closes a specialization (e.g., n_k arithmetic-progression-like). real_closure_candidate=true because this is precisely the F8-flagged best-ROI shot and the three-AI debate independently converged on the Parry-Schmidt + Frougny transducer lane as the operational unlock for the quadratic-threshold barrier identified by Badea 1987 and beyond."
+}

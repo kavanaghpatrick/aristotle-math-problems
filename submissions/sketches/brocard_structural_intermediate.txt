@@ -1,0 +1,25 @@
+OPEN GAP: Brocard's Conjecture verified for n ∈ [1001, 10000]
+Source: formal-conjectures/FormalConjectures/Wikipedia/BrocardConjecture.lean
+Domain: number theory
+
+For every n ∈ [1001, 10000], between the squares of the n-th and (n+1)-th
+primes there are at least four prime numbers. A 10× scaling jump over
+slot738's [501, 1000] verified range, not a 2× bump. Ferreira (2023,
+arXiv:2307.08725, formal-conjectures `brocard_conjecture.ferreira_large_n`)
+is non-effective (`∀ᶠ n in atTop`), so closing the small-n gap is the only
+formally productive direction; every n verified in Lean is unconditional.
+
+theorem brocard_conjecture_extended_1001_10000 :
+    ∀ n : ℕ, 1001 ≤ n → n ≤ 10000 →
+      4 ≤ ((Finset.Ioo (n.nth Nat.Prime ^ 2) ((n+1).nth Nat.Prime ^ 2)).filter
+        Nat.Prime).card := by sorry
+
+Status: OPEN. Brocard's conjecture is unresolved unconditionally for general n.
+External computational verification reaches n ≤ 4·10^5 (no Lean proof). Lean
+verification stops at n=1000 (slot722 + slot738). Ferreira's asymptotic
+result has no explicit N_0, so the "no man's land" is infinite in principle;
+the meaningful structural play is a multiplicative scaling test of the
+slot738 encoding, not an additive bump. slot738 attached as prior context:
+its explicit-witness-table + 10-chunk × 50-entry native_decide cascade
+should scale; this submission tests at 200-chunk × 50-entry (or equivalent
+restructuring) and verifies sieving up to p_10001^2 ≈ 1.18·10^10.

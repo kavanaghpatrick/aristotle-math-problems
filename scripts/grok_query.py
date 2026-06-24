@@ -56,7 +56,14 @@ def query_grok(prompt: str, model: str = "grok-4", max_tokens: int = 4000, timeo
 
         response = json.loads(result.stdout)
         if 'error' in response:
-            return f"API ERROR: {response['error'].get('message', response['error'])}"
+            err = response['error']
+            if isinstance(err, dict):
+                return f"API ERROR: {err.get('message', err)}"
+            else:
+                return f"API ERROR: {err}"
+
+        if 'choices' not in response:
+            return f"API ERROR (no choices): {str(response)[:500]}"
 
         return response['choices'][0]['message']['content']
 

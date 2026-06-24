@@ -1,0 +1,10 @@
+OPEN GAP: Erdős 938 (illustrative test sketch)
+Source: formal-conjectures/Erdos938
+Domain: nt
+
+The conjecture states that no nontrivial integer solution (a, b, c) to a^p + b^p = c^p exists for any prime p >= 3.
+
+theorem erdos_938_test (p : ℕ) (hp : 3 ≤ p) (hprime : p.Prime) :
+    ¬ ∃ a b c : ℤ, a ≠ 0 ∧ b ≠ 0 ∧ c ≠ 0 ∧ a^p + b^p = c^p := by sorry
+
+Status: OPEN. Test placeholder for fusion-gate verification.

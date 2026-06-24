@@ -59,7 +59,7 @@ def call_grok(prompt: str, timeout: int = 300) -> str:
 
     request = {
         "messages": [{"role": "user", "content": prompt}],
-        "model": "grok-4",
+        "model": "grok-4.3",
         "temperature": 0.3,
     }
 

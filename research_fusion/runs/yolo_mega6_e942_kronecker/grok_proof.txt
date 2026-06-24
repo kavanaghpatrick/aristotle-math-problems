@@ -1,0 +1,47 @@
+-- Grok Round 4 output: Lean 4 / Mathlib4 signatures
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Nat.Powerful  -- (or FormalConjecturesForMathlib.Data.Nat.Full for Nat.Full 2)
+import Mathlib.Data.Nat.Factorization.Defs
+import Mathlib.Data.Nat.Squarefree
+import Mathlib.Order.Filter.AtTopBot
+import Mathlib.Order.LiminfLimsup
+import Mathlib.Data.ENat.Basic
+import Mathlib.Topology.Instances.AddCircle.DenseSubgroup
+import Mathlib.LinearAlgebra.LinearIndependent
+import Mathlib.Data.Real.Basic
+import Mathlib.Data.Fin.VecNotation
+
+def erdos_942.h (n : ℕ) : ℕ :=
+  ((Finset.Ico (n ^ 2) ((n + 1) ^ 2)).filter Nat.Powerful).card
+
+-- L1: counting M powerful in the interval yields h(n) >= M
+theorem card_powerful_ge_of_box {n M : ℕ} {p : Fin M → ℕ} {u : Fin M → ℕ}
+    (hp : Function.Injective p) (hprime : ∀ i, Nat.Prime (p i))
+    (hu : ∀ i, 1 ≤ u i)
+    (hmem : ∀ i, u i ^ 2 * p i ^ 3 ∈ Finset.Ico (n ^ 2) ((n + 1) ^ 2)) :
+    M ≤ erdos_942.h n := sorry
+
+-- L_box: construct u_i from box-hit n
+theorem box_construction (n M : ℕ) (p : Fin M → ℕ)
+    (hp : Function.Injective p) (hprime : ∀ i, Nat.Prime (p i))
+    (hfract : ∀ i, Int.fract (n * ((p i : ℝ)) ^ (-(3 : ℝ) / 2)) > 1 - ((p i : ℝ)) ^ (-(3 : ℝ) / 2))
+    (hn : (n : ℝ) ≥ (p (Fin.last M) : ℝ) ^ ((3 : ℝ) / 2)) :
+    ∃ u : Fin M → ℕ, ∀ i, 1 ≤ u i ∧ u i ^ 2 * p i ^ 3 ∈ Finset.Ico (n ^ 2) ((n + 1) ^ 2) := sorry
+
+-- L3 (MATHLIB GAP, AXIOMATIZE): Besicovitch Q-LI of sqrt-primes
+axiom L_LI_sqrt_primes {M : ℕ} (p : Fin M → ℕ)
+    (hp : Function.Injective p) (hprime : ∀ i, Nat.Prime (p i)) :
+    LinearIndependent ℚ (Fin.cons (1 : ℝ) (fun i ↦ ((p i : ℝ)) ^ ((3 : ℝ) / 2)))
+
+-- L4 (MATHLIB GAP, AXIOMATIZE): simultaneous Kronecker density on AddCircle^M
+axiom L_sim_Kronecker {M : ℕ} (β : Fin M → ℝ)
+    (hli : LinearIndependent ℚ (Fin.cons (1 : ℝ) β))
+    (U : Set (Fin M → AddCircle (1:ℝ))) (hU : U.Nonempty) (hopen : IsOpen U) :
+    {n : ℕ | (fun i ↦ ((n : ℝ) * β i : AddCircle (1:ℝ))) ∈ U}.Infinite
+
+-- L5+L6+L7: assemble
+theorem frequently_h_ge (M : ℕ) :
+    ∃ᶠ n in Filter.atTop, (M : ℕ∞) ≤ (erdos_942.h n : ℕ∞) := sorry
+
+theorem erdos_942_variants_limsup_main :
+    Filter.atTop.limsup ((fun n ↦ (erdos_942.h n : ℕ∞))) = ⊤ := sorry

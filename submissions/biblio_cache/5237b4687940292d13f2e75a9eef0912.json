@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1781083973.0134232,
+  "checked_at": "2026-06-10T09:32:53+00:00",
+  "evidence": "2/3 sources reached; no closure language found; NO citations attachable (F2-STALE: attach literature manually before submission)",
+  "sources": [
+    {
+      "evidence": "source unreachable (network error/rate-limit)",
+      "signal": "error",
+      "source": "zbmath",
+      "url": ""
+    }
+  ],
+  "status": "CLEAR"
+}

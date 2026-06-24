@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "iter2 of E1003 explicitly drops the speculative Tao-2016 entropy-decrement pillar that Aristotle correctly critiqued in v1 (UUID 4697679f-3c66-4f46-a156-7f9900dfdf22). The target is the FIXED-SUPPORT FINITENESS direction only, not the infinitude conjecture itself. The Subspace Theorem in the Evertse-Schlickewei-Schmidt 2002 Annals form (DOI 10.2307/3062133) bounds the count of non-degenerate solutions to u+v=1 in a finite-rank multiplicative group Γ ⊂ ℚ* by an explicit function of (dim=2, rank(Γ)), independent of coefficient heights. The per-support sub-claim is therefore clean_decidable: it has a precise statement, a published proof in the literature, and a structural_finite_reduction via S-unit pairs. real_closure_candidate=true because (a) the technique is published and well-established, (b) the sub-claim does not require entropy decrement or any speculative cross-domain bridge, (c) Aristotle's v1 critique is honestly answered — Pillar 2 is dropped, Pillar 1 is restated as the standalone provable theorem it actually is. The honest_disclaimer in the fusion.json makes clear this does NOT prove infinitude. journal_subclaim level: a clean finiteness-per-support result strengthening Erdős-Pomerance-Sárközy 1987 to effective per-support form."
+}

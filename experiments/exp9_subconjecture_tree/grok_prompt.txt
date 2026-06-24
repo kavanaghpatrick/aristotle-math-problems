@@ -1,0 +1,77 @@
+You are a research mathematician specializing in number theory, Diophantine equations, sieve theory, and arithmetic geometry. You will perform a SUB-CONJECTURE TREE SEARCH on Erdős Problem 938.
+
+# THE PROBLEM (E938, OPEN)
+
+Let A = {n_1 < n_2 < ...} be the sequence of POWERFUL NUMBERS (n is powerful iff every prime p | n satisfies p^2 | n).
+
+Question: Are there only finitely many three-term arithmetic progressions formed by CONSECUTIVE terms n_k, n_{k+1}, n_{k+2}?
+
+Formal Lean statement:
+  {P : Finset ℕ | Set.IsAPOfLength P.toSet 3 ∧ ∃ k,
+     P = {nth Powerful k, nth Powerful (k+1), nth Powerful (k+2)}}.Finite
+
+# KEY FACTS / PRIOR WORK ON E938
+- Conjecturally TRUE.
+- Computational: only 3 consecutive 3-APs of powerfuls below 10^6, 18 below 10^14, ALL from family A_1 (Pell parametrization of (n, n+1, n+2)-like structures).
+- Van Doorn 2026 (arXiv:2605.06697) Conj 5 asserts theorem is FALSE: infinitely many consecutive 3-APs from family A_1. (Plausibility unclear.)
+- Chan 2022 (arXiv:2210.00281): under abc, common difference d ≫_ε N^{1/2-ε}. Unconditionally builds infinitely many NON-consecutive powerful 3-APs with d ≪ N^{1/2}.
+- Chan 2025 (arXiv:2503.21485): handles case middle is a perfect cube with single odd-power prime in n±1.
+- She 2025 (arXiv:2507.16828): no triplets x³−1 = p²a³, x³, x³+1 = q²b³ for primes p,q.
+- Erdős-Mollin-Walsh open: no three CONSECUTIVE INTEGERS all powerful.
+- Powerful number parametrization: n = a²b³ with squarefree b.
+- mod-8 residues of powerful: {0, 1, 3, 4, 5, 7} (NOT {0,1,4}). Residue 2,6 mod 8 excluded by v_2(n)=1.
+- mod-72 admissible AP triples: 593 (no local obstruction closes E938).
+- Frey-Hellegouarch curve Y² = X(X − a²b³)(X − 2c²d³) — viable but level-lowering open.
+- Bombieri-Lang / Vojta dim-2 needed for kernel uniformity; per-kernel finiteness UNCONDITIONAL via Mordell-Siegel on ternary quadratic form b_1 X² + b_3 Z² = 2 b_2 Y².
+- Prior Aristotle submissions (slots 1259, 1284, 1300, 1302, 1304, 1311-1343) all returned compiled_no_advance.
+
+# YOUR TASK
+
+Generate EXACTLY 50 SUB-CONJECTURES of E938. Each must be:
+- A DIFFERENT angle / restriction / sharpening / generalization / dual / negation / decomposition of E938.
+- Stated as a precise mathematical claim (not a vague direction).
+- Each genuinely distinct (no near-duplicates).
+
+GROUP INTO 7 CATEGORIES (aim ~7 each):
+  W — WEAKENING (a weaker claim implied by E938)
+  R — RESTRICTION (E938 restricted to a special parametric family or subset)
+  S — SHARPENING (a stronger quantitative form of E938)
+  G — GENERALIZATION (E938 with broader hypothesis, e.g., k-term APs, k-powerful)
+  D — DUAL (a problem whose resolution would resolve E938 by symmetry/transfer)
+  N — NEGATION (a structured way to falsify, e.g., construct an infinite family)
+  C — DECOMPOSITION (E938 = sub-claim 1 ∧ sub-claim 2 ∧ ...)
+
+For EACH sub-conjecture, output EXACTLY this format:
+
+```
+ID: [W1|W2|...|R1|...|C7]
+Title: <≤12 words>
+Statement: <precise math claim, 1-3 sentences>
+Why distinct from E938: <1 sentence>
+Tractability: <1-10 integer> — rationale ≤15 words
+Impact:       <1-10 integer> — rationale ≤15 words (resolution of this → resolution of E938?)
+Novelty:      <1-10 integer> — rationale ≤15 words (how unexplored by prior work)
+EV:           <Tractability × Impact, integer>
+```
+
+Constraints:
+- Aim for an average T of ~5 and I of ~5 — DO NOT inflate scores.
+- Tractability 10 = provable in 1 day by a graduate student using Mathlib infrastructure. Tractability 1 = open hard problem.
+- Impact 10 = its proof directly implies E938. Impact 1 = orthogonal curiosity.
+- Novelty 10 = not in any of the cited prior work. Novelty 1 = explicitly addressed by Chan/Mollin-Walsh.
+- AT LEAST 8 sub-conjectures must have EV ≥ 35.
+- AT LEAST 3 must be falsifying constructions (in N).
+- Decomposition (C) must include at least one "C* = C1 ∧ C2 ∧ ... ⇒ E938" claim.
+
+After the 50 entries, output a section:
+=== RANKING ===
+Top 10 by EV, with one-line justification each.
+Bottom 5 by EV, with one-line "why I included it" each.
+
+End with:
+=== META-OBSERVATIONS ===
+- Which CATEGORY produced highest mean EV?
+- Which 3 sub-conjectures are most underrated (high novelty, lower visible EV)?
+- One paragraph: what gap in the prior E938 attack tree did this exercise surface?
+
+Be concise. NO preamble. Start with "ID: W1".

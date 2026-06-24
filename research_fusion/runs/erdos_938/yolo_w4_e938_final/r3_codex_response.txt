@@ -1,0 +1,26 @@
+Primary recommendation: **Option A**, but with one correction: L4 must be an **eventual absolute kernel bound**, not merely a bound `B*(N)` growing with `N`. A growing bound does not combine with L3, since L3 only gives finiteness for each fixed `B`.
+
+So Aristotle should formalize:
+
+`L1 + L3 + axiomatized L4_abs => E938 finiteness`.
+
+L2 can be included as an abc-conditional supporting bound, citing Chan’s `d >>_eps N^{1/2-eps}` result, but it does not close the finiteness argument by itself. Chan’s paper states the abc lower bound for powerful AP gaps, and BBC is about coprime/k-full AP constraints, so it should not be used as the missing unbounded-kernel step.
+
+**Corrected L4:** There exist constants `B0,K0` such that every consecutive powerful 3-AP with `n_k >= K0` has `max(b1,b2,b3) <= B0`.
+
+With that correction, Option A is the cleanest informal-mode submission: it produces a rigorous conditional bridge and isolates the true open core. Option B is the real research problem, but too speculative as the primary submission target. Option C is useful only as a falsification side project.
+
+**Bridge lemma under 600 chars**
+
+Every powerful number has form `a^2b^3` with squarefree `b`. Consecutive powerful 3-APs have `d <= sqrt(n_{k+2})+1`; abc gives Chan’s lower bound `d >>_eps N^{1/2-eps}`. For fixed kernel bound `B`, only finitely many kernel triples occur. Thus E938 reduces to the open kernel-uniformity lemma: sufficiently large consecutive powerful 3-APs have an absolute bounded squarefree kernel.
+
+**Named technique under 120 chars**
+
+Square-gap squeeze + fixed-kernel Mordell/Siegel reduction + axiomatized kernel uniformity
+
+**Estimates**
+
+`P(compiled_partial)`: 0.75  
+`P(target_resolved)`: 0.08  
+`P(disproven)`: 0.12  
+`P(compiled_no_advance)`: 0.35

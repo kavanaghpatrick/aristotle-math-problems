@@ -1,0 +1,3 @@
+82245571-5625-46e1-9e2f-551bf11a2386
+# Task: Erdos 252 sigma_k/n! irrationality k>=5 — bare gap
+# Submitted: 2026-02-18T19:37:21

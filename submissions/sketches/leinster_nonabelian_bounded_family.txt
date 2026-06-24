@@ -1,0 +1,23 @@
+OPEN GAP: Existence of a nonabelian Leinster group — D_3 × C_5 witness
+Source: formal-conjectures/FormalConjectures/Wikipedia/LeinsterGroup.lean
+Domain: algebra
+
+There exists a finite nonabelian group whose sum of normal-subgroup orders
+equals twice its own order. Specifically, the group DihedralGroup 3 ×
+Multiplicative (ZMod 5) has order 30 and is conjectured to be a Leinster
+group. This is a bounded finite check on a fully decidable structure.
+
+theorem exists_nonabelian_leinster_group_witness :
+    ∃ G : Type, ∃ (_ : Group G) (_ : Fintype G),
+      LeinsterGroup.IsLeinster G ∧ ¬ ∀ (a b : G), a * b = b * a := by sorry
+
+Status: OPEN witness in Lean. Leinster (2001) gave D_3 × C_5 as the smallest
+nonabelian example; no formally verified witness exists in Mathlib.
+DihedralGroup 3 has 4 normal subgroups summing to 10; ZMod 5 contributes a
+factor of 6 via cyclic σ; coprime orders give a multiplicative reduction.
+All structure is Fintype-decidable.
+
+contribution_statement: target_resolved=1 here means a checked Lean proof
+that DihedralGroup 3 × Multiplicative (ZMod 5) is a Leinster group AND is
+nonabelian — the first formally verified nonabelian Leinster witness,
+closing the existence question in `exists_nonabelian_leinster_group`.

@@ -1,0 +1,18 @@
+OPEN GAP: Oppermann's Conjecture
+Source: Oppermann (1882)
+Domain: nt
+
+For every integer x ≥ 2, there exists a prime in the interval
+(x² - x, x²) and a prime in the interval (x², x² + x).
+
+Implies Legendre's conjecture, Brocard's conjecture, and Andrica's
+conjecture. Stronger than all known prime gap results.
+
+Best unconditional: Baker-Harman-Pintz (2001) give a prime in
+[x, x + x^{0.525}], far from the x^{0.5} gap Oppermann requires.
+
+theorem oppermann (x : ℕ) (hx : x ≥ 2) :
+    (∃ p, Nat.Prime p ∧ x^2 - x < p ∧ p < x^2) ∧
+    (∃ p, Nat.Prime p ∧ x^2 < p ∧ p < x^2 + x) := by sorry
+
+Status: OPEN. Implies Legendre and Andrica. No unconditional proof.

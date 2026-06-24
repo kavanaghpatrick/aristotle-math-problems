@@ -1,0 +1,17 @@
+OPEN GAP: Infinitely many powerful 3-APs with d = 2·√N + 1
+Source: erdosproblems.com/938
+Domain: nt
+
+Are there infinitely many three-term arithmetic progressions
+(N, N+d, N+2d) of powerful natural numbers (every prime divisor p of n
+satisfies p²∣n) with common difference d = 2·√N + 1? This common
+difference is the smallest growth rate of d for which the question is
+known to be unconditionally open and reaches the threshold relevant to
+Erdős Problem 938.
+
+theorem powerful_3AP_d_eq_2sqrtN_plus_1 :
+    {p : ℕ × ℕ | Nat.Powerful p.1 ∧ Nat.Powerful (p.1 + p.2) ∧
+      Nat.Powerful (p.1 + 2 * p.2) ∧
+      p.2 = 2 * Nat.sqrt p.1 + 1}.Infinite := by sorry
+
+Status: OPEN. The companion .fusion.json provides the strategy.

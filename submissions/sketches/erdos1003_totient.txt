@@ -1,0 +1,11 @@
+OPEN GAP: Erdos 1003 — Infinitely many n with phi(n)=phi(n+1)
+Source: FormalConjectures/ErdosProblems/1003.lean
+Domain: nt
+
+Are there infinitely many n with phi(n) = phi(n+1)?
+
+theorem erdos_1003 :
+    Set.Infinite {n : ℕ | Nat.totient n = Nat.totient (n + 1)} := by sorry
+
+Status: OPEN. Many computational examples known.
+EPS87 proved count is at most x/exp(c*(log x)^{1/3}).

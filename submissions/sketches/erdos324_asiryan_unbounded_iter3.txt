@@ -1,0 +1,22 @@
+OPEN GAP: Erdős 324 — quintic pair-sum distinctness (unbounded, iter3)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/324.lean
+Domain: number theory
+
+Erdős conjectured that f(x) = x^5 has the property that all sums
+f(a)+f(b) = a^5 + b^5 with a < b nonnegative integers are distinct:
+no nontrivial collision a^5 + b^5 = c^5 + d^5 with {a,b} ≠ {c,d}.
+Prior submissions (L3 iter1 UUID 229acf74, N≤50; L3 iter2 N≤200)
+closed bounded variants via finite native_decide checks. The
+unbounded statement remains open.
+
+theorem erdos_324_quintic_pair_distinct :
+    ∀ a b c d : ℕ, a < b → c < d →
+      a ^ 5 + b ^ 5 = c ^ 5 + d ^ 5 → a = c ∧ b = d := by
+  sorry
+
+Status: OPEN. No nontrivial collision is known for x^5 (Lander-Parkin
+1966 found 5-term relations, not pair collisions). Numerical search
+to ~10^11 confirms zero pair collisions. Every known closure result
+treats either fixed bounded ranges or constrained linear subfamilies;
+the unrestricted pair statement has resisted all standard
+diophantine-finiteness methods on Mathlib-available infrastructure.

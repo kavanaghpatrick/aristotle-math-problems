@@ -317,11 +317,22 @@ class LearningExtractor:
         conn = self.get_db()
         cursor = conn.cursor()
 
+        # Canonical submissions.status enum (2026-05-28):
+        #   submitted | compile_failed | compiled_partial | compiled_no_advance
+        #   | compiled_advance | disproven
+        # sorry_count==0 + no axiom + no negation → compiled_no_advance;
+        # negation → disproven; sorry>=1 → compiled_partial.
+        if parsed.get('negated'):
+            new_status = 'disproven'
+        elif parsed['sorry_count'] == 0:
+            new_status = 'compiled_no_advance'
+        else:
+            new_status = 'compiled_partial'
         cursor.execute("""
         UPDATE submissions
-        SET sorry_count = ?, proven_count = ?, output_file = ?, status = 'completed'
+        SET sorry_count = ?, proven_count = ?, output_file = ?, status = ?
         WHERE uuid = ?
-        """, (parsed['sorry_count'], parsed['proven_count'], output_path, project_id))
+        """, (parsed['sorry_count'], parsed['proven_count'], output_path, new_status, project_id))
 
         # Get submission_id
         cursor.execute("SELECT id FROM submissions WHERE uuid = ?", (project_id,))

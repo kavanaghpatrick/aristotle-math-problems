@@ -1,0 +1,24 @@
+IATA Rule 3015 — Fix Rule 4e Mauritius/South Africa constraint
+
+The attached context has rule_4e_intercontinental_limits with a bug in the Mauritius/South Africa constraint.
+
+Current (buggy): triggers MU/ZA exclusion when deps > 1 OR arrs > 1 from EuropeMiddleEast.
+Rule 3015 says: "If travel is to/from Europe in both directions, itinerary may not include Mauritius/South Africa."
+
+The constraint should check: travel goes EME→Africa AND Africa→EME (both directions via EME for Africa), not just multiple departures/arrivals from EME.
+
+Fix: define has_eme_africa_both_directions checking that there exists a segment from EME to Africa AND a segment from Africa to EME. Only then exclude MU/ZA.
+
+def has_eme_africa_both_directions (itin : Itinerary) : Bool :=
+  (itin.any fun s => s.origin.continent == .EuropeMiddleEast ∧ s.destination.continent == .Africa) ∧
+  (itin.any fun s => s.origin.continent == .Africa ∧ s.destination.continent == .EuropeMiddleEast)
+
+def rule_4e_intercontinental_limits_v2 (itin : Itinerary) : Prop :=
+  [same as v1 but replace MU/ZA constraint with:]
+  let mru_zaf_constraint :=
+    if has_eme_africa_both_directions itin
+    then ¬itin.any (fun s => is_mru_zaf s.origin ∨ is_mru_zaf s.destination)
+    else True
+
+Prove: rule_4e_v2 is strictly weaker than rule_4e_v1 on the MU/ZA clause (v1 over-restricts)
+Prove: has_eme_africa_both_directions → intercontinental deps from EME ≥ 1 ∧ arrs to EME ≥ 1

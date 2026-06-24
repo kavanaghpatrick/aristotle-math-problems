@@ -1,0 +1,15 @@
+OPEN GAP: Erdos 672 — four-term coprime AP product is never a cube
+Source: FormalConjectures/ErdosProblems/672.lean (Erdos672With 4 3)
+Domain: nt
+
+For any positive integers n and d with gcd(n, d) = 1, the product
+n(n+d)(n+2d)(n+3d) is never a perfect cube.
+
+theorem erdos_672_k4_l3 :
+    ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+    ¬ ∃ y : ℕ, (∏ i ∈ Finset.range 4, (n + i * d)) = y ^ 3 := by
+  sorry
+
+Status: OPEN in Mathlib / formal-conjectures. Prior bare-mode Aristotle
+submissions (slot698, slot 1218, slot 1243, slot 1248) returned
+compiled_no_advance. The unbounded statement remains unformalized.

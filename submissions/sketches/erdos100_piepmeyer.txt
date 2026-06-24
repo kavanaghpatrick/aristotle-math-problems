@@ -1,0 +1,17 @@
+OPEN GAP: Erdős 100 — Piepmeyer 9 unit-distance-separated points witness
+Source: formal-conjectures/FormalConjectures/ErdosProblems/100.lean
+Domain: combinatorics / discrete geometry
+
+There exists a 9-point set A ⊂ ℝ² with the property that any two distinct
+pairwise distances differ by at least 1, and the diameter of A is strictly
+less than 5. Published by Harborth and Piepmeyer in "Three distinct
+distances in the plane", Geom. Dedicata 61 (1996) 315–327.
+
+theorem erdos_100_piepmeyer :
+    ∃ A : Finset ℝ², A.card = 9 ∧
+      (∀ p₁ q₁ p₂ q₂, p₁ ∈ A → q₁ ∈ A → p₂ ∈ A → q₂ ∈ A →
+        dist p₁ q₁ ≠ dist p₂ q₂ → |dist p₁ q₁ - dist p₂ q₂| ≥ 1) ∧
+      Metric.diam (A : Set ℝ²) < 5 := by sorry
+
+Status: OPEN in Lean. A published explicit construction exists (Harborth-
+Piepmeyer 1996); formalization is the gap.

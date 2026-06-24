@@ -41,12 +41,18 @@ Run the complete audit checklist (same as `/project:audit`):
 
 ## Step 4: Determine Verdict
 
+Canonical status enum (2026-05-28):
+`submitted | compile_failed | compiled_partial | compiled_no_advance | compiled_advance | disproven`.
+Note: `compiled_advance` is OPT-IN — only set when target_resolved=1, axiomatizes_prior_work=0,
+and contribution_statement is filled. `/process-result` defaults to `compiled_no_advance`.
+
 | Condition | Verdict | DB Status |
 |-----------|---------|-----------|
-| 0 sorry, 0 axiom, all checks pass | **PROVEN** | `proven`, `verified=1` |
-| 1 sorry, no structural issues | **NEAR_MISS** | `completed`, `verified=NULL` |
-| 2+ sorry, no structural issues | **NEEDS_WORK** | `completed` |
-| Has axiom, self-loops, false lemmas, or unsafe sym2 | **INVALID** | `invalid`, `verified=0` |
+| 0 sorry, 0 axiom, all checks pass | **CLEAN COMPILE** | `compiled_no_advance`, `verified=1` |
+| Aristotle negated the conjecture | **DISPROVEN** | `disproven`, `verified=NULL` |
+| sorry >= 1, no structural issues | **PARTIAL** | `compiled_partial`, `verified=NULL` |
+| Has axiom, self-loops, false lemmas, or unsafe sym2 | **INVALID** | `compile_failed`, `verified=0` |
+| Gap was actually resolved (manual confirm) | **ADVANCE** | `compiled_advance`, `verified=1`, `target_resolved=1` |
 
 ## Step 5: Update Database
 

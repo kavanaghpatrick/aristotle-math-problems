@@ -1,0 +1,8 @@
+{
+  "CS": "sub_claim_closure",
+  "CM": "structural_finite_reduction",
+  "CR": "clean_decidable",
+  "HM": "journal_subclaim",
+  "real_closure_candidate": true,
+  "rationale": "Single-prime sub-claim closure within the slot720 Feit-Thompson p=3, q ≡ 71 (mod 72) family theorem. q=1583 is the first prime > 100 in the family where A(q) = q^2 + q + 1 is itself prime, so the small-witness branch of slot720's helper is inapplicable. The large-witness branch instantiates the same helper not_dvd_via_fermat_factor with r := A(q), reducing the obstruction to a clean decidable mod-A(q) verification on a 22-bit modulus. CS=sub_claim_closure: extends slot720's enumerated family list by one prime (a sub-claim of the full FT p=3 conjecture). CM=structural_finite_reduction: a single q is reduced to a finite native_decide check via the existing helper. CR=clean_decidable: the modular arithmetic is fully decidable in well under a second, no exponential blowup. HM=journal_subclaim: publishable as the structural complement to slot720, demonstrating both branches of the dichotomy mechanism. real_closure_candidate=true: this is a genuine structural extension — the large-witness branch is novel and required for any q where A(q) is prime, not a bounded-version cop-out."
+}

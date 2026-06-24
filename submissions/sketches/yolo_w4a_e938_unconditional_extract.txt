@@ -1,0 +1,28 @@
+OPEN GAP: Erdős 938 — unconditional upper bound on successive powerful 3-AP common difference
+Source: formal-conjectures/FormalConjectures/ErdosProblems/938.lean; erdosproblems.com/938
+Domain: nt
+
+Let A = {n_1 < n_2 < ...} be the powerful numbers (p | n ⇒ p² | n). For any
+index k such that (n_k, n_{k+1}, n_{k+2}) is a 3-term arithmetic progression of
+three successively enumerated terms of A with common difference d := n_{k+1} -
+n_k, the gap is unconditionally bounded above by d < 2·√(n_k) + 2. We seek a
+fully sorry-free, axiom-clean Lean 4 / Mathlib formalization stating exactly
+this unconditional upper bound together with the auxiliary lemmas needed (no
+abc-conjecture hypothesis, no further open inputs).
+
+theorem erdos_938_unconditional_upper_bound (k : ℕ) :
+    let n0 := Nat.nth Nat.Powerful k
+    let n1 := Nat.nth Nat.Powerful (k + 1)
+    let n2 := Nat.nth Nat.Powerful (k + 2)
+    n1 - n0 = n2 - n1 →
+    ((n1 - n0 : ℝ) < 2 * Real.sqrt n0 + 2) := by sorry
+
+Status: OPEN as a clean Mathlib-PR target. A sorry-free Lean proof has been
+sketched in nu4_final/yolo_slot1315_extracted (UUID 5ab86500…) where the
+upper bound compiles unconditionally but is bundled together with an
+abc-conditional pair whose lower-bound half is still sorry. The
+extract-and-clean goal here is the unconditional half on its own, with full
+infrastructure (Nat.Powerful definition, infinitude of powerful numbers,
+perfect-square is powerful, no powerful between successively enumerated
+powerful neighbours, interval-contains-square auxiliary) all sorry-free in
+a single file.

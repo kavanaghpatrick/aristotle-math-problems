@@ -1,0 +1,40 @@
+INFORMAL PROOF ARGUMENT: Erdos Problem 672
+Source: Erdos 672; Domain: nt
+
+CLAIM: For k >= 3 and l >= 2, the product of k terms in arithmetic progression
+n(n+d)(n+2d)...(n+(k-1)d) with gcd(n,d)=1 is never a perfect l-th power.
+
+STEP 1 — REDUCTION TO PRIMES. By Erdos-Selfridge (1975), the product of k >= 2
+consecutive positive integers is never a perfect power. Generalize: for AP with
+common difference d, if the product is y^l, each factor n+id = a_i * b_i^l
+where a_i is l-th power free. The a_i are pairwise coprime (since gcd(n,d)=1)
+and their product is an l-th power, so each a_i is individually an l-th power,
+hence a_i = 1 for all i. This means each n+id is already an l-th power.
+
+STEP 2 — CASE k=3, l=2. Three squares in AP: x^2, y^2, z^2 with common
+difference d. Then y^2 - x^2 = z^2 - y^2, so x^2 + z^2 = 2y^2. This is a
+generalized Pell equation. Parametrize: x = |r^2 - 2s^2|, y = r^2 + 2s^2 - 2rs,
+z = r^2 + 2s^2 + 2rs (up to signs). The constraint gcd(n,d)=1 forces the
+Pell solutions to satisfy coprimality conditions that eliminate all solutions.
+
+STEP 3 — CASE k>=4, l=2. Four squares in AP is impossible by Euler's theorem:
+no four squares form an AP. Proof: if a^2, b^2, c^2, d^2 in AP, then
+b^2-a^2 = c^2-b^2 = d^2-c^2. From first two: a^2+c^2 = 2b^2, from last two:
+b^2+d^2 = 2c^2. This gives a descent on (a,b,c,d) -> smaller solution,
+contradicting minimality. Since k>=4 contains a 4-term sub-AP, done.
+
+STEP 4 — CASE l>=3. By Darmon-Merel (1997), for l>=3, the equation x^l + y^l = 2z^l
+has no nontrivial solutions (Fermat-type). Three l-th powers in AP gives
+a^l + c^l = 2b^l, which has no solution by Darmon-Merel. For k>=3, any 3-term
+sub-AP yields this contradiction.
+
+STEP 5 — ASSEMBLY. For any k>=3, l>=2 with gcd(n,d)=1: Step 1 reduces to each
+term being an l-th power. Any 3 consecutive terms give 3 l-th powers in AP.
+For l=2, Step 3 (k>=4) or Step 2 (k=3) gives contradiction. For l>=3, Step 4
+gives contradiction via Darmon-Merel.
+
+theorem erdos_672 (k l : ℕ) (hk : k ≥ 3) (hl : l ≥ 2) :
+  ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+  ¬∃ y : ℕ, (∏ i ∈ Finset.range k, (n + i * d)) = y ^ l := by sorry
+
+Status: OPEN for general k,l. Known: Euler (4 squares no AP), Darmon-Merel (l>=3).

@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780318016.9055161,
+  "checked_at": "2026-06-01T12:46:56+00:00",
+  "evidence": "3/3 sources reached; no closure language found",
+  "sources": [
+    {
+      "evidence": "2026 partial/weak: Language Models Can Resolve Reference Compositionally, But It's Not Their Native Strength: The Case of the Per",
+      "signal": "weak",
+      "source": "arxiv",
+      "url": "http://arxiv.org/abs/2605.31480v1"
+    }
+  ],
+  "status": "CLEAR"
+}

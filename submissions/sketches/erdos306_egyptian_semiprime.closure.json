@@ -1,0 +1,8 @@
+{
+  "CS": "full_closure",
+  "CM": "explicit_witness",
+  "CR": "clean_decidable",
+  "HM": "journal_clean",
+  "real_closure_candidate": true,
+  "rationale": "Resolves Erdős-Graham 1980 universal claim over all positive rationals with squarefree denominator using semiprime unit fractions — full closure of a 46-year-open problem; per-rational witness is finitely verifiable."
+}

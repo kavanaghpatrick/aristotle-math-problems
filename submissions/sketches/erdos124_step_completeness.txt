@@ -1,0 +1,21 @@
+OPEN GAP: Erdős 124 — Step-M completeness criterion (Cassels filling)
+Source: formal-conjectures/FormalConjectures/ErdosProblems/124.lean (erdos124.ne_zero)
+Domain: nt
+
+The open BEGL96 case asks whether a set R ⊆ ℕ is cofinite. A reduction isolates the
+difficulty into two local conditions at step M: if some threshold T admits a full window
+of M consecutive members of R just above it, and R is closed under adding M above T, then
+R contains every integer beyond T. Stated abstractly for a set R and step M ≥ 1:
+
+theorem erdos124_step_completeness
+    (R : Set ℕ) (M T : ℕ) (hM : 0 < M)
+    (hwin : ∀ i, i < M → (T + 1 + i) ∈ R)
+    (hclose : ∀ n, T < n → n ∈ R → (n + M) ∈ R) :
+    ∀ n, T < n → n ∈ R := by
+  sorry
+
+Status: OPEN component (the elementary completeness engine for the open conjecture). Once
+the window and +M-closure conditions hold, every n > T decomposes as n₀ + jM with n₀ in the
+window, and repeated closure reaches n. The whole open difficulty of BEGL96 is establishing
+the window and closure hypotheses (with M = (min D)^k); the criterion itself is elementary.
+Not in Mathlib.

@@ -1,0 +1,13 @@
+OPEN GAP: Erdos 672 — AP products not perfect cubes
+Source: FormalConjectures/ErdosProblems/672.lean
+Domain: nt
+
+The product of 4 terms in arithmetic progression with
+coprime first term and common difference is never a cube.
+
+theorem erdos_672_l3 :
+    ∀ n d : ℕ, n > 0 → d > 0 → n.gcd d = 1 →
+    ¬ ∃ y : ℕ, (∏ i in Finset.range 4, (n + i * d)) = y ^ 3 := by
+  sorry
+
+Status: OPEN. The l=2 (square) case is known. l=3 is open.

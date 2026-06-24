@@ -1,0 +1,13 @@
+**T1–T6 scores (all novel as stated):**
+
+- **T1**: NOT IN MATHLIB. UFD factorization exists (`UniqueFactorizationMonoid`, `factors`, `Nat.factorization`), but the explicit square-free *b* decomposition for powerful numbers does not.
+- **T2**: NOT IN MATHLIB. Trivial once `Powerful` is defined; no prior instance.
+- **T3/T4**: NOT IN MATHLIB. Erdős 3-AP bounds and mod-36 obstructions are number-theoretic results with no Mathlib formalization.
+- **T5**: NOT IN MATHLIB. `sigma`/`d` (arithmetic functions) and `Multiplicative` exist, but no multiperfect predicate or `d(n)` prime ⇒ not multiperfect lemma.
+- **T6**: PARTIALLY. `Nat.valuation` / `padicValNat` (in `Multiplicity`/`Padics`) already give the valuation tools; the 3-AP application is new.
+
+No file listed (`Multiplicity`, `Divisors`, `UFD`, `Squarefree`, `IsPrimePow`) contains “Powerful” or the multiperfect bridge. `IsPrimePow` exists (`Data.Nat.Prime`) but has no multiperfect interaction.
+
+**Naming.** `Nat.IsPowerful` (or `n.Powerful`) follows the `Squarefree`/`Odd` pattern and avoids collision. “Powerful” is unambiguous in this context; `PowerNumber` is unnecessary.
+
+**Recommendation.** Define `Powerful` once, reuse existing `factorization`/`valuation`/`Squarefree` lemmas, and add only the new statements. No duplication risk.

@@ -1,0 +1,279 @@
+{
+  "generated_at": "2026-05-30",
+  "purpose": "Structural DNA of Aristotle's compiled_advance + strategically-valuable disproof artifacts",
+  "method": "Read ARISTOTLE_SUMMARY.md + Main.lean for each success; classify proof_pattern, key_tactic, sketch-provided data, novelty",
+  "successes": [
+    {
+      "slot_id": "slot720",
+      "iter": "iter2",
+      "problem": "Feit-Thompson p=3 prime conjecture for q≡ 71 (mod 72), q ≤ 1000",
+      "db_status": "compiled_advance",
+      "proof_pattern": "Enumerated residue-class subfamily + Fermat-little-theorem reduction with per-prime small-divisor witnesses",
+      "key_tactic": "interval_cases q; native_decide; not_dvd_via_fermat_factor with explicit (q, p) pairs",
+      "data_provided_in_sketch": "Residue class q ≡ 71 mod 72, bound q≤1000, prior bundle context (slots 612/613 Wieferich)",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 0,
+      "key_lemma_signature": "p ∣ q²+q+1 ∧ 3^(q mod (p-1)) ≢ 1 mod p → ¬ A(q) ∣ (3^q-1)/2",
+      "load_bearing_data": "explicit small prime p_i for each q_i: (359,7),(431,7),(503,13),(647,211),(719,487),(863,7)"
+    },
+    {
+      "slot_id": "slot722",
+      "iter": "iter2",
+      "problem": "Brocard's conjecture: ≥4 primes in (p_n², p_{n+1}²) for n ∈ [2,500]",
+      "db_status": "compiled_advance",
+      "proof_pattern": "Computable nthPrime bridge + native_decide on Finset.Icc + Nat.nth_count bridging lemma",
+      "key_tactic": "native_decide on parametric Finset.Icc 0 N; Nat.nth_count to bridge noncomputable Nat.nth Nat.Prime",
+      "data_provided_in_sketch": "Numeric bound N, target cardinality ≥4, suggestion to verify computationally",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 0,
+      "key_lemma_signature": "nthPrimeComp n = Nat.nth Nat.Prime n for n ≤ N",
+      "load_bearing_data": "definition of computable nthPrimeComp using Nat.find of next prime; Nat.count Nat.Prime as bridge"
+    },
+    {
+      "slot_id": "slot736",
+      "problem": "FT p=3 q≡71 mod 72 extended to q≤1500 (iter3)",
+      "db_status": "submitted (advance per summary)",
+      "proof_pattern": "Bound → Finset.range cast + single native_decide cascade (no per-q case split)",
+      "key_tactic": "native_decide on Finset.range 1501 with full ∀-reduction via suffices/Finset.mem_range",
+      "data_provided_in_sketch": "Numeric bound q ≤ 1500, residue class, slot720 prior context",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 5,
+      "key_lemma_signature": "∀ q ∈ Finset.range 1501, Prime q → ...",
+      "load_bearing_data": "the bound; native_decide handled actual modular exponentiation"
+    },
+    {
+      "slot_id": "slot737",
+      "problem": "Erdős 647 Sophie Germain residue subclass (proved by case analysis on Cunningham chain split)",
+      "db_status": "submitted (advance per summary)",
+      "proof_pattern": "Multiplicative-function lower bound on σ₀ + explicit witness construction (m = n-3 or m = n-4) per disjunctive case",
+      "key_tactic": "Case split on hsplit; manual sigma₀ lower bounds via Nat.divisors composite ≥3 + multiplicativity (no native_decide on main statement)",
+      "data_provided_in_sketch": "Bounded floor n ≥ 3000, Cunningham residual disjunction ((2q-1)/3 composite OR (q-1)/2 composite), slot723 defensive context",
+      "domain": "nt",
+      "novelty_level": "genuinely_novel_math",
+      "axiom_count": 3,
+      "key_lemma_signature": "σ₀(3c) ≥ 6 for composite c ≥ 999;  σ₀(4d) ≥ 7 for composite d ≥ 749",
+      "load_bearing_data": "the case-split hypothesis (the Cunningham disjunction); Aristotle synthesized the multiplicativity lemmas"
+    },
+    {
+      "slot_id": "slot738",
+      "problem": "Brocard's conjecture for n ∈ [501, 1000]",
+      "db_status": "submitted (advance per summary)",
+      "proof_pattern": "Witness-table chunked into 10×50; Bool checker + Nat.nth_count bridge + cardinality lemma",
+      "key_tactic": "native_decide on each of 10 chunks; checkEntryB function; nth_prime_of_count using Nat.nth_count",
+      "data_provided_in_sketch": "Numeric range [501,1000], 4-witness target cardinality, slot722 context",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 5,
+      "key_lemma_signature": "checkEntryB n entry = true → 4 ≤ ((Finset.Ioo (n.nth Prime^2) ...).filter Prime).card",
+      "load_bearing_data": "approach reused slot722's bridge pattern; sketch provided the bound, Aristotle precomputed the witness table externally and embedded as List"
+    },
+    {
+      "slot_id": "slot739",
+      "problem": "Existence of a nonabelian Leinster group (D₃ × C₅)",
+      "db_status": "submitted (advance per summary)",
+      "proof_pattern": "Coprime-product decomposition of normal subgroups → multiplicativity of σ → finite group enumeration on each factor",
+      "key_tactic": "Mixed: structural theorem normal_subgroup_of_coprime_prod + native_decide / finite enumeration of normal subgroups of D₃ and C₅",
+      "data_provided_in_sketch": "Existence formulation, candidate witness (slot575 D₃ × C₅ reframe)",
+      "domain": "algebra",
+      "novelty_level": "formalization_of_solved",
+      "axiom_count": 5,
+      "key_lemma_signature": "Nat.Coprime |G| |H| → every Subgroup (G×H) factors; σ(G×H) = σ G · σ H",
+      "load_bearing_data": "the explicit witness D₃ × C₅ (vs sketches that left existence open); coprimality of orders 6 and 5"
+    },
+    {
+      "slot_id": "slot740",
+      "problem": "Erdős 203 covering: original conjecture index1_covering_insufficient_M8_B500 disproven",
+      "db_status": "submitted (strategically valuable disproof)",
+      "proof_pattern": "Greedy set cover on partition structure of 25 multi-cell index-1 primes + CRT realization → explicit 43-digit m + native_decide",
+      "key_tactic": "native_decide on ∃ _ : ℕ, ∀ k l : Fin 8, ∃ p ∈ Finset.range 501, ...",
+      "data_provided_in_sketch": "Index-1 prime set, bound p ≤ 500, finite grid 8×8, candidate covering structure",
+      "domain": "nt/covering",
+      "novelty_level": "genuinely_novel_math",
+      "axiom_count": 5,
+      "key_lemma_signature": "∀ (k,l) ∈ Fin 8 × Fin 8, ∃ prime p ≤ 500: p | 2^k · 3^l · m + 1",
+      "load_bearing_data": "explicit counterexample_m = 1579554969991861182625270235031094424159694 (computed externally, embedded as def); structure of 22 covering primes"
+    },
+    {
+      "slot_id": "slot578",
+      "problem": "OEIS A67720: φ(k²+1) = k·φ(k+1), bounded search up to 3200",
+      "db_status": "disproven",
+      "proof_pattern": "Bounded universal statement → native_decide on Finset.range, plus structural lemmas (gcd, prime factor congruence mod 4)",
+      "key_tactic": "native_decide after revert + Nat.totient_eq_div_primeFactors_mul rewrite",
+      "data_provided_in_sketch": "Bound k < 3200, equation, OEIS reference",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 0,
+      "load_bearing_data": "the bound; the equation was already definable in Mathlib"
+    },
+    {
+      "slot_id": "slot615",
+      "problem": "Erdős 137 k=3: product of 3 consecutive integers not powerful, bounded verification",
+      "db_status": "disproven (structural lemmas + bounded verification)",
+      "proof_pattern": "Bounded native_decide + structural decomposition by parity/divisibility-by-3 case-split",
+      "key_tactic": "native_decide on bounded range + manual divisibility lemmas",
+      "data_provided_in_sketch": "k=3 specialization, Powerful definition, bound n < 10000",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 0,
+      "load_bearing_data": "the bound; the parity case-split structure"
+    },
+    {
+      "slot_id": "slot618",
+      "problem": "Casas-Alvero conjecture in positive characteristic p (counterexample)",
+      "db_status": "disproven",
+      "proof_pattern": "Explicit polynomial witness X^(p+1) - X^p over ZMod p + structural Lean proofs of monic / degree / Hasse derivative properties",
+      "key_tactic": "Polynomial.hasseDeriv manipulation; explicit construction; standard polynomial lemmas in Mathlib",
+      "data_provided_in_sketch": "Casas-Alvero property definition, characteristic p hint, polynomial structure",
+      "domain": "algebra",
+      "novelty_level": "formalization_of_solved",
+      "axiom_count": 0,
+      "load_bearing_data": "the explicit polynomial witness (Daniel Lazard's counterexample is classical)"
+    },
+    {
+      "slot_id": "slot633",
+      "problem": "FT p=3 q≡71 mod 72 synthesis contradiction (early arc, slot720 predecessor)",
+      "db_status": "disproven (the synthesis attack)",
+      "proof_pattern": "Derived modular formula k mod A + numerical check that derived value differs from actual at q=71 → contradicts 3^q ≡ 1 mod A",
+      "key_tactic": "Algebraic identity (poly_identity) + Nat.ModEq + numeric native_decide",
+      "data_provided_in_sketch": "k = (3^q-1)/A, A = q²+q+1, synthesis attempt",
+      "domain": "nt",
+      "novelty_level": "mechanical_extension",
+      "axiom_count": 0,
+      "load_bearing_data": "the algebraic identity and explicit q=71 numeric check"
+    },
+    {
+      "slot_id": "slot695",
+      "problem": "Lehmer's Totient Problem: counterexample must be odd + squarefree (structural)",
+      "db_status": "disproven (negative structural result on shape of counterexample)",
+      "proof_pattern": "Manual structural number-theoretic proof (no native_decide). Squarefreeness from p² | n ⇒ p | φ(n); odd from φ even on evens",
+      "key_tactic": "Nat.totient_even, Nat.squarefree_iff_prime_squarefree, manual case analysis",
+      "data_provided_in_sketch": "Lehmer counterexample definition, conjecture statement",
+      "domain": "nt",
+      "novelty_level": "formalization_of_solved",
+      "axiom_count": 0,
+      "load_bearing_data": "the definition; classical results in Mathlib"
+    },
+    {
+      "slot_id": "slot693",
+      "problem": "Erdős 850: same-prime-factors triple constraint  — structural partial results",
+      "db_status": "disproven (negative bounds: no x<10, diff≥30, divisible by 6, etc.)",
+      "proof_pattern": "Bounded native_decide search up to small N + structural deductions (rad-lcm divisibility, parity, smoothness)",
+      "key_tactic": "native_decide on bounded x range + radical/rad-lcm structural lemmas",
+      "data_provided_in_sketch": "Same-prime-factors definition, three-term shift",
+      "domain": "nt",
+      "novelty_level": "formalization_of_solved",
+      "axiom_count": 0,
+      "load_bearing_data": "the bound for search; definition of rad/rad_lcm"
+    },
+    {
+      "slot_id": "slot712",
+      "problem": "Erdős 672 k=3 l=2: product of 3 terms in AP is a perfect square (counterexample (1,24))",
+      "db_status": "disproven (explicit counterexample)",
+      "proof_pattern": "Single explicit AP witness (n=1, d=24) → product = 1·25·49 = 1225 = 35² → native_decide",
+      "key_tactic": "use 1, 24; native_decide",
+      "data_provided_in_sketch": "Erdos672Holds definition; k=3, l=2 instance",
+      "domain": "nt",
+      "novelty_level": "genuinely_novel_math",
+      "axiom_count": 0,
+      "load_bearing_data": "the (1,24) witness was needed; Aristotle (or context) supplied it"
+    },
+    {
+      "slot_id": "slot114",
+      "problem": "Tuza ν=4 diagonal exclusion hypothesis (FALSE)",
+      "db_status": "disproven (explicit 8-vertex counterexample graph)",
+      "proof_pattern": "Constructive 8-vertex graph G_ex + Cycle4 verification + triangle T1_ex = {0,2,6} witnessing the violation",
+      "key_tactic": "Explicit Fintype graph + decide on adjacencies + manual triangle membership",
+      "data_provided_in_sketch": "Diagonal exclusion hypothesis statement + Cycle4 definition",
+      "domain": "combinatorics",
+      "novelty_level": "genuinely_novel_math",
+      "axiom_count": 0,
+      "load_bearing_data": "the specific 8-vertex graph"
+    },
+    {
+      "slot_id": "slot131",
+      "problem": "Tuza external triangles sharing common apex (FALSE)",
+      "db_status": "disproven (explicit 10-vertex counterexample)",
+      "proof_pattern": "Constructive 10-vertex graph with explicit maxPacking M_cex = {A,B,C,D} + two disjoint external triangles T1, T2",
+      "key_tactic": "Explicit Finset construction + decide on packing-number = 4",
+      "data_provided_in_sketch": "Hypothesis about external triangles + Cycle4 definition + slot262 packing definitions",
+      "domain": "combinatorics",
+      "novelty_level": "genuinely_novel_math",
+      "axiom_count": 0,
+      "load_bearing_data": "the 10-vertex graph + the M_cex packing"
+    }
+  ],
+  "snipe_signatures": [
+    {
+      "id": "S1_bounded_native_decide_universal",
+      "description": "∀ n ≤ N, P(n) where P is decidable in Mathlib → reduce ∀ ℕ to Finset.range (N+1) and native_decide",
+      "exhibited_by": ["slot736", "slot578", "slot615", "slot693"],
+      "sketch_data_required": "an explicit numeric bound N for the universal quantifier; P(n) must be expressible using existing Mathlib decidable predicates (Nat.Prime, totient, divisors, modular conditions)",
+      "reproducibility_evidence": "4+ slots, all clean compiles, axiom count typically just standard",
+      "limit": "fails when modular exponent or search blow up native_decide budget"
+    },
+    {
+      "id": "S2_witness_table_with_nth_count_bridge",
+      "description": "Universal claim over indices 0..N involving noncomputable Nat.nth + verification: precompute witness table externally, chunk it (10×50 typical), and bridge to Nat.nth via Nat.nth_count",
+      "exhibited_by": ["slot722", "slot738"],
+      "sketch_data_required": "Numeric range, target cardinality / property of witness, and ideally a parametrized statement using Nat.nth Nat.Prime",
+      "reproducibility_evidence": "2 slots in different N ranges using the same scaffold; explicitly reused encoding in slot738",
+      "limit": "scales linearly in N; chunking required to stay under recursion depth"
+    },
+    {
+      "id": "S3_residue_class_subfamily_with_small_prime_witness",
+      "description": "FT-style: for q in arithmetic progression q≡r mod M, enumerate q via interval_cases and supply (q,p) Fermat-divisor pairs; use 3^(q mod (p-1)) ≢ 1 mod p as a closure",
+      "exhibited_by": ["slot720", "slot633"],
+      "sketch_data_required": "Residue class (q≡r mod M), bound q≤N, prior context indicating which small primes p_i divide A(q_i)",
+      "reproducibility_evidence": "2 slots; slot720 is a clean generalization of the slot633 single-instance attack",
+      "limit": "needs a small prime divisor of A(q) below the threshold where Fermat reduction is feasible; breaks when A(q) is prime (e.g. predicted at q=1583)"
+    },
+    {
+      "id": "S4_greedy_cover_plus_CRT_witness",
+      "description": "For a finite-grid coverage / set-cover problem, run greedy externally, realize via CRT, embed the resulting big integer as a def, and verify the cover by native_decide on the finite grid",
+      "exhibited_by": ["slot740"],
+      "sketch_data_required": "Finite grid bounds, prime set, divisibility predicate; the explicit witness integer (or hints that one can be computed externally)",
+      "reproducibility_evidence": "1 slot but mechanism is reusable for any 2D covering / set-cover problem",
+      "limit": "produces only finite-grid witness; lifting to infinite case requires a separate periodic-lattice argument (open in E203)"
+    },
+    {
+      "id": "S5_case_split_with_explicit_small_offset_witnesses",
+      "description": "Existence statement ∃ m < n: f(m) > bound, prove by disjunctive case split with witness m ∈ {n-1, n-2, n-3, n-4} per case, plus manual multiplicativity lower bounds on σ₀",
+      "exhibited_by": ["slot737", "slot723"],
+      "sketch_data_required": "The bound, the disjunctive hypothesis (e.g. Cunningham split), the divisor-function lower-bound target",
+      "reproducibility_evidence": "2 slots in the same E647 family; pattern explicitly compounded across iterations",
+      "limit": "requires the disjunction to actually cover the residue case; misses when none of the offset witnesses work (the truly hard Cunningham residue)"
+    },
+    {
+      "id": "S6_explicit_finite_graph_counterexample",
+      "description": "Combinatorial disproof: construct an explicit small graph (8 to 12 vertices), define adjacency by decide, verify all required structural conditions, exhibit the witness triangle/packing",
+      "exhibited_by": ["slot114", "slot131", "slot267", "slot250"],
+      "sketch_data_required": "Precise hypothesis to refute; the conjectured structural property; Cycle4/packing definitions in context",
+      "reproducibility_evidence": "4 slots in the Tuza arc; each refuted a candidate bridging lemma",
+      "limit": "specialty in graph combinatorics; counterexample search is hard for larger structures"
+    },
+    {
+      "id": "S7_explicit_polynomial_or_group_witness",
+      "description": "Algebraic existence: explicit polynomial / group element / coset witness, then verify standard property using Mathlib's library (Polynomial.hasseDeriv, Subgroup.Normal, ZMod, DihedralGroup)",
+      "exhibited_by": ["slot618", "slot739", "slot712"],
+      "sketch_data_required": "The explicit witness (P = X^(p+1) - X^p; D₃×C₅; (n,d)=(1,24)); the property definition",
+      "reproducibility_evidence": "3 slots across algebra and nt; reliable when witness is classical or supplied",
+      "limit": "novelty is in the witness, not the proof; Aristotle won't discover novel algebraic witnesses, but verifies supplied ones"
+    },
+    {
+      "id": "S8_structural_constraints_on_counterexample_shape",
+      "description": "For an open existence conjecture, produce necessary conditions on any counterexample (must be odd, squarefree, divisible by 6, diff ≥ 30) without resolving existence",
+      "exhibited_by": ["slot695", "slot693", "slot615"],
+      "sketch_data_required": "The counterexample definition; permission to bound the search",
+      "reproducibility_evidence": "3 slots across Lehmer, Erdős 850, Erdős 137; produces 'compiled-no-advance' or 'disproven' tags rather than full resolution",
+      "limit": "doesn't actually close the gap, only narrows it; user has flagged these as not 'gap-resolutions'"
+    }
+  ],
+  "top3_reproducibility": [
+    "S1_bounded_native_decide_universal (4 slots; pattern: bound + decidable predicate)",
+    "S6_explicit_finite_graph_counterexample (4 slots; pattern: small Fintype graph + decide)",
+    "S5_case_split_with_explicit_small_offset_witnesses (2 slots same arc; pattern: σ₀ lower bounds + offset witness)"
+  ]
+}

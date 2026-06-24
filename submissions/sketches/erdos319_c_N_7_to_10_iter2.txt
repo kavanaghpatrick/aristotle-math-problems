@@ -1,0 +1,24 @@
+OPEN GAP: Erdős 319 — c(N) ≥ 4 for N ∈ {7, 8, 9, 10} via explicit witness
+Source: formal-conjectures/FormalConjectures/ErdosProblems/319.lean
+Domain: combinatorics
+
+Let c(N) be the size of the largest A ⊆ {1,…,N} carrying signs δ : A → {-1,+1}
+with Σ_{n∈A} δ(n)/n = 0 and Σ_{n∈A'} δ(n)/n ≠ 0 for every nonempty A' ⊊ A.
+Iter1 established c(6) ≥ 4 with witness A={1,2,3,6}, δ(1)=−1, δ(2)=δ(3)=δ(6)=+1.
+Iter2 extends this lower bound to N ∈ {7, 8, 9, 10}: the same witness
+A={1,2,3,6} ⊆ {1..N} satisfies all requirements for every N ≥ 6, since
+−1 + 1/2 + 1/3 + 1/6 = 0 and all 14 nonempty proper subset signed sums are
+nonzero (verified by brute-force scan; the witness is unique up to global
+sign-flip for N ≤ 11).
+
+theorem erdos_319_c_N_7_to_10_lb :
+    ∀ N ∈ ({7, 8, 9, 10} : Finset ℕ),
+      ∃ A : Finset ℕ, A ⊆ Finset.Icc 1 N ∧ A.card = 4 ∧
+        ∃ δ : ℕ → ℤˣ,
+          (∑ n ∈ A, (δ n : ℚ) / n = 0) ∧
+          (∀ A' ⊂ A, A'.Nonempty → ∑ n ∈ A', (δ n : ℚ) / n ≠ 0) := by sorry
+
+Status: OPEN at the answer-of-question level. Brute-force scan: c(N)=0 for
+N≤5, c(N)=4 for 6≤N≤11, c(12)=6. Stated as explicit-witness existence (no
+biconditional, no answer(sorry)) to avoid the F1 undecidable-wrapper trap;
+goal is exact c(N) lower bounds on small N, not asymptotic Θ/O/o.

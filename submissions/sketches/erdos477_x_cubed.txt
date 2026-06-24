@@ -1,0 +1,18 @@
+OPEN GAP: Erdos 477 — Sekanina X^3 case
+Source: formal-conjectures/FormalConjectures/ErdosProblems/477.lean (theorem erdos_477.X_pow_three)
+Domain: algebra (additive combinatorics / unique-representation bases)
+
+Erdos-Graham (after Sekanina 1959) asked: is there a polynomial f : Z[X] of degree >= 2
+and a set A of integers such that for every z in Z there is exactly one pair
+(a, b) with a in A and b = f(n) for some n > 0 and z = a + b?
+Sekanina [Sek59] proved NO for f = X^2 (degree 2). The cubic case f = X^3 is open.
+Show: no such A exists for f = X^3.
+
+theorem erdos_477_X_pow_three : letI f : ℤ[X] := X ^ 3
+    ∀ A : Set ℤ, ∃ z : ℤ, ¬ ∃! a ∈ A ×ˢ (f.eval '' {n | 0 < n}), z = a.1 + a.2 := by sorry
+
+Status: OPEN. Sekanina [Sek59] closed degree 2 (f = X^2); AlphaProof generalized degree 2
+to a·X^2+b·X+c when a|b, b ≠ 0 (Jan 7 2026 partial progress on variant). AlphaProof Nexus
+ATTEMPTED erdos_477.variants.X_pow_three but produced no proof (listed only in
+erdos_problems_attempted.txt; absent from APNOutputs/ErdosProblems/). Cubic case remains
+open per teorth/erdosproblems AI-contributions wiki and erdosproblems.com/477.

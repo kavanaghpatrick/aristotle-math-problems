@@ -1,0 +1,14 @@
+OPEN GAP: Erdős Problem 828 — Infinitely Many φ(n) | (n+1)
+Source: Erdős Problem 828
+Domain: nt
+
+Are there infinitely many n with φ(n) | (n + 1)?
+
+Known solutions: n = 1, 2, 4, 8, 12. The full characterization of
+which integers a give infinitely many solutions to φ(n) | (n + a)
+is open. Related to Lehmer's conjecture (a = 0 case).
+
+theorem erdos828 :
+    Set.Infinite {n : ℕ | n > 0 ∧ Nat.totient n ∣ (n + 1)} := by sorry
+
+Status: OPEN. Five solutions known. Infinitude unknown.

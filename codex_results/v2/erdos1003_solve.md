@@ -1,0 +1,8 @@
+Implemented a self-contained search/analyze script at [scripts/erdos1003_search.py](/Users/patrickkavanagh/math/scripts/erdos1003_search.py#L1) and wrote the results up at [codex_results/erdos1003_totient.md](/Users/patrickkavanagh/math/codex_results/erdos1003_totient.md#L1).
+
+I ran `python3 scripts/erdos1003_search.py --limit 10000000 --show 0 --skip-crt`. It built the `phi/spf` sieve to `10,000,001` in `22.12s`, scanned in `4.90s`, and found `142` values of `n <= 10^7` with `phi(n)=phi(n+1)`. The full list is in [codex_results/erdos1003_totient.md](/Users/patrickkavanagh/math/codex_results/erdos1003_totient.md#L6).
+
+The main structural point is the CRT obstruction in [codex_results/erdos1003_totient.md](/Users/patrickkavanagh/math/codex_results/erdos1003_totient.md#L70): if you try the natural fixed-kernel family
+`n = A u`, `n+1 = B v` with `u,v` prime and `gcd(A,B)=1`, CRT makes `u,v` linear in one parameter `t`, and then `phi(n)=phi(n+1)` becomes a single linear equation in `t`. So for fixed `A,B` there is at most one candidate unless `A=B=1` trivially. That explains sporadic hits like `104, 164, 194`, but it rules out the simplest infinite CRT family. The only especially clean exact family visible in-range is the Fermat-pattern `n = 3, 15, 255, 65535`, coming from `n+1 = 2^(2^k)` and the Fermat product identity.
+
+Verified with `python3 -m py_compile [scripts/erdos1003_search.py](/Users/patrickkavanagh/math/scripts/erdos1003_search.py#L1)`.

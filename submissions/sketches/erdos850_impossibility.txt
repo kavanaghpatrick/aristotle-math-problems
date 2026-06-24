@@ -1,0 +1,15 @@
+OPEN GAP: Erdos 850 — Impossibility (no same-radical triple-shift pair exists)
+Source: FormalConjectures/ErdosProblems/850.lean
+Domain: nt
+
+Prove that NO distinct positive x, y can simultaneously satisfy
+rad(x)=rad(y), rad(x+1)=rad(y+1), rad(x+2)=rad(y+2).
+
+theorem erdos_850_impossibility :
+    ¬ ∃ x y : ℕ, 0 < x ∧ 0 < y ∧ x ≠ y
+    ∧ x.primeFactors = y.primeFactors
+    ∧ (x+1).primeFactors = (y+1).primeFactors
+    ∧ (x+2).primeFactors = (y+2).primeFactors := by sorry
+
+Status: OPEN. No impossibility proof is known. Aristotle must derive a contradiction
+from any putative witness (use erdos850_existence.txt for the constructive side).

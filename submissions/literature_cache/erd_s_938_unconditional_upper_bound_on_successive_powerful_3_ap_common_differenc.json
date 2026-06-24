@@ -1,0 +1,18 @@
+{
+  "_cache_ts": 1780160469.718969,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T17:01:09+00:00",
+  "citations": [],
+  "erdos_n": null,
+  "erdosproblems_status": null,
+  "erdosproblems_url": null,
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erd_s_938_unconditional_upper_bound_on_successive_powerful_3_ap_common_differenc",
+  "status": "UNKNOWN",
+  "wiki_evidence": [],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "CLEAR"
+}

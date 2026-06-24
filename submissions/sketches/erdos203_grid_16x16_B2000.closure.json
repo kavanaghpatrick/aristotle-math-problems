@@ -1,0 +1,19 @@
+{
+  "problem_id": "erdos_203",
+  "sketch_path": "submissions/sketches/erdos203_grid_16x16_B2000.txt",
+  "target": "16x16 finite-grid covering existence at B=2000 (sharper than slot740's 8x8 at B=500)",
+  "predecessor_slots": ["slot740 (8x8 closed at B=500)", "slot724 (E203 background, index-2 primes catalogued)"],
+  "closure_scope": "bounded_version_closure",
+  "closure_mechanism": "explicit_witness",
+  "closure_risk_primary": "clean_decidable",
+  "closure_risk_secondary": ["witness_search_explosion", "partial_result_only"],
+  "honesty_marker": "journal_partial",
+  "real_closure_candidate": false,
+  "strategic_subclaim": true,
+  "closure_probability_1_to_10": 3,
+  "rationale": "Slot740 mechanism (greedy set cover + CRT realization of m, then native_decide) is proven scalable; question is whether the 16x16 finite question is satisfiable. Monte-Carlo over 1135-prime pool (B=10000, idx-1+2) caps at 0.751 coverage of K x L — strongly suggests 16x16 is uncoverable, in which case Aristotle gets a clean impossibility theorem. If 16x16 IS coverable, that's a strict strengthening of slot740. Either way produces a measurable advance over slot740, but neither resolves the open E203 conjecture itself (lift problem remains).",
+  "search_evidence": "scripts/erdos203_lift_retry.py + analysis/erdos203_lift_retry_may30.json: no full quotient cover for B in {2000, 5000, 10000} (best 0.751 MC coverage).",
+  "submission_recommendation": "submit_as_rubric_points",
+  "do_not_celebrate_as": "E203 closure",
+  "celebrate_as": "Sharpened slot740 — 16x16 verified or 16x16 unsatisfiable"
+}

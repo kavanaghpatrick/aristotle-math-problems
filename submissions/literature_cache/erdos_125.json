@@ -1,0 +1,32 @@
+{
+  "_cache_ts": 1780127608.450528,
+  "arxiv_recent": [],
+  "checked_at": "2026-05-30T07:53:28+00:00",
+  "citations": [
+    {
+      "evidence": "wiki 1(a): AI standalone \u2014 Full solution",
+      "snapshot": "2026-05-30",
+      "source": "teorth-wiki",
+      "url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+    },
+    {
+      "evidence": "status indicator: solved",
+      "source": "erdosproblems.com",
+      "url": "https://www.erdosproblems.com/125"
+    }
+  ],
+  "erdos_n": 125,
+  "erdosproblems_status": "solved",
+  "erdosproblems_url": "https://www.erdosproblems.com/125",
+  "mk_failed": {
+    "lines": [],
+    "present": false
+  },
+  "problem_id": "erdos_125",
+  "status": "AI_CLOSED",
+  "wiki_evidence": [
+    "wiki 1(a): AI standalone \u2014 Full solution"
+  ],
+  "wiki_snapshot_date": "2026-05-30",
+  "wiki_status": "AI_CLOSED"
+}

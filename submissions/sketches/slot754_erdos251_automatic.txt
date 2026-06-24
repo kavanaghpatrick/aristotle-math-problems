@@ -1,0 +1,21 @@
+OPEN GAP: Erdős 251 — irrationality of Σ p_n / 2^n
+Source: formal-conjectures/FormalConjectures/ErdosProblems/251.lean
+Domain: nt
+
+CLAIM. Let p_n denote the n-th prime (p_1 = 2, p_2 = 3, p_3 = 5, ...).
+The real number S = Σ_{n=1}^{∞} p_n / 2^n is irrational.
+
+theorem erdos_251 : Irrational (∑' n : ℕ, (Nat.nth Nat.Prime n : ℝ) / 2^n) := by
+  sorry
+
+Status: OPEN. Erdős conjectured (1988) that Σ p_n^k / 2^n is irrational for
+every k = 1, 2, 3; the k = 1 case remains unresolved. Convergence follows
+from Bertrand's postulate p n.toNat below 2^(n+1) and PNT decay. Prior
+Aristotle attempts (slot699, slot704, slot1219, all 2026) returned
+compiled_no_advance after producing only the convergence and bound
+infrastructure. The analogous Σ ω(n)/2^n was settled by Tao–Teräväinen
+(December 2025, arXiv:2512.01739) via two-point correlations of MULTIPLICATIVE
+functions; the n-th prime function n ↦ p_n is not multiplicative.
+
+Note: each binary digit of S is Decidable once a computable approximant
+to S within 2^{-k-1} is available (uses n.toNat enumeration of primes).

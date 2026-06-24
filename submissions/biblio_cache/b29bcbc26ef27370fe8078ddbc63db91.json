@@ -1,0 +1,14 @@
+{
+  "_cache_ts": 1780315719.438068,
+  "checked_at": "2026-06-01T12:08:39+00:00",
+  "evidence": "named-conjecture card: Feit-Thompson theorem = CLOSED (Feit-Thompson 1963 Pacific J. Math. 13)",
+  "sources": [
+    {
+      "evidence": "card[Feit-Thompson theorem]=CLOSED \u2014 Feit-Thompson 1963 Pacific J. Math. 13",
+      "signal": "strong",
+      "source": "named_conjecture_status",
+      "url": ""
+    }
+  ],
+  "status": "CLOSED"
+}
